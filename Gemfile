@@ -33,7 +33,7 @@ gem 'unicorn'
 
 # Deploy with Capistrano
 gem 'capistrano'
-gem 'cap_bootstrap'
+gem 'cap_bootstrap', github: 'benrs44/cap_bootstrap'
 
 # To use debugger
 # gem 'debugger'

@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/benrs44/cap_bootstrap.git
+  revision: afd547999dda0a498a418babff4e78e1722b2f7e
+  specs:
+    cap_bootstrap (0.3.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -30,7 +36,6 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.2)
     builder (3.0.3)
-    cap_bootstrap (0.3.0)
     capistrano (2.13.3)
       highline
       net-scp (>= 1.0.0)
@@ -124,7 +129,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  cap_bootstrap
+  cap_bootstrap!
   capistrano
   coffee-rails (~> 3.2.1)
   jquery-rails
