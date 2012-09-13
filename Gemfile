@@ -37,3 +37,11 @@ gem 'cap_bootstrap', github: 'benrs44/cap_bootstrap'
 
 # To use debugger
 # gem 'debugger'
+
+gem "rspec-rails", :group => [:test, :development]
+group :test do
+  gem "factory_girl_rails"
+  gem "capybara"
+  gem "guard-rspec"
+  gem 'rb-fsevent', '~> 0.9.1'
+end
