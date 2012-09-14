@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/benrs44/cap_bootstrap.git
-  revision: afd547999dda0a498a418babff4e78e1722b2f7e
+  revision: 0b2eab7ae26da2fc8df36c158dd73dbdd9b37082
   specs:
-    cap_bootstrap (0.3.1)
+    cap_bootstrap (0.3.2)
 
 GEM
   remote: https://rubygems.org/
