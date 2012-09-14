@@ -1,6 +1,11 @@
 Caball::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  # Authenitaction for staging environment
+  config.middleware.insert_after(::Rack::Lock, "::Rack::Auth::Basic", "staging") do |u, p|
+    [u, p] == ['admin', 'Caball666']
+  end
+
   # Code is not reloaded between requests
   config.cache_classes = true
 
