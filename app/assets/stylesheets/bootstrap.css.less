@@ -1,7 +1,12 @@
 @import "twitter/bootstrap/bootstrap";
+<<<<<<< HEAD
 body { 
 	padding-top: 60px;
 }
+=======
+@import "theme.css.less";
+// @import "bootstrap-custom.min.css";
+>>>>>>> refs/heads/theme
 
 @import "twitter/bootstrap/responsive";
 
@@ -20,6 +25,7 @@ body {
 // Font Awesome
 @import "fontawesome";
 
+<<<<<<< HEAD
 // Your custom LESS stylesheets goes here
 //
 // Since bootstrap was imported above you have access to its mixins which
@@ -30,3 +36,38 @@ body {
 //
 // Example:
 // @linkColor: #ff0000;
+=======
+@gridColumns: 12;
+
+.navbar-search {
+  margin-top: 24px;
+  margin-bottom: 25px;
+}
+
+.sign-up {
+  color: #41B7D8;
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+}
+
+.video-container iframe,  
+.video-container object,  
+.video-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+// Page specific css
+// @import "fonts.css.less";
+@import "users.css.less";
+@import "projects.css.less";
+>>>>>>> refs/heads/theme
