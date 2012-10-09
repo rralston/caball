@@ -13,7 +13,4 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-<<<<<<< HEAD
-=======
 *.DS_Store
->>>>>>> refs/heads/theme
