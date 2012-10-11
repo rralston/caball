@@ -13,6 +13,7 @@
 //
 //= require admin/excanvas.min.js
 //= require jquery
+//= require jquery_ujs
 //= require admin/jquery.ui.custom.js
 //= require twitter/bootstrap
 //= require admin/jquery.flot.min.js
