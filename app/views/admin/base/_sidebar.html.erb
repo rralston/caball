@@ -5,7 +5,7 @@
 				<i class="icon icon-home"></i> <span>Dashboard</span>
 			<% end %>
 		<% end %>
-		<%= content_tag(:li, :class => menu_open?("form_common", "form_validation", "form_wizard")) do %>
+		<%= content_tag(:li, :class => open?("form_common", "form_validation", "form_wizard")) do %>
 			<a href="#"><i class="icon icon-th-list"></i> <span>Form elements</span> <span class="label">3</span></a>
 			<ul>
 				<%= content_tag(:li, :class => is_active?("form_common")) do %>
@@ -39,7 +39,7 @@
 				<i class="icon icon-th-list"></i> <span>Grid Layout</span>
 			<% end %>
 		<% end %>
-		<%= content_tag(:li, :class => menu_open2?("invoice", "chat", "calendar", "gallery")) do %>
+		<%= content_tag(:li, :class => open?("invoice", "chat", "calendar", "gallery")) do %>
 			<a href="#"><i class="icon icon-file"></i> 
 				<span>Sample pages</span> <span class="label">4</span>
 			</a>
