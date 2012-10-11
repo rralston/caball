@@ -51,6 +51,36 @@
     color: darken(@grayLight, 10%); }
 }
 
+// Footer
+
+#footer > hr {
+  border-top: 1px solid @grayDarker;
+  border-bottom: 1px solid @gray;
+}
+
+#footer .copyright {
+  color: @gray;
+}
+
+#footer ul.links {
+  margin:0;
+}
+
+#footer ul.links > li {
+  display: inline;
+  list-style-type: none;
+  padding: 0 12px;
+  border-left: 1px solid lighten(@grayDark, 5%);
+  a {
+    // font-weight: bold;
+  }
+}
+
+#footer ul.links > li:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
 // All site
 .video-container {
   position: relative;
