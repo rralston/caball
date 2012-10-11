@@ -1,5 +1,4 @@
 @import "twitter/bootstrap/bootstrap";
-@import "theme.css.less";
 // @import "bootstrap-custom.min.css";
 
 @import "twitter/bootstrap/responsive";
@@ -16,11 +15,11 @@
 @fontAwesomeTtfPath: '/assets/fontawesome-webfont.ttf';
 @fontAwesomeSvgPath: '/assets/fontawesome-webfont.svg';
 
+@import "variables.css.less";
+@import "theme.css.less";
+
 // Font Awesome
 @import "fontawesome";
-
-
-@gridColumns: 12;
 
 .navbar-search {
   margin-top: 24px;
@@ -50,6 +49,6 @@
 }
 
 // Page specific css
-// @import "fonts.css.less";
+@import "fonts.css.less";
 @import "users.css.less";
 @import "projects.css.less";
