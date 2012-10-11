@@ -20,5 +20,4 @@
 //= require admin/jquery.peity.min.js
 //= require admin/fullcalendar.js
 //= require admin/unicorn.js
-//= require admin/unicorn.dashboard.js
 
