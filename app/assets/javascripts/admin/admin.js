@@ -9,8 +9,15 @@
 //
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
+// Require Directory limits just to current directory so it does not load Admin Assets
 //
+//= require admin/excanvas.min.js
 //= require jquery
-//= require jquery_ujs
+//= require admin/jquery.ui.custom.js
 //= require twitter/bootstrap
-//= require_directory .
+//= require admin/jquery.flot.min.js
+//= require admin/jquery.flot.resize.min.js
+//= require admin/jquery.peity.min.js
+//= require admin/fullcalendar.js
+//= require admin/unicorn.js
+

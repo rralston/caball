@@ -1,0 +1,75 @@
+<div id="sidebar">
+	<ul>
+		<li class="<%= is_active?("index") %>" >
+			<%= link_to 'index' do %>
+				<i class="icon icon-home"></i> <span>Dashboard</span>
+			<% end %>
+		</li>
+		<%= content_tag(:li, :class => open?("form_common", "form_validation", "form_wizard")) do %>
+			<%= link_to "#" do %>
+				<i class="icon icon-th-list"></i> <span>Form elements</span> <span class="label">3</span>
+			<% end %>
+			<ul>
+				<li class="<%= is_active?("form_common") %>" >
+					<%= link_to "Common Elements", 'form_common' %>
+				</li>
+				<li class="<%= is_active?("form_validation") %>" >
+					<%= link_to "Validation", 'form_validation' %>
+				</li>
+				<li class="<%= is_active?("form_wizard") %>" >
+					<%= link_to "Wizard", 'form_wizard' %>
+				</li>
+			</ul>
+		<% end %>
+		<li class="<%= is_active?("buttons") %>">
+			<%= link_to 'buttons' do %>
+				<i class="icon icon-tint"></i> <span>Buttons &amp; icons</span>
+			<% end %>
+		</li>
+		<li class="<%= is_active?("interface") %>">
+			<%= link_to 'interface' do %>
+				<i class="icon icon-pencil"></i> <span>Interface elements</span>
+			<% end %>
+		</li>
+		<li class="<%= is_active?("tables") %>">
+			<%= link_to 'tables' do %>
+				<i class="icon icon-th"></i> <span>Tables</span>
+			<% end %>
+		</li>
+		<li class="<%= is_active?("grid") %>">
+			<%= link_to 'grid' do %>
+				<i class="icon icon-th-list"></i> <span>Grid Layout</span>
+			<% end %>
+		</li>
+		<%= content_tag(:li, :class => open?("invoice", "chat", "calendar", "gallery")) do %>
+			<%= link_to "#" do %>
+				<i class="icon icon-file"></i> 
+				<span>Sample pages</span> <span class="label">4</span>
+			<% end %>
+			<ul>
+				<li class="<%= is_active?("invoice") %>" >
+					<%= link_to "Invoice", 'invoice' %>
+				</li>
+				<li class="<%= is_active?("chat") %>" >
+					<%= link_to "Support Chat", 'chat' %>
+				</li>
+				<li class="<%= is_active?("calendar") %>" >
+					<%= link_to "Calendar", 'calendar' %>
+				</li>
+				<li class="<%= is_active?("gallery") %>" >
+					<%= link_to "Gallery", 'gallery' %>
+				</li>
+			</ul>
+		<% end %>
+		<li class="<%= is_active?("charts") %>" >
+			<%= link_to 'charts' do %>
+				<i class="icon icon-signal"></i> <span>Charts &amp; graphs</span>
+			<% end %>
+		</li>
+		<li class="<%= is_active?("widgets") %>" >
+			<%= link_to('widgets') do %>
+				<i class="icon icon-inbox"></i> <span>Widgets</span>
+			<% end %>
+		</li>
+	</ul>
+</div>
