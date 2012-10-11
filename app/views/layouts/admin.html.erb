@@ -1,90 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Unicorn Admin</title>
+	<title>Unicorn Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <%= stylesheet_link_tag    "admin/application", :media => "all" %>
-<%= javascript_include_tag "admin/application.js" %>
-<%= javascript_include_tag "admin/excanvas.min.js" %>
-<%= javascript_include_tag "admin/jquery.min.js" %>
-<%= javascript_include_tag "admin/jquery.ui.custom.js" %>
-<%= javascript_include_tag "admin/bootstrap.min.js" %>
-<%= javascript_include_tag "admin/jquery.flot.min.js" %>
-<%= javascript_include_tag "admin/jquery.flot.resize.min.js" %>
-<%= javascript_include_tag "admin/jquery.peity.min.js" %>
-<%= javascript_include_tag "admin/fullcalendar.min.js" %>
-<%= javascript_include_tag "admin/unicorn.js" %>
-<%= javascript_include_tag "admin/unicorn.dashboard.js" %>
- <%= csrf_meta_tags %>
-	</head>
-	<body>
-				<div id="header">
-			<h1><a href="./dashboard.html">Unicorn Admin</a></h1>		
-		</div>
-		
-		<div id="search">
-			<input type="text" placeholder="Search here..."/><button type="submit" class="tip-right" title="Search"><i class="icon-search icon-white"></i></button>
-		</div>
-		<div id="user-nav" class="navbar navbar-inverse">
-            <ul class="nav btn-group">
-                <li class="btn btn-inverse" ><a title="" href="#"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>
-                <li class="btn btn-inverse dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a class="sAdd" title="" href="#">new message</a></li>
-                        <li><a class="sInbox" title="" href="#">inbox</a></li>
-                        <li><a class="sOutbox" title="" href="#">outbox</a></li>
-                        <li><a class="sTrash" title="" href="#">trash</a></li>
-                    </ul>
-                </li>
-                <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
-                <li class="btn btn-inverse"><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
-            </ul>
-        </div>
+  <%= stylesheet_link_tag    "admin/admin", :media => "all" %>
+	<%= javascript_include_tag "admin/admin.js" %>
+	<%= csrf_meta_tags %>
+</head>
+<body>
 
-		<div id="sidebar">
-			<a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
-			<ul>
-				<%= content_tag(:li, :class => is_active?("index")) do %><%= link_to(('index'), :class => is_active?("index")) do %><i class="icon icon-home"></i> <span>Dashboard</span><% end %><% end %>
-				<%= content_tag(:li, :class => menu_open?("form_common", "form_validation", "form_wizard")) do %>
-					<a href="#"><i class="icon icon-th-list"></i> <span>Form elements</span> <span class="label">3</span></a>
-					<ul>
-						<%= content_tag(:li, :class => is_active?("form_common")) do %><%= link_to "Common Elements", ('form_common') %><% end %>
-						<%= content_tag(:li, :class => is_active?("form_validation")) do %><%= link_to "Validation", ('form_validation') %><% end %>
-						<%= content_tag(:li, :class => is_active?("form_wizard")) do %><%= link_to "Wizard", ('form_wizard') %><% end %>
-					</ul>
-				<% end %>
-				<%= content_tag(:li, :class => is_active?("buttons")) do %><%= link_to('buttons') do %><i class="icon icon-tint"></i> <span>Buttons &amp; icons</span><% end %><% end %>
-				<%= content_tag(:li, :class => is_active?("interface")) do %><%= link_to('interface') do %><i class="icon icon-pencil"></i> <span>Interface elements</span><% end %><% end %>
-				<%= content_tag(:li, :class => is_active?("tables")) do %><%= link_to('tables') do %><i class="icon icon-th"></i> <span>Tables</span><% end %><% end %>
-				<%= content_tag(:li, :class => is_active?("grid")) do %><%= link_to('grid') do %><i class="icon icon-th-list"></i> <span>Grid Layout</span><% end %><% end %>
+	<%= render :partial => 'header' %>
 
-				<%= content_tag(:li, :class => menu_open2?("invoice", "chat", "calendar", "gallery")) do %>
-					<a href="#"><i class="icon icon-file"></i> <span>Sample pages</span> <span class="label">4</span></a>
-					<ul>
-					<%= content_tag(:li, :class => is_active?("invoice")) do %><%= link_to "Invoice", ('invoice') %><% end %>
-					<%= content_tag(:li, :class => is_active?("chat")) do %><%= link_to "Support Chat", ('chat') %><% end %>
-					<%= content_tag(:li, :class => is_active?("calendar")) do %><%= link_to "Calendar", ('calendar') %><% end %>
-					<%= content_tag(:li, :class => is_active?("gallery")) do %><%= link_to "Gallery", ('gallery') %><% end %>
-					</ul>
-				<% end %>
-				<%= content_tag(:li, :class => is_active?("charts")) do %><%= link_to('charts') do %><i class="icon icon-signal"></i> <span>Charts &amp; graphs</span><% end %><% end %>
-				<%= content_tag(:li, :class => is_active?("widgets")) do %><%= link_to('widgets') do %><i class="icon icon-inbox"></i> <span>Widgets</span><% end %><% end %>
-			</ul>
-		
-		</div>
-	
-	
-<%= yield %>
-	<div class="row-fluid">
-		<div id="footer" class="span12">
-			Brought to you by <a href="http://www.caball.net">Caball Media Group</a>
-		</div>
-	</div>
-</div>
-</div>
+	<%= render :partial => 'sidebar' %>
 
+	<%= yield %>
 
-            			
+	<%= render :partial => 'footer' %>
 
-	</body>
+</body>
 </html>
