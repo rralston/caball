@@ -19,23 +19,38 @@
               </h1>
               <div class="nav-collapse">
                 <ul class="nav pull-right">
+                  <li class="divider-vertical"></li>
                   <li>
-                    <%= link_to "Projects", "/projects/show" %>
+                    <%= link_to "/projects/show", :class => 'double-lines' do %>
+                      <h4>Discover</h4>
+                      <h6>great projects</h6>
+                    <% end %>
                   </li>
+                  <li class="divider-vertical"></li>
+                  <li>
+                    <%= link_to "/users/show", :class => 'double-lines' do %>
+                      <h4>Find</h4>
+                      <h6>talented people</h6>
+                    <% end %>
+                  </li>
+                  <li class="divider-vertical"></li>
+                  <li>
+                    <form class="navbar-search pull-right">
+                      <input type="text" class="search-query" placeholder="Search">
+                    </form>
+                  </li>  
+                  <li class="divider-vertical"></li>
+                  <li>
+                    <%= link_to "#" do %>
+                      <h4>Log In</h4>
+                    <% end %>
                   </li>
                   <li>
-                    <%= link_to "People", "/users/show" %>
-                  </li>
-                  <li>
-                    <%= link_to "Log In", "#" %>
-                  </li>
-                  <li>
-                    <%= link_to "Sign Up", "#", :class => "sign-up" %>
+                    <%= link_to "#" do %>
+                      <h4>Sign up</h4>
+                    <% end %>
                   </li>
                 </ul>
-                <form class="navbar-search pull-right">
-                  <input type="text" class="search-query" placeholder="Search">
-                </form>
               </div>
             </div>
           </div>

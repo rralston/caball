@@ -21,15 +21,37 @@
 // Font Awesome
 @import "fontawesome";
 
+// Navbar
+.navbar .divider-vertical {
+  height: 79px;
+  margin: 0;
+}
+
 .navbar-search {
-  margin-top: 24px;
-  margin-bottom: 25px;
+  margin: 24px 18px 25px 18px;
 }
 
-.sign-up {
-  color: #41B7D8;
+.navbar .nav > li > a {
+  h4, h6 {
+    margin: 0;
+    line-height: 18px; }
+  h4 {
+    color: @linkColor; }
+  h6 {
+    color: @grayLight; }
 }
 
+.navbar .nav > li > a.double-lines {
+    padding: 21px 18px 22px 18px; }
+
+.navbar .nav > li > a:hover {
+  h4 {
+    color: @linkColorHover; }
+  h6 {
+    color: darken(@grayLight, 10%); }
+}
+
+// All site
 .video-container {
   position: relative;
   padding-bottom: 56.25%;
