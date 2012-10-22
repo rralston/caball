@@ -50,10 +50,10 @@ class UsersController < ApplicationController
 
      respond_to do |format|
        if @user.update_attributes(params[:user])
-         format.html { redirect_to @user, :notice => 'User was successfully updated.' }
+         format.html { redirect_to @user, :notice => @user.first_name.pluralize + ' Profile was successfully updated.' }
          format.json { head :no_content }
        else
-         format.html { render :action => "edit" }
+         format.html { render :action => "edit", :error => 'User was successfully created.' }
          format.json { render :json => @user.errors, :status => :unprocessable_entity }
        end
      end
