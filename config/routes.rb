@@ -1,19 +1,12 @@
 Caball::Application.routes.draw do
   resources :users
-
-  match 'users/show' => 'users#show'
-  match 'projects/show' => 'projects#show'
-  match 'users/new' => 'users#new'
+  resources :characteristics
   
-  namespace :users do
-    %w[new edit show].each do |page|
-      get 'users/' + page
-    end
-  end  
+  match 'projects/show' => 'projects#show'
+
   namespace :admin do
     %w[index interface buttons calendar charts chat gallery grid invoice login tables widgets form_wizard form_common form_validation].each do |page|
       get 'admin/' + page
     end
   end
-  
 end
