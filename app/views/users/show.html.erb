@@ -11,7 +11,7 @@
                     <figure class="thumbnail-figure profile-pic">
                       <%= image_tag "biz/people1-400x400.jpeg" %>
                       <figcaption class="thumbnail-title">
-                        <h3><span>Betty Doe</span></h3>
+                        <h3><span><%= @user.first_name %> <%= @user.last_name %></span></h3>
                         <p><span>Creative director</span></p>
                       </figcaption>    
                     </figure>
@@ -29,14 +29,17 @@
 									      CONTACT
 									 </a>
 									</center><br>
+									<center><%= link_to t('.edit', :default => t("helpers.links.edit")),
+								              edit_user_path(@user), :class => 'btn' %>
+								</center>
               </div>
               <div class="span6">
                 <div class="well">
                   <h3>
-                      Betty Doe - Creative Actor
+                      <%= @user.first_name %> <%= @user.last_name %> - Creative Actor
                   </h3>
                   <p>
-Once upon a time, I was British, then I realized no one likes English people. So I moved to America to be in the movies. Being in the movies is nothing like I thought it was going to be like. It is actually alot of work. I ahve to memorize things and stuff.
+Once upon a time, I was from <%= @user.location %>, then I realized no one likes English people. So I moved to America to be in the movies. Being in the movies is nothing like I thought it was going to be like. It is actually alot of work. I ahve to memorize things and stuff.
                   </p>
                 </div>
               </div>
