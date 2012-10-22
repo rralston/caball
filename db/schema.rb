@@ -11,6 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20121022040815) do
+
+  create_table "users", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "location"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "user_about_title"
+    t.text     "user_about"
+    t.boolean  "superadmin"
+    t.boolean  "admin"
+    t.boolean  "editor"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
 end
