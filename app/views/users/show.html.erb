@@ -39,61 +39,15 @@
                       <%= @user.first_name %> <%= @user.last_name %> - Creative Actor
                   </h3>
                   <p>
-Once upon a time, I was from <%= @user.location %>, then I realized no one likes English people. So I moved to America to be in the movies. Being in the movies is nothing like I thought it was going to be like. It is actually alot of work. I ahve to memorize things and stuff.
+										<%=h truncate(@user.about, :length => 200) %>
                   </p>
                 </div>
               </div>
-							<div class="span6">
-                <div class="well">
-                  <h3>
-                      Past Projects
-                  </h3>
-                   <table class="table table-striped table-hover">								
-											  <tbody>
-													<tr>
-													<td><b>The Dark Knight Rises (2012):</b> Bane</td>
-													</tr>
-													<tr>
-													<td><b>Lawless (2012):</b> Forrest Bondurant</td>
-													</tr>
-													<tr>
-													<td><b>Warrior (2012):</b> Tommy Conlon</td>
-													</tr>	
-											  </tbody>
-										</table>
-                </div>
-              </div>
-							<div class="span6">
-                <div class="well">
-                  <h3>
-                      Physical Description
-                  </h3>
-                  <table class="table table-striped table-hover">								
-										  <tbody>
-												<tr>
-												<td><b>Age:</b> 27</td>
-									      <td><b>Height:</b> 160cm</td>
-												<td><b>Weight:</b> 160kg</td>    
-												</tr>
-												<tr>
-										      <td><b>Ethnicity:</b> Black & White</td>
-										      <td><b>Body Type:</b> Huge</td>
-										      <td><b>Skin Colour:</b> Grey</td>
-										    </tr>
-												<tr>
-										      <td><b>Eye Colour:</b> White</td>
-										      <td><b>Hair Colour:</b> Blonde</td>
-										      <td><b>Chest:</b> Massive</td>
-										    </tr>
-												<tr>
-										      <td><b>Waist:</b> 28cm</td>
-										      <td><b>Hips:</b> 34cm</td>
-										      <td><b>Dress:</b> 2</td>
-										    </tr>
-										  </tbody>
-									</table>
-                </div>
-              </div>
+							<%= render :partial => 'past_projects' %>
+
+							<% if @user.characteristics.age.present? then %>
+							<%= render :partial => 'characteristics' %>
+							<% end %>
             </div>
           </div>
         </div>
@@ -161,7 +115,7 @@ Once upon a time, I was from <%= @user.location %>, then I realized no one likes
                     </h1>
                 </div>
 									<p>
-                      The amazing Salma Hayek was born on September 2, 1966, in the oil boomtown of Coatzacoalcos, Mexico. Hayek has freely admitted that she and her brother, Sami, were spoiled rotten by her well-to-do Lebanese-Mexican businessman father and her Mexican-born opera-singing mother. After having seen Willy Wonka & the Chocolate Factory (1971) in a local movie theatre, Salma decided she wanted to become an actress. Her education included a stint at a New Orleans convent school, where she pulled pranks on the nuns by setting their clocks back three hours. She was soon expelled. Only after attending Mexico City's Universidad Iberoamericana did she feel ready to pursue acting seriously.
+                      <%= @user.about %>
                   </p>
               </div>
             </div>
