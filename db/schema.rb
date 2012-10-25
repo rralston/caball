@@ -11,7 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121022040815) do
+ActiveRecord::Schema.define(:version => 20121022094841) do
+
+  create_table "characteristics", :force => true do |t|
+    t.integer  "age"
+    t.integer  "height"
+    t.integer  "weight"
+    t.string   "ethnicity"
+    t.string   "bodytype"
+    t.string   "skin_color"
+    t.string   "eye_color"
+    t.string   "hair_color"
+    t.integer  "chest"
+    t.integer  "waist"
+    t.integer  "hips"
+    t.integer  "dress_size"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
@@ -20,13 +38,12 @@ ActiveRecord::Schema.define(:version => 20121022040815) do
     t.string   "location"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "user_about_title"
-    t.text     "user_about"
+    t.text     "about"
     t.boolean  "superadmin"
     t.boolean  "admin"
     t.boolean  "editor"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
