@@ -9,7 +9,11 @@
               <div class="span4">
                   <a href="about.html">
                     <figure class="thumbnail-figure profile-pic">
-                      <%= image_tag "biz/people1-400x400.jpeg" %>
+                      <% if @user.photo.image.present? then %>
+												<%= image_tag @user.photo.image %>
+												<% else %>
+												<%= image_tag "biz/people1-400x400.jpeg" %>
+												<% end %>
                       <figcaption class="thumbnail-title">
                         <h3><span><%= @user.first_name %> <%= @user.last_name %></span></h3>
                         <p><span>Creative director</span></p>

@@ -7,7 +7,23 @@
 <% end %>
 
 <%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
+  <%= f.fields_for :photo do |p|   %>
+	  <% if p.present? %>
+
+			<div class="control-group">
+	    <%= p.label :file_name, :class => 'control-label' %>
+				<div class="controls">
+	    		<%= p.text_field :file_name, :class => 'text_field' %>
+	 			</div>
+			</div>
+	    <div class="control-group">
+		  	<div class="controls">
+					<%= p.file_field :image %>
+				</div>
+			</div>
+			<% end %>
+	<% end %>
+	<div class="control-group">
     <%= f.label :first_name, :class => 'control-label' %>
      <div class="controls">
      <%= f.text_field :first_name, :class => 'text_field' %>
@@ -105,6 +121,7 @@
 	   </div>
 	</div>
 <% end %>		
+
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
