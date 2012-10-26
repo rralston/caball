@@ -47,3 +47,8 @@ group :test do
   gem "guard-rspec"
   gem 'rb-fsevent', '~> 0.9.1'
 end
+
+#Image Uploader
+gem 'carrierwave'
+#Image Processor
+gem "rmagick"
