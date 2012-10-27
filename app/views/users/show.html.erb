@@ -8,7 +8,7 @@
            <div class="span4">
                <a href="about.html">
                  <figure class="thumbnail-figure profile-pic">
-                   <% if @user.photo.present? then %>
+                   <% if @user.photo.image.present? then %>
 									<%= image_tag @user.photo.image %>
 									<% else %>
 									<%= image_tag "biz/people1-400x400.jpeg" %>
