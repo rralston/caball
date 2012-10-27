@@ -27,7 +27,9 @@ class UsersController < ApplicationController
 
    def edit
      @user = User.find(params[:id])
-     @user.build_photo
+     if @user.photo.nil?
+       @user.photo = Photo.new
+     end
    end
    
    def create

@@ -28,29 +28,29 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
   # end
 
-  # Process files as they are uploaded:
-  # process :scale => [400, 400]
-  #
-  # def scale(width, height)
-  #   # do something
-  # end
 
-  # Create different versions of your uploaded files:
+  # Create thumb version of uploaded files:
+  # Accessible through <%= image_tag @user.photo.image.url(:thumb)  %>
    version :thumb do
-     process :resize_to_fit => [50, 50]
+     process :resize_to_fit => [25, 25]
+   end
+   
+   # Create Medium Sized Version
+   # Accessible through <%= image_tag @user.photo.image.url(:medium)  %>
+    version :medium do
+      process :resize_to_fit => [100, 100]
+    end
+   
+
+  # White list of extensions which are allowed to be uploaded.
+   def extension_white_list
+     %w(jpg jpeg gif png)
    end
 
-  # Add a white list of extensions which are allowed to be uploaded.
-  # For images you might use something like this:
-  # def extension_white_list
-  #   %w(jpg jpeg gif png)
-  # end
-
   # Override the filename of the uploaded files:
-  # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
+   def filename
+     "Profile_Image.jpg" if original_filename
+   end
   
   process :resize_to_fit => [400, 400]
 
