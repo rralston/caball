@@ -1,114 +1,145 @@
 <div class="well">
-<% @user.errors.full_messages.each do |error| %>
-  <div class="alert alert-error">
-			<button type="button" class="close" data-dismiss="alert">×</button>
-			<p><%= error %></p>
-	</div>
-<% end %>
+	<% @user.errors.full_messages.each do |error| %>
+	  <div class="alert alert-error">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<p><%= error %></p>
+		</div>
+	<% end %>
 
-<%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :first_name, :class => 'control-label' %>
-     <div class="controls">
-     <%= f.text_field :first_name, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :last_name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :last_name, :class => 'text_field' %>
-    </div>
-  </div>
- <div class="control-group">
-    <%= f.label :email, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :email, :class => 'text_field' %>
-    </div>
-  </div>
- <div class="control-group">
-    <%= f.label :location, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :location, :class => 'text_field' %>
-    </div>
-  </div>
- <div class="control-group">
-    <%= f.label :about, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :about, :class => 'text_area' %>
-    </div>
-	</div>
+	<%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
+	  <%= f.fields_for :photo do |p|  %>
+		  <% if @user.photo.image.present? %>
+				<div class="control-group">
+		    <%= p.label :file_name, :class => 'control-label' %>
+					<div class="controls">
+						<%= p.text_field :file_name, :class => 'text_field' %>
+		 			</div>
+				</div>
+		    <div class="control-group">
+				  <%= p.label "Profile Photo", :class => 'control-label' %>
+			  	<div class="controls">
+						<%= image_tag @user.photo.image.url(:medium), {:class => "img-polaroid"} %>					
+						<%= p.check_box :_destroy %> Click Here to Destroy
+						</div>
+				</div>
+				<% else %>
+				<div class="control-group">
+		    	<%= p.label :file_name, :class => 'control-label' %>
+					<div class="controls">
+						<%= p.text_field :file_name, :class => 'text_field' %>
+		 			</div>
+				</div>
+				<div class="control-group">
+					<p>Please Upload a Profile Image</p>
+					<div class="controls">
+						<%= p.file_field :image %>
+			 		</div>
+				</div>
+	  	<% end %>
+		<% end %>
+		<div class="control-group">
+	  <%= f.label :first_name, :class => 'control-label' %>
+	    <div class="controls">
+	    <%= f.text_field :first_name, :class => 'text_field' %>
+	    </div>
+	  </div>
+	  <div class="control-group">
+	    <%= f.label :last_name, :class => 'control-label' %>
+	    <div class="controls">
+	      <%= f.text_field :last_name, :class => 'text_field' %>
+	    </div>
+	  </div>
+	 <div class="control-group">
+	    <%= f.label :email, :class => 'control-label' %>
+	    <div class="controls">
+	      <%= f.text_field :email, :class => 'text_field' %>
+	    </div>
+	  </div>
+	 <div class="control-group">
+	    <%= f.label :location, :class => 'control-label' %>
+	    <div class="controls">
+	      <%= f.text_field :location, :class => 'text_field' %>
+	    </div>
+	  </div>
+	 <div class="control-group">
+	    <%= f.label :about, :class => 'control-label' %>
+	    <div class="controls">
+	      <%= f.text_area :about, :class => 'text_area' %>
+	    </div>
+	 </div>
 	<%= f.fields_for :characteristics do |c|   %>
-	<div class="control-group">
-	  <%= c.label :age, :class => 'control-label' %>
-		<div class="controls">
-			<%= c.text_field :age, :class => 'text_field' %>
-	   </div>
-	</div>
-	<div class="control-group">
-		 <%= c.label :height, :class => 'control-label' %>
+	 <div class="control-group">
+		  <%= c.label :age, :class => 'control-label' %>
 			<div class="controls">
-				<%= c.text_field :height, :class => 'text_field' %>
+				<%= c.text_field :age, :class => 'text_field' %>
 		   </div>
-	</div>
-	<div class="control-group">
-	  <%= c.label :ethnicity, :class => 'control-label' %>
-		<div class="controls">
-			<%= c.text_field :ethnicity, :class => 'text_field' %>
-	   </div>
-	</div>
-	<div class="control-group">
-		 <%= c.label :bodytype, :class => 'control-label' %>
+	 </div>
+		<div class="control-group">
+			 <%= c.label :height, :class => 'control-label' %>
+				<div class="controls">
+					<%= c.text_field :height, :class => 'text_field' %>
+			   </div>
+		</div>
+		<div class="control-group">
+		  <%= c.label :ethnicity, :class => 'control-label' %>
 			<div class="controls">
-				<%= c.text_field :bodytype, :class => 'text_field' %>
+				<%= c.text_field :ethnicity, :class => 'text_field' %>
 		   </div>
-	</div>	
-	<div class="control-group">
-	  <%= c.label :skin_color, :class => 'control-label' %>
-		<div class="controls">
-			<%= c.text_field :skin_color, :class => 'text_field' %>
-	   </div>
-	</div>
-	<div class="control-group">
-		 <%= c.label :eye_color, :class => 'control-label' %>
+		</div>
+		<div class="control-group">
+			 <%= c.label :bodytype, :class => 'control-label' %>
+				<div class="controls">
+					<%= c.text_field :bodytype, :class => 'text_field' %>
+			   </div>
+		</div>	
+		<div class="control-group">
+		  <%= c.label :skin_color, :class => 'control-label' %>
 			<div class="controls">
-				<%= c.text_field :eye_color, :class => 'text_field' %>
+				<%= c.text_field :skin_color, :class => 'text_field' %>
 		   </div>
-	</div>
-	<div class="control-group">
-	  <%= c.label :hair_color, :class => 'control-label' %>
-		<div class="controls">
-			<%= c.text_field :hair_color, :class => 'text_field' %>
-	   </div>
-	</div>
-	<div class="control-group">
-		 <%= c.label :chest, :class => 'control-label' %>
+		</div>
+		<div class="control-group">
+			 <%= c.label :eye_color, :class => 'control-label' %>
+				<div class="controls">
+					<%= c.text_field :eye_color, :class => 'text_field' %>
+			   </div>
+		</div>
+		<div class="control-group">
+		  <%= c.label :hair_color, :class => 'control-label' %>
 			<div class="controls">
-				<%= c.text_field :chest, :class => 'text_field' %>
+				<%= c.text_field :hair_color, :class => 'text_field' %>
 		   </div>
-	</div>
-	<div class="control-group">
-	  <%= c.label :waist, :class => 'control-label' %>
-		<div class="controls">
-			<%= c.text_field :waist, :class => 'text_field' %>
-	   </div>
-	</div>
-	<div class="control-group">
-		 <%= c.label :hips, :class => 'control-label' %>
+		</div>
+		<div class="control-group">
+			 <%= c.label :chest, :class => 'control-label' %>
+				<div class="controls">
+					<%= c.text_field :chest, :class => 'text_field' %>
+			   </div>
+		</div>
+		<div class="control-group">
+		  <%= c.label :waist, :class => 'control-label' %>
 			<div class="controls">
-				<%= c.text_field :hips, :class => 'text_field' %>
+				<%= c.text_field :waist, :class => 'text_field' %>
 		   </div>
-	</div>
-	<div class="control-group">
-	  <%= c.label :dress_size, :class => 'control-label' %>
-		<div class="controls">
-			<%= c.text_field :dress_size, :class => 'text_field' %>
-	   </div>
-	</div>
-<% end %>		
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                users_path, :class => 'btn' %>
-  </div>
-<% end %>
+		</div>
+		<div class="control-group">
+			 <%= c.label :hips, :class => 'control-label' %>
+				<div class="controls">
+					<%= c.text_field :hips, :class => 'text_field' %>
+			   </div>
+		</div>
+		<div class="control-group">
+		  <%= c.label :dress_size, :class => 'control-label' %>
+			<div class="controls">
+				<%= c.text_field :dress_size, :class => 'text_field' %>
+		   </div>
+		</div>
+	<% end %>		
+
+	  <div class="form-actions">
+	    <%= f.submit nil, :class => 'btn btn-primary' %>
+	    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+	                users_path, :class => 'btn' %>
+	  </div>
+	<% end %>
 </div>

@@ -1,6 +1,7 @@
 Caball::Application.routes.draw do
-  resources :users
-  resources :characteristics
+  resources :users do 
+    resources :characteristics, :photos
+  end
   
   match 'projects/show' => 'projects#show'
 

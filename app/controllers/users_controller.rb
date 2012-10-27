@@ -19,6 +19,7 @@ class UsersController < ApplicationController
   def new
      @user = User.new
      @user.build_characteristics
+     @user.build_photo
      respond_to do |format|
        format.html # new.html.erb
      end
@@ -26,6 +27,9 @@ class UsersController < ApplicationController
 
    def edit
      @user = User.find(params[:id])
+     if @user.photo.nil?
+       @user.photo = Photo.new
+     end
    end
    
    def create

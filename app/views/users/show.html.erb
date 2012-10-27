@@ -1,126 +1,131 @@
 <!-- Main Content -->
-  
 
-    <section id="promo" class="section alt">
-      <div class="container">
-        <div class="row-fluid">
-          <div class="span-10 offset1"
-            <div class="row-fluid">
-              <div class="span4">
-                  <a href="about.html">
-                    <figure class="thumbnail-figure profile-pic">
-                      <%= image_tag "biz/people1-400x400.jpeg" %>
-                      <figcaption class="thumbnail-title">
-                        <h3><span><%= @user.first_name %> <%= @user.last_name %></span></h3>
-                        <p><span>Creative director</span></p>
-                      </figcaption>    
-                    </figure>
-                  </a>
-									<h4> Talent </h4>
-									<div class="progress progress-striped active">
-									  <div class="bar" style="width: 40%;"></div>
-									</div>
-									<h4> Klout </h4>
-									<div class="progress progress-striped active">
-									  <div class="bar" style="width: 80%;"></div>
-									</div>
-									<center>
-									<a class="btn btn-primary btn-large">
-									      CONTACT
-									 </a>
-									</center><br>
-									<center><%= link_to t('.edit', :default => t("helpers.links.edit")),
-								              edit_user_path(@user), :class => 'btn' %>
-								</center>
-              </div>
-              <div class="span6">
-                <div class="well">
-                  <h3>
-                      <%= @user.first_name %> <%= @user.last_name %> - Creative Actor
-                  </h3>
-                  <p>
-										<%=h truncate(@user.about, :length => 200) %>
-                  </p>
-                </div>
-              </div>
-							<%= render :partial => 'past_projects' %>
+ <section id="promo" class="section alt">
+   <div class="container">
+     <div class="row-fluid">
+       <div class="span-10 offset1"
+         <div class="row-fluid">
+           <div class="span4">
+               <a href="about.html">
+                 <figure class="thumbnail-figure profile-pic">
+                   <% if @user.photo.present? then %>
+									<%= image_tag @user.photo.image %>
+									<% else %>
+									<%= image_tag "biz/people1-400x400.jpeg" %>
+								<% end %>
+                   <figcaption class="thumbnail-title">
+                     <h3><span><%= @user.first_name %> <%= @user.last_name %></span></h3>
+                     <p><span>Creative director</span></p>
+                   </figcaption>    
+                 </figure>
+               </a>
+						<h4> Talent </h4>
+						<div class="progress progress-striped active">
+						  <div class="bar" style="width: 40%;"></div>
+						</div>
+						<h4> Klout </h4>
+						<div class="progress progress-striped active">
+						  <div class="bar" style="width: 80%;"></div>
+						</div>
+						<center>
+						<a class="btn btn-primary btn-large">
+						      CONTACT
+						 </a>
+						</center>
+						<br>
+						<center>
+						<%= link_to t('.edit', :default => t("helpers.links.edit")),
+					              edit_user_path(@user), :class => 'btn' %>
+						</center>
+           </div>
+           <div class="span6">
+             <div class="well">
+               <h3>
+                   <%= @user.first_name %> <%= @user.last_name %> - Creative Actor
+               </h3>
+               <p>
+							<%=h truncate(@user.about, :length => 200) %>
+               </p>
+             </div>
+           </div>
+				<%= render :partial => 'past_projects' %>
 
-							<% if @user.characteristics.age.present? then %>
-							<%= render :partial => 'characteristics' %>
-							<% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+				<% if @user.characteristics.age.present? then %>
+					<%= render :partial => 'characteristics' %>
+				<% end %>
+         </div>
+       </div>
+     </div>
+   </div>
+ </section>
 
-    <section class="section">
-      <div class="container">
-        <div class="row-fluid">
-          <div class="span10 offset1">
-            <div class="row-fluid">
-              <div class="page-header">
-                <h1>
-                  Video Portfolio
-                </h1>
-              </div>
-              <ul class="thumbnails thumbnail-list">
-                <li class="span3">
-                  <a href="portfolio-item.html">
-                    <figure class="thumbnail-figure">
-                      <%= image_tag "http://img.youtube.com/vi/EqWRZrupLrI/0.jpg", :width => "100%" %>
-                      <i class="icon-play-circle"></i>    
-                    </figure>
-                  </a>
-                </li>
-                <li class="span3">
-                  <a href="portfolio-item.html">
-                    <figure class="thumbnail-figure">
-                      <%= image_tag "http://img.youtube.com/vi/KE11iY6rHCI/0.jpg", :width => "100%" %>
-                      <i class="icon-play-circle"></i>
-                    </figure>
-                  </a>
-                </li>
-                <li class="span3">
-                  <a href="portfolio-item.html">
-                    <figure class="thumbnail-figure">
-                      <%= image_tag "http://img.youtube.com/vi/iT1sCkVE4Bw/0.jpg", :width => "100%" %>
-                      <i class="icon-play-circle"></i>    
-                    </figure>
-                  </a>
-                </li>
-                <li class="span3">
-                  <a href="portfolio-item.html">
-                    <figure class="thumbnail-figure">
-                      <%= image_tag "http://img.youtube.com/vi/EqWRZrupLrI/0.jpg", :width => "100%" %>
-                      <i class="icon-play-circle"></i>    
-                    </figure>
-                  </a>
-                </li>
-              </ul>
-            </div>  
-          </div>
-        </div>  
-      </div>
-    </section>
+ <section class="section">
+   <div class="container">
+     <div class="row-fluid">
+       <div class="span10 offset1">
+         <div class="row-fluid">
+           <div class="page-header">
+             <h1>
+               Video Portfolio
+             </h1>
+           </div>
+           <ul class="thumbnails thumbnail-list">
+             <li class="span3">
+               <a href="portfolio-item.html">
+                 <figure class="thumbnail-figure">
+                   <%= image_tag "http://img.youtube.com/vi/EqWRZrupLrI/0.jpg", :width => "100%" %>
+                   <i class="icon-play-circle"></i>    
+                 </figure>
+               </a>
+             </li>
+             <li class="span3">
+               <a href="portfolio-item.html">
+                 <figure class="thumbnail-figure">
+                   <%= image_tag "http://img.youtube.com/vi/KE11iY6rHCI/0.jpg", :width => "100%" %>
+                   <i class="icon-play-circle"></i>
+                 </figure>
+               </a>
+             </li>
+             <li class="span3">
+               <a href="portfolio-item.html">
+                 <figure class="thumbnail-figure">
+                   <%= image_tag "http://img.youtube.com/vi/iT1sCkVE4Bw/0.jpg", :width => "100%" %>
+                   <i class="icon-play-circle"></i>    
+                 </figure>
+               </a>
+             </li>
+             <li class="span3">
+               <a href="portfolio-item.html">
+                 <figure class="thumbnail-figure">
+                   <%= image_tag "http://img.youtube.com/vi/EqWRZrupLrI/0.jpg", :width => "100%" %>
+                   <i class="icon-play-circle"></i>    
+                 </figure>
+               </a>
+             </li>
+           </ul>
+         </div>  
+       </div>
+     </div>  
+   </div>
+ </section>
 
-      <section class="section alt">
-        <div class="container">
-          <div class="row-fluid">
-            <div class="span10 offset1">
-              <div class="row-fluid">
-                <div class="page-header">
-                    <h1>
-                        About Me
-                    </h1>
-                </div>
-									<p>
-                      <%= @user.about %>
-                  </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+   <section class="section alt">
+     <div class="container">
+       <div class="row-fluid">
+         <div class="span10 offset1">
+           <div class="row-fluid">
+             <div class="page-header">
+                 <h1>
+                     About Me
+                 </h1>
+             </div>
+						<p>
+							<%= @user.about %>
+						</p>
+           </div>
+         </div>
+       </div>
+     </div>
+   </section>
 
-    </div>
+ </div>
