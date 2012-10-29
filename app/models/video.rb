@@ -3,7 +3,7 @@ class Video < ActiveRecord::Base
   attr_accessible :provider, :title, :description, :keywords, :duration, :date, :thumbnail_small, :thumbnail_large, :embed_url, :embed_code, :video_updated_at, :url
   before_create :movie_details
   
-  def set_provider
+  def movie_details
     video = VideoInfo.new(self.url)
     self.provider = video.provider     
     self.title = video.title  
