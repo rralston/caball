@@ -3,7 +3,7 @@
  <section id="promo" class="section alt">
    <div class="container">
      <div class="row-fluid">
-       <div class="span-10 offset1"
+       <div class="span-10 offset1">
          <div class="row-fluid">
            <div class="span4">
                <a href="about.html">
@@ -29,7 +29,7 @@
 						</div>
 						<center>
 						<a class="btn btn-primary btn-large">
-						      CONTACT
+						      CONTACT 
 						 </a>
 						</center>
 						<br>
@@ -71,25 +71,34 @@
            </div>
            <ul class="thumbnails thumbnail-list">
              <li class="span3">
+               <!-- <%= link_to @user.videos.first.url do %> -->
+							<a data-toggle="lightbox" href="#demoLightbox">
+                 <figure class="thumbnail-figure">
+										<%= image_tag(@user.videos.first.thumbnail_large, :width => '100%') %>
+									<i class="icon-play-circle"></i>    
+                 </figure>
+               <!-- <% end %> -->
+							</a>
+							<div class="lightbox fade" id="demoLightbox" style="display: none;">
+								<div class='lightbox-content'>
+									<h3><%= @user.videos.first.title %></h3>
+									<!-- <%= @user.videos.first.description %> -->									
+									<iframe width="560" height="315" src=<%= @user.videos.first.embed_url %> frameborder="0" allowfullscreen></iframe>
+								</div>
+							</div>
+             </li>
+             <li class="span3">
                <a href="portfolio-item.html">
                  <figure class="thumbnail-figure">
-                   <%= image_tag "http://img.youtube.com/vi/EqWRZrupLrI/0.jpg", :width => "100%" %>
-                   <i class="icon-play-circle"></i>    
-                 </figure>
+                   <%= image_tag(@user.videos.second.thumbnail_large, :width => '100%') %>
+									<i class="icon-play-circle"></i>
+								 </figure>
                </a>
              </li>
              <li class="span3">
                <a href="portfolio-item.html">
                  <figure class="thumbnail-figure">
-                   <%= image_tag "http://img.youtube.com/vi/KE11iY6rHCI/0.jpg", :width => "100%" %>
-                   <i class="icon-play-circle"></i>
-                 </figure>
-               </a>
-             </li>
-             <li class="span3">
-               <a href="portfolio-item.html">
-                 <figure class="thumbnail-figure">
-                   <%= image_tag "http://img.youtube.com/vi/iT1sCkVE4Bw/0.jpg", :width => "100%" %>
+                   <%= image_tag(@user.videos.third.thumbnail_large, :width => '100%') %>
                    <i class="icon-play-circle"></i>    
                  </figure>
                </a>

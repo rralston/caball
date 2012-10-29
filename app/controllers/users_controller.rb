@@ -20,6 +20,9 @@ class UsersController < ApplicationController
      @user = User.new
      @user.build_characteristics
      @user.build_photo
+     3.times do 
+       @video = @user.videos.build
+     end
      respond_to do |format|
        format.html # new.html.erb
      end
@@ -30,11 +33,13 @@ class UsersController < ApplicationController
      if @user.photo.nil?
        @user.photo = Photo.new
      end
+     if @user.videos.nil?
+        @user.videos = Video.new
+      end
    end
    
    def create
      @user = User.new(params[:user])
-
      respond_to do |format|
        if @user.save
          format.html { redirect_to @user, :notice => 'User was successfully created.' }
@@ -46,7 +51,6 @@ class UsersController < ApplicationController
 
    def update
      @user = User.find(params[:id])
-
      respond_to do |format|
        if @user.update_attributes(params[:user])
          format.html { redirect_to @user, :notice => @user.first_name.pluralize + ' Profile was successfully updated.' }
@@ -65,3 +69,4 @@ class UsersController < ApplicationController
      end
    end  
 end
+

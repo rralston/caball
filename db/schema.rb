@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121025064400) do
+ActiveRecord::Schema.define(:version => 20121027105355) do
 
   create_table "characteristics", :force => true do |t|
     t.integer  "age"
@@ -54,6 +54,24 @@ ActiveRecord::Schema.define(:version => 20121025064400) do
     t.boolean  "editor"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "videos", :force => true do |t|
+    t.string   "url"
+    t.string   "provider"
+    t.string   "title"
+    t.text     "description"
+    t.string   "keywords"
+    t.integer  "duration"
+    t.datetime "date"
+    t.string   "thumbnail_small"
+    t.string   "thumbnail_large"
+    t.string   "embed_url"
+    t.string   "embed_code"
+    t.datetime "video_updated_at"
+    t.integer  "user_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
 end
