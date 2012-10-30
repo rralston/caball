@@ -135,9 +135,11 @@
 		   </div>
 		</div>
 	<% end %>	
+
 	
 	<%= f.fields_for :videos do |video| %>
 		<% if @videos.present?  %>
+		<% if video.object.thumbnail_small.present? %>
 			<div class="control-group">
 	    <label class="control-label">Video Preview</label>
 				<div class="controls">
@@ -145,6 +147,7 @@
 					<%= video.check_box :_destroy %> Click Here to Destroy
 				</div>
 			</div>
+			<% end %>
 			<div class="control-group">
 	    <%= video.label :url, :class => 'control-label' %>
 				<div class="controls">

@@ -33,15 +33,18 @@ class UsersController < ApplicationController
    def edit
      @user = User.find(params[:id])
      @videos = @user.videos
+     if @videos.first.nil?
+       @videos.build
+     end
+     if @videos.second.nil?
+       @videos.build
+     end
+     if @videos.third.nil?
+       @videos.build
+     end
      if @user.photo.nil?
        @user.photo = Photo.new
      end
-     3.times do 
-       if @videos.present?          
-       else 
-       @videos.build
-     end
-   end
  end
    
    def create
