@@ -135,33 +135,32 @@
 		   </div>
 		</div>
 	<% end %>	
-	 
-	<%= f.fields_for :videos do |video| %>	
-		<% if @user.videos.present? === false %>
+	
+	<%= f.fields_for :videos do |video| %>
+		<% if @videos.present?  %>
+			<div class="control-group">
+	    <label class="control-label">Video Preview</label>
+				<div class="controls">
+					<img src=<%= video.object.thumbnail_small %> class="img-polaroid" >
+					<%= video.check_box :_destroy %> Click Here to Destroy
+				</div>
+			</div>
 			<div class="control-group">
 	    <%= video.label :url, :class => 'control-label' %>
 				<div class="controls">
 					<%= video.text_field(:url) %>
 				</div>
 			</div>
-			
-			<div class="control-group">
-	    	Video Preview
-				<div class="controls">
-					<img src=<%= video.object.thumbnail_small %> class="img-polaroid" >
-					<%= video.check_box :_destroy %> Click Here to Destroy
+			<% else %> 
+				<div class="control-group">
+					<label class="control-label">Youtube URL</label>
+					<div class="controls">
+					<%= video.text_field(:url) %>
+					</div>
 				</div>
-			</div>
-		<% else %> 
-		
-		<p><%= video.text_field(:url) %></p>
-		<% end %>
+			<% end %>
 	<% end %>
-	
-	
-	
-	
-	
+<!-- End of Form -->
 
 	  <div class="form-actions">
 	    <%= f.submit nil, :class => 'btn btn-primary' %>
