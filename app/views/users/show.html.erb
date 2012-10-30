@@ -80,7 +80,14 @@
 										<% end %>									<i class="icon-play-circle"></i>    
                  </figure>
 							</a>
-
+							<% if @user.videos.first.present? %>
+								<div class="lightbox fade" id="demoLightbox" style="display: none;">
+									<div class='lightbox-content'>
+										<h3><%= @user.videos.first.title %></h3>
+										<iframe width="560" height="315" src=<%= @user.videos.first.embed_url %> frameborder="0" allowfullscreen></iframe>
+									</div>
+								</div>
+							<% end %>
              </li>
              <li class="span3">
                <a href="portfolio-item.html">
