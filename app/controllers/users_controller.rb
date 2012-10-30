@@ -10,7 +10,9 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
-
+    if @user.nil?
+        redirect_to :action => :index
+    end
     respond_to do |format|
       format.html # show.html.erb
     end
@@ -30,13 +32,17 @@ class UsersController < ApplicationController
 
    def edit
      @user = User.find(params[:id])
+     @videos = @user.videos
      if @user.photo.nil?
        @user.photo = Photo.new
      end
-     if @user.videos.nil?
-        @user.videos = Video.new
-      end
+     3.times do 
+       if @videos.present?          
+       else 
+       @videos.build
+     end
    end
+ end
    
    def create
      @user = User.new(params[:user])
