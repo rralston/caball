@@ -5,4 +5,15 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :characteristics, :photo, :videos, :allow_destroy => true
   attr_accessible :first_name, :last_name, :email, :location, :about, :characteristics_attributes, :photo_attributes, :photo, :videos_attributes
   validates_presence_of :first_name, :last_name, :email, :message => "is required"
+  
+  def self.from_omniauth(auth)
+      where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.name = auth.info.name
+        user.oauth_token = auth.credentials.token
+        user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+        user.save!
+      end
+  end
 end
