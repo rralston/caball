@@ -62,7 +62,7 @@ class UsersController < ApplicationController
      @user = User.find(params[:id])
      respond_to do |format|
        if @user.update_attributes(params[:user])
-         format.html { redirect_to @user, :notice => @user.first_name.pluralize + ' Profile was successfully updated.' }
+         format.html { redirect_to @user, :notice => @user.name + ' Profile was successfully updated.' }
        else
          format.html { render :action => "edit", :error => 'User was successfully created.' }
        end
