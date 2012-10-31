@@ -14,7 +14,7 @@
 									<%= image_tag "biz/people1-400x400.jpeg" %>
 								<% end %>
                    <figcaption class="thumbnail-title">
-                     <h3><span><%= @user.first_name %> <%= @user.last_name %></span></h3>
+                     <h3><span><%= @user.name %></span></h3>
                      <p><span>Creative director</span></p>
                    </figcaption>    
                  </figure>
@@ -41,7 +41,7 @@
            <div class="span6">
              <div class="well">
                <h3>
-                   <%= @user.first_name %> <%= @user.last_name %> - Creative Actor
+                   <%= @user.name %> - Creative Actor
                </h3>
                <p>
 							<%=h truncate(@user.about, :length => 200) %>
