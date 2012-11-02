@@ -35,6 +35,7 @@ class UsersController < ApplicationController
    end
 
    def edit
+     correct_user?
      @user = User.find(params[:id])
      if @user.characteristics.nil?
         @user.build_characteristics
