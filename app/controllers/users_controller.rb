@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
 
+  #Security & Authentication Checker
+  # before_filter :authenticate_user!
+  # before_filter :correct_user?
+  
   def index
     @users = User.all
 
@@ -32,6 +36,9 @@ class UsersController < ApplicationController
 
    def edit
      @user = User.find(params[:id])
+     if @user.characteristics.nil?
+        @user.build_characteristics
+      end
      @videos = @user.videos
      if @videos.first.nil?
        @videos.build

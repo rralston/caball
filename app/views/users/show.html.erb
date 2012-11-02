@@ -28,9 +28,8 @@
 						  <div class="bar" style="width: 80%;"></div>
 						</div>
 						<center>
-						<a class="btn btn-primary btn-large">
-						      CONTACT 
-						 </a>
+						      <%= mail_to @user.email, "Contact", :class => "btn btn-primary btn-large",
+									         :subject => "Contact from Caball Networks" %> 
 						</center>
 						<br>
 						<center>
