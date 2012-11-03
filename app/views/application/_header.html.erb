@@ -28,7 +28,7 @@
                   </li>
                   <li class="divider-vertical"></li>
                   <li>
-                    <%= link_to "/users/show", :class => 'double-lines' do %>
+                    <%= link_to "/users", :class => 'double-lines' do %>
                       <h4>Find</h4>
                       <h6>talented people</h6>
                     <% end %>
@@ -36,12 +36,15 @@
                   <li class="divider-vertical"></li>
                   <li class="dropdown">
 										
-										<%= link_to "#", :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do %>
-										      <i class="icon-user icon-white"></i>My Account
+										<%= link_to "#", :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do %>								<% if current_user.receipts.is_unread %>
+										<span class="badge badge-info"><%= current_user.receipts.is_unread.count %></span>      			<% else %>
+										<i class="icon-user icon-white"></i>
+										<% end %> My Account
 										<b class="caret"></b>
 										<% end %>
 										<ul class="dropdown-menu">
                     	<% if current_user %>
+													<%= link_to "My Profile", user_path(current_user) %>
 													<% else %><li>
 												<%= link_to "#" do %>
 	                      <h4>Log In</h4>
