@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
 
+  #Security & Authentication Checker
+  # before_filter :authenticate_user!
+  # before_filter :correct_user?
+  
   def index
     @users = User.all
 
@@ -31,7 +35,11 @@ class UsersController < ApplicationController
    end
 
    def edit
+     correct_user?
      @user = User.find(params[:id])
+     if @user.characteristics.nil?
+        @user.build_characteristics
+      end
      @videos = @user.videos
      if @videos.first.nil?
        @videos.build
@@ -59,10 +67,11 @@ class UsersController < ApplicationController
    end
 
    def update
+     correct_user?
      @user = User.find(params[:id])
      respond_to do |format|
        if @user.update_attributes(params[:user])
-         format.html { redirect_to @user, :notice => @user.first_name.pluralize + ' Profile was successfully updated.' }
+         format.html { redirect_to @user, :notice => @user.name + ' Profile was successfully updated.' }
        else
          format.html { render :action => "edit", :error => 'User was successfully created.' }
        end
@@ -70,6 +79,7 @@ class UsersController < ApplicationController
    end
 
    def destroy
+     correct_user?
      @user = User.find(params[:id])
      @user.destroy
 

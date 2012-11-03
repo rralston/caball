@@ -42,8 +42,7 @@ ActiveRecord::Schema.define(:version => 20121027105355) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
+    t.string   "name"
     t.string   "email"
     t.string   "location"
     t.float    "latitude"
@@ -52,8 +51,12 @@ ActiveRecord::Schema.define(:version => 20121027105355) do
     t.boolean  "superadmin"
     t.boolean  "admin"
     t.boolean  "editor"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "oauth_token"
+    t.datetime "oauth_expires_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   create_table "videos", :force => true do |t|

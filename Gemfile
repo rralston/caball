@@ -50,8 +50,13 @@ end
 
 #Image Uploader
 gem 'carrierwave'
+
 #Image Processor
 gem "rmagick"
+
 #Video Processor
 gem 'video_info'
 gem 'hpricot'
+
+#Authenitcation
+gem 'omniauth-facebook'
