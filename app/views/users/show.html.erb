@@ -44,6 +44,9 @@
                </h3>
                <p>
 							<%=h truncate(@user.about, :length => 200) %>
+							<!-- <%= render current_user.mailbox.inbox %>
+							<%= @user.receipts.is_unread.count %> -->
+
                </p>
              </div>
            </div>

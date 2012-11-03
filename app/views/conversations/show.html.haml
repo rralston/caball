@@ -4,4 +4,6 @@
     - message = receipt.message
     %h3= message.subject
     %p= message.body
+    %b Has been Read? 
+    %p= receipt.is_read
 = render 'messages/form', conversation: conversation
