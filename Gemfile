@@ -58,5 +58,5 @@ gem "rmagick"
 gem 'video_info'
 gem 'hpricot'
 
-#Authentication 
+#Authenitcation
 gem 'omniauth-facebook'
