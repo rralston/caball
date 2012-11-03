@@ -60,3 +60,6 @@ gem 'hpricot'
 
 #Authenitcation
 gem 'omniauth-facebook'
+
+#Messaging
+gem 'mailboxer'
