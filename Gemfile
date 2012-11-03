@@ -63,3 +63,5 @@ gem 'omniauth-facebook'
 
 #Messaging
 gem 'mailboxer'
+gem 'haml-rails'
+gem 'simple_form'

@@ -86,6 +86,12 @@ GEM
     guard-rspec (2.1.1)
       guard (>= 1.1)
       rspec (~> 2.11)
+    haml (3.1.7)
+    haml-rails (0.3.5)
+      actionpack (>= 3.1, < 4.1)
+      activesupport (>= 3.1, < 4.1)
+      haml (~> 3.1)
+      railties (>= 3.1, < 4.1)
     hashie (1.2.0)
     highline (1.6.15)
     hike (1.2.1)
@@ -202,6 +208,9 @@ GEM
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
       rubyzip
+    simple_form (2.0.2)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     slop (3.3.3)
     sprockets (2.1.3)
       hike (~> 1.2)
@@ -243,6 +252,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   factory_girl_rails
   guard-rspec
+  haml-rails
   hpricot
   jquery-rails
   mailboxer
@@ -253,6 +263,7 @@ DEPENDENCIES
   rmagick
   rspec-rails
   sass-rails (~> 3.2.3)
+  simple_form
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   unicorn
