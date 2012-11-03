@@ -58,11 +58,13 @@
 	                    	<% end %>
 											</li>
 											<li class="divider"></li>
+											<% if current_user %>
 											<li>
-												<%= link_to "#" do %>
+												<%= link_to "../conversations#index" do %>
 												<h4><i class="icon-envelope icon-white"></i> Messages</h4>
 												<% end %>
 											</li>
+											<% end %>
 										</ul>
                   </li>
 									  <li class="divider-vertical"></li>
