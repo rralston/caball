@@ -62,6 +62,6 @@ gem 'hpricot'
 gem 'omniauth-facebook'
 
 #Messaging
-gem 'mailboxer', github: 'rralston/mailboxer'
+gem 'mailboxer'
 gem 'haml-rails'
 gem 'simple_form'
