@@ -26,7 +26,18 @@ class ConversationsController < ApplicationController
     conversation.untrash(current_user)
     redirect_to :conversations
   end
+  
+  #Bring in Details from Documentation Here Also Add to Routes
+  def unread
+    conversation.mark_as_unread(current_user)
+    redirect_to :conversations
+  end
 
+  def read
+    conversation.mark_as_read(current_user)
+    redirect_to :conversations
+  end
+  
   private
 
   def mailbox
