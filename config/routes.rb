@@ -20,6 +20,8 @@ Caball::Application.routes.draw do
       post :reply
       post :trash
       post :untrash
+      post :unread
+      post :read
     end
   end
 end
