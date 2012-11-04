@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :subdomain_view_path
   helper_method :current_user
+  helper_method :notification
   # Security & Authentication
   helper_method :user_signed_in?
   helper_method :correct_user?
@@ -13,6 +14,16 @@ class ApplicationController < ActionController::Base
   
   def current_user
       @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+
+#Notification System  
+  def notification
+    if @current_user
+    notification = @current_user.receipts.where(:receiver_id == :user_id).is_unread.count
+    if notification > 0
+    notification
+      end
+    end
   end
   
   def user_signed_in?
