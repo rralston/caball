@@ -1,0 +1,22 @@
+<div class="row-fluid">
+	<div class="span9 offset1">
+		<div class="well">
+			<h1> Conversations <% if notification %>- New (<%= notification %>)<% end %></h1>
+			<div class="well">
+				<h2> Inbox </h2>
+				<ul class="unstyled">
+					<%= render mailbox.inbox %>
+				</ul>
+				<h2> Sentbox </h2>
+				<ul class="unstyled">
+					<%= render mailbox.sentbox %>
+				</ul>
+				<h2> Trash </h2>
+				<ul class="unstyled">
+					<%= render mailbox.trash %>
+				</ul>
+
+			<%= link_to 'Start Conversation', :new_conversation, {:class => 'btn'} %>
+		</div>
+	</div>
+</div>

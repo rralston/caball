@@ -46,6 +46,12 @@
 							<%=h truncate(@user.about, :length => 200) %>
 							<!-- <%= render current_user.mailbox.inbox %>
 							<%= @user.receipts.is_unread.count %> -->
+							<%= @user.id %>
+							<% @user.receipts.each do |receipt| %>
+							<%= receipt.receiver_id %>
+							<%= receipt.is_read %>
+							<% end %>
+					    
 
                </p>
              </div>

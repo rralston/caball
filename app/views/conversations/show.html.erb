@@ -1,0 +1,40 @@
+<div class="row-fluid">
+	<div class="span9 offset1">
+		<div class="well">
+			<%= link_to("Go back", { :controller => "conversations", :action => "index" }) %>
+			<h1><%= conversation.subject %></h1>
+		
+			<div class="well">
+				<ul class="unstyled">
+			<%= content_tag_for(:li, conversation.receipts_for(current_user)) do |receipt| %>
+			
+				<% message = receipt.message %>
+				
+				<% if message.sender_id == current_user.id %>
+				
+					<blockquote class="pull-right">
+						<p class="lead"><%= message.subject %></p>
+						<%= message.body %>
+						<small>
+							This <%= receipt.is_read? %> has been read
+						</small>
+					</blockquote>
+
+				<% else %>
+				
+					<blockquote>
+						<p class="lead"><%= message.subject %></p>
+						<%= message.body %>
+						<small>
+							This <%= receipt.is_read? %> has been read
+						</small>
+					</blockquote>
+				
+				<% end %>				
+				<% end %>
+				</ul>
+			</div>
+			<%= render 'messages/form', conversation: conversation %>
+		</div>
+	</div>
+</div>
