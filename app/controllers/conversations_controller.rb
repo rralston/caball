@@ -16,7 +16,7 @@ class ConversationsController < ApplicationController
     current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
     redirect_to conversation
   end
-
+   
   def trash
     conversation.move_to_trash(current_user)
     redirect_to :conversations
@@ -33,8 +33,10 @@ class ConversationsController < ApplicationController
     @mailbox ||= current_user.mailbox
   end
 
+  # Mark as read once COnversation has been opened.
   def conversation
-    @conversation ||= mailbox.conversations.find(params[:id])
+    mailbox.conversations.find(params[:id]).receipts_for(current_user).mark_as_read
+    @conversation ||= mailbox.conversations.find(params[:id])    
   end
 
   def conversation_params(*keys)
