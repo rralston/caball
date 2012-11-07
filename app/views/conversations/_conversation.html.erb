@@ -9,12 +9,12 @@
 		<% end %>
 		
 		
-		<% if conversation.is_unread?(current_user) %>
-			| 
-			<i class="icon-envelope icon-white"></i> <%= link_to 'Mark as Read', [:read, conversation], method: :post %>
-			<% else %>
-			|
-			<%= link_to 'Mark as Unread', [:unread, conversation], method: :post %>
-		<% end %>
+		<!-- <% if conversation.is_unread?(current_user) %>
+					| 
+					<i class="icon-envelope icon-white"></i> <%= link_to 'Mark as Read', [:read, conversation], method: :post %>
+					<% else %>
+					|
+					<%= link_to 'Mark as Unread', [:unread, conversation], method: :post %>
+				<% end %> -->
 	</p>
 <% end %>

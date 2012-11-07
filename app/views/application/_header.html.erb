@@ -49,7 +49,7 @@
                     	<% if current_user %>
 													<%= link_to "My Profile", user_path(current_user) %>
 													<% else %><li>
-	                      <h4><%= link_to "Sign in", "/auth/facebook", id: "sign_in" %></h4>
+	                      <h4><%= link_to "Sign in", "/auth/facebook#new", id: "sign_in" %></h4>
 	                    	<% end %>
 	                  	</li>
 	                  	<li>
