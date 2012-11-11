@@ -19,7 +19,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 
-  gem 'twitter-bootstrap-rails'
+  gem 'twitter-bootstrap-rails', '2.1.0'
 end
 
 gem 'jquery-rails'
@@ -60,3 +60,8 @@ gem 'hpricot'
 
 #Authenitcation
 gem 'omniauth-facebook'
+
+#Messaging
+gem 'mailboxer'
+gem 'haml-rails'
+gem 'simple_form'

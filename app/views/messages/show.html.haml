@@ -1,0 +1,10 @@
+.well
+	%h1= message.subject
+	%ul
+			%p{:class=>"lead"}= message.subject
+			%blockquote
+				%p= message.body
+			%small
+				%b Has been Read? 
+				%p= receipt.is_read
+	= render 'messages/form', conversation: conversation

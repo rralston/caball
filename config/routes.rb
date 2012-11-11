@@ -14,4 +14,14 @@ Caball::Application.routes.draw do
       get 'admin/' + page
     end
   end
+  
+  resources :conversations, only: [:index, :show, :new, :create] do
+    member do
+      post :reply
+      post :trash
+      post :untrash
+      post :unread
+      post :read
+    end
+  end
 end
