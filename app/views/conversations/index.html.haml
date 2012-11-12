@@ -1,0 +1,15 @@
+.row-fluid
+	.span9
+		.well
+			%h1 Conversations
+			.well
+				%h2 Inbox
+				%ul.unstyled= render mailbox.inbox
+			.well
+				%h2 Sentbox
+				%ul.unstyled= render mailbox.sentbox
+			.well
+				%h2 Trash
+				%ul.unstyled= render mailbox.trash
+
+			= link_to 'Start Conversation', :new_conversation, {:class => 'btn'}

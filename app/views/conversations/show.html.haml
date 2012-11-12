@@ -1,0 +1,13 @@
+.well
+	%h1= conversation.subject
+	%ul
+		= content_tag_for(:li, conversation.receipts_for(current_user)) do |receipt|
+			- message = receipt.message
+			%p{:class=>"lead"}= message.subject
+			%blockquote
+				%p= message.body
+			%small
+				%b Has been Read? 
+				%p= receipt.is_read?
+	= render 'messages/form', conversation: conversation
+	

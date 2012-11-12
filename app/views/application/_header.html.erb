@@ -28,7 +28,7 @@
                   </li>
                   <li class="divider-vertical"></li>
                   <li>
-                    <%= link_to "/users/show", :class => 'double-lines' do %>
+                    <%= link_to "/users", :class => 'double-lines' do %>
                       <h4>Find</h4>
                       <h6>talented people</h6>
                     <% end %>
@@ -36,35 +36,36 @@
                   <li class="divider-vertical"></li>
                   <li class="dropdown">
 										
-										<%= link_to "#", :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do %>
-										      <i class="icon-user icon-white"></i>My Account
+										<%= link_to "#", :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do %>								
+										<% if current_user %>
+										<% if notification %>
+										<span class="badge badge-info"><%= notification %></span>      			
+										<% else %>
+										<i class="icon-user icon-white"></i>
+										<% end %><% end %> 
+										My Account
 										<b class="caret"></b>
 										<% end %>
-										<ul class="dropdown-menu">
-                    	<% if current_user %>
-													<% else %><li>
-												<%= link_to "#" do %>
-	                      <h4>Log In</h4>
-	                    	<% end %><% end %>
-	                  	</li>
-	                  	<li>
-	                    	<%= link_to "#" do %>
-	                      <% if current_user %>
-													    Signed in as <strong><%= current_user.name %></strong>!
-													    <%= link_to "Sign out", signout_path, id: "sign_out" %>
-													  <% else %>
-													    <h4><%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %></h4>
-													  <% end %>
-	                    	<% end %>
-											</li>
-											<li class="divider"></li>
-											<li>
-												<%= link_to "#" do %>
-												<h4><i class="icon-envelope icon-white"></i> Messages</h4>
-												<% end %>
-											</li>
+										
+										<ul class="dropdown-menu">	                  
+											<% if current_user %>
+												<li>
+													<%= link_to user_path(current_user) do %>
+														Signed in as <strong><%= current_user.name %></strong>!
+													<% end %>
+												</li>
+												<li><%= link_to "Sign out", signout_path, id: "sign_out" %></li>
+												<li class="divider"></li>
+												<li>
+													<%= link_to "../conversations#index" do %>
+														<h4><i class="icon-envelope icon-white"></i> Messages</h4>
+													<% end %>
+												</li>
+												<% else %>
+													<li><%= link_to "Sign In with Facebook", "/auth/facebook", id: "sign_in" %></li>
+											<% end %>
 										</ul>
-                  </li>
+                		</li>
 									  <li class="divider-vertical"></li>
 	                  <li class="dropdown">
 											<%= link_to "#", :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do %>
