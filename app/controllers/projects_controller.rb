@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    @project.id = Current_User.id
   end
 
   def index
@@ -23,7 +24,7 @@ class ProjectsController < ApplicationController
    end
    
    def create
-     @project = Project.new(params[:user])
+     @project = Project.new(params[:id])
      respond_to do |format|
        if @project.save
          format.html { redirect_to @project, :notice => 'Project was successfully created.' }
