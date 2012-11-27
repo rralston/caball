@@ -2,7 +2,6 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
-    @project.id = Current_User.id
   end
 
   def index

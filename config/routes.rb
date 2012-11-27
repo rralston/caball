@@ -1,6 +1,6 @@
 Caball::Application.routes.draw do
   resources :users do 
-    resources :characteristics, :photos, :projects
+    resources :characteristics, :photos
   end
   resources :projects
   
