@@ -1,9 +1,5 @@
 class ProjectsController < ApplicationController
 
-  def new
-    @project = Project.new
-  end
-
   def index
     @projects = Project.all
 
@@ -15,6 +11,13 @@ class ProjectsController < ApplicationController
   def show
     
   end
+  
+  def new
+     @projects = Project.new
+     respond_to do |format|
+       format.html # new.html.erb
+     end
+   end
   
   def edit
      # correct_project_owner?
