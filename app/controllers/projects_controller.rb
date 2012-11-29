@@ -1,9 +1,5 @@
 class ProjectsController < ApplicationController
 
-  def new
-    @project = Project.new
-  end
-
   def index
     @projects = Project.all
 
@@ -20,18 +16,22 @@ class ProjectsController < ApplicationController
      # correct_project_owner?
      # Define Security Measures
      @project = Project.find(params[:id])
-   end
-   
-   def create
-     @project = Project.new(params[:user])
-     respond_to do |format|
-       if @project.save
-         format.html { redirect_to @project, :notice => 'Project was successfully created.' }
-       else
-         format.html { render :action => "new" }
-       end
+  end
+  
+  def new
+    @project = Project.new
+  end
+  
+ def create
+   @project = Project.new(params[:project])
+   respond_to do |format|
+     if @project.save
+       format.html { redirect_to @project, :notice => 'Project was successfully created.' }
+     else
+       format.html { render :action => "new" }
      end
    end
+ end
 
    def update
      # correct_project_owner?
@@ -56,4 +56,5 @@ class ProjectsController < ApplicationController
        format.html { redirect_to Project_url }
      end
    end
-end
+  
+  end
