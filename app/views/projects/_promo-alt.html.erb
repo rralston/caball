@@ -5,7 +5,7 @@
       <div class="row-fluid">
         <div class="page-header">
           <h1>
-            The Veldt <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</small>
+            <%= @project.title %> <small><%=h truncate(@project.description, :length => 200) %></small>
           </h1>
         </div>
       </div>
