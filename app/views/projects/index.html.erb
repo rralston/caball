@@ -1,3 +1,4 @@
+<div class="well">
 <%- model_class = Project.new.class -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
@@ -37,3 +38,4 @@
             new_project_path,
             :class => 'btn btn-primary' %>
 <br>
+</div>
