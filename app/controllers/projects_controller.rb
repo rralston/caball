@@ -41,8 +41,8 @@ class ProjectsController < ApplicationController
      # Define Security Measures
      @project = Project.find(params[:id])
      respond_to do |format|
-       if @project.update_attributes(params[:user])
-         format.html { redirect_to @user, :notice => @project.name + ' Project was successfully updated.' }
+       if @project.update_attributes(params[:project])
+         format.html { redirect_to @project, :notice => @project.title + ' Project was successfully updated.' }
        else
          format.html { render :action => "edit", :error => 'Project was not created.' }
        end
@@ -56,7 +56,7 @@ class ProjectsController < ApplicationController
      @project.destroy
 
      respond_to do |format|
-       format.html { redirect_to Project_url }
+       format.html { redirect_to projects_url }
      end
    end
   
