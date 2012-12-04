@@ -3,6 +3,8 @@ Caball::Application.routes.draw do
     resources :characteristics, :photos
   end
   
+  resources :projects
+  
   match 'projects/show' => 'projects#show'
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
