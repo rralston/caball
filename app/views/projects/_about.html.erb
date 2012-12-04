@@ -2,56 +2,19 @@
   <div class="row-fluid">
     <div class="span10 offset1">
       <div class="row-fluid">
-        <div class="span4">
-          <div class="page-header">
-            <h1>
-                Latest News
-            </h1>
-          </div>
-          <div class="sidebar-widget">
-                            <ul class="unstyled">
-                                <li>
-                                    <h4><a href="#">Lorem ipsum dolor sit</a></h4>
-                                    <p><small>November 12, 2012</small></p>
-                                </li>
-                                <li>
-                                    <h4><a href="#">Ed do eiusmod tempor</a></h4>
-                                    <p><small>August 23, 2012</small></p>
-                                </li>
-                                <li>
-                                    <h4><a href="#">Incididunt ut labore </a></h4>
-                                    <p><small>June 28, 2011</small></p>
-                                </li>
-                                <li>
-                                    <h4><a href="#">Quis nostrud exercitation </a></h4>
-                                    <p><small>June 25, 2011</small></p>
-                                </li>
-                            </ul>
-                            <%= link_to "MORE", "#" %>
-                        </div>
-        </div>
         <div class="span8">
       <div class="page-header">
           <h1>
-              About The Project
+              About <%= @project.title %>
           </h1>
         </div>
       <article class="blog-post">
         
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <%= @project.description %>
         </p>
-        <p>
-            Nullam eget suscipit turpis. Suspendisse nec magna et velit elementum vulputate. Suspendisse ac nibh lectus, at sollicitudin turpis. Aenean ut tortor a felis consectetur pulvinar. Phasellus mattis viverra luctus. Pellentesque tempor bibendum arcu non vestibulum. In bibendum mattis nibh, nec laoreet enim pretium a. Donec augue sem, convallis euismod pellentesque non, facilisis non nulla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis blandit cursus mi, malesuada euismod enim accumsan nec. Pellentesque nisl enim, elementum non molestie eu, lobortis sed odio. Mauris vehicula commodo neque, nec viverra libero accumsan in.
-        </p>
-        <%= link_to "MORE", "#" %>
+        <!-- <%= link_to "MORE", "#" %> -->
     </article>
-    </div>
-    </div>
+
   </div>
 </div>

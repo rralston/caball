@@ -2,8 +2,9 @@ class User < ActiveRecord::Base
   has_one :characteristics
   has_one :photo
   has_many :videos
-  accepts_nested_attributes_for :characteristics, :photo, :videos, :allow_destroy => true
-  attr_accessible :name, :email, :location, :about, :characteristics_attributes, :photo_attributes, :photo, :videos_attributes
+  has_many :projects
+  accepts_nested_attributes_for :characteristics, :photo, :videos, :projects, :allow_destroy => true
+  attr_accessible :name, :email, :location, :about, :characteristics_attributes, :photo_attributes, :photo, :videos_attributes, :projects_attributes
   validates_presence_of :name, :email, :message => "is required"
   
   acts_as_messageable
