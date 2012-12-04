@@ -1,3 +1,13 @@
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+ 
+<script>
+	$(function() {
+		$( "#start" ).datepicker();
+		$( "#end" ).datepicker();
+	});
+</script>
+
 <div class="well">
 	<% @project.errors.full_messages.each do |error| %>
 	  <div class="alert alert-error">
@@ -25,14 +35,14 @@
 	 	<div class="control-group">
 	  <%= p.label :start, :class => 'control-label' %>
 	    <div class="controls">
-	    <%= p.text_field :start, :class => 'text_field' %>
+	    <%= p.text_field :start, :id => 'start' %>
 	    </div>
 	  </div>
 	
 	 	<div class="control-group">
 	  <%= p.label :end, :class => 'control-label' %>
 	    <div class="controls">
-	    <%= p.text_field :end, :class => 'text_field' %>
+	    <%= p.text_field :end, :id => 'end' %>
 	    </div>
 	  </div>
 	
