@@ -1,0 +1,47 @@
+<div class="well">
+<%- model_class = Project.new.class -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+	    <th><%= model_class.human_attribute_name(:id) %></th>
+			<th><%= model_class.human_attribute_name(:user_id) %></th>
+			<th>User Photo</th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:end) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= link_to project.id, project_path(project), :class => 'btn btn-mini' %></td>
+				<td><% if project.user_id %><%= link_to User.find(project.user_id).name, User.find(project.user_id) %><% end %></td>
+				<td><% if project.user_id %><%= image_tag(User.find(project.user_id).photo.image.url(:medium), {:class => "img-polaroid"}) %><% end %></td>
+				<td><%= project.title %></td>
+        <td><%= project.description %></td>
+        <td><%=l project.created_at %></td>
+				<td><%= project.end %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_project_path(project), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      project_path(project),
+                      :method => :delete,
+                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_project_path,
+            :class => 'btn btn-primary' %>
+<br>
+</div>
