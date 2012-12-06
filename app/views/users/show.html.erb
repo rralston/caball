@@ -70,7 +70,7 @@
            </div>
            <ul class="thumbnails thumbnail-list">
              <li class="span3">
-							<a data-toggle="lightbox" href="#demoLightbox">
+							<a data-toggle="lightbox" href="#video1">
                  <figure class="thumbnail-figure">
 									<% if @user.videos.first.thumbnail_small.present? %>
                    <%= image_tag(@user.videos.first.thumbnail_large, :width => '100%') %>
@@ -80,7 +80,7 @@
                  </figure>
 							</a>
 							<% if @user.videos.first.present? %>
-								<div class="lightbox fade" id="demoLightbox" style="display: none;">
+								<div class="lightbox fade" id="video1" style="display: none;">
 									<div class='lightbox-content'>
 										<h3><%= @user.videos.first.title %></h3>
 										<iframe width="560" height="315" src=<%= @user.videos.first.embed_url %> frameborder="0" allowfullscreen></iframe>
@@ -90,7 +90,8 @@
              </li>
              <li class="span3">
                <a href="portfolio-item.html">
-                 <figure class="thumbnail-figure">
+                 <a data-toggle="lightbox" href="#video2">
+									<figure class="thumbnail-figure">
 									<% if @user.videos.second.thumbnail_small.present? %>
                    <%= image_tag(@user.videos.second.thumbnail_large, :width => '100%') %>
 										<% else %>
@@ -98,25 +99,41 @@
 										<% end %>									<i class="icon-play-circle"></i>
 								 </figure>
                </a>
+							<% if @user.videos.second.present? %>
+								<div class="lightbox fade" id="video2" style="display: none;">
+									<div class='lightbox-content'>
+										<h3><%= @user.videos.second.title %></h3>
+										<iframe width="560" height="315" src=<%= @user.videos.second.embed_url %> frameborder="0" allowfullscreen></iframe>
+									</div>
+								</div>
+							<% end %>
              </li>
              <li class="span3">
                <a href="portfolio-item.html">
-                 <figure class="thumbnail-figure">
+                 <a data-toggle="lightbox" href="#video3">
+									<figure class="thumbnail-figure">
 									<% if @user.videos.third.thumbnail_small.present? %>
                    <%= image_tag(@user.videos.third.thumbnail_large, :width => '100%') %>
 										<% else %>
 										<%= image_tag "http://img.youtube.com/vi/EqWRZrupLrI/0.jpg", :width => "100%" %>
-										<% end %>
-                   <i class="icon-play-circle"></i>    
-                 </figure>
+										<% end %>									<i class="icon-play-circle"></i>
+								 </figure>
                </a>
+							<% if @user.videos.third.present? %>
+								<div class="lightbox fade" id="video3" style="display: none;">
+									<div class='lightbox-content'>
+										<h3><%= @user.videos.third.title %></h3>
+										<iframe width="560" height="315" src=<%= @user.videos.third.embed_url %> frameborder="0" allowfullscreen></iframe>
+									</div>
+								</div>
+							<% end %>
              </li>
              <li class="span3">
                <a href="portfolio-item.html">
-                 <figure class="thumbnail-figure">
-                   <%= image_tag "http://img.youtube.com/vi/EqWRZrupLrI/0.jpg", :width => "100%" %>
-                   <i class="icon-play-circle"></i>    
-                 </figure>
+									<figure class="thumbnail-figure">
+										<%= image_tag "http://img.youtube.com/vi/EqWRZrupLrI/0.jpg", :width => "100%" %>
+										<i class="icon-play-circle"></i>
+								 </figure>
                </a>
              </li>
            </ul>
