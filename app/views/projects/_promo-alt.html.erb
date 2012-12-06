@@ -17,14 +17,16 @@
           </div>
         </div>
         <div class="span4">
-          <!-- <div class="well">
-                   <h3>
-                     Kickstarter Funding
-                   </h3>
-                   <p>
-                       This feature is coming with Version 2.0!
-                   </p>
-                 </div> -->
+          <div class="well">
+	<center><%= image_tag(User.find(@project.user_id).photo.image.url(:medium), {:class => "img-circle"}) %></center>
+                             <h3>
+                               <%= User.find(@project.user_id).name %> 
+														</h3>
+
+                             <p>
+                                 <%= User.find(@project.user_id).about %>
+                             </p>
+                           </div>
           <div class="well">
             <h3>
                 Get Involved
