@@ -1,0 +1,16 @@
+<div class="span6">
+                <div class="well">
+                  <h3>
+                      Current Projects
+                  </h3>
+                   <table class="table table-striped table-hover">								
+											  <tbody>
+													<% @projects.each do |project| %>
+													<tr>
+													<td><b><%= link_to project.title, project_path(project.id) %></b> <%= project.description %></td>
+													</tr>
+													<% end %>
+											  </tbody>
+										</table>
+                </div>
+              </div>
