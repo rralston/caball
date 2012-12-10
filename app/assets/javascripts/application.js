@@ -15,3 +15,7 @@
 //= require twitter/bootstrap
 //= require_directory .
 //= require users/bootstrap-lightbox.js
+//= require projects/numerous-2.1.1.js
+$(document).ready(function(){
+  Numerous.init();
+});
