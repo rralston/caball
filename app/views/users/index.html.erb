@@ -19,7 +19,7 @@
       <tr>
         <td><%= link_to user.id, user_path(user), :class => 'btn btn-mini' %></td>
         <td><%= image_tag(user.photo.image.url(:medium), {:class => "img-polaroid"}) %></td>
-				<td><%= user.name %></td>
+				<td><%= link_to user.name, user_path(user) %></td>
         <td><%= user.email %></td>
         <td><%=l user.created_at %></td>
         <td>
