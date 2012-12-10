@@ -63,6 +63,29 @@
 	    </div>
 	  </div>
 		<% end %>
+		<div id="fields-for-list" class="numerous">
+			<%= p.fields_for :roles, Role.new, :child_index => 'replace_this' do |role| %>
+		  <div class="control-group">
+				  <%= role.label :name, :class => 'control-label' %>
+					<div class="controls">
+						<%= role.select(:name, [['Actor'], ['Producer'], ['Director'], ['Technical'], ['Stuntmen']]) %>
+				   </div>
+			 </div>
+			
+			<div class="control-group">
+		  <%= role.label :description, :class => 'control-label' %>
+		    <div class="controls">
+		    <%= role.text_area :description, :class => 'textarea', :rows => "5" %>	
+		    </div>
+		  </div>
+		
+		    <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+		<% end %>
+		</div>
+
+
+<div id="list"></div>
+<%= link_to 'Add More Talent', '#', :id => 'add-to-list' %>
 
 <!-- End of Form -->
 
