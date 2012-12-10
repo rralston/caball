@@ -46,23 +46,24 @@
 	    </div>
 	  </div>
 	
-	<h2>Talent Required</h2>
-		<label class="checkbox">
-		  <input type="checkbox" value="">Actor
-		</label>
-		<label class="checkbox">
-		  <input type="checkbox" value="">Stuntmen
-		</label>
-		<label class="checkbox">
-		  <input type="checkbox" value="">Producers
-		</label>
-		<label class="checkbox">
-		  <input type="checkbox" value="">Directors
-		</label>
-		<label class="checkbox">
-		  <input type="checkbox" value="">Technical
-		</label>
+		<h2>Talent Required</h2>
 		
+		<%= p.fields_for :roles do |role|   %>
+		 <div class="control-group">
+			  <%= role.label :name, :class => 'control-label' %>
+				<div class="controls">
+					<%= role.select(:name, [['Actor'], ['Producer'], ['Director'], ['Technical'], ['Stuntmen']]) %>
+			   </div>
+		 </div>
+		
+		<div class="control-group">
+	  <%= role.label :description, :class => 'control-label' %>
+	    <div class="controls">
+	    <%= role.text_area :description, :class => 'textarea', :rows => "5" %>	
+	    </div>
+	  </div>
+		<% end %>
+
 <!-- End of Form -->
 
 	  <div class="form-actions">

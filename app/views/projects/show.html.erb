@@ -6,6 +6,8 @@
   <%= render 'about' %>
 </section>
 
+<% if @project.roles.present? then %>
 <section id="roles" class="section alt">
   <%= render 'roles' %>
 </section>
+<% end %>
