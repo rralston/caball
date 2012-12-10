@@ -14,12 +14,8 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_directory .
-<<<<<<< HEAD
 //= require users/bootstrap-lightbox.js
 //= require projects/numerous-2.1.1.js
 $(document).ready(function(){
   Numerous.init();
 });
-=======
-//= require users/bootstrap-lightbox.js
->>>>>>> Working on Profile
