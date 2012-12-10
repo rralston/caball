@@ -34,7 +34,7 @@
 	 	<div class="control-group">
 	  <%= p.label :start, :class => 'control-label' %>
 	    <div class="controls">
-	    <%= p.text_field to_date(:start), :id => 'start' %>
+	    <%= p.text_field :start, :id => 'start' %>
 	    </div>
 	  </div>
 	
@@ -46,12 +46,12 @@
 	  </div>
 	
 	<h2>Youtube Video</h2>
-	 <div class="control-group">
+	 <!-- <div class="control-group">
 		  <%= p.label :title, :class => 'control-label' %>
 			<div class="controls">
 				<%= p.select(:title, [['Hello']]) %>
 		   </div>
-	 </div>
+	 </div> -->
 		<h2>Talent Required</h2>
 		
 		<%= p.fields_for :roles do |role|   %>
