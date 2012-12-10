@@ -7,7 +7,7 @@
 											  <tbody>
 													<% @projects.each do |project| %>
 													<tr>
-													<td><b><%= link_to project.title, project_path(project.id) %></b> <%= project.description %></td>
+													<td><b><%= link_to project.title, project_path(project.id), :rel => "tooltip", :title => "View Project Details"  %></b> <%= project.description %></td>
 													</tr>
 													<% end %>
 											  </tbody>

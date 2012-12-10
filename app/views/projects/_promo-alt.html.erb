@@ -20,7 +20,7 @@
           <div class="well">
 	<center><%= image_tag(User.find(@project.user_id).photo.image.url(:medium), {:class => "img-circle"}) %></center>
                              <h3>
-                               <%= User.find(@project.user_id).name %> 
+                               <%= link_to User.find(@project.user_id).name, user_path(User.find(@project.user_id)), :rel => "tooltip", :title => "View User Profile" %> 
 														</h3>
 
                              <p>
