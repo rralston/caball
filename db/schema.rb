@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121112030646) do
+ActiveRecord::Schema.define(:version => 20121204031816) do
 
   create_table "characteristics", :force => true do |t|
     t.integer  "age"
@@ -88,6 +88,14 @@ ActiveRecord::Schema.define(:version => 20121112030646) do
   end
 
   add_index "receipts", ["notification_id"], :name => "index_receipts_on_notification_id"
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "project_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "name"
