@@ -14,10 +14,21 @@
           <div class="well span3 pull-center roles">
               <h5>
                   <i class="icon-camera huge-icon"></i>    
-                  <span class="blocked">Photography</span>
+                  <span class="blocked"><%= @project.roles.first.name %></span>
               </h5>
               <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+                  <%= @project.roles.first.description %>
+              </p>
+              <%= link_to "Apply", "#", :class => "btn btn-small btn-success" %>
+              <%= link_to "Info", "#", :class => "btn btn-small btn-info" %>
+          </div>
+          <div class="well span3 pull-center roles">
+              <h5>
+                  <i class="my-icons-martial"></i>    
+                  <span class="blocked"><%= @project.roles.second.name %></span>
+              </h5>
+              <p>
+                  <%= @project.roles.second.description %>
               </p>
               <%= link_to "Apply", "#", :class => "btn btn-small btn-success" %>
               <%= link_to "Info", "#", :class => "btn btn-small btn-info" %>
@@ -25,21 +36,10 @@
           <div class="well span3 pull-center roles">
               <h5>
                   <i class="icon-camera huge-icon"></i>    
-                  <span class="blocked">Photography</span>
+                  <span class="blocked"><%= @project.roles.third.name %></span>
               </h5>
               <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
-              </p>
-              <%= link_to "Apply", "#", :class => "btn btn-small btn-success" %>
-              <%= link_to "Info", "#", :class => "btn btn-small btn-info" %>
-          </div>
-          <div class="well span3 pull-center roles">
-              <h5>
-                  <i class="icon-camera huge-icon"></i>    
-                  <span class="blocked">Photography</span>
-              </h5>
-              <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.
+                  <%= @project.roles.third.description %>
               </p>
               <%= link_to "Apply", "#", :class => "btn btn-small btn-success" %>
               <%= link_to "Info", "#", :class => "btn btn-small btn-info" %>

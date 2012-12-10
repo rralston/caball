@@ -22,13 +22,13 @@
         <td><%= link_to project.id, project_path(project), :class => 'btn btn-mini' %></td>
 				<td><% if project.user_id %><%= link_to User.find(project.user_id).name, User.find(project.user_id) %><% end %></td>
 				<td><% if project.user_id %><%= image_tag(User.find(project.user_id).photo.image.url(:medium), {:class => "img-polaroid"}) %><% end %></td>
-				<td><%= project.title %></td>
+				<td><%= link_to project.title, project_path(project) %></td>
         <td><%= project.description %></td>
         <td><%=l project.created_at %></td>
 				<td><%= project.end %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_project_path(project), :class => 'btn btn-mini' %>
+                      edit_project_path(project), :class => 'btn btn-warning btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       project_path(project),
                       :method => :delete,

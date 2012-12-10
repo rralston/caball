@@ -23,6 +23,7 @@ class ProjectsController < ApplicationController
   
   def new
     @project = Project.new
+    @project.roles.build
   end
   
  def create

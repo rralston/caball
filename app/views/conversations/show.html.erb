@@ -3,6 +3,7 @@
 		<div class="well">
 			<%= link_to("Go back", { :controller => "conversations", :action => "index" }) %>
 			<h1><%= conversation.subject %></h1>
+		
 			<div class="well">
 				<ul class="unstyled">
 			<%= content_tag_for(:li, conversation.receipts_for(current_user)) do |receipt| %>
@@ -19,9 +20,7 @@
 					<div class="well">
 						<p class="lead"><%= message.subject %></p>
 						<p><%= message.body %></p>
-						<i>From: <%= link_to User.find(message.sender_id).name, user_path(message.sender_id) %>
-						<!-- <%= image_tag(User.find(message.sender_id).photo.image.url(:medium), {:class => "img-polaroid"}) %> --> 
-						</i>
+						<i>From: <%= User.find(message.sender_id).name %></i>
 					</div>
 				
 				<% end %>				
