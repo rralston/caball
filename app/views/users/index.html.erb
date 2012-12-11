@@ -10,7 +10,7 @@
 	    <ul class='thumbnails bordered thumbnail-list'>
 	      <% @users.last(3).each do |use| %>
 				<li class='span4'>
-	        <a href='#'>
+	        <%= link_to user_path(use.id) do %>
 	          <figure class='thumbnail-figure'>
 	            <%= image_tag use.photo.image %>
 	              <figcaption class='thumbnail-title'>
@@ -23,7 +23,7 @@
 	              </figcaption>
 	            </img>
 	          </figure>
-	        </a>
+	        <% end %>
 	        <p>
 	          <%= use.about %>
 	        </p>
