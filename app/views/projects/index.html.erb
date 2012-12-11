@@ -10,7 +10,7 @@
     <ul class='thumbnails bordered thumbnail-list'>
       <% @projects.first(3).each do |proj| %>
 			<li class='span4'>
-        <a href='#'>
+        <%= link_to project_path(proj.id) do %>
           <figure class='thumbnail-figure'>
             <%= image_tag "project/project_photo.jpg" %>
               <figcaption class='thumbnail-title'>
@@ -25,7 +25,7 @@
               </figcaption>
             </img>
           </figure>
-        </a>
+        <% end %>
         <p>
           <%= proj.description %>
         </p>
