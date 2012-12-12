@@ -27,6 +27,7 @@ class UsersController < ApplicationController
      @user = User.new
      @user.build_characteristics
      @user.build_photo
+     @user.types.build
      3.times do 
        @video = @user.videos.build
      end
