@@ -1,6 +1,6 @@
 class CreateTalents < ActiveRecord::Migration
     def change
-      create_table :talent do |t|
+      create_table :talents do |t|
         t.string :name
         t.text :description
         t.references :user
