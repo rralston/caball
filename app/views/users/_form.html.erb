@@ -61,6 +61,27 @@
 	      <%= f.text_area :about, :class => 'text_area' %>
 	    </div>
 	 </div>
+	
+		<h2>What Positions Can you Do?</h2>
+		
+		<%= f.fields_for :types do |type|   %>
+		 <div class="control-group">
+			  <%= type.label :name, :class => 'control-label' %>
+				<div class="controls">
+					<%= type.select(:name, [['Actor'], ['Producer'], ['Director'], ['Technical'], ['Stuntmen']]) %>
+			   </div>
+		 </div>
+		
+		<div class="control-group">
+	  <%= type.label :description, :class => 'control-label' %>
+	    <div class="controls">
+	    <%= type.text_area :description, :class => 'textarea', :rows => "5" %>	
+	    </div>
+	  </div>
+		<% end %>
+
+		<h2>A little more detail can help you get found!</h2>
+
 	<%= f.fields_for :characteristics do |c|   %>
 	 <div class="control-group">
 		  <%= c.label :age, :class => 'control-label' %>
