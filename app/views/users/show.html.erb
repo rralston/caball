@@ -6,7 +6,7 @@
        <div class="span-10 offset1">
          <div class="row-fluid">
            <div class="span4">
-               <a href="about.html">
+               <a href="#">
                  <figure class="thumbnail-figure profile-pic">
                    <% if @user.photo.image.present? then %>
 									<%= image_tag @user.photo.image %>
@@ -15,11 +15,19 @@
 								<% end %>
                    <figcaption class="thumbnail-title">
                      <h3><span><%= @user.name %></span></h3>
-                     <p><span><% if @user.talents.present? %><%= @user.talents.name %> <% end %></span></p>
+                     <p><span><% if @user.talents.present? %><%= @user.talents.first.name %> <% end %></span></p>
                    </figcaption>    
                  </figure>
                </a>
-						<h4> Profile Completeness </h4>
+		             <div class="well">
+		               <h3>
+		                   Based in <%= @user.location %>
+		               </h3>
+		               <p>
+									<center><img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= @user.location %>&zoom=11&size=200x200&sensor=false"></center>
+		               </p>
+		             </div>
+	<h4> Profile Completeness </h4>
 						<div class="progress progress-striped active">
 						  <div class="bar" style="width: 40%;"></div>
 						</div>
@@ -36,11 +44,11 @@
 						<%= link_to t('.edit', :default => t("helpers.links.edit")),
 					              edit_user_path(@user), :class => 'btn' %>
 						</center>
-           </div>
+						</div>
            <div class="span6">
              <div class="well">
                <h3>
-                   <%= @user.name %> - Creative Director
+                   <%= @user.name %> <% if @user.talents.present? %>- <%= @user.talents.first.name %> <% end %>
                </h3>
                <p>
 							<%=h truncate(@user.about, :length => 200) %>

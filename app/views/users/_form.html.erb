@@ -6,6 +6,8 @@
 		</div>
 	<% end %>
 	
+	<h2>User Profile</h2>
+	
 	<%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
 	  <%= f.fields_for :photo do |p|  %>
 		  <% if @user.photo.image.present? %>
@@ -63,10 +65,11 @@
 	 </div>
 	
 		<h2>What Positions Can you Do?</h2>
-		
+		<h5>Start with your main position, you can always add more</h5>
+		<br>
 		<%= f.fields_for :talents do |talent|   %>
 		 <div class="control-group">
-			  <%= talent.label :name, :class => 'control-label' %>
+			  <%= talent.label "Talent", :class => 'control-label' %>
 				<div class="controls">
 					<%= talent.select(:name, [['Actor'], ['Producer'], ['Director'], ['Technical'], ['Stuntmen']]) %>
 			   </div>
@@ -76,10 +79,36 @@
 	  <%= talent.label :description, :class => 'control-label' %>
 	    <div class="controls">
 	    <%= talent.text_area :description, :class => 'textarea', :rows => "5" %>	
+			<%= talent.check_box :_destroy %> Click Here to Destroy
 	    </div>
 	  </div>
 		<% end %>
-
+		
+		<div id="fields-for-list" class="numerous">
+			<%= f.fields_for :talents, Talent.new, :child_index => 'replace_this' do |talent| %>
+		  <div class="control-group">
+				  <%= talent.label :name, :class => 'control-label' %>
+					<div class="controls">
+						<%= talent.select(:name, [['Actor'], ['Producer'], ['Director'], ['Technical'], ['Stuntmen']]) %>
+				   </div>
+			 </div>
+			
+			<div class="control-group">
+		  <%= talent.label :description, :class => 'control-label' %>
+		    <div class="controls">
+		    <%= talent.text_area :description, :class => 'textarea', :rows => "5" %>	
+		    </div>
+		  </div>
+		
+		    <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+		<% end %>
+		</div>
+		
+		
+		<div id="list"></div>
+		<%= link_to 'Add Another Talent To Find More Projects!', '#', :id => 'add-to-list' %>
+		
+		<br>
 		<h2>A little more detail can help you get found!</h2>
 
 	<%= f.fields_for :characteristics do |c|   %>
@@ -151,6 +180,7 @@
 		</div>
 	<% end %>	
 
+	<h2>How about some Videos for a Virtual Resume!</h2>
 	
 	<%= f.fields_for :videos do |video| %>
 		<% if @videos.present?  %>
