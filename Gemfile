@@ -65,3 +65,6 @@ gem 'omniauth-facebook'
 gem 'mailboxer'
 gem 'haml-rails'
 gem 'simple_form'
+
+#Gelocation
+gem 'geocoder'
