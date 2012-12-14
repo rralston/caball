@@ -1,3 +1,5 @@
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+
 <div class="well">
 	<% @user.errors.full_messages.each do |error| %>
 	  <div class="alert alert-error">
@@ -54,9 +56,10 @@
 	 <div class="control-group">
 	    <%= f.label :location, :class => 'control-label' %>
 	    <div class="controls">
-	      <%= f.text_field :location, :class => 'text_field' %>
+	      <%= f.text_field :location, :class => 'text_field' %>   Locate Me! <%= image_tag("locate_me.png", :height => "30", :id => "locate") %>
 	    </div>
 	  </div>
+	<!-- <p>click me!</p> -->
 	 <div class="control-group">
 	    <%= f.label :about, :class => 'control-label' %>
 	    <div class="controls">

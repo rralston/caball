@@ -8,13 +8,13 @@
            <div class="span4">
                <a href="#">
                  <figure class="thumbnail-figure profile-pic">
-                   <% if @user.photo.image.present? then %>
+                   <% if @user.photo.present? then %>
 									<%= image_tag @user.photo.image %>
 									<% else %>
 									<%= image_tag "biz/people1-400x400.jpeg" %>
 								<% end %>
                    <figcaption class="thumbnail-title">
-                     <h3><span><%= @user.name %></span></h3>
+                     <h3><span><%= @user.name.split[0..0].join(" ") %></span></h3>
                      <p><span><% if @user.talents.present? %><%= @user.talents.first.name %> <% end %></span></p>
                    </figcaption>    
                  </figure>
