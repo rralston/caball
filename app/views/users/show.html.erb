@@ -15,7 +15,7 @@
 								<% end %>
                    <figcaption class="thumbnail-title">
                      <h3><span><%= @user.name %></span></h3>
-                     <p><span>User Type</span></p>
+                     <p><span><% if @user.talents.present? %><%= @user.talents.name %> <% end %></span></p>
                    </figcaption>    
                  </figure>
                </a>
