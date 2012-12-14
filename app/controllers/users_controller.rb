@@ -55,6 +55,9 @@ class UsersController < ApplicationController
      if @user.photo.nil?
        @user.photo = Photo.new
      end
+     if @user.types.nil?
+       @user.types.build
+     end
  end
    
    def create
