@@ -55,6 +55,9 @@
                </p>
              </div>
            </div>
+					<% if @user.talents.present? then %>
+					<%= render :partial => 'talents' %>
+					<% end %>
 					<% if @user.projects.present? then %>
 						<%= render :partial => 'current_projects' %>
 					<% end %>
