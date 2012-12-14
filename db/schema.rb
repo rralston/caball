@@ -97,7 +97,7 @@ ActiveRecord::Schema.define(:version => 20121212234113) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "type", :force => true do |t|
+  create_table "talent", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.integer  "user_id"

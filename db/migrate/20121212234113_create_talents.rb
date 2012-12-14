@@ -1,6 +1,6 @@
-class CreateTypes < ActiveRecord::Migration
+class CreateTalents < ActiveRecord::Migration
     def change
-      create_table :type do |t|
+      create_table :talent do |t|
         t.string :name
         t.text :description
         t.references :user
