@@ -27,6 +27,7 @@ class UsersController < ApplicationController
      @user = User.new
      @user.build_characteristics
      @user.build_photo
+     @user.talent.build
      3.times do 
        @video = @user.videos.build
      end
@@ -54,6 +55,9 @@ class UsersController < ApplicationController
      if @user.photo.nil?
        @user.photo = Photo.new
      end
+     if @user.talents.nil?
+       @user.talents.build
+     end
  end
    
    def create
@@ -72,7 +76,7 @@ class UsersController < ApplicationController
      @user = User.find(params[:id])
      respond_to do |format|
        if @user.update_attributes(params[:user])
-         format.html { redirect_to @user, :notice => @user.name + ' Profile was successfully updated.' }
+         format.html { redirect_to @user, :notice => @user.name.pluralize + ' Profile was successfully updated.' }
        else
          format.html { render :action => "edit", :error => 'User was successfully created.' }
        end
