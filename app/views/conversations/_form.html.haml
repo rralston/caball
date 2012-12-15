@@ -1,6 +1,6 @@
 .well
 	= simple_form_for :conversation, url: :conversations do |f|
-		= f.input :recipients
+		= f.input :recipients, {:name => "title", :value => 'sup' }
 		= f.input :subject
 		= f.input :body
 		.form-actions
