@@ -1,0 +1,12 @@
+<div id="well">
+	<%= simple_form_for :conversation, url: :conversations do |f| %>
+		<%= f.input :recipients, :as => :hidden, :input_html => { :value => @recipient } %>
+		
+		<%= f.input :subject %>
+		<%= f.input :body %>
+		<div id="form-actions">
+			<%= f.button :submit, class: 'btn-primary' %>
+			<%= submit_tag 'Cancel', type: :reset, class: 'btn btn-danger' %>
+			</div>
+		<% end %>
+</div>
