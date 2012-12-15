@@ -2,14 +2,19 @@ class ConversationsController < ApplicationController
   before_filter :authenticate_user!
   helper_method :mailbox, :conversation
 
+  def new
+    @recipient = params[:recipient]
+  end
+  
   def create
+    # Standard Part
     recipient_emails = conversation_params(:recipients).split(',')
     recipients = User.where(email: recipient_emails).all
 
     conversation = current_user.
       send_message(recipients, *conversation_params(:body, :subject)).conversation
 
-    redirect_to conversation
+    redirect_to root_url, :notice => 'Your Message was successfully sent.'
   end
 
   def reply
