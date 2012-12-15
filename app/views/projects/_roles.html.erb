@@ -19,7 +19,9 @@
               <p>
                   <%= @project.roles.first.description %>
               </p>
-              <%= link_to "Apply", "#", :class => "btn btn-small btn-success" %>
+              <%= link_to 'Send Message', new_conversation_path(:recipient => User.find(@project.user_id).email, :subject => @project.roles.first.name+"-"+@project.title ), class: "btn" %>
+
+<%= link_to "Apply", "#", :class => "btn btn-small btn-success" %>
               <%= link_to "Info", "#", :class => "btn btn-small btn-info" %>
           </div>
           <div class="well span3 pull-center roles">
