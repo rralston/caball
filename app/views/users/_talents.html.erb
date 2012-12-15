@@ -1,7 +1,7 @@
 <div class="span6">
              <div class="well">
                <h3>
-                   <%= @user.name.split[0..0].join(" ") %> is an <% if @user.talents.present? %>- <%= @user.talents.first.name %> <%= image_tag("actor.png", :height => "30") %><% end %>
+                   <%= @user.name.split[0..0].join(" ") %> is a <% if @user.talents.present? %>- <%= @user.talents.first.name %> <%= image_tag("director.png", :height => "30") %><% end %>
                </h3>
                <p>
 		<%= @user.talents.first.description %>

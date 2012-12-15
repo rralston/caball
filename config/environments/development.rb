@@ -34,4 +34,7 @@ Caball::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  
+  # Change when Push to the Website or will Error out
+  config.action_mailer.default_url_options = { :host => 'localhost' }
 end

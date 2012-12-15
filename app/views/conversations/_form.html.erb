@@ -1,0 +1,15 @@
+<div id="well">
+	<%= simple_form_for :conversation, url: :conversations do |f| %>
+		<%= f.input :recipients, :as => :hidden, :input_html => { :value => @recipient } %>
+		<% if @subject.present? %>
+			<%= f.input :subject, :as => :hidden, :input_html => { :value => @subject } %>
+		<% else %>
+			<%= f.input :subject %>
+		<% end %>
+		<%= f.input :body, {:class => 'textarea', :rows => "5"} %>
+		<div id="form-actions">
+			<%= f.button :submit, class: 'btn-primary' %>
+			<%= submit_tag 'Cancel', type: :reset, class: 'btn btn-danger' %>
+			</div>
+		<% end %>
+</div>

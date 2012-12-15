@@ -44,6 +44,11 @@
 						<%= link_to t('.edit', :default => t("helpers.links.edit")),
 					              edit_user_path(@user), :class => 'btn' %>
 						</center>
+						<br>
+						<center>
+	            <%= link_to 'Send Message', new_conversation_path(:recipient => @user.email), class: "btn" %>
+						 
+						</center>
 						</div>
            <div class="span6">
              <div class="well">
