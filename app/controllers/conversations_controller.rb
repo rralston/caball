@@ -4,6 +4,9 @@ class ConversationsController < ApplicationController
 
   def new
     @recipient = params[:recipient]
+    if params[:subject]
+      @subject  = params[:subject]
+    end
   end
   
   def create
