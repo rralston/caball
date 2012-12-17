@@ -6,6 +6,12 @@ Caball::Application.routes.draw do
   resources :projects
   resources :home
   
+  namespace :home do
+    %w[privacy].each do |page|
+      get page
+    end
+  end
+  
   match 'projects/show' => 'projects#show'
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
