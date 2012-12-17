@@ -1,7 +1,13 @@
 <div id="well">
 	<section class='section' id='content' role='main'>
 	  <div class='container'>
-			<h1> Start Conversation Now <h1>
+			<% if @subject.present? %>
+			<h1> Apply for <%= @subject %>! </h1>
+				<% else %>
+			<h1> Message User </h1>
+				<% end %>
+				<p>Your User Profile Information will also be linked to the message so make sure it's up-to-date!
+				
 			<%= render 'form' %>
 		</div>
 	</section>
