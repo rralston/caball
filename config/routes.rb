@@ -4,12 +4,13 @@ Caball::Application.routes.draw do
   end
   
   resources :projects
+  resources :home
   
   match 'projects/show' => 'projects#show'
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
-  root :to => 'users#index'
+  root :to => 'home#index'
   
   namespace :admin do
     %w[index interface buttons calendar charts chat gallery grid invoice login tables widgets form_wizard form_common form_validation].each do |page|
