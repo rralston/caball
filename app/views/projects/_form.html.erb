@@ -17,7 +17,7 @@
 	<% end %>
 	<%= form_for @project, :html => { :class => 'form-horizontal' } do |p| %>
 		<%= p.fields_for :photos do |p|  %>
-		  <% if @project.photos.first.nil? %>
+		  <% if @pictures.first.image.url.present? %>
 				<!-- <div class="control-group">
 		    <%= p.label :description, :class => 'control-label' %>
 					<div class="controls">
@@ -25,27 +25,28 @@
 		 			</div>
 				</div> -->
 		    <div class="control-group">
-				  <%= p.label "Profile Photo", :class => 'control-label' %>
-			  	<div class="controls">
-						<%= image_tag @project.photos.first.image.url(:medium), {:class => "img-polaroid"} %>					
+				  <%= p.label "Project Photos", :class => 'control-label' %>
+					<div class="controls">
+						<img src=<%= p.object.image.url(:medium) %> class="img-polaroid" >			
 						<%= p.check_box :_destroy %> Click Here to Destroy
 						</div>
 				</div>
 				<% else %>
-				<div class="control-group">
+				<!-- <div class="control-group">
 		    	<%= p.label :description, :class => 'control-label' %>
 					<div class="controls">
 						<%= p.text_field :description, :class => 'text_field' %>
 		 			</div>
-				</div>
+				</div> -->
 				<div class="control-group">
-					<p>Please Upload a Profile Image</p>
+					<p class="control-label">Project Images</p>
 					<div class="controls">
 						<%= p.file_field :image %>
 			 		</div>
 				</div>
 	  	<% end %>
 		<% end %>
+		
 		<div class="control-group">
 	  <%= p.label :title, :class => 'control-label' %>
 	    <div class="controls">
