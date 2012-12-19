@@ -17,28 +17,28 @@
 		
 	
 	
-	  <%= f.fields_for :photo do |p|  %>
-		  <% if @user.photo.image.present? %>
+	  <%= f.fields_for :photos do |p|  %>
+		  <% if @user.photos.first.nil? %>
 				<!-- <div class="control-group">
-		    <%= p.label :file_name, :class => 'control-label' %>
+		    <%= p.label :description, :class => 'control-label' %>
 					<div class="controls">
-						<%= p.text_field :file_name, :class => 'text_field' %>
+						<%= p.text_field :description, :class => 'text_field' %>
 		 			</div>
 				</div> -->
 		    <div class="control-group">
 				  <%= p.label "Profile Photo", :class => 'control-label' %>
 			  	<div class="controls">
-						<%= image_tag @user.photo.image.url(:medium), {:class => "img-polaroid"} %>					
+						<%= image_tag @user.photos.first.image.url(:medium), {:class => "img-polaroid"} %>					
 						<%= p.check_box :_destroy %> Click Here to Destroy
 						</div>
 				</div>
 				<% else %>
-				<!-- <div class="control-group">
-		    	<%= p.label :file_name, :class => 'control-label' %>
+				<div class="control-group">
+		    	<%= p.label :description, :class => 'control-label' %>
 					<div class="controls">
-						<%= p.text_field :file_name, :class => 'text_field' %>
+						<%= p.text_field :description, :class => 'text_field' %>
 		 			</div>
-				</div> -->
+				</div>
 				<div class="control-group">
 					<p>Please Upload a Profile Image</p>
 					<div class="controls">

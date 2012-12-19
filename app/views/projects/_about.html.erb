@@ -12,6 +12,11 @@
         
         <p>
             <%= @project.description %>
+						<% if @project.photos.present? then %>
+						<%= image_tag @project.photos.first.image %>
+						<% else %>
+						<%= image_tag "biz/people1-400x400.jpeg" %>
+					<% end %>
         </p>
         <!-- <%= link_to "MORE", "#" %> -->
     </article>
