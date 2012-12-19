@@ -137,7 +137,8 @@ ActiveRecord::Schema.define(:version => 20121212234113) do
     t.string   "embed_url"
     t.string   "embed_code"
     t.datetime "video_updated_at"
-    t.integer  "user_id"
+    t.integer  "videoable_id"
+    t.string   "videoable_type"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end

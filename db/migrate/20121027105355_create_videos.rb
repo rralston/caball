@@ -13,7 +13,7 @@ class CreateVideos < ActiveRecord::Migration
         t.string :embed_url
         t.string :embed_code
         t.datetime :video_updated_at
-        t.references :user
+        t.references :videoable, :polymorphic => true
         t.timestamps
       end
     end
