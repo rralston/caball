@@ -19,11 +19,15 @@ class ProjectsController < ApplicationController
      # correct_project_owner?
      # Define Security Measures
      @project = Project.find(params[:id])
+     if @project.photos.first.nil?
+       @project.photos.build
+     end
   end
   
   def new
     @project = Project.new
     @project.roles.build
+    @project.photos.build
   end
   
  def create

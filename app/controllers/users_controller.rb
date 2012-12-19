@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   def new
      @user = User.new
      @user.build_characteristics
-     @user.build_photo
+     @user.build_photos
      @user.talent.build
      3.times do 
        @video = @user.videos.build
@@ -53,8 +53,8 @@ class UsersController < ApplicationController
      if @videos.third.nil?
        @videos.build
      end
-     if @user.photo.nil?
-       @user.photo = Photo.new
+     if @user.photos.first.nil?
+       @user.photos.build
      end
      if @user.talents.nil?
        @user.talents.build
