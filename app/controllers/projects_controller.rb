@@ -19,8 +19,15 @@ class ProjectsController < ApplicationController
      # correct_project_owner?
      # Define Security Measures
      @project = Project.find(params[:id])
-     if @project.photos.first.nil?
-       @project.photos.build
+     @pictures = @project.photos
+     if @pictures.first.nil?
+       @pictures.build
+     end
+     if @pictures.second.nil?
+       @pictures.build
+     end
+     if @pictures.third.nil?
+       @pictures.build
      end
      @videos = @project.videos
       if @videos.first.nil?
@@ -31,8 +38,10 @@ class ProjectsController < ApplicationController
   def new
     @project = Project.new
     @project.roles.build
-    @project.photos.build
-    1.times do 
+    3.times do 
+      @project.photos.build
+    end
+    3.times do 
       @video = @project.videos.build
     end
   end
