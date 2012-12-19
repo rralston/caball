@@ -22,12 +22,19 @@ class ProjectsController < ApplicationController
      if @project.photos.first.nil?
        @project.photos.build
      end
+     @videos = @project.videos
+      if @videos.first.nil?
+        @videos.build
+      end
   end
   
   def new
     @project = Project.new
     @project.roles.build
     @project.photos.build
+    1.times do 
+      @video = @project.videos.build
+    end
   end
   
  def create
