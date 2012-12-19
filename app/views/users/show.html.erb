@@ -27,28 +27,32 @@
 									<center><img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= @user.location %>&zoom=11&size=400x300&sensor=false"></center>
 		               </p>
 		             </div>
-	<h4> Profile Completeness </h4>
-						<div class="progress progress-striped active">
-						  <div class="bar" style="width: 40%;"></div>
+	<!-- <h4> Profile Completeness </h4>
+							<div class="progress progress-striped active">
+							  <div class="bar" style="width: 40%;"></div>
+							</div>
+							<h4> Klout </h4>
+							<div class="progress progress-striped active">
+							  <div class="bar" style="width: 80%;"></div>
+							</div>
+							<center>
+							      <%= mail_to @user.email, "Contact", :class => "btn btn-primary btn-large",
+										         :subject => "Contact from Caball Networks" %> 
+							</center>
+							<br>
+							<center>
+							<%= link_to t('.edit', :default => t("helpers.links.edit")),
+						              edit_user_path(@user), :class => 'btn' %>
+							</center>
+							<br> -->
+								<div class="span11">
+			             <div class="well">
+								<center>
+								<p>Start a conversation with <%= @user.name.split[0..0].join(" ") %></p>
+		            <%= link_to 'Send Message', new_conversation_path(:recipient => @user.email), class: "btn" %>
+							</center>
 						</div>
-						<h4> Klout </h4>
-						<div class="progress progress-striped active">
-						  <div class="bar" style="width: 80%;"></div>
 						</div>
-						<center>
-						      <%= mail_to @user.email, "Contact", :class => "btn btn-primary btn-large",
-									         :subject => "Contact from Caball Networks" %> 
-						</center>
-						<br>
-						<center>
-						<%= link_to t('.edit', :default => t("helpers.links.edit")),
-					              edit_user_path(@user), :class => 'btn' %>
-						</center>
-						<br>
-						<center>
-	            <%= link_to 'Send Message', new_conversation_path(:recipient => @user.email), class: "btn" %>
-						 
-						</center>
 						</div>
            <div class="span6">
              <div class="well">

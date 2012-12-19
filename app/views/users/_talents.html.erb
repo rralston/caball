@@ -21,19 +21,22 @@
 				    </div>
 				  </div>
 				<% if @user.talents.second.name.present? %>
+				
 				  <div class="accordion-group">
+					<% @talents.each do |talent| %>
 				    <div class="accordion-heading">
 				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-				        <center><h5>Secondary Talent: <%= @user.talents.second.name %></h5></center>
+				        <center><h5>Secondary Talent: <%= talent.name %></h5></center>
 				      </a>
 				    </div>
 				    <div id="collapseTwo" class="accordion-body collapse">
 				      <div class="accordion-inner">
 				           <p>
-					      <%= @user.talents.second.description %>
+					      <%= talent.description %>
 					          </p>
 				      </div>
 				    </div>
+						<% end %>
 				  </div>
 				<% end %>
 				</div>
