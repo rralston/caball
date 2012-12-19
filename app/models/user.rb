@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_one :characteristics
   has_many :photos, :as => :imageable
-  has_many :videos
+  has_many :videos, :as => :videoable
   has_many :projects
   has_many :talents
   accepts_nested_attributes_for :characteristics, :photos, :videos, :projects, :talents, :allow_destroy => true
