@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 
   def correct_user?
     @user = User.find(params[:id])
-    unless current_user == @user
+    unless current_user == @user || @current_user.admin == true
       redirect_to root_url, :error => 'Access denied.'
     end
   end

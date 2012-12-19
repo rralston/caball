@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @projects = @user.projects
+    @talents = @user.talents.offset(1)
     if @user.nil?
         redirect_to :action => :index
     end
