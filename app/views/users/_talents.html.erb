@@ -1,10 +1,44 @@
 <div class="span6">
-             <div class="well">
-               <h3>
-                   <%= @user.name.split[0..0].join(" ") %> is a <% if @user.talents.present? %>- <%= @user.talents.first.name %> <%= image_tag("director.png", :height => "30") %><% end %>
-               </h3>
-               <p>
-		<%= @user.talents.first.description %>
-               </p>
-             </div>
-           </div>
+  <div class="well">
+    
+        
+				<div class="accordion" id="accordion2">
+				  <div class="accordion-group">
+				    <div class="accordion-heading">
+				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+				        <h3>
+						              <%= @user.name.split[0..0].join(" ") %> is a <% if @user.talents.present? %>- <%= @user.talents.first.name %> <%= image_tag("director.png", :height => "30") %><% end %>
+						          </h3>
+				      </a>
+				    </div>
+				    <div id="collapseOne" class="accordion-body collapse in">
+				      <div class="accordion-inner">
+				          <p>
+				      <%= @user.talents.first.description %>
+				          </p>
+								
+				      </div>
+				    </div>
+				  </div>
+				<% if @user.talents.second.name.present? %>
+				
+				  <div class="accordion-group">
+					<% @talents.each do |talent| %>
+				    <div class="accordion-heading">
+				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+				        <center><h5>Secondary Talent: <%= talent.name %></h5></center>
+				      </a>
+				    </div>
+				    <div id="collapseTwo" class="accordion-body collapse">
+				      <div class="accordion-inner">
+				           <p>
+					      <%= talent.description %>
+					          </p>
+				      </div>
+				    </div>
+						<% end %>
+				  </div>
+				<% end %>
+				</div>
+  </div>
+</div>
