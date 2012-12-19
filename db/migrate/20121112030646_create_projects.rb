@@ -3,8 +3,8 @@ class CreateProjects < ActiveRecord::Migration
     create_table :projects do |t|
       t.string :title
       t.text :description
-      t.datetime :start
-      t.datetime :end
+      t.date :start
+      t.date :end
       t.references :user
       t.timestamps
     end
