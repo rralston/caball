@@ -2,7 +2,6 @@ set :stages, %w(production staging)
 set :default_stage, "production"
 
 require "bundler/capistrano"
-require "cap_bootstrap/capistrano"
 require 'capistrano/ext/multistage'
 
 server "192.155.85.156", :web, :app, :db, primary: true
