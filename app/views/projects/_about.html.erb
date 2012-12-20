@@ -12,8 +12,18 @@
         
         <p>
             <%= @project.description %>
-        </p>
-        <!-- <%= link_to "MORE", "#" %> -->
+				</p>
+				<% if @project.photos.present? then %>
+				<ul class='thumbnails bordered thumbnail-list'>
+					<% @project.photos.each do |photo| %>
+				      <li class='span4'>
+				          <figure class='thumbnail-figure'>
+										<%= image_tag photo.image %>
+				          </figure>
+				      </li>
+						<% end %>
+						</ul>
+						<% end %>
     </article>
 
   </div>

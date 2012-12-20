@@ -16,6 +16,36 @@
 		</div>
 	<% end %>
 	<%= form_for @project, :html => { :class => 'form-horizontal' } do |p| %>
+		<%= p.fields_for :photos do |p|  %>
+		  <% if @pictures.first.image.url.present? %>
+				<!-- <div class="control-group">
+		    <%= p.label :description, :class => 'control-label' %>
+					<div class="controls">
+						<%= p.text_field :description, :class => 'text_field' %>
+		 			</div>
+				</div> -->
+		    <div class="control-group">
+				  <%= p.label "Project Photos", :class => 'control-label' %>
+					<div class="controls">
+						<img src=<%= p.object.image.url(:medium) %> class="img-polaroid" >			
+						<%= p.check_box :_destroy %> Click Here to Destroy
+						</div>
+				</div>
+				<% else %>
+				<!-- <div class="control-group">
+		    	<%= p.label :description, :class => 'control-label' %>
+					<div class="controls">
+						<%= p.text_field :description, :class => 'text_field' %>
+		 			</div>
+				</div> -->
+				<div class="control-group">
+					<p class="control-label">Project Images</p>
+					<div class="controls">
+						<%= p.file_field :image %>
+			 		</div>
+				</div>
+	  	<% end %>
+		<% end %>
 		
 		<div class="control-group">
 	  <%= p.label :title, :class => 'control-label' %>
@@ -46,6 +76,34 @@
 	  </div>
 	
 	<h2>Youtube Video</h2>
+	<!-- Begin Videos -->
+	<%= p.fields_for :videos do |video| %>
+		<% if @videos.present?  %>
+		<% if video.object.thumbnail_small.present? %>
+			<div class="control-group">
+	    <label class="control-label">Video Preview</label>
+				<div class="controls">
+					<img src=<%= video.object.thumbnail_small %> class="img-polaroid" >
+					<%= video.check_box :_destroy %> Click Here to Destroy
+				</div>
+			</div>
+			<% end %>
+			<div class="control-group">
+	    <%= video.label :url, :class => 'control-label' %>
+				<div class="controls">
+					<%= video.text_field(:url) %>
+				</div>
+			</div>
+			<% else %> 
+				<div class="control-group">
+					<label class="control-label">Youtube URL</label>
+					<div class="controls">
+					<%= video.text_field(:url) %>
+					</div>
+				</div>
+			<% end %>
+	<% end %>
+	<!-- End Videos -->
 	 <!-- <div class="control-group">
 		  <%= p.label :title, :class => 'control-label' %>
 			<div class="controls">

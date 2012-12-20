@@ -14,7 +14,7 @@ set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 set :scm, "git"
-set :repository, "git@github.com:benrs44/#{application}.git"
+set :repository, "git@github.com:rralston/#{application}.git"
 set :port, 30128
 
 default_run_options[:pty] = true

@@ -8,8 +8,8 @@
            <div class="span4">
                <a href="#">
                  <figure class="thumbnail-figure profile-pic">
-                   <% if @user.photo.present? then %>
-									<%= image_tag @user.photo.image %>
+                   <% if @user.photos.present? then %>
+									<%= image_tag @user.photos.first.image %>
 									<% else %>
 									<%= image_tag "biz/people1-400x400.jpeg" %>
 								<% end %>
@@ -86,11 +86,11 @@
          <div class="row-fluid">
            <div class="page-header">
              <h1>
-               Video Portfolio
+               Video Portfolio <small>A sample of <%= @user.name.split[0..0].join(" ").pluralize %> work</small>
              </h1>
            </div>
            <ul class="thumbnails thumbnail-list">
-             <li class="span3">
+             <li class="span4">
 							<a data-toggle="lightbox" href="#video1">
                  <figure class="thumbnail-figure">
 									<% if @user.videos.first.thumbnail_small.present? %>
@@ -109,7 +109,7 @@
 								</div>
 							<% end %>
              </li>
-             <li class="span3">
+             <li class="span4">
                <a href="portfolio-item.html">
                  <a data-toggle="lightbox" href="#video2">
 									<figure class="thumbnail-figure">
@@ -129,7 +129,7 @@
 								</div>
 							<% end %>
              </li>
-             <li class="span3">
+             <li class="span4">
                <a href="portfolio-item.html">
                  <a data-toggle="lightbox" href="#video3">
 									<figure class="thumbnail-figure">
@@ -148,14 +148,6 @@
 									</div>
 								</div>
 							<% end %>
-             </li>
-             <li class="span3">
-               <a href="portfolio-item.html">
-									<figure class="thumbnail-figure">
-										<%= image_tag "http://img.youtube.com/vi/EqWRZrupLrI/0.jpg", :width => "100%" %>
-										<i class="icon-play-circle"></i>
-								 </figure>
-               </a>
              </li>
            </ul>
          </div>  
