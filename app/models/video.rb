@@ -1,10 +1,10 @@
 class Video < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :videoable, :polymorphic => true
   attr_accessible :provider, :title, :description, :keywords, :duration, :date, :thumbnail_small, :thumbnail_large, :embed_url, :embed_code, :video_updated_at, :url
   before_save :movie_details, :if => :url?
 
   def movie_details
-    video = VideoInfo.new(self.url)
+    video = VideoInfo.get(self.url)
     self.provider = video.provider     
     self.title = video.title  
     self.description = video.description 

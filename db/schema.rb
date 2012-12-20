@@ -57,19 +57,20 @@ ActiveRecord::Schema.define(:version => 20121212234113) do
 
   create_table "photos", :force => true do |t|
     t.string   "image"
-    t.string   "file_name"
+    t.string   "description"
     t.string   "content_type"
     t.integer  "file_size"
-    t.datetime "updated_at",   :null => false
-    t.integer  "user_id"
-    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.datetime "created_at",     :null => false
   end
 
   create_table "projects", :force => true do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "start"
-    t.datetime "end"
+    t.date     "start"
+    t.date     "end"
     t.integer  "user_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -136,7 +137,8 @@ ActiveRecord::Schema.define(:version => 20121212234113) do
     t.string   "embed_url"
     t.string   "embed_code"
     t.datetime "video_updated_at"
-    t.integer  "user_id"
+    t.integer  "videoable_id"
+    t.string   "videoable_type"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
   end
