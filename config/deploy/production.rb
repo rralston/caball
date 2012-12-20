@@ -1,4 +1,4 @@
-server "50.116.8.32", :web, :app, :db, primary: true
+server "192.155.85.156", :web, :app, :db, primary: true
 set :deploy_env, 'production'
 set :rails_env, 'production'
-set :branch, "master"
+set :branch, "dev"
