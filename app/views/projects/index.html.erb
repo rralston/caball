@@ -12,7 +12,9 @@
 			<li class='span4'>
         <%= link_to project_path(proj.id) do %>
           <figure class='thumbnail-figure'>
-            <%= image_tag(proj.photos.first.image) %>
+            <% if proj.photos.exists? %>
+						<%= image_tag(proj.photos.first.image) %>
+						<% end %>
               <figcaption class='thumbnail-title'>
                 <h3>
                   <span><%= proj.title %></span>
