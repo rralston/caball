@@ -35,7 +35,7 @@
         </div>
         <div class="span4">
           <div class="well">
-	<center><%= image_tag(User.find(@project.user_id).photos.first.image.url(:medium), {:class => "img-circle"}) %></center>
+	<center><% if User.find(@project.user_id).photos.exists? %><%= image_tag(User.find(@project.user_id).photos.first.image.url(:medium), {:class => "img-circle"}) %><% end %></center>
                              <h3>
                                <%= link_to User.find(@project.user_id).name, user_path(User.find(@project.user_id)), :rel => "tooltip", :title => "View User Profile" %> 
 														</h3>
