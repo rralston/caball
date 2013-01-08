@@ -12,7 +12,11 @@
 				<li class='span4'>
 	        <%= link_to user_path(use.id) do %>
 	          <figure class='thumbnail-figure'>
-	            <%= image_tag use.photos.first.image %>
+	            <% if use.photos.exists? %>
+								<%= image_tag use.photos.first.image %>
+								<% else %>
+								<%= image_tag "biz/people1-400x400.jpeg" %>
+								<% end %>
 	              <figcaption class='thumbnail-title'>
 	                <h3>
 	                  <span><%= use.name %></span>
@@ -53,7 +57,10 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.id, user_path(user), :class => 'btn btn-mini' %></td>
-        <td><%= image_tag(user.photos.first.image.url(:medium), {:class => "img-polaroid"}) %></td>
+        <td><% if user.photos.exists? %>
+					<%= image_tag(user.photos.first.image.url(:medium), {:class => "img-polaroid"}) %>
+					<% else %>
+					<% end %></td>
 				<td><%= link_to user.name, user_path(user) %></td>
         <td><%= user.email %></td>
         <td><%=l user.created_at %></td>
