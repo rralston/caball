@@ -18,7 +18,7 @@
 	                  <span><%= use.name %></span>
 	                </h3>
 	                <p>
-	                  <span>Creative Director</span>
+	                  <span><% if use.talents.exists? %> <%= use.talents.first.name %><% else %><%= use.name.split[0..0].join(" ") %> has no talent<% end %></span>
 	                </p>
 	              </figcaption>
 	            </img>
