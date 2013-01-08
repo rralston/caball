@@ -56,10 +56,9 @@
   
 		<%= p.label "Project Photos", :class => 'control-label' %>
 				<%= p.fields_for :photos do |p|  %>
-				<% if @pictures.present? %>
+				<% if p.object.image.present? %>
 
 				    <div class="control-group">
-
 							<div class="controls">
 								<img src=<%= p.object.image.url(:medium) %> class="img-polaroid" >
 								<%= p.check_box :_destroy %> Delete Image								
@@ -72,7 +71,6 @@
 						</div>
 						</div>
 						<% else %>
-
 						<div class="control-group">
 							<p class="control-label">Project Images</p>
 							<div class="controls">
