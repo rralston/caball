@@ -29,7 +29,7 @@
 	          </figure>
 	        <% end %>
 	        <p>
-	          <%= use.about %>
+	          <% if use.about.exists? %><%= use.about %><% end %>
 	        </p>
 	      </li>
 	<% end %>
