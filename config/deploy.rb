@@ -1,7 +1,7 @@
 require "bundler/capistrano"
 
 server "192.155.85.156", :web, :app, :db, primary: true
-
+set :shared_children, shared_children + %w{public/uploads}
 set :application, "caball"
 set :user, "deployer"
 set :deploy_to, "/home/#{user}/apps/#{application}"
