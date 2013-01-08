@@ -15,38 +15,15 @@
 				<p><%= error %></p>
 		</div>
 	<% end %>
-	<%= form_for @project, :html => { :class => 'form-horizontal' } do |p| %>
-		<%= p.fields_for :photos do |p|  %>
-		  <% if @pictures.first.image.url.present? %>
-				<!-- <div class="control-group">
-		    <%= p.label :description, :class => 'control-label' %>
-					<div class="controls">
-						<%= p.text_field :description, :class => 'text_field' %>
-		 			</div>
-				</div> -->
-		    <div class="control-group">
-				  <%= p.label "Project Photos", :class => 'control-label' %>
-					<div class="controls">
-						<img src=<%= p.object.image.url(:medium) %> class="img-polaroid" >			
-						<%= p.check_box :_destroy %> Click Here to Destroy
-						</div>
-				</div>
-				<% else %>
-				<!-- <div class="control-group">
-		    	<%= p.label :description, :class => 'control-label' %>
-					<div class="controls">
-						<%= p.text_field :description, :class => 'text_field' %>
-		 			</div>
-				</div> -->
-				<div class="control-group">
-					<p class="control-label">Project Images</p>
-					<div class="controls">
-						<%= p.file_field :image %>
-			 		</div>
-				</div>
-	  	<% end %>
-		<% end %>
+	
+	<div class="row-fluid">
+	  <div class="span12">
 		
+	<%= form_for @project, :html => { :class => 'form-horizontal' } do |p| %>
+
+		  <div class="row-fluid">
+        <div class="span4">
+	
 		<div class="control-group">
 	  <%= p.label :title, :class => 'control-label' %>
 	    <div class="controls">
@@ -74,6 +51,39 @@
 	    <%= p.text_field :end, :id => 'end' %>
 	    </div>
 	  </div>
+	</div>
+	<div class="span6 offset2">
+  
+		<%= p.label "Project Photos", :class => 'control-label' %>
+				<%= p.fields_for :photos do |p|  %>
+				<% if @pictures.present? %>
+
+				    <div class="control-group">
+
+							<div class="controls">
+								<img src=<%= p.object.image.url(:medium) %> class="img-polaroid" >
+								<%= p.check_box :_destroy %> Delete Image								
+								</div>
+						</div>
+						<div class="control-group">
+							<p class="control-label">Description</p>
+							<div class="controls">
+						<%= p.text_field :description, :class => 'text_field' %>
+						</div>
+						</div>
+						<% else %>
+
+						<div class="control-group">
+							<p class="control-label">Project Images</p>
+							<div class="controls">
+								<%= p.file_field :image %>
+					 		</div>
+						</div>
+			  	<% end %>
+				<% end %>
+				</div>
+				</div>
+				
 	
 	<h2>Youtube Video</h2>
 	<!-- Begin Videos -->
