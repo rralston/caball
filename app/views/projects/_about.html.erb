@@ -19,7 +19,12 @@
 				      <li class='span4'>
 				          <figure class='thumbnail-figure'>
 										<%= image_tag photo.image %>
-				          </figure>
+				          	<figcaption class='thumbnail-title'>
+			                <p>
+			                  <span><%= photo.description %></span>
+			                </p>
+			              </figcaption>
+			</figure>
 				      </li>
 						<% end %>
 						</ul>
