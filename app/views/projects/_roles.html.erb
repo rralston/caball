@@ -11,7 +11,7 @@
         </div>
 
         <div class="row-fluid">
-          <% @project.roles.each do |role| %>
+          <% @project.roles.each_with_index do |role, index| %>
 					<div class="well span3 pull-center roles">
               <h5>
                   <i class="icon-camera huge-icon"></i>    
