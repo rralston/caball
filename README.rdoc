@@ -1,17 +1,7 @@
-== Welcome to Caball on Guthub
+== Welcome to Filmzu 
 
-Hello, Bro's and Brajette's. 
+Hello, Bro's and Brajette's the future of independent film!
 
-  class CaballController < ActionController::Base
-    def destroy
-      @weblog = Weblog.find(params[:id])
-      @weblog.destroy
-      logger.info("#{Time.now} Destroyed Weblog ID ##{@weblog.id}!")
-    end
-  end
+Launching very soon. 
 
-The result will be a message in your log file along the lines of:
-
-  Mon Nov 08 14:22:29 +1000 2012 Destroyed Weblog ID #1!
-
-More information on http://www.caball.net/
+More information on http://www.filmzu.com
