@@ -4,10 +4,12 @@ Caball::Application.routes.draw do
   end
   
   resources :projects
-  resources :home
   
+  # Static Pages 
+  
+  resources :home, except: :show  
   namespace :home do
-    %w[privacy].each do |page|
+    %w[privacy terms about].each do |page|
       get page
     end
   end
@@ -18,6 +20,7 @@ Caball::Application.routes.draw do
   match 'signout', to: 'sessions#destroy', as: 'signout'
   root :to => 'home#index'
   
+  # Admin Area
   namespace :admin do
     %w[index interface buttons calendar charts chat gallery grid invoice login tables widgets form_wizard form_common form_validation].each do |page|
       get 'admin/' + page
