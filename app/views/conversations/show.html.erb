@@ -8,7 +8,7 @@
 			<%= content_tag_for(:p, conversation.receipts_for(current_user).limit(1)) do |receipt| %>
 				<% message = receipt.message %>
 				About <%= link_to User.find(message.sender_id).name, user_path(User.find(message.sender_id)) %>
-				<% if User.find(message.sender_id).photos.first.image.url(:medium).present? %>
+				<% if User.find(message.sender_id).photos.first.present? %>
 				<%= image_tag(User.find(message.sender_id).photos.first.image.url(:medium), {:class => "img-circle"}) %>
 				<% end %>
 				<a class="btn btn-large" href="#"><i class="icon-star"></i> Star</a>
