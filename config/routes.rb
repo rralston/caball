@@ -8,16 +8,10 @@ Caball::Application.routes.draw do
   # Static Pages 
   
   resources :home, except: :show  
-  get "about", to: 'home#about'
-  get "privacy", to: 'home#privacy'
-  get "terms", to: 'home#terms'
-  
-  # namespace :home do
-  #     %w[privacy terms about].each do |page|
-  #       get page
-  #     end
-  #   end
-  
+  %w[privacy terms about].each do |page|
+    get page, controller: "home", action: page
+  end
+
   match 'projects/show' => 'projects#show'
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
