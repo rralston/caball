@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   def new
      @user = User.new
      @user.build_characteristics
-     @user.build_photos
+     # @user.build_photos (this was building before save)
      @user.talent.build
      3.times do 
        @video = @user.videos.build
