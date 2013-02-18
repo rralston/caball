@@ -11,8 +11,9 @@
 				<% if User.find(message.sender_id).photos.first.present? %>
 				<%= image_tag(User.find(message.sender_id).photos.first.image.url(:medium), {:class => "img-circle"}) %>
 				<% end %>
-				<a class="btn btn-large" href="#"><i class="icon-star"></i> Star</a>
-				
+				<!-- Version 2.0 Favourite Messages -->
+				<!-- <a class="btn btn-large" href="#"><i class="icon-star"></i> Star</a> -->
+				<!-- Version 2.0 Favourite Messages End -->
 				<% end %>
 			<!-- Message Chain is below this line -->
 			<div class="well">
