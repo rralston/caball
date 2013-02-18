@@ -77,9 +77,18 @@
       											<% end %>
       											<ul class="dropdown-menu">
       	                    <!-- Search Form Begin -->
-<form class="navbar-search pull-right">
-<input type="text" class="search-query" placeholder="Search">
-</form>
+														<form class="navbar-search pull-right">
+															<%= search_form_for @search do |f| %>
+															  <div class="field">
+															    <% if @users %>
+																		<%= f.text_field :name_cont, :placeholder => 'Find Talent...' %>
+																	<% end %>
+																	<% if @projects %>
+																		<%= f.text_field :title_cont, :placeholder => 'Find a Project...' %>
+																	<% end %>
+															  </div>
+															<% end %>
+														</form>
 														<!-- Search Form End -->
       	                  	</ul>
       										</li>
