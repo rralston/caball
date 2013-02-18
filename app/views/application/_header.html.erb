@@ -82,9 +82,10 @@
 															  <div class="field">
 															    <% if @users %>
 																		<%= f.text_field :name_cont, :placeholder => 'Find Talent...' %>
-																	<% end %>
-																	<% if @projects %>
-																		<%= f.text_field :title_cont, :placeholder => 'Find a Project...' %>
+																	<% else %>
+																		<% if @projects %>
+																			<%= f.text_field :title_cont, :placeholder => 'Find a Project...' %>
+																		<% end %>
 																	<% end %>
 															  </div>
 															<% end %>
