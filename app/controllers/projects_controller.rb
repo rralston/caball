@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-
+  
   def index
     @search = Project.search(params[:q])
     @projects = @search.result
@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
   end
   
   def show
+    search
     @project = Project.find(params[:id])
     if @project.nil?
         redirect_to :action => :index
@@ -82,4 +83,11 @@ class ProjectsController < ApplicationController
      end
    end
   
+  def search
+      @search = Project.search(params[:q])
+      @projects = @search.result
+      if params[:q]
+        redirect_to :action => :index, :q => params[:q]
+      end
+    end
   end

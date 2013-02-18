@@ -20,6 +20,11 @@ class UsersController < ApplicationController
     if @user.nil?
         redirect_to :action => :index
     end
+    @search = User.search(params[:q])
+    @users = @search.result
+      if params[:q]
+        redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return
+      end
     respond_to do |format|
       format.html # show.html.erb
     end
