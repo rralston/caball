@@ -1,8 +1,8 @@
 class ProjectsController < ApplicationController
 
   def index
-     @projects = Project.all
-    # @projects = Project.search(params[:search])
+    @search = Project.search(params[:q])
+    @projects = @search.result
     respond_to do |format|
       format.html # index.html.erb
     end

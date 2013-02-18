@@ -5,8 +5,9 @@ class UsersController < ApplicationController
   # before_filter :correct_user?
   
   def index
-    @users = User.all
-
+    @search = User.search(params[:q])
+    @users = @search.result
+    @search.build_condition
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -63,6 +64,9 @@ class UsersController < ApplicationController
    
    def create
      @user = User.new(params[:user])
+     # if @user.photos.empty?
+     #   @user.photos.destroy
+     # end
      respond_to do |format|
        if @user.save
          format.html { redirect_to @user, :notice => 'User was successfully created.' }
