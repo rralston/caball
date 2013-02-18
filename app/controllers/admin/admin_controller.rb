@@ -1,6 +1,8 @@
 class Admin::AdminController < Admin::BaseController
   
   def index
+    @users = User.all.count
+    @projects = Project.all.count
   end
   def interface
   end
