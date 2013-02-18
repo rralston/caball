@@ -2,7 +2,25 @@
 	<section class='section' id='content' role='main'>
 	  <div class='container'>
 	    <div class='page-header'>
-	      <h1>
+	      
+	<!-- Begin New Search Index -->
+				<%= search_form_for @search do |f| %>
+				  <%= f.condition_fields do |c| %>
+				  <div class="field">
+				    <%= c.attribute_fields do |a| %>
+				      <%= a.attribute_select associations: [:projects] %>
+				    <% end %>
+				    <%= c.predicate_select %>
+				    <%= c.value_fields do |v| %>
+				      <%= v.text_field :value %>
+				    <% end %>
+				    </div>
+				  <% end %>
+				  <div class="actions"><%= f.submit "Search" %></div>
+				<% end %>
+				<!-- End New Search Index -->
+				
+				<h1>
 	        Featured Users
 	        <small>Here are just some of the great talent on Caball right now.</small>
 	      </h1>
@@ -38,6 +56,8 @@
 	</section>
 	
 	<br>
+	
+	<!-- Begin Old Index -->
 <%- model_class = User.new.class -%>
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
@@ -77,6 +97,7 @@
     <% end %>
   </tbody>
 </table>
+<!-- End Old Index -->
 
 <!-- <%= link_to t('.new', :default => t("helpers.links.new")),
             new_user_path,
