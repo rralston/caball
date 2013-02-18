@@ -19,6 +19,7 @@ class ProjectsController < ApplicationController
   def edit
      # correct_project_owner?
      # Define Security Measures
+     search
      @project = Project.find(params[:id])
      @pictures = @project.photos
      if @pictures.first.nil?
@@ -37,6 +38,7 @@ class ProjectsController < ApplicationController
   end
   
   def new
+    search
     @project = Project.new
     @project.roles.build
     3.times do 

@@ -31,6 +31,7 @@ class UsersController < ApplicationController
   end
   
   def new
+     search
      @user = User.new
      @user.build_characteristics
      # @user.build_photos (this was building before save)
@@ -45,6 +46,7 @@ class UsersController < ApplicationController
 
    def edit
      correct_user?
+     search
      @user = User.find(params[:id])
      if @user.characteristics.nil?
         @user.build_characteristics
@@ -102,5 +104,13 @@ class UsersController < ApplicationController
        format.html { redirect_to Users_url }
      end
    end  
+   
+  def search
+   @search = User.search(params[:q])
+   @users = @search.result
+     if params[:q]
+       redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return
+     end
+  end
 end
 
