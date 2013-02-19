@@ -1,7 +1,7 @@
 <%= javascript_include_tag "admin/unicorn.dashboard.js" %>
 <div id="content">
 		<div id="content-header">
-			<h1>Dashboard</h1>
+			<h1>Filmzu Admin Area</h1>
 			<div class="btn-group">
 				<a class="btn btn-large tip-bottom" title="Manage Files"><i class="icon-file"></i></a>
 				<a class="btn btn-large tip-bottom" title="Manage Users"><i class="icon-user"></i></a>
@@ -51,7 +51,7 @@
 			<div class="row-fluid">
 				<div class="span12">
 					<div class="alert alert-info">
-						Welcome in the <strong>Unicorn Admin Theme</strong>. Dont forget to check all the pages!
+						Welcome <strong><%= @current_user %></strong>. Dont forget to check all the pages!
 						<a href="#" data-dismiss="alert" class="close">×</a>
 					</div>
 					<div class="widget-box">
@@ -60,11 +60,11 @@
 							<div class="row-fluid">
 							<div class="span4">
 								<ul class="site-stats">
-									<li><i class="icon-user"></i> <strong>1433</strong> <small>Total Users</small></li>
-									<li><i class="icon-arrow-right"></i> <strong>16</strong> <small>New Users (last week)</small></li>
+									<li><i class="icon-user"></i> <strong><%= @users %></strong> <small>Total Users</small></li>
+									<li><i class="icon-arrow-right"></i> <strong><%= @users_weekly %></strong> <small>New Users (last week)</small></li>
 									<li class="divider"></li>
-									<li><i class="icon-shopping-cart"></i> <strong>259</strong> <small>Total Shop Items</small></li>
-									<li><i class="icon-tag"></i> <strong>8650</strong> <small>Total Orders</small></li>
+									<li><i class="icon-facetime-video"></i> <strong><%= @projects %></strong> <small>Total Projects</small></li>
+									<li><i class="icon-play"></i> <strong><%= @projects_weekly %></strong> <small>New Projects (last week)</small></li>
 									<li><i class="icon-repeat"></i> <strong>29</strong> <small>Pending Orders</small></li>
 								</ul>
 							</div>

@@ -1,14 +1,16 @@
 class ProjectsController < ApplicationController
-
+  
   def index
-    @projects = Project.all
-
+    @search = Project.search(params[:q])
+    @projects = @search.result
+    @search.build_condition
     respond_to do |format|
       format.html # index.html.erb
     end
   end
   
   def show
+    search
     @project = Project.find(params[:id])
     if @project.nil?
         redirect_to :action => :index
@@ -18,6 +20,7 @@ class ProjectsController < ApplicationController
   def edit
      # correct_project_owner?
      # Define Security Measures
+     search
      @project = Project.find(params[:id])
      @pictures = @project.photos
      if @pictures.first.nil?
@@ -36,6 +39,7 @@ class ProjectsController < ApplicationController
   end
   
   def new
+    search
     @project = Project.new
     @project.roles.build
     3.times do 
@@ -82,4 +86,11 @@ class ProjectsController < ApplicationController
      end
    end
   
+  def search
+      @search = Project.search(params[:q])
+      @projects = @search.result
+      if params[:q]
+        redirect_to :action => :index, :q => params[:q]
+      end
+    end
   end

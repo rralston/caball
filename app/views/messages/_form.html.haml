@@ -3,5 +3,7 @@
     = f.input :subject
     = f.input :body
     .form-actions
-      = f.button :submit, class: 'btn-primary'
-      = submit_tag 'Cancel', type: :reset, class: 'btn btn-danger'
+    = f.button :submit, 'Send Message', class: 'btn-primary'
+    = submit_tag 'Clear', type: :reset, class: 'btn btn-danger'
+    = button_to "Go Back", '#', :onclick => 'history.back(); return false;'
+

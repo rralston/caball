@@ -2,6 +2,39 @@
 <section class='section' id='content' role='main'>
   <div class='container'>
     <div class='page-header'>
+	
+			<!-- Begin New Project Search -->
+
+			<div class="accordion" id="accordion2">
+			  <div class="accordion-group">
+			    <div class="accordion-heading">
+			      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+			        <h1>Advanced Search Fields</h1>
+			      </a>
+			    </div>
+			    <div id="collapseOne" class="accordion-body collapse out">
+			      <div class="accordion-inner">
+			        <%= search_form_for @search do |f| %>
+							  <%= f.condition_fields do |c| %>
+							  <div class="field">
+							    <%= c.attribute_fields do |a| %>
+							      <%= a.attribute_select associations: [:roles] %>
+							    <% end %>
+							    <%= c.predicate_select %>
+							    <%= c.value_fields do |v| %>
+							      <%= v.text_field :value %>
+							    <% end %>
+							    </div>
+							  <% end %>
+							  <div class="actions"><%= f.submit "Search" %></div>
+							<% end %>
+			      </div>
+			    </div>
+			  </div>
+				<!-- End New Project Search -->
+				
+				<br>
+				
       <h1>
         Featured Projects
         <small>Here are just some of the great projects on Caball right now.</small>
