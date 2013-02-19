@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   def index
     @search = Project.search(params[:q])
     @projects = @search.result
+    @search.build_condition
     respond_to do |format|
       format.html # index.html.erb
     end
