@@ -5,6 +5,16 @@
 				<i class="icon icon-home"></i> <span>Dashboard</span>
 			<% end %>
 		</li>
+		<li class="<%= is_active?("users") %>">
+			<%= link_to 'buttons' do %>
+				<i class="icon icon-user"></i> <span>Users</span>
+			<% end %>
+		</li>
+		<li class="<%= is_active?("projects") %>">
+			<%= link_to 'buttons' do %>
+				<i class="icon-facetime-video"></i> <span>Projects</span>
+			<% end %>
+		</li>
 		<%= content_tag(:li, :class => open?("form_common", "form_validation", "form_wizard")) do %>
 			<%= link_to "#" do %>
 				<i class="icon icon-th-list"></i> <span>Form elements</span> <span class="label">3</span>

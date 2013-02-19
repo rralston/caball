@@ -1,0 +1,53 @@
+<div id="content">
+			<div id="content-header">
+				<h1>Users</h1>
+				<div class="btn-group">
+					<a class="btn btn-large tip-bottom" title="Manage Files"><i class="icon-file"></i></a>
+					<a class="btn btn-large tip-bottom" title="Manage Users"><i class="icon-user"></i></a>
+					<a class="btn btn-large tip-bottom" title="Manage Comments"><i class="icon-comment"></i><span class="label label-important">5</span></a>
+					<a class="btn btn-large tip-bottom" title="Manage Orders"><i class="icon-shopping-cart"></i></a>
+				</div>
+			</div>
+			<div id="breadcrumb">
+				<a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+				<a href="#" class="current">Users</a>
+			</div>
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="widget-box">
+							<div class="widget-title">
+								<span class="icon">
+									<i class="icon-th"></i>
+								</span>
+								<h5>Current Users</h5>
+							</div>
+							<div class="widget-content nopadding">
+								<table class="table table-bordered table-striped">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Email</th>
+											<th>Sign-Up Date</th>
+											<th>Actions</th>
+										</tr>
+									</thead>
+									<tbody>
+										<% @users.each do |user| %>
+										<tr>
+											<td><%= link_to user.name, user_path(user.id) %></td>
+											<td><%= user.email %></td>
+											<td><%= user.created_at %></td>
+											<td><%= link_to(edit_user_path(user.id), :class => "btn btn-primary btn-mini") do %>Edit<% end %> <%= link_to 'Send Message', new_conversation_path(:recipient => user.email), class: "btn btn-success btn-mini" %> <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+						                      user_path(user),
+						                      :method => :delete,
+						                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+						                      :class => 'btn btn-mini btn-danger' %></td>
+										</tr>
+										<% end %>
+									</tbody>
+								</table>							
+							</div>
+						</div>	
+					</div>
+				</div>
