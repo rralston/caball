@@ -16,33 +16,8 @@ class Admin::AdminController < Admin::BaseController
     @recent_projects = Project.order('created_at DESC').last(10)
     @conversations_weekly = Conversation.where('created_at >= ?', 1.week.ago).count
   end
-  def interface
-  end
-  def buttons
-  end
-  def calendar
-  end
-  def charts
-  end
-  def chat
-  end
-  def gallery
-  end
-  def grid
-  end
-  def invoice
-  end
-  def login
-  end
-  def tables
-  end
-  def widgets
-  end
-  def form_wizard
-  end
-  def form_common
-  end
-  def form_validation
+  def users
+  @users = User.all
   end
 end
 
