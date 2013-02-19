@@ -6,4 +6,12 @@ class Project < ActiveRecord::Base
   attr_accessible :title, :description, :start, :end, :roles_attributes, :photos_attributes, :videos_attributes
   accepts_nested_attributes_for :roles, :photos, :videos, :allow_destroy => true  
   validates_presence_of :title, :description, :message => "is required"
+  
+  # def self.search(search)
+  #   if search
+  #     find(:all, :conditions => ['description LIKE ?', "%#{search}%"])
+  #   else
+  #     find(:all)
+  #   end
+  # end
 end

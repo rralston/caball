@@ -6,17 +6,24 @@ class ApplicationController < ActionController::Base
   # Security & Authentication
   helper_method :user_signed_in?
   helper_method :correct_user?
+  # Search
+  helper_method :search
   private
 
   def subdomain_view_path
     prepend_view_path "app/views/#{request.subdomain}_subdomain" if request.subdomain.present?
   end
   
-  def current_user
-      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  # Search
+  def search
+   @search = User.search(params[:q])
+   @users = @search.result
+     if params[:q]
+       redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return
+     end
   end
-
-#Notification System  
+  
+  #Notification System  
   def notification
     if @current_user
     notification = @current_user.receipts.where(:receiver_id == :user_id).is_unread.count
@@ -26,6 +33,12 @@ class ApplicationController < ActionController::Base
     end
   end
   
+  # Authentication
+  
+  def current_user
+       @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+   
   def user_signed_in?
       return true if current_user
   end

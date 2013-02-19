@@ -68,3 +68,6 @@ gem 'simple_form'
 
 #Gelocation
 gem 'geocoder'
+
+#Search
+gem 'ransack'
