@@ -9,7 +9,9 @@
 				</div>
 			</div>
 			<div id="breadcrumb">
-				<a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+				<%= link_to admin_admin_index_url, {:title => "Go to Home", :class => "tip-bottom"} do %>
+				<i class="icon-home"></i> Home
+				<% end %>
 				<a href="#" class="current">Users</a>
 			</div>
 			<div class="container-fluid">
@@ -26,9 +28,9 @@
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th>Name</th>
-											<th>Email</th>
-											<th>Sign-Up Date</th>
+											<th><%= sort_link(@search, :name, "Name") %></th>
+											<th><%= sort_link(@search, :email, "Email") %></th>
+											<th><%= sort_link(@search, :created_at, "Sign-Up Date") %></th>
 											<th>Actions</th>
 										</tr>
 									</thead>
@@ -51,3 +53,17 @@
 						</div>	
 					</div>
 				</div>
+				
+				<div class="widget-box">
+					<div class="widget-title">
+						<span class="icon">
+							<i class="icon-exclamation-sign"></i>
+						</span>
+						<h5>Navigation</h5>
+					</div>
+					<div class="widget-content">
+						<div class="pagination">
+						<%= paginate @users %>
+						</div>
+				</div>
+			</div>
