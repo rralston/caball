@@ -1,5 +1,8 @@
 class ProjectsController < ApplicationController
   
+  # Search
+  helper_method :search
+  
   def index
     @search = Project.search(params[:q])
     @projects = @search.result
