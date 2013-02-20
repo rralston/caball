@@ -1,5 +1,8 @@
 class Admin::AdminController < Admin::BaseController
   
+  # Search
+  helper_method :search
+   
   def index
     @users = User.all.count
     @users_weekly = User.where('created_at >= ?', 1.week.ago).count
@@ -17,10 +20,14 @@ class Admin::AdminController < Admin::BaseController
     @conversations_weekly = Conversation.where('created_at >= ?', 1.week.ago).count
   end
   def users
-  @users = User.all
+    # @users = User.order("name").page(params[:page]).per(10)
+    @search = User.search(params[:q])
+    @users = @search.result.order("name").page(params[:page]).per(10)
   end
   def projects
-  @projects = Project.all
+    # @projects = Project.order("title").page(params[:page]).per(10)
+    @search = Project.search(params[:q])
+    @projects = @search.result.order("title").page(params[:page]).per(10)
   end
 end
 
