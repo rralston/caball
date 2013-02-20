@@ -71,3 +71,9 @@ gem 'geocoder'
 
 #Search
 gem 'ransack'
+
+#Pagination
+gem "kaminari"
+
+#Web App Monitoring
+gem 'newrelic_rpm'
