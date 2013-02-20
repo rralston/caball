@@ -29,5 +29,9 @@ class Admin::AdminController < Admin::BaseController
     @search = Project.search(params[:q])
     @projects = @search.result.order("title").page(params[:page]).per(10)
   end
+  def messages
+    @search = Notification.search(params[:q])
+    @notification = @search.result.order("subject").page(params[:page]).per(10)
+  end
 end
 

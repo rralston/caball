@@ -20,7 +20,7 @@ Caball::Application.routes.draw do
   
   # Admin Area
   namespace :admin do
-    %w[index users projects interface buttons calendar charts chat gallery grid invoice login tables widgets form_wizard form_common form_validation].each do |page|
+    %w[index users projects messages interface buttons calendar charts chat gallery grid invoice login tables widgets form_wizard form_common form_validation].each do |page|
       get 'admin/' + page
     end
   end
