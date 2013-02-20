@@ -19,5 +19,8 @@ class Admin::AdminController < Admin::BaseController
   def users
   @users = User.all
   end
+  def projects
+  @projects = Project.all
+  end
 end
 
