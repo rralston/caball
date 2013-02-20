@@ -6,11 +6,21 @@ class ApplicationController < ActionController::Base
   # Security & Authentication
   helper_method :user_signed_in?
   helper_method :correct_user?
-
+  # Search
+  helper_method :search
   private
 
   def subdomain_view_path
     prepend_view_path "app/views/#{request.subdomain}_subdomain" if request.subdomain.present?
+  end
+  
+  # Search for Home Directory
+  def search
+   @search = User.search(params[:q])
+   @users = @search.result
+     if params[:q]
+       redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return
+     end
   end
   
   #Notification System  
