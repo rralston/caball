@@ -25,7 +25,7 @@ class ConversationsController < ApplicationController
     conversation = current_user.
       send_message(recipients, *conversation_params(:body, :subject)).conversation
 
-    redirect_to root_url, :notice => 'Your Message was successfully sent.'
+    redirect_to conversations_url, :notice => 'Your Message was successfully sent.'
   end
 
   def reply
