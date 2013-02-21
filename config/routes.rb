@@ -4,6 +4,8 @@ Caball::Application.routes.draw do
   end
   
   resources :projects
+  resources :conversations
+  resources :notifications
   
   # Static Pages 
   
@@ -20,7 +22,7 @@ Caball::Application.routes.draw do
   
   # Admin Area
   namespace :admin do
-    %w[index users projects messages interface buttons calendar charts chat gallery grid invoice login tables widgets form_wizard form_common form_validation].each do |page|
+    %w[index users user_images interrogate projects messages interface buttons calendar charts chat gallery grid invoice login tables widgets form_wizard form_common form_validation].each do |page|
       get 'admin/' + page
     end
   end
