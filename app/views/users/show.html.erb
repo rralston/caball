@@ -43,8 +43,20 @@
                    <a href = "#" class="btn">Pictures</a>
                  </div>
                  <div class="span4 offset2 contact-button">
-                   <%= link_to 'Contact', new_conversation_path(:recipient => @user.email), class: "btn" %>
+                   <a data-toggle="modal" data-target="#message-modal" 
+                    data-remote ="<%= new_conversation_path(:recipient => @user.email, :modal => true) %>"
+                    data-keyboard="true" class="btn">Contact</a>
                  </div>
+                 <!-- About Me Modal -->
+                  <div id="message-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h3><span>Message <%= @user.name.split[0..0].join(" ") %></span></h3>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                  </div>
+                 <!-- End About Me Modal --> 
                </div>
              </div>
            </div>
@@ -83,12 +95,15 @@
                
              </div>
            </div>
+          <div class="clearfix"></div>
+          <div class="row-fluid projects-characteristics">
 					<% if @user.projects.present? then %>
 						<%= render :partial => 'current_projects' %>
 					<% end %>
 					<% if @user.characteristics.age.present? then %>
 						<%= render :partial => 'characteristics' %>
 					<% end %>
+					</div>
          </div>
        </div>
      </div>
@@ -96,13 +111,13 @@
  </section>
 
  <section class="section">
-   <div class="container">
+   <div class="container-fluid">
      <div class="row-fluid">
-       <div class="span10 offset1">
+       <div class="span12">
          <div class="row-fluid">
            <div class="page-header">
              <h1>
-               Video Portfolio <small>A sample of <%= @user.name.split[0..0].join(" ").pluralize %> work</small>
+               Video Portfolio <small>A sample of <%= @user.name.split[0..0].join(" ").possessive %> work</small> 
              </h1>
            </div>
            <ul class="thumbnails thumbnail-list">
@@ -171,24 +186,5 @@
      </div>  
    </div>
  </section>
-
-   <section class="section alt">
-     <div class="container">
-       <div class="row-fluid">
-         <div class="span10 offset1">
-           <div class="row-fluid">
-             <div class="page-header">
-                 <h1>
-                     About Me
-                 </h1>
-             </div>
-						<p>
-							<%= @user.about %>
-						</p>
-           </div>
-         </div>
-       </div>
-     </div>
-   </section>
 
  </div>

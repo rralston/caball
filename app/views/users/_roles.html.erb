@@ -1,5 +1,5 @@
 <% if @user.talents.second.present? then %>
-  <div class="span6 role-column">
+  <div class="span6 role-column role1">
     <div class="row-fluid">
      <h3><%= @user.talents.first.name %></h3> 
     </div>
@@ -10,7 +10,7 @@
      <%= shorten :text => @user.talents.first.description, :length => 400, :partial => "more_roles" %>
     </div>
   </div>
-  <div class="span6">
+  <div class="span6 role-column role2">
     <div class="row-fluid">
      <h3><%= @user.talents.second.name %></h3> 
     </div>
@@ -22,7 +22,7 @@
     </div>
   </div>
 <% else %>
-  <div class="span12 role-column">
+  <div class="span12 role-column role1">
     <div class="row-fluid">
      <h3><%= @user.talents.first.name %></h3> 
     </div>
@@ -35,3 +35,27 @@
   </div>
 <% end %>
 
+<!-- Role1 Modal -->
+  <div id="role1-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header left-aligned">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3><span><%= @user.name.split[0..0].join(" ") %></span></h3>
+      <span><%= @user.talents.first.name %></span>
+    </div>
+    <div class="modal-body left-aligned">
+      <%= @user.talents.first.description %>
+    </div>
+  </div>
+ <!-- End Location Modal --> 
+<% if @user.talents.second.present? then %>
+  <div id="role2-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header left-aligned">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3><span><%= @user.name.split[0..0].join(" ") %></span></h3>
+      <span><%= @user.talents.second.name %></span>
+    </div>
+    <div class="modal-body left-aligned">
+      <%= @user.talents.second.description %>
+    </div>
+  </div>
+<% end %>

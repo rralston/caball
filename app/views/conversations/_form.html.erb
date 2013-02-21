@@ -6,7 +6,11 @@
 		<% else %>
 			<%= f.input :subject %>
 		<% end %>
-		<%= f.input :body, :as => :text %>
+		<% if not @modal.nil? %>
+		  <%= f.input :body, :as => :text, :input_html => { :rows => @rows } %>
+		<% else %>
+		  <%= f.input :body, :as => :text %>
+		<%end%>
 		<div id="form-actions">
 			<%= f.button :submit, class: 'btn-primary' %>
 			<%= submit_tag 'Cancel', type: :reset, class: 'btn btn-danger' %>
