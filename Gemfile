@@ -75,3 +75,6 @@ gem 'geocoder'
 
 #Search
 gem 'ransack'
+
+# For easily making nouns possessive
+gem 'possessive'
