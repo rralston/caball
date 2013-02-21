@@ -25,6 +25,14 @@ class UsersController < ApplicationController
       if params[:q]
         redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return
       end
+      
+    @real_videos = Array.new
+    for video in @user.videos
+      if video.thumbnail_small.present?
+        @real_videos << video
+      end
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
     end

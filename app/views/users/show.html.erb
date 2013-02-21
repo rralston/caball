@@ -107,6 +107,12 @@
    </div>
  </section>
 
+<% comment = "Here we're dynamically displaying videos--only those that the user has linked to.
+             We need to choose how large the video will be and then how it will be offset depending on how many videos
+             Are being displayed.
+"%>
+
+<% if @real_videos.length > 0 %>
  <section class="section">
    <div class="container-fluid">
      <div class="row-fluid">
@@ -118,70 +124,34 @@
              </h1>
            </div>
            <ul class="thumbnails thumbnail-list">
+           <% @real_videos.each_with_index do |video, counter| %>
+            <% if counter == 0 %>
+             <li class="span4 offset<%= (3 - @real_videos.length) * 2 %>">
+            <% else %>
              <li class="span4">
-							<a data-toggle="lightbox" href="#video1">
+            <% end %>
+               <div class="row-fluid">
+                 <h3><%= video.title %></h3>
+               </div>
+							 <a data-toggle="lightbox" href="#video1">
                  <figure class="thumbnail-figure">
-									<% if @user.videos.first.thumbnail_small.present? %>
                    <%= image_tag(@user.videos.first.thumbnail_large, :width => '100%') %>
-										<% else %>
-										<%= image_tag "http://img.youtube.com/vi/EqWRZrupLrI/0.jpg", :width => "100%" %>
-										<% end %>									<i class="icon-play-circle"></i>    
+									 <i class="icon-play-circle"></i>    
                  </figure>
 							</a>
-							<% if @user.videos.first.present? %>
-								<div class="lightbox fade" id="video1" style="display: none;">
-									<div class='lightbox-content'>
-										<h3><%= @user.videos.first.title %></h3>
-										<iframe width="560" height="315" src=<%= @user.videos.first.embed_url %> frameborder="0" allowfullscreen></iframe>
-									</div>
+							<div class="lightbox fade" id="video1" style="display: none;">
+								<div class='lightbox-content'>
+									<h3><%= video.title %></h3>
+									<iframe width="560" height="315" src=<%= video.embed_url %> frameborder="0" allowfullscreen></iframe>
 								</div>
-							<% end %>
+							</div>
              </li>
-             <li class="span4">
-               <a href="portfolio-item.html">
-                 <a data-toggle="lightbox" href="#video2">
-									<figure class="thumbnail-figure">
-									<% if @user.videos.second.thumbnail_small.present? %>
-                   <%= image_tag(@user.videos.second.thumbnail_large, :width => '100%') %>
-										<% else %>
-										<%= image_tag "http://img.youtube.com/vi/EqWRZrupLrI/0.jpg", :width => "100%" %>
-										<% end %>									<i class="icon-play-circle"></i>
-								 </figure>
-               </a>
-							<% if @user.videos.second.present? %>
-								<div class="lightbox fade" id="video2" style="display: none;">
-									<div class='lightbox-content'>
-										<h3><%= @user.videos.second.title %></h3>
-										<iframe width="560" height="315" src=<%= @user.videos.second.embed_url %> frameborder="0" allowfullscreen></iframe>
-									</div>
-								</div>
-							<% end %>
-             </li>
-             <li class="span4">
-               <a href="portfolio-item.html">
-                 <a data-toggle="lightbox" href="#video3">
-									<figure class="thumbnail-figure">
-									<% if @user.videos.third.thumbnail_small.present? %>
-                   <%= image_tag(@user.videos.third.thumbnail_large, :width => '100%') %>
-										<% else %>
-										<%= image_tag "http://img.youtube.com/vi/EqWRZrupLrI/0.jpg", :width => "100%" %>
-										<% end %>									<i class="icon-play-circle"></i>
-								 </figure>
-               </a>
-							<% if @user.videos.third.present? %>
-								<div class="lightbox fade" id="video3" style="display: none;">
-									<div class='lightbox-content'>
-										<h3><%= @user.videos.third.title %></h3>
-										<iframe width="560" height="315" src=<%= @user.videos.third.embed_url %> frameborder="0" allowfullscreen></iframe>
-									</div>
-								</div>
-							<% end %>
-             </li>
+             <% end %>
            </ul>
          </div>  
        </div>
      </div>  
    </div>
  </section>
-
+<% end %>
  </div>
