@@ -1,6 +1,6 @@
 <div id="content">
 			<div id="content-header">
-				<h1>Users</h1>
+				<h1>Projects</h1>
 				<div class="btn-group">
 					<a class="btn btn-large tip-bottom" title="Manage Files"><i class="icon-file"></i></a>
 					<a class="btn btn-large tip-bottom" title="Manage Users"><i class="icon-user"></i></a>
@@ -23,11 +23,13 @@
 									<i class="icon-th"></i>
 								</span>
 								<h5>Current Projects</h5>
+								<span class="label label-info"><%= @count %></span>
 							</div>
 							<div class="widget-content nopadding">
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
+											<th><%= sort_link(@search, :id, "ID") %></th>
 											<th><%= sort_link(@search, :title, "Title") %></th>
 											<th>Owner</th>
 											<th><%= sort_link(@search, :created_at, "Created On") %></th>
@@ -37,6 +39,7 @@
 									<tbody>
 										<% @projects.each do |project| %>
 										<tr>
+											<td><%= link_to project.id, project_path(project.id), :class => 'btn btn-mini' %></td>
 											<td><%= link_to project.title, project_path(project.id) %></td>
 											<td><%= link_to User.find(project.user_id).name, user_path(project.user_id) %></td>
 											<td><%= project.created_at %></td>

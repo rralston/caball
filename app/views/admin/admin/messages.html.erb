@@ -17,30 +17,47 @@
 			<div class="container-fluid">
 				<div class="row-fluid">
 					<div class="span12">
+						<% if flash[:notice] %>
+								<div class="alert alert-block">
+									<a class="close" data-dismiss="alert" href="#">×</a>
+									<%= flash[:notice] %>
+								</div>
+						<% end %>
 						<div class="widget-box">
 							<div class="widget-title">
 								<span class="icon">
 									<i class="icon-th"></i>
 								</span>
 								<h5>Current Messages</h5>
+								<span class="label label-info"><%= @count %></span>
 							</div>
 							<div class="widget-content nopadding">
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
-											<th>1</th>
-											<th>2</th>
-											<th>3</th>
-											<th>Actions</th>
+											<th><%= sort_link(@search, :id, "Message ID") %></th>
+											<th><%= sort_link(@search, :conversation_id, "Conversation ID") %></th>
+											<th><%= sort_link(@search, :sender_id, "From") %></th>
+											<th><%= sort_link(@search, :subject, "Subject") %></th>
+											<th><%= sort_link(@search, :body, "Body") %></th>
+											<th><%= sort_link(@search, :created_at, "Sent") %></th>
+											<th>Delete</th>
 										</tr>
 									</thead>
 									<tbody>
 										<% @notification.each do |notification| %>
 										<tr>
+											<td><%= link_to(notification.conversation_id, conversation_path(notification.conversation_id), :class => "btn btn-mini") %></td>
+											<td><%= notification.id %></td>
+											<td><%= notification.sender_id %></td>
 											<td><%= notification.subject %></td>
 											<td><%= notification.body %></td>
 											<td><%= notification.created_at %></td>
-											<td><%= link_to User.find(notification.sender_id).name, user_path(notification.sender_id) %></td>
+											<td><%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+						                      conversation_path(notification.id),
+						                      :method => :delete,
+						                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+						                      :class => 'btn btn-mini btn-danger' %></td>
 										</tr>
 										<% end %>
 									</tbody>

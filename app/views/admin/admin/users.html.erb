@@ -23,11 +23,13 @@
 									<i class="icon-th"></i>
 								</span>
 								<h5>Current Users</h5>
+								<span class="label label-info"><%= @count %></span>
 							</div>
 							<div class="widget-content nopadding">
 								<table class="table table-bordered table-striped">
 									<thead>
 										<tr>
+											<th><%= sort_link(@search, :id, "ID") %></th>
 											<th><%= sort_link(@search, :name, "Name") %></th>
 											<th><%= sort_link(@search, :email, "Email") %></th>
 											<th><%= sort_link(@search, :created_at, "Sign-Up Date") %></th>
@@ -37,7 +39,8 @@
 									<tbody>
 										<% @users.each do |user| %>
 										<tr>
-											<td><%= link_to user.name, user_path(user.id) %></td>
+											<td><%= link_to user.id, user_path(user.id), :class => "btn btn-mini" %></td>
+											<td><%= link_to user.name, admin_admin_interrogate_path(user.id) %></td>
 											<td><%= user.email %></td>
 											<td><%= user.created_at %></td>
 											<td><%= link_to(edit_user_path(user.id), :class => "btn btn-primary btn-mini") do %>Edit<% end %> <%= link_to 'Send Message', new_conversation_path(:recipient => user.email), class: "btn btn-success btn-mini" %> <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
