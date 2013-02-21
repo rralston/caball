@@ -36,26 +36,40 @@
 <% end %>
 
 <!-- Role1 Modal -->
-  <div id="role1-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div id="role1-modal" class="modal hide fade role-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header left-aligned">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       <h3><span><%= @user.name.split[0..0].join(" ") %></span></h3>
       <span><%= @user.talents.first.name %></span>
     </div>
     <div class="modal-body left-aligned">
+      <div class="row-fluid">
       <%= @user.talents.first.description %>
+      </div>
+      <% if @user.talents.first.name == 'Actor' %>
+      <div class="row-fluid actor-characteristics">
+        <%= render :partial => 'characteristics' %>
+      </div>
+      <% end %>
     </div>
   </div>
  <!-- End Location Modal --> 
 <% if @user.talents.second.present? then %>
-  <div id="role2-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div id="role2-modal" class="modal hide fade role-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header left-aligned">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       <h3><span><%= @user.name.split[0..0].join(" ") %></span></h3>
       <span><%= @user.talents.second.name %></span>
     </div>
     <div class="modal-body left-aligned">
+      <div class="row-fluid">
       <%= @user.talents.second.description %>
+      </div>
+      <% if @user.talents.second.name == 'Actor' %>
+      <div class="row-fluid">
+        <%= render :partial => 'characteristics' %>
+      </div>
+      <% end %>
     </div>
   </div>
 <% end %>

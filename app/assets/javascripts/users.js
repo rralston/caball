@@ -41,12 +41,20 @@ var Users = {
           if (tempNode.hasClass('role1')) {
             $('#role1-modal').modal( {
               keyboard: true
-            });
+            }).css({
+                'margin-left': function () {
+                    return -($(this).width() / 2);
+                  }
+                });
             return;
           } else if (tempNode.hasClass('role2')) {
             $('#role2-modal').modal( {
               keyboard: true
-            });
+            }).css({
+                'margin-left': function () {
+                    return -($(this).width() / 2);
+                  }
+                });
             return;
           }
           tempNode = tempNode.parent();
