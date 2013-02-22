@@ -29,11 +29,7 @@
                  
                  <a href="#">
                  <div class="profile-pic">
-                   <% if @user.photos.present? then %>
-                     <%= image_tag @user.photos.first.image %>
-                   <% else %>
-                     <%= image_tag "biz/people1-400x400.jpeg" %>
-                   <% end %>  
+                   <%= image_tag @user.photos.first.image %>
                  </div>
                </a>
                </div>
