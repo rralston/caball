@@ -26,10 +26,9 @@ class Admin::AdminController < Admin::BaseController
     @users = @search.result.order("name").page(params[:page]).per(10)
   end
   def user_images
-    @count = Photo.where('imageable_type = ?', User).count
-    # @users = User.order("name").page(params[:page]).per(10)
-    @search = Photo.search(params[:q])
-    @photos = @search.result.order("id").page(params[:page]).per(10)
+    @count = Photo.where('imageable_type = ? AND image = ?', "User", "Profile_Image.jpg").count
+    @search = Photo.where('imageable_type = ? AND image = ?', "User", "Profile_Image.jpg").search(params[:q])
+    @photos = @search.result.order("id").page(params[:page]).per(20)
   end
   def interrogate
     @user = User.find(params[:id])
@@ -44,6 +43,11 @@ class Admin::AdminController < Admin::BaseController
     # @projects = Project.order("title").page(params[:page]).per(10)
     @search = Project.search(params[:q])
     @projects = @search.result.order("title").page(params[:page]).per(10)
+  end
+  def project_images
+    @count = Photo.where('imageable_type = ? AND image = ?', "Project", "Profile_Image.jpg").count
+    @search = Photo.where('imageable_type = ? AND image = ?', "Project", "Profile_Image.jpg").search(params[:q])
+    @photos = @search.result.order("id").page(params[:page]).per(20)
   end
   def messages
     @count = Notification.all.count
