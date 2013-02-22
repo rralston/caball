@@ -10,11 +10,21 @@
 				<i class="icon icon-user"></i> <span>Users</span>
 			<% end %>
 		</li>
+		<li class="<%= is_active?("user_images") %>">
+			<%= link_to 'user_images' do %>
+				<i class="icon-th-large"></i> <span>User Images</span>
+			<% end %>
+		</li>
 		<li class="<%= is_active?("projects") %>">
 			<%= link_to 'projects' do %>
 				<i class="icon-facetime-video"></i> <span>Projects</span>
 			<% end %>
 		</li>
+			<li class="<%= is_active?("project_images") %>">
+				<%= link_to 'project_images' do %>
+					<i class="icon-th-large"></i> <span>Project Images</span>
+				<% end %>
+			</li>
 		<li class="<%= is_active?("messages") %>">
 			<%= link_to 'messages' do %>
 				<i class="icon-envelope"></i> <span>Messages</span>
