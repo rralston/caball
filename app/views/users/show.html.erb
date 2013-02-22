@@ -108,8 +108,8 @@
  </section>
 
 <% comment = "Here we're dynamically displaying videos--only those that the user has linked to.
-             We need to choose how large the video will be and then how it will be offset depending on how many videos
-             Are being displayed.
+             We need to choose how it will be offset depending on how many videos
+             are being displayed.
 "%>
 
 <% if @real_videos.length > 0 %>
@@ -135,7 +135,7 @@
                </div>
 							 <a data-toggle="lightbox" href="#video1">
                  <figure class="thumbnail-figure">
-                   <%= image_tag(@user.videos.first.thumbnail_large, :width => '100%') %>
+                   <%= image_tag(video.thumbnail_large, :width => '100%') %>
 									 <i class="icon-play-circle"></i>    
                  </figure>
 							</a>
@@ -145,7 +145,23 @@
 									<iframe width="560" height="315" src=<%= video.embed_url %> frameborder="0" allowfullscreen></iframe>
 								</div>
 							</div>
+              <div class="row-fluid video-more-button" data-video="<%= counter %>">
+                <span>
+                 <%= shorten :text => video.description, :length => 140, :partial => "more_video" %></span>
              </li>
+             <!-- Video Description Modal -->
+              <div id="video-modal-<%= counter %>" data-video="<%= counter %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h3><span><%= video.title %></span></h3>
+                </div>
+                <div class="modal-body">
+                  <p>
+                 <%= video.description %>
+                  </p>
+                </div>
+              </div>
+              <!-- End Video Description Modal --> 
              <% end %>
            </ul>
          </div>  

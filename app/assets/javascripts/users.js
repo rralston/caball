@@ -10,7 +10,7 @@ var Users = {
     init: function () {
       console.log("init show users");   
       Users.Show.handlers();
-      Users.Show.roleModals();
+      Users.Show.modalHandlers();
     },
     
     handlers: function() {
@@ -30,7 +30,7 @@ var Users = {
       });
     },
     
-    roleModals: function () {
+    modalHandlers: function () {
       $('.role-more a').on('click', function () {
         // Now we have to figure out whether we'll display role 1 or role 2
         // We can do that from figuring out who our parent is and we'll have to 
@@ -49,6 +49,28 @@ var Users = {
             return;
           } else if (tempNode.hasClass('role2')) {
             $('#role2-modal').modal( {
+              keyboard: true
+            }).css({
+                'margin-left': function () {
+                    return -($(this).width() / 2);
+                  }
+                });
+            return;
+          }
+          tempNode = tempNode.parent();
+        }
+      }); 
+      
+      $('.video-more a').on('click', function () {
+        // Now we have to figure out which video to display
+        // We can do that from figuring out who our parent is and we'll have to 
+        // iterate up the DOM tree to check
+        console.log("clicked");
+        var tempNode = $(this);
+        while(!tempNode.hasClass('container-fluid')) { // How we know we've gone too far up
+          if (tempNode.hasClass('video-more-button')) {
+            var videoNum = tempNode.data('video');
+            $('#video-modal-' + videoNum).modal( {
               keyboard: true
             }).css({
                 'margin-left': function () {
