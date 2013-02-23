@@ -154,6 +154,7 @@ GEM
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
+    possessive (1.0.1)
     pry (0.9.12)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -271,6 +272,7 @@ DEPENDENCIES
   mailboxer
   omniauth-facebook
   pg
+  possessive
   rails (= 3.2.8)
   ransack
   rb-fsevent (~> 0.9.1)
