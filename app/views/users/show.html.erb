@@ -129,13 +129,13 @@
                <div class="row-fluid">
                  <h3><%= video.title %></h3>
                </div>
-							 <a data-toggle="lightbox" href="#video1">
+							 <a data-toggle="lightbox" href="#video<%= counter %>">
                  <figure class="thumbnail-figure">
                    <%= image_tag(video.thumbnail_large, :width => '100%') %>
 									 <i class="icon-play-circle"></i>    
                  </figure>
 							</a>
-							<div class="lightbox fade" id="video1" style="display: none;">
+							<div class="lightbox fade" id="video<%= counter %>" style="display: none;">
 								<div class='lightbox-content'>
 									<h3><%= video.title %></h3>
 									<iframe width="560" height="315" src=<%= video.embed_url %> frameborder="0" allowfullscreen></iframe>
