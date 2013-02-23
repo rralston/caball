@@ -35,6 +35,9 @@
 					<div class="controls">
 						<%= p.text_field :description, :class => 'text_field' %>
 		 			</div>
+		 			<div class="controls">
+            <%= p.text_field :user_description, :class => 'text_field' %>
+          </div>
 				</div>
 				<div class="control-group">
 					<p>Please Upload a Profile Image</p>
@@ -227,6 +230,12 @@
 					</div>
 				</div>
 			<% end %>
+      <div class="control-group">
+        <label class="control-label">Description</label>
+        <div class="controls">
+          <%= video.text_area :user_description, :class => 'text_field', :rows => 5 %>
+        </div>
+      </div>
 	<% end %>
 <!-- End of Form -->
 
