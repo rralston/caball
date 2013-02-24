@@ -35,9 +35,6 @@
 					<div class="controls">
 						<%= p.text_field :description, :class => 'text_field' %>
 		 			</div>
-		 			<div class="controls">
-            <%= p.text_field :user_description, :class => 'text_field' %>
-          </div>
 				</div>
 				<div class="control-group">
 					<p>Please Upload a Profile Image</p>
@@ -47,7 +44,32 @@
 				</div>
 				
 	  	<% end %>
-		<% end %>
+    <% end %>
+    
+	  <% comment= "Allowing for multiple photos here..." %>
+	  	
+    <div id="fields-for-photos-list" class="numerous">
+      <%= f.fields_for :photos, Photo.new, :child_index => 'replace_this' do |photo| %>
+      <div class="control-group">
+          <div class="controls">
+            <%= photo.file_field :image %>
+           </div>
+       </div>
+      
+      <div class="control-group">
+      <%= photo.label :description, :class => 'control-label' %>
+        <div class="controls">
+        <%= photo.text_area :description, :class => 'textarea', :rows => "5" %>  
+        </div>
+      </div>
+    
+        <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+    <% end %>
+    </div>
+    
+    <div id="photos-list"></div>
+    <%= link_to 'Add Another Photo', '#', :id => 'add-to-photos-list' %>
+  
 		<div class="control-group">
 	  <%= f.label :name, :class => 'control-label' %>
 	    <div class="controls">
@@ -100,7 +122,7 @@
 	  </div>
 		<% end %>
 		
-		<div id="fields-for-list" class="numerous">
+		<div id="fields-for-talents-list" class="numerous">
 			<%= f.fields_for :talents, Talent.new, :child_index => 'replace_this' do |talent| %>
 		  <div class="control-group">
 				  <%= talent.label :name, :class => 'control-label' %>
@@ -121,8 +143,8 @@
 		</div>
 		
 		
-		<div id="list"></div>
-		<%= link_to 'Add Another Talent To Find More Projects!', '#', :id => 'add-to-list' %>
+		<div id="talents-list"></div>
+		<%= link_to 'Add Another Talent To Find More Projects!', '#', :id => 'add-to-talents-list' %>
 
 <br>
 		    <h2>A little more detail can help you get found!</h2><br>
