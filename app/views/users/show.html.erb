@@ -74,6 +74,11 @@
                  <!-- End About Me Modal --> 
                </div>
              </div>
+              <div class="row-fluid projects-characteristics">
+              <% if @user.projects.present? then %>
+                <%= render :partial => 'current_projects' %>
+              <% end %>
+              </div>
            </div>
            <div class="span7">
              <div class="row-fluid about-me">
@@ -110,12 +115,6 @@
                
              </div>
            </div>
-          <div class="clearfix"></div>
-          <div class="row-fluid projects-characteristics">
-					<% if @user.projects.present? then %>
-						<%= render :partial => 'current_projects' %>
-					<% end %>
-					</div>
          </div>
        </div>
      </div>
