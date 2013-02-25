@@ -136,6 +136,9 @@ figure.profile-pic > img {
 }
 
 #photos-modal {
+  display: table;
+  height: 100%;
+  top: 0;
   background: transparent;
   border: none;
   -webkit-box-shadow: 0 0 0 transparent;
@@ -143,15 +146,44 @@ figure.profile-pic > img {
   box-shadow: 0 0 0 transparent;
 }
 
-.carousel-inner { text-align: center; }
+.photos-modal .modal-body {
+  height: 100%;
+  overflow-y: visible !important;
+}
 
-.carousel .item > img { display: inline-block; }
+.photos-modal .carousel {
+  height: 100%;
+}
 
-.carousel-control.right {
+
+.photos-modal .carousel-inner { 
+  display: table;
+  text-align: center;
+  height: 100%;
+}
+
+.photos-modal .carousel-inner > .active {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.photos-modal .carousel-inner > .next , .photos-modal .carousel-inner > .prev{
+  display: table-cell;
+  vertical-align: middle;
+  position: inherit;
+}
+
+.photos-modal .carousel-control {
+  top: 50%;
+}
+
+.photos-modal .carousel .item > img { display: inline-block; }
+
+.photos-modal .carousel-control.right {
   right: 0;
 }
 
-.carousel-control.left {
+.photos-modal .carousel-control.left {
   left: 0;
 }
 /* End modal photo gallery */
