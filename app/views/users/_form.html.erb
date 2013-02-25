@@ -15,19 +15,27 @@
 	        <div class="row-fluid">
 	          <div class="span4">
 		
-	
+    
 	
 	  <%= f.fields_for :photos do |p|  %>
 		  <% if @user.photos.exists? %>
-			
-			<div class="control-group">
-			  <%= p.label "Profile Photo", :class => 'control-label' %>
-		  	<div class="controls">
-					<%= image_tag @user.photos.first.image.url(:medium), {:class => "img-polaroid"} %>					
-					<%= p.check_box :_destroy %> Click Here to Destroy
-					</div>
-			</div>
-			
+  			<% if p.object == @user.photos.first %>
+    			<div class="control-group">
+    			  <%= p.label "Profile Photo", :class => 'control-label' %>
+    		  	<div class="controls">
+    					<%= image_tag @user.photos.first.image.url(:medium), {:class => "img-polaroid"} %>					
+    					<%= p.check_box :_destroy %> Click Here to Destroy
+    					</div>
+    			</div>
+    		<% else %>
+    		  <div class="control-group">
+            <%= p.label "Additional Photo", :class => 'control-label' %>
+            <div class="controls">
+              <%= image_tag p.object.image.url(:medium), {:class => "img-polaroid"} %>          
+              <%= p.check_box :_destroy %> Click Here to Destroy
+              </div>
+          </div>
+         <% end %>
 				<% else %>
 				
 				<div class="control-group">
