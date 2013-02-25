@@ -149,6 +149,7 @@ figure.profile-pic > img {
 .photos-modal .modal-body {
   height: 100%;
   overflow-y: visible !important;
+  color: #fff;
 }
 
 .photos-modal .carousel {
@@ -171,6 +172,11 @@ figure.profile-pic > img {
   display: table-cell;
   vertical-align: middle;
   position: inherit;
+}
+
+.photos-modal .carousel-inner > .right:not(.prev) , 
+.photos-modal .carousel-inner > .left:not(.next){
+  visibility: hidden;
 }
 
 .photos-modal .carousel-control {
