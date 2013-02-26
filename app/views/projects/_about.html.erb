@@ -1,35 +1,38 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row-fluid">
-    <div class="span10 offset1">
-      <div class="row-fluid">
-        <div class="span12">
-      <div class="page-header">
-          <h1>
-              About <%= @project.title %>
-          </h1>
-        </div>
-      <article class="blog-post">
-        
-        <p>
-            <%= @project.description %>
-				</p>
-				<% if @project.photos.present? then %>
-				<ul class='thumbnails bordered thumbnail-list'>
-					<% @project.photos.each do |photo| %>
-				      <li class='span4'>
-				          <figure class='thumbnail-figure'>
-										<%= image_tag photo.image %>
-				          	<figcaption class='thumbnail-title'>
-			                <p>
-			                  <span><%= photo.description %></span>
-			                </p>
-			              </figcaption>
-			</figure>
-				      </li>
-						<% end %>
-						</ul>
-						<% end %>
-    </article>
-
+    <div class="page-header">
+        <h1>
+            About <%= @project.title %>
+        </h1>
+    </div>
+  </div>
+  <div class="row-fluid dates">
+    <p><span class="label">Starts:  </span><span><%= @project.start %></span><span class="label">Ends:  </span><span><%= @project.end %></span></p>
+  </div>
+  <div class="row-fluid">
+    <div class="span9">
+      <p>
+          <%= simple_format(@project.description) %>
+    	</p>
+    	<% if @project.photos.present? then %>
+    	<ul class='thumbnails bordered thumbnail-list'>
+    		<% @project.photos.each do |photo| %>
+          <li class='span4'>
+            <figure class='thumbnail-figure'>
+    					<%= image_tag photo.image %>
+            	<figcaption class='thumbnail-title'>
+                <p>
+                  <span><%= photo.description %></span>
+                </p>
+              </figcaption>
+            </figure>
+          </li>
+    		<% end %>
+    	</ul>
+    	<% end %>
+    </div>
+    <div class="span3 centered-text">
+      <%= render 'contact' %>
+    </div>
   </div>
 </div>

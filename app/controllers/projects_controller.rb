@@ -12,8 +12,16 @@ class ProjectsController < ApplicationController
   def show
     search
     @project = Project.find(params[:id])
+    
     if @project.nil?
         redirect_to :action => :index
+    end
+    
+    @real_videos = Array.new
+    for video in @project.videos
+      if video.thumbnail_small.present?
+        @real_videos << video
+      end
     end
   end
   

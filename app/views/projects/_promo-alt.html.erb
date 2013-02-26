@@ -1,68 +1,36 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row-fluid">
-    <div class="span10 offset1">
+    <div class="span12">
 
       <div class="row-fluid">
-        <div class="page-header">
+        <div class="page-header centered-text">
           <h1>
-            <%= @project.title %> <small><%=h truncate(@project.description, :length => 200) %></small>
+            <%= @project.title %> 
           </h1>
         </div>
       </div>
-
+        
+      <% comment = "3d Projects Slider" %>
       <div class="row-fluid">
-        <div class="span8">
-          <div class="video-container">
-						<a data-toggle="lightbox" href="#video1">
-               <figure class="thumbnail-figure">
-            <% if @project.videos.first.thumbnail_small.present? %>
-             <%= image_tag(@project.videos.first.thumbnail_large, :width => '100%') %>
-							<% else %>
-							<%= image_tag "http://img.youtube.com/vi/EqWRZrupLrI/0.jpg", :width => "100%" %>
-							<% end %>
-							<i class="icon-play-circle"></i>    
-           </figure>
-				</a>
-					<% if @project.videos.first.present? %>
-						<div class="lightbox fade" id="video1" style="display: none;">
-							<div class='lightbox-content'>
-								<h3><%= @project.videos.first.title %></h3>
-								<iframe width="560" height="315" src=<%= @project.videos.first.embed_url %> frameborder="0" allowfullscreen></iframe>
-							</div>
-						</div>
-					<% end %>
-          </div>
-        </div>
-        <div class="span4">
-          <div class="well">
-	<center><% if User.find(@project.user_id).photos.exists? %><%= image_tag(User.find(@project.user_id).photos.first.image.url(:medium), {:class => "img-circle"}) %><% end %></center>
-                             <h3>
-                               <%= link_to User.find(@project.user_id).name, user_path(User.find(@project.user_id)), :rel => "tooltip", :title => "View User Profile" %> 
-														</h3>
-
-                             <p>
-                                 <%= User.find(@project.user_id).about %>
-                             </p>
-                           </div>
-          <div class="well">
-            <h3>
-                Get Involved
-            </h3>
-            <p><center>
-                <button class="btn btn-primary" type="button">Contact</button><br><br>
-								<%= link_to t('.edit', :default => t("helpers.links.edit")),
-			                      edit_project_path(@project), :class => 'btn btn-warning' %><br><br>
-								
-								<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-									                      project_path(@project),
-									                      :method => :delete,
-									                      :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-									                      :class => 'btn btn-danger' %>
-            </p></center>
-          </div>
+        <div id="projectsFlow" class="ContentFlow">
+            <div class="loadIndicator"><div class="indicator"></div></div>
+            <div class="flow">
+                <% @real_videos.each do |video, counter|%>
+                  <div class="item" href="URL" target="TARGET" >
+                      <iframe width="560" height="315" src=<%= video.embed_url %> frameborder="0" allowfullscreen class="content"></iframe>
+                      <div class="caption"><%= video.description %></div>
+                  </div>
+                <%end%>
+                <% @project.photos.each do |photo| %>
+                  <div class="item" href="URL" target="TARGET" >
+                      <img class="content" src="<%= photo.image %>" href="URL" target="TARGET" /> 
+                      <div class="caption"><%= photo.description %></div>
+                  </div>
+                <%end%>
+            </div>
         </div>
       </div>
-
+      
     </div>      
   </div>
 </div>
