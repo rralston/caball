@@ -13,7 +13,7 @@
 	    <h2>User Profile</h2>
 	  <%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
 	        <div class="row-fluid">
-	          <div class="span4">
+	          <div class="span5">
 		
     
 	
@@ -25,15 +25,22 @@
     		  	<div class="controls">
     					<%= image_tag @user.photos.first.image.url(:medium), {:class => "img-polaroid"} %>					
     					<%= p.check_box :_destroy %> Click Here to Destroy
-    					</div>
+    				</div>
     			</div>
     		<% else %>
     		  <div class="control-group">
             <%= p.label "Additional Photo", :class => 'control-label' %>
-            <div class="controls">
+            <div class="controls">    
               <%= image_tag p.object.image.url(:medium), {:class => "img-polaroid"} %>          
               <%= p.check_box :_destroy %> Click Here to Destroy
-              </div>
+            </div>
+          </div>
+        
+          <div class="control-group">
+            <%= p.label "Description", :class => 'control-label' %>
+            <div class="controls">
+              <%= p.text_area :description, :class => 'textarea', :rows => "5"%>
+            </div>
           </div>
          <% end %>
 				<% else %>
@@ -100,7 +107,7 @@
 	    </div>
 	  </div>
 </div>
-  <div class="span6 offset2">
+  <div class="span6 offset1">
 	 <div class="control-group">
 	    <%= f.label :about, :class => 'control-label' %>
 	    <div class="controls">
