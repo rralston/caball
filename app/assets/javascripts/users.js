@@ -27,6 +27,23 @@ var Users = {
           $('#message-modal').modal('hide');
           return false;
         });
+        
+        $('#message-modal').on('hidden', function () {
+          $('input[value="Cancel"]').off('click');
+        });
+      });
+      
+      $('#photos-modal').on('shown', function () {
+        $("body").keydown(function(e) {
+          if(e.keyCode == 37) { // left
+            //$('#photos-modal').carousel('prev');
+            $('.carousel-control.left').click();
+          }
+          else if(e.keyCode == 39) { // right
+            //$('#photos-modal').carousel('next');
+            $('.carousel-control.right').click();
+          }
+        });
       });
     },
     
