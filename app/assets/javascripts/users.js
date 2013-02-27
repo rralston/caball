@@ -34,14 +34,13 @@ var Users = {
       });
       
       $('#photos-modal').on('shown', function () {
+        $('#photoCarousel').carousel(0);
         $("body").keydown(function(e) {
           if(e.keyCode == 37) { // left
-            //$('#photos-modal').carousel('prev');
-            $('.carousel-control.left').click();
+            $('#photoCarousel').carousel('prev');
           }
           else if(e.keyCode == 39) { // right
-            //$('#photos-modal').carousel('next');
-            $('.carousel-control.right').click();
+            $('#photoCarousel').carousel('next');
           }
         });
       });
