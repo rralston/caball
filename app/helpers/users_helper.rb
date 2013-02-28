@@ -1,6 +1,9 @@
 module UsersHelper
   
   def shorten(args)
+    if args[:counter].present?
+      @counter = args[:counter]
+    end
     length = args[:length]
     text = args[:text]
     partial = args[:partial]
