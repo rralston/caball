@@ -16,6 +16,16 @@ PAGES = {
     show: function() {
       Users.Show.init();
     }
+  },
+ 
+  projects: {
+    init: function() {
+      Projects.init();
+    },
+ 
+    show: function() {
+      Projects.Show.init();
+    }
   }
 };
  

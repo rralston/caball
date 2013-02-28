@@ -1,3 +1,4 @@
+
 .roles:nth-child(4n + 1) {
   margin-left: 0;
 }
@@ -8,4 +9,34 @@
 
 .dates .label {
   padding: 0.4em;
+}
+
+#projects-flow {
+  font-size: 8em;
+  
+  i {
+    position: absolute;
+    bottom: 52%;
+    left: 38%;
+    cursor: pointer;  
+  }
+}
+
+
+/*Royal Slider Mods*/
+
+.royalSlider {
+  .rsSlide {
+    .transition(all 1s ease-in-out);
+  }
+  .rsSlide.right-slide {
+    .transform(perspective(800px) rotateY(-45deg) ) !important;
+  }
+  .rsSlide.left-slide {
+    .transform(perspective(800px) rotateY(45deg) ) !important;
+  }
+  .rsSlide.rsActiveSlide {
+    z-index: 10;
+    .transform(perspective(1000px) rotateY(0deg) translateZ(300px)) !important;
+  }
 }
