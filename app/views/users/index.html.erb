@@ -44,11 +44,7 @@
 				<li class='span4'>
 	        <%= link_to user_path(use.id) do %>
 	          <figure class='thumbnail-figure'>
-	            <% if use.photos.exists? %>
 								<%= image_tag use.photos.first.image %>
-								<% else %>
-								<%= image_tag "biz/people1-400x400.jpeg" %>
-								<% end %>
 	              <figcaption class='thumbnail-title'>
 	                <h3>
 	                  <span><%= use.name %></span>
