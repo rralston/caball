@@ -5,6 +5,11 @@
 				<i class="icon icon-home"></i> <span>Dashboard</span>
 			<% end %>
 		</li>
+		<%= content_tag(:li, :class => open?("users", "user_images")) do %>
+			<%= link_to "#" do %>
+				<i class="icon icon-user"></i> <span>Users</span> <span class="label">2</span>
+			<% end %>
+			<ul>
 		<li class="<%= is_active?("users") %>">
 			<%= link_to 'users' do %>
 				<i class="icon icon-user"></i> <span>Users</span>
@@ -15,6 +20,13 @@
 				<i class="icon-th-large"></i> <span>User Images</span>
 			<% end %>
 		</li>
+		</ul>
+		<% end %>
+		<%= content_tag(:li, :class => open?("projects", "project_images")) do %>
+			<%= link_to "#" do %>
+				<i class="icon-facetime-video"></i> <span>Projects</span> <span class="label">2</span>
+			<% end %>
+			<ul>
 		<li class="<%= is_active?("projects") %>">
 			<%= link_to 'projects' do %>
 				<i class="icon-facetime-video"></i> <span>Projects</span>
@@ -25,12 +37,14 @@
 					<i class="icon-th-large"></i> <span>Project Images</span>
 				<% end %>
 			</li>
+		</ul>
+		<% end %>
 		<li class="<%= is_active?("messages") %>">
 			<%= link_to 'messages' do %>
 				<i class="icon-envelope"></i> <span>Messages</span>
 			<% end %>
 		</li>
-		<%= content_tag(:li, :class => open?("form_common", "form_validation", "form_wizard")) do %>
+		<!-- <%= content_tag(:li, :class => open?("form_common", "form_validation", "form_wizard")) do %>
 			<%= link_to "#" do %>
 				<i class="icon icon-th-list"></i> <span>Form elements</span> <span class="label">3</span>
 			<% end %>
@@ -96,5 +110,5 @@
 				<i class="icon icon-inbox"></i> <span>Widgets</span>
 			<% end %>
 		</li>
-	</ul>
+	</ul> -->
 </div>
