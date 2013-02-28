@@ -41,7 +41,7 @@
       </h1>
     </div>
     <ul class='thumbnails bordered thumbnail-list'>
-      <% @projects.first(3).each do |proj| %>
+      <% @projects.first(3).each_with_index do |proj, counter| %>
 			<li class='span4'>
         <%= link_to project_path(proj.id) do %>
           <figure class='thumbnail-figure'>
@@ -61,7 +61,7 @@
           </figure>
         <% end %>
         <p>
-          <%= proj.description %>
+          <%= shorten :text => proj.description, :length => 500, :partial => "more_projects_description", :counter => counter %>
         </p>
         <div class='row-fluid'>
           <div class='span4'>
@@ -118,13 +118,29 @@
     </tr>
   </thead>
   <tbody>
-    <% @projects.each do |project| %>
+    <% @projects.each_with_index do |project, counter| %>
       <tr>
         <td><%= link_to project.id, project_path(project), :class => 'btn btn-mini' %></td>
 				<td><% if project.user_id %><%= link_to User.find(project.user_id).name, User.find(project.user_id) %><% end %></td>
 				<td><% if User.find(project.user_id).photos.exists? %><%= image_tag(User.find(project.user_id).photos.first.image.url(:medium), {:class => "img-polaroid"}) %><% end %></td>
 				<td><%= link_to project.title, project_path(project) %></td>
-        <td><%= project.description %></td>
+        <td>
+          <%= shorten :text => project.description, :length => 100, :partial => "more_projects_description", :counter => counter %>
+          <!-- Projects Description Modal -->
+
+          <div id="projects-description-<%= counter %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3><span><%= project.title %></span></h3>
+            </div>
+            <div class="modal-body">
+              <p>
+                <%= simple_format(project.description) %>
+              </p>
+            </div>
+          </div>
+          <!-- End Projects Description Modal -->
+        </td>
         <td><%=l project.created_at %></td>
 				<td><%= project.end %></td>
         <td>
