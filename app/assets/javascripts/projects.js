@@ -35,9 +35,15 @@ var Projects = {
           node.removeClass('left-slide');
           node.removeClass('right-slide');
   
-          if (node.offset().left < offsetFromCenter) { node.addClass('left-slide')}
-          else if (node.offset().left > offsetFromCenter) { node.addClass('right-slide')}
+          if (node.offset().left < offsetFromCenter) { 
+            node.addClass('left-slide');
+            //node.css({'-webkit-transform': 'perspective(800px) rotateY(30deg)'} )
+          }
+          else if (node.offset().left > offsetFromCenter) { 
+            node.addClass('right-slide')
+          }
         });
+        
       }
       var slider = $(".royalSlider").data('royalSlider');
       console.log(slider);
@@ -62,7 +68,7 @@ var Projects = {
               keyboardNavEnabled: true,
               visibleNearby: {
                 enabled: true,
-                centerArea: 0.2,
+                centerArea: 0.4,
                 center: true,
                 breakpoint: 650,
                 breakpointCenterArea: 0.64,

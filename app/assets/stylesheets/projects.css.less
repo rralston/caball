@@ -1,8 +1,4 @@
 
-.roles:nth-child(4n + 1) {
-  margin-left: 0;
-}
-
 .dates span {
   margin-right: 10px;
 }
@@ -22,12 +18,28 @@
   }
 }
 
+.roles .well {
+  display: block;
+  float: none;
+  margin: 0 auto;
+  height: auto;
+  width: 70%;
+  text-align: center;
+}
+
+.roles:nth-child(3n + 1) {
+  margin-left: 0;
+}
+
+.roles-row { 
+  margin-bottom: 30px;  
+}
 
 /*Royal Slider Mods*/
 
 .royalSlider {
   .rsSlide {
-    .transition(all 1s ease-in-out);
+    .transition(all 1s ease-out);
   }
   .rsSlide.right-slide {
     .transform(perspective(800px) rotateY(-45deg) ) !important;
@@ -37,6 +49,7 @@
   }
   .rsSlide.rsActiveSlide {
     z-index: 10;
-    .transform(perspective(1000px) rotateY(0deg) translateZ(300px)) !important;
+    
+    .transform(perspective(1000px) rotateY(0deg) ) !important;
   }
 }
