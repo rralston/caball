@@ -14,22 +14,6 @@
       <p>
           <%= simple_format(@project.description) %>
     	</p>
-    	<% if @project.photos.present? then %>
-    	<ul class='thumbnails bordered thumbnail-list'>
-    		<% @project.photos.each do |photo| %>
-          <li class='span4'>
-            <figure class='thumbnail-figure'>
-    					<%= image_tag photo.image %>
-            	<figcaption class='thumbnail-title'>
-                <p>
-                  <span><%= photo.description %></span>
-                </p>
-              </figcaption>
-            </figure>
-          </li>
-    		<% end %>
-    	</ul>
-    	<% end %>
     </div>
     <div class="span3 centered-text">
       <%= render 'contact' %>

@@ -12,25 +12,59 @@
         
       <% comment = "3d Projects Slider" %>
       <div class="row-fluid">
-        <div id="projectsFlow" class="ContentFlow">
+        <div id="projects-flow" class="ContentFlow">
             <div class="loadIndicator"><div class="indicator"></div></div>
             <div class="flow">
-                <% @real_videos.each do |video, counter|%>
-                  <div class="item" href="URL" target="TARGET" >
-                      <iframe width="560" height="315" src=<%= video.embed_url %> frameborder="0" allowfullscreen class="content"></iframe>
+                <% @real_videos.each_with_index do |video, counter|%>
+                  <div class="item" >
+                      <img class="content" src="<%= video.thumbnail_large %>" data-toggle="lightbox" data-target="#video-lightbox-<%= counter %>" />
+                      <i class="icon-play-circle"></i>  
                       <div class="caption"><%= video.description %></div>
+                      <div class="label"></div>
                   </div>
+                  <!-- Video slider modal -->
+                  <div class="lightbox fade" id="video-lightbox-<%= counter %>" style="display: none;">
+                    <div class='lightbox-content'>
+                      <iframe width="560" height="315" src=<%= video.embed_url %> frameborder="0" allowfullscreen></iframe>
+                    </div>
+                  </div>
+                  <!-- End Video slider modal -->
                 <%end%>
-                <% @project.photos.each do |photo| %>
-                  <div class="item" href="URL" target="TARGET" >
-                      <img class="content" src="<%= photo.image %>" href="URL" target="TARGET" /> 
+                <% @project.photos.each_with_index do |photo, counter| %>
+                  <div class="item" data-toggle="lightbox" href="#photo-lightbox-<%=counter%>" >
+                      <img class="content" src="<%= photo.image %>" />    
                       <div class="caption"><%= photo.description %></div>
+                      <div class="label"></div>
                   </div>
+                  
                 <%end%>
+              <div class="globalCaption"></div>
+              <div class="scrollbar"><div class="slider"><div class="position"></div></div></div>
             </div>
         </div>
       </div>
-      
+      <% @project.photos.each_with_index do |photo, counter| %>
+        <!-- Photo slider modal -->
+        <div class="lightbox fade" id="photo-lightbox-<%= counter %>" style="display: none;">
+          <div class='lightbox-content'>
+            <%= image_tag(photo.image) %>
+          </div>
+        </div>
+        <!-- End Photo slider modal -->
+      <%end%>
+      <div class="row-fluid">
+        <div class="royalSlider rsDefault">
+          
+          <% @project.photos.each do |photo| %>
+            <%= image_tag(photo.image) %>
+          <%end%>
+          
+          <% @project.videos.each do |video| %>
+            <img class="rsImg" src="<%= video.thumbnail_large %>" data-rsVideo="<%= video.url %>" />
+          <%end%>
+          
+        </div>  
+      </div>
     </div>      
   </div>
 </div>
