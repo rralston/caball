@@ -1,5 +1,8 @@
 class Admin::AdminController < Admin::BaseController
   
+  #Admin Status Check
+  before_filter :require_admin
+  
   # Search
   helper_method :search
    
@@ -54,6 +57,15 @@ class Admin::AdminController < Admin::BaseController
     @search = Notification.search(params[:q])
     @notification = @search.result.order("subject").page(params[:page]).per(10)
     # @notification = Notification.order("subject").page(params[:page]).per(10)
+  end
+  
+  private
+
+  def require_admin
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    unless @current_user.admin == true
+      redirect_to root_url, :error => 'Access denied.'
+    end
   end
 end
 
