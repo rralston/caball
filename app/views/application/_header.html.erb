@@ -54,6 +54,9 @@
       														<i class="icon-user icon-white"></i> <strong><%= current_user.name %></strong>
       													<% end %>
       												</li>
+															<% if current_user.admin == true %>
+															<li><%= link_to admin_admin_index_path do %><i class="icon-eye-open icon-white"></i> Admin Module<% end %></li>
+															<% end %>
       												<li><%= link_to new_project_path do %><i class="icon-film icon-white"></i> Start a Project<% end %></li>
       												<li><%= link_to edit_user_path(current_user) do %><i class="icon-wrench icon-white"></i> Edit Profile<% end %></li>
       												<li><%= link_to signout_path, id: "sign_out" do %><i class="icon-off icon-white"></i> Sign-Out<% end %></li>
