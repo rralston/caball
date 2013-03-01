@@ -67,7 +67,7 @@
             
           <%end%>
           
-          <% @project.videos.each_with_index do |video| %>
+          <% @real_videos.each_with_index do |video| %>
             <img src="<%= video.thumbnail_large %>" data-rsVideo="<%= video.url %>" />
           <%end%>
           
