@@ -34,6 +34,7 @@
 											<th><%= sort_link(@search, :email, "Email") %></th>
 											<th><%= sort_link(@search, :created_at, "Sign-Up Date") %></th>
 											<th><%= sort_link(@search, :admin, "Admin") %></th>
+											<th>Featured</th>
 											<th>Actions</th>
 										</tr>
 									</thead>
@@ -45,8 +46,9 @@
 											<td><%= user.email %></td>
 											<td><%= user.created_at %></td>
 											<%= form_for(user) do |f| %>
-											<td><%= f.check_box :admin %><%= f.submit "Update", :class => 'btn btn-primary btn-mini' %></td>
+											<td><%= f.check_box :admin %><%= f.submit "Go", :class => 'btn btn-primary btn-mini' %></td>
 											<% end %>
+											<td>!</td>
 											<td><%= link_to(edit_user_path(user.id), :class => "btn btn-primary btn-mini") do %>Edit<% end %> <%= link_to 'Send Message', new_conversation_path(:recipient => user.email), class: "btn btn-success btn-mini" %> <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
 						                      user_path(user),
 						                      :method => :delete,

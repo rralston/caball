@@ -27,12 +27,12 @@
 								<ul class="thumbnails">
 									<% @photos.each do |photo| %>
 									<li class="span2">
-										<a href="#" class="thumbnail">
+										<%= link_to user_path(photo.imageable_id), :class => "thumbnail" do %>
 											<%= image_tag(photo.image.url(:medium), :size => '140x140') %>
-										</a>
+										<% end %>
 										<div class="actions">
-											<a title="" href="#"><i class="icon-pencil icon-white"></i></a>
-											<a title="" href="#"><i class="icon-remove icon-white"></i></a>
+											<%= link_to edit_user_path(photo.imageable_id) do %><i class="icon-pencil icon-white"></i><% end %>
+											<a href="#"><i class="icon-remove icon-white"></i></a>
 										</div>
 									</li>
 									<% end %>
