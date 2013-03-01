@@ -11,7 +11,7 @@
 	<ul class="nav btn-group">
 		<li class="btn btn-inverse" >
 			<%= link_to user_path(current_user) do %>
-				<i class="icon icon-user"></i> <span class="text">Profile</span>
+				<i class="icon icon-user"></i> <span class="text"><%= @current_user.name %></span>
 			<% end %>
 		</li>
 		<li class="btn btn-inverse dropdown" id="menu-messages">
