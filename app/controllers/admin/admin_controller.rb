@@ -6,9 +6,6 @@ class Admin::AdminController < Admin::BaseController
   #Admin Status Check
   before_filter :require_admin
   
-  # Search
-  helper_method :search
-   
   def index
     @users = User.all.count
     @users_weekly = User.where('created_at >= ?', 1.week.ago).count
