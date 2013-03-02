@@ -48,7 +48,7 @@
 										<% @notification.each do |notification| %>
 										<tr>
 											<td><%= link_to(notification.conversation_id, conversation_path(notification.conversation_id), :class => "btn btn-mini") %></td>
-											<td><%= notification.id %></td>
+											<td><%= link_to(notification.id, notification_path(notification.id)) %></td>
 											<td><%= notification.sender_id %></td>
 											<td><%= notification.subject %></td>
 											<td><%= notification.body %></td>

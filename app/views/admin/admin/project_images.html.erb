@@ -27,7 +27,7 @@
 								<ul class="thumbnails">
 									<% @photos.each do |photo| %>
 									<li class="span2">
-										<%= link_to user_path(photo.imageable_id), :class => "thumbnail" do %>
+										<%= link_to project_path(photo.imageable_id), :class => "thumbnail" do %>
 											<%= image_tag(photo.image.url(:medium), :size => '140x140') %>
 										<% end %>
 										<div class="actions">
