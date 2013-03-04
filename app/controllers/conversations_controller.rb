@@ -28,6 +28,14 @@ class ConversationsController < ApplicationController
     redirect_to conversations_url, :notice => 'Your Message was successfully sent.'
   end
 
+  # Destroy Message form the System
+  def destroy
+   Notification.find(params[:id]).destroy
+   respond_to do |format|
+     format.html { redirect_to admin_admin_messages_url, :notice => 'Message has been deleted' }
+   end
+  end
+  
   def reply
     current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
     redirect_to :conversation
@@ -59,8 +67,7 @@ class ConversationsController < ApplicationController
   def mailbox
     @mailbox ||= current_user.mailbox
   end
-
-  # Mark as read once COnversation has been opened.
+  # Mark as read once Conversation has been opened.
   def conversation
     mailbox.conversations.find(params[:id]).receipts_for(current_user).mark_as_read
     @conversation ||= mailbox.conversations.find(params[:id])    

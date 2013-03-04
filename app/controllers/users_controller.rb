@@ -107,9 +107,8 @@ class UsersController < ApplicationController
      correct_user?
      @user = User.find(params[:id])
      @user.destroy
-
      respond_to do |format|
-       format.html { redirect_to Users_url }
+       format.html { redirect_to root_url, :notice => 'Sorry to see you leave :-(' }
      end
    end  
    

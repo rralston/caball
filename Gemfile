@@ -78,3 +78,9 @@ gem 'ransack'
 
 # For easily making nouns possessive
 gem 'possessive'
+
+#Pagination
+gem "kaminari"
+
+#Web App Monitoring
+gem 'newrelic_rpm'

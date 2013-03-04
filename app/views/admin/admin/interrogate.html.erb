@@ -1,0 +1,32 @@
+<div id="content">
+			<div id="content-header">
+				<h1>Interrogate Users</h1>
+				<div class="btn-group">
+					<a class="btn btn-large tip-bottom" title="Manage Files"><i class="icon-file"></i></a>
+					<a class="btn btn-large tip-bottom" title="Manage Users"><i class="icon-user"></i></a>
+					<a class="btn btn-large tip-bottom" title="Manage Comments"><i class="icon-comment"></i><span class="label label-important">5</span></a>
+					<a class="btn btn-large tip-bottom" title="Manage Orders"><i class="icon-shopping-cart"></i></a>
+				</div>
+			</div>
+			<div id="breadcrumb">
+				<%= link_to admin_admin_index_url, {:title => "Go to Home", :class => "tip-bottom"} do %>
+				<i class="icon-home"></i> Home
+				<% end %>
+				<a href="#" class="current">Users</a>
+			</div>
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="widget-box">
+							<div class="widget-title">
+								<span class="icon">
+									<i class="icon-th"></i>
+								</span>
+								<h5>Current Users</h5>
+								<span class="label label-info"><%= @count %></span>
+							</div>
+							
+						</div>	
+					</div>
+				</div>
+			</div>

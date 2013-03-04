@@ -1,5 +1,8 @@
 class ProjectsController < ApplicationController
   
+  # Search
+  helper_method :search
+  
   def index
     @search = Project.search(params[:q])
     @projects = @search.result
@@ -78,7 +81,7 @@ class ProjectsController < ApplicationController
        if @project.update_attributes(params[:project])
          format.html { redirect_to @project, :notice => @project.title + ' Project was successfully updated.' }
        else
-         format.html { render :action => "edit", :error => 'Project was not created.' }
+         format.html { render :action => "edit", :notice => 'Project was not created.' }
        end
      end
    end
@@ -88,9 +91,8 @@ class ProjectsController < ApplicationController
      # Define Security Measures
      @project = Project.find(params[:id])
      @project.destroy
-
      respond_to do |format|
-       format.html { redirect_to projects_url }
+       format.html { redirect_to root_url, :notice => @project.title + ' Project was deleted.' }
      end
    end
   
