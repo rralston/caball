@@ -29,7 +29,8 @@
                  
                  <a href="#">
                  <div class="profile-pic">
-                   <%= image_tag @user.photos.first.image, :"data-toggle" => "modal", :"data-target" => "#photos-modal", :"data-keyboard"=>"true"%>
+                <% if @user.photos.exists? %>   
+								<%= image_tag @user.photos.first.image, :"data-toggle" => "modal", :"data-target" => "#photos-modal", :"data-keyboard"=>"true"%>
                  </div></a>
                  <!-- Photos Modal -->
                   <div id="photos-modal" class="modal hide fade photos-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -49,6 +50,7 @@
                         <a class="carousel-control right" href="#photoCarousel" data-slide="next">&rsaquo;</a>
                       </div>
                     </div>
+										<% end %>
                   </div>
                  <!-- End Photos Modal --> 
                </div>
@@ -87,9 +89,11 @@
                      About Me
                  </h1>
                </div>
-               <p>
+               <% if @user.about.present? %>
+							<p>
                  <%= shorten :text => @user.about, :length => 800, :partial => "more_bio" %>
                </p>
+							<% end %>
              </div>
              <!-- About Me Modal -->
               <div id="about-me-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
