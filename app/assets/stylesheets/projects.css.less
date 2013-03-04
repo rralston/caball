@@ -1,3 +1,80 @@
-.roles:nth-child(4n + 1) {
+
+.dates span {
+  margin-right: 10px;
+}
+
+.dates .label {
+  padding: 0.4em;
+}
+
+#projects-flow {
+  font-size: 8em;
+  
+  i {
+    position: absolute;
+    bottom: 52%;
+    left: 38%;
+    cursor: pointer;  
+  }
+}
+
+.roles .well {
+  display: block;
+  float: none;
+  margin: 0 auto;
+  height: auto;
+  width: 70%;
+  text-align: center;
+}
+
+.roles:nth-child(3n + 1) {
   margin-left: 0;
+}
+
+.roles-row { 
+  margin-bottom: 30px;  
+}
+
+.projects-box:nth-child(3n + 1) {
+  margin-left: 0;
+  clear: both;
+}
+
+.projects-box .thumbnail-figure{
+  text-align: center;
+  .thumbnail-title{
+    text-align: left;
+  }
+}
+
+/*Royal Slider Mods*/
+
+.royalSlider {
+  .rsSlide {
+    .transition(all 1s ease-out);
+  }
+  
+  .rsSlide.right-slide {
+    .transform(perspective(800px) rotateY(-45deg) ) !important;
+  }
+  
+  .rsSlide.left-slide {
+    .transform(perspective(800px) rotateY(45deg) ) !important;
+  }
+  
+  .rsSlide.rsActiveSlide {
+    z-index: 10;
+    
+    .transform(perspective(1000px) rotateY(0deg) ) !important;
+  }
+  
+  .rsSlide img {
+    border: 5px transparent solid;
+    .border-radius(20px);
+    
+  }
+  
+  .rsVisibleNearbyWrap {
+    overflow-y: visible;
+  }
 }

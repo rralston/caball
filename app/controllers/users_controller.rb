@@ -25,6 +25,14 @@ class UsersController < ApplicationController
       if params[:q]
         redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return
       end
+      
+    @real_videos = Array.new
+    for video in @user.videos
+      if video.thumbnail_small.present?
+        @real_videos << video
+      end
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
     end
@@ -88,7 +96,7 @@ class UsersController < ApplicationController
      @user = User.find(params[:id])
      respond_to do |format|
        if @user.update_attributes(params[:user])
-         format.html { redirect_to @user, :notice => @user.name.pluralize + ' Profile was successfully updated.' }
+         format.html { redirect_to @user, :notice => @user.name.possessive + ' Profile was successfully updated.' }
        else
          format.html { render :action => "edit", :error => 'User was successfully created.' }
        end

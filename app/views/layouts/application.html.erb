@@ -16,7 +16,7 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body class="theme">
+<body class="theme" data-controller="<%= controller_name %>" data-action="<%= action_name %>">
     
   <%= render 'header' %>
 
@@ -28,4 +28,5 @@
   <%= render 'footer' %>
 
 </body>
+<%= google_analytics_js 'UA-38653918-1' %>
 </html>

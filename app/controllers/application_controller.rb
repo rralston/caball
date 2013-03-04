@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     prepend_view_path "app/views/#{request.subdomain}_subdomain" if request.subdomain.present?
   end
   
-  # Search
+  # Search for Home Directory
   def search
    @search = User.search(params[:q])
    @users = @search.result
