@@ -19,7 +19,11 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 
-  gem 'twitter-bootstrap-rails', '2.1.0'
+  # Twitter Boostrap and Upgrade dependencies
+  gem 'therubyracer'
+  gem 'less-rails'
+  gem 'twitter-bootstrap-rails'
+  
 end
 
 gem 'jquery-rails'
@@ -71,3 +75,12 @@ gem 'geocoder'
 
 #Search
 gem 'ransack'
+
+# For easily making nouns possessive
+gem 'possessive'
+
+#Pagination
+gem "kaminari"
+
+#Web App Monitoring
+gem 'newrelic_rpm'

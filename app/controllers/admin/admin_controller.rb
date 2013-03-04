@@ -1,5 +1,11 @@
 class Admin::AdminController < Admin::BaseController
   
+  #Sign-In Check
+  helper_method :current_user
+  before_filter :user_signed_in?
+  #Admin Status Check
+  before_filter :require_admin
+  
   def index
     @users = User.all.count
     @users_weekly = User.where('created_at >= ?', 1.week.ago).count
@@ -16,33 +22,57 @@ class Admin::AdminController < Admin::BaseController
     @recent_projects = Project.order('created_at DESC').last(10)
     @conversations_weekly = Conversation.where('created_at >= ?', 1.week.ago).count
   end
-  def interface
+  def users
+    @count = User.all.count
+    # @users = User.order("name").page(params[:page]).per(10)
+    @search = User.search(params[:q])
+    @users = @search.result.order("name").page(params[:page]).per(10)
   end
-  def buttons
+  def user_images
+    @count = Photo.where('imageable_type = ? AND image = ?', "User", "Profile_Image.jpg").count
+    @search = Photo.where('imageable_type = ? AND image = ?', "User", "Profile_Image.jpg").search(params[:q])
+    @photos = @search.result.order("id").page(params[:page]).per(20)
   end
-  def calendar
+  def interrogate
+    @user = User.find(params[:id])
+    @projects = @user.projects
+    @talents = @user.talents.offset(1)
+    respond_to do |format|
+      format.html # show.html.erb
+    end
   end
-  def charts
+  def projects
+    @count = Project.all.count
+    # @projects = Project.order("title").page(params[:page]).per(10)
+    @search = Project.search(params[:q])
+    @projects = @search.result.order("title").page(params[:page]).per(10)
   end
-  def chat
+  def project_images
+    @count = Photo.where('imageable_type = ? AND image = ?', "Project", "Profile_Image.jpg").count
+    @search = Photo.where('imageable_type = ? AND image = ?', "Project", "Profile_Image.jpg").search(params[:q])
+    @photos = @search.result.order("id").page(params[:page]).per(20)
   end
-  def gallery
+  def messages
+    @count = Notification.all.count
+    @search = Notification.search(params[:q])
+    @notification = @search.result.order("subject").page(params[:page]).per(10)
+    # @notification = Notification.order("subject").page(params[:page]).per(10)
   end
-  def grid
+  
+  private
+  def current_user
+       @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
-  def invoice
+  def user_signed_in?
+      unless current_user
+      redirect_to root_url, :notice => 'Please sign-in.'
   end
-  def login
   end
-  def tables
-  end
-  def widgets
-  end
-  def form_wizard
-  end
-  def form_common
-  end
-  def form_validation
+  def require_admin
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    unless @current_user.admin == true
+      redirect_to root_url, :notice => 'Access denied.'
+    end
   end
 end
 

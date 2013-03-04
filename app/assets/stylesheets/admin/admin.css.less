@@ -12,7 +12,7 @@
 @fontAwesomeEotPath: '/assets/fontawesome-webfont.eot';
 @fontAwesomeWoffPath: '/assets/fontawesome-webfont.woff';
 @fontAwesomeTtfPath: '/assets/fontawesome-webfont.ttf';
-@fontAwesomeSvgPath: '/assets/fontawesome-webfont.svg';
+@fontAwesomeSvgPath: '/assets/fontawesome-webfont.svg';@fontAwesomeEotPath_iefix: asset-path("fontawesome-webfont.eot?#iefix&v=3.0.2");
 
 // Font Awesome
 @import "fontawesome";
@@ -20,3 +20,21 @@
 @import "admin/fullcalendar.css.less";
 @import "admin/unicorn-main.css.less";
 @import "admin/unicorn-grey.css.less";
+
+// Pagination
+.pagination .page.current {
+  color: #999999;
+  cursor: default;
+  float: left;
+  padding: 0 14px;
+  line-height: 34px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-left-width: 0;
+}
+.pagination span:first-child a {
+	border-left-width: 1px;
+}
+.pagination .page.current:first-child {
+	border-left-width: 1px;
+}

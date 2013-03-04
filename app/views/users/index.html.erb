@@ -40,15 +40,11 @@
 	      </h1>
 	    </div>
 	    <ul class='thumbnails bordered thumbnail-list'>
-	      <% @users.last(3).each do |use| %>
+	      <% @users.last(3).each_with_index do |use, counter| %>
 				<li class='span4'>
 	        <%= link_to user_path(use.id) do %>
 	          <figure class='thumbnail-figure'>
-	            <% if use.photos.exists? %>
 								<%= image_tag use.photos.first.image %>
-								<% else %>
-								<%= image_tag "biz/people1-400x400.jpeg" %>
-								<% end %>
 	              <figcaption class='thumbnail-title'>
 	                <h3>
 	                  <span><%= use.name %></span>
@@ -61,7 +57,20 @@
 	          </figure>
 	        <% end %>
 	        <p>
-	          <%= use.about %>
+	          <%= shorten :text => use.about, :length => 500, :partial => "more_users_bio", :counter => counter %>
+	          <!-- User Bio Modal -->
+              <div id="user-bio-<%= counter %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h3><span><%= use.name.split[0..0].join(" ") %></span></h3>
+                </div>
+                <div class="modal-body">
+                  <p>
+                 <%= simple_format(use.about) %>
+                  </p>
+                </div>
+              </div>
+             <!-- End User Bio Modal --> 
 	        </p>
 	      </li>
 	<% end %>

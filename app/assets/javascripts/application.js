@@ -13,6 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require_directory .
 //= require users/bootstrap-lightbox.js
 //= require projects/numerous-2.1.1.js
+//= require projects/contentflow.js
+//= require projects/slider.js
+//= require_directory .
+//= require init
