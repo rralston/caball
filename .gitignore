@@ -19,5 +19,3 @@
 /public/uploads/
 Snippets.txt
 
-# Ignore Facebook Auth Stuff
-config/initializers/omniauth.rb
