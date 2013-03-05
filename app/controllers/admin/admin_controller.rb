@@ -65,13 +65,13 @@ class Admin::AdminController < Admin::BaseController
   end
   def user_signed_in?
       unless current_user
-      redirect_to root_url, :notice => 'Please sign-in.'
+      redirect_to root_url, :flash => { :error => "Please Sign in!" }
   end
   end
   def require_admin
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
     unless @current_user.admin == true
-      redirect_to root_url, :notice => 'Access denied.'
+      redirect_to root_url, :flash => { :error => "Access denied." }
     end
   end
 end
