@@ -6,6 +6,31 @@ var Users = {
     console.log("init Users");
   },
   
+  Edit: {
+    init: function () {
+      console.log("init edit user");
+      Users.Edit.handlers();
+    },
+    
+    handlers: function () {
+      /* Add handler for numerous.js if we're adding additional entries to form */
+      Numerous.init({
+        'photos-list' : {
+          'add' : function(form){
+            var current = $('#steps').data('index');
+            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
+            $('#steps').height(stepHeight);
+          },
+  
+          'remove' : function(form){
+            alert("I'm removing a fields_for instance!");
+            // do something here
+          }
+        }
+      });
+    }
+  },
+  
   Show: {
     init: function () {
       console.log("init show users");   
@@ -13,7 +38,7 @@ var Users = {
       Users.Show.modalHandlers();
     },
     
-    handlers: function() {
+    handlers: function () {
       $('#message-modal').on('show', function () {
         $(this).css({
         'margin-left': function () {

@@ -12,6 +12,10 @@ PAGES = {
     init: function() {
       Users.init();
     },
+    
+    edit: function () {
+      Users.Edit.init();
+    },
  
     show: function() {
       Users.Show.init();
