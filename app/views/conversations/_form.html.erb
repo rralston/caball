@@ -7,7 +7,7 @@
 			<%= f.input :subject %>
 		<% end %>
 		<% if not @modal.nil? %>
-		  <%= f.input :body, :as => :text, :input_html => { :rows => @rows } %>
+		  <%= f.input :body, :as => :text %>
 		<% else %>
 		  <%= f.input :body, :as => :text %>
 		<%end%>

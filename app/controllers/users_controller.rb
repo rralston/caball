@@ -43,7 +43,9 @@ class UsersController < ApplicationController
      @user = User.new
      @user.build_characteristics
      # @user.build_photos (this was building before save)
-     @user.talent.build
+     2.times do
+       @user.talent.build
+     end
      3.times do 
        @video = @user.videos.build
      end
@@ -72,7 +74,10 @@ class UsersController < ApplicationController
      if @user.photos.first.nil?
        @user.photos.build
      end
-     if @user.talents.nil?
+     if @user.talents.first.nil?
+       @user.talents.build
+     end
+     if @user.talents.second.nil?
        @user.talents.build
      end
  end
@@ -92,6 +97,7 @@ class UsersController < ApplicationController
    end
 
    def update
+     search
      correct_user?
      @user = User.find(params[:id])
      respond_to do |format|

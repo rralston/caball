@@ -91,7 +91,7 @@ figure.profile-pic > img {
 
 }
 
-.roles {
+.roles-container {
   margin-top: 20px;
   text-align: center;
 }
@@ -122,6 +122,86 @@ figure.profile-pic > img {
 
 .role-modal {
   width: 60%;
+}
+
+/* Styles for user edit form */
+
+.edit-user {
+  margin-bottom: 80px;
+  
+  /* It would be nice to figure out the best way to make the forms/text size more responsive
+  #navigation {
+      @media only screen and (max-width: 1350px) {
+        li {
+          font-size: 75%;
+        }
+      }
+      
+      @media only screen and (max-width: 750px) {
+        li {
+          font-size: 50%;
+        }
+      }
+    }*/
+  
+}
+.user-form {
+  form {
+    .info .gender input {
+      float: left;
+      margin-left: 10px;
+    }
+    
+    .info .gender label {
+      float: left;
+    }
+    
+    .location img {
+      margin-top: 20px;
+    }
+    
+    .location i {
+      position: relative;
+      top: 30px;
+      left: 5px;
+    }
+    
+    .roles .controls {
+      text-align: left;
+      
+    }
+    
+    .roles .control-group h3 {
+      text-align: left;
+      margin-left: 1em;
+    }
+    
+    .roles .actor-characteristics {
+      margin-bottom: 20px;
+      input {
+        width: 8em;
+      }
+    }
+    
+    .videos h3 {
+      margin-left: 10px;
+    }
+    
+    h2 {
+      margin-left: 10px;
+      text-align: left;
+    }
+    
+    .terms .form-actions {
+      background-color: transparent;
+      margin-bottom: 0px;
+      padding-bottom: 0px;
+    }
+    
+    .input-error {
+      background-color: #FFEDEF;
+    }
+  }
 }
 
 /* Overriding CSS in order to create nice modal photo gallery */

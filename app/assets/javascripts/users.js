@@ -6,6 +6,47 @@ var Users = {
     console.log("init Users");
   },
   
+  Edit: {
+    init: function () {
+      console.log("init edit user");
+      Users.Edit.handlers();
+    },
+    
+    handlers: function () {
+      
+      var ajaxFormOptions = { 
+        success:      function(responseText, statusText, xhr, $form){ // post-submit callback 
+                        console.log('status: ' + statusText + '\n\nresponseText: \n' + responseText + '\n\nThe output div should have already been updated with the responseText.'); 
+                      } 
+      }; 
+      
+      $('#formElem').ajaxForm(ajaxFormOptions);
+      
+      $('#navigation li').on('click', function() {
+        console.log("submitting form ajaxly");
+        $('#formElem').ajaxSubmit();
+      });
+      /* Add handler for numerous.js if we're adding additional entries to form so that it resizes 
+         div height
+       */
+      Numerous.init({
+        'photos-list' : {
+          'add' : function(form){
+            var current = $('#steps').data('index');
+            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
+            $('#steps').height(stepHeight);
+          },
+  
+          'remove' : function(form){
+            var current = $('#steps').data('index');
+            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
+            $('#steps').height(stepHeight);
+          }
+        }
+      });
+    }
+  },
+  
   Show: {
     init: function () {
       console.log("init show users");   
@@ -13,7 +54,7 @@ var Users = {
       Users.Show.modalHandlers();
     },
     
-    handlers: function() {
+    handlers: function () {
       $('#message-modal').on('show', function () {
         $(this).css({
         'margin-left': function () {
