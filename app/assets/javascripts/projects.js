@@ -1,11 +1,4 @@
-// Specifying options for the 3d "contentflow" slider
-//ContentFlowGlobal.setAddOnConf('slideshow', {startOnLoad: true, duration: 4000});
-var contentFlowOptions = {
-  visibleItems: 10,
-  scrollWheelSpeed: 0
-}
-var projectsContentflow = new ContentFlow('projects-flow', contentFlowOptions);
-    
+
 var Projects = {
   
   init: function () {

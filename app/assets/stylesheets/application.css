@@ -5,4 +5,5 @@
  *= require bootstrap_and_overrides
  *= require projects/slider.css
  *= require projects/rs_default.css
+ *= require sliding_form/style.css
 */
