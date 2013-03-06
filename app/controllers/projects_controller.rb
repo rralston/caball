@@ -32,6 +32,7 @@ class ProjectsController < ApplicationController
      # correct_project_owner?
      # Define Security Measures
      search
+     @talents = {'Actor / Actress' => 1, 'Animators' => 2, 'Art' => 3, 'Audio' => 4, 'Casting Director' => 5, 'Cinematographer / DP' =>6, 'Composer' => 7, 'Costumes' => 8, 'Director' => 9, 'Distribution Professional' => 10, 'Editor' => 11, 'Executive Producer' => 12, 'Hairstylist / Makeup Artist' => 13, 'Lighting / Electrical' => 14, 'Other' => 15, 'Personal Assistant' => 16, 'Producer' => 17, 'Production Staff' => 18, 'Props' => 19, 'Set Design' => 20, 'Sound' => 21, 'Stuntman' => 22, 'Talent Agent / Literary Agent' => 23, 'Talent Manager' => 24, 'Visual Effects' => 25, 'Writer' => 26}
      @project = Project.find(params[:id])
      @pictures = @project.photos
      if @pictures.first.nil?
