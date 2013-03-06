@@ -20,3 +20,5 @@
 /public/uploads/
 Snippets.txt
 
+# Ignore Public Assets
+/public/assets
