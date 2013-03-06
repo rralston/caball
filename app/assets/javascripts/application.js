@@ -17,5 +17,6 @@
 //= require projects/numerous-2.1.1.js
 //= require projects/contentflow.js
 //= require projects/slider.js
+//= require application/sliding.form.js
 //= require_directory .
 //= require init
