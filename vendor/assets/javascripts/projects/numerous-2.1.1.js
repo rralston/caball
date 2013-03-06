@@ -159,6 +159,3 @@ $(document).ready(function(e)
     Numerous.get(list).find('.numerous-remove').trigger('click');
   };
 });
-$(document).ready(function(){
-  Numerous.init();
-});

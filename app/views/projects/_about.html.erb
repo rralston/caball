@@ -7,7 +7,13 @@
     </div>
   </div>
   <div class="row-fluid dates">
-    <p><span class="label">Starts:  </span><span><%= @project.start %></span><span class="label">Ends:  </span><span><%= @project.end %></span></p>
+    <p>
+    <% if !@project.start.nil? %>  
+      <span class="label">Starts:  </span><span><%= @project.start %></span>
+    <% end %>
+    <% if !@project.end.nil? %>
+      <span class="label">Ends:  </span><span><%= @project.end %></span></p>
+    <% end %>
   </div>
   <div class="row-fluid">
     <div class="span9">
