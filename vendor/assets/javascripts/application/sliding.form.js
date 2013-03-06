@@ -2,30 +2,14 @@ $(function() {
 	/*
 	number of fieldsets
 	*/
-	var fieldsetCount = $('#formElem').children().length;
-	
+	var fieldsetCount = $('#formElem').children().length; // This kind of fucks things up if 
+	                                                      // theres an CSRF token immediately under the form tag
+	                                                      // I had to hack the validation to work around this issue
 	/*
 	current position of fieldset / navigation link
 	*/
 	var current 	= 1;
-	
-	/* Create a data element for the current-index for fetching elsewhere */
-	$('#steps').data('index', current);
-    
-	/*
-	sum and save the widths of each one of the fieldsets
-	set the final sum as the total width of the steps element
-	*/
-	var stepsWidth	= 0;
-    var widths 		= new Array();
-	$('#steps .step').each(function(i){
-        var $step 		= $(this);
-		    widths[i]  		= stepsWidth;
-		    $step.width($step.parent().width());
-        stepsWidth	 	+= $step.width();
-    });
-	$('#steps').width(stepsWidth);
-	
+	var widths    = new Array();
 	/*
 	to avoid problems in IE, focus the first input of the form
 	*/
@@ -34,10 +18,11 @@ $(function() {
 	/* Reset height to match content 
 	 */
 	
-	var stepHeight = $('#steps .step :eq(0)').height() + 50;
-  $('#steps').height(stepHeight);
-  
+  resizeHeight();
+  resizeWidth();
 
+  $(window).on('resize', resizeWidth).on('resize', resizeHeight);
+	
 	/*
 	show the navigation bar
 	*/
@@ -57,8 +42,6 @@ $(function() {
 		in the current variable	
 		*/
 		current = $this.parent().index() + 1;
-		
-    $('#steps').data('index', current);
 		/*
 		animate / slide to the next or to the corresponding
 		fieldset. The order of the links in the navigation
@@ -78,8 +61,8 @@ $(function() {
 				validateStep(prev);
 			$('#formElem').children(':nth-child('+ parseInt(current) +')').find(':input:first').focus();	
 		});
-		    var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
-		    $('#steps').height(stepHeight);
+		    resizeHeight();
+		    
         e.preventDefault();
     });
 	
@@ -122,16 +105,19 @@ $(function() {
 		
 		var error = 1;
 		var hasError = false;
-		$('#formElem').children(':nth-child('+ parseInt(step) +')').find(':input:not(button)').each(function(){
+		
+		/* We have to use step+1 here to avoid the CSRF token */
+		$('#formElem').children(':nth-child('+ parseInt(step + 1) +')').find(':input:not(button)').each(function(){
 			var $this 		= $(this);
 			var valueLength = jQuery.trim($this.val()).length;
 			
-			if(valueLength == ''){
+			if(valueLength == '' && $(this).hasClass('required')){ // Only looking for fields that have the class required
 				hasError = true;
-				$this.css('background-color','#FFEDEF');
+				$this.addClass('input-error');
 			}
 			else
-				$this.css('background-color','#FFFFFF');	
+			  $this.removeClass('input-error');
+			
 		});
 		var $link = $('#navigation li:nth-child(' + parseInt(step) + ') a');
 		$link.parent().find('.error,.checked').remove();
@@ -151,8 +137,34 @@ $(function() {
 	*/
 	$('#registerButton').bind('click',function(){
 		if($('#formElem').data('errors')){
-			alert('Please correct the errors in the Form');
+			//alert('Please correct the errors in the Form'); // We can use this error handler if we want.
 			return false;
 		}	
 	});
+	
+	function resizeWidth() {
+	  /*
+    sum and save the widths of each one of the fieldsets
+    set the final sum as the total width of the steps element
+    */
+    var stepsWidth  = 0;
+      
+      $('#steps .step').each(function(i){
+            var $step     = $(this);
+            widths[i]     = stepsWidth;
+            $step.width($step.parent().width());
+            stepsWidth    += $step.width();
+        });
+      $('#steps').width(stepsWidth);
+	}
+	
+	function resizeHeight() {
+	 
+    /* Create a data element for the current-index for fetching elsewhere */
+    $('#steps').data('index', current);
+      
+    var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height() + 50;
+    $('#steps').height(stepHeight);  
+	
+	}
 });
