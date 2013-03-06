@@ -9,7 +9,6 @@ class ConversationsController < ApplicationController
       @subject  = params[:subject]
     end
     if params[:modal]
-      @rows = 5
       @modal = true
       respond_to do |format|
         format.html { render :layout => false }# show.html.erb

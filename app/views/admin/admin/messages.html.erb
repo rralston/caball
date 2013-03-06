@@ -36,7 +36,7 @@
 									<thead>
 										<tr>
 											<th><%= sort_link(@search, :id, "Message ID") %></th>
-											<th><%= sort_link(@search, :conversation_id, "Conversation ID") %></th>
+											<th><%= sort_link(@search, :conversation_id, "To") %></th>
 											<th><%= sort_link(@search, :sender_id, "From") %></th>
 											<th><%= sort_link(@search, :subject, "Subject") %></th>
 											<th><%= sort_link(@search, :body, "Body") %></th>
@@ -48,8 +48,8 @@
 										<% @notification.each do |notification| %>
 										<tr>
 											<td><%= link_to(notification.conversation_id, conversation_path(notification.conversation_id), :class => "btn btn-mini") %></td>
-											<td><%= link_to(notification.id, notification_path(notification.id)) %></td>
-											<td><%= notification.sender_id %></td>
+											<td><%= link_to User.find(Receipt.find(notification.id).receiver_id).name, user_path(User.find(Receipt.find(notification.id).receiver_id).id) %></td>
+											<td><%= link_to User.find(notification.sender_id).name, user_path(User.find(notification.sender_id).id) %></td>
 											<td><%= notification.subject %></td>
 											<td><%= notification.body %></td>
 											<td><%= notification.created_at %></td>
