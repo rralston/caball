@@ -1,7 +1,5 @@
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
 
-<div class="well">
-
 	<% @user.errors.full_messages.each do |error| %>
 	  <div class="alert alert-error">
 				<button type="button" class="close" data-dismiss="alert">×</button>
@@ -9,9 +7,8 @@
 		</div>
 	<% end %>
 	
-
 	<div class="row-fluid">
-	  <div class="span12">
+	  <div class="span8 offset2 edit-user">
 	    <h2>User Profile</h2>
 	     <div id="wrapper" class="row-fluid">
 	       <div id="navigation" style="display:none;">
@@ -35,28 +32,30 @@
                   <a href="#">Finish</a>
              </li>
            </ul>
+           <div class="clearfix"></div>
          </div>
          <div id="steps">
 	         <%= form_for @user, :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'formElem'} do |f| %> 
              
              <fieldset class="step info">
                <div class="span12">
+                 <h2>General Info</h2>
                  <div class="control-group">
                      <%= f.label :name, :class => 'control-label' %>
                      <div class="controls">
-                     <%= f.text_field :name, :class => 'text_field' %>
+                     <%= f.text_field :name, :class => 'text_field required' %>
                      </div>
                  </div>
                  <div class="control-group">
                    <%= f.label :email, :class => 'control-label' %>
                    <div class="controls">
-                     <%= f.text_field :email, :class => 'text_field' %>
+                     <%= f.text_field :email, :class => 'text_field required email' %>
                    </div>
                  </div>
                  <div class="control-group">
                    <%= f.label :location, :class => 'control-label' %>
                    <div class="controls location">
-                     <%= f.text_field :location, :class => 'text_field' %>
+                     <%= f.text_field :location, :class => 'text_field required' %>
                      <div class="clearfix"></div>
                      <%= image_tag("locate_me.png", :align => "left", :height => "30", :id => "locate") %>
                      <i>Click icon for your location</i>
@@ -129,6 +128,7 @@ THIS IS OUR RAILS imdb url to replace html above
              
              <fieldset class="step about-you">
                <div class="span12">
+                 <h2>About You</h2>
                  
 <%
 =begin%> 
@@ -163,16 +163,12 @@ THIS IS OUR RAILS imdb url to replace html above
                        </div>
                    </div>
                   <% end %>
-                
-          
-                 
                </div>
-               
              </fieldset>
              
              <fieldset class="step roles">
-             
                <div class="span12">
+                 <h2>Your Roles</h2>
                  <%= f.fields_for :talents do |talent|   %>
                    <div class="control-group">
                      <h3><%= talent.object.name %></h3>
@@ -184,7 +180,7 @@ THIS IS OUR RAILS imdb url to replace html above
                    <% if talent.object.name.downcase == 'actor'%> 
                     <%= f.fields_for :characteristics do |c|   %>
                     <div class="row-fluid actor-characteristics">
-                      <div class="span6">
+                      <div class="span4">
                         <div class="control-group">
                             <%= c.label :age, :class => 'control-label' %>
                             <div class="controls">
@@ -222,7 +218,7 @@ THIS IS OUR RAILS imdb url to replace html above
                                </div>
                           </div>
                       </div>
-                      <div class="span6">
+                      <div class="span4">
                         <div class="control-group">
                           <%= c.label :hair_color, :class => 'control-label' %>
                           <div class="controls">
@@ -266,6 +262,7 @@ THIS IS OUR RAILS imdb url to replace html above
              </fieldset>
              
              <fieldset class="step more-photos">
+                 <h2>More Photos</h2>
        
                 <% comment = "We'll have to re-work this when we get photos vs profile photo"%>
           	   <%= f.fields_for :photos do |p|  %>
@@ -330,6 +327,8 @@ THIS IS OUR RAILS imdb url to replace html above
              </fieldset>
           	 
           	 <fieldset class="step videos">
+          	   <div class="span12">
+                 <h2><%= @user.name.possessive %> Reel</h2>
               <% videos_counter = 1 %>
             	<%= f.fields_for :videos do |video| %>
             	  <h3>Video <%=videos_counter%></h3>
@@ -379,20 +378,38 @@ THIS IS OUR RAILS imdb url to replace html above
                       <%= video.text_area :user_description, :class => 'text_field', :rows => 5 %>
                     </div>
                   </div>
-                <% videos_counter+=1%>
+                <% videos_counter+=1 %>
                <% end %>
+               </div>
+             </fieldset>
+             
+             <fieldset class="step terms">
+               <div class="span12">
+                 <h2>Terms and Conditions</h2>
+                 <div class="control-group">
+                    <label class="control-label">Terms and Conditions</label>
+                    <div class="controls">
+                      
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label">I agree</label>
+                    <div class="controls">
+                      <input type="checkbox" name="terms-agree" />
+                    </div>
+                  <div class="form-actions">
+                    <%= f.submit nil, :class => 'btn btn-primary' %>
+                    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                                users_path, :class => 'btn' %>
+                  </div>
+               </div>
              </fieldset>
 	
            <!-- End of Form Inputs -->
          </div>
        </div>
 
-	  <div class="form-actions">
-	    <%= f.submit nil, :class => 'btn btn-primary' %>
-	    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-	                users_path, :class => 'btn' %>
-	  </div>
+	  
 	<% end %>
-</div>
 </div>
 </div>

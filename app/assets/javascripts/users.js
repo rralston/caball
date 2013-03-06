@@ -13,7 +13,22 @@ var Users = {
     },
     
     handlers: function () {
-      /* Add handler for numerous.js if we're adding additional entries to form */
+      
+      var ajaxFormOptions = { 
+        success:      function(responseText, statusText, xhr, $form){ // post-submit callback 
+                        console.log('status: ' + statusText + '\n\nresponseText: \n' + responseText + '\n\nThe output div should have already been updated with the responseText.'); 
+                      } 
+      }; 
+      
+      $('#formElem').ajaxForm(ajaxFormOptions);
+      
+      $('#navigation li').on('click', function() {
+        console.log("submitting form ajaxly");
+        $('#formElem').ajaxSubmit();
+      });
+      /* Add handler for numerous.js if we're adding additional entries to form so that it resizes 
+         div height
+       */
       Numerous.init({
         'photos-list' : {
           'add' : function(form){
@@ -23,8 +38,9 @@ var Users = {
           },
   
           'remove' : function(form){
-            alert("I'm removing a fields_for instance!");
-            // do something here
+            var current = $('#steps').data('index');
+            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
+            $('#steps').height(stepHeight);
           }
         }
       });
