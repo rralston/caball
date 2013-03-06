@@ -8,7 +8,8 @@
 /.bundle
 
 # Ignore database.yml
-/config/database.yml
+# Change for Heroku to Read
+# /config/database.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
@@ -19,3 +20,5 @@
 /public/uploads/
 Snippets.txt
 
+# Ignore Public Assets
+/public/assets
