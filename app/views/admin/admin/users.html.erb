@@ -46,9 +46,9 @@
 											<td><%= user.email %></td>
 											<td><%= user.created_at %></td>
 											<%= form_for(user) do |f| %>
-											<td><%= f.check_box :admin %><%= f.submit "Go", :class => 'btn btn-primary btn-mini' %></td>
+											<td><%= f.check_box :admin %></td>
+											<td><%= f.check_box :featured %><%= f.submit "Go", :class => 'btn btn-primary btn-mini' %></td>
 											<% end %>
-											<td>!</td>
 											<td><%= link_to(edit_user_path(user.id), :class => "btn btn-primary btn-mini") do %>Edit<% end %> 
 												<%= link_to 'Send Message', new_conversation_path(:recipient => user.email, :modal => true), class: "btn btn-success btn-mini", :data => {:toggle => "modal", :target => "#message-modal", :keyboard => "true" } %> 
 												<div id="message-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
