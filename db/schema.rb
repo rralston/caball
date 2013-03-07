@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130224031355) do
+ActiveRecord::Schema.define(:version => 20130307001018) do
 
   create_table "characteristics", :force => true do |t|
     t.integer  "age"
@@ -36,6 +36,16 @@ ActiveRecord::Schema.define(:version => 20130224031355) do
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
+
+  create_table "follows", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "follow_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "follows", ["follow_id"], :name => "index_follows_on_follow_id"
+  add_index "follows", ["user_id"], :name => "index_follows_on_user_id"
 
   create_table "notifications", :force => true do |t|
     t.string   "type"
@@ -64,6 +74,17 @@ ActiveRecord::Schema.define(:version => 20130224031355) do
     t.integer  "imageable_id"
     t.string   "imageable_type"
     t.datetime "created_at",     :null => false
+    t.boolean  "primary"
+  end
+
+  create_table "profile", :force => true do |t|
+    t.string   "image"
+    t.string   "description"
+    t.string   "content_type"
+    t.integer  "file_size"
+    t.datetime "updated_at",   :null => false
+    t.integer  "user_id"
+    t.datetime "created_at",   :null => false
   end
 
   create_table "projects", :force => true do |t|
@@ -74,6 +95,13 @@ ActiveRecord::Schema.define(:version => 20130224031355) do
     t.integer  "user_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "status"
+    t.boolean  "featured"
+    t.string   "type"
+    t.string   "genre"
+    t.string   "location"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "receipts", :force => true do |t|
@@ -102,9 +130,21 @@ ActiveRecord::Schema.define(:version => 20130224031355) do
     t.string   "name"
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.text     "description2"
   end
+
+  create_table "updates", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "updates", ["project_id"], :name => "index_updates_on_project_id"
+  add_index "updates", ["user_id"], :name => "index_updates_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
@@ -122,6 +162,10 @@ ActiveRecord::Schema.define(:version => 20130224031355) do
     t.datetime "oauth_expires_at"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.string   "gender"
+    t.string   "imdb_url"
+    t.text     "headline"
+    t.boolean  "featured"
   end
 
   create_table "videos", :force => true do |t|
@@ -142,6 +186,8 @@ ActiveRecord::Schema.define(:version => 20130224031355) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.text     "user_description"
+    t.string   "imdb"
+    t.boolean  "primary"
   end
 
   add_foreign_key "notifications", "conversations", :name => "notifications_on_conversation_id"
