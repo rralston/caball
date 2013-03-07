@@ -1,0 +1,45 @@
+<%= div_for comment do %>
+  <p><strong><%= link_to comment.user.name, comment.user %> says</strong></p>
+  <%= simple_format comment.content %>
+  <% if comment.user == current_user %>
+    <p>
+      <%= link_to "Edit", edit_project_comment_path(@project, comment) %> |
+      <%= link_to "Destroy", [@project, comment], method: :delete %>
+    </p>
+  <% end %>
+<% end %>
+
+
+<div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span12">
+
+        <div class="row-fluid">
+          <div class="page-header">
+              <h1>
+                  Project Updates
+              </h1>
+          </div>
+        </div>
+<%= div_for comment do %>
+        <div class="row-fluid roles-row">
+					  <div class="well">
+              <h5>
+               <%= link_to comment.user.name, comment.user %> says
+              </h5>
+              <p>
+              	<%= simple_format comment.content %>
+							  <% if comment.user == current_user %>
+							</p>  
+							<p>
+					      <%= link_to "Edit", edit_project_comment_path(@project, comment) %> |
+					      <%= link_to "Destroy", [@project, comment], method: :delete %>
+					    </p>
+          </div>
+        </div>
+				 <% end %>
+				<% end %>
+      </div>
+    </div>
+</div>
+
