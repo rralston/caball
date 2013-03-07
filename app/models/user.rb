@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :projects, :dependent => :destroy
   has_many :talents, :dependent => :destroy
   accepts_nested_attributes_for :characteristics, :photos, :videos, :projects, :talents, :allow_destroy => true
-  attr_accessible :name, :email, :location, :about, :characteristics_attributes, :photos_attributes, :talents_attributes, :photo, :videos_attributes, :projects_attributes, :admin
+  attr_accessible :name, :email, :location, :about, :imdb_url, :characteristics_attributes, :photos_attributes, :talents_attributes, :photo, :videos_attributes, :projects_attributes, :admin
   validates_presence_of :name, :email, :message => "is required"
   
   acts_as_messageable
