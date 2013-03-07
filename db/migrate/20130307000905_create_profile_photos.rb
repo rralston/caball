@@ -1,7 +1,13 @@
 class CreateProfilePhotos < ActiveRecord::Migration
-  def up
-  end
-
-  def down
+  def change
+    create_table :profile do |t|
+      t.string :image
+      t.string :description
+      t.string :content_type
+      t.integer :file_size
+      t.datetime :updated_at
+      t.references :user 
+      t.timestamps
+    end
   end
 end
