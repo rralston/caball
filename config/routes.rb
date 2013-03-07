@@ -6,6 +6,7 @@ Caball::Application.routes.draw do
   resources :projects
   resources :conversations
   resources :notifications
+  resources :friendships
   
   # Static Pages 
   
