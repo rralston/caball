@@ -82,24 +82,12 @@ THIS IS OUR RAILS GENDER radios to replace html above
 <%
 =end%>
 
-                 <div class="control-group">
-                   <label class="control-label" for="user_imdb_url">IMDb URL</label>
-                     <div class="controls">
-                     <input class="text_field" id="user_imdb_url" name="user_imbdb_url" size="30" type="text" value="" style="background-color: rgb(255, 255, 255);">
-                     </div>
-                 </div>
-<%
-=begin%>     
-THIS IS OUR RAILS imdb url to replace html above 
-                 <div class="control-group">>
-                   <%= f.label :imdb_url, :class => 'control-label' %>
-                     <div class="controls">
-                       <%= f.text_field :imdb_url, :class => 'text_field' %>
-                   </div>
-                 </div>
-                 
-<%
-=end%>
+    <div class="control-group">>
+       <%= f.label :imdb_url, :class => 'control-label' %>
+         <div class="controls">
+           <%= f.text_field :imdb_url, :class => 'text_field' %>
+       </div>
+     </div>
 
                 <% comment = "WE'RE GOING TO SET UP A MIGRATION TO HANDLE PROFILE PHOTOS VS THE REST OF THE PHOTOS"%>
                 <%= f.fields_for :photos do |p|  %>
@@ -177,7 +165,8 @@ THIS IS OUR RAILS imdb url to replace html above
                       <%= talent.text_area :description, :class => 'textarea', :rows => "10" %> 
                       </div>
                    </div>
-                   <% if talent.object.name.downcase == 'actor'%> 
+									<% if talent.object.name.present? %>
+                   <% if talent.object.name.downcase == 'actor' %> 
                     <%= f.fields_for :characteristics do |c|   %>
                     <div class="row-fluid actor-characteristics">
                       <div class="span4">
@@ -252,7 +241,7 @@ THIS IS OUR RAILS imdb url to replace html above
                       </div>
                       </div>
           
-          
+          						<% end %>
                       <% end %>  
                    <% end %>
                   <% end %>
@@ -339,14 +328,15 @@ THIS IS OUR RAILS imdb url to replace html above
                   </div>
                 </div>
                 
-                <%comment = "We're going to have to replace the next two with proper rails field"%>
-                <div class="control-group">
-                  <label class="control-label">IMDb Link</label>
-                  <div class="controls">
-                    <input id="user_videos_attributes_0_imdb_url" name="user[videos_attributes][0][imdb_url]" size="30" type="text" value="IMDb Link">
-                  </div>
-                </div>
+
                 
+						    <div class="control-group">>
+						       <%= video.label :imdb, :class => 'control-label' %>
+						         <div class="controls">
+						           <%= video.text_field :imdb, :class => 'text_field' %>
+						       </div>
+						     </div>
+						
             		<% if @videos.present?  %>
         
               		<% if video.object.thumbnail_small.present? %>
