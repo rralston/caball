@@ -56,10 +56,23 @@
                </div>
                <div class="clearfix"></div>
                <div class="row-fluid pictures-contact-buttons">
-                 <div class="span4 offset1 pictures-button">
+                 <div class="span2 offset2 pictures-button">
                    <a href = "#" data-toggle="modal" data-target="#photos-modal" data-keyboard="true" class="btn">Pictures</a>
                  </div>
-                 <div class="span4 offset2 contact-button">
+								<div class="span3">
+									<% if current_user && current_user.id != @user.id %>
+										 <% if current_user.friends.include? @user %>
+										    <%= link_to "Stop Following", current_user.friendships.find_by_friend_id(@user.id), method: :delete, :class => 'btn btn-info' %>
+										  <% else %>
+										    <%= link_to "Follow", friendships_path(friend_id: @user), method: :post, :class => 'btn btn-info' %>
+										  <% end %>
+										<% end %>
+									<% if current_user.id == @user.id %>
+									<button class="btn btn-primary" type="button">Following <%= @user.friendships.all.count %></button>
+									<% end %>
+								</div>
+									
+                 <div class="span2 contact-button">
                    <a data-toggle="modal" data-target="#message-modal" 
                     data-remote ="<%= new_conversation_path(:recipient => @user.email, :modal => true) %>"
                     data-keyboard="true" class="btn">Contact</a>
