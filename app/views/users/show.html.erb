@@ -62,9 +62,11 @@
 								<div class="span3">
 									<% if current_user && current_user.id != @user.id %>
 										 <% if current_user.friends.include? @user %>
-										    <%= link_to "Stop Following", current_user.friendships.find_by_friend_id(@user.id), method: :delete, :class => 'btn btn-info' %>
-										  <% else %>
-										    <%= link_to "Follow", friendships_path(friend_id: @user), method: :post, :class => 'btn btn-info' %>
+										    <%= link_to "Stop Following", current_user.friendships.find_by_friend_id(@user.id), method: :delete, :class => 'btn btn-info follow stop-following' %>
+										    <%= link_to "Follow", friendships_path(friend_id: @user), method: :post, :class => 'btn btn-info follow start-following hidden' %>
+                      <% else %>
+                        <%= link_to "Stop Following", current_user.friendships.find_by_friend_id(@user.id), method: :delete, :class => 'btn btn-info follow stop-following hidden' %>
+                        <%= link_to "Follow", friendships_path(friend_id: @user), method: :post, :class => 'btn btn-info follow start-following' %>
 										  <% end %>
 										<% end %>
 									<% if current_user.id == @user.id %>
