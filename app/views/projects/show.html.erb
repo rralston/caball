@@ -10,4 +10,18 @@
 <section id="roles" class="section alt">
   <%= render 'roles' %>
 </section>
+
+<section id="roles" class="section alt">
+<h2>Comments</h2>
+
+<div id="comments">
+  <%= render @project.comments %>
+</div>
+
+<h3>New Comment</h3>
+
+<%= render 'comments/form' %>
+
+</section>
+
 <% end %>
