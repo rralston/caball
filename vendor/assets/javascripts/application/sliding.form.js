@@ -13,11 +13,12 @@ $(function() {
 	*/
 	$('#formElem').children(':first').find(':input:first').focus();	
 	
-	/* Reset height to match content 
+	/* Reset height and width to match content 
 	 */
-	
-  resizeHeight();
-  resizeWidth();
+	$(document).ready(function() {
+    resizeHeight();
+    resizeWidth();
+  });
 
   $(window).on('resize', resizeWidth).on('resize', resizeHeight);
 	
@@ -124,7 +125,7 @@ $(function() {
       $('#steps .step').each(function(i){
             var $step     = $(this);
             widths[i]     = stepsWidth;
-            $step.width($step.parent().width());
+            $step.width($step.parents('#wrapper').width());
             stepsWidth    += $step.width();
         });
       $('#steps').width(stepsWidth);
