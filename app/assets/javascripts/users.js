@@ -48,7 +48,6 @@ var Users = {
       /* Update the Roles when the user changes their selection */
      
       $('.talent-select').on('change', function() {
-        console.log($(this).val() + $(this).data('index'));  
         var value = $(this).val();
         var index = $(this).data('index');
         $('.step.roles .talent-label[data-index=' + index + ']').text(value);
