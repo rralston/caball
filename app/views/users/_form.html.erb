@@ -61,33 +61,22 @@
                      <i>Click icon for your location</i>
                    </div>
                  </div>
+                 
                  <div class="control-group">
-                   <label class="control-label">
-                     Gender
-                   </label>
                    <div class="controls gender">
-                     <input id="gender_male" name="gender" value="male" type="radio"><label for="gender_male">Male</label>
-                     <input id="gender_female" name="gender" value="female" type="radio"> <label for="gender_female">Female</label>
+                     <%= radio_button("user", "gender", "male", {:checked => (!@user.gender.nil? && (@user.gender == "male" && 'checked')) || "false"}) %>
+                     <%= label :gender_male, 'Male' %>
+                     <%= radio_button("user", "gender", "female", {:checked => (!@user.gender.nil? && (@user.gender == "female" && 'checked')) || "false"}) %>
+                     <%= label :gender_male, 'Female' %>
                    </div>
                  </div>
-<%
-=begin%>
-THIS IS OUR RAILS GENDER radios to replace html above
-                 <div class="control-group">
-                   <%= f.radio_button :gender, 'male', :checked => (@user.gender == male)?%>
-                   <%= label :gender_male, 'Male' %>
-                   <%= f.radio_button :gender, 'female', :checked => (@user.gender == female)?%>
-                   <%= label :gender_female, 'Female' %>
-                 </div>
-<%
-=end%>
 
-    <div class="control-group">>
-       <%= f.label :imdb_url, :class => 'control-label' %>
-         <div class="controls">
-           <%= f.text_field :imdb_url, :class => 'text_field' %>
-       </div>
-     </div>
+                <div class="control-group">
+                   <%= f.label :imdb_url, :class => 'control-label' %>
+                     <div class="controls">
+                       <%= f.text_field :imdb_url, :class => 'text_field' %>
+                   </div>
+                 </div>
 
                 <% comment = "WE'RE GOING TO SET UP A MIGRATION TO HANDLE PROFILE PHOTOS VS THE REST OF THE PHOTOS"%>
                 <%= f.fields_for :photos do |p|  %>
@@ -117,23 +106,12 @@ THIS IS OUR RAILS GENDER radios to replace html above
              <fieldset class="step about-you">
                <div class="span12">
                  <h2>About You</h2>
-                 
-<%
-=begin%> 
-        TO REPLACE SHIM HTML BELOW
+
                  <div class="control-group">
                    <%= f.label :headline, :class => 'control-label' %>
                    <div class="controls">
                      <%= f.text_field :headline, :class => 'text_field' %>
                    </div>
-                 </div>
-<%
-=end%>
-                 <div class="control-group">
-                     <label class="control-label" for="user_headline">Headline</label>
-                       <div class="controls">
-                       <input class="text_field" id="user_headline" name="user_headline" size="30" type="text" value="" style="background-color: rgb(255, 255, 255);">
-                       </div>
                  </div>
                  
                  <div class="control-group">
@@ -318,8 +296,8 @@ THIS IS OUR RAILS GENDER radios to replace html above
           	 <fieldset class="step videos">
           	   <div class="span12">
                  <h2><%= @user.name.possessive %> Reel</h2>
-              <% videos_counter = 1 %>
-            	<%= f.fields_for :videos do |video| %>
+                <% videos_counter = 1 %>
+              	<%= f.fields_for :videos do |video| %>
             	  <h3>Video <%=videos_counter%></h3>
                 <div class="control-group">
                   <label class="control-label">Title</label>
@@ -388,7 +366,7 @@ THIS IS OUR RAILS GENDER radios to replace html above
                       <input type="checkbox" name="terms-agree" />
                     </div>
                   <div class="form-actions">
-                    <%= f.submit nil, :class => 'btn btn-primary' %>
+                    <%= f.submit nil, :class => 'btn btn-primary', :id => 'submit-user-form' %>
                     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                                 users_path, :class => 'btn' %>
                   </div>
