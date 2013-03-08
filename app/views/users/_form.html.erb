@@ -125,7 +125,8 @@
                    <div class="control-group">
                       <%= talent.label "Talent", :class => 'control-label' %>
                       <div class="controls">
-                        <%= talent.select(:name, [['Actor'], ['Producer'], ['Director'], ['Technical'], ['Stuntmen'], ['Fan'], ['Talent Manager']], {}, {:multiple => true, :size=> 5}) %>
+                        
+                        <%= talent.select(:name, [['Actor'], ['Producer'], ['Director'], ['Technical'], ['Stuntmen'], ['Fan'], ['Talent Manager']])%>
                        </div>
                    </div>
                   <% end %>
