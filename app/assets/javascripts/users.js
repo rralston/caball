@@ -45,9 +45,35 @@ var Users = {
         } 
       });
       
+      /* Update the Roles when the user changes their selection */
+     
+      $('.talent-select').on('change', function() {
+        console.log($(this).val() + $(this).data('index'));  
+        var value = $(this).val();
+        var index = $(this).data('index');
+        $('.step.roles .talent-label[data-index=' + index + ']').text(value);
+        var actor = false;
+        $characteristics = $('.actor-characteristics');
+        $('.talent-select').each(function(index) {
+          if ($(this).val() === 'Actor')  {
+            actor = true;
+          }
+        });
+        
+        if (!actor && !$characteristics.hasClass('hidden') ) {
+          $characteristics.addClass('hidden');
+        } 
+        if (actor) {
+          if ($characteristics.hasClass('hidden')) {
+            $characteristics.removeClass('hidden');
+          }
+        }
+      });
+      
       /* Add handler for numerous.js if we're adding additional entries to form so that it resizes 
          div height
        */
+            
       Numerous.init({
         'photos-list' : {
           'add' : function(form){

@@ -123,7 +123,7 @@
                         <%= talent_field.label "Talent", :class => 'control-label' %>
                         <div class="controls">
                           <%= talent_field.check_box :_destroy %> Click Here to Delete  
-                          <%= talent_field.select(:name, [['Actor'], ['Producer'], ['Director'], ['Technical'], ['Stuntmen'], ['Fan'], ['Talent Manager']])%>
+                          <%= talent_field.select(:name, [['Actor'], ['Producer'], ['Director'], ['Technical'], ['Stuntmen'], ['Fan'], ['Talent Manager']], {}, {:class => 'talent-select', :'data-index' => index})%>
                          </div>
                      </div>
                     <% end %>
@@ -138,7 +138,7 @@
                  <% @user.talents.each_with_index do |talent, index| %>
                    <%= f.fields_for :talents, talent, :child_index => index do |talent_field|   %>
                      <div class="control-group">
-                       <h3><%= talent_field.object.name %></h3>
+                       <h3 class="talent-label" data-index="<%= index %>"><%= talent_field.object.name %></h3>
                        <%= talent_field.label :description, :class => 'control-label' %> 
                         <div class="controls">
                         <%= talent_field.text_area :description, :class => 'textarea', :rows => "10" %> 
@@ -148,9 +148,12 @@
                  <% end %>
 
 									<% if !@user.talents.first.nil? and !@user.talents.second.nil? and !@user.talents.first.name.nil? and !@user.talents.second.name.nil? %>
-                   <% if @user.talents.first.name.downcase == 'actor' or @user.talents.second.name.downcase == 'actor' %> 
-                    <%= f.fields_for :characteristics_attributes do |c|   %>
+                   <%= f.fields_for :characteristics_attributes do |c|   %>
+                   <% if @user.talents.first.name.downcase == 'actor' or @user.talents.second.name.downcase == 'actor' %>
                     <div class="row-fluid actor-characteristics">
+                    <% else %> 
+                    <div class="row-fluid actor-characteristics hidden">
+                    <% end %>
                       <div class="span4">
                         <div class="control-group">
                             <%= c.label :age, :class => 'control-label' %>
@@ -224,7 +227,6 @@
                       </div>
           
           						<% end %>
-                      <% end %>  
                   <% end %>
                     
                </div>  
