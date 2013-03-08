@@ -78,19 +78,16 @@
                    </div>
                  </div>
 
-                <% comment = "WE'RE GOING TO SET UP A MIGRATION TO HANDLE PROFILE PHOTOS VS THE REST OF THE PHOTOS"%>
-                <%= f.fields_for :photos do |p|  %>
-                  <% if @user.photos.exists? %> 
-                    <% if p.object == @user.photos.first %>
-                      <div class="control-group">
-                        <%= p.label "Profile Photo", :class => 'control-label' %>
-                        <div class="controls">
-                          <%= image_tag @user.photos.first.image.url(:medium), {:class => "img-polaroid"} %>          
-                          <%= p.file_field :image %>
-                          <%= p.check_box :_destroy %> Click Here to Delete  
-                        </div>
+                <%= f.fields_for :profiles_attributes do |p|  %>
+                  <% if !@user.profiles.nil? %> 
+                    <div class="control-group">
+                      <%= p.label "Profile Photo", :class => 'control-label' %>
+                      <div class="controls">
+                        <%= image_tag @user.profiles.image.url(:medium), {:class => "img-polaroid"} %>          
+                        <%= p.file_field :image %>
+                        <%= p.check_box :_destroy %> Click Here to Delete  
                       </div>
-                    <%end%>
+                    </div>
                   <%else%>
                     <div class="control-group">
                       <p>Please Upload a Profile Image</p>
@@ -106,7 +103,7 @@
              <fieldset class="step about-you">
                <div class="span12">
                  <h2>About You</h2>
-
+                 
                  <div class="control-group">
                    <%= f.label :headline, :class => 'control-label' %>
                    <div class="controls">
@@ -120,15 +117,16 @@
                      <%= f.text_area :about, :class => 'text_area' %>
                    </div>
                  </div>
-                 
-                 <%= f.fields_for :talents do |talent|   %>
-                   <div class="control-group">
-                      <%= talent.label "Talent", :class => 'control-label' %>
-                      <div class="controls">
-                        
-                        <%= talent.select(:name, [['Actor'], ['Producer'], ['Director'], ['Technical'], ['Stuntmen'], ['Fan'], ['Talent Manager']])%>
-                       </div>
-                   </div>
+                 <% @user.talents.each_with_index do |talent, index| %>
+                   <%= f.fields_for :talents, talent, :child_index => index do |talent_field| %>
+                     <div class="control-group">
+                        <%= talent_field.label "Talent", :class => 'control-label' %>
+                        <div class="controls">
+                          <%= talent_field.check_box :_destroy %> Click Here to Delete  
+                          <%= talent_field.select(:name, [['Actor'], ['Producer'], ['Director'], ['Technical'], ['Stuntmen'], ['Fan'], ['Talent Manager']])%>
+                         </div>
+                     </div>
+                    <% end %>
                   <% end %>
                </div>
              </fieldset>
@@ -136,17 +134,22 @@
              <fieldset class="step roles">
                <div class="span12">
                  <h2>Your Roles</h2>
-                 <%= f.fields_for :talents do |talent|   %>
-                   <div class="control-group">
-                     <h3><%= talent.object.name %></h3>
-                     <%= talent.label :description, :class => 'control-label' %> 
-                      <div class="controls">
-                      <%= talent.text_area :description, :class => 'textarea', :rows => "10" %> 
-                      </div>
-                   </div>
-									<% if talent.object.name.present? %>
-                   <% if talent.object.name.downcase == 'actor' %> 
-                    <%= f.fields_for :characteristics do |c|   %>
+
+                 <% @user.talents.each_with_index do |talent, index| %>
+                   <%= f.fields_for :talents, talent, :child_index => index do |talent_field|   %>
+                     <div class="control-group">
+                       <h3><%= talent_field.object.name %></h3>
+                       <%= talent_field.label :description, :class => 'control-label' %> 
+                        <div class="controls">
+                        <%= talent_field.text_area :description, :class => 'textarea', :rows => "10" %> 
+                        </div>
+                     </div>
+                   <% end %>
+                 <% end %>
+
+									<% if !@user.talents.first.nil? and !@user.talents.second.nil? and !@user.talents.first.name.nil? and !@user.talents.second.name.nil? %>
+                   <% if @user.talents.first.name.downcase == 'actor' or @user.talents.second.name.downcase == 'actor' %> 
+                    <%= f.fields_for :characteristics_attributes do |c|   %>
                     <div class="row-fluid actor-characteristics">
                       <div class="span4">
                         <div class="control-group">
@@ -222,7 +225,6 @@
           
           						<% end %>
                       <% end %>  
-                   <% end %>
                   <% end %>
                     
                </div>  
@@ -309,7 +311,7 @@
                 
 
                 
-						    <div class="control-group">>
+						    <div class="control-group">
 						       <%= video.label :imdb, :class => 'control-label' %>
 						         <div class="controls">
 						           <%= video.text_field :imdb, :class => 'text_field' %>
