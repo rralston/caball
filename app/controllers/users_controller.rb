@@ -70,9 +70,6 @@ class UsersController < ApplicationController
      if @videos.third.nil?
        @videos.build
      end
-     if @user.photos.first.nil?
-       @user.photos.build
-     end
      if @user.profiles.nil?
        @user.build_profiles
      end

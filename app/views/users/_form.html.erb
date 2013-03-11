@@ -78,14 +78,13 @@
                    </div>
                  </div>
 
-                <%= f.fields_for :profiles_attributes do |p|  %>
+                <%= f.fields_for :profiles do |p|  %>
                   <% if !@user.profiles.nil? %> 
                     <div class="control-group">
                       <%= p.label "Profile Photo", :class => 'control-label' %>
                       <div class="controls">
                         <%= image_tag @user.profiles.image.url(:medium), {:class => "img-polaroid"} %>          
-                        <%= p.file_field :image %>
-                        <%= p.check_box :_destroy %> Click Here to Delete  
+                        <%= p.file_field :image %> 
                       </div>
                     </div>
                   <%else%>
@@ -235,8 +234,7 @@
              
              <fieldset class="step more-photos">
                  <h2>More Photos</h2>
-       
-                <% comment = "We'll have to re-work this when we get photos vs profile photo"%>
+                 
           	   <%= f.fields_for :photos do |p|  %>
           		  <% if @user.photos.exists? %>
               		  <div class="control-group">
