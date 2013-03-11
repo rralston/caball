@@ -16,15 +16,15 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @projects = @user.projects
-    @talents = @user.talents.offset(1)
+    @talents = @user.talents
     if @user.nil?
         redirect_to :action => :index
     end
     @search = User.search(params[:q])
     @users = @search.result
-      if params[:q]
-        redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return
-      end
+    if params[:q]
+      redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return
+    end
       
     @real_videos = Array.new
     for video in @user.videos
@@ -42,10 +42,9 @@ class UsersController < ApplicationController
      search
      @user = User.new
      @user.build_characteristics
+     @user.build_profiles
      # @user.build_photos (this was building before save)
-     2.times do
-       @user.talent.build
-     end
+     # @user.talents.build
      3.times do 
        @video = @user.videos.build
      end
@@ -71,8 +70,8 @@ class UsersController < ApplicationController
      if @videos.third.nil?
        @videos.build
      end
-     if @user.photos.first.nil?
-       @user.photos.build
+     if @user.profiles.nil?
+       @user.build_profiles
      end
      if @user.talents.first.nil?
        @user.talents.build
