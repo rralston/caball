@@ -10,7 +10,7 @@
 <section id="roles" class="section alt">
   <%= render 'roles' %>
 </section>
-
+<% if @project.comments.present? %>
 <section id="roles" class="section alt">
 <div id="comments">
 	<div class="container-fluid">
@@ -23,12 +23,13 @@
 	              </h1>
 	          </div>
 	        </div>
-  				<%= render @project.comments if @project.comments.present? %>
+  				<%= render @project.comments %>
 				</div>
 		  </div>
 	</div>
 </div>
-
+<% end %>
+<% if current_user %>
 <% if current_user.id == @project.user_id %>
 <div id="comments">
 	<div class="container-fluid">
@@ -46,6 +47,7 @@
 		  </div>
 	</div>
 </div>
+<% end %>
 <% end %>
 
 
