@@ -185,6 +185,49 @@ var Users = {
       });  
     }
     
-  }
+  },
   
+  Index: {
+    
+    init: function() {
+      Users.Index.handlers();
+    },
+    
+    handlers: function() {
+      
+      /* We want to catch the search input and use ajax to display search results instead */
+      $('#user_search input').on( 'keypress', function(e) {
+        if(e.charCode == 13) {
+          searchTerm = $(this).val();
+          
+          /* Do the ajax call to get results from the server */
+          $.ajax({
+            url: '/users',
+            contentType: "application/json; charset=utf-8",
+            type: 'GET',
+            data: {
+              'q[name_cont]': searchTerm
+            },
+            dataType: 'json',
+            success: function(data) {
+              console.log(data);
+              if(data.success)
+                $('.users-search .search-results').html(data.html);
+              else 
+                Alert.newAlert("error", "There was an error processing your search");
+           
+            },
+            error: function() {
+              Alert.newAlert("error", "There was an error processing your search");
+            }
+          });
+          return false;
+        }
+      });
+      
+      
+    }
+    
+  }
+    
 }

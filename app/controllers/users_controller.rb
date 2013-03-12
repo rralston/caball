@@ -10,6 +10,11 @@ class UsersController < ApplicationController
     @search.build_condition
     respond_to do |format|
       format.html # index.html.erb
+      format.json { render :json => {
+                   :success => true, 
+                   :html => render_to_string(:partial => 'user_search_results', 
+                                             :layout => false, :formats => [:html], :locals => {} ) 
+                  } }
     end
   end
   
@@ -121,7 +126,7 @@ class UsersController < ApplicationController
    @search = User.search(params[:q])
    @users = @search.result
      if params[:q]
-       redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return
+       redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return   
      end
   end
 end
