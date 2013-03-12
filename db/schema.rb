@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130307041653) do
+ActiveRecord::Schema.define(:version => 20130307085953) do
 
   create_table "characteristics", :force => true do |t|
     t.integer  "age"
@@ -30,6 +30,17 @@ ActiveRecord::Schema.define(:version => 20130307041653) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "comments", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "comments", ["project_id"], :name => "index_comments_on_project_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
 
   create_table "conversations", :force => true do |t|
     t.string   "subject",    :default => ""
@@ -77,7 +88,7 @@ ActiveRecord::Schema.define(:version => 20130307041653) do
     t.boolean  "primary"
   end
 
-  create_table "profile", :force => true do |t|
+  create_table "profiles", :force => true do |t|
     t.string   "image"
     t.string   "description"
     t.string   "content_type"

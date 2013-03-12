@@ -6,7 +6,7 @@ class ChangeDataTypeForPhotosDescription < ActiveRecord::Migration
     end
     def self.down
       change_table :photos do |t|
-        t.change :description, :string
+        t.change :description, :text
       end
     end
   end

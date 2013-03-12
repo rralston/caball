@@ -1,17 +1,21 @@
 class User < ActiveRecord::Base
   has_one :characteristics, :dependent => :destroy
+  has_one :profiles, :dependent => :destroy
   has_many :photos, :as => :imageable, :dependent => :destroy
   has_many :videos, :as => :videoable, :dependent => :destroy
   has_many :projects, :dependent => :destroy
   has_many :talents, :dependent => :destroy
   has_many :friendships
   has_many :friends, through: :friendships
+  accepts_nested_attributes_for :profiles, :reject_if => :all_blank
   accepts_nested_attributes_for :characteristics, :photos, :videos, :projects, :talents, :allow_destroy => true
-  attr_accessible :name, :email, :location, :about, :imdb_url, :featured, :characteristics_attributes, :photos_attributes, :talents_attributes, :photo, :videos_attributes, :projects_attributes, :admin
+  attr_accessible :name, :email, :location, :about, :profiles, :profiles_attributes, :imdb_url, :characteristics_attributes, :photos_attributes, :talents_attributes, :photo, :videos_attributes, :projects_attributes, :admin, :gender, :headline
   validates_presence_of :name, :email, :message => "is required"
-  
+
   acts_as_messageable
-  
+    
+
+
   def self.from_omniauth(auth)
   where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
      user.provider = auth.provider
