@@ -23,7 +23,7 @@
 	              </h1>
 	          </div>
 	        </div>
-  				<%= render @project.comments %>
+  				<%= render @project.comments if @project.comments.present? %>
 				</div>
 		  </div>
 	</div>
