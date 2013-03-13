@@ -14,21 +14,65 @@ var Users = {
     
     handlers: function () {
       
-      var ajaxFormOptions = { 
-        success:      function(responseText, statusText, xhr, $form){ // post-submit callback 
-                        console.log('status: ' + statusText + '\n\nresponseText: \n' + responseText + '\n\nThe output div should have already been updated with the responseText.'); 
-                      } 
-      }; 
-      
-      $('#formElem').ajaxForm(ajaxFormOptions);
-      
+      // When user clicks on tab to go to next part of form, they're data will be uploaded/saved
+      // For now, only if there aren't errors in the form
       $('#navigation li').on('click', function() {
-        console.log("submitting form ajaxly");
-        $('#formElem').ajaxSubmit();
+        if(!$('#formElem').data('errors')){
+          $('#formElem').ajaxSubmit();
+        }
       });
+      
+      // For User Edit form - slides when you press tab on the last input
+      $('#formElem fieldset').each(function() {
+          $this = $(this);
+          $inputField = $this.find('.control-group').last().children().last();
+          $inputField.on('keydown', function(e){
+            if (e.which == 9){          
+              var current = $('#steps').data('index');
+              $('#navigation li:nth-child(' + (parseInt(current)+1) + ') a').click();
+              /* force the blur for validation */
+              $(this).blur();
+              e.preventDefault();
+            }
+        });
+      });
+      
+      // For user form - if there are errors don't allow the user to submit
+      $('#submit-user-form').bind('click',function(){
+        if($('#formElem').data('errors')){
+          Alert.newAlert('error', 'Please go back and correct any errors.');
+          return false;
+        } 
+      });
+      
+      /* Update the Roles when the user changes their selection */
+     
+      $('.talent-select').on('change', function() {
+        var value = $(this).val();
+        var index = $(this).data('index');
+        $('.step.roles .talent-label[data-index=' + index + ']').text(value);
+        var actor = false;
+        $characteristics = $('.actor-characteristics');
+        $('.talent-select').each(function(index) {
+          if ($(this).val() === 'Actor')  {
+            actor = true;
+          }
+        });
+        
+        if (!actor && !$characteristics.hasClass('hidden') ) {
+          $characteristics.addClass('hidden');
+        } 
+        if (actor) {
+          if ($characteristics.hasClass('hidden')) {
+            $characteristics.removeClass('hidden');
+          }
+        }
+      });
+      
       /* Add handler for numerous.js if we're adding additional entries to form so that it resizes 
          div height
        */
+            
       Numerous.init({
         'photos-list' : {
           'add' : function(form){
@@ -141,6 +185,49 @@ var Users = {
       });  
     }
     
-  }
+  },
   
+  Index: {
+    
+    init: function() {
+      Users.Index.handlers();
+    },
+    
+    handlers: function() {
+      
+      /* We want to catch the search input and use ajax to display search results instead */
+      $('#user_search input').on( 'keypress', function(e) {
+        if(e.charCode == 13) {
+          searchTerm = $(this).val();
+          
+          /* Do the ajax call to get results from the server */
+          $.ajax({
+            url: '/users',
+            contentType: "application/json; charset=utf-8",
+            type: 'GET',
+            data: {
+              'q[name_cont]': searchTerm
+            },
+            dataType: 'json',
+            success: function(data) {
+              console.log(data);
+              if(data.success)
+                $('.users-search .search-results').html(data.html);
+              else 
+                Alert.newAlert("error", "There was an error processing your search");
+           
+            },
+            error: function() {
+              Alert.newAlert("error", "There was an error processing your search");
+            }
+          });
+          return false;
+        }
+      });
+      
+      
+    }
+    
+  }
+    
 }

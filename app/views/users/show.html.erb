@@ -29,16 +29,16 @@
                  
                  <a href="#">
                  <div class="profile-pic">
-                <% if @user.photos.exists? %>   
-								<%= image_tag @user.photos.first.image, :"data-toggle" => "modal", :"data-target" => "#photos-modal", :"data-keyboard"=>"true"%>
+                <% if @user.profiles.present? %>   
+								<%= image_tag @user.profiles.image, :"data-toggle" => "modal", :"data-target" => "#photos-modal", :"data-keyboard"=>"true"%>
                  </div></a>
                  <!-- Photos Modal -->
                   <div id="photos-modal" class="modal hide fade photos-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-body">
                       <div id="photoCarousel" class="carousel slide" data-interval="false">
                         <div class="carousel-inner">
-                          <div class="active item"><div class="item-container"><%= image_tag @user.photos.first.image %></div></div>
-                          <% @user.photos.drop(1).each_with_index do |photo, counter| %>
+                          <div class="active item"><div class="item-container"><%= image_tag @user.profiles.image %></div></div>
+                          <% @user.photos.each_with_index do |photo, counter| %>
                             <div class="item">
                               <div class="item-container"><%= image_tag photo.image %>
                               <div class="row-fluid"><%= photo.description %></div></div>

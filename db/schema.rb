@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(:version => 20130307001018) do
     t.boolean  "primary"
   end
 
-  create_table "profile", :force => true do |t|
+  create_table "profiles", :force => true do |t|
     t.string   "image"
     t.string   "description"
     t.string   "content_type"
