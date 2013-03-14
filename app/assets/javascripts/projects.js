@@ -14,6 +14,7 @@ var Projects = {
     
     handlers: function() {
       
+      $(window).load(Projects.Show.equalHeights);
       
     },
     
@@ -71,6 +72,20 @@ var Projects = {
       
       Projects.Show.flowHandlers();
       
+    },
+    
+    /* This resizes the roles boxes so that they're all equal height and have equal proportions */
+    equalHeights: function() {
+      
+      var maxHeight=0;
+      $('.roles-row .roles .well').height('auto');
+      $('.roles-row .roles .well').each(function(){
+          if($(this).height()>maxHeight){
+              maxHeight=$(this).height();
+          }
+      });
+     
+      $('.roles-row .roles .well').height(maxHeight);
     }
     
   },
