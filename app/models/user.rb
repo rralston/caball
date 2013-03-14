@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_one :characteristics, :dependent => :destroy
-  has_one :profiles, :as => :imageable, :dependent => :destroy
+  has_one :profiles, :dependent => :destroy
   has_many :photos, :as => :imageable, :dependent => :destroy
   has_many :videos, :as => :videoable, :dependent => :destroy
   has_many :projects, :dependent => :destroy
