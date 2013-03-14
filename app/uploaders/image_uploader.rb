@@ -30,6 +30,7 @@ class ImageUploader < CarrierWave::Uploader::Base
       "/images/fallback/#{model.imageable_type}_" + [version_name, "default.png"].compact.join('_')
     rescue Exception => e
       "/images/fallback/#{model}_" + [version_name, "default.png"].compact.join('_')
+    end
   end
 
 
