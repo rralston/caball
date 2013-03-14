@@ -13,7 +13,7 @@ var Projects = {
     },
     
     handlers: function() {
-      
+      $(window).resize(Projects.Show.equalHeights);
       $(window).load(Projects.Show.equalHeights);
       
     },
