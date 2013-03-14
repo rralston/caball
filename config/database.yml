@@ -5,14 +5,26 @@
 #   gem 'sqlite3'
 
 # Max
+# development:
+#   adapter: postgresql
+#   database: filmzu
+#   host: localhost
+#   username: postgres
+#   password: password
+#   pool: 5
+#   timeout: 5000
+
+# Max Heroku 
 development:
   adapter: postgresql
-  database: filmzu
-  host: localhost
-  username: postgres
-  password: password
+  encoding: unicode
   pool: 5
-  timeout: 5000
+  database: d5gplihnrmuhgp
+  username: cgqmoimdevhcvm
+  password: BSib5K0ZAgokA3z8nMNTJXZC2y
+  host: ec2-54-243-62-232.compute-1.amazonaws.com
+  port: 5432
+
 
 # Rupe
 #development:
