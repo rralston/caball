@@ -10,7 +10,7 @@
 							<% end %>
               </h5>
               <p>
-              	<%= simple_format comment.content %>
+              	<%= raw comment.content %><br><br>
 								<% if comment.created_at != comment.updated_at %>
 								<i>
 									<% if comment.updated_at > Time.now.beginning_of_day %>
