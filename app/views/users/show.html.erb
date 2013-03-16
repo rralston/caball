@@ -57,7 +57,7 @@
                 <%= if @user.talents.first.present? then image_tag(@user.talents.first.name.downcase + ".png") end%>
               </div>
               <div class="span4 talents-thumbnail">
-                <%= image_tag(@user.talents.second.name.downcase + ".png") %>
+                <%= if @user.talents.second.present? then image_tag(@user.talents.second.name.downcase + ".png") end%>
               </div>
               <div class="span4">
                 third thumbnail image
@@ -72,7 +72,7 @@
             <%= [@user.talents.first.name, @user.talents.second.name].reject(&:empty?).join(' and ') %>
           </h3>
         </div>
-        <div class="row-fluid">
+        <div class="row-fluid follow-buttons">
           <div class="span3">
             <a data-toggle="modal" data-target="#message-modal" 
                     data-remote ="<%= new_conversation_path(:recipient => @user.email, :modal => true) %>"

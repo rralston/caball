@@ -102,11 +102,23 @@ var Users = {
     
     handlers: function () {
       
+      /* These are for keeping boxes equal widths/heights
+       * Right now we need to add each handler -
+       * we could probably replace this with an array of selectors that all should be the same height
+       * and then a function that just handles them all.
+       */
       $(window).resize( function() {
-        Users.Show.equalHeights('.user-body .user-menu .item.name');
+        Users.Show.equalWidths('.user-body .user-menu .item.name');
       });
       $(window).load( function() {
-        Users.Show.equalHeights('.user-body .user-menu .item.name');
+        Users.Show.equalWidths('.user-body .user-menu .item.name');
+      });
+      
+      $(window).resize( function() {
+        Users.Show.equalHeights('.follow-buttons .span3');
+      });
+      $(window).load( function() {
+        Users.Show.equalHeights('.follow-buttons .span3');
       });
       
       $('.user-menu').on('click', function() {
@@ -234,6 +246,20 @@ var Users = {
     
     /* This resizes the roles boxes so that they're all equal height and have equal proportions */
     equalHeights: function(selector) {
+      
+      var maxHeight=$(selector).parent().height();
+      $(selector).height('auto');
+      $(selector).each(function(){
+          if($(this).height()>maxHeight){
+              maxHeight=$(this).height();
+          }
+      });
+     
+      $(selector).height(maxHeight);
+    },
+    
+    /* This resizes the roles boxes so that they're all equal width and have equal proportions */
+    equalWidths: function(selector) {
       
       var maxWidth=$(selector).parent().width();
       $(selector).width('auto');
