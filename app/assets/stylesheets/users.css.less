@@ -268,7 +268,8 @@ figure.profile-pic > img {
  
 
 /* User Profile Page */
-
+        
+@backgroundButtonColor: #bfbfbf;
 .user-header {
   
   .header-bubble {
@@ -282,6 +283,25 @@ figure.profile-pic > img {
     margin: 20px 0px;
     .box-shadow(0px 10px 10px #333);
     color: #fff;
+    
+    .right-content {
+      position: relative;
+      
+      .follow-buttons {
+        
+        > .span4 {
+          color: @black;
+          background: @backgroundButtonColor repeat;
+          background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+          background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+          background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+          background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+          background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+          .border-radius(~'10px / 5px');
+          .box-shadow(0px 10px 10px -5px #F00);
+        }
+      }
+    }
   }
   
   .details div {
@@ -304,20 +324,6 @@ figure.profile-pic > img {
     width: 50%;
   }
   
-  @backgroundButtonColor: #bfbfbf;
-  
-  .follow-buttons .span4 {
-    color: @black;
-    background: @backgroundButtonColor repeat;
-    background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-    background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-    background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-    background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-    background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-    .border-radius(~'10px / 5px');
-    .box-shadow(0px 10px 10px -5px #F00);
-    
-  }
   
   .headline {
     margin: 10px 0;
@@ -377,40 +383,76 @@ figure.profile-pic > img {
       background-color: #ddd;
     }
     
+    .user-menu.active .button-tab {
+      display: block;
+    }
+    
     .user-menu {
       
       @menuButtonColor: #555;
         
-      background: @menuButtonColor repeat;
-      background: -webkit-linear-gradient(left, rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @menuButtonColor repeat;
-      background: -moz-linear-gradient(left, rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @menuButtonColor repeat;
-      background: -ms-linear-gradient(left, rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @menuButtonColor repeat;
-      background: -o-linear-gradient(left, rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @menuButtonColor repeat;
-      background: linear-gradient(left, rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @menuButtonColor repeat;
-      
-      border: solid 2px @black;
-      .border-radius(~'40px / 8px');
+      position: relative;
+        
+      margin-right: 5px;
+      margin-bottom: 30px;
+      margin-left: 5px;
+  
+      border: 1px solid #494949;
+      border-radius: 5px;
+  
+      background-color: @menuButtonColor;
+      background-image: linear-gradient(90deg, #525252, dimgray);
+  
+      box-shadow: 
+          inset 0 1px 0 0 rgba(255,255,255,0.4),
+          inset 0 0 5px 0 rgba(255,255,255,0.2),
+          inset 0 67px 67px -40px rgba(255,255,255,0),
+          0 2px 0 0 #2e2e2e,
+          0 3px 6px 0 rgba(0,0,0,0.4);
+      transition: 
+          box-shadow 230ms ease-in-out,
+          transform 230ms ease-in-out,
+          border-color 230ms ease-in-out;
+  
+      font-family: 'Montserrat', sans-serif;
+      color: white;
+      font-size: 23px;
+      line-height: 20px;
+      font-weight: 400;
+      text-align: left;
       text-decoration: none;
+      text-shadow: 0 1px 1px rgba(0,0,0,0.27);
+  
+      vertical-align: middle;
       cursor: pointer;
-      color: @white;
-      font-weight: bolder;
-      
-      margin-bottom: 10px;
-      
-      h3 {
-        font-size: 1.5em;
-      }
       
       display: table;
+      
+      .button-tab {
+        display: none;
+        position: absolute;
+        right: -15px;
+        z-index: -1;
+        height: 100%;
+        top: 1px;
+      }
       
       .item {
         display: table-cell;
         vertical-align: middle;
-        
       }
         
       .arrow.item {
-        padding-right: 20px;
+        right: 5px;
+        position: relative;
+        text-align: right;
+        
+        img {
+          z-index: 0;
+          position: relative;
+          width: 18px;
+          height: 22px;
+        }
       }
       
       .item.name {
@@ -418,11 +460,34 @@ figure.profile-pic > img {
         padding-right: 10px;
       }
     }
+    
+    .user-menu:hover {
+      border-color: rgba(73,73,73,0.5);
+      box-shadow: 
+        inset 0 1px 0 0 rgba(255,255,255,0.6),
+        inset 0 0 5px 0 rgba(255,255,255,0.2),
+        inset 0 67px 67px -40px rgba(255,255,255,0.3),
+        0 2px 0 0 #2e2e2e,
+        0 3px 8px 0 rgba(0,0,0,0.4);
+    }
+    
+    .user-menu.active {
+      box-shadow: 
+        inset 0 1px 0 0 rgba(255,255,255,0),
+        inset 0 1px 7px -1px rgba(0,0,0,0.35),
+        inset 0 67px 67px -40px rgba(255,255,255,0),
+        0 2px 0 0 #2e2e2e,
+        0 3px 8px 0 rgba(0,0,0,0);
+      transform: translate(0px, 2px);
+    }
   }
   
   .content {
+    margin-left: 0px;
+    z-index: 1;
+    position: relative;
     .border-radius(10px);
-    background: url('user_body_texture.png') repeat;
+    background: #555;
     min-height: 400px; 
     padding-bottom: 50px;
     .box-shadow(0px 10px 10px #333);

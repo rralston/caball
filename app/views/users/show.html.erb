@@ -81,7 +81,7 @@
               </div>
             </div>
           </div>
-          <div class="span5 offset1">
+          <div class="span5 offset1 right-content">
             <div class="row-fluid left-aligned">
               <h3>
                 <%= [@user.talents.first.name, @user.talents.second.name].reject(&:empty?).join(' and ') %>
@@ -118,38 +118,50 @@
       <div class="span2 offset1 menu">
         <div class="container-fluid">
           <div class="row-fluid user-menu" data-link="about_me">
-            <div class="item name"><h3>ABOUT ME</h3></div> 
+            <div class="item name"><h3>About</h3></div> 
               <div class="arrow item">
                 <%= image_tag('red_arrow.png') %>
               </div>
+                <%= image_tag('button_tab.png', :class => "button-tab") %>
+          </div>
+          <div class="row-fluid user-menu" data-link="reel">
+            <div class="item name"><h3>My Reel</h3></div> 
+              <div class="arrow item">
+                <%= image_tag('red_arrow.png') %>
+              </div>
+                <%= image_tag('button_tab.png', :class => "button-tab") %>
           </div>
           <% if @user.talents.first.present? %>
           <div class="row-fluid user-menu" data-link="first_role">
-            <div class="item name"><h3><%= @user.talents.first.name.upcase %> </h3></div>  
+            <div class="item name"><h3><%= @user.talents.first.name %> </h3></div>  
               <div class="arrow item">
                 <%= image_tag('red_arrow.png') %>
               </div>
+                <%= image_tag('button_tab.png', :class => "button-tab") %>
           </div>
           <% end %>
           <% if @user.talents.second.present? %>
           <div class="row-fluid user-menu" data-link="second_role">
-            <div class="item name"><h3><%= @user.talents.second.name.upcase %> </h3></div>  
+            <div class="item name"><h3><%= @user.talents.second.name %> </h3></div>  
               <div class="arrow item">
                 <%= image_tag('red_arrow.png') %>
               </div>
+                <%= image_tag('button_tab.png', :class => "button-tab") %>
           </div>
           <% end %>
           <div class="row-fluid user-menu" data-link="pictures">
-            <div class="item name"><h3>PICTURES </h3></div> 
+            <div class="item name"><h3>Pictures </h3></div> 
               <div class="arrow item">
                 <%= image_tag('red_arrow.png') %>
               </div>
+                <%= image_tag('button_tab.png', :class => "button-tab") %>
           </div>
           <div class="row-fluid user-menu" data-link="projects">
-            <div class="item name"><h3>PROJECTS </h3></div> 
+            <div class="item name"><h3>Projects </h3></div> 
               <div class="arrow item">
                 <%= image_tag('red_arrow.png') %>
               </div>
+                <%= image_tag('button_tab.png', :class => "button-tab") %>
           </div>
         </div>
       </div>

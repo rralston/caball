@@ -107,10 +107,10 @@ var Users = {
        * and then a function that just handles them all.
        */
       $(window).resize( function() {
-        Users.Show.equalWidths('.user-body .user-menu .item.name');
+        Users.Show.equalWidths('.user-body .user-menu');
       });
       $(window).load( function() {
-        Users.Show.equalWidths('.user-body .user-menu .item.name');
+        Users.Show.equalWidths('.user-body .user-menu');
       });
       
       $(window).resize( function() {
@@ -118,6 +118,13 @@ var Users = {
       });
       $(window).load( function() {
         Users.Show.equalHeights('.follow-buttons div');
+      });
+      
+      $(window).resize( function() {
+        Users.Show.equalHeights('.header-bubble > .span5');
+      });
+      $(window).load( function() {
+        Users.Show.equalHeights('.header-bubble > .span5');
       });
       
       $('.user-menu').on('click', function() {
