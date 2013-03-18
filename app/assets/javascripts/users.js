@@ -88,7 +88,8 @@ var Users = {
           }
         }
       });
-    }
+    },
+    
   },
   
   Show: {
@@ -96,9 +97,54 @@ var Users = {
       console.log("init show users");   
       Users.Show.handlers();
       Users.Show.modalHandlers();
+      $('div[data-link=about_me]').trigger('click');
     },
     
     handlers: function () {
+      
+      $(window).resize( function() {
+        Users.Show.equalHeights('.user-body .user-menu .item.name');
+      });
+      $(window).load( function() {
+        Users.Show.equalHeights('.user-body .user-menu .item.name');
+      });
+      
+      $('.user-menu').on('click', function() {
+        var link = $(this).data('link');
+        $('.user-menu').removeClass('active');
+        $(this).addClass('active');
+        Users.Show.displayContent(link);
+      });
+    },
+    
+    displayContent: function(link) {
+      var id = $('#user-body').data('id');
+      console.log(link);
+      
+      $.ajax({
+        url: '/users/' + id,
+        contentType: "application/json; charset=utf-8",
+        type: 'GET',
+        data: {
+          'link': link
+        },
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          if(data.success)
+            $('.user-body .content').html(data.html);
+          else 
+            Alert.newAlert("error", "There was an error in processing");
+        },
+        error: function() {
+          Alert.newAlert("error", "There was an error in processing");
+        }
+      });
+    },
+    
+    modalHandlers: function () {
+      
+      /* So that the messaging modal sizes appropriately */
       $('#message-modal').on('show', function () {
         $(this).css({
         'margin-left': function () {
@@ -107,6 +153,8 @@ var Users = {
         });
       });
       
+      
+      /* Event listeners for messaging modal buttons */
       $('#message-modal').on('shown', function () {
         $('input[value="Cancel"]').on('click', function () {
           $('#message-modal').modal('hide');
@@ -118,6 +166,7 @@ var Users = {
         });
       });
       
+      /* Photo carousel for the photos modal */
       $('#photos-modal').on('shown', function () {
         $('#photoCarousel').carousel(0);
         $("body").keydown(function(e) {
@@ -129,9 +178,7 @@ var Users = {
           }
         });
       });
-    },
-    
-    modalHandlers: function () {
+      
       $('.role-more a').on('click', function () {
         // Now we have to figure out whether we'll display role 1 or role 2
         // We can do that from figuring out who our parent is and we'll have to 
@@ -183,6 +230,20 @@ var Users = {
           tempNode = tempNode.parent();
         }
       });  
+    },
+    
+    /* This resizes the roles boxes so that they're all equal height and have equal proportions */
+    equalHeights: function(selector) {
+      
+      var maxWidth=$(selector).parent().width();
+      $(selector).width('auto');
+      $(selector).each(function(){
+          if($(this).width()>maxWidth){
+              maxWidth=$(this).width();
+          }
+      });
+     
+      $(selector).width(maxWidth);
     }
     
   },

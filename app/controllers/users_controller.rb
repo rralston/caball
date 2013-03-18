@@ -37,9 +37,16 @@ class UsersController < ApplicationController
         @real_videos << video
       end
     end
-    
+    if params[:link]
+      partial = params[:link]
+    end
     respond_to do |format|
       format.html # show.html.erb
+      format.json { render :json => {
+                   :success => true, 
+                   :html => render_to_string(:partial => partial, 
+                                             :layout => false, :formats => [:html], :locals => {} ) 
+                  } }
     end
   end
   
