@@ -40,7 +40,11 @@
                   <li class="divider-vertical"></li>
                   <li class="widgets">
                     <div class="search">
-                      <%= search_form_for @search do |f| %><%= f.text_field :name_cont, :placeholder => 'Find Talent...' %><% end %>
+                      <% if params[:controller] == 'projects' then %>
+                        <%= search_form_for @search do |f| %><%= f.text_field :title_cont, :placeholder => 'Find a Project...' %><% end %>
+                      <% else %>
+                        <%= search_form_for @search do |f| %><%= f.text_field :name_cont, :placeholder => 'Find Talent...' %><% end %>
+                      <% end %>
                       <i class="icon-search"></i>
                     </div>
                     <% if current_user %>

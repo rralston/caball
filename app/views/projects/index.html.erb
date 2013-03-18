@@ -2,7 +2,7 @@
   <div class='container-fluid'>
     <div class='row-fluid'>
       <!-- Left Column for Search Terms-->
-      <div class='span3'>
+      <div class='span3 search-column'>
         <%= search_form_for @search do |f| %>
           <div class="field project-title">
             <%= f.text_field :title_cont, :placeholder => 'Find a Project...', :class => 'project-title-input' %>

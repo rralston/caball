@@ -359,7 +359,7 @@ figure.profile-pic > img {
   }
   
   .message-button {
-    background: @backgroundButtonColor repeat;
+    background: @backgroundButtonColor;
     background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
     background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
     background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
@@ -374,7 +374,7 @@ figure.profile-pic > img {
   .message-button:hover {
     /* Overriding a weird bootstrap property */
     background-position: 0px 33px;
-    background: darken(@backgroundButtonColor, 20%) repeat;
+    background: darken(@backgroundButtonColor, 20%);
     background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
     background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
     background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
@@ -507,7 +507,6 @@ figure.profile-pic > img {
           0 2px 0 0 #2e2e2e,
           0 3px 6px 0 rgba(0,0,0,0.4);
           
-    
     border: 1px solid #494949;
           
     margin-left: 0px;
@@ -515,7 +514,7 @@ figure.profile-pic > img {
     position: relative;
     /*.border-radius(10px);*/
     background: #555;
-    min-height: 400px; 
+    min-height: 600px; 
     padding-bottom: 50px;
    /*.box-shadow(0px 10px 10px #333);*/
     color: @white;
