@@ -247,32 +247,41 @@ header {
 }
 
 // Footer
-#footer {
+footer {
+  background: url('user_body_texture.png') repeat;
   padding: 20px;
-  background: #333333;
-  color: #eeeeee;
-  border-top: 1px solid black;
-  text-shadow: 1px 1px 1px #222222;
-  -webkit-box-shadow: inset 0px 3px 3px rgba(0,0,0,0.25);
-  -moz-box-shadow: inset 0px 3px 3px rgba(0,0,0,0.25);
-  box-shadow: inset 0px 3px 3px rgba(0,0,0,0.25);
-  -webkit-box-shadow: inset 0px 3px 3px rgba(0,0,0,0.25);
-  -moz-box-shadow: inset 0px 3px 3px rgba(0,0,0,0.25);
-  box-shadow: inset 0px 3px 3px rgba(0,0,0,0.25);
-}
-#footer > hr {
+  color: @white;
+  .text-shadow(1px 6px 8px #333);   
+  .box-shadow(inset 0px 3px 3px rgba(0,0,0,0.25));
+  
+  a, a:active, a:focus, a:visited { 
+    color: @white;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: none;
+    color: #c1272d; 
+  }
+  
+  h5 {
+    display: inline;
+    font-size: 1.5em;
+  }
+  
+  .camera-keyhole {
+    margin-top: -5px; 
+  }
+  
+  > hr {
+    
   border-top: 1px solid @grayDarker;
   border-bottom: 1px solid @gray;
+  }
+  
+  ul.links {
+    margin:0;
+  }
 }
-
-#footer .copyright {
-  color: @gray;
-}
-
-#footer ul.links {
-  margin:0;
-}
-
 #footer ul.links > li {
   display: inline;
   list-style-type: none;
@@ -475,8 +484,8 @@ width: 310px;
 
 /* Set the fixed height of the footer here */
 #push,
-#footer {
-  height: 60px;
+footer {
+  height: 50px;
 }
 
 

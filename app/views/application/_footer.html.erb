@@ -1,32 +1,23 @@
 <!-- Page Footer -->
 <footer  id="footer" role="contentinfo" class="section">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row-fluid">
-      <div class="span10 offset1">
-        <div class="copyright pull-right">© <%= Date.today.strftime("%Y") %> Filmzu</div>
+      <div class="span1 camera-keyhole"><%= image_tag 'camera_keyhole.png' %></div>
+      <div class="span7 offset4">
         <ul class="links">
-                 <li>
-                   <%= link_to "About", "root_url" %>
-                 </li>
-                 <li>
-                   <%= link_to "Blog", root_url %>
-                 </li>
-                 <li>
-                   <%= link_to "Find Talent", users_path %>
-                 </li>
-       					<li>
-       	          <%= link_to "Discover Projects", projects_path %>
-       	        </li>
-                 <li>
-                   <%= link_to "Terms of Use", "terms" %>
-                 </li>
-                 <li>
-                   <%= link_to "Privacy Policy", privacy_path %>
-                 </li>
-                 <li>
-                   <%= link_to "Contact", "contact" %>
-                 </li>
-               </ul>
+          <li>
+            <h5><%= link_to "About Filmzu", "root_url" %></h5>
+          </li>
+          <li>
+            <h5><%= link_to "Feedback", root_url %></h5>
+          </li>
+          <li>
+            <h5><%= link_to "Contact Us", root_url %></h5>
+          </li>
+          <li>
+            <h5><%= link_to "Terms & Conditions", "terms" %></h5>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
