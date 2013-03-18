@@ -118,14 +118,14 @@
       <div class="span2 offset1 menu">
         <div class="container-fluid">
           <div class="row-fluid user-menu" data-link="about_me">
-            <div class="item name"><h3>About Me</h3></div> 
+            <div class="item name"><h3>ABOUT ME</h3></div> 
               <div class="arrow item">
                 <%= image_tag('red_arrow.png') %>
               </div>
           </div>
           <% if @user.talents.first.present? %>
           <div class="row-fluid user-menu" data-link="first_role">
-            <div class="item name"><h3><%= @user.talents.first.name %> </h3></div>  
+            <div class="item name"><h3><%= @user.talents.first.name.upcase %> </h3></div>  
               <div class="arrow item">
                 <%= image_tag('red_arrow.png') %>
               </div>
@@ -133,20 +133,20 @@
           <% end %>
           <% if @user.talents.second.present? %>
           <div class="row-fluid user-menu" data-link="second_role">
-            <div class="item name"><h3><%= @user.talents.second.name %> </h3></div>  
+            <div class="item name"><h3><%= @user.talents.second.name.upcase %> </h3></div>  
               <div class="arrow item">
                 <%= image_tag('red_arrow.png') %>
               </div>
           </div>
           <% end %>
           <div class="row-fluid user-menu" data-link="pictures">
-            <div class="item name"><h3>Pictures </h3></div> 
+            <div class="item name"><h3>PICTURES </h3></div> 
               <div class="arrow item">
                 <%= image_tag('red_arrow.png') %>
               </div>
           </div>
           <div class="row-fluid user-menu" data-link="projects">
-            <div class="item name"><h3>Projects </h3></div> 
+            <div class="item name"><h3>PROJECTS </h3></div> 
               <div class="arrow item">
                 <%= image_tag('red_arrow.png') %>
               </div>
