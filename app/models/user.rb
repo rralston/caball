@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many :talents, :dependent => :destroy
   has_many :friendships
   has_many :friends, through: :friendships
+  has_many :comments
   accepts_nested_attributes_for :characteristics, :photos, :videos, :projects, :talents, :allow_destroy => true
   attr_accessible :name, :email, :location, :about, :imdb_url, :featured, :characteristics_attributes, :photos_attributes, :talents_attributes, :photo, :videos_attributes, :projects_attributes, :admin
   validates_presence_of :name, :email, :message => "is required"
