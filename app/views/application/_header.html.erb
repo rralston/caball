@@ -40,7 +40,8 @@
                   <li class="divider-vertical"></li>
                   <li class="widgets">
                     <div class="search">
-                      <input type="text" > <i class="icon-search"></i>
+                      <%= search_form_for @search do |f| %><%= f.text_field :name_cont, :placeholder => 'Find Talent...' %><% end %>
+                      <i class="icon-search"></i>
                     </div>
                     <% if current_user %>
                       <div class="notifications">
