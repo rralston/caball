@@ -11,9 +11,8 @@
       </ul>
     </div>
   <% end %>
-
   <div class="field">
-    <%= f.text_area :content, rows: 8, cols: 300 %>
+    <%= f.text_area :content, rows: 8, :class => 'span12', :placeholder => "Enter your project updates here, you can also embed a Youtube or Vimeo Video!" %>
   </div>
   <div class="actions">
     <%= f.submit "Create New Update", :class => 'btn btn-primary' %>
