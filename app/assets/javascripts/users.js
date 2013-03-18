@@ -114,10 +114,10 @@ var Users = {
       });
       
       $(window).resize( function() {
-        Users.Show.equalHeights('.follow-buttons .span3');
+        Users.Show.equalHeights('.follow-buttons div');
       });
       $(window).load( function() {
-        Users.Show.equalHeights('.follow-buttons .span3');
+        Users.Show.equalHeights('.follow-buttons div');
       });
       
       $('.user-menu').on('click', function() {
