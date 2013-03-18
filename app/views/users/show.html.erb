@@ -81,25 +81,23 @@
               </div>
             </div>
           </div>
-          <div class="span5 offset1 right-content">
+          <div class="span5 offset3 right-content">
             <div class="row-fluid left-aligned">
               <h3>
                 <%= [@user.talents.first.name, @user.talents.second.name].reject(&:empty?).join(' and ') %>
               </h3>
-            </div>
-            <div class="row-fluid left-aligned headline">
               <%= if @user.headline.present? then simple_format @user.headline end %>
             </div>
             <div class="row-fluid follow-buttons">
-              <div class="span4 centered-text">
+              <div class="span4 offset2 centered-text">
+                <h5><%= @user.friendships.all.count %></h5>
                 <h5>Following </h5>
-                <h5><%= @user.friendships.all.count %></h5>
               </div>
               <div class="span4 centered-text">
-                <h5>Followers </h5>
                 <h5><%= @user.friendships.all.count %></h5>
+                <h5>Followers </h5>
               </div>
-              <div class="span4 camera-heart centered-text">
+              <div class="span2 camera-heart centered-text">
                 <%= link_to(friendships_path(friend_id: @user), method: :post, :class => '') do %>
                   <%= image_tag 'camera_heart.png' %>
                 <% end %>
