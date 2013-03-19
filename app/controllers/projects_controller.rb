@@ -37,9 +37,20 @@ class ProjectsController < ApplicationController
     end
     
     @real_videos = Array.new
+    
     for video in @project.videos
       if video.thumbnail_small.present?
         @real_videos << video
+      end
+    end
+    
+    @sorted_roles = Hash.new
+    
+    @project.roles.each do |role|
+      if @sorted_roles.has_key?(role.name) then
+        @sorted_roles[role.name] << role
+      else
+        @sorted_roles[role.name] = [role]
       end
     end
   end

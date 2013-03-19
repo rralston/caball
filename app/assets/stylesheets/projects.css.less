@@ -1,4 +1,4 @@
-iframe {
+.royalSlider iframe {
   margin-top: -200px;
   margin-bottom: 30px;
   margin-left: 800px;
@@ -15,6 +15,96 @@ iframe {
   -o-transform:rotate(20deg);
   -ms-transform:rotate(20deg);
   filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=.2);
+}
+
+/* Projects Profile Page */
+
+#content {
+  .page-header {
+    h1 {
+      font-size: 2em;
+      color: @black;
+    }
+    
+  }
+  
+  #about {
+    
+    .message-follow {
+      border: 3px solid #333;
+      width: 40%;
+      padding: 10px;
+      border: 3px solid #999;
+      background: url('user_body_texture.png') repeat;  
+      .box-shadow(3px 3px 6px 0px #333333);
+      
+      .message-button {
+        color: @black;
+        background: @backgroundButtonColor;
+        background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
+        background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
+        background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
+        background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
+        background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
+        .box-shadow(0px 10px 10px -5px #F00);
+        
+        padding: 10px;
+        .border-radius(3px);
+        border: 1px solid #999;
+        
+        h5 {
+          margin: 0;
+        }
+      }
+      
+      .message-button:hover {
+        text-decoration: none;
+        cursor: pointer;
+        @darkerButtonBackgroundColor: darken(@backgroundButtonColor, 10%);
+        background: @darkerButtonBackgroundColor;
+        background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @darkerButtonBackgroundColor;
+        background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @darkerButtonBackgroundColor;
+        background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @darkerButtonBackgroundColor;
+        background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @darkerButtonBackgroundColor;
+        background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @darkerButtonBackgroundColor;
+      }
+    }
+    
+    .video-container {
+      margin-top: 40px;
+      margin-bottom: 40px;
+      .box-shadow(3px 3px 6px 1px #333);
+      iframe {
+        
+      }
+    }
+    
+    .about-text {
+      .projects-description-more {
+        text-align: right;
+        margin-top: -15px;
+        .btn-link {
+          text-align: right;
+          color: #333;
+        }
+        .btn-link:hover {
+          text-decoration: none;
+        }
+      }
+    }
+    .open-roles-container {
+      text-align: center;
+      margin-bottom: 40px;
+      span {
+        color: @white;
+        padding: 10px;
+        border: 3px solid #999;
+        background: url('user_body_texture.png') repeat;  
+        .box-shadow(3px 3px 6px 0px #333333);
+      }
+    }
+    
+  }
 }
 .comment p {
   margin-right: 500px;
@@ -124,6 +214,7 @@ section.projects-search {
     border: solid 3px #444;
     padding: 10px;
     margin-bottom: 20px;
+    overflow: hidden;
     
     a, a:hover, a:active, a:visited {
       text-decoration: none;
