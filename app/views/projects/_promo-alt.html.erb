@@ -27,26 +27,6 @@
         </div>
       </div>
         
-      <% comment = "3d Projects Slider" %>
-<%
-=begin%>
-      <div class="row-fluid">
-        <div class="royalSlider rsDefault">
-          
-          <% @project.photos.each_with_index do |photo, counter| %>
-            <%= image_tag(photo.image) %>
-            
-          <%end%>
-          
-          <% @real_videos.each_with_index do |video| %>
-            <img src="<%= video.thumbnail_large %>" data-rsVideo="<%= video.url %>" />
-          <%end%>
-          
-        </div>  
-
-      </div>
-<%
-=end%>
     </div>      
   </div>
 </div>

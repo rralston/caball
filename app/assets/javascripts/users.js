@@ -98,6 +98,7 @@ var Users = {
       Users.Show.handlers();
       Users.Show.modalHandlers();
       $('div[data-link=about_me]').trigger('click');
+      Global.initFlow();
     },
     
     handlers: function () {
@@ -126,13 +127,26 @@ var Users = {
       
       $('.user-menu').on('click', function() {
         var link = $(this).data('link');
-        $('.user-menu').removeClass('active');
-        $(this).addClass('active');
-        Users.Show.displayContent(link);
+        Users.Show.displayContent(link, $(this));
       });
     },
     
-    displayContent: function(link) {
+    displayContent: function(link, menuItem) {
+      
+      if(link === 'reel') {
+        /* We have a separate condition for reel -- no server call*/
+    
+        $('.user-menu').removeClass('active');
+        $(menuItem).addClass('active');
+        var top = $(menuItem).position().top;
+        $('.triangle-tab').css('top', top);
+        $('html, body').animate({
+          scrollTop: $('.reel-slider').offset().top
+        });
+        
+        return;
+      }
+      $('.triangle-tab').css('top', top);
       var id = $('#user-body').data('id');
       console.log(link);
       
@@ -140,14 +154,28 @@ var Users = {
         url: '/users/' + id,
         contentType: "application/json; charset=utf-8",
         type: 'GET',
+        context: menuItem,
         data: {
           'link': link
         },
         dataType: 'json',
         success: function(data) {
           console.log(data);
-          if(data.success)
+          if(data.success) {
             $('.user-body .content').html(data.html);
+            $('.user-menu').removeClass('active');
+            $(this).addClass('active');
+            var top = $(this).position().top;
+            $('.triangle-tab').css('top', top);
+            
+            if($(this).data('link') === 'projects'){
+              Users.Show.equalHeights('.projects .projects-box');
+              $(window).resize( function() {
+                Users.Show.equalHeights('.projects .projects-box');
+              });
+            }
+          }
+            
           else 
             Alert.newAlert("error", "There was an error in processing");
         },
@@ -300,8 +328,8 @@ var Users = {
     /* This resizes the roles boxes so that they're all equal height and have equal proportions */
     equalHeights: function(selector) {
       
-      var maxHeight=$(selector).parent().height();
       $(selector).height('auto');
+      var maxHeight=$(selector).parent().height();
       $(selector).each(function(){
           if($(this).height()>maxHeight){
               maxHeight=$(this).height();

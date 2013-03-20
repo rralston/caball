@@ -62,7 +62,7 @@
 
   position: absolute; 
   cursor: pointer;  
-  background: url('<%= asset_path 'royal_slider/rs-default.png' %>');
+  background: url('royal_slider/rs-default.png');
 
   background-color: #000;
   background-color: rgba(0,0,0,0.75);

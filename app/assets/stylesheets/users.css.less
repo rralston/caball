@@ -66,10 +66,6 @@ figure.profile-pic > img {
   position: absolute;
 }
 
-.location-modal-button {
-  cursor: pointer;
-}
-
 .centered-buttons {
   text-align: center;
 }
@@ -269,19 +265,33 @@ figure.profile-pic > img {
 
 /* User Profile Page */
         
+        
+/* Might just want to do this for #user-body and #user-header */
+#content {
+  position: relative;
+}
+#content:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  
+  background: url('user_body_texture.png') repeat;
+  opacity: 0.2;
+  filter: alpha(opacity=20);
+  z-index: -1;
+}
 @backgroundButtonColor: #bfbfbf;
 .user-header {
   
   .header-bubble {
-    background: url('user_body_texture.png') repeat;
-    background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), url('user_body_texture.png') repeat;
-    background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), url('user_body_texture.png') repeat;
-    background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), url('user_body_texture.png') repeat;
-    background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), url('user_body_texture.png') repeat;
-    background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), url('user_body_texture.png') repeat;
+    background-color: @white;
     margin: 20px 0px;
-    .box-shadow(0px 10px 10px #333);
-    color: #fff;
+    border: 2px solid @black;
+    color: @black;
     
     .modal {
       color: #333;
@@ -291,6 +301,8 @@ figure.profile-pic > img {
       position: relative;
       padding-bottom: 10px;
       display: table;
+      float: right;
+      padding-right: 20px;
       
       > div {
         display: table-row;
@@ -310,6 +322,7 @@ figure.profile-pic > img {
           background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
           background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
           .box-shadow(0px 10px 10px -5px #F00);
+        .border-radius(3px);
           
           padding: 5px 0;
           
@@ -321,16 +334,36 @@ figure.profile-pic > img {
     }
   }
   
+  .details {
+    .location-modal-button {
+      cursor: pointer;
+      color: #666;
+    }
+      
+    font-size: 1.4em;
+    
+    
+    .talents {
+      color: #666;
+      text-align: center;
+      
+    }
+  }
+  
+  .right-content {
+    color: #666;
+  }
+  
   .details div {
     margin-top: 15px;
   }
 
   .profile-pic {
-    padding: 10%;
-    width: 60%;
+    padding: 5%;
+    width: 84%;
     
     img {
-      border: solid 10px #333;
+
       
       /*.border-radius(10px);*/
     }
@@ -359,32 +392,21 @@ figure.profile-pic > img {
   }
   
   .message-button {
-    background: @backgroundButtonColor;
-    background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-    background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-    background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-    background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-    background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-    /*.border-radius(~'10px / 5px');*/
+    .gradient(#555, #666, #333);
+    border: 1px solid #ccc;
     text-decoration: none;
-    color: @black;
+    color: @white;
     padding: 4% 12%;
     cursor: pointer;
+    font-weight: 400;
   }
   .message-button:hover {
     /* Overriding a weird bootstrap property */
-    background-position: 0px 33px;
-    background: darken(@backgroundButtonColor, 20%);
-    background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-    background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-    background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-    background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-    background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-    border-color: darken(@backgroundButtonColor, 20%);
+    .gradient(#333, #444, #111);
   }
   
   .message-row {
-    margin-bottom: 30px;
+    margin-bottom: 0px;
     font-weight: bold;
   }
 
@@ -392,26 +414,51 @@ figure.profile-pic > img {
 
 .user-body {
   
-  margin-bottom: 50px;
+  padding-bottom: 50px;
 
   .menu {  
+    position: relative;
     
     .active {
       background-color: #ddd;
     }
     
-    .user-menu.active .button-tab {
-      display: block;
-    }
-    
     .user-menu {
       
-      @menuButtonColor: #555;
+      h3 {
+        font-weight: 400;
+        
+        @media screen and (max-width: 1500px) {
+          font-size: 0.9em;
+        }
+        
+        @media screen and (max-width: 1400px) {
+          font-size: 0.8em;
+        }
+        
+        @media screen and (max-width: 1300px) {
+          font-size: 0.7em;
+        }
+        
+        @media screen and (max-width: 1200px) {
+          font-size: 0.5em;
+        }
+        
+        @media screen and (max-width: 1100px) {
+          font-size: 0.4em;
+        }
+        
+        @media screen and (max-width: 1000px) {
+          font-size: 0.3em;
+        }
+      }
+      
+      @menuButtonColor: #333;
         
       position: relative;
         
       margin-right: 5px;
-      margin-bottom: 30px;
+      margin-bottom: 5px;
       margin-left: 5px;
   
       border: 1px solid #494949;
@@ -444,15 +491,6 @@ figure.profile-pic > img {
       cursor: pointer;
       
       display: table;
-      
-      .button-tab {
-        display: none;
-        position: absolute;
-        right: -15px;
-        z-index: -1;
-        height: 100%;
-        top: 1px;
-      }
       
       .item {
         display: table-cell;
@@ -499,38 +537,148 @@ figure.profile-pic > img {
     }
   }
   
+  .content .triangle-tab {
+      position: absolute;
+      left: -50px;
+      top: 0px;
+      margin-top: 5px;
+      content: "";
+      border-top: 25px solid transparent;
+      border-top: 25px solid rgba(0,0,0,0);
+      border-left: 25px solid transparent;
+      border-left: 25px solid rgba(0,0,0,0);
+      border-right: 25px solid #333;
+      border-bottom: 25px solid transparent;
+      border-bottom: 25px solid rgba(0,0,0,0);
+    }
+  
   .content {
-    box-shadow: 
-          inset 0 1px 1px 0 rgba(255,255,255,0.4),
-          inset 0 0 5px 0 rgba(255,255,255,0.2),
-          inset 0 67px 67px -40px rgba(255,255,255,0),
-          0 2px 0 0 #2e2e2e,
-          0 3px 6px 0 rgba(0,0,0,0.4);
-          
-    border: 1px solid #494949;
-          
-    margin-left: 0px;
+    border: 2px solid @black;
     z-index: 1;
     position: relative;
-    /*.border-radius(10px);*/
-    background: #555;
+    background: #333;
     min-height: 600px; 
     padding-bottom: 50px;
-   /*.box-shadow(0px 10px 10px #333);*/
     color: @white;
     
+    .projects {
+      position: relative;
+      .well {
+        background: none;
+        border: none;
+      }
+      
+      .projects-box {
+        border: solid 3px @black;
+        background-color: @white;
+        color: @black;
+        padding: 10px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        
+        a, a:hover, a:active, a:visited {
+          text-decoration: none;
+          color: #333;
+        }
+        
+        .title {
+          font-size: 2em;
+          margin-top: 0px;
+        }
+        
+        .profile-image {
+    
+          border: 3px solid #333;
+        }
+        
+        .name-location {
+          text-align: center;
+          
+          span {
+            display: block;
+          }
+          
+          .open-roles {
+            color: #c00;
+          }
+          
+          .message-button-container {
+            padding: 5px;
+            margin-top: 5px;
+            font-weight: bolder;
+          }
+          
+          .message-button {
+            background: @backgroundButtonColor;
+            background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+            background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+            background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+            background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+            background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+            
+            text-decoration: none;
+            color: @black;
+            padding: 4% 12%;
+            cursor: pointer;
+          }
+          
+          .message-button:hover {
+            background: darken(@backgroundButtonColor, 20%);
+            background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
+            background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
+            background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
+            background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
+            background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
+            border-color: darken(@backgroundButtonColor, 20%);
+          }
+        }
+        
+        .thumbnail-details {
+          margin-top: 20px;
+          
+          .project-description {
+            font-size: 0.8em;
+          }
+          
+          .roles-container {
+    
+          }
+          
+          .role-name {
+            display: inline-block;
+            padding-right: 20px;
+            margin-bottom: 10px;
+          }
+        }
+        
+        hr {
+          margin: 0;
+          border: 1px solid #444;
+        }
+        
+      }
+
+    }
     .title {
+      margin-top: 20px;
+      background-color: #999;
+      border: 2px solid @black;
       h1 {
         float: left;
         padding: 10px;
+        font-weight: 400; 
+        
         /*.border-radius(2px);*/
       }
       
     }
     
-    .role-description {
+    .drawer-content {
       margin-top: 40px;
       padding: 10px;
+      background-color: @white;
+      border: 3px solid @black;
+      color: @black;
       /*.border-radius(2px);*/
     }
     
