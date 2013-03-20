@@ -23,6 +23,17 @@ class ApplicationController < ActionController::Base
      end
   end
   
+  # Project Comments System
+  
+    def current_user
+      @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    end
+    helper_method :current_user
+
+    def require_login
+      redirect_to login_url, alert: "You must first log in or sign up." if current_user.nil?
+    end
+  
   #Notification System  
   def notification
     if @current_user
@@ -34,6 +45,10 @@ class ApplicationController < ActionController::Base
   end
   
   # Authentication
+  
+  def require_login
+    redirect_to login_url, alert: "You must first log in or sign up." if current_user.nil?
+  end
   
   def current_user
        @current_user ||= User.find(session[:user_id]) if session[:user_id]
