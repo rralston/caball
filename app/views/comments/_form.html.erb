@@ -1,0 +1,22 @@
+<div class="row-fluid roles-row">
+	  <div class="well">
+<%= form_for [@project, @comment] do |f| %>
+  <% if @comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+      <ul>
+      <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.text_area :content, rows: 8, :class => 'span12', :placeholder => "Enter your project updates here, you can also embed a Youtube or Vimeo Video!" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Create New Update", :class => 'btn btn-primary' %>
+  </div>
+<% end %>
+		</div>
+</div>

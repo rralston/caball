@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130307001018) do
+ActiveRecord::Schema.define(:version => 20130307085953) do
 
   create_table "characteristics", :force => true do |t|
     t.integer  "age"
@@ -31,21 +31,32 @@ ActiveRecord::Schema.define(:version => 20130307001018) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "comments", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "comments", ["project_id"], :name => "index_comments_on_project_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
   create_table "conversations", :force => true do |t|
     t.string   "subject",    :default => ""
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
 
-  create_table "follows", :force => true do |t|
+  create_table "friendships", :force => true do |t|
     t.integer  "user_id"
-    t.integer  "follow_id"
+    t.integer  "friend_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  add_index "follows", ["follow_id"], :name => "index_follows_on_follow_id"
-  add_index "follows", ["user_id"], :name => "index_follows_on_user_id"
+  add_index "friendships", ["friend_id"], :name => "index_friendships_on_friend_id"
+  add_index "friendships", ["user_id"], :name => "index_friendships_on_user_id"
 
   create_table "notifications", :force => true do |t|
     t.string   "type"
@@ -134,17 +145,6 @@ ActiveRecord::Schema.define(:version => 20130307001018) do
     t.datetime "updated_at",   :null => false
     t.text     "description2"
   end
-
-  create_table "updates", :force => true do |t|
-    t.text     "content"
-    t.integer  "user_id"
-    t.integer  "project_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "updates", ["project_id"], :name => "index_updates_on_project_id"
-  add_index "updates", ["user_id"], :name => "index_updates_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "name"
