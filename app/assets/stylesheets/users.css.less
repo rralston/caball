@@ -264,15 +264,23 @@ figure.profile-pic > img {
  
 
 /* User Profile Page */
-        
+
 @backgroundButtonColor: #bfbfbf;
 .user-header {
   
   .header-bubble {
+    height: 150px;
     background-color: @white;
     margin: 20px 0px;
-    border: 2px solid @black;
+    .box-shadow(0px 0px 12px 0px #cdcdcd);
     color: @black;
+    
+    .profile-pic {
+      img {
+        width: 200px;
+        .border-radius(0px);
+      }
+    }
     
     .modal {
       color: #333;
@@ -280,55 +288,45 @@ figure.profile-pic > img {
     
     .right-content {
       position: relative;
-      padding-bottom: 10px;
       display: table;
       float: right;
       padding-right: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      color: #666;
+      font-weight: 800;
       
-      > div {
-        display: table-row;
+      .btn-link {
+        color: #666;
       }
       
-      .follow-buttons {
+      .headline {
         
-        display: table-cell;
-        vertical-align: bottom;
-        
-        > div {
-          color: @black;
-          background: @backgroundButtonColor;
-          background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
-          background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
-          background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
-          background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
-          background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
-          .box-shadow(0px 10px 10px -5px #F00);
-        .border-radius(3px);
-          
-          padding: 5px 0;
-          
-          h5 {
-            margin: 0;
-          }
-        }
       }
     }
   }
   
   .details {
+    
+    color: #666;
+    
+    h3 {
+      font-size: 1.7em;
+      background: url("underline_background.png") repeat-x 100% 100%;
+      padding-bottom: 0px;
+      white-space: nowrap;
+    }
+    
     .location-modal-button {
       cursor: pointer;
-      color: #666;
     }
       
-    font-size: 1.4em;
-    
+    font-size: 1em;
     
     .talents {
-      color: #666;
       text-align: center;
-      
     }
+    
   }
   
   .right-content {
@@ -338,52 +336,25 @@ figure.profile-pic > img {
   .details div {
     margin-top: 15px;
   }
-
-  .profile-pic {
-    padding: 5%;
-    width: 84%;
-    
-    img {
-
-      
-      /*.border-radius(10px);*/
-    }
-  }
-  
-  .talents-thumbnail img{
-    padding: 25%;
-    width: 50%;
-  }
-  
   
   .headline {
-    margin: 10px 0;
-  }
-  
-  .camera-heart {
-    position: relative;
-  }
-  
-  .camera-heart img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-left: -21px;
-    margin-top: -18px;
+    margin: 5px 0;
   }
   
   .message-button {
-    .gradient(#555, #666, #333);
+    background-color: #5a86de;
     border: 1px solid #ccc;
+    .border-radius(5px);
     text-decoration: none;
     color: @white;
-    padding: 4% 12%;
     cursor: pointer;
     font-weight: 400;
+    font-size: 1.4em;
+    padding: 5px;
+    
   }
   .message-button:hover {
-    /* Overriding a weird bootstrap property */
-    .gradient(#333, #444, #111);
+    background-color: darken(#5a86de, 10%);
   }
   
   .message-row {
@@ -395,6 +366,104 @@ figure.profile-pic > img {
 
 .user-body {
   
+  a, a:hover, a:visited, a:active {
+    text-decoration: none;
+    color: @black;
+  }
+  
+  .follow-container {
+    width: 200px;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    
+    .follow-button {
+      position: relative;
+      left: 50%;
+      margin-left: -50px;
+      margin-top: 10px;
+      background-color: #666;
+      width: 100px;
+      .border-radius(5px);
+      color: @white;
+      text-align: center;
+      vertical-align: middle;
+      padding: 4px 0;
+      cursor: pointer;
+      
+      a {
+        color: @white;
+      }
+      
+      img {
+        width: 25px;
+      }
+    }
+    
+    .follow-images {
+      
+    }
+    
+    .follow-counts {
+      text-align: center;
+      margin-bottom: 10px;
+      
+      .numbers {
+        width: 45%;
+        color: @white;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 2em;
+        background-color: #666;
+        .border-radius(5px);
+        text-align: center;
+      }
+    }
+    
+    .follow-button:hover {
+      background-color: darken(#666, 10%);
+    }
+  }
+  
+  .about-container {
+    
+    .about-title {
+      border: 1px solid #ccc;
+      color: #4c99c0;
+      font-size: 1em;
+      width: 80px;
+      padding: 10px;
+      background-color: #f7f7f7;
+      z-index: 5;
+      position: relative;
+    }
+    
+    .about-content {
+      background-color: @white;
+      color: #4c99c0;
+      border: 1px solid rgba(205, 205, 205, 0.19);
+      padding-top: 35px;
+      margin-top: -30px;
+      margin-left: 10px;
+      position: relative;
+      
+      > div {
+        padding: 10px;
+      }
+      
+      .more-button {
+        z-index: 5;
+        position: relative;
+      }
+      
+      .modal {
+        color: @black;
+      }
+    }
+  }
+  
+}
+
+.blah {
   padding-bottom: 50px;
 
   .menu {  

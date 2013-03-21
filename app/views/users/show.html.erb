@@ -1,7 +1,7 @@
 <!-- Main Content -->
 <section id="user-header" class="section alt user-header">
-  <div class="container-fluid">
-    <div class="row-fluid">
+  <div class="container">
+    <div class="row">
       <div class="span10 offset1">
         <div class="row-fluid header-bubble">
           <div class="span6">
@@ -54,35 +54,20 @@
                   </div>
                   <!-- End Location Modal --> 
                 <%end %>
-                <div class="row-fluid talents">
+                <span class="row-fluid talents">
                     <%= if @user.talents.first.present? then @user.talents.first.name end%>
-                    &thinsp;
-                    <%= if @user.talents.second.present? then @user.talents.second.name end%>
-                </div>
+                    
+                    <% if @user.talents.second.present? %> 
+                    / <%= @user.talents.second.name %> 
+                    <% end%>
+                </span>
                 
-                <div class="row-fluid message-row">
-                  <a data-toggle="modal" data-target="#message-modal" 
-                        data-remote ="<%= new_conversation_path(:recipient => @user.email, :modal => true)%>"
-                        data-keyboard="true" class="message-button">Message</a>
-                  <!-- Message Modal -->
-                    <div id="message-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3><span>Message <%= @user.name.split[0..0].join(" ") %></span></h3>
-                      </div>
-                      <div class="modal-body">
-                      </div>
-                    </div>
-                  <!-- Message Modal --> 
-                </div>
+                
               </div>
             </div>
           </div>
           <div class="span5 offset1 right-content">
-            <div class="row-fluid left-aligned">
-              <h3>
-                <%= [@user.talents.first.name, @user.talents.second.name].reject(&:empty?).join(' and ') %>
-              </h3>
+            <div class="row-fluid left-aligned headline">
               <% if @user.headline.present? %>
                  
                 <%= shorten :text => @user.headline, :length => 200, :partial => "more_headline" %>
@@ -96,10 +81,35 @@
                       <%= simple_format @user.headline %>  
                     </div>
                   </div>
-                  <!-- End Location Modal --> 
+                  <!-- End Headline Modal --> 
               <% end %>
             </div>
-            <div class="row-fluid follow-buttons">
+            <div class="row-fluid message-row">
+              <div class="span7 offset8 message-span">
+                <a data-toggle="modal" data-target="#message-modal" 
+                      data-remote ="<%= new_conversation_path(:recipient => @user.email, :modal => true)%>"
+                      data-keyboard="true" class="message-button"><%= image_tag('mail_icon.png') %> Message</a>
+                <!-- Message Modal -->
+                  <div id="message-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h3><span>Message <%= @user.name.split[0..0].join(" ") %></span></h3>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                  </div>
+                <!-- Message Modal --> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- just for me to keep track of >
+<div class="row-fluid follow-buttons">
               <div class="span4 offset2 centered-text">
                 <h5><%= @user.friendships.all.count %></h5>
                 <h5>Following </h5>
@@ -114,64 +124,104 @@
                 <% end %>
               </div>
             </div>
+            
+            
+</-->
+<section id = "user-body" class="user-body" data-id="<%=@user.id%>">
+  <div class="container">
+    <div class="row">
+      <div class="span10 offset1">
+        <div class="row-fluid">
+          <div class="span3 follow-container">
+            <div class="follow-button">
+              <%= link_to(friendships_path(friend_id: @user), method: :post, :class => '') do %>
+                <%= image_tag('camera_keyhole.png')%> Follow
+              <% end %>
+            </div>
+            <div class="follow-images">
+              A bunch of images
+            </div>
+            <div class="follow-counts">
+              <div class="row-fluid">
+                <div class="numbers"><%= @user.friendships.all.count %> Fans</div>
+                <div class="numbers"><%= @user.friendships.all.count %> Following</div>
+              </div>
+            </div>
+          </div>
+          <div class="span6 about-container">
+            <div class="about-title">
+              About me:
+            </div>  
+            <div class="about-content">
+              <div><%= shorten :text => @user.about, :length => 500, :partial => "more_about" %></div>
+              <!-- About Modal -->
+              <div id="about-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header left-aligned">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h3><span><%= @user.name.split[0..0].join(" ") %></span></h3>
+                </div>
+                <div class="modal-body">
+                  <%= simple_format @user.about %>  
+                </div>
+              </div>
+              <!-- End Headline Modal --> 
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
+        
 <section id = "user-body" class="user-body" data-id="<%=@user.id%>">
-  <div class="container-fluid">
+  <div class="container">
     <div class="row-fluid">
       <div class="span2 offset1 menu">
-        <div class="container-fluid">
-          <div class="row-fluid user-menu" data-link="about_me">
-            <div class="item name"><h3>ABOUT ME</h3></div> 
-              <div class="arrow item">
-                <%= image_tag('red_arrow.png') %>
-              </div>
-          </div>
-          <div class="row-fluid user-menu" data-link="updates">
-            <div class="item name"><h3>UPDATES</h3></div> 
-              <div class="arrow item">
-                <%= image_tag('red_arrow.png') %>
-              </div>
-          </div>
-          <div class="row-fluid user-menu" data-link="reel">
-            <div class="item name"><h3>MY REEL</h3></div> 
-              <div class="arrow item">
-                <%= image_tag('red_arrow.png') %>
-              </div>
-          </div>
-          <% if @user.talents.first.present? %>
-          <div class="row-fluid user-menu" data-link="first_role">
-            <div class="item name"><h3><%= @user.talents.first.name.upcase %> </h3></div>  
-              <div class="arrow item">
-                <%= image_tag('red_arrow.png') %>
-              </div>
-          </div>
-          <% end %>
-          <% if @user.talents.second.present? %>
-          <div class="row-fluid user-menu" data-link="second_role">
-            <div class="item name"><h3><%= @user.talents.second.name.upcase %> </h3></div>  
-              <div class="arrow item">
-                <%= image_tag('red_arrow.png') %>
-              </div>
-          </div>
-          <% end %>
-          <div class="row-fluid user-menu" data-link="pictures">
-            <div class="item name"><h3>PICTURES </h3></div> 
-              <div class="arrow item">
-                <%= image_tag('red_arrow.png') %>
-              </div>
-          </div>
-          <div class="row-fluid user-menu" data-link="projects">
-            <div class="item name"><h3>PROJECTS </h3></div> 
-              <div class="arrow item">
-                <%= image_tag('red_arrow.png') %>
-              </div>
-          </div>
+        <div class="row user-menu" data-link="about_me">
+          <div class="item name"><h3>ABOUT ME</h3></div> 
+            <div class="arrow item">
+              <%= image_tag('red_arrow.png') %>
+            </div>
+        </div>
+        <div class="row user-menu" data-link="updates">
+          <div class="item name"><h3>UPDATES</h3></div> 
+            <div class="arrow item">
+              <%= image_tag('red_arrow.png') %>
+            </div>
+        </div>
+        <div class="row user-menu" data-link="reel">
+          <div class="item name"><h3>MY REEL</h3></div> 
+            <div class="arrow item">
+              <%= image_tag('red_arrow.png') %>
+            </div>
+        </div>
+        <% if @user.talents.first.present? %>
+        <div class="row user-menu" data-link="first_role">
+          <div class="item name"><h3><%= @user.talents.first.name.upcase %> </h3></div>  
+            <div class="arrow item">
+              <%= image_tag('red_arrow.png') %>
+            </div>
+        </div>
+        <% end %>
+        <% if @user.talents.second.present? %>
+        <div class="row user-menu" data-link="second_role">
+          <div class="item name"><h3><%= @user.talents.second.name.upcase %> </h3></div>  
+            <div class="arrow item">
+              <%= image_tag('red_arrow.png') %>
+            </div>
+        </div>
+        <% end %>
+        <div class="row user-menu" data-link="pictures">
+          <div class="item name"><h3>PICTURES </h3></div> 
+            <div class="arrow item">
+              <%= image_tag('red_arrow.png') %>
+            </div>
+        </div>
+        <div class="row user-menu" data-link="projects">
+          <div class="item name"><h3>PROJECTS </h3></div> 
+            <div class="arrow item">
+              <%= image_tag('red_arrow.png') %>
+            </div>
         </div>
       </div>
       <div class="span8 content" data-top: "100px">
