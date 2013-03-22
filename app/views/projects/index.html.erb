@@ -1,3 +1,43 @@
+<section class='projects-search'>
+  <div class='container-fluid'>
+    <div class='row-fluid'>
+      <!-- Left Column for Search Terms-->
+      <div class='span3'>
+        <%= search_form_for @search do |f| %>
+          <div class="field project-title">
+            <%= f.text_field :title_cont, :placeholder => 'Find a Project...', :class => 'project-title-input' %>
+            <i class="icon-search"></i>
+          </div>
+          
+          <div class="field genre">
+            <h3>Genre</h3>
+            <%= f.select(:genre_cont, options_for_select(@genres), {}, {:multiple=> true, :size => 5, :class => 'genres-input' }) 
+            %>
+          </div>
+          <div class="field location">
+            <h3>Location</h3>
+            <%= f.text_field :location_cont, :placeholder => 'Location' , :class => 'location-input' 
+            %>
+          </div>
+          <div class="field roles">
+            <h3>Open Roles</h3>
+            <%= f.select(:roles_id_cont, options_for_select(@talents), {}, {:multiple=> true, :size => 5, :class => 'roles-input' })
+            %>
+          </div>
+        <% end %>
+      </div>
+      
+      <!-- Right Column for displaying users-->
+      <div class='span9 search-results'>
+        <%= render :partial => 'project_search_results' %>
+      </div>
+
+  </div>
+</section>
+
+<%
+=begin
+%>
 <div class="well">
 <section class='section' id='content' role='main'>
   <div class='container-fluid'>
@@ -45,20 +85,18 @@
         <%= link_to project_path(proj.id) do %>
           <div class='thumbnail-figure'>
             <% if proj.photos.exists? %>
-						<%= image_tag(proj.photos.first.image.url(:large)) %>
+						  <%= image_tag(proj.photos.first.image.url(:large)) %> </img>
 						<% end %>
-              <div class='thumbnail-title'>
-                <h3>
-                  <span><%= proj.title %></span>
-                </h3>
-                <p>
-                  <span>
-										<%= proj.roles.length %> Roles Available!
-                </p>
-              </div>
-            </img>
-          </div>
-        <% end %>
+					</div>
+				<% end %>
+        <div class='thumbnail-title'>
+          <h3>
+            <span><%= proj.title %></span>
+          </h3>
+          <p>
+							<%= proj.roles.length %> Roles Available!
+          </p>
+        </div>
         <p>
           <%= shorten :text => proj.description, :length => 500, :partial => "more_projects_description", :counter => counter %>
         </p>
@@ -129,5 +167,8 @@
             new_project_path,
             :class => 'btn btn-primary' %> -->
 <br>
-
+<%
+=end
+%>
+</div>
 </div>

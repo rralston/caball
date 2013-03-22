@@ -88,7 +88,8 @@ var Users = {
           }
         }
       });
-    }
+    },
+    
   },
   
   Show: {
@@ -96,10 +97,54 @@ var Users = {
       console.log("init show users");   
       Users.Show.handlers();
       Users.Show.modalHandlers();
+      $('div[data-link=about_me]').trigger('click');
     },
     
     handlers: function () {
+	
+      $(window).resize( function() {
+        Users.Show.equalHeights('.user-body .user-menu .item.name');
+      });
+      $(window).load( function() {
+        Users.Show.equalHeights('.user-body .user-menu .item.name');
+      });
       
+      $('.user-menu').on('click', function() {
+        var link = $(this).data('link');
+        $('.user-menu').removeClass('active');
+        $(this).addClass('active');
+        Users.Show.displayContent(link);
+      });
+    },
+    
+    displayContent: function(link) {
+      var id = $('#user-body').data('id');
+      console.log(link);
+      
+      $.ajax({
+        url: '/users/' + id,
+        contentType: "application/json; charset=utf-8",
+        type: 'GET',
+        data: {
+          'link': link
+        },
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          if(data.success)
+            $('.user-body .content').html(data.html);
+          else 
+            Alert.newAlert("error", "There was an error in processing");
+        },
+        error: function() {
+          Alert.newAlert("error", "There was an error in processing");
+        }
+      });
+    },
+    
+    modalHandlers: function () {
+      
+      /* So that the messaging modal sizes appropriately */
       $('#message-modal').on('show', function () {
         $(this).css({
         'margin-left': function () {
@@ -108,6 +153,8 @@ var Users = {
         });
       });
       
+      
+      /* Event listeners for messaging modal buttons */
       $('#message-modal').on('shown', function () {
         $('input[value="Cancel"]').on('click', function () {
           $('#message-modal').modal('hide');
@@ -119,6 +166,7 @@ var Users = {
         });
       });
       
+      /* Photo carousel for the photos modal */
       $('#photos-modal').on('shown', function () {
         $('#photoCarousel').carousel(0);
         $("body").keydown(function(e) {
@@ -233,8 +281,65 @@ var Users = {
           tempNode = tempNode.parent();
         }
       });  
+    },
+    
+    /* This resizes the roles boxes so that they're all equal height and have equal proportions */
+    equalHeights: function(selector) {
+      
+      var maxWidth=$(selector).parent().width();
+      $(selector).width('auto');
+      $(selector).each(function(){
+          if($(this).width()>maxWidth){
+              maxWidth=$(this).width();
+          }
+      });
+     
+      $(selector).width(maxWidth);
+    }
+    
+  },
+  
+  Index: {
+    
+    init: function() {
+      Users.Index.handlers();
+    },
+    
+    handlers: function() {
+      
+      /* We want to catch the search input and use ajax to display search results instead */
+      $('#user_search input').on( 'keypress', function(e) {
+        if(e.charCode == 13) {
+          searchTerm = $(this).val();
+          
+          /* Do the ajax call to get results from the server */
+          $.ajax({
+            url: '/users',
+            contentType: "application/json; charset=utf-8",
+            type: 'GET',
+            data: {
+              'q[name_cont]': searchTerm
+            },
+            dataType: 'json',
+            success: function(data) {
+              console.log(data);
+              if(data.success)
+                $('.users-search .search-results').html(data.html);
+              else 
+                Alert.newAlert("error", "There was an error processing your search");
+           
+            },
+            error: function() {
+              Alert.newAlert("error", "There was an error processing your search");
+            }
+          });
+          return false;
+        }
+      });
+      
+      
     }
     
   }
-  
+    
 }
