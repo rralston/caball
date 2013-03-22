@@ -56,7 +56,11 @@
               
               <div class="profile">
                 <%= link_to "#", :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do %> 
-                  <%= image_tag current_user.profiles.image.url(:tiny), :size=> '40x40' %>
+                  <% if current_user.profiles.present? %>
+                    <%= image_tag current_user.profiles.image.url(:tiny), :size=> '40x40' %>
+                  <% else %>
+                    <icon class="icon-user icon-white"></icon>
+                  <% end %>
                 <% end %>
                 <ul class="dropdown-menu">    
                   <li>
