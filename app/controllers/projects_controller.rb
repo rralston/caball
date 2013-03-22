@@ -7,8 +7,24 @@ class ProjectsController < ApplicationController
     @search = Project.search(params[:q])
     @projects = @search.result
     @search.build_condition
+    @genres = {'Horror' => 'horror', 'Action' => 'action', 'Western' => 'western', 'Drama' => 'drama', 
+               'TV Series' => 'tv series', 'Short' => 'short', 'Comedy' => 'comedy'}
+    @talents = {'Actor / Actress' => 'Actor / Actress', 'Animators' => 'Animators', 'Art' => 'Art', 'Audio' => 'Audio', 
+                'Casting Director' => 'Casting Director', 'Cinematographer / DP' => 'Cinematographer / DP', 'Composer' => 'Composer', 
+                'Costumes' => 'Costumes', 'Director' => 'Director', 'Distribution Professional' => 'Distribution Professional', 
+                'Editor' => 'Editor', 'Executive Producer' => 'Executive Producer', 'Hairstylist / Makeup Artist' => 'Hairstylist / Makeup Artist', 
+                'Lighting / Electrical' => 'Lighting / Electrical', 'Other' => 'Other', 'Personal Assistant' => 'Personal Assistant', 'Producer' => 'Producer', 
+                'Production Staff' => 'Production Staff', 'Props' => 'Props', 'Set Design' => 'Set Design', 'Sound' => 'Sound',
+                'Stuntman' => 'Stuntman', 'Talent Agent / Literary Agent' => 'Talent Agent / Literary Agent', 'Talent Manager' => 'Talent Manager', 
+                'Visual Effects' => 'Visual Effects', 'Writer' => 'Writer'}
+                
     respond_to do |format|
       format.html # index.html.erb
+      format.json { render :json => {
+                   :success => true, 
+                   :html => render_to_string(:partial => '/projects/project_search_results.html.erb', 
+                                             :layout => false, :locals => {} ) 
+                  } }
     end
   end
   
@@ -32,7 +48,14 @@ class ProjectsController < ApplicationController
      # correct_project_owner?
      # Define Security Measures
      search
-     @talents = {'Actor / Actress' => 1, 'Animators' => 2, 'Art' => 3, 'Audio' => 4, 'Casting Director' => 5, 'Cinematographer / DP' =>6, 'Composer' => 7, 'Costumes' => 8, 'Director' => 9, 'Distribution Professional' => 10, 'Editor' => 11, 'Executive Producer' => 12, 'Hairstylist / Makeup Artist' => 13, 'Lighting / Electrical' => 14, 'Other' => 15, 'Personal Assistant' => 16, 'Producer' => 17, 'Production Staff' => 18, 'Props' => 19, 'Set Design' => 20, 'Sound' => 21, 'Stuntman' => 22, 'Talent Agent / Literary Agent' => 23, 'Talent Manager' => 24, 'Visual Effects' => 25, 'Writer' => 26}
+     @talents = {'Actor / Actress' => 'Actor / Actress', 'Animators' => 'Animators', 'Art' => 'Art', 'Audio' => 'Audio', 
+                'Casting Director' => 'Casting Director', 'Cinematographer / DP' => 'Cinematographer / DP', 'Composer' => 'Composer', 
+                'Costumes' => 'Costumes', 'Director' => 'Director', 'Distribution Professional' => 'Distribution Professional', 
+                'Editor' => 'Editor', 'Executive Producer' => 'Executive Producer', 'Hairstylist / Makeup Artist' => 'Hairstylist / Makeup Artist', 
+                'Lighting / Electrical' => 'Lighting / Electrical', 'Other' => 'Other', 'Personal Assistant' => 'Personal Assistant', 'Producer' => 'Producer', 
+                'Production Staff' => 'Production Staff', 'Props' => 'Props', 'Set Design' => 'Set Design', 'Sound' => 'Sound',
+                'Stuntman' => 'Stuntman', 'Talent Agent / Literary Agent' => 'Talent Agent / Literary Agent', 'Talent Manager' => 'Talent Manager', 
+                'Visual Effects' => 'Visual Effects', 'Writer' => 'Writer'}
      @project = Project.find(params[:id])
      @pictures = @project.photos
      if @pictures.first.nil?
@@ -52,7 +75,14 @@ class ProjectsController < ApplicationController
   
   def new
     search
-    @talents = {'Actor / Actress' => 1, 'Animators' => 2, 'Art' => 3, 'Audio' => 4, 'Casting Director' => 5, 'Cinematographer / DP' =>6, 'Composer' => 7, 'Costumes' => 8, 'Director' => 9, 'Distribution Professional' => 10, 'Editor' => 11, 'Executive Producer' => 12, 'Hairstylist / Makeup Artist' => 13, 'Lighting / Electrical' => 14, 'Other' => 15, 'Personal Assistant' => 16, 'Producer' => 17, 'Production Staff' => 18, 'Props' => 19, 'Set Design' => 20, 'Sound' => 21, 'Stuntman' => 22, 'Talent Agent / Literary Agent' => 23, 'Talent Manager' => 24, 'Visual Effects' => 25, 'Writer' => 26}
+    @talents = {'Actor / Actress' => 'Actor / Actress', 'Animators' => 'Animators', 'Art' => 'Art', 'Audio' => 'Audio', 
+                'Casting Director' => 'Casting Director', 'Cinematographer / DP' => 'Cinematographer / DP', 'Composer' => 'Composer', 
+                'Costumes' => 'Costumes', 'Director' => 'Director', 'Distribution Professional' => 'Distribution Professional', 
+                'Editor' => 'Editor', 'Executive Producer' => 'Executive Producer', 'Hairstylist / Makeup Artist' => 'Hairstylist / Makeup Artist', 
+                'Lighting / Electrical' => 'Lighting / Electrical', 'Other' => 'Other', 'Personal Assistant' => 'Personal Assistant', 'Producer' => 'Producer', 
+                'Production Staff' => 'Production Staff', 'Props' => 'Props', 'Set Design' => 'Set Design', 'Sound' => 'Sound',
+                'Stuntman' => 'Stuntman', 'Talent Agent / Literary Agent' => 'Talent Agent / Literary Agent', 'Talent Manager' => 'Talent Manager', 
+                'Visual Effects' => 'Visual Effects', 'Writer' => 'Writer'}
     @project = Project.new
     @project.roles.build
     3.times do 
@@ -102,7 +132,7 @@ class ProjectsController < ApplicationController
       @search = Project.search(params[:q])
       @projects = @search.result
       if params[:q]
-        redirect_to :action => :index, :q => params[:q]
+        redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return   
       end
     end
   end

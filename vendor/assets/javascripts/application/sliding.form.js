@@ -2,9 +2,7 @@ $(function() {
 	/*
 	number of fieldsets
 	*/
-	var fieldsetCount = $('#formElem').children().length; // This kind of fucks things up if 
-	                                                      // theres an CSRF token immediately under the form tag
-	                                                      // I had to hack the validation to work around this issue
+	var fieldsetCount = $('#formElem fieldset').length; 
 	/*
 	current position of fieldset / navigation link
 	*/
@@ -15,11 +13,12 @@ $(function() {
 	*/
 	$('#formElem').children(':first').find(':input:first').focus();	
 	
-	/* Reset height to match content 
+	/* Reset height and width to match content 
 	 */
-	
-  resizeHeight();
-  resizeWidth();
+	$(document).ready(function() {
+    resizeHeight();
+    resizeWidth();
+  });
 
   $(window).on('resize', resizeWidth).on('resize', resizeHeight);
 	
@@ -55,9 +54,7 @@ $(function() {
         $('#steps').stop().animate({
             marginLeft: '-' + widths[current-1] + 'px'
         },500,function(){
-			if(current == fieldsetCount)
-				validateSteps();
-			else
+			if(prev == 1)
 				validateStep(prev);
 			$('#formElem').children(':nth-child('+ parseInt(current) +')').find(':input:first').focus();	
 		});
@@ -65,22 +62,6 @@ $(function() {
 		    
         e.preventDefault();
     });
-	
-	/*
-	clicking on the tab (on the last input of each fieldset), makes the form
-	slide to the next step
-	*/
-	$('#formElem > fieldset').each(function(){
-		var $fieldset = $(this);
-		$fieldset.children(':last').find(':input').keydown(function(e){
-			if (e.which == 9){
-				$('#navigation li:nth-child(' + (parseInt(current)+1) + ') a').click();
-				/* force the blur for validation */
-				$(this).blur();
-				e.preventDefault();
-			}
-		});
-	});
 	
 	/*
 	validates errors on all the fieldsets
@@ -127,20 +108,12 @@ $(function() {
 			error = -1;
 			valclass = 'error';
 		}
+    $('#formElem').data('errors',hasError); 
+    
 		$('<span class="'+valclass+'"></span>').insertAfter($link);
 		
 		return error;
 	}
-	
-	/*
-	if there are errors don't allow the user to submit
-	*/
-	$('#registerButton').bind('click',function(){
-		if($('#formElem').data('errors')){
-			//alert('Please correct the errors in the Form'); // We can use this error handler if we want.
-			return false;
-		}	
-	});
 	
 	function resizeWidth() {
 	  /*
@@ -152,7 +125,7 @@ $(function() {
       $('#steps .step').each(function(i){
             var $step     = $(this);
             widths[i]     = stepsWidth;
-            $step.width($step.parent().width());
+            $step.width($step.parents('#wrapper').width());
             stepsWidth    += $step.width();
         });
       $('#steps').width(stepsWidth);

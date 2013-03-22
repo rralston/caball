@@ -25,24 +25,29 @@ class ImageUploader < CarrierWave::Uploader::Base
     # For Rails 3.1+ asset pipeline compatibility:
     # asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
   
-    "/images/fallback/" + [version_name, "default.png"].compact.join('_')
+    # Profiles doesn't have an "imageable_type", but photos do
+    begin
+      "/images/fallback/#{model.imageable_type}_" + [version_name, "default.png"].compact.join('_')
+    rescue Exception => e
+      "/images/fallback/#{model.class}_" + [version_name, "default.png"].compact.join('_')
+    end
   end
 
 
   # Create thumb version of uploaded files:
   # Accessible through <%= image_tag @user.photo.image.url(:thumb)  %>
    version :thumb do
-     process :resize_to_fit => [25, 25]
+     process :resize_to_fill => [25, 25]
    end
    
    # Create Medium Sized Version
    # Accessible through <%= image_tag @user.photo.image.url(:medium)  %>
     version :medium do
-      process :resize_to_fit => [100, 100]
+      process :resize_to_fill => [100, 100]
     end
    
    version :large do
-     process :resize_to_fit => [400, 400]
+     process :resize_to_fill => [400, 400]
    end
 
   # White list of extensions which are allowed to be uploaded.
@@ -55,6 +60,6 @@ class ImageUploader < CarrierWave::Uploader::Base
      "Profile_Image.jpg" if original_filename
    end
   
-  process :resize_to_fit => [400, 400]
+  process :resize_to_fill => [400, 400]
 
 end
