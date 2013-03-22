@@ -8,7 +8,8 @@
      <%= image_tag(@user.talents.first.name.downcase + ".png", :height => "30") %>
     </div>
     <div class="row-fluid left-aligned">
-		<%= shorten :text => @user.talents.first.description, :length => 400, :partial => "more_roles" %>
+		<%= shorten :text => @user.talents.first.description, :length => 400, :partial => "more_roles" , 
+                 :show_more => (@user.talents.first.name.downcase == 'actor') %>
     </div>
   </div>
 <% end %>
@@ -21,7 +22,8 @@
      <%= image_tag(@user.talents.second.name.downcase + ".png", :height => "30") %>
     </div>
     <div class="row-fluid left-aligned">
-     <%= shorten :text => @user.talents.second.description, :length => 400, :partial => "more_roles" %>
+     <%= shorten :text => @user.talents.second.description, :length => 400, :partial => "more_roles" , 
+                 :show_more => (@user.talents.second.name.downcase == 'actor') %>
     </div>
   </div>
 	<% end %>
@@ -35,7 +37,8 @@
      <%= image_tag(@user.talents.first.name.downcase + ".png", :height => "30") %>
     </div>
     <div class="row-fluid left-aligned">
-     <%= shorten :text => @user.talents.first.description, :length => 400, :partial => "more_roles" %>
+     <%= shorten :text => @user.talents.first.description, :length => 400, :partial => "more_roles" , 
+                 :show_more => (@user.talents.first.name.downcase == 'actor') %>
     </div>
   </div>
 <% end %>
@@ -51,14 +54,14 @@
       <div class="row-fluid">
       <%= @user.talents.first.description %>
       </div>
-      <% if @user.talents.first.name == 'Actor' %>
+      <% if @user.talents.first.name == 'Actor'  and !@user.characteristics.nil? %>
       <div class="row-fluid actor-characteristics">
         <%= render :partial => 'characteristics' %>
       </div>
       <% end %>
     </div>
   </div>
- <!-- End Location Modal --> 
+ <!-- End Role1 Modal --> 
 <% if @user.talents.second.present? then %>
   <div id="role2-modal" class="modal hide fade role-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-header left-aligned">
@@ -70,8 +73,8 @@
       <div class="row-fluid">
       <%= @user.talents.second.description %>
       </div>
-      <% if @user.talents.second.name == 'Actor' %>
-      <div class="row-fluid">
+      <% if @user.talents.second.name == 'Actor' and !@user.characteristics.nil? %>
+      <div class="row-fluid actor-characteristics">
         <%= render :partial => 'characteristics' %>
       </div>
       <% end %>

@@ -14,21 +14,65 @@ var Users = {
     
     handlers: function () {
       
-      var ajaxFormOptions = { 
-        success:      function(responseText, statusText, xhr, $form){ // post-submit callback 
-                        console.log('status: ' + statusText + '\n\nresponseText: \n' + responseText + '\n\nThe output div should have already been updated with the responseText.'); 
-                      } 
-      }; 
-      
-      $('#formElem').ajaxForm(ajaxFormOptions);
-      
+      // When user clicks on tab to go to next part of form, they're data will be uploaded/saved
+      // For now, only if there aren't errors in the form
       $('#navigation li').on('click', function() {
-        console.log("submitting form ajaxly");
-        $('#formElem').ajaxSubmit();
+        if(!$('#formElem').data('errors')){
+          $('#formElem').ajaxSubmit();
+        }
       });
+      
+      // For User Edit form - slides when you press tab on the last input
+      $('#formElem fieldset').each(function() {
+          $this = $(this);
+          $inputField = $this.find('.control-group').last().children().last();
+          $inputField.on('keydown', function(e){
+            if (e.which == 9){          
+              var current = $('#steps').data('index');
+              $('#navigation li:nth-child(' + (parseInt(current)+1) + ') a').click();
+              /* force the blur for validation */
+              $(this).blur();
+              e.preventDefault();
+            }
+        });
+      });
+      
+      // For user form - if there are errors don't allow the user to submit
+      $('#submit-user-form').bind('click',function(){
+        if($('#formElem').data('errors')){
+          Alert.newAlert('error', 'Please go back and correct any errors.');
+          return false;
+        } 
+      });
+      
+      /* Update the Roles when the user changes their selection */
+     
+      $('.talent-select').on('change', function() {
+        var value = $(this).val();
+        var index = $(this).data('index');
+        $('.step.roles .talent-label[data-index=' + index + ']').text(value);
+        var actor = false;
+        $characteristics = $('.actor-characteristics');
+        $('.talent-select').each(function(index) {
+          if ($(this).val() === 'Actor')  {
+            actor = true;
+          }
+        });
+        
+        if (!actor && !$characteristics.hasClass('hidden') ) {
+          $characteristics.addClass('hidden');
+        } 
+        if (actor) {
+          if ($characteristics.hasClass('hidden')) {
+            $characteristics.removeClass('hidden');
+          }
+        }
+      });
+      
       /* Add handler for numerous.js if we're adding additional entries to form so that it resizes 
          div height
        */
+            
       Numerous.init({
         'photos-list' : {
           'add' : function(form){
@@ -44,7 +88,8 @@ var Users = {
           }
         }
       });
-    }
+    },
+    
   },
   
   Show: {
@@ -52,10 +97,65 @@ var Users = {
       console.log("init show users");   
       Users.Show.handlers();
       Users.Show.modalHandlers();
+      $('div[data-link=about_me]').trigger('click');
     },
     
     handlers: function () {
+      /* These are for keeping boxes equal widths/heights
+       * Right now we need to add each handler -
+       * we could probably replace this with an array of selectors that all should be the same height
+       * and then a function that just handles them all.
+       */
+      $(window).resize( function() {
+        Users.Show.equalWidths('.user-body .user-menu .item.name');
+      });
+      $(window).load( function() {
+        Users.Show.equalWidths('.user-body .user-menu .item.name');
+      });
       
+      $(window).resize( function() {
+        Users.Show.equalHeights('.follow-buttons .span3');
+      });
+      $(window).load( function() {
+        Users.Show.equalHeights('.follow-buttons .span3');
+      });
+      
+      $('.user-menu').on('click', function() {
+        var link = $(this).data('link');
+        $('.user-menu').removeClass('active');
+        $(this).addClass('active');
+        Users.Show.displayContent(link);
+      });
+    },
+    
+    displayContent: function(link) {
+      var id = $('#user-body').data('id');
+      console.log(link);
+      
+      $.ajax({
+        url: '/users/' + id,
+        contentType: "application/json; charset=utf-8",
+        type: 'GET',
+        data: {
+          'link': link
+        },
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          if(data.success)
+            $('.user-body .content').html(data.html);
+          else 
+            Alert.newAlert("error", "There was an error in processing");
+        },
+        error: function() {
+          Alert.newAlert("error", "There was an error in processing");
+        }
+      });
+    },
+    
+    modalHandlers: function () {
+      
+      /* So that the messaging modal sizes appropriately */
       $('#message-modal').on('show', function () {
         $(this).css({
         'margin-left': function () {
@@ -64,6 +164,8 @@ var Users = {
         });
       });
       
+      
+      /* Event listeners for messaging modal buttons */
       $('#message-modal').on('shown', function () {
         $('input[value="Cancel"]').on('click', function () {
           $('#message-modal').modal('hide');
@@ -75,6 +177,7 @@ var Users = {
         });
       });
       
+      /* Photo carousel for the photos modal */
       $('#photos-modal').on('shown', function () {
         $('#photoCarousel').carousel(0);
         $("body").keydown(function(e) {
@@ -189,8 +292,79 @@ var Users = {
           tempNode = tempNode.parent();
         }
       });  
+    },
+    
+    /* This resizes the roles boxes so that they're all equal height and have equal proportions */
+    equalHeights: function(selector) {
+      
+      var maxHeight=$(selector).parent().height();
+      $(selector).height('auto');
+      $(selector).each(function(){
+          if($(this).height()>maxHeight){
+              maxHeight=$(this).height();
+          }
+      });
+     
+      $(selector).height(maxHeight);
+    },
+    
+    /* This resizes the roles boxes so that they're all equal width and have equal proportions */
+    equalWidths: function(selector) {
+      
+      var maxWidth=$(selector).parent().width();
+      $(selector).width('auto');
+      $(selector).each(function(){
+          if($(this).width()>maxWidth){
+              maxWidth=$(this).width();
+          }
+      });
+     
+      $(selector).width(maxWidth);
+    }
+    
+  },
+  
+  Index: {
+    
+    init: function() {
+      Users.Index.handlers();
+    },
+    
+    handlers: function() {
+      
+      /* We want to catch the search input and use ajax to display search results instead */
+      $('#user_search input').on( 'keypress', function(e) {
+        if(e.charCode == 13) {
+          searchTerm = $(this).val();
+          
+          /* Do the ajax call to get results from the server */
+          $.ajax({
+            url: '/users',
+            contentType: "application/json; charset=utf-8",
+            type: 'GET',
+            data: {
+              'q[name_cont]': searchTerm
+            },
+            dataType: 'json',
+            success: function(data) {
+              console.log(data);
+              if(data.success)
+                $('.users-search .search-results').html(data.html);
+              else 
+                Alert.newAlert("error", "There was an error processing your search");
+           
+            },
+            error: function() {
+              Alert.newAlert("error", "There was an error processing your search");
+            }
+          });
+          return false;
+        }
+      });
+      
+      
     }
     
   }
-  
+    
 }

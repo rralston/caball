@@ -1,6 +1,6 @@
 class CreateProfilePhotos < ActiveRecord::Migration
   def change
-    create_table :profile do |t|
+    create_table :profiles do |t|
       t.string :image
       t.string :description
       t.string :content_type

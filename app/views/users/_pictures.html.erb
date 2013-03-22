@@ -1,0 +1,23 @@
+<div class="pictures">
+  <div class="row-fluid">
+    <div class="span10 offset1 pictures-title title">
+      <h1>Pictures</h1>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div id="photoCarouselDiv" class="carousel slide" data-interval="false">
+      <div class="carousel-inner">
+        <div class="active item"><div class="item-container"><%= image_tag @user.profiles.image %></div></div>
+        <% @user.photos.each_with_index do |photo, counter| %>
+          <div class="item">
+            <div class="item-container"><%= image_tag photo.image %>
+            <div class="row-fluid"><%= photo.description %></div></div>
+          </div> 
+        <% end %>
+      </div>
+      <!-- Carousel nav -->
+      <a class="carousel-control left" href="#photoCarouselDiv" data-slide="prev">&lsaquo;</a>
+      <a class="carousel-control right" href="#photoCarouselDiv" data-slide="next">&rsaquo;</a>
+    </div>
+  </div>
+</div>

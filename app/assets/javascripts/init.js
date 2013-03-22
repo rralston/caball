@@ -19,6 +19,10 @@ PAGES = {
  
     show: function() {
       Users.Show.init();
+    },
+    
+    index: function() {
+      Users.Index.init();
     }
   },
  
@@ -29,6 +33,10 @@ PAGES = {
  
     show: function() {
       Projects.Show.init();
+    },
+    
+    index: function() {
+      Projects.Index.init();
     }
   }
 };

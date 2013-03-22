@@ -10,21 +10,26 @@ class UsersController < ApplicationController
     @search.build_condition
     respond_to do |format|
       format.html # index.html.erb
+      format.json { render :json => {
+                   :success => true, 
+                   :html => render_to_string(:partial => 'user_search_results', 
+                                             :layout => false, :formats => [:html], :locals => {} ) 
+                  } }
     end
   end
   
   def show
     @user = User.find(params[:id])
     @projects = @user.projects
-    @talents = @user.talents.offset(1)
+    @talents = @user.talents
     if @user.nil?
         redirect_to :action => :index
     end
     @search = User.search(params[:q])
     @users = @search.result
-      if params[:q]
-        redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return
-      end
+    if params[:q]
+      redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return
+    end
       
     @real_videos = Array.new
     for video in @user.videos
@@ -32,9 +37,16 @@ class UsersController < ApplicationController
         @real_videos << video
       end
     end
-    
+    if params[:link]
+      partial = params[:link]
+    end
     respond_to do |format|
       format.html # show.html.erb
+      format.json { render :json => {
+                   :success => true, 
+                   :html => render_to_string(:partial => partial, 
+                                             :layout => false, :formats => [:html], :locals => {} ) 
+                  } }
     end
   end
   
@@ -42,13 +54,9 @@ class UsersController < ApplicationController
      search
      @user = User.new
      @user.build_characteristics
+     @user.build_profiles
      # @user.build_photos (this was building before save)
-     2.times do
-       @user.talent.build
-     end
-     3.times do 
-       @video = @user.videos.build
-     end
+     # @user.talents.build
      respond_to do |format|
        format.html # new.html.erb
      end
@@ -62,24 +70,20 @@ class UsersController < ApplicationController
         @user.build_characteristics
       end
      @videos = @user.videos
-     if @videos.first.nil?
-       @videos.build
+     # unless @videos.first.present?
+     #   3.times do
+     #     @videos.build
+     #    end
+     # end
+     if @user.profiles.nil?
+       @user.build_profiles
      end
-     if @videos.second.nil?
-       @videos.build
-     end
-     if @videos.third.nil?
-       @videos.build
-     end
-     if @user.photos.first.nil?
-       @user.photos.build
-     end
-     if @user.talents.first.nil?
+     unless @user.talents.exists?
        @user.talents.build
      end
-     if @user.talents.second.nil?
-       @user.talents.build
-     end
+     # if @user.talents.second.nil?
+     #   @user.talents.second.build
+     # end
  end
    
    def create
@@ -122,7 +126,7 @@ class UsersController < ApplicationController
    @search = User.search(params[:q])
    @users = @search.result
      if params[:q]
-       redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return
+       redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return   
      end
   end
 end
