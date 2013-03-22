@@ -31,7 +31,7 @@ class ProjectsController < ApplicationController
   def show
     search
     @project = Project.find(params[:id])
-    
+    @comment = Comment.new
     if @project.nil?
         redirect_to :action => :index
     end

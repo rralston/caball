@@ -146,17 +146,6 @@ ActiveRecord::Schema.define(:version => 20130307085953) do
     t.text     "description2"
   end
 
-  create_table "updates", :force => true do |t|
-    t.text     "content"
-    t.integer  "user_id"
-    t.integer  "project_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "updates", ["project_id"], :name => "index_updates_on_project_id"
-  add_index "updates", ["user_id"], :name => "index_updates_on_user_id"
-
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
