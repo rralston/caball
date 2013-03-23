@@ -108,25 +108,6 @@
   </div>
 </section>
 
-<!-- just for me to keep track of >
-<div class="row-fluid follow-buttons">
-              <div class="span4 offset2 centered-text">
-                <h5><%= @user.friendships.all.count %></h5>
-                <h5>Following </h5>
-              </div>
-              <div class="span4 centered-text">
-                <h5><%= @user.friendships.all.count %></h5>
-                <h5>Followers </h5>
-              </div>
-              <div class="span2 camera-heart centered-text">
-                <%= link_to(friendships_path(friend_id: @user), method: :post, :class => '') do %>
-                  <%= image_tag 'camera_heart.png' %>
-                <% end %>
-              </div>
-            </div>
-            
-            
-</-->
 <section id = "user-body" class="user-body" data-id="<%=@user.id%>">
   <div class="container">
     <div class="row">
@@ -139,16 +120,21 @@
               <% end %>
             </div>
             <div class="follow-images">
-              A bunch of images
+              <% @followers_following.first(12).each_with_index do |user, index| %>
+                <% if user.profiles.present? %>
+                  <%= image_tag user.profiles.image.url(:tiny), :size=> '50x50' %>
+                <% end %>
+              <% end %>
+              <div class="clearfix"></div>
             </div>
             <div class="follow-counts">
               <div class="row-fluid">
-                <div class="numbers"><%= @user.friendships.all.count %> Fans</div>
+                <div class="numbers"><%= Friendship.where( :friend_id => @user.id).count %> Fans</div>
                 <div class="numbers"><%= @user.friendships.all.count %> Following</div>
               </div>
             </div>
           </div>
-          <div class="span6 about-container">
+          <div class="span9 about-container">
             <div class="about-title">
               About me:
             </div>  
@@ -165,87 +151,48 @@
                 </div>
               </div>
               <!-- End Headline Modal --> 
+              <div class="first-pic">
+                <%= image_tag @user.photos.first.image %>
+              </div>
+              <div class="second-pic">
+                <%= image_tag @user.photos.second.image %>
+              </div>
             </div>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span12 links-container">
+            <span class="user-menu active" data-link="updates">
+              Updates
+            </span>
+            
+            <span class="user-menu" data-link="reel">
+              Reel
+            </span>
+            
+            <% if @user.talents.first.present? %>
+            <span class="user-menu" data-link="first_role">
+              <%= @user.talents.first.name.capitalize %>
+            </span>
+            <% end %>
+            
+            <% if @user.talents.second.present? %>
+            <span class="user-menu" data-link="second_role">
+              <%= @user.talents.second.name.capitalize %>
+            </span>
+            <% end %>
+            
+            <span class="user-menu" data-link="resume">
+              Resume
+            </span>
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="span12 body-content-container ">
+            
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-<!-- This is just for me to take a look at>
-<section id = "user-body" class="user-body" data-id="<%=@user.id%>">
-  <div class="container">
-    <div class="row-fluid">
-      <div class="span2 offset1 menu">
-        <div class="row user-menu" data-link="about_me">
-          <div class="item name"><h3>ABOUT ME</h3></div> 
-            <div class="arrow item">
-              <%= image_tag('red_arrow.png') %>
-            </div>
-        </div>
-        <div class="row user-menu" data-link="updates">
-          <div class="item name"><h3>UPDATES</h3></div> 
-            <div class="arrow item">
-              <%= image_tag('red_arrow.png') %>
-            </div>
-        </div>
-        <div class="row user-menu" data-link="reel">
-          <div class="item name"><h3>MY REEL</h3></div> 
-            <div class="arrow item">
-              <%= image_tag('red_arrow.png') %>
-            </div>
-        </div>
-        <% if @user.talents.first.present? %>
-        <div class="row user-menu" data-link="first_role">
-          <div class="item name"><h3><%= @user.talents.first.name.upcase %> </h3></div>  
-            <div class="arrow item">
-              <%= image_tag('red_arrow.png') %>
-            </div>
-        </div>
-        <% end %>
-        <% if @user.talents.second.present? %>
-        <div class="row user-menu" data-link="second_role">
-          <div class="item name"><h3><%= @user.talents.second.name.upcase %> </h3></div>  
-            <div class="arrow item">
-              <%= image_tag('red_arrow.png') %>
-            </div>
-        </div>
-        <% end %>
-        <div class="row user-menu" data-link="pictures">
-          <div class="item name"><h3>PICTURES </h3></div> 
-            <div class="arrow item">
-              <%= image_tag('red_arrow.png') %>
-            </div>
-        </div>
-        <div class="row user-menu" data-link="projects">
-          <div class="item name"><h3>PROJECTS </h3></div> 
-            <div class="arrow item">
-              <%= image_tag('red_arrow.png') %>
-            </div>
-        </div>
-      </div>
-      <div class="span8 content" data-top: "100px">
-        
-      </div>
-    </div>
-    <div class="row-fluid reel-slider">
-         <% comment = "3d Reel Slider" %>
-      <div class="row-fluid">
-        <div class="royalSlider rsDefault">
-          
-          <% @user.photos.each do |photo| %>
-            <img src="<%= photo.image.url(:large) %>" />
-          <%end%>
-          
-          <% @real_videos.each_with_index do |video| %>
-            <img src="<%= video.thumbnail_large %>" data-rsVideo="<%= video.url %>" />
-          <%end%>
-          
-        </div>  
-
-      </div>
-
-    </div>
-  </div>
-</section>
-<!-- End -->

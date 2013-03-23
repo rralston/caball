@@ -98,32 +98,9 @@ var Users = {
       Users.Show.handlers();
       Users.Show.modalHandlers();
       $('div[data-link=about_me]').trigger('click');
-      Global.initFlow();
     },
     
     handlers: function () {
-      /* These are for keeping boxes equal widths/heights
-       * Right now we need to add each handler -
-       * we could probably replace this with an array of selectors that all should be the same height
-       * and then a function that just handles them all.
-       */
-      $(window).resize( function() {
-        Users.Show.equalWidths('.user-body .user-menu');
-      });
-      $(window).load( function() {
-        Users.Show.equalWidths('.user-body .user-menu');
-      });
-      
-      $(window).load( function() {
-        Users.Show.equalHeights('.follow-buttons div');
-      });
-      
-      $(window).resize( function() {
-        Users.Show.equalHeights('.header-bubble > .span5');
-      });
-      $(window).load( function() {
-        Users.Show.equalHeights('.header-bubble > .span5');
-      });
       
       $('.user-menu').on('click', function() {
         var link = $(this).data('link');
@@ -133,20 +110,6 @@ var Users = {
     
     displayContent: function(link, menuItem) {
       
-      if(link === 'reel') {
-        /* We have a separate condition for reel -- no server call*/
-    
-        $('.user-menu').removeClass('active');
-        $(menuItem).addClass('active');
-        var top = $(menuItem).position().top;
-        $('.triangle-tab').css('top', top);
-        $('html, body').animate({
-          scrollTop: $('.reel-slider').offset().top
-        });
-        
-        return;
-      }
-      $('.triangle-tab').css('top', top);
       var id = $('#user-body').data('id');
       console.log(link);
       
@@ -162,18 +125,13 @@ var Users = {
         success: function(data) {
           console.log(data);
           if(data.success) {
-            $('.user-body .content').html(data.html);
+            $('.user-body .body-content-container').html(data.html);
             $('.user-menu').removeClass('active');
             $(this).addClass('active');
-            var top = $(this).position().top;
-            $('.triangle-tab').css('top', top);
             
-            if($(this).data('link') === 'projects'){
-              Users.Show.equalHeights('.projects .projects-box');
-              $(window).resize( function() {
-                Users.Show.equalHeights('.projects .projects-box');
-              });
-            }
+            if($(this).data('link') === 'reel')
+              Global.initFlow();
+            
           }
             
           else 
