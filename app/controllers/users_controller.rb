@@ -57,9 +57,6 @@ class UsersController < ApplicationController
      @user.build_profiles
      # @user.build_photos (this was building before save)
      # @user.talents.build
-     3.times do 
-       @video = @user.videos.build
-     end
      respond_to do |format|
        format.html # new.html.erb
      end
@@ -73,24 +70,20 @@ class UsersController < ApplicationController
         @user.build_characteristics
       end
      @videos = @user.videos
-     if @videos.first.nil?
-       @videos.build
-     end
-     if @videos.second.nil?
-       @videos.build
-     end
-     if @videos.third.nil?
-       @videos.build
-     end
+     # unless @videos.first.present?
+     #   3.times do
+     #     @videos.build
+     #    end
+     # end
      if @user.profiles.nil?
        @user.build_profiles
      end
-     if @user.talents.first.nil?
+     unless @user.talents.exists?
        @user.talents.build
      end
-     if @user.talents.second.nil?
-       @user.talents.build
-     end
+     # if @user.talents.second.nil?
+     #   @user.talents.second.build
+     # end
  end
    
    def create

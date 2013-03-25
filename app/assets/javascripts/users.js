@@ -101,12 +101,23 @@ var Users = {
     },
     
     handlers: function () {
-      
+      /* These are for keeping boxes equal widths/heights
+       * Right now we need to add each handler -
+       * we could probably replace this with an array of selectors that all should be the same height
+       * and then a function that just handles them all.
+       */
       $(window).resize( function() {
-        Users.Show.equalHeights('.user-body .user-menu .item.name');
+        Users.Show.equalWidths('.user-body .user-menu .item.name');
       });
       $(window).load( function() {
-        Users.Show.equalHeights('.user-body .user-menu .item.name');
+        Users.Show.equalWidths('.user-body .user-menu .item.name');
+      });
+      
+      $(window).resize( function() {
+        Users.Show.equalHeights('.follow-buttons div');
+      });
+      $(window).load( function() {
+        Users.Show.equalHeights('.follow-buttons div');
       });
       
       $('.user-menu').on('click', function() {
@@ -179,6 +190,57 @@ var Users = {
         });
       });
       
+      $('.follow').on('click', ajaxFollow);
+      
+      function ajaxFollow() {
+        $(this).button('loading');
+        $.ajax({
+          url: $(this).attr('href'),
+          type: $(this).data('method').toUpperCase(),
+          contentType: 'application/json; charset=utf-8',
+          success: function (data) {
+              if(data.success) {
+                if(data.created) {
+                  
+                   // We have to update which friendship to remove now
+                  newId = data.friendship.id;
+                  $('.follow.stop-following').attr('href', '/friendships/' + newId);
+                  $('#bootstrap-alert-placeholder').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>'+data.notice+'</span></div>');
+                  $('.follow').button('reset');
+                  $('.follow.stop-following').removeClass('hidden');
+                  $('.follow.start-following').addClass('hidden');
+                  
+                  $('.alert').alert();
+                  // We have to set our own timeout for closing the alert
+                  window.setTimeout(function() { $(".alert").alert('close'); }, 2000);
+                }
+                else if (data.destroyed) {
+                  
+                  $('#bootstrap-alert-placeholder').html('<div class="alert fade in"><a class="close" data-dismiss="alert">×</a><span>'+data.notice+'</span></div>');
+                  $('.follow').button('reset');
+                  $('.follow.stop-following').addClass('hidden');
+                  $('.follow.start-following').removeClass('hidden');
+                  
+                  $('.alert').alert();
+                  // We have to set our own timeout for closing the alert
+                  window.setTimeout(function() { $(".alert").alert('close'); }, 2000);
+                }
+                else {
+                  $('.follow').button('reset');
+                  $('#bootstrap-alert-placeholder').html('<div class="alert fade in alert-error"><a class="close" data-dismiss="alert">×</a><span>There was a problem following. Please try again...</span></div>');
+                }
+              }
+          },
+          error: function () {
+            $('.follow').button('reset');
+            $('#bootstrap-alert-placeholder').html('<div class="alert fade in alert-error"><a class="close" data-dismiss="alert">×</a><span>There was a problem following. Please try again...</span></div>');
+          }
+        });
+        return false;
+      }
+    },
+    
+    modalHandlers: function () {
       $('.role-more a').on('click', function () {
         // Now we have to figure out whether we'll display role 1 or role 2
         // We can do that from figuring out who our parent is and we'll have to 
@@ -234,6 +296,20 @@ var Users = {
     
     /* This resizes the roles boxes so that they're all equal height and have equal proportions */
     equalHeights: function(selector) {
+      
+      var maxHeight=$(selector).parent().height();
+      $(selector).height('auto');
+      $(selector).each(function(){
+          if($(this).height()>maxHeight){
+              maxHeight=$(this).height();
+          }
+      });
+     
+      $(selector).height(maxHeight);
+    },
+    
+    /* This resizes the roles boxes so that they're all equal width and have equal proportions */
+    equalWidths: function(selector) {
       
       var maxWidth=$(selector).parent().width();
       $(selector).width('auto');

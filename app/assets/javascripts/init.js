@@ -5,6 +5,7 @@ PAGES = {
   common: {
     init: function() {
       console.log("sitewide init");
+      Global.init();
     }
   },
  

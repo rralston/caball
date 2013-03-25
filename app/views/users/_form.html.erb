@@ -241,7 +241,7 @@
                       <%= p.label "Photo", :class => 'control-label' %>
                       <div class="controls">    
                         <%= image_tag p.object.image.url(:medium), {:class => "img-polaroid"} %>       
-                        <%= p.file_field :image%>   
+                        <%= p.file_field :image %>   
                         <%= p.check_box :_destroy %> Click Here to Destroy
                       </div>
                     </div>
@@ -300,7 +300,8 @@
           	   <div class="span12">
                  <h2><%= @user.name.possessive %> Reel</h2>
                 <% videos_counter = 1 %>
-              	<%= f.fields_for :videos do |video| %>
+								<div id="fields-for-videos-list" class="numerous">
+              	<%= f.fields_for :videos, Video.new, :child_index => 'replace_this' do |video| %>
             	  <h3>Video <%=videos_counter%></h3>
                 <div class="control-group">
                   <label class="control-label">Title</label>
@@ -308,16 +309,16 @@
                     <%= video.text_field(:title) %>
                   </div>
                 </div>
-                
-
-                
 						    <div class="control-group">
 						       <%= video.label :imdb, :class => 'control-label' %>
 						         <div class="controls">
 						           <%= video.text_field :imdb, :class => 'text_field' %>
 						       </div>
 						     </div>
-						
+						<%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+						<div id="videos-list"></div>
+            <%= link_to 'Add Another Video', '#', :id => 'add-to-videos-list' %>
+						</fieldset>
             		<% if @videos.present?  %>
         
               		<% if video.object.thumbnail_small.present? %>

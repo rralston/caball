@@ -2,176 +2,18 @@
 <section id="user-header" class="section alt user-header">
   <div class="container-fluid">
     <div class="row-fluid">
-      <div class="span5">
-        <div class="row-fluid">
-          <div class="span6">
-            <% if @user.profiles.present? %> 
-              <a href="#">
-                <div class="profile-pic">  
-                <%= image_tag @user.profiles.image, :"data-toggle" => "modal", :"data-target" => "#photos-modal", :"data-keyboard"=>"true" %>
-                </div>
-              </a>
-              <!-- Photos Modal -->
-              <div id="photos-modal" class="modal hide fade photos-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-body">
-                  <div id="photoCarousel" class="carousel slide" data-interval="false">
-                    <div class="carousel-inner">
-                      <div class="active item"><div class="item-container"><%= image_tag @user.profiles.image %></div></div>
-                      <% @user.photos.each_with_index do |photo, counter| %>
-                        <div class="item">
-                          <div class="item-container"><%= image_tag photo.image %>
-                          <div class="row-fluid"><%= photo.description %></div></div>
-                        </div> 
-                      <% end %>
-                    </div>
-                    <!-- Carousel nav -->
-                    <a class="carousel-control left" href="#photoCarousel" data-slide="prev">&lsaquo;</a>
-                    <a class="carousel-control right" href="#photoCarousel" data-slide="next">&rsaquo;</a>
-                  </div>
-                </div>
-              </div>
-              <!-- End Photos Modal --> 
-            <% end %>
-          </div>
-          <div class="span6 centered-text">
-            <h3><% if @user.name.present?%><%= @user.name %><% end %></h3>
-            <% if @user.location.present? %>
-              <span data-toggle="modal" data-target="#location-modal" data-keyboard="true" class="location-modal-button">
-                 <%= @user.location %>
-              </span>
-              <!-- Location Modal -->
-              <div id="location-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-header left-aligned">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h3><span><%= @user.name.split[0..0].join(" ") %></span></h3>
-                 <% if @user.location.present? %><p><span><%= @user.location %></span></p> <%end %>
-                </div>
-                <div class="modal-body">
-                  <img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= @user.location %>&zoom=11&size=400x300&sensor=false">
-                </div>
-              </div>
-              <!-- End Location Modal --> 
-            <%end %>
+      <div class="span10 offset1">
+        <div class="row-fluid header-bubble">
+          <div class="span5">
             <div class="row-fluid">
-              <div class="span4 talents-thumbnail">
-                <%= if @user.talents.first.present? then image_tag(@user.talents.first.name.downcase + ".png") end%>
-              </div>
-              <div class="span4 talents-thumbnail">
-                <%= image_tag(@user.talents.second.name.downcase + ".png") %>
-              </div>
-              <div class="span4">
-                third thumbnail image
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="span5 offset1">
-        <div class="row-fluid centered-text">
-          <h3>
-            <%= [@user.talents.first.name, @user.talents.second.name].reject(&:empty?).join(' and ') %>
-          </h3>
-        </div>
-        <div class="row-fluid">
-          <div class="span3">
-            <a data-toggle="modal" data-target="#message-modal" 
-                    data-remote ="<%= new_conversation_path(:recipient => @user.email, :modal => true) %>"
-                    data-keyboard="true" class="btn">Message</a>
-            <!-- Message Modal -->
-              <div id="message-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h3><span>Message <%= @user.name.split[0..0].join(" ") %></span></h3>
-                </div>
-                <div class="modal-body">
-                </div>
-              </div>
-            <!-- Message Modal --> 
-          </div>
-          <div class="span3 centered-text">
-            <h5>Following </h5>
-            <h5>131</h5>
-          </div>
-          <div class="span3 centered-text">
-            <h5>Followers </h5>
-            <h5>4,121</h5>
-          </div>
-          <div class="span3 centered-text">
-            <h5>Follow</h5>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id = "user-body" class="user-body" data-id="<%=@user.id%>">
-  <div class="container-fluid">
-    <div class="row-fluid">
-      <div class="span2 menu">
-        <div class="container-fluid">
-          <div class="row-fluid user-menu" data-link="about_me">
-            <div class="item name"><h3>About Me</h3></div> <div class="arrow item"><h3><i class="icon-play"></i></h3></div>
-          </div>
-          <% if @user.talents.first.present? %>
-          <div class="row-fluid user-menu" data-link="first_role">
-            <div class="item name"><h3><%= @user.talents.first.name %> </h3></div> <div class="arrow item"><h3><i class="icon-play"></i></h3></div>
-          </div>
-          <% end %>
-          <% if @user.talents.second.present? %>
-          <div class="row-fluid user-menu" data-link="second_role">
-            <div class="item name"><h3><%= @user.talents.second.name %> </h3></div> <div class="arrow item"><h3><i class="icon-play"></i></h3></div>
-          </div>
-          <% end %>
-          <div class="row-fluid user-menu" data-link="pictures">
-            <div class="item name"><h3>Pictures </h3></div> <div class="arrow item"><h3><i class="icon-play"></i></h3></div>
-          </div>
-          <div class="row-fluid user-menu" data-link="projects">
-            <div class="item name"><h3>Projects </h3></div> <div class="arrow item"><h3><i class="icon-play"></i></h3></div>
-          </div>
-        </div>
-      </div>
-      <div class="span10 content">
-        
-        
-      </div>
-    </div>
-  </div>
-</section>
- <section id="promo" class="section alt">
-   
-   <div class="container-fluid">
-     <div class="row-fluid">
-       <div class="span12">
-         <div class="row-fluid">
-           <div class="span5">
-             <div class="row-fluid">
-               <div class="span12 centered-text">
-                 <h3><span><%= @user.name.split[0..0].join(" ") %></span></h3>
-                 <% if @user.location.present? %>
-                  <p><span data-toggle="modal" data-target="#location-modal" data-keyboard="true" class="location-modal-button">
-                     <%= @user.location %>
-                  </span></p> 
-                  <!-- Location Modal -->
-                    <div id="location-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                      <div class="modal-header left-aligned">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3><span><%= @user.name.split[0..0].join(" ") %></span></h3>
-                       <% if @user.location.present? %><p><span><%= @user.location %></span></p> <%end %>
-                      </div>
-                      <div class="modal-body">
-                        <img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= @user.location %>&zoom=11&size=400x300&sensor=false">
-                      </div>
+              <div class="span6">
+                <% if @user.profiles.present? %> 
+                  <a href="#">
+                    <div class="profile-pic">  
+                    <%= image_tag @user.profiles.image, :"data-toggle" => "modal", :"data-target" => "#photos-modal", :"data-keyboard"=>"true" %>
                     </div>
-                 <!-- End Location Modal --> 
-                 <%end %>
-                 
-                 <a href="#">
-                 <div class="profile-pic">
-                <% if @user.profiles.present? %>   
-								<%= image_tag @user.profiles.image, :"data-toggle" => "modal", :"data-target" => "#photos-modal", :"data-keyboard"=>"true" %>
-                 </div></a>
-                 <!-- Photos Modal -->
+                  </a>
+                  <!-- Photos Modal -->
                   <div id="photos-modal" class="modal hide fade photos-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-body">
                       <div id="photoCarousel" class="carousel slide" data-interval="false">
@@ -189,144 +31,132 @@
                         <a class="carousel-control right" href="#photoCarousel" data-slide="next">&rsaquo;</a>
                       </div>
                     </div>
-										<% end %>
                   </div>
-                 <!-- End Photos Modal --> 
-               </div>
-               <div class="clearfix"></div>
-               <div class="row-fluid pictures-contact-buttons">
-                 <div class="span4 offset1 pictures-button">
-                   <a href = "#" data-toggle="modal" data-target="#photos-modal" data-keyboard="true" class="btn">Pictures</a>
-                 </div>
-                 <div class="span4 offset2 contact-button">
-                   <a data-toggle="modal" data-target="#message-modal" 
-                    data-remote ="<%= new_conversation_path(:recipient => @user.email, :modal => true) %>"
-                    data-keyboard="true" class="btn">Contact</a>
-                 </div>
-                 <!-- Message Modal -->
-                  <div id="message-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-header">
+                  <!-- End Photos Modal --> 
+                <% end %>
+              </div>
+              <div class="span6 centered-text details">
+                <h3><% if @user.name.present?%><%= @user.name %><% end %></h3>
+                <% if @user.location.present? %>
+                  <span data-toggle="modal" data-target="#location-modal" data-keyboard="true" class="location-modal-button">
+                     <%= @user.location %>
+                  </span>
+                  <!-- Location Modal -->
+                  <div id="location-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header left-aligned">
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                      <h3><span>Message <%= @user.name.split[0..0].join(" ") %></span></h3>
+                      <h3><span><%= @user.name.split[0..0].join(" ") %></span></h3>
+                     <% if @user.location.present? %><p><span><%= @user.location %></span></p> <%end %>
                     </div>
                     <div class="modal-body">
+                      <img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= @user.location %>&zoom=11&size=400x300&sensor=false">
                     </div>
                   </div>
-                 <!-- Message Modal --> 
-               </div>
-             </div>
-              <div class="row-fluid projects-characteristics">
-              <% if @user.projects.present? then %>
-                <%= render :partial => 'current_projects' %>
-              <% end %>
-              </div>
-           </div>
-           <div class="span7">
-             <div class="row-fluid about-me">
-               <div class="page-header">
-                 <h1>
-                     About Me
-                 </h1>
-               </div>
-               <% if @user.about.present? %>
-							<p>
-                 <%= shorten :text => @user.about, :length => 800, :partial => "more_bio" %>
-               </p>
-							<% end %>
-             </div>
-             <!-- About Me Modal -->
-              <div id="about-me-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h3><span><%= @user.name.split[0..0].join(" ") %></span></h3>
-                 <% if @user.location.present? %><p><span><%= @user.location %></span></p> <%end %>
-                </div>
-                <div class="modal-body">
-                  <p>
-                 <%= simple_format(@user.about) %>
-                  </p>
-                </div>
-              </div>
-             <!-- End About Me Modal --> 
-             <div class="row-fluid bio-more">
-               <a data-toggle="modal" data-target="#about-me-modal" data-keyboard="true" class="hidden btn btn-link">more</a>
-             </div>
-             <div class="row-fluid roles-container">
-               <% if @user.talents.present? then %>
-                <%= render :partial => 'roles' %>
-               <% end %>
-               
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
- </section>
-
-<% comment = "Here we're dynamically displaying videos--only those that the user has linked to.
-             We need to choose how it will be offset depending on how many videos
-             are being displayed.
-"%>
-
-<% if @real_videos.length > 0 %>
- <section class="section">
-   <div class="container-fluid">
-     <div class="row-fluid">
-       <div class="span12">
-         <div class="row-fluid">
-           <div class="page-header">
-             <h1>
-               Video Portfolio <small>A sample of <%= @user.name.split[0..0].join(" ").possessive %> work</small> 
-             </h1>
-           </div>
-           <ul class="thumbnails thumbnail-list">
-           <% @real_videos.each_with_index do |video, counter| %>
-            <% if counter == 0 %>
-             <li class="span4 offset<%= (3 - @real_videos.length) * 2 %>">
-            <% else %>
-             <li class="span4">
-            <% end %>
-               <div class="row-fluid">
-                 <h3><%= video.title %></h3>
-               </div>
-							 <a data-toggle="lightbox" href="#video<%= counter %>">
-                 <figure class="thumbnail-figure">
-                   <%= image_tag(video.thumbnail_large, :width => '100%') %>
-									 <i class="icon-play-circle"></i>    
-                 </figure>
-							</a>
-							<div class="lightbox fade" id="video<%= counter %>" style="display: none;">
-								<div class='lightbox-content'>
-									<iframe width="560" height="315" src=<%= video.embed_url %> frameborder="0" allowfullscreen></iframe>
-								</div>
-							</div>
-              <div class="row-fluid video-more-button" data-video="<%= counter %>">
-                <span>
-                <% if video.user_description.present? %> 
-                  <%= shorten :text => video.user_description, :length => 140, :partial => "more_video" %>
+                  <!-- End Location Modal --> 
                 <%end %>
-                </span>
-             </li>
-             <!-- Video Description Modal -->
-              <div id="video-modal-<%= counter %>" data-video="<%= counter %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h3><span><%= video.title %></span></h3>
+                <div class="row-fluid">
+                  <div class="span6 talents">
+                    <%= if @user.talents.first.present? then @user.talents.first.name end%>
+                  </div>
+                  <div class="span6 talents">
+                    <%= if @user.talents.second.present? then @user.talents.second.name end%>
+                  </div>
                 </div>
-                <div class="modal-body">
-                  <p>
-                 <%= simple_format(video.user_description) %>
-                  </p>
+                
+                <div class="row-fluid message-row">
+                  <a data-toggle="modal" data-target="#message-modal" 
+                        data-remote ="<%= new_conversation_path(:recipient => @user.email, :modal => true)%>"
+                        data-keyboard="true" class="message-button">Message</a>
+                  <!-- Message Modal -->
+                    <div id="message-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3><span>Message <%= @user.name.split[0..0].join(" ") %></span></h3>
+                      </div>
+                      <div class="modal-body">
+                      </div>
+                    </div>
+                  <!-- Message Modal --> 
                 </div>
               </div>
-              <!-- End Video Description Modal --> 
-             <% end %>
-           </ul>
-         </div>  
-       </div>
-     </div>  
-   </div>
- </section>
-<% end %>
- </div>
+            </div>
+          </div>
+          <div class="span5 offset1">
+            <div class="row-fluid left-aligned">
+              <h3>
+                <%= [@user.talents.first.name, @user.talents.second.name].reject(&:empty?).join(' and ') %>
+              </h3>
+            </div>
+            <div class="row-fluid left-aligned headline">
+              <%= if @user.headline.present? then simple_format @user.headline end %>
+            </div>
+            <div class="row-fluid follow-buttons">
+              <div class="span4 centered-text">
+                <h5>Following </h5>
+                <h5><%= @user.friendships.all.count %></h5>
+              </div>
+              <div class="span4 centered-text">
+                <h5>Followers </h5>
+                <h5><%= @user.friendships.all.count %></h5>
+              </div>
+              <div class="span4 camera-heart centered-text">
+                <%= link_to(friendships_path(friend_id: @user), method: :post, :class => '') do %>
+                  <%= image_tag 'camera_heart.png' %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id = "user-body" class="user-body" data-id="<%=@user.id%>">
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2 offset1 menu">
+        <div class="container-fluid">
+          <div class="row-fluid user-menu" data-link="about_me">
+            <div class="item name"><h3>About Me</h3></div> 
+              <div class="arrow item">
+                <%= image_tag('red_arrow.png') %>
+              </div>
+          </div>
+          <% if @user.talents.first.present? %>
+          <div class="row-fluid user-menu" data-link="first_role">
+            <div class="item name"><h3><%= @user.talents.first.name %> </h3></div>  
+              <div class="arrow item">
+                <%= image_tag('red_arrow.png') %>
+              </div>
+          </div>
+          <% end %>
+          <% if @user.talents.second.present? %>
+          <div class="row-fluid user-menu" data-link="second_role">
+            <div class="item name"><h3><%= @user.talents.second.name %> </h3></div>  
+              <div class="arrow item">
+                <%= image_tag('red_arrow.png') %>
+              </div>
+          </div>
+          <% end %>
+          <div class="row-fluid user-menu" data-link="pictures">
+            <div class="item name"><h3>Pictures </h3></div> 
+              <div class="arrow item">
+                <%= image_tag('red_arrow.png') %>
+              </div>
+          </div>
+          <div class="row-fluid user-menu" data-link="projects">
+            <div class="item name"><h3>Projects </h3></div> 
+              <div class="arrow item">
+                <%= image_tag('red_arrow.png') %>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="span8 content">
+        
+        
+      </div>
+    </div>
+  </div>
+</section>

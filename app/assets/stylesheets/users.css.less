@@ -271,11 +271,30 @@ figure.profile-pic > img {
 
 .user-header {
   
+  .header-bubble {
+    background: url('user_body_texture.png') repeat;
+    background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), url('user_body_texture.png') repeat;
+    background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), url('user_body_texture.png') repeat;
+    background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), url('user_body_texture.png') repeat;
+    background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), url('user_body_texture.png') repeat;
+    background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), url('user_body_texture.png') repeat;
+    .border-radius(~'40px / 20px');
+    margin: 20px 0px;
+    .box-shadow(0px 10px 10px #333);
+    color: #fff;
+  }
+  
+  .details div {
+    margin-top: 15px;
+  }
+
   .profile-pic {
     padding: 10%;
     width: 60%;
     
     img {
+      border: solid 10px #333;
+      
       .border-radius(10px);
     }
   }
@@ -284,10 +303,73 @@ figure.profile-pic > img {
     padding: 25%;
     width: 50%;
   }
+  
+  @backgroundButtonColor: #bfbfbf;
+  
+  .follow-buttons .span4 {
+    color: @black;
+    background: @backgroundButtonColor repeat;
+    background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+    background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+    background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+    background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+    background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+    .border-radius(~'10px / 5px');
+    .box-shadow(0px 10px 10px -5px #F00);
+    
+  }
+  
+  .headline {
+    margin: 10px 0;
+  }
+  
+  .camera-heart {
+    position: relative;
+  }
+  
+  .camera-heart img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -21px;
+    margin-top: -18px;
+  }
+  
+  .message-button {
+    background: @backgroundButtonColor repeat;
+    background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+    background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+    background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+    background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+    background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+    .border-radius(~'10px / 5px');
+    text-decoration: none;
+    color: @black;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .message-button:hover {
+    /* Overriding a weird bootstrap property */
+    background-position: 0px 33px;
+    background: darken(@backgroundButtonColor, 20%) repeat;
+    background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
+    background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
+    background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
+    background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
+    background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
+    border-color: darken(@backgroundButtonColor, 20%);
+  }
+  
+  .message-row {
+    margin-bottom: 30px;
+    font-weight: bold;
+  }
 
 }
 
 .user-body {
+  
+  margin-bottom: 50px;
 
   .menu {  
     
@@ -295,18 +377,28 @@ figure.profile-pic > img {
       background-color: #ddd;
     }
     
-    .container-fluid {
-      margin-right: 0px;
-      padding-right: 0px;
-    }
     .user-menu {
       
+      @menuButtonColor: #555;
+        
+      background: @menuButtonColor repeat;
+      background: -webkit-linear-gradient(left, rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @menuButtonColor repeat;
+      background: -moz-linear-gradient(left, rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @menuButtonColor repeat;
+      background: -ms-linear-gradient(left, rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @menuButtonColor repeat;
+      background: -o-linear-gradient(left, rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @menuButtonColor repeat;
+      background: linear-gradient(left, rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @menuButtonColor repeat;
+      
+      border: solid 2px @black;
+      .border-radius(~'40px / 8px');
+      text-decoration: none;
       cursor: pointer;
-      border: 1px solid #ddd;
-      .border-radius(5px 0 0 5px);
+      color: @white;
+      font-weight: bolder;
+      
+      margin-bottom: 10px;
       
       h3 {
-        font-size: 1em;
+        font-size: 1.5em;
       }
       
       display: table;
@@ -318,8 +410,7 @@ figure.profile-pic > img {
       }
         
       .arrow.item {
-        text-align: right;
-        padding-right: 10px;
+        padding-right: 20px;
       }
       
       .item.name {
@@ -330,16 +421,16 @@ figure.profile-pic > img {
   }
   
   .content {
-    .border-radius(0px 10px 10px 10px);
-    background-color: #ddd;
-    margin-left: -2px;
+    .border-radius(10px);
+    background: url('user_body_texture.png') repeat;
     min-height: 400px; 
     padding-bottom: 50px;
+    .box-shadow(0px 10px 10px #333);
+    color: @white;
     
     .title {
       h1 {
         float: left;
-        background-color: #fff;
         padding: 10px;
         .border-radius(2px);
       }
@@ -348,9 +439,43 @@ figure.profile-pic > img {
     
     .role-description {
       margin-top: 40px;
-      background-color: #fff;
       padding: 10px;
       .border-radius(2px);
+    }
+    
+    .pictures {
+      overflow: hidden;
+      
+      .carousel {
+      
+        margin-top: 50px;
+        height: 100%;
+         
+        .carousel-control {
+          top: 50px;
+        }
+        
+        .carousel-inner {
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+          
+          .item.active, .item.next, .item.prev {
+            display: table;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            .item-container {
+              display: table-cell;
+              vertical-align: middle;
+            }
+            img {
+              vertical-align: middle;
+              padding-bottom: 10px;
+            }
+          }
+        }
+      }
     }
   }
 }

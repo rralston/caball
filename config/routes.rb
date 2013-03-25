@@ -3,9 +3,13 @@ Caball::Application.routes.draw do
     resources :characteristics, :photos, :talents, :profile
   end
   
-  resources :projects
+  resources :projects do 
+    resources :comments
+  end
+  
   resources :conversations
   resources :notifications
+  resources :friendships
   
   # Static Pages 
   

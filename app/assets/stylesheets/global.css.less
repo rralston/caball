@@ -1,54 +1,248 @@
-// Fixes the NavBar overlapping content
-@media (min-width: 980px) {
-  body {
-    padding-top: 80px;
+/* Header Stuff */
+
+header {
+  
+  height: 100px;
+  margin-bottom: 30px;
+  
+  .box-shadow(0px 10px 19px #333);
+  
+  .navbar-fixed-top {
+    height: 100%;
+    position: relative;
+    .navbar-inner {
+      height: 100%;
+    }
   }
-}
+  
+  .nav-collapse {
+    height: 100%;
+  }
+  
+  // Get rid of horizontal line
+  .navbar-fixed-top .navbar-inner, .navbar-static-top .navbar-inner {
+    box-shadow: none;
+    border-width: 0 0 0px;
+  }
+  
+  .header-container > div.row-fluid, 
+  .header-container > div.row-fluid > .span12,
+  .header-container > div.row-fluid > .span12 > .row-fluid,
+  .header-container > div.row-fluid > .span12 > .row-fluid .pull-right,
+  .header-container > div.row-fluid > .span12 > .row-fluid .pull-right li {
+    height: 100%;
+  }
+  
+  .header-container {
+    height: 100%;
+    padding: 0px;
+    background: url('header_background.png') repeat;
+     
+    .row-fluid .row-fluid {
+      display: table;
+    }
+    
+    .divider-vertical {
+      margin: 0px 0px;
+      border-left: 1px solid #333;
+      border-right: 1px solid #333;
+    }
+  
+    .brand {
+      background-color: transparent;
+      padding: 0;
+      display: table-cell;
+      vertical-align: middle;
+      float: none;
+      position: relative;
+      left: -3px;
+      
+      .triangle-shape {
+        border-top: 129px solid #fff;
+        border-top: 129px solid rgba(255,255,255,1);
+        border-left: 140px solid #fff;
+        border-left: 140px solid rgba(255,255,255,1);
+        border-right: 340px solid rgba(0,0,0,0);
+        position: absolute;
+        top: -29px;
+        z-index: 5;
+        -webkit-filter: drop-shadow(9px 9px 9px rgba(0,0,0,0.3));
+        filter: url(shadow.svg#drop-shadow);
+        -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=0, OffY=1, Color='#ccc')";
+        filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=0, OffY=1, Color='#ccc')";
 
-// Navbar
-.navbar .divider-vertical {
-  height: 79px;
-  margin: 0;
-}
+      }
+      
+      a {
+        z-index: 10;
+        position: relative;
+        left: 15px;
+      }
+    }
+    
+    .nav > li {
+      float: none;
+      display: inline;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    
+    .nav > ul {
+      display: table;
+    }
+    
+    .nav {
+      
+      .widgets {
+        
+        div { 
+          padding-right: 10px;
+        }
+        
+        .notifications > a{
+          height: 43px;
+          width: 55px;
+          background: url('header_icons.png') no-repeat 0px -43px;
+          position: relative;
+          float: left;
+          
+          .number {
+            position: absolute;
+            left: 40px;
+            top: -5px;
+          }
+        }
+        
+        .messages  > a{
+          height: 46px;
+          width: 55px;
+          background: url('header_icons.png') no-repeat 0px -3px;
+          position: relative;
+          float: left;
+          
+          .number {
+            position: absolute;
+            left: 40px;
+            top: -5px;
+          }
+        }
+        
+        .profile {
+          float: left;
+          padding-left: 10px;
+        }
+        
+        .settings > a{
+          height: 43px;
+          width: 55px;
+          background: url('header_icons.png') no-repeat 0px -89px;
+          position: relative;
+          float: left;
+          border: none !important;
+        }
+      }
+      
+      .search {
+        position: relative;
+        
+        form {
+          margin: 0px;
+        }
+        
+        input {
+          padding-left: 20px;
+          text-align: right;
+        }
+        
+        .icon-search {
+          position: absolute;
+          left: 4px;
+          top: 7px;
+          cursor: pointer;
+          
+        }
+      }
+      
+      .messaging {
+        .messaging-icon {
+          background-image: url('messaging_icon.png');
+          background-repeat: no-repeat;
+          height: 18px;
+          width: 29px;
+          
+        }
+        
+        .messaging-icon:hover {
+          background-image: url('messaging_icon_hover.png');
+          
+        }
+        
+        .badge-info {
+          position: absolute;
+          left: 25px;
+          bottom: 20px;
+          background: rgb(255, 38, 38); 
+          background: rgba(255, 38, 38, .8);
+        }
+      }
+    }
+    /* For over-writing weird open state where background changes */
+    .nav .dropdown.open > .dropdown-toggle {
+      background-color: transparent !important;
+      border: none !important;
+    }
+    
+    .nav .dropdown > .dropdown-toggle {
+      border: none !important;
+    }
+    
+    .title-cell {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    
+    .nav > li > a {
+     
+      display: table;
+      vertical-align: middle;
+      position: relative;
+      text-align: center;
+      height: 100%;
+      padding: 0 15px;
+          
+    }
+    
 
-.navbar-inner {
-  background: rgba(255,255,255,0.95);
-}
-
-.navbar-search {
-  margin: 24px 18px 25px 18px;
-}
-.search-query {
-}
-.navbar .nav > li.dropdown > a {
-    color: @linkColor;
-}
-
-.navbar .nav > li > a {
-  h4, h6 {
-    margin: 0;
-    line-height: 18px; }
-  h4 {
-    color: @linkColor; }
-  h6 {
-    color: @grayLight; }
-}
-
-.navbar .nav > li > a.double-lines {
-    padding: 21px 18px 22px 18px; }
-
-.navbar .nav > li > a:hover {
-  h4 {
-    color: @linkColorHover; }
-  h6 {
-    color: darken(@grayLight, 10%); }
-}
-
-/* Moves the search bar under the "my account nav" in the header */
-@media (min-width: 980px) {
-  header .navbar .dropdown.search {
-    margin-left: -110px;
-    top: 35px;
+    
+    h4, h6 {
+      margin: 0;
+      line-height: 18px;
+      // Need to adjust text shadow for different background color
+      .text-shadow(1px 6px 8px #333);       
+    }
+    
+    h4, h6 {
+      color: @white; 
+    }
+   
+   .caret {
+      border-top-color: @grayDarker !important;  // This was getting overriden somewhere else
+      border-bottom-color: @grayDarker !important; // This was getting overriden somewhere else
+    }
+    
+    a:hover {
+      text-decoration: none !important;
+      h4 {
+        color: #c1272d; 
+      }
+      h6 {
+        color: #c1272d;
+      }
+      .caret { 
+        border-top-color: lighten(@grayDarker, 20%) !important; 
+        border-bottom-color: lighten(@grayDarker, 20%) !important; 
+      }
+    }
   }
 }
 
