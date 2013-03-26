@@ -10,7 +10,7 @@ set :use_sudo, false
 
 set :scm, "git"
 set :repository, "git@github.com:rralston/#{application}.git"
-set :branch, "dev"
+set :branch, "live"
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
@@ -41,8 +41,8 @@ namespace :deploy do
 
   desc "Make sure local git is in sync with remote."
   task :check_revision, roles: :web do
-    unless `git rev-parse HEAD` == `git rev-parse origin/dev`
-      puts "WARNING: HEAD is not the same as origin/dev"
+    unless `git rev-parse HEAD` == `git rev-parse origin/live`
+      puts "WARNING: HEAD is not the same as origin/live"
       puts "Run `git push` to sync changes."
       exit
     end
