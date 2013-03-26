@@ -18,7 +18,9 @@
                 <% end %>                            
               </h1>
               <div class="nav-collapse">
-                <ul class="nav pull-right">
+<% if false %>
+								                <ul class="nav pull-right">
+
                         <li class="divider-vertical"></li>
                         <li>
                           <%= link_to "/projects", :class => 'double-lines' do %>
@@ -94,8 +96,10 @@
 														</form>
 														<!-- Search Form End -->
       	                  	</ul>
+
       										</li>
                       </ul>
+<% end %>
               </div>
             </div>		
 					<% if flash[:notice] %>
