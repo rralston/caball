@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_filter :search
+  # before_filter :search
   
   def index
   end

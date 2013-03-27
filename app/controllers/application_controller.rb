@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   helper_method :user_signed_in?
   helper_method :correct_user?
   # Search
-  helper_method :search
+  # helper_method :search
   private
 
   def subdomain_view_path
@@ -15,14 +15,14 @@ class ApplicationController < ActionController::Base
   end
   
   # Search for Home Directory
-  def search
-   @search = User.search(params[:q])
-   @users = @search.result
-     if params[:q]
-       redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return
-     end
-  end
-  
+  # def search
+  #  @search = User.search(params[:q])
+  #  @users = @search.result
+  #    if params[:q]
+  #      redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return
+  #    end
+  # end
+  # 
   # Project Comments System
   
     def current_user
