@@ -38,7 +38,7 @@ class ImageUploader < CarrierWave::Uploader::Base
    # Create Medium Sized Version
    # Accessible through <%= image_tag @user.photo.image.url(:medium)  %>
     version :medium do
-      process :resize_to_fill => [100, 100]
+      process :resize_to_fill => [170, 170]
     end
    
    version :large do

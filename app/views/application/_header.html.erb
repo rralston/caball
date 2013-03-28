@@ -40,7 +40,11 @@
                   <li class="divider-vertical"></li>
                   <li class="widgets">
                     <div class="search">
-                      <%= search_form_for @search do |f| %><%= f.text_field :name_cont, :placeholder => 'Find Talent...' %><% end %>
+                      <% if params[:controller] == 'projects' then %>
+                        <%= search_form_for @search do |f| %><%= f.text_field :title_cont, :placeholder => 'Find a Project...' %><% end %>
+                      <% else %>
+                        <%= search_form_for @search do |f| %><%= f.text_field :name_cont, :placeholder => 'Find Talent...' %><% end %>
+                      <% end %>
                       <i class="icon-search"></i>
                     </div>
                     <% if current_user %>
@@ -62,8 +66,11 @@
                       </div>
                       
                       <div class="profile">
-                        <%= link_to user_path(current_user) do %>
-                          <%= image_tag current_user.profiles.image.url(:tiny), :size => '40x40'%>
+                        <% if current_user.profiles.image.present? %>
+                          <%= link_to user_path(current_user) do %>
+                          
+                            <%= image_tag current_user.profiles.image.url(:tiny), :size => '40x40'%>
+                          <% end %>
                         <% end %>
                       </div>
                     <% end %>

@@ -59,18 +59,6 @@ iframe {
   margin-bottom: 30px;  
 }
 
-.projects-box:nth-child(3n + 1) {
-  margin-left: 0;
-  clear: both;
-}
-
-.projects-box .thumbnail-figure{
-  text-align: center;
-  .thumbnail-title{
-    text-align: left;
-  }
-}
-
 /*Royal Slider Mods*/
 
 .royalSlider {
@@ -109,6 +97,15 @@ iframe {
 section.projects-search {
   margin-top: 30px;
   
+  .search-column {
+    padding: 10px;
+    border: 4px solid #333;
+    .box-shadow(~'0px 7px 11px 1px #333333, 0px -2px 11px 1px #333333');
+    input {
+      width: 80%;
+    }
+  }
+  
   .projects-box:nth-child(3n + 1) {
     margin-left: 0;
   }
@@ -125,12 +122,82 @@ section.projects-search {
   
   .projects-box {
     border: solid 3px #444;
-    .border-radius(12px);
     padding: 10px;
     margin-bottom: 20px;
     
-    img {
-      .border-radius(5px);
+    a, a:hover, a:active, a:visited {
+      text-decoration: none;
+      color: #333;
+    }
+    
+    .title {
+      font-size: 2em;
+      margin-top: 0px;
+    }
+    
+    .profile-image {
+
+      border: 3px solid #333;
+    }
+    
+    .name-location {
+      text-align: center;
+      
+      span {
+        display: block;
+      }
+      
+      .open-roles {
+        color: #c00;
+      }
+      
+      .message-button-container {
+        padding: 5px;
+        margin-top: 5px;
+        font-weight: bolder;
+      }
+      
+      .message-button {
+        background: @backgroundButtonColor;
+        background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+        background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+        background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+        background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+        background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
+        
+        text-decoration: none;
+        color: @black;
+        padding: 4% 12%;
+        cursor: pointer;
+      }
+      
+      .message-button:hover {
+        background: darken(@backgroundButtonColor, 20%);
+        background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
+        background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
+        background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
+        background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
+        background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
+        border-color: darken(@backgroundButtonColor, 20%);
+      }
+    }
+    
+    .thumbnail-details {
+      margin-top: 20px;
+      
+      .project-description {
+        font-size: 0.8em;
+      }
+      
+      .roles-container {
+
+      }
+      
+      .role-name {
+        display: inline-block;
+        padding-right: 20px;
+        margin-bottom: 10px;
+      }
     }
     
     hr {
@@ -138,22 +205,6 @@ section.projects-search {
       border: 1px solid #444;
     }
     
-    .genre:nth-child(3n + 1) {
-      margin-left: 0px;
-    }
-    
-    .genres {
-      margin: 0;
-      text-align: center;
-      width: 100%;
-      padding: 10px 0px;
-    }
-    
-    .genres li {
-      display: inline-block;
-      list-style: none;
-      margin-right: 10px;
-    }
   }
 }
 

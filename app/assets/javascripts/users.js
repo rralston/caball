@@ -107,17 +107,21 @@ var Users = {
        * and then a function that just handles them all.
        */
       $(window).resize( function() {
-        Users.Show.equalWidths('.user-body .user-menu .item.name');
+        Users.Show.equalWidths('.user-body .user-menu');
       });
       $(window).load( function() {
-        Users.Show.equalWidths('.user-body .user-menu .item.name');
+        Users.Show.equalWidths('.user-body .user-menu');
+      });
+      
+      $(window).load( function() {
+        Users.Show.equalHeights('.follow-buttons div');
       });
       
       $(window).resize( function() {
-        Users.Show.equalHeights('.follow-buttons div');
+        Users.Show.equalHeights('.header-bubble > .span5');
       });
       $(window).load( function() {
-        Users.Show.equalHeights('.follow-buttons div');
+        Users.Show.equalHeights('.header-bubble > .span5');
       });
       
       $('.user-menu').on('click', function() {
@@ -151,6 +155,7 @@ var Users = {
           Alert.newAlert("error", "There was an error in processing");
         }
       });
+      
     },
     
     modalHandlers: function () {
@@ -238,9 +243,7 @@ var Users = {
         });
         return false;
       }
-    },
-    
-    modalHandlers: function () {
+
       $('.role-more a').on('click', function () {
         // Now we have to figure out whether we'll display role 1 or role 2
         // We can do that from figuring out who our parent is and we'll have to 

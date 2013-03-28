@@ -10,6 +10,7 @@ var Projects = {
       console.log("init show project");   
       Projects.Show.handlers();
       Projects.Show.initFlow();
+      Projects.Show.modalHandlers();
     },
     
     handlers: function() {
@@ -45,6 +46,31 @@ var Projects = {
       slider.slides[slider.numSlides - 1].holder.on('rsAfterContentSet', adjustAngles);
       slider.ev.on('rsAfterSlideChange', adjustAngles);
       
+    },
+    
+    modalHandlers: function() {
+      
+      /* So that the messaging modal sizes amodalHandlers: function () {ppropriately */
+      $('#message-modal').on('show', function () {
+        $(this).css({
+        'margin-left': function () {
+            return -($(this).width() / 2);
+          }
+        });
+      });
+      
+      
+      /* Event listeners for messaging modal buttons */
+      $('#message-modal').on('shown', function () {
+        $('input[value="Cancel"]').on('click', function () {
+          $('#message-modal').modal('hide');
+          return false;
+        });
+        
+        $('#message-modal').on('hidden', function () {
+          $('input[value="Cancel"]').off('click');
+        });
+      });
     },
     
     initFlow: function() {
@@ -95,6 +121,7 @@ var Projects = {
     init: function() {
       console.log("Project search init");
       Projects.Index.handlers();
+      Projects.Index.modalHandlers();
       
     },
     
@@ -113,6 +140,31 @@ var Projects = {
       $(window).load(Projects.Index.equalHeights);
       $(window).resize(Projects.Index.equalHeights);
       
+    },
+    
+    modalHandlers: function() {
+      
+      /* So that the messaging modal sizes amodalHandlers: function () {ppropriately */
+      $('#message-modal').on('show', function () {
+        $(this).css({
+        'margin-left': function () {
+            return -($(this).width() / 2);
+          }
+        });
+      });
+      
+      
+      /* Event listeners for messaging modal buttons */
+      $('#message-modal').on('shown', function () {
+        $('input[value="Cancel"]').on('click', function () {
+          $('#message-modal').modal('hide');
+          return false;
+        });
+        
+        $('#message-modal').on('hidden', function () {
+          $('input[value="Cancel"]').off('click');
+        });
+      });
     },
     
     ajaxSearch: function() {
