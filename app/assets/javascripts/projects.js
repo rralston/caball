@@ -9,7 +9,11 @@ var Projects = {
     init: function () {
       console.log("init show project");   
       Projects.Show.handlers();
-      Projects.Show.initFlow();
+      
+      /* This breaks if we don't actually have the slider in the html so I'm commenting it out until 
+       * the slider finds a home.
+       */
+      //Projects.Show.initFlow();
       Projects.Show.modalHandlers();
     },
     
