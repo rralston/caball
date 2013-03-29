@@ -1,4 +1,6 @@
 Caball::Application.routes.draw do
+  get "activities/index"
+
   resources :users do 
     resources :characteristics, :photos, :talents, :profile
   end
@@ -10,6 +12,10 @@ Caball::Application.routes.draw do
   resources :conversations
   resources :notifications
   resources :friendships
+  
+  # News feed
+  
+  resources :activities
   
   # Static Pages 
   
