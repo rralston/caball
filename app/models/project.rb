@@ -1,7 +1,7 @@
 class Project < ActiveRecord::Base
   include PublicActivity::Model
-  trackedbelongs_to :user
-  
+  tracked
+  belongs_to :user
   has_many :roles, :dependent => :destroy
   has_many :photos, :as => :imageable, :dependent => :destroy
   has_many :videos, :as => :videoable, :dependent => :destroy
