@@ -1,0 +1,32 @@
+<%= div_for blog do %>
+        <div class="row-fluid roles-row">
+					  <div class="well">
+              <h5>
+               <%= link_to blog.user.name, blog.user %> created a new update
+							<% if blog.created_at > Time.now.beginning_of_day %>
+							  <%="#{time_ago_in_words(blog.created_at)} ago"%>
+							<% else %>
+ 							 on <%= blog.created_at.strftime('%A %d %B %Y at %I:%M%p') %>
+							<% end %>
+              </h5>
+              <p>
+              	<%= raw blog.content %><br><br>
+								<% if blog.created_at != blog.updated_at %>
+								<i>
+									<% if blog.updated_at > Time.now.beginning_of_day %>
+									    Edited <%="#{time_ago_in_words(blog.updated_at)} ago"%>  
+									<% else %>
+									    Edited on <%= blog.created_at.strftime("%A %d %B %Y at %I:%M%p") %> 
+									<% end %>
+									</i>
+								<% end %>
+							  <% if blog.user == current_user %>
+							</p>  
+							<p>
+					      <%= link_to "Edit", edit_user_blog_path(@user, blog) %> |
+					      <%= link_to "Destroy", [@user, blog], method: :delete %>
+					    </p>
+        		</div>
+			  </div>
+<% end %>
+<% end %>
