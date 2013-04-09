@@ -208,8 +208,10 @@
                         <%= link_to "Follow", friendships_path(friend_id: @user), method: :post, :class => 'btn btn-info follow start-following' %>
 										  <% end %>
 										<% end %>
+										<% if current_user %>
 									<% if current_user.id == @user.id %>
 									<button class="btn btn-primary" type="button">Following <%= @user.friendships.all.count %></button>
+									<% end %>
 									<% end %>
 								</div>
 									
