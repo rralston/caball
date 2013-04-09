@@ -2,7 +2,7 @@ Caball::Application.routes.draw do
   get "activities/index"
 
   resources :users do 
-    resources :characteristics, :photos, :talents, :profile
+    resources :characteristics, :photos, :talents, :profile, :blogs
   end
   
   resources :projects do 
