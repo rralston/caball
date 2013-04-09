@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   
   def show
     @user = User.find(params[:id])
+    @blog = Blog.new
     @projects = @user.projects
     @talents = @user.talents
     if @user.nil?
