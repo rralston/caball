@@ -274,6 +274,7 @@ figure.profile-pic > img {
     margin: 20px 0px;
     .box-shadow(0px 0px 12px 0px #cdcdcd);
     color: @black;
+    position: relative;
     
     .profile-pic {
       img {
@@ -298,10 +299,14 @@ figure.profile-pic > img {
       
       .btn-link {
         color: #666;
+        font-weight: 400;
       }
       
       .headline {
-        
+         .modal {
+           font-weight: 400;
+           
+         }
       }
     }
   }
@@ -359,7 +364,9 @@ figure.profile-pic > img {
   
   .message-row {
     margin-bottom: 0px;
+    bottom: -25px;
     font-weight: bold;
+    position: absolute;
   }
 
 }
@@ -372,7 +379,7 @@ figure.profile-pic > img {
   }
   
   .follow-container {
-    width: 200px;
+    width: 202px;
     border: 1px solid #ccc;
     margin-top: 10px;
     
@@ -401,6 +408,13 @@ figure.profile-pic > img {
     
     .follow-images {
       
+      padding: 10px 0;
+      img {
+        display: inline;
+        float: left;
+        padding: 0;
+        margin: 0;
+      }
     }
     
     .follow-counts {
@@ -425,6 +439,7 @@ figure.profile-pic > img {
   }
   
   .about-container {
+    margin-bottom: 40px;
     
     .about-title {
       border: 1px solid #ccc;
@@ -445,9 +460,12 @@ figure.profile-pic > img {
       margin-top: -30px;
       margin-left: 10px;
       position: relative;
+      width: 80%;
+      height: 190px;
       
       > div {
         padding: 10px;
+        width: 70%;
       }
       
       .more-button {
@@ -459,312 +477,59 @@ figure.profile-pic > img {
         color: @black;
       }
     }
-  }
-  
-}
-
-.blah {
-  padding-bottom: 50px;
-
-  .menu {  
-    position: relative;
     
-    .active {
-      background-color: #ddd;
+    .first-pic {
+      img {
+        width: 200px;
+        position: absolute;
+        top: -30px;
+        right: -70px;
+      }
     }
     
+    .second-pic {
+      img {
+        width: 125px;
+        position: absolute;
+        right: -100px;
+        top: 120px;
+      }
+    }
+  }
+  
+  .links-container {
+    .box-shadow(0px 0px 2px 1px #d4d4d4);
+    
+    background-color: @white;
+    text-align: center;
+    line-height: 2em;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    
     .user-menu {
-      
-      h3 {
-        font-weight: 400;
-        
-        @media screen and (max-width: 1500px) {
-          font-size: 0.9em;
-        }
-        
-        @media screen and (max-width: 1400px) {
-          font-size: 0.8em;
-        }
-        
-        @media screen and (max-width: 1300px) {
-          font-size: 0.7em;
-        }
-        
-        @media screen and (max-width: 1200px) {
-          font-size: 0.5em;
-        }
-        
-        @media screen and (max-width: 1100px) {
-          font-size: 0.4em;
-        }
-        
-        @media screen and (max-width: 1000px) {
-          font-size: 0.3em;
-        }
-      }
-      
-      @menuButtonColor: #333;
-        
-      position: relative;
-        
-      margin-right: 5px;
-      margin-bottom: 5px;
-      margin-left: 5px;
-  
-      border: 1px solid #494949;
-      /*border-radius: 5px;*/
-  
-      background-color: @menuButtonColor;
-      background-image: linear-gradient(90deg, #525252, dimgray);
-  
-      box-shadow: 
-          inset 0 1px 0 0 rgba(255,255,255,0.4),
-          inset 0 0 5px 0 rgba(255,255,255,0.2),
-          inset 0 67px 67px -40px rgba(255,255,255,0),
-          0 2px 0 0 #2e2e2e,
-          0 3px 6px 0 rgba(0,0,0,0.4);
-      transition: 
-          box-shadow 230ms ease-in-out,
-          transform 230ms ease-in-out,
-          border-color 230ms ease-in-out;
-  
-      font-family: 'Montserrat', sans-serif;
-      color: white;
-      font-size: 23px;
-      line-height: 20px;
-      font-weight: 400;
-      text-align: left;
-      text-decoration: none;
-      text-shadow: 0 1px 1px rgba(0,0,0,0.27);
-  
-      vertical-align: middle;
+      display: inline;
+      color: #4c99c0;
       cursor: pointer;
+      font-size: 2em;
+      padding: 30px;
+      font-weight: 800;
       
-      display: table;
-      
-      .item {
-        display: table-cell;
-        vertical-align: middle;
-      }
-        
-      .arrow.item {
-        right: 5px;
-        position: relative;
-        text-align: right;
-        
-        img {
-          z-index: 0;
-          position: relative;
-          width: 18px;
-          height: 22px;
-        }
-      }
-      
-      .item.name {
-        padding-left: 10px;
-        padding-right: 10px;
-      }
     }
     
     .user-menu:hover {
-      border-color: rgba(73,73,73,0.5);
-      box-shadow: 
-        inset 0 1px 0 0 rgba(255,255,255,0.6),
-        inset 0 0 5px 0 rgba(255,255,255,0.2),
-        inset 0 67px 67px -40px rgba(255,255,255,0.3),
-        0 2px 0 0 #2e2e2e,
-        0 3px 8px 0 rgba(0,0,0,0.4);
+      color: darken(#4c99c0, 10%);
     }
     
     .user-menu.active {
-      box-shadow: 
-        inset 0 1px 0 0 rgba(255,255,255,0),
-        inset 0 1px 7px -1px rgba(0,0,0,0.35),
-        inset 0 67px 67px -40px rgba(255,255,255,0),
-        0 2px 0 0 #2e2e2e,
-        0 3px 8px 0 rgba(0,0,0,0);
-      transform: translate(0px, 2px);
+      text-decoration: underline;
     }
   }
   
-  .content .triangle-tab {
-      position: absolute;
-      left: -50px;
-      top: 0px;
-      margin-top: 5px;
-      content: "";
-      border-top: 25px solid transparent;
-      border-top: 25px solid rgba(0,0,0,0);
-      border-left: 25px solid transparent;
-      border-left: 25px solid rgba(0,0,0,0);
-      border-right: 25px solid #333;
-      border-bottom: 25px solid transparent;
-      border-bottom: 25px solid rgba(0,0,0,0);
-    }
-  
-  .content {
-    border: 2px solid @black;
-    z-index: 1;
-    position: relative;
-    background: #333;
-    min-height: 600px; 
-    padding-bottom: 50px;
-    color: @white;
-    
-    .projects {
-      position: relative;
-      .well {
-        background: none;
-        border: none;
-      }
-      
-      .projects-box {
-        border: solid 3px @black;
-        background-color: @white;
-        color: @black;
-        padding: 10px;
-        margin-bottom: 20px;
-        overflow: hidden;
-        
-        a, a:hover, a:active, a:visited {
-          text-decoration: none;
-          color: #333;
-        }
-        
-        .title {
-          font-size: 2em;
-          margin-top: 0px;
-        }
-        
-        .profile-image {
-    
-          border: 3px solid #333;
-        }
-        
-        .name-location {
-          text-align: center;
-          
-          span {
-            display: block;
-          }
-          
-          .open-roles {
-            color: #c00;
-          }
-          
-          .message-button-container {
-            padding: 5px;
-            margin-top: 5px;
-            font-weight: bolder;
-          }
-          
-          .message-button {
-            background: @backgroundButtonColor;
-            background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-            background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-            background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-            background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-            background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-            
-            text-decoration: none;
-            color: @black;
-            padding: 4% 12%;
-            cursor: pointer;
-          }
-          
-          .message-button:hover {
-            background: darken(@backgroundButtonColor, 20%);
-            background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-            background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-            background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-            background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-            background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-            border-color: darken(@backgroundButtonColor, 20%);
-          }
-        }
-        
-        .thumbnail-details {
-          margin-top: 20px;
-          
-          .project-description {
-            font-size: 0.8em;
-          }
-          
-          .roles-container {
-    
-          }
-          
-          .role-name {
-            display: inline-block;
-            padding-right: 20px;
-            margin-bottom: 10px;
-          }
-        }
-        
-        hr {
-          margin: 0;
-          border: 1px solid #444;
-        }
-        
-      }
-
-    }
-    .title {
-      margin-top: 20px;
-      background-color: #999;
-      border: 2px solid @black;
-      h1 {
-        float: left;
-        padding: 10px;
-        font-weight: 400; 
-        
-        /*.border-radius(2px);*/
-      }
-      
-    }
-    
-    .drawer-content {
-      margin-top: 40px;
-      padding: 10px;
-      background-color: @white;
-      border: 3px solid @black;
-      color: @black;
-      /*.border-radius(2px);*/
-    }
-    
-    .pictures {
-      overflow: hidden;
-      
-      .carousel {
-      
-        margin-top: 50px;
-        height: 100%;
-         
-        .carousel-control {
-          top: 50px;
-        }
-        
-        .carousel-inner {
-          width: 100%;
-          height: 100%;
-          overflow: visible;
-          
-          .item.active, .item.next, .item.prev {
-            display: table;
-            text-align: center;
-            width: 100%;
-            height: 100%;
-            .item-container {
-              display: table-cell;
-              vertical-align: middle;
-            }
-            img {
-              vertical-align: middle;
-              padding-bottom: 10px;
-            }
-          }
-        }
-      }
-    }
+  .body-content-container {
+    background-color: @white;
+    .box-shadow(0px 0px 2px 1px #e5e5e5);
+    margin-bottom: 50px;
   }
+  
 }

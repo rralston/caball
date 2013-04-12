@@ -37,6 +37,7 @@ var Global = {
           }
       });  
     
+    $('.rsSlide:first').addClass('rsActiveSlide');
     Global.flowHandlers();
     
   },

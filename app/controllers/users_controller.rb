@@ -37,6 +37,16 @@ class UsersController < ApplicationController
         @real_videos << video
       end
     end
+    
+    @followers_following = Array.new
+    
+    Friendship.where(:friend_id => @user.id).each do |friendship|
+      @followers_following.push(User.find(friendship.user_id)) unless @followers_following.include?(User.find(friendship.user_id))
+    end 
+    @user.friendships.all.each do |friendship|
+      @followers_following.push(User.find(friendship.user_id)) unless @followers_following.include?(User.find(friendship.user_id))
+    end
+    
     if params[:link]
       partial = params[:link]
     end
