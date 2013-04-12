@@ -152,10 +152,10 @@
               </div>
               <!-- End Headline Modal --> 
               <div class="first-pic">
-                <%= image_tag @user.photos.first.image %>
+                <%= if @user.photos.first.present? then image_tag @user.photos.first.image %>
               </div>
               <div class="second-pic">
-                <%= image_tag @user.photos.second.image %>
+                <%= if @user.photos.second.present? then image_tag @user.photos.second.image %>
               </div>
             </div>
           </div>
