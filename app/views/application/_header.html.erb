@@ -1,139 +1,154 @@
 <!-- Page Header -->
-<header id="masthead">       
+<header id="masthead">
   <nav class="navbar navbar-fixed-top">
     <div class="navbar-inner">
-      <div class="container-fluid header-container">
-        <div class="row-fluid">
-          <div class="span12">
-            <div class="row-fluid">
-              <div class="span3 brand">
-                <div class="triangle-shape">
-                </div>
-                <%= link_to root_url do %>
-                  <!-- <i class="icon-film"></i> -->
-                  <%= image_tag "filmzu1.png", :size => "150x25" %>
-                <% end %>                            
+      <div class="container-fluid">
+        <%= link_to root_url, :class=>'brand' do %>
+        <!-- <i class="icon-film"></i> -->
+        <%= image_tag "filmzu.png" %>
+        <% end %>
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <div class="nav-collapse">
+          <ul class="nav pull-right">
+            <li class="projects-link link">
+              <div class="title-cell">
+              <%= link_to "/projects", :class => 'double-lines' do %>
+                <h4>PROJECTS</h4>
+                <h6>In Progress</h6>
+              <% end %>
               </div>
-              <div class="nav-collapse">
-                <ul class="nav pull-right">
-                  <li class="divider-vertical"></li>
-                  <li class="projects-link">
-                    <%= link_to "/projects", :class => 'double-lines' do %>
-                      <div class="title-cell">
-                        <h4>PROJECTS</h4>
-                        <h6>Second line of text</h6>
-                      </div>
+            </li>
+
+            <li class="people-link link">
+              <div class="title-cell">
+              <%= link_to "/users", :class => 'double-lines' do %>
+                <h4>PEOPLE</h4>
+                <h6>Creating Video</h6>
+              <% end %>
+              </div>
+            </li>
+
+            <li class="library-link link">
+              <div class="title-cell">
+              <%= link_to "/library", :class => 'double-lines' do %>
+                <h4>LIBRARY</h4>
+                <h6>Articles and How-To's</h6>
+              <% end %>
+              </div>
+            </li>
+            
+            <li class="widgets">
+              <div class="search">
+                <% if params[:controller] == 'projects' then %>
+                <%= search_form_for @search do |f| %><%= f.text_field :title_cont, :placeholder => 'Find a Project...' %><% end %>
+                <% else %>
+                <%= search_form_for @search do |f| %><%= f.text_field :name_cont, :placeholder => 'Find Talent...' %><% end %>
+                <% end %>
+                <i class="icon-search"></i>
+              </div>
+              
+              <% if current_user %>
+              
+              <div class="profile">
+                <%= link_to "#", :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do %> 
+                  <%= image_tag current_user.profiles.image.url(:tiny), :size=> '40x40' %>
+                <% end %>
+                <ul class="dropdown-menu">    
+                  <li>
+                    <%= link_to user_path(current_user) do %>
+                    <i class="icon-user icon-white"></i><strong><%= current_user.name %></strong>
                     <% end %>
                   </li>
-                  
-                  <li class="divider-vertical"></li>
-                  
-                  <li class="people-link">
-                    <%= link_to "/users", :class => 'double-lines' do %>
-                      <div class="title-cell">
-                        <h4>PEOPLE</h4>
-                        <h6>Second line of text</h6>
-                      </div>
-                    <% end %>
-                  </li> 
-                  
-                  <li class="divider-vertical"></li>
-                  <li class="widgets">
-                    <div class="search">
-                      <% if params[:controller] == 'projects' then %>
-                        <%= search_form_for @search do |f| %><%= f.text_field :title_cont, :placeholder => 'Find a Project...' %><% end %>
-                      <% else %>
-                        <%= search_form_for @search do |f| %><%= f.text_field :name_cont, :placeholder => 'Find Talent...' %><% end %>
-                      <% end %>
-                      <i class="icon-search"></i>
-                    </div>
-                    <% if current_user %>
-                      <div class="notifications">
-                        <a href = "#">
-                          <div class="number">32</div>
-                        </a>
-                      </div>
-                      <div class="messages">
-                        <%= link_to "../conversations#index" do %>
-                          <div class="number">
-                            <% if notification %>
-                              <span class="">
-                                <%= notification %>
-                              </span>           
-                            <% end %>
-                          </div>
-                        <% end %>
-                      </div>
-                      
-                      <div class="profile">
-                        <% if current_user.profiles.present? %>
-                          <%= link_to user_path(current_user) do %>
-                          
-                            <%= image_tag current_user.profiles.image.url(:tiny), :size => '40x40'%>
-                          <% end %>
-                        <% end %>
-                      </div>
-                    <% end %>
-                    
-                    <div class="dropdown settings">
-                      <%= link_to "#", :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do %> <% end %>
-                      <ul class="dropdown-menu">                    
-                        <% if current_user %>
-                          <li>
-                            <%= link_to user_path(current_user) do %>
-                              <i class="icon-user icon-white"></i> <strong><%= current_user.name %></strong>
-                            <% end %>
-                          </li>
-                          <% if current_user.admin == true %>
-                          <li><%= link_to admin_admin_index_path do %><i class="icon-eye-open icon-white"></i> Admin Module<% end %></li>
-                          <% end %>
-                          <li><%= link_to new_project_path do %><i class="icon-film icon-white"></i> Start a Project<% end %></li>
-                          <li><%= link_to edit_user_path(current_user) do %><i class="icon-wrench icon-white"></i> Edit Profile<% end %></li>
-                          <li><%= link_to signout_path, id: "sign_out" do %><i class="icon-off icon-white"></i> Sign-Out<% end %></li>
-                          <li class="divider"></li>
-                          <li>
-                            <%= link_to "../conversations#index" do %>
-                              <h5><i class="icon-envelope icon-white"></i> Messages <% if notification %>(<%= notification %>)<% end %></h5>
-                            <% end %>
-                          </li>
-                          <% else %>
-                            <li><%= link_to "Sign In with Facebook", "/auth/facebook", id: "sign_in" %></li>
-                        <% end %>
-                      </ul>
-                    </div>
+                  <% if current_user.admin == true %>
+                  <li>
+                    <%= link_to admin_admin_index_path do %><i class="icon-eye-open icon-white"></i> Admin Module<% end %>
+                  </li>
+                  <% end %>
+                  <li>
+                    <%= link_to new_project_path do %><i class="icon-film icon-white"></i> Start a Project<% end %>
+                  </li>
+                  <li>
+                    <%= link_to edit_user_path(current_user) do %><i class="icon-wrench icon-white"></i> Edit Profile<% end %>
+                  </li>
+                  <li>
+                    <%= link_to signout_path, id: "sign_out" do %><i class="icon-off icon-white"></i> Sign-Out<% end %>
                   </li>
                 </ul>
               </div>
-            </div>    
-					<% if flash[:notice] %>
-						<div class="alert alert-success">
-								<button type="button" class="close" data-dismiss="alert">×</button>
-								<%= flash[:notice] %>
-						</div>
-					<% end %>
-					<% if flash[:error] %>
-						<div class="alert alert-error">
-								<button type="button" class="close" data-dismiss="alert">×</button>
-							   <%= flash[:error] %>
-						</div>
-					<% end %>
-					<% if flash[:alert] %>
-						<div class="alert">
-								<button type="button" class="close" data-dismiss="alert">×</button>
-							   <%= flash[:alert] %>
-						</div>
-					<% end %>
-					<% if flash[:info] %>
-						<div class="alert alert-info">
-								<button type="button" class="close" data-dismiss="alert">×</button>
-							   <%= flash[:info] %>
-						</div>
-					<% end %>
-					
-					  <%comment = "This is a generic placeholder for bootstrap alerts created through JS."%>
-            <div id = "bootstrap-alert-placeholder"></div>
-          
+              
+              <div class="messages">
+                <%= link_to "../conversations#index" do %>
+                <div class="number">
+                  <% if notification %>
+                  <span class=""> <%= notification %> </span>
+                  <% end %>
+                </div>
+                <% end %>
+              </div>
+              
+              <div class="notifications">
+                <a href = "#">
+                <div class="number">
+                  <% comment = "This obviously has to be replaced with some notification count" %>
+                  32
+                </div> </a>
+              </div>
+
+              <% else %>
+              <div class="profile">
+                <%= link_to "#", :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do %> 
+                  <icon class="icon-user">
+                <% end %>
+                <ul class="dropdown-menu">    
+                  <li>
+                    <%= link_to "Sign In with Facebook", "/auth/facebook", id: "sign_in" %>
+                  </li>
+                </ul>
+              </div>
+              <% end %>
+            </li>
+          </ul>
+          <% if flash[:notice] %>
+          <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">
+              ×
+            </button>
+            <%= flash[:notice] %>
           </div>
+          <% end %>
+          <% if flash[:error] %>
+          <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">
+              ×
+            </button>
+            <%= flash[:error] %>
+          </div>
+          <% end %>
+          <% if flash[:alert] %>
+          <div class="alert">
+            <button type="button" class="close" data-dismiss="alert">
+              ×
+            </button>
+            <%= flash[:alert] %>
+          </div>
+          <% end %>
+          <% if flash[:info] %>
+          <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">
+              ×
+            </button>
+            <%= flash[:info] %>
+          </div>
+          <% end %>
+
+          <% comment = "This is a generic placeholder for bootstrap alerts created through JS."%>
+          <div id = "bootstrap-alert-placeholder"></div>
+
         </div>
       </div>
     </div>
