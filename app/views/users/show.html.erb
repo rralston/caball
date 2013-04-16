@@ -208,8 +208,10 @@
                         <%= link_to "Follow", friendships_path(friend_id: @user), method: :post, :class => 'btn btn-info follow start-following' %>
 										  <% end %>
 										<% end %>
+										<% if current_user %>
 									<% if current_user.id == @user.id %>
 									<button class="btn btn-primary" type="button">Following <%= @user.friendships.all.count %></button>
+									<% end %>
 									<% end %>
 								</div>
 									
@@ -344,4 +346,46 @@
    </div>
  </section>
 <% end %>
+<% if @user.blogs.present? %>
+<section id="roles" class="section alt">
+<div id="blogs">
+	<div class="container-fluid">
+	    <div class="row-fluid">
+	      <div class="span12">
+	        <div class="row-fluid">
+	          <div class="page-header">
+	              <h1>
+	                  User Updates
+	              </h1>
+	          </div>
+	        </div>
+  				<%= render @user.blogs %>
+				</div>
+		  </div>
+	</div>
+</div>
+<% end %>
+<% if current_user %>
+<% if current_user.id == @user.id %>
+<div id="blogs">
+	<div class="container-fluid">
+	    <div class="row-fluid">
+	      <div class="span12">
+	        <div class="row-fluid">
+	          <div class="page-header">
+	              <h1>
+	                  Create a New Blog
+	              </h1>
+	          </div>
+	        </div>
+  				<%= render 'blogs/form' %>
+				</div>
+		  </div>
+	</div>
+</div>
+<% end %>
+<% end %>
+
+
+</section>
  </div>

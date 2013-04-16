@@ -84,3 +84,6 @@ gem "kaminari"
 
 #Web App Monitoring
 gem 'newrelic_rpm'
+
+#FB Style Newsfeeds
+gem 'public_activity'
