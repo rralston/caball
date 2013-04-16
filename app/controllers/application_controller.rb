@@ -1,7 +1,11 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  #News Feed
+  include PublicActivity::StoreController
+  
   before_filter :subdomain_view_path
   helper_method :current_user
+  hide_action :current_user
   helper_method :notification
   # Security & Authentication
   helper_method :user_signed_in?
