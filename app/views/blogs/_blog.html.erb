@@ -1,4 +1,17 @@
-<%= div_for blog do %>
+<%
+=begin
+%>Shouldnt there be something here???
+
+<%= debug(blog) %>
+<%= blog.each do |post| %>
+<%= debug(post) %>
+<%= debug(post.user) %>
+<% end %>
+
+<%
+=end
+%>
+<%= div_for blogs do |blog| %>
         <div class="row-fluid roles-row">
 					  <div class="well">
               <h5>

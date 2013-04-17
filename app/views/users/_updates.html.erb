@@ -5,9 +5,11 @@
 </div>
 <div class="row-fluid">
   <div class="span10 offset1 role-description drawer-content">
-    <% if @user.blogs.present? 
-		     render :file => '/blogs/_blog.html.erb', :locals => {:blog => @user.blogs}
-			 end %>
+
+    <% if @user.blogs.present? %>      
+		  <%= render(:partial => '/blogs/blog', :format => [:html], :locals => {:blogs => @user.blogs}) %>
+    <% end %>
+
 </div>
 </div>
  
