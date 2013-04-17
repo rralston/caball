@@ -110,7 +110,7 @@ var Users = {
     },
     
     styleUpdates: function() {
-      $(window).load(function() {
+      function rearrangeImages() {
         var baseRowOffset = 60;
         var deviationRowOffset = 100;
         
@@ -138,7 +138,11 @@ var Users = {
           $(this).css('top', top);
           
         });
-      });
+      }
+      
+      
+      $(window).load(rearrangeImages);
+      rearrangeImages();
     },
     
     displayContent: function(link, menuItem) {
