@@ -32,7 +32,6 @@
                       </div>
                     </div>
                   </div>
-<<<<<<< HEAD
                   <!-- End Photos Modal --> 
                 <% end %>
               </div>
@@ -91,38 +90,6 @@
                       data-remote ="<%= new_conversation_path(:recipient => @user.email, :modal => true)%>"
                       data-keyboard="true" class="message-button"><%= image_tag('mail_icon.png') %> Message</a>
                 <!-- Message Modal -->
-=======
-                 <!-- End Photos Modal --> 
-               </div>
-               <div class="clearfix"></div>
-               <div class="row-fluid pictures-contact-buttons">
-                 <div class="span2 offset2 pictures-button">
-                   <a href = "#" data-toggle="modal" data-target="#photos-modal" data-keyboard="true" class="btn">Pictures</a>
-                 </div>
-								<div class="span3">
-									<% if current_user && current_user.id != @user.id %>
-										 <% if current_user.friends.include? @user %>
-										    <%= link_to "Stop Following", current_user.friendships.find_by_friend_id(@user.id), method: :delete, :class => 'btn btn-info follow stop-following' %>
-										    <%= link_to "Follow", friendships_path(friend_id: @user), method: :post, :class => 'btn btn-info follow start-following hidden' %>
-                      <% else %>
-                        <%= link_to "Stop Following", current_user.friendships.find_by_friend_id(@user.id), method: :delete, :class => 'btn btn-info follow stop-following hidden' %>
-                        <%= link_to "Follow", friendships_path(friend_id: @user), method: :post, :class => 'btn btn-info follow start-following' %>
-										  <% end %>
-										<% end %>
-										<% if current_user %>
-									<% if current_user.id == @user.id %>
-									<button class="btn btn-primary" type="button">Following <%= @user.friendships.all.count %></button>
-									<% end %>
-									<% end %>
-								</div>
-									
-                 <div class="span2 contact-button">
-                   <a data-toggle="modal" data-target="#message-modal" 
-                    data-remote ="<%= new_conversation_path(:recipient => @user.email, :modal => true) %>"
-                    data-keyboard="true" class="btn">Contact</a>
-                 </div>
-                 <!-- Message Modal -->
->>>>>>> ba8bb5a0c95095cbb394091a79f5677c2292c3c8
                   <div id="message-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -190,7 +157,6 @@
               <div class="second-pic">
                 <%= if not @user.photos.second.nil? then image_tag @user.photos.second.image end%>
               </div>
-<<<<<<< HEAD
             </div>
           </div>
         </div>
@@ -230,57 +196,3 @@
     </div>
   </div>
 </section>
-=======
-              <!-- End Video Description Modal --> 
-             <% end %>
-           </ul>
-         </div>  
-       </div>
-     </div>  
-   </div>
- </section>
-<% end %>
-<% if @user.blogs.present? %>
-<section id="roles" class="section alt">
-<div id="blogs">
-	<div class="container-fluid">
-	    <div class="row-fluid">
-	      <div class="span12">
-	        <div class="row-fluid">
-	          <div class="page-header">
-	              <h1>
-	                  User Updates
-	              </h1>
-	          </div>
-	        </div>
-  				<%= render @user.blogs %>
-				</div>
-		  </div>
-	</div>
-</div>
-<% end %>
-<% if current_user %>
-<% if current_user.id == @user.id %>
-<div id="blogs">
-	<div class="container-fluid">
-	    <div class="row-fluid">
-	      <div class="span12">
-	        <div class="row-fluid">
-	          <div class="page-header">
-	              <h1>
-	                  Create a New Blog
-	              </h1>
-	          </div>
-	        </div>
-  				<%= render 'blogs/form' %>
-				</div>
-		  </div>
-	</div>
-</div>
-<% end %>
-<% end %>
-
-
-</section>
- </div>
->>>>>>> ba8bb5a0c95095cbb394091a79f5677c2292c3c8
