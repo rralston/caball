@@ -4,7 +4,7 @@
     <div class="span10 offset1 drawer-content">
   
       <% if @user.blogs.present? %>      
-        <%= render(:partial => '/blogs/blog', :format => [:html], :locals => {:blogs => @user.blogs}) %>
+        <%= render(:partial => '/blogs/blog', :formats => [:html], :locals => {:blogs => @user.blogs}) %>
       <% end %>
   
     </div>
