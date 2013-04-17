@@ -7,23 +7,8 @@
           <h1>
             <%= @project.title %> 
           </h1>
-          <span><%= @project.genre %></span>
-          <span>
-            <% if @project.status.present? %> 
-              Status <%= @project.status %>
-            <% end %>
-          </span>
-          <span>
-            <% if @project.location.present? %> 
-              Location: <%= @project.location %>
-            <% end %>
-          </span>
-          <% if !@project.start.nil? %>  
-            <span>Starts:  </span><span><%= @project.start %></span>
-          <% end %>
-          <% if !@project.end.nil? %>
-            <span>Ends:  </span><span><%= @project.end %></span>
-          <% end %>
+          <span>By <%= @project.user.name %></span>
+          
         </div>
       </div>
         

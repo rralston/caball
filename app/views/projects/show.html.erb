@@ -1,7 +1,123 @@
+<div class="container">
+  <div class="row-fluid">
+    <div class="span12">
+
+      <div class="row-fluid">
+        <div class="page-header centered-text">
+          <h1>
+            <%= @project.title %> 
+          </h1>
+          <span>By <%= @project.user.name %></span>
+          
+        </div>
+      </div>
+      
+      <div class="row-fluid follow-roles-bar">
+        <div class="span3 follow-container">
+          <div class="follow-button">
+            Follow
+          </div>
+          <div class="follow-counts">
+            <div class="row-fluid">
+              <div class="numbers">4,339 Fans</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="span3 offset6 roles-buttons">
+          <span class="roles-button">Roles</span>
+          <span class="vrule"></span>
+          <span class="roles-button">Producer</span>
+          <span class="vrule"></span>
+          <span class="roles-button">Update</span>
+        </div>
+      </div>
+      
+      <div class="row-fluid about-content">
+        <div class="span8 video-stuff-container">
+          <div class="row-fluid reel-slider">
+            <% comment = "3d Reel Slider" %>
+            <div class="row-fluid">
+              <div class="royalSlider rsDefault">
+                
+                <% @project.photos.each do |photo| %>
+                  <img src="<%= photo.image.url(:large) %>" />
+                <%end%>
+                
+                <% @real_videos.each_with_index do |video| %>
+                  <img src="<%= video.thumbnail_large %>" data-rsVideo="<%= video.url %>" />
+                <% end %>    
+              </div>  
+            </div>
+          </div>
+          <div class="headline-container">
+            <p>"A girl wakes up on the COAST of Ireland, with no memory of who she is and how she got there.”</p>
+          </div>
+        </div>
+        <div class="span4 project-details">
+          <div class="well details-well">
+            <div class="project-details-title">
+              <h3>Project Details:</h3>
+            </div>
+            <div class="project-details-content">
+              <span class="project-detail">
+                Action
+              </span>
+              <span class="project-detail">
+                Drama
+              </span>
+              <span class="project-detail">
+                Film
+              </span>
+              <span class="project-detail">
+                Pre-Production
+              </span>
+            <div class="shooting-locations-title">
+                <h3>Shooting Locations:</h3>
+            </div>
+            <div class="shooting-locations-content">
+              <div class="shooting-location">
+                San Francisco, CA
+              </div>
+              <div class="shooting-location">
+                Belfast, N. Ireland
+              </div>
+            </div>
+            <div class="open-roles-title">
+              <h3>Open Roles:</h3>
+            </div>
+            <div class="open-roles-content">
+              <div class="open-role">Cast(8)</div>
+              <div class="open-role">Lighting(2)</div>
+              <div class="open-role">Camera Crew(3)</div>
+              <div class="open-role">Sound(2)</div>
+              <div class="open-role">Business(1)</div>
+              <div class="open-role">Assistant(1)</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="well dates-well">
+          <div class="dates-title">
+            <h3>Important Dates:</h3>
+          </div>
+          <div class="date">9/12/13 - Start of Principle Photo</div>
+          <div class="date">8/15/13 - Open Casting</div>
+          <div class="date">7/2/13 - Script Review</div>
+        </div>
+      </div>
+        
+    </div>      
+  </div>
+</div>
+
 <section id="promo" class="section alt">
   <%= render 'promo-alt' %>
 </section>
 
+<section id="follow-roles-bar">
+  <%= render 'follow_roles_bar' %>
+</section>
 <section id="about" class="section">
   <%= render 'about' %>
 </section>

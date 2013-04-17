@@ -17,15 +17,184 @@
   filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=.2);
 }
 
-/* Projects Profile Page */
+/* Projects Display Page */
 
-#content {
+#projects-show {
+  
   .page-header {
+ 
+    border-bottom: none;
+ 
     h1 {
-      font-size: 2em;
-      color: @black;
+      font-size: 4em;
+      color: #4c99c0;
+      margin-bottom: 20px;
     }
     
+    span {
+      font-size: 1.4em;
+    }
+    
+  }
+  
+  .follow-roles-bar {
+    background-color: @white;
+    border: solid 1px #ccc;
+    .box-shadow(0px 0px 12px 3px #ccc);
+  }
+  
+  .follow-container {
+    
+    .follow-button {
+      display: inline-block;
+      position: relative;
+      background-color: #666;
+      width: 100px;
+      margin: 10px 0 10px 10px;
+      .border-radius(5px);
+      color: @white;
+      text-align: center;
+      vertical-align: middle;
+      padding: 4px 0;
+      cursor: pointer;
+      
+      a {
+        color: @white;
+      }
+      
+      img {
+        width: 25px;
+      }
+    }
+    .follow-counts {
+      text-align: center;
+      display: inline-block;
+      
+      .numbers {
+        color: @white;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 2em;
+        background-color: #666;
+        .border-radius(5px);
+        text-align: center;
+        width: 100px;
+      }
+    }
+    
+    .follow-button:hover {
+      background-color: darken(#666, 10%);
+    }
+  }
+  
+  .roles-buttons {
+    
+    vertical-align: middle;
+    line-height: 45px;
+    position: relative;
+    left: -20px;
+    
+    .vrule {
+      border-left: 2px solid #ccc;
+      height: 15px;
+      margin: 0px 10px;
+      display: inline-block;
+      vertical-align: middle;
+      
+    }
+    .roles-button {
+      color: #4c99c0;
+      font-size: 1.5em;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+  }
+  
+  .about-content {
+    margin-top: 20px;
+    background-color: @white;
+    border: solid 1px #ccc;
+    .box-shadow(0px 0px 12px 3px #ccc);
+    
+    .video-stuff-container {
+      
+      .headline-container {
+        border-top: 2px solid #ccc;
+        border-bottom: 2px solid #ccc;
+        text-align: center;
+        padding: 40px;
+        width: 75%;
+        position: relative;
+        left: 9%;
+        p {
+          font-size: 2em;
+          color: #4c99c0;
+        }
+      }
+    }
+    
+    .project-details {
+      
+      .details-well {
+        margin: 20px;
+      }
+      
+      .project-details-title {
+        font-size: 1.5em;
+        text-align: center;
+      }
+      
+      .project-details-content {
+        text-align: center;
+        
+        .project-detail {
+          margin: 0 10px;
+        }
+      }
+      
+      .shooting-locations-title {
+        margin-top: 30px;
+        font-size: 1.5em;
+        text-align: center;
+        border-top: 2px solid #ccc;
+      }
+      
+      .shooting-locations-content {
+        text-align: left;
+        .shooting-location {
+          margin-bottom: 20px;
+        }
+      }
+      
+      .open-roles-title {
+        font-size: 1.5em;
+        text-align: center;
+        border-top: 2px solid #ccc;
+      }
+      
+      .open-roles-content {
+        text-align: left;
+        .open-role {
+          margin-bottom: 10px;
+        }
+      }
+      
+      .dates-well {
+        margin: 20px;
+        
+        .dates-title {
+          font-weight: 1.5em;
+          text-align: center;
+          
+        }
+        
+        .date {
+          font-size: 1.2em;
+          text-align: left;
+        }
+      }
+    
+    }
   }
   
   #about {

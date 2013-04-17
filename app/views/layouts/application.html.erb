@@ -23,7 +23,7 @@
     
   <%= render 'header' %>
 
-  <div id="content" role="main">
+  <div id="<%= controller_name %>-<%= action_name %>" role="main">
 	  
     <%= yield %>
   </div>
