@@ -97,7 +97,8 @@ var Users = {
       console.log("init show users");   
       Users.Show.handlers();
       Users.Show.modalHandlers();
-      $('div[data-link=about_me]').trigger('click');
+      
+      $('span[data-link=updates]').trigger('click');
     },
     
     handlers: function () {
@@ -105,6 +106,38 @@ var Users = {
       $('.user-menu').on('click', function() {
         var link = $(this).data('link');
         Users.Show.displayContent(link, $(this));
+      });
+    },
+    
+    styleUpdates: function() {
+      $(window).load(function() {
+        var baseRowOffset = 60;
+        var deviationRowOffset = 100;
+        
+        $('.blog-post').each(function(index) {
+          if(index % 2 == 1) {
+            var offset = baseRowOffset + (Math.random() * deviationRowOffset);
+            $(this).css('margin-top', offset + 'px');
+          }
+        });
+        
+        /* In order to handle really tall images */
+       $('.blog-post').each(function(index) {
+         if(index > 1) {
+           var diff = $(this).offset().top - ($('.blog-post').eq(index - 2).offset().top + $('.blog-post').eq(index - 2).height());
+           if(diff < 0) {
+             $('.blog-post').eq(index-1).css('margin-bottom', (diff * -1) + 'px');
+           }
+         }
+       });
+        
+        $('.blog-circle').not('.blog-circle-top').each(function(index) {
+          
+          var top = $('.blog-arrow').eq(index).offset().top - $('.drawer-content').offset().top;
+          
+          $(this).css('top', top);
+          
+        });
       });
     },
     
@@ -131,6 +164,9 @@ var Users = {
             
             if($(this).data('link') === 'reel')
               Global.initFlow();
+              
+            if($(this).data('link') === 'updates')
+              Users.Show.styleUpdates();
             
           }
             
