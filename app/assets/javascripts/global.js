@@ -44,10 +44,18 @@ var Global = {
   
   flowHandlers: function() {
       
-    function adjustAngles() {
-      var offsetFromCenter = $('.rsSlide.rsActiveSlide').offset().left;
+    function adjustAngles(eventTrigger) {
+      if (eventTrigger.currentTarget.hasOwnProperty('slider')) {
+        var slider = eventTrigger.currentTarget.slider;
+        var sliderData = eventTrigger.currentTarget;
+      } else {
+        var slider = $(eventTrigger.currentTarget).parents('.royalSlider');
+        var sliderData = slider.data('royalSlider');
+      }
+
+      var offsetFromCenter = slider.find('.rsSlide.rsActiveSlide').offset().left;
       
-      var slides = slider.slidesJQ;
+      var slides = sliderData.slidesJQ;
       
       $.each(slides, function(index, node) {
         node.removeClass('left-slide');
@@ -62,12 +70,13 @@ var Global = {
       });
       
     }
-    var slider = $(".royalSlider").data('royalSlider');
-    console.log(slider);
-    
-    slider.slides[slider.numSlides - 1].holder.on('rsAfterContentSet', adjustAngles);
-    slider.ev.on('rsAfterSlideChange', adjustAngles);
-    
+      
+    /* I added some logic here so that we can have multiple sliders per page */
+    $('.royalSlider').each(function(index) {
+      slider = $(this).data('royalSlider');
+      
+      slider.slides[slider.numSlides - 1].holder.on('rsAfterContentSet', adjustAngles);
+      slider.ev.on('rsAfterSlideChange', adjustAngles);
+    }); 
   }
-  
 }
