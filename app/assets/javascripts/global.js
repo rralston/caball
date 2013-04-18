@@ -23,7 +23,8 @@ var Global = {
             controlNavigation: 'none',
             video: {
               autoHideBlocks: true,
-              autoHideArrows: false
+              autoHideArrows: false,
+              vimeoCode: '<iframe src="http://player.vimeo.com/video/%id%?byline=0&amp;portrait=0&amp;autoplay=1" width="WIDTH" height="HEIGHT" frameborder="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>'
             },
             fadeinLoadedSlide: false,
             keyboardNavEnabled: true,
@@ -34,7 +35,7 @@ var Global = {
               breakpoint: 650,
               breakpointCenterArea: 0.64,
               navigateByCenterClick: false
-          }
+          },
       });  
     
     $('.rsSlide:first').addClass('rsActiveSlide');
@@ -75,7 +76,7 @@ var Global = {
     $('.royalSlider').each(function(index) {
       slider = $(this).data('royalSlider');
       
-      slider.slides[slider.numSlides - 1].holder.on('rsAfterContentSet', adjustAngles);
+      slider.slides[0].holder.on('rsAfterContentSet', adjustAngles);
       slider.ev.on('rsAfterSlideChange', adjustAngles);
     }); 
   }
