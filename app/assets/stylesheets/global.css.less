@@ -438,7 +438,25 @@ footer {
 
 .royalSlider {
   
-  padding-top: 50px;
+  margin-top: 20px !important;
+  height: 350px !important;
+  
+  .rsVideoContainer iframe {
+    background-color: @white;
+  }
+  
+  
+   .rsVisibleNearbyWrap {
+     height: 350px !important;
+     .rsOverflow {
+       height: 350px !important;
+     }
+   }
+  
+  .rsMainSlideImage {
+    margin-top: 0 !important;
+  }
+  
   .rsSlide {
     .transition(all 1s ease-out);
   }
@@ -455,10 +473,6 @@ footer {
     z-index: 10;
     
     .transform(perspective(1000px) rotateY(0deg) ) !important;
-  }
-  
-  .rsSlide img {
-    
   }
   
   .rsVisibleNearbyWrap {
