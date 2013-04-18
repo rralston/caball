@@ -3,6 +3,10 @@ class CommentsController < ApplicationController
   before_filter :require_login
   before_filter :load_project
   
+  def current_user
+       @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+  
   def create
     @project = Project.find(params[:project_id])
     @comment = @project.comments.build(params[:comment])
