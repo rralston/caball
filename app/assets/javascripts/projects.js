@@ -22,15 +22,14 @@ var Projects = {
     
     modalHandlers: function() {
       
-      /* So that the messaging modal sizes amodalHandlers: function () {ppropriately */
-      $('#message-modal').on('show', function () {
+      /* So that the messaging modal sizes appropriately */
+      $('#message-modal').on('shown', function () {
         $(this).css({
         'margin-left': function () {
             return -($(this).width() / 2);
           }
         });
       });
-      
       
       /* Event listeners for messaging modal buttons */
       $('#message-modal').on('shown', function () {
@@ -43,6 +42,7 @@ var Projects = {
           $('input[value="Cancel"]').off('click');
         });
       });
+      
     },
     
     /* This resizes the roles boxes so that they're all equal height and have equal proportions */
