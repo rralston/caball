@@ -1,32 +1,51 @@
-<%= div_for comment do %>
-        <div class="row-fluid roles-row">
-					  <div class="well">
-              <h5>
-               <%= link_to comment.user.name, comment.user %> created a new update
-							<% if comment.created_at > Time.now.beginning_of_day %>
-							  <%="#{time_ago_in_words(comment.created_at)} ago"%>
-							<% else %>
- 							 on <%= comment.created_at.strftime('%A %d %B %Y at %I:%M%p') %>
-							<% end %>
-              </h5>
-              <p>
-              	<%= raw comment.content %><br><br>
-								<% if comment.created_at != comment.updated_at %>
-								<i>
-									<% if comment.updated_at > Time.now.beginning_of_day %>
-									    Edited <%="#{time_ago_in_words(comment.updated_at)} ago"%>  
-									<% else %>
-									    Edited on <%= comment.created_at.strftime("%A %d %B %Y at %I:%M%p") %> 
-									<% end %>
-									</i>
-								<% end %>
-							  <% if comment.user == current_user %>
-							</p>  
-							<p>
-					      <%= link_to "Edit", edit_project_comment_path(@project, comment) %> |
-					      <%= link_to "Destroy", [@project, comment], method: :delete %>
-					    </p>
-        		</div>
-			  </div>
-<% end %>
-<% end %>
+<div class="row-fluid">
+  <%= image_tag 'vertical_rule.png', :class => "vertical-rule" %>
+  <%= image_tag 'blog_circle.png', :class => "blog-circle blog-circle-top" %>
+  <% blogs.sort! {|a, b| Time.now - a.created_at <=> Time.now - b.created_at}%>
+  <% blogs.each_with_index do |blog, counter| %>
+    <% if counter.even? %>
+    <%= image_tag 'blog_circle.png', :class => "blog-circle" %>
+    <div class="blog-post span5" id="blog<%=counter%>">
+      <%= image_tag 'blog_arrow_left.png', :class => "blog-arrow blog-arrow-left" %> 
+    <% else %>
+    <%= image_tag 'blog_circle.png', :class => "blog-circle" %>
+    <div class="blog-post span5 offset2" id="blog<%=counter%>">
+      <%= image_tag 'blog_arrow_right.png', :class => "blog-arrow blog-arrow-right" %> 
+    <% end %>
+      <div class="well">
+        <h5>
+          <%= link_to blog.project.title, blog.project %> created a new update
+          <% if blog.created_at > Time.now.beginning_of_day %>
+            <%="#{time_ago_in_words(blog.created_at)} ago"%>
+          <% else %>
+            on <%= blog.created_at.strftime('%A %d %B %Y at %I:%M%p') %>
+          <% end %>
+        </h5>
+        <p>
+          <%= raw blog.content %><br><br>
+          <% if blog.created_at != blog.updated_at %>
+            <i>
+            <% if blog.updated_at > Time.now.beginning_of_day %>
+              Edited <%="#{time_ago_in_words(blog.updated_at)} ago"%>  
+            <% else %>
+              Edited on <%= blog.created_at.strftime("%A %d %B %Y at %I:%M%p") %> 
+            <% end %>
+            </i>
+          <% end %>
+        </p> 
+        <% if blog.user == current_user %> 
+          <p>
+<%
+=begin
+%> I'm not sure why these links aren't working...
+          <%= link_to "Edit", edit_project_comment_path(@user, blog) %> |
+          <%= link_to "Destroy", [@project, blog], method: :delete %>
+<%
+=end
+%>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -263,13 +263,13 @@ actor to play the lead roll. Please apply if interested”</h3>
 	    <div class="row-fluid">
 	      <div class="span12">
 	        <div class="row-fluid">
-	          <div class="page-header">
-	              <h1>
-	                  Project Updates
-	              </h1>
+	          <div class="updates-title++=+">
+	              <h3>
+	                  Updates
+	              </h3>
 	          </div>
 	        </div>
-  				<%= render @project.comments %>
+  				<%= render :partial => 'comments/comment', :locals => {:blogs => @project.comments} %>
 				</div>
 		  </div>
 	</div>
@@ -278,15 +278,15 @@ actor to play the lead roll. Please apply if interested”</h3>
 
 <% if current_user %>
 <% if current_user.id == @project.user_id %>
-<div id="comments">
+<div id="add-comments">
 	<div class="container-fluid">
 	    <div class="row-fluid">
 	      <div class="span12">
 	        <div class="row-fluid">
-	          <div class="page-header">
-	              <h1>
+	          <div class="new-update-title">
+	              <h3>
 	                  Create a New Update
-	              </h1>
+	              </h3>
 	          </div>
 	        </div>
   				<%= render 'comments/form' %>
