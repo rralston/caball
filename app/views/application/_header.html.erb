@@ -54,14 +54,8 @@
               
               <% if current_user %>
               
-              <div class="profile">
-                <%= link_to "#", :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do %> 
-                  <% if current_user.profiles.present? %>
-                    <%= image_tag current_user.profiles.image.url(:tiny), :size=> '40x40' %>
-                  <% else %>
-                    <icon class="icon-user icon-white"></icon>
-                  <% end %>
-                <% end %>
+              <div class="profile logged-in">
+                <%= link_to "#", :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do %> <% end %>
                 <ul class="dropdown-menu">    
                   <li>
                     <%= link_to user_path(current_user) do %>
@@ -104,7 +98,7 @@
               </div>
 
               <% else %>
-              <div class="profile">
+              <div class="profile logged-out">
                 <%= link_to "#", :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do %> 
                   <icon class="icon-user">
                 <% end %>
@@ -117,44 +111,43 @@
               <% end %>
             </li>
           </ul>
-          <% if flash[:notice] %>
-          <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert">
-              ×
-            </button>
-            <%= flash[:notice] %>
-          </div>
-          <% end %>
-          <% if flash[:error] %>
-          <div class="alert alert-error">
-            <button type="button" class="close" data-dismiss="alert">
-              ×
-            </button>
-            <%= flash[:error] %>
-          </div>
-          <% end %>
-          <% if flash[:alert] %>
-          <div class="alert">
-            <button type="button" class="close" data-dismiss="alert">
-              ×
-            </button>
-            <%= flash[:alert] %>
-          </div>
-          <% end %>
-          <% if flash[:info] %>
-          <div class="alert alert-info">
-            <button type="button" class="close" data-dismiss="alert">
-              ×
-            </button>
-            <%= flash[:info] %>
-          </div>
-          <% end %>
-
-          <% comment = "This is a generic placeholder for bootstrap alerts created through JS."%>
-          <div id = "bootstrap-alert-placeholder"></div>
-
         </div>
       </div>
     </div>
   </nav>
 </header>
+<% if flash[:notice] %>
+<div class="alert alert-success">
+  <button type="button" class="close" data-dismiss="alert">
+    ×
+  </button>
+  <%= flash[:notice] %>
+</div>
+<% end %>
+<% if flash[:error] %>
+<div class="alert alert-error">
+  <button type="button" class="close" data-dismiss="alert">
+    ×
+  </button>
+  <%= flash[:error] %>
+</div>
+<% end %>
+<% if flash[:alert] %>
+<div class="alert">
+  <button type="button" class="close" data-dismiss="alert">
+    ×
+  </button>
+  <%= flash[:alert] %>
+</div>
+<% end %>
+<% if flash[:info] %>
+<div class="alert alert-info">
+  <button type="button" class="close" data-dismiss="alert">
+    ×
+  </button>
+  <%= flash[:info] %>
+</div>
+<% end %>
+
+<% comment = "This is a generic placeholder for bootstrap alerts created through JS." %>
+<div id="bootstrap-alert-placeholder" class="js-alert"></div>

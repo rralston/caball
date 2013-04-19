@@ -4,13 +4,17 @@ body {
 
 /* Header Stuff */
 
+.alert {
+  position: absolute;
+  z-index: 10;
+  color: @black;
+}
+
 header {
   
   height: 100px;
   margin-bottom: 40px;
-  
   .box-shadow(0px 10px 19px #333);
-  
   
   .navbar-fixed-top {
     height: 100%;
@@ -74,58 +78,84 @@ header {
         position: absolute;
         height: 100px;
         width: 200px;
-        .box-shadow(5px 5px 5px #333);
-        
+        .box-shadow(5px 5px 5px #333); 
       }
       
       .widgets {
-        
         position: relative;
-        
+        top: 23px;
+       
         .search {
-          
           height: 2em;
+          float: left;
+          
+          .icon-search {
+            position: absolute;
+            top: 10px;
+            width: 23px;
+            height: 22px;
+            background-color: white;
+            left: 2px;
+          }
           
           input {
+            position: relative;
+            top: 3px;
             width: 200px;
+            padding-left: 25px;
+            
           }
         }
         
         div { 
           padding-right: 10px;
+          top: 5px;
         }
         
-        .notifications > a{
-          height: 43px;
-          width: 55px;
-          background: url('header_icons.png') no-repeat 0px -43px;
-          position: relative;
-          float: left;
-          
-          .number {
-            position: absolute;
-            left: 40px;
-            top: -5px;
-          }
+        .number {
+          position: absolute;
+          left: 0px;
+          top: -5px;
         }
         
-        .messages  > a{
-          height: 46px;
-          width: 55px;
-          background: url('header_icons.png') no-repeat 0px -3px;
+        .notifications > a {
+          height: 35px;
+          width: 37px;
+          background: url('header_icons.png') no-repeat 0px 0px;
           position: relative;
           float: left;
-          
-          .number {
-            position: absolute;
-            left: 40px;
-            top: -5px;
-          }
+        }
+        
+        .messages  > a {
+          height: 22px;
+          width: 36px;
+          background: url('header_icons.png') no-repeat 0px -34px;
+          position: relative;
+          float: left;
+          top: 5px;
+        }
+        
+        .profile.logged-in > a {
+          height: 30px;
+          width: 36px;
+          background: url('header_icons.png') no-repeat 0px -60px;
+          position: relative;
+          float: left;
+        }
+        
+        .dropdown-menu {
+          top: 130%;
+          left: -275%;
         }
         
         .profile {
-          float: left;
-          padding-left: 10px;
+          position: relative;
+        }
+        
+        .profile.logged-out {
+          position: relative;
+          float: right;
+          margin-top: -10px;
           
           icon {
             color: @white;
@@ -133,16 +163,14 @@ header {
             text-decoration: none;
             margin-top: 10px;
           }
-          
-          .dropdown-menu {
-            right: 0px;
-            
-          }
         }
         
         .notifications, .profile, .messages {
-          margin-top: 10px;
           float: right;
+        } 
+        
+        .notifications > a:hover, .profile > a:hover, .messages > a:hover {
+            opacity: 0.4;
         } 
       }   
     }
@@ -163,6 +191,7 @@ footer {
     color: @white;
     text-decoration: none;
   }
+  
   a:hover {
     text-decoration: none;
     color: #c1272d; 
@@ -187,6 +216,7 @@ footer {
     margin:0;
   }
 }
+
 #footer ul.links > li {
   display: inline;
   list-style-type: none;
