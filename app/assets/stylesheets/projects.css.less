@@ -92,7 +92,7 @@
   }
   
   h3 {
-    font-size: 1.5em;
+    font-size: 1.3em;
     font-weight: 400;
     color: #4c99c0;
    }
@@ -108,11 +108,13 @@
       background-color: #ededed;
       width: 100px;
       padding: 0 20px;
-      margin: 10px 0 0 20px;
+      margin: 10px 0 50px 20px;
       text-align: left;
     }
     
     .role-circles {
+      
+      margin-left: 0px;
       
       .role-circle-container {
         display: inline-block;
@@ -203,10 +205,14 @@
     
     .producer-profile {
       
+      a {
+        text-decoration: none;
+      }
+      
       .producer-title {
         border: 1px solid #ccc;
         background-color: #ededed;
-        width: 100px;
+        width: 80px;
         padding: 0 20px;
         margin: 10px 0 0 20px;
       }
@@ -493,6 +499,9 @@
       input {
         width: 80%;
       }
+      select {
+        width: 80%;
+      }
     }
     
     .projects-search-title {
@@ -576,8 +585,8 @@
       display: inline-block;
       position: relative;
       margin: 10px 0 0 0;
-      width: 80px;
-      height: 105px;
+      width: 70%;
+      height: 88px;
       
       .role-title {
         position: relative;
@@ -589,17 +598,18 @@
       
       .role-count {
         position: relative;
-        float: left;
-        top: 90px;
-        width: 90px;
+        top: 69px;
+        width: 103px;
+        left: -18px;
+        display: inline-block;
       }
       
       .role-circle {
         border: 3px solid #4c99c0;
         background-color: transparent;
         .border-radius(45px);
-        width: 80px;
-        height: 80px;
+        width: 60px;
+        height: 60px;
         z-index: 9;
         position: absolute;
       }
@@ -608,8 +618,8 @@
         border: 3px solid @white;
         background-color: #4c99c0;
         .border-radius(45px);
-        width: 70px;
-        height: 70px;
+        width: 50px;
+        height: 50px;
         position: absolute;
         top: 5px;
         left: 5px;
@@ -618,7 +628,7 @@
       
       .circle-measure {
         height: 50px;
-        width: 80px;
+        width: 60px;
         z-index: 8;
         background-color: @white;
         position: absolute;
@@ -645,6 +655,7 @@
         
         height: 140px;
         overflow: hidden;
+        font-size: 0.9em;
         
         .more-roles-link {
           display: inline-block;
@@ -666,6 +677,7 @@
       width: 100%;
       margin-top: -35px;
       margin-left: -10px;
+      font-size: 0.8em;
     }
     
     hr.bottom {
@@ -718,7 +730,7 @@
       .border-radius(5px);
       color: @white;
       text-align: center;
-      padding: 4px;
+      padding: 2px 5px 1px 5px;
       cursor: pointer;
       color: @white;
       background-color: #666;

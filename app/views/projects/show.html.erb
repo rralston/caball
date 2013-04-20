@@ -26,7 +26,7 @@
           </div>
         </div>
         
-        <div class="span3 offset6 roles-buttons">
+        <div class="span4 offset5 roles-buttons">
           <span class="roles-button">Roles</span>
           <span class="vrule"></span>
           <span class="roles-button">Producer</span>
@@ -141,10 +141,12 @@
           <h3>Producer</h3>
         </div>
         <div class="producer-content">
+          <%= link_to @producer do %>
           <%= image_tag @producer.profiles.image.url(:medium), :class => "producer-image", :width => 150 %>
           <div class="producer-name">
             <h3><%= @producer.name %></h3>
           </div>
+          <% end %> 
           <div class="row-fluid message-row">
             <div class="span12 message-span">
               <a data-toggle="modal" data-target="#message-modal" 

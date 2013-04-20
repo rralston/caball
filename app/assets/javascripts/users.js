@@ -187,7 +187,7 @@ var Users = {
     modalHandlers: function () {
       
       /* So that the messaging modal sizes appropriately */
-      $('#message-modal').on('show', function () {
+      $('.modal').on('shown', function () {
         $(this).css({
         'margin-left': function () {
             return -($(this).width() / 2);
