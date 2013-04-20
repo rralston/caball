@@ -14,12 +14,14 @@
       
       <div class="row-fluid follow-roles-bar">
         <div class="span3 follow-container">
+          <%= link_to(friendships_path(friend_id: @producer), method: :post, :class => '') do %>
           <div class="follow-button">
             Follow
           </div>
+          <% end %>
           <div class="follow-counts">
             <div class="row-fluid">
-              <div class="numbers">4,339 Fans</div>
+              <div class="numbers"><%= @producer.friendships.all.count %> Fans</div>
             </div>
           </div>
         </div>
@@ -58,16 +60,10 @@
             </div>
             <div class="project-details-content">
               <span class="project-detail">
-                Action
+                <%= if @project.genre.present? then @project.genre end %>
               </span>
               <span class="project-detail">
-                Drama
-              </span>
-              <span class="project-detail">
-                Film
-              </span>
-              <span class="project-detail">
-                Pre-Production
+                <%= if @project.status.present? then @project.status end %>
               </span>
             <div class="shooting-locations-title">
                 <h3>Shooting Locations:</h3>
