@@ -145,21 +145,20 @@
           <h3>Producer</h3>
         </div>
         <div class="producer-content">
-          <img class="producer-image" width="150px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTKsolP0d1stUAEvbCn0g2xJO-Eac9R55r2qMY9nIT75a_03hA4sw" />
+          <%= image_tag @producer.profiles.image.url(:medium), :class => "producer-image", :width => 150 %>
           <div class="producer-name">
-            <h3>Juice Soa</h3>
+            <h3><%= @producer.name %></h3>
           </div>
           <div class="row-fluid message-row">
             <div class="span12 message-span">
-              <% comment = "THIS WILL JUST MESSAGE USER 2" %>
               <a data-toggle="modal" data-target="#message-modal" 
-                    data-remote ="<%= new_conversation_path(:recipient => User.find(2).email, :modal => true)%>"
+                    data-remote ="<%= new_conversation_path(:recipient => @producer.email, :modal => true)%>"
                     data-keyboard="true" class="message-button"><%= image_tag('mail_icon.png') %> Message</a>
               <!-- Message Modal -->
                 <div id="message-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3><span>Message <%= User.find(2).name.split[0..0].join(" ") %></span></h3>
+                    <h3><span>Message <%= @producer.name.split[0..0].join(" ") %></span></h3>
                   </div>
                   <div class="modal-body">
                   </div>
@@ -175,9 +174,7 @@
           <h3>In the Producer's Words:</h3>
         </div>
         <div class="producer-headline-content">
-          <h3>“A girl wakes up on the COAST of Ireland, with no memory of who she is and 
-how she got there. So I decided to make a movie about it. We are looking for a really rugged looking 
-actor to play the lead roll. Please apply if interested”</h3>
+          <h3><%= @producer.headline %></h3>
         </div>
       </div>
     </div>
