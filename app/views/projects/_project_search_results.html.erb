@@ -3,10 +3,12 @@
     <div class='span4 projects-box'>
       <%= link_to project_path(proj.id) do %>
         <h3 class="title centered-text">
-          <span><%= proj.title %></span>
+          <%= proj.title %>
         </h3>
       <% end %>
-      <div class="row-fluid">
+      <span class="producer-name">Producer: <%= link_to user_path(proj.user) do proj.user.name end %></span>
+      <span class="location-name"><%= if proj.location.present? then proj.location end %></span>
+      <div class="row-fluid thumbnail-container">
         <%= link_to project_path(proj.id) do %>
           <div class='thumbnail-figure span6'>
             <% if proj.photos.exists? %>
@@ -14,24 +16,12 @@
             <% end %>
           </div>
         <% end %>
-        <div class="name-location span6">
-          <h5> <span><%= User.find(proj.user_id).name %></span></h5>
-          <span class="location"><%= if proj.location.present? then proj.location end%></span>
-          <span class="open-roles"><%= proj.roles.length %> Open Roles </span>
-          <div class="message-button-container">
-            <a data-toggle="modal" data-target="#message-modal" 
-                  data-remote ="<%= new_conversation_path(:recipient => User.find(proj.user_id).email, :modal => true)%>"
-                  data-keyboard="true" class="message-button">Message</a>
-            <!-- Message Modal -->
-              <div id="message-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                  <h3><span>Message <%= User.find(proj.user_id).name.split[0..0].join(" ") %></span></h3>
-                </div>
-                <div class="modal-body">
-                </div>
-              </div>
-            <!-- Message Modal --> 
+        <div class="open-roles span6">
+          <div class="role-circle-container">
+            <div class="role-circle"></div>
+            <div class="circle-fill"></div>
+            <div class="circle-measure"></div>
+            <span class="role-count">7 Open Roles</span>
           </div>
         </div>
       </div>
@@ -42,13 +32,37 @@
         <div class="row-fluid roles-container centered-text">
           <% proj.roles.each_with_index do |role, index| %>
             <% if index > 7 then %>
-              <%= proj.roles.length - index %> more roles available!
+              <span class="more-roles-link"><%= proj.roles.length - index %> more...</span>
               <% break %>
             <% end %>
             <span class="role-name"><%= role.name %></span>
           <% end %>
         </div>
         
+      </div>
+      <hr class="bottom"/>
+      <div class="message-follow-row">
+        <a data-toggle="modal" data-target="#message-modal-<%= counter %>" 
+              data-remote ="<%= new_conversation_path(:recipient => proj.user.email, :modal => true)%>"
+              data-keyboard="true" class="message-button"><%= image_tag('mail_icon.png') %> Message</a>
+        <!-- Message Modal -->
+          <div id="message-modal-<%= counter %>" class="modal hide fade left-aligned message-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3><span>Message <%= proj.user.name.split[0..0].join(" ") %></span></h3>
+            </div>
+            <div class="modal-body">
+            </div>
+          </div>
+        <!-- Message Modal --> 
+        <div class="follow-button">
+          <%= link_to(friendships_path(friend_id: proj.user), method: :post, :class => '') do %>
+            <%= image_tag('camera_keyhole.png')%> Follow
+          <% end %>
+        </div>
+        <div class="follow-count">
+          <%= Friendship.where( :friend_id => proj.user.id).count %> Fans
+        </div>
       </div>
       <!-- Projects Description Modal -->
       <div id="projects-description-<%= counter %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

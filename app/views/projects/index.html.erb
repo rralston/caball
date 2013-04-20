@@ -1,9 +1,13 @@
 <section class='projects-search'>
-  <div class='container-fluid'>
-    <div class='row-fluid'>
+  <div class='container'>
+    <div class='row'>
       <!-- Left Column for Search Terms-->
       <div class='span3 search-column'>
-        <%= search_form_for @search do |f| %>
+        <div class="projects-search-title">
+          <h3>PROJECTS</h3>
+        </div>
+        <div class="projects-search-content">
+          <%= search_form_for @search do |f| %>
           <div class="field project-title">
             <%= f.text_field :title_cont, :placeholder => 'Find a Project...', :class => 'project-title-input' %>
             <i class="icon-search"></i>
@@ -24,7 +28,8 @@
             <%= f.select(:roles_id_cont, options_for_select(@talents), {}, {:multiple=> true, :size => 5, :class => 'roles-input' })
             %>
           </div>
-        <% end %>
+          <% end %>
+        </div>
       </div>
       
       <!-- Right Column for displaying users-->

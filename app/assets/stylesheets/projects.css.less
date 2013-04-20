@@ -479,15 +479,31 @@
 
 /* Projects Search/Index */
 
-section.projects-search {
-  margin-top: 30px;
+#projects-index {
+  margin-top: 75px;
   
   .search-column {
-    padding: 10px;
-    border: 4px solid #333;
-    .box-shadow(~'0px 7px 11px 1px #333333, 0px -2px 11px 1px #333333');
-    input {
-      width: 80%;
+    
+    .projects-search-content {
+      background-color: #333;
+      padding: 10px;
+      border: 1px solid #ccc;
+      color: @white;
+      //.box-shadow(~'0px 7px 11px 1px #333333, 0px -2px 11px 1px #333333');
+      input {
+        width: 80%;
+      }
+    }
+    
+    .projects-search-title {
+      background-color: @white;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      text-align: center;
+      h3 {
+        margin: 0;
+        font-weight: 800;
+      }
     }
   }
   
@@ -497,7 +513,7 @@ section.projects-search {
   
   .projects-description-more {
     position: relative;
-    top: -10px;
+    top: 5px;
     text-align: right;
   }
   
@@ -506,10 +522,15 @@ section.projects-search {
   }
   
   .projects-box {
-    border: solid 3px #444;
+    
+    border: solid 1px #dadada;
+    background-color: @white;
     padding: 10px;
     margin-bottom: 20px;
     overflow: hidden;
+    text-align: center;
+    position: relative;
+    height: 510px;
     
     a, a:hover, a:active, a:visited {
       text-decoration: none;
@@ -517,55 +538,100 @@ section.projects-search {
     }
     
     .title {
-      font-size: 2em;
+      height: 1.4em;
+      overflow: hidden;
+      font-size: 1.6em;
       margin-top: 0px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #dadada;
+      display: inline-block;
     }
     
-    .profile-image {
-
-      border: 3px solid #333;
+    .location-name {
+      display: block;
+      height: 1em;
+      overflow: hidden;
     }
     
-    .name-location {
-      text-align: center;
+    .producer-name {
+      display: block;
+      height: 1.5em;
+      overflow: hidden;
       
-      span {
-        display: block;
-      }
-      
-      .open-roles {
-        color: #c00;
-      }
-      
-      .message-button-container {
-        padding: 5px;
-        margin-top: 5px;
-        font-weight: bolder;
-      }
-      
-      .message-button {
-        background: @backgroundButtonColor;
-        background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-        background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-        background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-        background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-        background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-        
+      a {
+        color: #4c99c0;
         text-decoration: none;
-        color: @black;
-        padding: 4% 12%;
-        cursor: pointer;
+      }
+    }
+    
+    .thumbnail-container {
+      margin-top: 10px;
+    }
+    
+    .open-roles {
+      border: 1px solid #ccc;
+    }
+    
+    .role-circle-container {
+      display: inline-block;
+      position: relative;
+      margin: 10px 0 0 0;
+      width: 80px;
+      height: 105px;
+      
+      .role-title {
+        position: relative;
+        float: left;
+        top: -30px;
+        width: 80px;
+        z-index: 10;
       }
       
-      .message-button:hover {
-        background: darken(@backgroundButtonColor, 20%);
-        background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-        background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-        background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-        background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-        background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-        border-color: darken(@backgroundButtonColor, 20%);
+      .role-count {
+        position: relative;
+        float: left;
+        top: 90px;
+        width: 90px;
       }
+      
+      .role-circle {
+        border: 3px solid #4c99c0;
+        background-color: transparent;
+        .border-radius(45px);
+        width: 80px;
+        height: 80px;
+        z-index: 9;
+        position: absolute;
+      }
+      
+      .circle-fill {
+        border: 3px solid @white;
+        background-color: #4c99c0;
+        .border-radius(45px);
+        width: 70px;
+        height: 70px;
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        z-index: 7;
+      }
+      
+      .circle-measure {
+        height: 50px;
+        width: 80px;
+        z-index: 8;
+        background-color: @white;
+        position: absolute;
+        top: 0%;
+        left: 3px;
+      }
+    }
+    
+    .modal-body {
+      text-align: left;
+    }
+   
+    .profile-image {
     }
     
     .thumbnail-details {
@@ -576,21 +642,85 @@ section.projects-search {
       }
       
       .roles-container {
-
+        
+        .more-roles-link {
+          display: inline-block;
+          color: #4c99c0;
+        }
       }
       
       .role-name {
         display: inline-block;
-        padding-right: 20px;
+        padding-right: 10px;
         margin-bottom: 10px;
       }
     }
     
-    hr {
-      margin: 0;
-      border: 1px solid #444;
+    .message-follow-row {
+      position: absolute;
+      height: 2em;
+      top: 100%;
+      width: 100%;
+      margin-top: -35px;
+      margin-left: -10px;
     }
     
+    hr.bottom {
+      margin: 0;
+      border: 1px solid #ccc;
+      top: 91%;
+      position: absolute;
+      margin-bottom: -50px;
+      width: 91%;
+    }
+
+    .message-button {
+      background-color: #5a86de;
+      border: 1px solid #ccc;
+      .border-radius(5px);
+      text-decoration: none;
+      color: @white;
+      cursor: pointer;
+      font-weight: 400;
+      font-size: 1em;
+      padding: 5px;
+    }
+    
+    .message-button:hover {
+      background-color: darken(#5a86de, 10%);
+    }
+    
+    
+    .follow-button {
+      display: inline-block;
+      position: relative;
+      
+      a {
+        .border-radius(5px);
+        color: @white;
+        text-align: center;
+        padding:5px;
+        cursor: pointer;
+        color: @white;
+        background-color: #666;
+      }
+      
+      img {
+        width: 25px;
+      }
+    }
+    
+    .follow-count {
+      display: inline-block;
+      .border-radius(5px);
+      color: @white;
+      text-align: center;
+      padding: 4px;
+      cursor: pointer;
+      color: @white;
+      background-color: #666;
+     
+    }
   }
 }
 
