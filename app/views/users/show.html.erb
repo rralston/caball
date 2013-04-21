@@ -151,12 +151,8 @@
                 </div>
               </div>
               <!-- End Headline Modal --> 
-              <div class="first-pic">
-                <%= if not @user.photos.first.nil? then image_tag @user.photos.first.image end %>
-              </div>
-              <div class="second-pic">
-                <%= if not @user.photos.second.nil? then image_tag @user.photos.second.image end %>
-              </div>
+              <%= if not @user.photos.first.nil? then image_tag @user.photos.first.image, :class => "first-pic" end %>
+              <%= if not @user.photos.second.nil? then image_tag @user.photos.second.image, :class => "second-pic" end %>
             </div>
           </div>
         </div>
