@@ -1,152 +1,31 @@
-
-<section class='section' id='content' role='main'>
-  <div class='container-fluid'>
-    <div class='page-header'>
-      
-<!-- Begin New Search Index -->
-
-<div class="accordion" id="accordion2">
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-        <h1>Advanced Search Fields</h1>
-      </a>
-    </div>
-    <div id="collapseOne" class="accordion-body collapse out">
-      <div class="accordion-inner">
-        <%= search_form_for @search do |f| %>
-				  <%= f.condition_fields do |c| %>
-				  <div class="field">
-				    <%= c.attribute_fields do |a| %>
-				      <%= a.attribute_select associations: [:characteristics] %>
-				    <% end %>
-				    <%= c.predicate_select %>
-				    <%= c.value_fields do |v| %>
-				      <%= v.text_field :value %>
-				    <% end %>
-				    </div>
-				  <% end %>
-				  <div class="actions"><%= f.submit "Search" %></div>
-				<% end %>
-      </div>
-    </div>
-  </div>
-	<!-- End New Search Index -->
-</div>
-</div>
-</div>
-</section>
-
-<section class='users-search'>
-  <div class='container-fluid'>
-    <div class='row-fluid'>
+<section class="users-search">
+  <div class="container">
+    <div class="row">
       <!-- Left Column for Search Terms-->
-      <div class='span3'>
-        <%= search_form_for @search do |f| %>
-          <div class="field">
-            <%= f.text_field :name_cont, :placeholder => 'Find Talent...' %>
+      <div class='span3 search-column'>
+        <div class="users-search-title">
+          <h3>USERS</h3>
+        </div>
+        <div class="users-search-content">
+          <%= search_form_for @search do |f| %>
+          <div class="field project-title">
+            <%= f.text_field :name_cont, :placeholder => 'Find a User...', :class => 'user-title-input' %>
+            <i class="icon-search"></i>
           </div>
-        <% end %>
+          <div class="field location">
+            <h3>Location</h3>
+            <%= f.text_field :location_cont, :placeholder => 'Location' , :class => 'location-input' 
+            %>
+          </div>
+          <% end %>
+        </div>
       </div>
       
       <!-- Right Column for displaying users-->
       <div class='span9 search-results'>
         <%= render :partial => 'user_search_results' %>
       </div>
-<br>				
-			<h1>
-        Featured Users
-        <small>Here are just some of the great talent on Caball right now.</small>
-      </h1>
+      
     </div>
-    <ul class='thumbnails bordered thumbnail-list'>
-      <% @users.last(3).each_with_index do |use, counter| %>
-			<li class='span4'>
-        <%= link_to user_path(use.id) do %>
-          <figure class='thumbnail-figure'>
-							<% if use.photos.exists? %>
-							<%= image_tag use.photos.first.image %>
-							<% end %>
-              <figcaption class='thumbnail-title'>
-                <h3>
-                  <span><%= use.name %></span>
-                </h3>
-                <p>
-                  <span><% if use.talents.exists? %> <%= use.talents.first.name %><% else %><%= use.name.split[0..0].join(" ") %> has no talent<% end %></span>
-                </p>
-              </figcaption>
-            </img>
-          </figure>
-        <% end %>
-        <p>
-					<% if use.about.present? %>
-          <%= shorten :text => use.about, :length => 500, :partial => "more_users_bio", :counter => counter %>
-          <!-- User Bio Modal -->
-            <div id="user-bio-<%= counter %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3><span><%= use.name.split[0..0].join(" ") %></span></h3>
-              </div>
-              <div class="modal-body">
-                <p>
-               <%= simple_format(use.about) %>
-                </p>
-              </div>
-            </div>
-           <!-- End User Bio Modal --> 
-					<% end %>
-        </p>
-      </li>
-<% end %>
-    </ul>
   </div>
 </section>
-
-<br>
-
-<!-- Begin Old Index -->
-<%- model_class = User.new.class -%>
-<div class="page-header">
-<h1><%=t '.title', :default => model_class.model_name.human.pluralize %></h1>
-</div>
-<table class="table table-striped">
-<thead>
-  <tr>
-    <th><%= model_class.human_attribute_name(:id) %></th>
-    <th><%= model_class.human_attribute_name(:photo) %></th>
-    <th><%= model_class.human_attribute_name(:name) %></th>
-    <th><%= model_class.human_attribute_name(:email) %></th>
-    <th><%= model_class.human_attribute_name(:created_at) %></th>
-    <th><%=t '.actions', :default => t("helpers.actions") %></th>
-  </tr>
-</thead>
-<tbody>
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= link_to user.id, user_path(user), :class => 'btn btn-mini' %></td>
-      <td><% if user.photos.exists? %>
-				<%= image_tag(user.photos.first.image.url(:medium), {:class => "img-polaroid"}) %>
-				<% else %>
-				<% end %></td>
-			<td><%= link_to user.name, user_path(user) %></td>
-      <td><%= user.email %></td>
-      <td><%=l user.created_at %></td>
-      <td>
-        <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                    edit_user_path(user), :class => 'btn btn-mini' %>
-        <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                    user_path(user),
-                    :method => :delete,
-                    :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
-                    :class => 'btn btn-mini btn-danger' %>
-      </td>
-    </tr>
-  <% end %>
-</tbody>
-</table>
-<!-- End Old Index -->
-
-<!-- <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_user_path,
-            :class => 'btn btn-primary' %> -->
-<br>
