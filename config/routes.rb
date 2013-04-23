@@ -3,6 +3,8 @@ Caball::Application.routes.draw do
     resources :characteristics, :photos, :talents, :profile
   end
   
+  match "/skills(/*path)" => redirect{ |params| "http://skills.filmzu.com" + (params[:path] ? "#{params[:path]}" : '/')}  
+  
   resources :projects do 
     resources :comments
   end
