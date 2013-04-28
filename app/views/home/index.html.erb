@@ -1,100 +1,68 @@
- <div id="wrap"> 
-  <!-- Main Content -->
-    <div id='content' role='main'>
-      <section class='section alt' id='promo'>
-<div class='container'>
-    <div class='carousel slide' id='myCarousel'>
-      <!-- Carousel items -->
-      <div class='carousel-inner'>
-        <div class='active item'>
-          <div class='row-fluid'>
-            <div class='span2'></div>
-						<div class='span9'>
-              <div class='hero-unit'>
-                <center>
-								<h1><%= image_tag "filmzu.png" %></h1>
-                <br>
-								<p>The platform that makes creating films as enjoyable as watching them</p>
-
-								<br>
-								
-																
-								
-								<!-- Begin Signup Form -->								
-								<form action="http://filmzu.us6.list-manage.com/subscribe/post?u=f7f6702bd4e503b98fda073a0&amp;id=c0f4907d41" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-									<label for="mce-EMAIL">We are currently in closed Alpha testing, please sign-up and we will let you know when we launch</label>
-									<br>
-									<div class="input-append">
-									<input type="email" value="" name="EMAIL" class="span6 email" id="mce-EMAIL" placeholder="Email Address" required>
-									<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn">
-									</div>
-								</form>
-								<!--End Signup Form -->
-								</center>
-								<br>
-              </div>
-            </div>
-            <!-- <div class='span5'>
-            <%= image_tag "main-poster.jpg", :class => "pull-right" %>
-            </div> -->
-          </div> 
-          <!-- <div class='row-fluid'>
-              <ul class="ch-grid">
-  							<div class='span4'>
-                	<li>
-  						        <div class="ch-item ch-img-1">
-  						            <div class="ch-info">
-  						                <h3>Have a Film Project?</h3>
-  						                <p>FilmZu</p>
-  						            </div>
-  						        </div>
-  						    </li>
-              </div>
-              <div class='span4'>
-                <li>
-  					        <div class="ch-item ch-img-1">
-  					            <div class="ch-info">
-  					                <h3>Need Cast, Staff & Funding?</h3>
-  					                <p>FilmZu</p>
-  					            </div>
-  					        </div>
-  					    </li>
-              </div>
-              <div class='span4'>
-                <li>
-  					        <div class="ch-item ch-img-1">
-  					            <div class="ch-info">
-  					                <h3>Distribution & Monetization</h3>
-  					                <p>FilmZu</p>
-  					            </div>
-  					        </div>
-  					    </li>
-              </div>
-            </div>
-          </div>
-          
-        Carousel nav
-        <a class='carousel-control left' data-slide='prev' href='#myCarousel'>&lsaquo;</a>
-        <a class='carousel-control right' data-slide='next' href='#myCarousel'>&rsaquo;</a>
+<section id="home" class="section home-section">
+  <div class="container-fluid lunchbox-container">
+    <div class="home-header">
+      <h1>FILM <span class="white-text">BEGINS</span> HERE</h1>
+      <span class="start-creating">Start Creating, Free!</span>
+      <div class="lunchbox-caption">
+        Filmaking requires a lot of people with different talents. Filmzu takes the headache out of searching for them,
+        and brings them all to one place. See how easy Filmzu makes creating premium video content.
       </div>
-    </div> --> 
-	<div id="push"></div>
-</div>
-</section>
-
-<!-- <section class='section'>
-  <div class='container'>
-    <div class='page-header'>
-		<center>
-      <h1>
-        What is Filmzu?
-        <small>We are a revolutionary collaboration tool for independent filmmakers.</small>
-      </h1>
-			<div class='row-fluid'>
-				<div class ="span1"></div> 
-				<div class ="span12"></div>
-			</div>
-		</center>
+      <div class="row blurb-list">
+        <div class="span4">
+          Staff your new project with talented people that want to be a part of your film.
+        </div>
+        <div class="vrule"></div>
+        <div class="span4">
+          Search for talented film and video professionals in your area!
+        </div>
+        <div class="vrule"></div>
+        <div class="span4">
+          Digital library with current how-to articles, videos, and interview to help hone your skill and learn new ones too!
+        </div>
+      </div>
     </div>
-	</div>
-</section> -->
+  </div>
+  <div class="container home-content">
+    <div class="content-header">
+      Take a look how Filmzu is the key to creating great film and video
+    </div>
+    <div class="row">
+      <div class="span6 roles-image sample-image">
+        <%= image_tag 'roles_sample.png'%>
+      </div>
+      <div class="span6 roles-text content-text">
+        The first platform with an active application process. 
+        Film and video professionals can look through projects to find ones they are interested in,
+        based on genre, location, schedule and more! 
+        Producers review only the individuals that want to work on the project!
+      </div>
+    </div>
+    <div class="row">
+      <div class="span6 profiles-text content-text">
+        Search for film and video professionals in your area. Whether you want to start a new project, or find
+        someone to work on an existing one, Filmzu is the destination spot to find wrtiers, actors, editors, and everything in between!
+      </div>
+      <div class="span6 profiles-image sample-image">
+        <%= image_tag 'profiles_sample.png'%>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span6 how-to-image sample-image">
+        <%= image_tag 'info_circle.png'%>
+      </div>
+      <div class="span6 how-to-text content-text">
+        Read through information and How-To videos. 
+        From DIY videos to make your own dolly, and other tips to help you save money. 
+        We also review the latest products and talk about all these ways you can spend your money!
+      </div>
+    </div>
+    <div class="row featured-projects">
+      <div class="featured-projects-bubble"><span>Featured Projects</span></div>
+      <%= render :partial => 'featured_projects' %>
+    </div>
+  </div>
+</section>
+ 
+
+								
+         

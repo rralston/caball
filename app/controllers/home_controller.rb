@@ -2,6 +2,7 @@ class HomeController < ApplicationController
   before_filter :search
   
   def index
+    @projects = Project.find(1, 2, 3)
   end
 
   def about
