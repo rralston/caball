@@ -177,14 +177,24 @@
           .follow-button {
             
             a {
-              background: url('camera_heart.png') no-repeat;
               color: @white;
+              display: block;
+              min-width: 24px;
+              height: 20px;
+              margin-top: 4px;
+              
               img {
                 display: none;
               }
               span {
                 display: none;
               }
+            }
+            a.start-following {
+              background: url('camera_heart.png') no-repeat 0 -20px;
+            }
+            a.stop-following {
+              background: url('camera_heart.png') no-repeat 0 0px;
             }
           }
         }
