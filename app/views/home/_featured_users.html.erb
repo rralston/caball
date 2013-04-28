@@ -1,0 +1,70 @@
+<% @users.first(3).each_with_index do |user, counter| %>
+    <div class='span4 projects-box'>
+      <%= link_to user_path(user.id) do %>
+        <h3 class="title centered-text">
+          <%= user.name %>
+        </h3>
+      <% end %>
+      <div class="row-fluid thumbnail-container">
+        <%= link_to project_path(user.id) do %>
+          <div class='thumbnail-figure span6'>
+            <% if user.profiles.present? %>
+            <%= image_tag(user.profiles.image.url(:medium), :class => "profile-image") %>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="span6">
+          <div class="producer-name">
+            <%= user.name%>
+          </div>
+          <div class="location">
+            <% if user.location.present? %> 
+            <% user.location %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <div class='thumbnail-details'>
+        <div class="project-description">
+          <%= shorten :text => user.about, :length => 100, :partial => "more_users_about.html.erb", :counter => counter %>
+        </div>
+        <div class="row-fluid roles-container centered-text">
+  
+        </div>
+      </div>
+      <div class="message-follow-row row-fluid">
+        <a data-toggle="modal" data-target="#message-user-modal-<%= counter %>" 
+              data-remote ="<%= new_conversation_path(:recipient => user.email, :modal => true)%>"
+              data-keyboard="true" class="message-button featured-projects-button"><%= image_tag('mail_icon.png') %> Message</a>
+        <!-- Message Modal -->
+          <div id="message-user-modal-<%= counter %>" class="modal hide fade left-aligned message-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3><span>Message <%= user.name.split[0..0].join(" ") %></span></h3>
+            </div>
+            <div class="modal-body">
+            </div>
+          </div>
+        <!-- End Message Modal --> 
+        <div class="follow-count featured-projects-button">
+          <span class="fan-count" data-user-id="<%= user.id %>"><%= Friendship.where( :friend_id => user.id).count %></span> Followers
+        </div>
+        <div class="follow-button featured-projects-button">
+          <%= render :partial => 'follow_button', :locals => {:user => user} %>
+        </div>
+      </div>
+      <!-- User About Modal -->
+      <div id="users-about-<%= counter %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3><span><%= user.name %></span></h3>
+        </div>
+        <div class="modal-body">
+          <p>
+            <%= simple_format(user.about) %>
+          </p>
+        </div>
+      </div>
+      <!-- User About Description Modal -->
+    </div>
+  <% end %>
