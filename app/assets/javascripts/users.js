@@ -220,55 +220,6 @@ var Users = {
           }
         });
       });
-      
-      $('.follow').on('click', ajaxFollow);
-      
-      function ajaxFollow() {
-        $(this).button('loading');
-        $.ajax({
-          url: $(this).attr('href'),
-          type: $(this).data('method').toUpperCase(),
-          contentType: 'application/json; charset=utf-8',
-          success: function (data) {
-              if(data.success) {
-                if(data.created) {
-                  
-                   // We have to update which friendship to remove now
-                  newId = data.friendship.id;
-                  $('.follow.stop-following').attr('href', '/friendships/' + newId);
-                  $('#bootstrap-alert-placeholder').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>'+data.notice+'</span></div>');
-                  $('.follow').button('reset');
-                  $('.follow.stop-following').removeClass('hidden');
-                  $('.follow.start-following').addClass('hidden');
-                  
-                  $('.alert').alert();
-                  // We have to set our own timeout for closing the alert
-                  window.setTimeout(function() { $(".alert").alert('close'); }, 2000);
-                }
-                else if (data.destroyed) {
-                  
-                  $('#bootstrap-alert-placeholder').html('<div class="alert fade in"><a class="close" data-dismiss="alert">×</a><span>'+data.notice+'</span></div>');
-                  $('.follow').button('reset');
-                  $('.follow.stop-following').addClass('hidden');
-                  $('.follow.start-following').removeClass('hidden');
-                  
-                  $('.alert').alert();
-                  // We have to set our own timeout for closing the alert
-                  window.setTimeout(function() { $(".alert").alert('close'); }, 2000);
-                }
-                else {
-                  $('.follow').button('reset');
-                  $('#bootstrap-alert-placeholder').html('<div class="alert fade in alert-error"><a class="close" data-dismiss="alert">×</a><span>There was a problem following. Please try again...</span></div>');
-                }
-              }
-          },
-          error: function () {
-            $('.follow').button('reset');
-            $('#bootstrap-alert-placeholder').html('<div class="alert fade in alert-error"><a class="close" data-dismiss="alert">×</a><span>There was a problem following. Please try again...</span></div>');
-          }
-        });
-        return false;
-      }
 
       $('.role-more a').on('click', function () {
         // Now we have to figure out whether we'll display role 1 or role 2

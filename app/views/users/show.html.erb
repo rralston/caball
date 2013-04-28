@@ -115,9 +115,7 @@
         <div class="row-fluid">
           <div class="span3 follow-container">
             <div class="follow-button">
-              <%= link_to(friendships_path(friend_id: @user), method: :post, :class => '') do %>
-                <%= image_tag('camera_keyhole.png')%> Follow
-              <% end %>
+              <%= render :partial => 'follow_button', :locals => {:user => @user} %>
             </div>
             <div class="follow-images">
               <% @followers_following.first(12).each_with_index do |user, index| %>
@@ -129,7 +127,7 @@
             </div>
             <div class="follow-counts">
               <div class="row-fluid">
-                <div class="numbers"><%= Friendship.where( :friend_id => @user.id).count %> Fans</div>
+                <div class="numbers"><span class="fan-count" data-user-id="<%= @user.id %>"><%= Friendship.where( :friend_id => @user.id).count %></span> Fans</div>
                 <div class="numbers"><%= @user.friendships.all.count %> Following</div>
               </div>
             </div>

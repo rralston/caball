@@ -56,12 +56,10 @@
           </div>
         <!-- Message Modal --> 
         <div class="follow-button">
-          <%= link_to(friendships_path(friend_id: proj.user), method: :post, :class => '') do %>
-            <%= image_tag('camera_keyhole.png')%> Follow
-          <% end %>
+          <%= render :partial => 'follow_button', :locals => {:user => proj.user} %>
         </div>
         <div class="follow-count">
-          <%= Friendship.where( :friend_id => proj.user.id).count %> Fans
+          <span class="fan-count" data-user-id="<%= proj.user.id %>"><%= Friendship.where( :friend_id => proj.user.id).count %></span> Fans
         </div>
       </div>
       <!-- Projects Description Modal -->
