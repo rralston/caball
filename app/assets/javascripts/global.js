@@ -3,6 +3,7 @@ var Global = {
   init: function () {
     console.log("global init");
     Global.handlers();
+    Global.modalHandlers();
   },
   
   handlers: function() {
@@ -13,6 +14,31 @@ var Global = {
      $('#user_search').submit();
    });
    $('.follow-button-handler').on('click', Global.ajaxFollow);
+  },
+    
+  modalHandlers: function() {
+    
+    /* So that the messaging modal sizes appropriately */
+    $('.message-modal').on('shown', function () {
+      $(this).css({
+      'margin-left': function () {
+          return -($(this).width() / 2);
+        }
+      });
+    });
+    
+    
+    /* Event listeners for messaging modal buttons */
+    $('#message-modal').on('shown', function () {
+      $('input[value="Cancel"]').on('click', function () {
+        $('#message-modal').modal('hide');
+        return false;
+      });
+      
+      $('#message-modal').on('hidden', function () {
+        $('input[value="Cancel"]').off('click');
+      });
+    });
   },
   
   initFlow: function() {

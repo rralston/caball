@@ -186,28 +186,6 @@ var Users = {
     
     modalHandlers: function () {
       
-      /* So that the messaging modal sizes appropriately */
-      $('.modal').on('shown', function () {
-        $(this).css({
-        'margin-left': function () {
-            return -($(this).width() / 2);
-          }
-        });
-      });
-      
-      
-      /* Event listeners for messaging modal buttons */
-      $('#message-modal').on('shown', function () {
-        $('input[value="Cancel"]').on('click', function () {
-          $('#message-modal').modal('hide');
-          return false;
-        });
-        
-        $('#message-modal').on('hidden', function () {
-          $('input[value="Cancel"]').off('click');
-        });
-      });
-      
       /* Photo carousel for the photos modal */
       $('#photos-modal').on('shown', function () {
         $('#photoCarousel').carousel(0);

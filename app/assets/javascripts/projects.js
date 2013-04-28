@@ -11,38 +11,12 @@ var Projects = {
       Projects.Show.handlers();
       
       Global.initFlow();
-      Projects.Show.modalHandlers();
       Projects.Show.styleUpdates();
     },
     
     handlers: function() {
       $(window).resize(Projects.Show.equalHeights);
       $(window).load(Projects.Show.equalHeights);
-      
-    },
-    
-    modalHandlers: function() {
-      
-      /* So that the messaging modal sizes appropriately */
-      $('#message-modal').on('shown', function () {
-        $(this).css({
-        'margin-left': function () {
-            return -($(this).width() / 2);
-          }
-        });
-      });
-      
-      /* Event listeners for messaging modal buttons */
-      $('#message-modal').on('shown', function () {
-        $('input[value="Cancel"]').on('click', function () {
-          $('#message-modal').modal('hide');
-          return false;
-        });
-        
-        $('#message-modal').on('hidden', function () {
-          $('input[value="Cancel"]').off('click');
-        });
-      });
       
     },
     
@@ -103,7 +77,6 @@ var Projects = {
     init: function() {
       console.log("Project search init");
       Projects.Index.handlers();
-      Projects.Index.modalHandlers();
       
     },
     
@@ -119,31 +92,6 @@ var Projects = {
       
       $('#project_search .icon-search').on('click', Projects.Index.ajaxSearch);
       
-    },
-    
-    modalHandlers: function() {
-      
-      /* So that the messaging modal sizes appropriately */
-      $('.message-modal').on('shown', function () {
-        $(this).css({
-        'margin-left': function () {
-            return -($(this).width() / 2);
-          }
-        });
-      });
-      
-      
-      /* Event listeners for messaging modal buttons */
-      $('#message-modal').on('shown', function () {
-        $('input[value="Cancel"]').on('click', function () {
-          $('#message-modal').modal('hide');
-          return false;
-        });
-        
-        $('#message-modal').on('hidden', function () {
-          $('input[value="Cancel"]').off('click');
-        });
-      });
     },
     
     ajaxSearch: function() {
