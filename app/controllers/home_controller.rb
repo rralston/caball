@@ -2,8 +2,8 @@ class HomeController < ApplicationController
   before_filter :search
   
   def index
-    @projects = Project.find(1, 2, 3)
-    @users = User.find(1, 2, 3) # Super simple "Featured projects/users" selection
+    @projects = Project.where(:featured => true).first(3)
+    @users = User.where(:featured => true).first(3)
   end
 
   def about
