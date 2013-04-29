@@ -14,17 +14,19 @@
       
       <div class="row-fluid follow-roles-bar">
         <div class="span3 follow-container">
+          <%= link_to(friendships_path(friend_id: @producer), method: :post, :class => '') do %>
           <div class="follow-button">
             Follow
           </div>
+          <% end %>
           <div class="follow-counts">
             <div class="row-fluid">
-              <div class="numbers">4,339 Fans</div>
+              <div class="numbers"><%= @producer.friendships.all.count %> Fans</div>
             </div>
           </div>
         </div>
         
-        <div class="span3 offset6 roles-buttons">
+        <div class="span4 offset5 roles-buttons">
           <span class="roles-button">Roles</span>
           <span class="vrule"></span>
           <span class="roles-button">Producer</span>
@@ -58,16 +60,10 @@
             </div>
             <div class="project-details-content">
               <span class="project-detail">
-                Action
+                <%= if @project.genre.present? then @project.genre end %>
               </span>
               <span class="project-detail">
-                Drama
-              </span>
-              <span class="project-detail">
-                Film
-              </span>
-              <span class="project-detail">
-                Pre-Production
+                <%= if @project.status.present? then @project.status end %>
               </span>
             <div class="shooting-locations-title">
                 <h3>Shooting Locations:</h3>
@@ -145,21 +141,22 @@
           <h3>Producer</h3>
         </div>
         <div class="producer-content">
-          <img class="producer-image" width="150px" src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTKsolP0d1stUAEvbCn0g2xJO-Eac9R55r2qMY9nIT75a_03hA4sw" />
+          <%= link_to @producer do %>
+          <%= image_tag @producer.profiles.image.url(:medium), :class => "producer-image", :width => 150 %>
           <div class="producer-name">
-            <h3>Juice Soa</h3>
+            <h3><%= @producer.name %></h3>
           </div>
+          <% end %> 
           <div class="row-fluid message-row">
             <div class="span12 message-span">
-              <% comment = "THIS WILL JUST MESSAGE USER 2" %>
               <a data-toggle="modal" data-target="#message-modal" 
-                    data-remote ="<%= new_conversation_path(:recipient => User.find(2).email, :modal => true)%>"
+                    data-remote ="<%= new_conversation_path(:recipient => @producer.email, :modal => true)%>"
                     data-keyboard="true" class="message-button"><%= image_tag('mail_icon.png') %> Message</a>
               <!-- Message Modal -->
                 <div id="message-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3><span>Message <%= User.find(2).name.split[0..0].join(" ") %></span></h3>
+                    <h3><span>Message <%= @producer.name.split[0..0].join(" ") %></span></h3>
                   </div>
                   <div class="modal-body">
                   </div>
@@ -175,9 +172,7 @@
           <h3>In the Producer's Words:</h3>
         </div>
         <div class="producer-headline-content">
-          <h3>“A girl wakes up on the COAST of Ireland, with no memory of who she is and 
-how she got there. So I decided to make a movie about it. We are looking for a really rugged looking 
-actor to play the lead roll. Please apply if interested”</h3>
+          <h3><%= @producer.headline %></h3>
         </div>
       </div>
     </div>
@@ -188,42 +183,105 @@ actor to play the lead roll. Please apply if interested”</h3>
       </div>
       <div class="clearfix"></div>
       <div class="span12 role-circles">
-        
+        <div class="role-circle-container">
+          <span class="role-title">Cast</span>
+          <div class="role-circle">
+          </div>
+          <div class="circle-fill"></div>
+          <div class="circle-measure"></div>
+          <span class="role-count">7/15</span>
+        </div>
+        <div class="role-circle-container">
+          <span class="role-title">Cast</span>
+          <div class="role-circle">
+          </div>
+          <div class="circle-fill"></div>
+          <div class="circle-measure"></div>
+          <span class="role-count">7/15</span>
+        </div>
+        <div class="role-circle-container">
+          <span class="role-title">Cast</span>
+          <div class="role-circle">
+          </div>
+          <div class="circle-fill"></div>
+          <div class="circle-measure"></div>
+          <span class="role-count">7/15</span>
+        </div>
+        <div class="role-circle-container">
+          <span class="role-title">Cast</span>
+          <div class="role-circle">
+          </div>
+          <div class="circle-fill"></div>
+          <div class="circle-measure"></div>
+          <span class="role-count">7/15</span>
+        </div>
+        <div class="role-circle-container">
+          <span class="role-title">Cast</span>
+          <div class="role-circle">
+          </div>
+          <div class="circle-fill"></div>
+          <div class="circle-measure"></div>
+          <span class="role-count">7/15</span>
+        </div>
+        <div class="role-circle-container">
+          <span class="role-title">Cast</span>
+          <div class="role-circle">
+          </div>
+          <div class="circle-fill"></div>
+          <div class="circle-measure"></div>
+          <span class="role-count">7/15</span>
+        </div>
+        <div class="role-circle-container">
+          <span class="role-title">Cast</span>
+          <div class="role-circle">
+          </div>
+          <div class="circle-fill"></div>
+          <div class="circle-measure"></div>
+          <span class="role-count">7/15</span>
+        </div>
+        <div class="role-circle-container">
+          <span class="role-title">Cast</span>
+          <div class="role-circle">
+          </div>
+          <div class="circle-fill"></div>
+          <div class="circle-measure"></div>
+          <span class="role-count">7/15</span>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <% if @project.comments.present? %>
-<section id="roles" class="section alt">
 <div id="comments">
 	<div class="container-fluid">
 	    <div class="row-fluid">
 	      <div class="span12">
 	        <div class="row-fluid">
-	          <div class="page-header">
-	              <h1>
-	                  Project Updates
-	              </h1>
+	          <div class="updates-title++=+">
+	              <h3>
+	                  Updates
+	              </h3>
 	          </div>
 	        </div>
-  				<%= render @project.comments %>
+  				<%= render :partial => 'comments/comment', :locals => {:blogs => @project.comments} %>
 				</div>
 		  </div>
 	</div>
 </div>
 <% end %>
+
 <% if current_user %>
 <% if current_user.id == @project.user_id %>
-<div id="comments">
+<div id="add-comments">
 	<div class="container-fluid">
 	    <div class="row-fluid">
 	      <div class="span12">
 	        <div class="row-fluid">
-	          <div class="page-header">
-	              <h1>
+	          <div class="new-update-title">
+	              <h3>
 	                  Create a New Update
-	              </h1>
+	              </h3>
 	          </div>
 	        </div>
   				<%= render 'comments/form' %>
@@ -233,6 +291,3 @@ actor to play the lead roll. Please apply if interested”</h3>
 </div>
 <% end %>
 <% end %>
-
-
-</section>

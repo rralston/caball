@@ -12,6 +12,7 @@ var Projects = {
       
       Global.initFlow();
       Projects.Show.modalHandlers();
+      Projects.Show.styleUpdates();
     },
     
     handlers: function() {
@@ -57,7 +58,43 @@ var Projects = {
       });
      
       $('.roles-row .roles .well').height(maxHeight);
-    }
+    },
+    
+    styleUpdates: function() {
+      function rearrangeImages() {
+        var baseRowOffset = 60;
+        var deviationRowOffset = 100;
+        
+        $('.blog-post').each(function(index) {
+          if(index % 2 == 1) {
+            var offset = baseRowOffset + (Math.random() * deviationRowOffset);
+            $(this).css('margin-top', offset + 'px');
+          }
+        });
+        
+        /* In order to handle really tall images */
+       $('.blog-post').each(function(index) {
+         if(index > 1) {
+           var diff = $(this).offset().top - ($('.blog-post').eq(index - 2).offset().top + $('.blog-post').eq(index - 2).height());
+           if(diff < 0) {
+             $('.blog-post').eq(index-1).css('margin-bottom', (diff * -1) + 'px');
+           }
+         }
+       });
+        
+        $('.blog-circle').not('.blog-circle-top').each(function(index) {
+          
+          var top = $('.blog-arrow').eq(index).offset().top - $('#comments').offset().top;
+          
+          $(this).css('top', top);
+          
+        });
+      }
+      
+      
+      $(window).load(rearrangeImages);
+      rearrangeImages();
+    },
     
   },
   
@@ -82,15 +119,12 @@ var Projects = {
       
       $('#project_search .icon-search').on('click', Projects.Index.ajaxSearch);
       
-      $(window).load(Projects.Index.equalHeights);
-      $(window).resize(Projects.Index.equalHeights);
-      
     },
     
     modalHandlers: function() {
       
-      /* So that the messaging modal sizes amodalHandlers: function () {ppropriately */
-      $('#message-modal').on('show', function () {
+      /* So that the messaging modal sizes appropriately */
+      $('.message-modal').on('shown', function () {
         $(this).css({
         'margin-left': function () {
             return -($(this).width() / 2);
@@ -150,28 +184,6 @@ var Projects = {
       });
       return false;
     },
-    
-    /* This resizes the project boxes so that they're all equal height and have equal proportions */
-    equalHeights: function() {
-      
-      var maxHeight=0;
-      $('.projects-search .projects-box').height('auto');
-      $('.projects-search .projects-box').each(function(){
-          if($(this).height()>maxHeight){
-              maxHeight=$(this).height();
-          }
-      });
-      
-      $('.projects-search .projects-box .project-description').height('auto');
-      $('.projects-search .projects-box').height(maxHeight);
-      maxHeight = 0;
-      $('.projects-search .projects-box .project-description').each(function(){
-          if($(this).height()>maxHeight){
-              maxHeight=$(this).height();
-          }
-      });
-      $('.projects-search .projects-box .project-description').height(maxHeight);
-    }
   }
   
 }

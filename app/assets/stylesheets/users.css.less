@@ -1,3 +1,7 @@
+/* THESE ARE GETTING INCLUDED ON EVERY PAGE - DO WE STILL 
+ * NEED THEM??
+ */
+
 // Profile Lightbox
 .lightbox {
 	background-color: transparent;
@@ -66,199 +70,105 @@ figure.profile-pic > img {
   position: absolute;
 }
 
-.centered-buttons {
-  text-align: center;
-}
-
-.pictures-contact-buttons {
-  margin-top: 15px;
-  text-align: center;
-}
-
-.pictures-button {
-  
-}
-
-.contact-button {
-  
-}
-
-.about-me {
-
-}
-
-.roles-container {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.bio-more {
-  text-align: right;
-  
-}
-.bio-more .hidden {
-  display: none;
-}
-
-.role-column{
-  text-align: center;
-}
-
-.projects-characteristics {
-  margin-top: 25px;
-}
-
-#message-modal {
-  width: 60%;
-}
-
-.actor-characteristics {
-  margin-top: 20px;
-}
-
-.role-modal {
-  width: 60%;
-}
-
 /* Styles for user edit form */
-
-.edit-user {
-  margin-bottom: 80px;
-  
-  /* It would be nice to figure out the best way to make the forms/text size more responsive
-  #navigation {
-      @media only screen and (max-width: 1350px) {
-        li {
-          font-size: 75%;
-        }
-      }
-      
-      @media only screen and (max-width: 750px) {
-        li {
-          font-size: 50%;
-        }
-      }
-    }*/
-  
-}
-
-.user-form {
-  form {
-    .info .gender input {
-      float: left;
-      margin-left: 10px;
-    }
+#users-edit {
+  .edit-user {
+    margin-bottom: 80px;
     
-    .info .gender label {
-      float: left;
-    }
-    
-    .location img {
-      margin-top: 20px;
-    }
-    
-    .location i {
-      position: relative;
-      top: 30px;
-      left: 5px;
-    }
-    
-    .roles .controls {
-      text-align: left;
-      
-    }
-    
-    .roles .control-group h3 {
-      text-align: left;
-      margin-left: 1em;
-    }
-    
-    .roles .actor-characteristics {
-      margin-bottom: 20px;
-      input {
-        width: 8em;
-      }
-    }
-    
-    .videos h3 {
-      margin-left: 10px;
-    }
-    
-    h2 {
-      margin-left: 10px;
-      text-align: left;
-    }
-    
-    .terms .form-actions {
-      background-color: transparent;
-      margin-bottom: 0px;
-      padding-bottom: 0px;
-    }
-    
-    .input-error {
-      background-color: #FFEDEF;
-    }
   }
-}
-
-/* Overriding CSS in order to create nice modal photo gallery */
-
-#photos-modal.fade.in {
-  top: 5%;
-}
-
-#photos-modal {
-  background-color: transparent;
-  border: medium none;
-  border-radius: 0 0 0 0;
-  box-shadow: none;
-  height: 90%;
-  outline: medium none;
-  width: 70%;
-  left: 15%;
-  margin-left: 0;
   
-  .modal-body {
-    height: 100%;
-    overflow-y: visible;
-    position: relative;
-    max-height: 100%;
-    color: #fff;
-    
-    .carousel {
-      height: 100%;
+  .user-form {
+    form {
+      .info .gender input {
+        float: left;
+        margin-left: 10px;
+      }
       
-      .carousel-inner {
-        width: 100%;
-        height: 100%;
-        overflow: visible;
+      .info .gender label {
+        float: left;
+      }
+      
+      .location img {
+        margin-top: 20px;
+      }
+      
+      .location i {
+        position: relative;
+        top: 30px;
+        left: 5px;
+      }
+      
+      .roles .controls {
+        text-align: left;
         
-        .item.active, .item.next, .item.prev {
-          display: table;
-          text-align: center;
-          width: 100%;
-          height: 100%;
-          .item-container {
-            display: table-cell;
-            vertical-align: middle;
-          }
-          img {
-            vertical-align: middle;
-            padding-bottom: 10px;
-          }
+      }
+      
+      .roles .control-group h3 {
+        text-align: left;
+        margin-left: 1em;
+      }
+      
+      .roles .actor-characteristics {
+        margin-bottom: 20px;
+        input {
+          width: 8em;
         }
+      }
+      
+      .videos h3 {
+        margin-left: 10px;
+      }
+      
+      h2 {
+        margin-left: 10px;
+        text-align: left;
+      }
+      
+      .terms .form-actions {
+        background-color: transparent;
+        margin-bottom: 0px;
+        padding-bottom: 0px;
+      }
+      
+      .input-error {
+        background-color: #FFEDEF;
       }
     }
   }
 }
-
-/* End modal photo gallery */
-
 
 /* User Index Page */
 
-.users-search .search-results .row .span4:nth-child(3n + 1) {
-  margin-left: 0;
+#users-index {
+  margin-top: 50px;
+  
+  .search-column {
+    
+    .users-search-content {
+      background-color: #333;
+      padding: 10px;
+      border: 1px solid #ccc;
+      color: @white;
+      //.box-shadow(~'0px 7px 11px 1px #333333, 0px -2px 11px 1px #333333');
+      input {
+        width: 80%;
+      }
+      select {
+        width: 80%;
+      }
+    }
+    
+    .users-search-title {
+      background-color: @white;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      text-align: center;
+      h3 {
+        margin: 0;
+        font-weight: 800;
+      }
+    }
+  }
 }
 
 /* End user Index Page */
@@ -297,6 +207,7 @@ figure.profile-pic > img {
       padding-bottom: 10px;
       color: #666;
       font-weight: 800;
+      height: 100%;
       
       .btn-link {
         color: #666;
@@ -306,7 +217,14 @@ figure.profile-pic > img {
       .headline {
          .modal {
            font-weight: 400;
-           
+         }
+         
+         .more-button {
+           position: absolute;
+           width: auto;
+           left: 0;
+           margin-top: 0;
+           z-index: 1;
          }
       }
     }
@@ -365,7 +283,8 @@ figure.profile-pic > img {
   
   .message-row {
     margin-bottom: 0px;
-    bottom: -25px;
+    right: 10px;
+    bottom: 0;
     font-weight: bold;
     position: absolute;
   }
@@ -376,11 +295,10 @@ figure.profile-pic > img {
   
   a, a:hover, a:visited, a:active {
     text-decoration: none;
-    color: @black;
   }
   
   .follow-container {
-    width: 202px;
+    width: 182px;
     border: 1px solid #ccc;
     margin-top: 10px;
     
@@ -410,7 +328,9 @@ figure.profile-pic > img {
     .follow-images {
       
       padding: 10px 0;
+      
       img {
+        width: 25%;
         display: inline;
         float: left;
         padding: 0;
@@ -480,21 +400,17 @@ figure.profile-pic > img {
     }
     
     .first-pic {
-      img {
-        width: 200px;
-        position: absolute;
-        top: -30px;
-        right: -70px;
-      }
+      width: 200px;
+      position: absolute;
+      top: -30px;
+      right: -70px;
     }
     
     .second-pic {
-      img {
-        width: 125px;
-        position: absolute;
-        right: -100px;
-        top: 120px;
-      }
+      width: 125px;
+      position: absolute;
+      right: -100px;
+      top: 120px;
     }
   }
   
@@ -512,8 +428,8 @@ figure.profile-pic > img {
       display: inline;
       color: #4c99c0;
       cursor: pointer;
-      font-size: 2em;
-      padding: 30px;
+      font-size: 1.9em;
+      padding: 30px 30px 30px 0px;
       font-weight: 800;
       
     }

@@ -76,8 +76,10 @@ var Global = {
     $('.royalSlider').each(function(index) {
       slider = $(this).data('royalSlider');
       
-      slider.slides[0].holder.on('rsAfterContentSet', adjustAngles);
-      slider.ev.on('rsAfterSlideChange', adjustAngles);
+      if(slider.slides[0] !== undefined) {
+        slider.slides[0].holder.on('rsAfterContentSet', adjustAngles);
+        slider.ev.on('rsAfterSlideChange', adjustAngles);
+      }
     }); 
   }
 }

@@ -38,6 +38,20 @@
 	    <%= p.text_area :description, :class => 'textarea', :rows => "5" %>	
 	    </div>
 	  </div>
+  
+    <div class="control-group">
+    <%= p.label :status, :class => 'control-label' %>
+      <div class="controls">
+      <%= p.text_field :status, :class => 'text_field' %> 
+      </div>
+    </div>
+  
+    <div class="control-group">
+    <%= p.label :genre, :class => 'control-label' %>
+      <div class="controls">
+      <%= p.text_field :genre, :class => 'text_field' %> 
+      </div>
+    </div>
 	
 	 	<div class="control-group">
 	  <%= p.label :start, :class => 'control-label' %>
