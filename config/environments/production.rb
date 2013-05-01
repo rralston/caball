@@ -5,6 +5,11 @@ Caball::Application.configure do
   #   'secret' == password
   # end
   
+  config.asset_sync.aws_access_key = ENV['AKIAJHIBHMAKIHAHLSJQ']
+  config.asset_sync.aws_access_secret = ENV['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']
+  config.asset_sync.aws_bucket = ENV['filmzu']
+  config.asset_sync.fog_provider = ENV['AWS']
+  
   # Code is not reloaded between requests
   config.cache_classes = true
 
