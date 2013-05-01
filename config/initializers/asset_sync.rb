@@ -1,8 +1,8 @@
 AssetSync.configure do |config|
-  config.fog_provider = 'AWS'
-  config.aws_access_key_id = ENV['AKIAJHIBHMAKIHAHLSJQ']
-  config.aws_secret_access_key = ENV['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']
-  config.fog_directory = ENV['filmzu']
+  # config.fog_provider = 'AWS'
+  # config.aws_access_key_id = ENV['AKIAJHIBHMAKIHAHLSJQ']
+  # config.aws_secret_access_key = ENV['i62vDZtHSGLB51guW+Z177TWXbi4X7538jg2pX24']
+  # config.fog_directory = ENV['filmzu']
   
   # Increase upload performance by configuring your region
   # config.fog_region = 'eu-west-1'
