@@ -11,8 +11,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include Sprockets::Helpers::IsolatedHelper
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
-  # storage :fog
+  storage :s3
+  
+  # storage :file Previously before CDN for Heroku
 
   def cache_dir
       "#{Rails.root}/tmp/uploads"
