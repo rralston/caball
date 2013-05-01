@@ -87,3 +87,6 @@ gem 'newrelic_rpm'
 
 #FB Style Newsfeeds
 gem 'public_activity'
+
+# Heroku CDN Link to AWS
+gem "asset_sync"
