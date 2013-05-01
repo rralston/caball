@@ -288,6 +288,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 3.2.1)
   factory_girl_rails
+  fog
   geocoder
   guard-rspec
   haml-rails
