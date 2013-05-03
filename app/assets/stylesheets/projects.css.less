@@ -1,109 +1,442 @@
-.royalSlider iframe {
-  margin-top: -200px;
-  margin-bottom: 30px;
-  margin-left: 800px;
-  -moz-border-radius: 12px;
-  -webkit-border-radius: 12px; 
-  border-radius: 12px; 
+/* Projects Display Page */
 
-  -moz-box-shadow: 4px 4px 14px #000; 
-  -webkit-box-shadow: 4px 4px 14px #000; 
-  box-shadow: 4px 4px 14px #000; 
-
-  -moz-transform:rotate(20deg);
-  -webkit-transform:rotate(20deg);
-  -o-transform:rotate(20deg);
-  -ms-transform:rotate(20deg);
-  filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=.2);
-}
-
-/* Projects Profile Page */
-
-#content {
+#projects-show {
+  
   .page-header {
+ 
+    border-bottom: none;
+ 
     h1 {
-      font-size: 2em;
-      color: @black;
+      font-size: 4em;
+      color: #4c99c0;
+      margin-bottom: 20px;
+    }
+    
+    span {
+      font-size: 1.4em;
     }
     
   }
   
-  #about {
+  .follow-roles-bar {
+    background-color: @white;
+    border: solid 1px #ccc;
+    .box-shadow(0px 0px 12px 3px #ccc);
+  }
+  
+  .follow-container {
     
-    .message-follow {
-      border: 3px solid #333;
-      width: 40%;
-      padding: 10px;
-      border: 3px solid #999;
-      background: url('user_body_texture.png') repeat;  
-      .box-shadow(3px 3px 6px 0px #333333);
-      
-      .message-button {
-        color: @black;
-        background: @backgroundButtonColor;
-        background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
-        background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
-        background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
-        background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
-        background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor;
-        .box-shadow(0px 10px 10px -5px #F00);
-        
-        padding: 10px;
-        .border-radius(3px);
-        border: 1px solid #999;
-        
-        h5 {
-          margin: 0;
-        }
-      }
-      
-      .message-button:hover {
-        text-decoration: none;
-        cursor: pointer;
-        @darkerButtonBackgroundColor: darken(@backgroundButtonColor, 10%);
-        background: @darkerButtonBackgroundColor;
-        background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @darkerButtonBackgroundColor;
-        background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @darkerButtonBackgroundColor;
-        background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @darkerButtonBackgroundColor;
-        background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @darkerButtonBackgroundColor;
-        background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @darkerButtonBackgroundColor;
-      }
-    }
-    
-    .video-container {
-      margin-top: 40px;
-      margin-bottom: 40px;
-      .box-shadow(3px 3px 6px 1px #333);
-      iframe {
-        
-      }
-    }
-    
-    .about-text {
-      .projects-description-more {
-        text-align: right;
-        margin-top: -15px;
-        .btn-link {
-          text-align: right;
-          color: #333;
-        }
-        .btn-link:hover {
-          text-decoration: none;
-        }
-      }
-    }
-    .open-roles-container {
+    .follow-button {
+      display: inline-block;
+      position: relative;
+      background-color: #666;
+      width: 100px;
+      margin: 10px 0 10px 10px;
+      .border-radius(5px);
+      color: @white;
       text-align: center;
-      margin-bottom: 40px;
-      span {
+      vertical-align: middle;
+      padding: 4px 0;
+      cursor: pointer;
+      
+      a {
         color: @white;
-        padding: 10px;
-        border: 3px solid #999;
-        background: url('user_body_texture.png') repeat;  
-        .box-shadow(3px 3px 6px 0px #333333);
+      }
+      
+      img {
+        width: 20px;
+      }
+    }
+    .follow-counts {
+      text-align: center;
+      display: inline-block;
+      
+      .numbers {
+        color: @white;
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 2em;
+        background-color: #666;
+        .border-radius(5px);
+        text-align: center;
+        width: 100px;
       }
     }
     
+    .follow-button:hover {
+      background-color: darken(#666, 10%);
+    }
+  }
+  
+  .roles-buttons {
+    
+    vertical-align: middle;
+    line-height: 45px;
+    position: relative;
+    left: -20px;
+    
+    .vrule {
+      border-left: 2px solid #ccc;
+      height: 15px;
+      margin: 0px 10px;
+      display: inline-block;
+      vertical-align: middle;
+      
+    }
+    .roles-button {
+      color: #4c99c0;
+      font-size: 1.5em;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+  }
+  
+  h3 {
+    font-size: 1.3em;
+    font-weight: 400;
+    color: #4c99c0;
+   }
+    
+  .roles-container {
+    background-color: @white;
+    .box-shadow(0px 0px 7px 2px rgba(204, 204, 204, 0.3));
+    
+    .roles-title {
+      float: left;
+      border: 1px solid #ccc;
+      background-color: #ededed;
+      width: 100px;
+      padding: 0 20px;
+      margin: 10px 0 50px 20px;
+      text-align: left;
+    }
+    
+    .role-circles {
+      
+      margin-left: 0px;
+      
+      .role-circle-container {
+        display: inline-block;
+        position: relative;
+        margin: 0 10px;
+        width: 80px;
+        height: 120px;
+        
+        .role-title {
+          position: relative;
+          float: left;
+          top: -30px;
+          width: 80px;
+          z-index: 10;
+        }
+        
+        .role-count {
+          position: relative;
+          float: left;
+          top: 70px;
+          width: 80px;
+        }
+        
+        .role-circle {
+          border: 3px solid #4c99c0;
+          background-color: transparent;
+          .border-radius(45px);
+          width: 80px;
+          height: 80px;
+          z-index: 9;
+          position: absolute;
+        }
+        
+        .circle-fill {
+          border: 3px solid @white;
+          background-color: #4c99c0;
+          .border-radius(45px);
+          width: 70px;
+          height: 70px;
+          position: absolute;
+          top: 5px;
+          left: 5px;
+          z-index: 7;
+        }
+        
+        .circle-measure {
+          height: 70px;
+          width: 80px;
+          z-index: 8;
+          background-color: @white;
+          position: absolute;
+          top: -20%;
+          left: 8px;
+        }
+      }
+    }
+  }
+  
+  .producer-container {
+    margin-top: 20px;
+    padding-bottom: 10px;
+    background-color: @white;
+    .box-shadow(0px 0px 7px 2px rgba(204, 204, 204, 0.3));
+    position: relative;
+      
+    .producer-headline {
+      
+      margin-left: 60px;
+      
+      .vrule {
+        position: absolute;
+        border-left: 2px solid #ccc;
+        height: 80%;
+        left: 17%;
+        top: 10%;
+      }
+      
+      .producer-headline-title {
+        
+      }
+      
+      .producer-headline-content {
+        h3 {
+          line-height: 1.5em;
+        }
+      }
+    }
+    
+    .producer-profile {
+      
+      a {
+        text-decoration: none;
+      }
+      
+      .producer-title {
+        border: 1px solid #ccc;
+        background-color: #ededed;
+        width: 80px;
+        padding: 0 20px;
+        margin: 10px 0 0 20px;
+      }
+      
+      .producer-content {
+        position: relative;
+        width: 80%;
+        left: 10%;
+      }
+      
+      .producer-image {
+        /* Right now this is working with a fixed image size - we'll have to figure
+         * out how it works when we put in correct images 
+         */
+        width: 100px;
+        left: 50%;
+        position: relative;
+        margin-left: -50px;
+        margin-top: 10px;
+      }
+      
+      .producer-name {
+        text-align: center;
+      }
+     
+      .message-button {
+        background-color: #5a86de;
+        border: 1px solid #ccc;
+        .border-radius(5px);
+        text-decoration: none;
+        color: @white;
+        cursor: pointer;
+        font-weight: 400;
+        font-size: 1.4em;
+        padding: 5px;
+        
+      }
+      .message-button:hover {
+        background-color: darken(#5a86de, 10%);
+      }
+      
+      .message-row {
+        font-weight: bold;
+        
+        .message-span {
+          text-align: center;
+        }
+      }
+    }
+  }
+  
+  .about-content {
+    margin-top: 20px;
+    background-color: @white;
+    border: solid 1px #ccc;
+    .box-shadow(0px 0px 12px 3px #ccc);
+    
+    .video-stuff-container {
+      
+      margin-top: 40px;
+      
+      .headline-container {
+        border-top: 2px solid #ccc;
+        border-bottom: 2px solid #ccc;
+        text-align: center;
+        padding: 40px;
+        width: 75%;
+        position: relative;
+        left: 9%;
+        p {
+          font-size: 2em;
+          color: #4c99c0;
+        }
+      }
+    }
+    
+    .project-details {
+      
+      .details-well {
+        padding-top: 0px;
+        margin: 20px;
+      }
+      
+      .project-details-title {
+        font-size: 1.5em;
+        text-align: center;
+      }
+      
+      .project-details-content {
+        text-align: center;
+        
+        .project-detail {
+          margin: 0 10px;
+        }
+      }
+      
+      .shooting-locations-title {
+        margin-top: 10px;
+        font-size: 1.5em;
+        text-align: center;
+        border-top: 2px solid #ccc;
+      }
+      
+      .shooting-locations-content {
+        text-align: left;
+        .shooting-location {
+          margin-bottom: 10px;
+        }
+      }
+      
+      .open-roles-title {
+        font-size: 1.5em;
+        text-align: center;
+        border-top: 2px solid #ccc;
+      }
+      
+      .open-roles-content {
+        text-align: left;
+        .open-role {
+          margin-bottom: 5px;
+        }
+      }
+      
+      .dates-well {
+        margin: 20px;
+        
+        .dates-title {
+          font-weight: 1.5em;
+          text-align: center;
+          
+        }
+        
+        .date {
+          font-size: 1.2em;
+          text-align: left;
+        }
+      }
+    }
+    
+    .about-text-images {
+      margin-left: 0;
+      
+      .photo-gallery {
+        
+      }
+      
+      .about-text {
+        
+        p {
+          padding-left: 40px;
+        }
+      }
+    }
+  }
+  
+  #add-comments {
+    margin-top: 20px;
+    padding-bottom: 10px;
+    background-color: @white;
+    .box-shadow(0px 0px 7px 2px rgba(204, 204, 204, 0.3));
+    position: relative;
+    
+    h3 {
+      
+    }
+  }
+  
+  #comments {
+    margin-top: 20px;
+    padding-bottom: 10px;
+    background-color: @white;
+    .box-shadow(0px 0px 7px 2px rgba(204, 204, 204, 0.3));
+    position: relative;
+    
+    .updates-title {
+      float: left;
+      border: 1px solid #ccc;
+      background-color: #ededed;
+      width: 100px;
+      padding: 0 20px;
+      margin: 10px 0 20px 0;
+      text-align: left;
+    }
+    
+    .blog-post:nth-of-type(2n + 1) {
+      margin-left: 0;
+    }
+    
+    .vertical-rule {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      margin-left: -1px;
+      height: 95%;
+      width: 4px;
+    }
+    
+    .blog-circle {
+      position: absolute;
+      left: 50%;
+      margin-left: -19px;
+    }
+    
+    .blog-circle-top {
+      top: 0;
+    }
+    
+    .blog-post {
+      position: relative;
+      
+      .blog-arrow {
+        position: absolute;
+        top: 40px;
+      }
+      
+      .blog-arrow-left {
+        right: 0%;
+        margin-right: -17px;
+      }
+      
+      .blog-arrow-right {
+        left: 0%;
+        margin-left: -17px;
+      }
+    } 
   }
 }
 .comment p {
@@ -151,15 +484,34 @@
 
 /* Projects Search/Index */
 
-section.projects-search {
-  margin-top: 30px;
+#projects-index {
+  margin-top: 75px;
   
   .search-column {
-    padding: 10px;
-    border: 4px solid #333;
-    .box-shadow(~'0px 7px 11px 1px #333333, 0px -2px 11px 1px #333333');
-    input {
-      width: 80%;
+    
+    .projects-search-content {
+      background-color: #333;
+      padding: 10px;
+      border: 1px solid #ccc;
+      color: @white;
+      //.box-shadow(~'0px 7px 11px 1px #333333, 0px -2px 11px 1px #333333');
+      input {
+        width: 80%;
+      }
+      select {
+        width: 80%;
+      }
+    }
+    
+    .projects-search-title {
+      background-color: @white;
+      border: 1px solid #ccc;
+      margin-bottom: -1px;
+      text-align: center;
+      h3 {
+        margin: 0;
+        font-weight: 800;
+      }
     }
   }
   
@@ -169,7 +521,7 @@ section.projects-search {
   
   .projects-description-more {
     position: relative;
-    top: -10px;
+    top: 5px;
     text-align: right;
   }
   
@@ -178,10 +530,15 @@ section.projects-search {
   }
   
   .projects-box {
-    border: solid 3px #444;
-    padding: 10px;
+    
+    border: solid 1px #dadada;
+    background-color: @white;
+    padding: 0 10px;
     margin-bottom: 20px;
     overflow: hidden;
+    text-align: center;
+    position: relative;
+    height: 372px;
     
     a, a:hover, a:active, a:visited {
       text-decoration: none;
@@ -189,80 +546,197 @@ section.projects-search {
     }
     
     .title {
-      font-size: 2em;
+      height: 1.4em;
+      overflow: hidden;
+      font-size: 1.6em;
       margin-top: 0px;
+      margin-bottom: 0px;
+      border-bottom: 1px solid #dadada;
+      display: inline-block;
     }
     
-    .profile-image {
-
-      border: 3px solid #333;
+    .location-name {
+      display: block;
+      height: 1em;
+      overflow: hidden;
     }
     
-    .name-location {
-      text-align: center;
+    .producer-name {
+      display: block;
+      height: 1.5em;
+      overflow: hidden;
       
-      span {
-        display: block;
-      }
-      
-      .open-roles {
-        color: #c00;
-      }
-      
-      .message-button-container {
-        padding: 5px;
-        margin-top: 5px;
-        font-weight: bolder;
-      }
-      
-      .message-button {
-        background: @backgroundButtonColor;
-        background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-        background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-        background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-        background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-        background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), @backgroundButtonColor repeat;
-        
+      a {
+        color: #4c99c0;
         text-decoration: none;
-        color: @black;
-        padding: 4% 12%;
-        cursor: pointer;
+      }
+    }
+    
+    .thumbnail-container {
+      margin-top: 10px;
+    }
+    
+    .open-roles {
+      border: 1px solid #ccc;
+    }
+    
+    .role-circle-container {
+      display: inline-block;
+      position: relative;
+      margin: 10px 0 0 0;
+      width: 70%;
+      height: 88px;
+      
+      .role-title {
+        position: relative;
+        float: left;
+        top: -30px;
+        width: 80px;
+        z-index: 10;
       }
       
-      .message-button:hover {
-        background: darken(@backgroundButtonColor, 20%);
-        background: -webkit-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-        background: -moz-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-        background: -ms-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-        background: -o-linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-        background: linear-gradient(rgba(255,255,255,0.2) 0%,rgba(0,0,0,0.5) 100%), darken(@backgroundButtonColor, 20%) repeat;
-        border-color: darken(@backgroundButtonColor, 20%);
+      .role-count {
+        position: relative;
+        top: 69px;
+        width: 103px;
+        left: -18px;
+        display: inline-block;
       }
+      
+      .role-circle {
+        border: 3px solid #4c99c0;
+        background-color: transparent;
+        .border-radius(45px);
+        width: 60px;
+        height: 60px;
+        z-index: 9;
+        position: absolute;
+      }
+      
+      .circle-fill {
+        border: 3px solid @white;
+        background-color: #4c99c0;
+        .border-radius(45px);
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        z-index: 7;
+      }
+      
+      .circle-measure {
+        height: 50px;
+        width: 60px;
+        z-index: 8;
+        background-color: @white;
+        position: absolute;
+        top: 0%;
+        left: 3px;
+      }
+    }
+    
+    .modal-body {
+      text-align: left;
+    }
+   
+    .profile-image {
     }
     
     .thumbnail-details {
-      margin-top: 20px;
+      margin-top: 5px;
+      display: table;
+      height: 150px;
+      
       
       .project-description {
         font-size: 0.8em;
       }
       
       .roles-container {
-
+        height: 20px;
+        overflow: hidden;
+        font-size: 0.9em;
+        display: table-row;
+        vertical-align: bottom;
+        
+        .more-roles-link {
+          display: inline-block;
+          color: #4c99c0;
+        }
       }
       
       .role-name {
         display: inline-block;
-        padding-right: 20px;
-        margin-bottom: 10px;
+        padding-right: 10px;
       }
     }
     
-    hr {
-      margin: 0;
-      border: 1px solid #444;
+    .message-follow-row {
+      position: absolute;
+      height: 2em;
+      top: 100%;
+      width: 100%;
+      margin-top: -28px;
+      margin-left: -10px;
+      font-size: 0.8em;
     }
     
+    hr.bottom {
+      margin: 0;
+      border: 1px solid #ccc;
+      bottom: 32px;
+      position: absolute;
+      width: 91%;
+    }
+
+    .message-button {
+      background-color: #5a86de;
+      border: 1px solid #ccc;
+      .border-radius(5px);
+      text-decoration: none;
+      color: @white;
+      cursor: pointer;
+      font-weight: 400;
+      font-size: 1em;
+      padding: 5px;
+    }
+    
+    .message-button:hover {
+      background-color: darken(#5a86de, 10%);
+    }
+    
+    
+    .follow-button {
+      display: inline-block;
+      position: relative;
+      
+      a {
+        .border-radius(5px);
+        color: @white;
+        text-align: center;
+        padding:5px;
+        cursor: pointer;
+        color: @white;
+        background-color: #666;
+      }
+      
+      img {
+        width: 25px;
+      }
+    }
+    
+    .follow-count {
+      display: inline-block;
+      .border-radius(5px);
+      color: @white;
+      text-align: center;
+      padding: 2px 5px 1px 5px;
+      cursor: pointer;
+      color: @white;
+      background-color: #666;
+     
+    }
   }
 }
 

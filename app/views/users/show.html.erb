@@ -115,21 +115,19 @@
         <div class="row-fluid">
           <div class="span3 follow-container">
             <div class="follow-button">
-              <%= link_to(friendships_path(friend_id: @user), method: :post, :class => '') do %>
-                <%= image_tag('camera_keyhole.png')%> Follow
-              <% end %>
+              <%= render :partial => 'follow_button', :locals => {:user => @user} %>
             </div>
             <div class="follow-images">
               <% @followers_following.first(12).each_with_index do |user, index| %>
                 <% if user.profiles.present? %>
-                  <%= image_tag user.profiles.image.url(:tiny), :size=> '50x50' %>
+                  <%= image_tag user.profiles.image.url(:tiny) %>
                 <% end %>
               <% end %>
               <div class="clearfix"></div>
             </div>
             <div class="follow-counts">
               <div class="row-fluid">
-                <div class="numbers"><%= Friendship.where( :friend_id => @user.id).count %> Fans</div>
+                <div class="numbers"><span class="fan-count" data-user-id="<%= @user.id %>"><%= Friendship.where( :friend_id => @user.id).count %></span> Fans</div>
                 <div class="numbers"><%= @user.friendships.all.count %> Following</div>
               </div>
             </div>
@@ -151,12 +149,8 @@
                 </div>
               </div>
               <!-- End Headline Modal --> 
-              <div class="first-pic">
-                <%= if not @user.photos.first.nil? then image_tag @user.photos.first.image end%>
-              </div>
-              <div class="second-pic">
-                <%= if not @user.photos.second.nil? then image_tag @user.photos.second.image end%>
-              </div>
+              <%= if not @user.photos.first.nil? then image_tag @user.photos.first.image, :class => "first-pic" end %>
+              <%= if not @user.photos.second.nil? then image_tag @user.photos.second.image, :class => "second-pic" end %>
             </div>
           </div>
         </div>

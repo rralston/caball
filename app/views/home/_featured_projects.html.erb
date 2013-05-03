@@ -1,0 +1,79 @@
+<% @projects.first(3).each_with_index do |proj, counter| %>
+    <div class='span4 projects-box'>
+      <%= link_to project_path(proj.id) do %>
+        <h3 class="title centered-text">
+          <%= proj.title %>
+        </h3>
+      <% end %>
+      <div class="row-fluid thumbnail-container">
+        <%= link_to project_path(proj.id) do %>
+          <div class='thumbnail-figure span6'>
+            <% if proj.photos.exists? %>
+            <%= image_tag(proj.photos.first.image.url(:medium), :class => "profile-image") %>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="span6">
+          <div class="producer-name">
+            <%= proj.user.name%>
+          </div>
+          <div class="location">
+            <% if proj.user.location.present? %> 
+            <% proj.user.location %>
+            <% end %>
+          </div>
+          <div class="open-roles">
+            <%= proj.roles.count %> Open Roles
+          </div>
+        </div>
+      </div>
+      <div class='thumbnail-details'>
+        <div class="project-description">
+          <%= shorten :text => proj.description, :length => 100, :partial => "more_projects_description.html.erb", :counter => counter %>
+        </div>
+        <div class="row-fluid roles-container centered-text">
+          <% proj.roles.each_with_index do |role, index| %>
+            <% if index > 6 then %>
+              <span class="more-roles-link"><%= proj.roles.length - index %> more...</span>
+              <% break %>
+            <% end %>
+            <span class="role-name"><%= role.name %></span>
+          <% end %>
+        </div>
+      </div>
+      <div class="message-follow-row row-fluid">
+        <a data-toggle="modal" data-target="#message-modal-<%= counter %>" 
+              data-remote ="<%= new_conversation_path(:recipient => proj.user.email, :modal => true)%>"
+              data-keyboard="true" class="message-button featured-projects-button"><%= image_tag('mail_icon.png') %> Message</a>
+        <!-- Message Modal -->
+          <div id="message-modal-<%= counter %>" class="modal hide fade left-aligned message-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h3><span>Message <%= proj.user.name.split[0..0].join(" ") %></span></h3>
+            </div>
+            <div class="modal-body">
+            </div>
+          </div>
+        <!-- End Message Modal --> 
+        <div class="follow-count featured-projects-button">
+          <span class="fan-count" data-user-id="<%= proj.user.id %>"><%= Friendship.where( :friend_id => proj.user.id).count %></span> Followers
+        </div>
+        <div class="follow-button featured-projects-button">
+          <%= render :partial => 'follow_button', :locals => {:user => proj.user} %>
+        </div>
+      </div>
+      <!-- Projects Description Modal -->
+      <div id="projects-description-<%= counter %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3><span><%= proj.title %></span></h3>
+        </div>
+        <div class="modal-body">
+          <p>
+            <%= simple_format(proj.description) %>
+          </p>
+        </div>
+      </div>
+      <!-- End Projects Description Modal -->
+    </div>
+  <% end %>

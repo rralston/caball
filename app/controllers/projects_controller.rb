@@ -36,6 +36,8 @@ class ProjectsController < ApplicationController
         redirect_to :action => :index
     end
     
+    @producer = @project.user
+    
     @real_videos = Array.new
     
     for video in @project.videos

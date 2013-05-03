@@ -19,6 +19,10 @@ module ApplicationHelper
     if args[:counter].present?
       @counter = args[:counter]
     end
+    formatted = false
+    if args[:formatted].present?
+      formatted = args[:formatted]
+    end
     show_more_anyways = false
     if args[:show_more] == true
       show_more = true
@@ -27,6 +31,9 @@ module ApplicationHelper
     text = args[:text]
     partial = args[:partial]
     output = truncate(text, :length => length, :omission => '...').html_safe
+    if formatted
+      output = simple_format(output)
+    end
     more_button = render :partial => partial
     output += more_button if text.length > length or show_more
     output

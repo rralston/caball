@@ -10,42 +10,14 @@ var Projects = {
       console.log("init show project");   
       Projects.Show.handlers();
       
-      /* This breaks if we don't actually have the slider in the html so I'm commenting it out until 
-       * the slider finds a home.
-       */
-      //Projects.Show.initFlow();
-      Projects.Show.modalHandlers();
+      Global.initFlow();
+      Projects.Show.styleUpdates();
     },
     
     handlers: function() {
       $(window).resize(Projects.Show.equalHeights);
       $(window).load(Projects.Show.equalHeights);
       
-    },
-    
-    modalHandlers: function() {
-      
-      /* So that the messaging modal sizes amodalHandlers: function () {ppropriately */
-      $('#message-modal').on('show', function () {
-        $(this).css({
-        'margin-left': function () {
-            return -($(this).width() / 2);
-          }
-        });
-      });
-      
-      
-      /* Event listeners for messaging modal buttons */
-      $('#message-modal').on('shown', function () {
-        $('input[value="Cancel"]').on('click', function () {
-          $('#message-modal').modal('hide');
-          return false;
-        });
-        
-        $('#message-modal').on('hidden', function () {
-          $('input[value="Cancel"]').off('click');
-        });
-      });
     },
     
     /* This resizes the roles boxes so that they're all equal height and have equal proportions */
@@ -60,7 +32,43 @@ var Projects = {
       });
      
       $('.roles-row .roles .well').height(maxHeight);
-    }
+    },
+    
+    styleUpdates: function() {
+      function rearrangeImages() {
+        var baseRowOffset = 60;
+        var deviationRowOffset = 100;
+        
+        $('.blog-post').each(function(index) {
+          if(index % 2 == 1) {
+            var offset = baseRowOffset + (Math.random() * deviationRowOffset);
+            $(this).css('margin-top', offset + 'px');
+          }
+        });
+        
+        /* In order to handle really tall images */
+       $('.blog-post').each(function(index) {
+         if(index > 1) {
+           var diff = $(this).offset().top - ($('.blog-post').eq(index - 2).offset().top + $('.blog-post').eq(index - 2).height());
+           if(diff < 0) {
+             $('.blog-post').eq(index-1).css('margin-bottom', (diff * -1) + 'px');
+           }
+         }
+       });
+        
+        $('.blog-circle').not('.blog-circle-top').each(function(index) {
+          
+          var top = $('.blog-arrow').eq(index).offset().top - $('#comments').offset().top;
+          
+          $(this).css('top', top);
+          
+        });
+      }
+      
+      
+      $(window).load(rearrangeImages);
+      rearrangeImages();
+    },
     
   },
   
@@ -69,7 +77,6 @@ var Projects = {
     init: function() {
       console.log("Project search init");
       Projects.Index.handlers();
-      Projects.Index.modalHandlers();
       
     },
     
@@ -85,34 +92,6 @@ var Projects = {
       
       $('#project_search .icon-search').on('click', Projects.Index.ajaxSearch);
       
-      $(window).load(Projects.Index.equalHeights);
-      $(window).resize(Projects.Index.equalHeights);
-      
-    },
-    
-    modalHandlers: function() {
-      
-      /* So that the messaging modal sizes amodalHandlers: function () {ppropriately */
-      $('#message-modal').on('show', function () {
-        $(this).css({
-        'margin-left': function () {
-            return -($(this).width() / 2);
-          }
-        });
-      });
-      
-      
-      /* Event listeners for messaging modal buttons */
-      $('#message-modal').on('shown', function () {
-        $('input[value="Cancel"]').on('click', function () {
-          $('#message-modal').modal('hide');
-          return false;
-        });
-        
-        $('#message-modal').on('hidden', function () {
-          $('input[value="Cancel"]').off('click');
-        });
-      });
     },
     
     ajaxSearch: function() {
@@ -153,28 +132,6 @@ var Projects = {
       });
       return false;
     },
-    
-    /* This resizes the project boxes so that they're all equal height and have equal proportions */
-    equalHeights: function() {
-      
-      var maxHeight=0;
-      $('.projects-search .projects-box').height('auto');
-      $('.projects-search .projects-box').each(function(){
-          if($(this).height()>maxHeight){
-              maxHeight=$(this).height();
-          }
-      });
-      
-      $('.projects-search .projects-box .project-description').height('auto');
-      $('.projects-search .projects-box').height(maxHeight);
-      maxHeight = 0;
-      $('.projects-search .projects-box .project-description').each(function(){
-          if($(this).height()>maxHeight){
-              maxHeight=$(this).height();
-          }
-      });
-      $('.projects-search .projects-box .project-description').height(maxHeight);
-    }
   }
   
 }
