@@ -29,13 +29,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   def default_url
     # For Rails 3.1+ asset pipeline compatibility:
     # asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  
-    # Profiles doesn't have an "imageable_type", but photos do
-    begin
-      "/images/fallback/#{model.imageable_type}_" + [version_name, "default.png"].compact.join('_')
-    rescue Exception => e
-      "/images/fallback/#{model.class}_" + [version_name, "default.png"].compact.join('_')
-    end
+
+    "/images/fallback/#{model.class}_" + [version_name, "default.png"].compact.join('_')
   end
 
 

@@ -14,15 +14,16 @@
 #   pool: 5
 #   timeout: 5000
 
-# Rupe
+# Max Heroku 
 development:
- adapter: postgresql
- database: caball_development
- host: localhost
- username: postgres
- password: 
- pool: 5
- timeout: 5000
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: d5gplihnrmuhgp
+  username: cgqmoimdevhcvm
+  password: BSib5K0ZAgokA3z8nMNTJXZC2y
+  host: ec2-54-243-62-232.compute-1.amazonaws.com
+  port: 5432
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

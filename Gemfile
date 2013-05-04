@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '1.9.3'
+
 gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
@@ -7,6 +9,8 @@ gem 'rails', '3.2.8'
 
 gem 'pg'
 
+# Ok lets try out the heroku business
+gem 'heroku'
 
 # Gems used only for assets and not required
 # in production environments by default.
