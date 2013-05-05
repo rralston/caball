@@ -6,11 +6,11 @@
     <% if counter.even? %>
     <%= image_tag 'blog_circle.png', :class => "blog-circle" %>
     <div class="blog-post span5" id="blog<%=counter%>">
-      <%= image_tag 'blog_arrow_left.png', :class => "blog-arrow blog-arrow-left" %> 
+      <div class="blog-arrow blog-arrow-left" ></div>
     <% else %>
     <%= image_tag 'blog_circle.png', :class => "blog-circle" %>
     <div class="blog-post span5 offset2" id="blog<%=counter%>">
-      <%= image_tag 'blog_arrow_right.png', :class => "blog-arrow blog-arrow-right" %> 
+      <div class="blog-arrow blog-arrow-right" ></div>
     <% end %>
       <div class="well">
         <h5>
