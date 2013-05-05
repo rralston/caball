@@ -89,7 +89,7 @@
             <div class="row-fluid left-aligned headline">
               <% if @user.headline.present? %>
                  
-                <%= shorten :text => @user.headline, :length => 200, :partial => "more_headline" %>
+                <%= shorten :text => @user.headline, :length => 150, :partial => "more_headline" %>
                 <!-- Headline Modal -->
                   <div id="headline-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-header left-aligned">
