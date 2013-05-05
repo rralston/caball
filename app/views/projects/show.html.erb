@@ -12,6 +12,23 @@
         </div>
       </div>
       
+      <% if current_user %>
+      <% if current_user.id == @project.user_id %>
+      <div class="row-fluid" id="add-updates">
+        <div class="span12">
+          <div class="row-fluid">
+            <div class="new-update-title">
+                <h3>
+                    Create a New Update
+                </h3>
+            </div>
+          </div>
+          <%= render 'comments/form' %>
+        </div>
+      </div>
+      <% end %>
+      <% end %>
+      
       <div class="row-fluid follow-roles-bar">
         <div class="span3 follow-container">
           <%= link_to(friendships_path(friend_id: @producer), method: :post, :class => '') do %>
@@ -269,25 +286,4 @@
 		  </div>
 	</div>
 </div>
-<% end %>
-
-<% if current_user %>
-<% if current_user.id == @project.user_id %>
-<div id="add-comments">
-	<div class="container-fluid">
-	    <div class="row-fluid">
-	      <div class="span12">
-	        <div class="row-fluid">
-	          <div class="new-update-title">
-	              <h3>
-	                  Create a New Update
-	              </h3>
-	          </div>
-	        </div>
-  				<%= render 'comments/form' %>
-				</div>
-		  </div>
-	</div>
-</div>
-<% end %>
 <% end %>
