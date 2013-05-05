@@ -630,25 +630,48 @@ figure.profile-pic > img {
       
       .blog-arrow {
         position: absolute;
-        top: 40px;
+        top: 45px;
       }
       
       .blog-arrow-left {
         right: 0%;
         margin-right: -14px;
-        border-left: solid 15px #f5f5f5;
+        border-left: solid 15px #e3e3e3;
         border-top: solid 15px transparent;
         border-bottom: solid 15px transparent;
       }
       
+      .blog-arrow-left:after{
+        content: '';
+        position: absolute;
+        top: -15px;
+        left: -16px;
+        width: 0;
+        height: 0;
+        border-left: 15px solid #f5f5f5;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+       }
+      
       .blog-arrow-right {
         left: 0%;
         margin-left: -14px;
-        border-right: solid 15px #f5f5f5;
+        border-right: solid 15px #e3e3e3;
         border-top: solid 15px transparent;
         border-bottom: solid 15px transparent;
-
       }
+      
+      .blog-arrow-right:after{
+        content: '';
+        position: absolute;
+        top: -15px;
+        left: 1px;
+        width: 0;
+        height: 0;
+        border-right: 15px solid #f5f5f5;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+       }
     }
   }
 }
