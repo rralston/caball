@@ -120,7 +120,7 @@
             <div class="follow-images">
               <% @followers_following.first(12).each_with_index do |user, index| %>
                 <% if user.profiles.present? %>
-                  <%= image_tag user.profiles.image.url(:tiny) %>
+                  <%= link_to user do%> <%= image_tag user.profiles.image.url(:tiny) %> <% end %>
                 <% end %>
               <% end %>
               <div class="clearfix"></div>
