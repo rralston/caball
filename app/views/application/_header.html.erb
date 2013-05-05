@@ -55,7 +55,13 @@
               <% if current_user %>
               
               <div class="profile logged-in">
-                <%= link_to "#", :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do %> <% end %>
+                <%= link_to "#", :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do %>
+                  <% if current_user.profiles.present? %> 
+                    <%= image_tag current_user.profiles.image.url(:tiny) %> 
+                  <% else %>
+                    <div class="default"></div>
+                  <% end %>
+                <% end %>
                 <ul class="dropdown-menu">    
                   <li>
                     <%= link_to user_path(current_user) do %>
