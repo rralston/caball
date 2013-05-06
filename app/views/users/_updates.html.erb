@@ -1,5 +1,22 @@
 
 <div id="blogs">
+  <% if current_user %>
+  <% if current_user.id == @user.id %>
+  <div id="add-blog-post" class="row-fluid">
+    <div class="span10 offset1">
+      <div class="row-fluid">
+        <div class="updates-header">
+            <h1>
+                Add Updates
+            </h1>
+        </div>
+      </div>
+      Create a New Update. 
+        <%= render :partial => 'blogs/form', :formats => [:html] %>
+    </div>
+  </div>
+  <% end %>
+  <% end %>
   <div class="row-fluid">
     <div class="span10 offset1 drawer-content">
   
