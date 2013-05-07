@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :blogs, :dependent => :destroy
   accepts_nested_attributes_for :characteristics, :photos, :videos, :projects, :talents, :allow_destroy => true
-  attr_accessible :name, :email, :location, :about, :profiles, :profiles_attributes, :imdb_url, :characteristics_attributes, :photos_attributes, :talents_attributes, :photo, :videos_attributes, :projects_attributes, :admin, :gender, :headline
+  attr_accessible :name, :email, :location, :about, :profiles, :profiles_attributes, :imdb_url, :characteristics_attributes, :photos_attributes, :talents_attributes, :photo, :videos_attributes, :projects_attributes, :admin, :gender, :headline, :featured
   validates_presence_of :name, :email, :message => "is required"
 
   acts_as_messageable

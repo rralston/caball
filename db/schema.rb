@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130409084115) do
+ActiveRecord::Schema.define(:version => 20130507063153) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -73,16 +73,6 @@ ActiveRecord::Schema.define(:version => 20130409084115) do
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
-
-  create_table "follows", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "follow_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "follows", ["follow_id"], :name => "index_follows_on_follow_id"
-  add_index "follows", ["user_id"], :name => "index_follows_on_user_id"
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -169,8 +159,10 @@ ActiveRecord::Schema.define(:version => 20130409084115) do
     t.string   "name"
     t.text     "description"
     t.integer  "project_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "filled",      :default => false
+    t.string   "subrole"
   end
 
   create_table "talents", :force => true do |t|
