@@ -42,17 +42,24 @@
     <div class="control-group">
     <%= p.label :status, :class => 'control-label' %>
       <div class="controls">
-      <%= p.text_field :status, :class => 'text_field' %> 
+			<%= p.select(:status, options_for_select(@status, @project.status)) %>
       </div>
     </div>
   
     <div class="control-group">
     <%= p.label :genre, :class => 'control-label' %>
       <div class="controls">
-      <%= p.text_field :genre, :class => 'text_field' %> 
+				<%= p.select(:genre, options_for_select(@genres, @project.genre)) %>
       </div>
     </div>
 	
+	  <div class="control-group">
+    <%= p.label 'Type', :class => 'control-label' %>
+      <div class="controls">
+				<%= p.select(:is_type, options_for_select(@is_type, @project.is_type)) %>
+      </div>
+    </div>
+
 	 	<div class="control-group">
 	  <%= p.label :start, :class => 'control-label' %>
 	    <div class="controls">
@@ -133,12 +140,12 @@
 		   </div>
 	 </div> -->
 		<h2>Talent Required</h2>
-		
+		<% if @project.roles.exists? %>
 		<%= p.fields_for :roles do |role|   %>
 		 <div class="control-group">
 			  <%= role.label :name, :class => 'control-label' %>
 				<div class="controls">
-					<%= role.select(:name, options_for_select(@talents)) %>
+					<%= role.text_area :name, :class => 'input-xlarge uneditable-input', :rows => '1' %>
 			   </div>
 		 </div>
 		
@@ -153,10 +160,14 @@
 	  <%= role.label :description, :class => 'control-label' %>
 	    <div class="controls">
 	    <%= role.text_area :description, :class => 'textarea', :rows => "5" %>	
-			<%= role.check_box :filled %> Role Filled?
+			<br><%= role.check_box :filled %> Role Filled?
+			<br>
+			<%= role.check_box :_destroy %> Click Here to Destroy
 	    </div>
 	  </div>
 		<% end %>
+		<% end %>
+		<% if !@project.roles.exists? %>
 		<div id="fields-for-list" class="numerous">
 			<%= p.fields_for :roles, Role.new, :child_index => 'replace_this' do |role| %>
 		  <div class="control-group">
@@ -167,6 +178,13 @@
 			 </div>
 			
 			<div class="control-group">
+		  <%= role.label :subrole, :class => 'control-label' %>
+		    <div class="controls">
+		    <%= role.text_area :subrole, :class => 'textarea', :rows => "1" %>	
+		    </div>
+		  </div>
+		
+			<div class="control-group">
 		  <%= role.label :description, :class => 'control-label' %>
 		    <div class="controls">
 		    <%= role.text_area :description, :class => 'textarea', :rows => "5" %>	
@@ -176,6 +194,7 @@
 		    <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
 		<% end %>
 		</div>
+		<% end %>
 
 
 <div id="list"></div>

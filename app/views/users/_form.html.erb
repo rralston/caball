@@ -79,13 +79,15 @@
                  </div>
 
                 <%= f.fields_for :profiles do |p|  %>
-                  <% if !@user.profiles.nil? %> 
+          		
+									      <% if @user.profiles.image.present? %> 
                     <div class="control-group">
                       <%= p.label "Profile Photo", :class => 'control-label' %>
                       <div class="controls">
                         <%= image_tag @user.profiles.image.url(:medium), {:class => "img-polaroid"} %>          
-                        <%= p.file_field :image %> 
-                      </div>
+												<%= p.check_box :_destroy %> Click Here to Delete  
+												
+                      </div><br><br><br><br><br><br>
                     </div>
                   <%else%>
                     <div class="control-group">
