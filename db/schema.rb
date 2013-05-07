@@ -74,16 +74,6 @@ ActiveRecord::Schema.define(:version => 20130507053626) do
     t.datetime "updated_at",                 :null => false
   end
 
-  create_table "follows", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "follow_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  add_index "follows", ["follow_id"], :name => "index_follows_on_follow_id"
-  add_index "follows", ["user_id"], :name => "index_follows_on_user_id"
-
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
