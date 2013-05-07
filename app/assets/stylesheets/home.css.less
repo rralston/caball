@@ -1,4 +1,5 @@
 #home-index {
+  margin-top: -43px;
   
   .lunchbox-container {
     width: 100%;
@@ -7,7 +8,8 @@
   }
   .home-header {
     text-align: center;
-    background: url('toolbox.png') no-repeat center -90px;
+    padding-top: 20px;
+    background: url('toolbox.png') no-repeat center 0px;
     
     h1 {
       padding-top: 10px;
@@ -18,11 +20,13 @@
       color: @white;
       background-color: #429ca8;
       .border-radius(5px);
-      padding: 10px;
+      padding: 8px 30px;
       margin-top: 10px;
       font-size: 1.5em;
       display: inline-block;
       cursor: pointer;
+      position: relative;
+      left: -10px;
     }
     
     .start-creating:hover {
@@ -39,31 +43,35 @@
     .lunchbox-caption {
       font-size: 1.5em;
       width: 75%;
-      margin: 365px auto 0px auto;
-      text-align: left;
+      margin: 12px auto 0px auto;
+      text-align: center;
+      
     }
     
     .blurb-list {
-      margin-top: 100px;
+      margin-top: 320px;
       margin-left: 0;
       text-align: left;
       font-size: 1.5em;
       
       .span4 {
         width: 29%;
+        min-height: 60px;
+        margin-bottom: 20px;
       }
-    }
-    
-    .vrule {
-      border-left: 2px solid #ccc;
-      float: left;
-      height: 85px;
-      margin-left: 20px;
+      .span4:nth-child(1) {
+        padding-right: 20px;
+        border-right: 2px solid #ccc;
+      } 
+      .span4:nth-child(2) {
+        padding-right: 20px;
+        border-right: 2px solid #ccc;
+      } 
     }
   }
   
   .home-content {
-    margin-top: 100px;
+    margin-top: 30px;
     
     .content-header {
       font-size: 2em;
