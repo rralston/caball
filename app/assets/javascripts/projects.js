@@ -5,9 +5,18 @@ var Projects = {
     console.log("init projects");
   },
   
+  Edit: {
+    
+    init: function() {
+      console.log('edit project init');
+      
+      Numerous.init();
+    }
+  },
+  
   Show: {
+    
     init: function () {
-      console.log("init show project");   
       Projects.Show.handlers();
       
       Global.initFlow();
@@ -75,13 +84,11 @@ var Projects = {
   Index: {
     
     init: function() {
-      console.log("Project search init");
       Projects.Index.handlers();
       
     },
     
     handlers: function() {
-      console.log("projects handlers init");
       
       /* We want to catch the search input and use ajax to display search results instead */
       $('#project_search input').on( 'keypress', function(e) {

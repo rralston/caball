@@ -31,6 +31,14 @@ PAGES = {
     init: function() {
       Projects.init();
     },
+    
+    edit: function() {
+      Projects.Edit.init()
+    },
+    
+    new: function() {
+      Projects.Edit.init();
+    },
  
     show: function() {
       Projects.Show.init();
