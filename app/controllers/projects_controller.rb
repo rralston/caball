@@ -81,6 +81,8 @@ class ProjectsController < ApplicationController
                 'War' => 'War', 'Western' => 'Western' }
     @type = {   'Feature Length' => 'Feature Length','Music Video' => 'Music Video', 'Reality' => 'Reality', 'Short' => 'Short',
                 'TV Series' => 'TV Series', 'Webisode' => 'Webisode'}
+    @status = { 'Draft' => 'Draft', 'Pre-Production' => 'Pre-Production', 'Greenlight' => 'Greenlight', 'Post-Production' => 'Post-Production', 'Completed' => 'Completed'}
+                
      @project = Project.find(params[:id])
      @pictures = @project.photos
      if @pictures.first.nil?
@@ -115,6 +117,7 @@ class ProjectsController < ApplicationController
                 'War' => 'War', 'Western' => 'Western' }
     @type = {   'Feature Length' => 'Feature Length','Music Video' => 'Music Video', 'Reality' => 'Reality', 'Short' => 'Short',
                 'TV Series' => 'TV Series', 'Webisode' => 'Webisode'}
+    @status = { 'Draft' => 'Draft', 'Pre-Production' => 'Pre-Production', 'Greenlight' => 'Greenlight', 'Post-Production' => 'Post-Production', 'Completed' => 'Completed'}
     @project = Project.new
     @project.roles.build
     3.times do 

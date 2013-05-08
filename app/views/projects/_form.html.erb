@@ -42,17 +42,24 @@
     <div class="control-group">
     <%= p.label :status, :class => 'control-label' %>
       <div class="controls">
-      <%= p.text_field :status, :class => 'text_field' %> 
+			<%= p.select(:status, options_for_select(@status)) %>
       </div>
     </div>
   
     <div class="control-group">
     <%= p.label :genre, :class => 'control-label' %>
       <div class="controls">
-      <%= p.text_field :genre, :class => 'text_field' %> 
+				<%= p.select(:genre, options_for_select(@genres)) %>
       </div>
     </div>
 	
+	  <div class="control-group">
+    <%= p.label :type, :class => 'control-label' %>
+      <div class="controls">
+				<%= p.select(:type, options_for_select(@type)) %>
+      </div>
+    </div>
+
 	 	<div class="control-group">
 	  <%= p.label :start, :class => 'control-label' %>
 	    <div class="controls">
