@@ -7,8 +7,13 @@ class ProjectsController < ApplicationController
     @search = Project.search(params[:q])
     @projects = @search.result
     @search.build_condition
-    @genres = {'Horror' => 'horror', 'Action' => 'action', 'Western' => 'western', 'Drama' => 'drama', 
-               'TV Series' => 'tv series', 'Short' => 'short', 'Comedy' => 'comedy'}
+    @genres = { 'Action' => 'Action', 'Adventure' => 'Adventure', 'Animation' => 'Animation', 'Biography' => 'Biography',
+                'Comedy' => 'Comedy', 'Crime' => 'Crime', 'Documentary' => 'Documentary', 'Drama' => 'Drama', 'Family' => 'Family',
+                'Fantasy' => 'Fantasy', 'Film-Noir' => 'Film-Noir', 'History' => 'History', 'Horror' => 'Horror', 'Musical' => 'Musical',
+                'Mystery' => 'Mystery', 'Romance' => 'Romance', 'Scifi' => 'Scifi', 'Sports' => 'Sports', 'Thriller' => 'Thriller',
+                'War' => 'War', 'Western' => 'Western' }
+    @type = {   'Feature Length' => 'Feature Length','Music Video' => 'Music Video', 'Reality' => 'Reality', 'Short' => 'Short',
+                'TV Series' => 'TV Series', 'Webisode' => 'Webisode'}
     @talents = {'Actor / Actress' => 'Actor / Actress', 'Animators' => 'Animators', 'Art' => 'Art', 'Audio' => 'Audio', 
                 'Casting Director' => 'Casting Director', 'Cinematographer / DP' => 'Cinematographer / DP', 'Composer' => 'Composer', 
                 'Costumes' => 'Costumes', 'Director' => 'Director', 'Distribution Professional' => 'Distribution Professional', 
@@ -69,6 +74,13 @@ class ProjectsController < ApplicationController
                 'Production Staff' => 'Production Staff', 'Props' => 'Props', 'Set Design' => 'Set Design', 'Sound' => 'Sound',
                 'Stuntman' => 'Stuntman', 'Talent Agent / Literary Agent' => 'Talent Agent / Literary Agent', 'Talent Manager' => 'Talent Manager', 
                 'Visual Effects' => 'Visual Effects', 'Writer' => 'Writer'}
+    @genres = { 'Action' => 'Action', 'Adventure' => 'Adventure', 'Animation' => 'Animation', 'Biography' => 'Biography',
+                'Comedy' => 'Comedy', 'Crime' => 'Crime', 'Documentary' => 'Documentary', 'Drama' => 'Drama', 'Family' => 'Family',
+                'Fantasy' => 'Fantasy', 'Film-Noir' => 'Film-Noir', 'History' => 'History', 'Horror' => 'Horror', 'Musical' => 'Musical',
+                'Mystery' => 'Mystery', 'Romance' => 'Romance', 'Scifi' => 'Scifi', 'Sports' => 'Sports', 'Thriller' => 'Thriller',
+                'War' => 'War', 'Western' => 'Western' }
+    @type = {   'Feature Length' => 'Feature Length','Music Video' => 'Music Video', 'Reality' => 'Reality', 'Short' => 'Short',
+                'TV Series' => 'TV Series', 'Webisode' => 'Webisode'}
      @project = Project.find(params[:id])
      @pictures = @project.photos
      if @pictures.first.nil?
