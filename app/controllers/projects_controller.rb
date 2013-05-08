@@ -96,6 +96,13 @@ class ProjectsController < ApplicationController
                 'Production Staff' => 'Production Staff', 'Props' => 'Props', 'Set Design' => 'Set Design', 'Sound' => 'Sound',
                 'Stuntman' => 'Stuntman', 'Talent Agent / Literary Agent' => 'Talent Agent / Literary Agent', 'Talent Manager' => 'Talent Manager', 
                 'Visual Effects' => 'Visual Effects', 'Writer' => 'Writer'}
+    @genres = { 'Action' => 'Action', 'Adventure' => 'Adventure', 'Animation' => 'Animation', 'Biography' => 'Biography',
+                'Comedy' => 'Comedy', 'Crime' => 'Crime', 'Documentary' => 'Documentary', 'Drama' => 'Drama', 'Family' => 'Family',
+                'Fantasy' => 'Fantasy', 'Film-Noir' => 'Film-Noir', 'History' => 'History', 'Horror' => 'Horror', 'Musical' => 'Musical',
+                'Mystery' => 'Mystery', 'Romance' => 'Romance', 'Scifi' => 'Scifi', 'Sports' => 'Sports', 'Thriller' => 'Thriller',
+                'War' => 'War', 'Western' => 'Western' }
+    @type = {   'Feature Length' => 'Feature Length','Music Video' => 'Music Video', 'Reality' => 'Reality', 'Short' => 'Short',
+                'TV Series' => 'TV Series', 'Webisode' => 'Webisode'}
     @project = Project.new
     @project.roles.build
     3.times do 
