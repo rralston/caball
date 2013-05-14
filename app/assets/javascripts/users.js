@@ -86,6 +86,19 @@ var Users = {
             var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
             $('#steps').height(stepHeight);
           }
+        },
+        'videos-list' : {
+          'add' : function(form){
+            var current = $('#steps').data('index');
+            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
+            $('#steps').height(stepHeight);
+          },
+  
+          'remove' : function(form){
+            var current = $('#steps').data('index');
+            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
+            $('#steps').height(stepHeight);
+          }
         }
       });
     },

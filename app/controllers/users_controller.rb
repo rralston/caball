@@ -91,6 +91,7 @@ class UsersController < ApplicationController
      end
      unless @user.talents.exists?
        @user.talents.build
+       @user.talents.build 
      end
      # if @user.talents.second.nil?
      #   @user.talents.second.build
