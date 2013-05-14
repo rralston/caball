@@ -142,5 +142,6 @@ class ProjectsController < ApplicationController
     @is_type = {'Feature Length' => 'Feature Length', 'Music Video' => 'Music Video', 'Reality' => 'Reality', 'Short' => 'Short',
                 'TV Series' => 'TV Series', 'Webisode' => 'Webisode'}
     @status = { 'Draft' => 'Draft', 'Pre-Production' => 'Pre-Production', 'Greenlight' => 'Greenlight', 'Post-Production' => 'Post-Production', 'Completed' => 'Completed'}
+    @compensation = {'Paid' => 'Paid', 'Low-Paid' => 'Low-Paid', 'Copy / Credit' => 'Copy / Credit'}
   end
 end
