@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130508035851) do
+ActiveRecord::Schema.define(:version => 20130514102602) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -140,8 +140,8 @@ ActiveRecord::Schema.define(:version => 20130508035851) do
     t.date     "start"
     t.date     "end"
     t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.string   "status"
     t.boolean  "featured"
     t.string   "is_type"
@@ -149,6 +149,8 @@ ActiveRecord::Schema.define(:version => 20130508035851) do
     t.string   "location"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "thoughts"
+    t.string   "compensation"
   end
 
   create_table "receipts", :force => true do |t|
