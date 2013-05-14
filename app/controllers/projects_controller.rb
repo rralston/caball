@@ -40,9 +40,15 @@ class ProjectsController < ApplicationController
     
     @project.roles.each do |role|
       if @sorted_roles.has_key?(role.name) then
-        @sorted_roles[role.name] << role
+        @sorted_roles[role.name][:role_list] << role
       else
-        @sorted_roles[role.name] = [role]
+        @sorted_roles[role.name] = {:role_list => [role], :open_count => 0, :filled_count => 0, :total_count => 0}
+      end
+      @sorted_roles[role.name][:total_count] += 1
+      if role.filled
+        @sorted_roles[role.name][:filled_count] += 1
+      else
+        @sorted_roles[role.name][:open_count] += 1
       end
     end
   end

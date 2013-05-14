@@ -166,7 +166,7 @@
 		 <div class="control-group">
 			  <%= role.label :name, :class => 'control-label' %>
 				<div class="controls">
-					<%= role.select(:name, options_for_select(@talents)) %>
+					<%= role.select :name, @talents%>
 			   </div>
 		 </div>
 		

@@ -66,26 +66,22 @@
                 <%= if @project.status.present? then @project.status end %>
               </span>
             <div class="shooting-locations-title">
-                <h3>Shooting Locations:</h3>
+                <h3>Location:</h3>
             </div>
             <div class="shooting-locations-content">
+              <% if !@project.location.nil? %>
               <div class="shooting-location">
-                San Francisco, CA
+                <%= @project.location %>
               </div>
-              <div class="shooting-location">
-                Belfast, N. Ireland
-              </div>
+              <% end %>
             </div>
             <div class="open-roles-title">
               <h3>Open Roles:</h3>
             </div>
             <div class="open-roles-content">
-              <div class="open-role">Cast(8)</div>
-              <div class="open-role">Lighting(2)</div>
-              <div class="open-role">Camera Crew(3)</div>
-              <div class="open-role">Sound(2)</div>
-              <div class="open-role">Business(1)</div>
-              <div class="open-role">Assistant(1)</div>
+              <% @sorted_roles.each do |role_name, role| %>
+              <div class="open-role"> <%= role_name %> (<%= @sorted_roles[role_name][:open_count] %>)</div>
+              <% end %>
             </div>
           </div>
         </div>
@@ -94,9 +90,12 @@
           <div class="dates-title">
             <h3>Important Dates:</h3>
           </div>
-          <div class="date">9/12/13 - Start of Principle Photo</div>
-          <div class="date">8/15/13 - Open Casting</div>
-          <div class="date">7/2/13 - Script Review</div>
+          <% if @project.start.present? %>
+          <div class="date"><%= @project.start %> - Start</div>
+          <% end %>
+          <% if @project.end.present? %>
+          <div class="date"><%= @project.end %> - End</div>
+          <% end %>
         </div>
       </div> 
     
@@ -183,70 +182,16 @@
       </div>
       <div class="clearfix"></div>
       <div class="span12 role-circles">
+        <% @sorted_roles.each do |role_name, role_array| %>
         <div class="role-circle-container">
-          <span class="role-title">Cast</span>
+          <span class="role-title"><%= role_name %></span>
           <div class="role-circle">
           </div>
           <div class="circle-fill"></div>
-          <div class="circle-measure"></div>
-          <span class="role-count">7/15</span>
+          <div class="circle-measure-<%= ((@sorted_roles[role_name][:filled_count] / @sorted_roles[role_name][:total_count].to_f) * 10).to_i %>"></div>
+          <span class="role-count"><%= @sorted_roles[role_name][:filled_count]%>/<%= @sorted_roles[role_name][:total_count]%></span>
         </div>
-        <div class="role-circle-container">
-          <span class="role-title">Cast</span>
-          <div class="role-circle">
-          </div>
-          <div class="circle-fill"></div>
-          <div class="circle-measure"></div>
-          <span class="role-count">7/15</span>
-        </div>
-        <div class="role-circle-container">
-          <span class="role-title">Cast</span>
-          <div class="role-circle">
-          </div>
-          <div class="circle-fill"></div>
-          <div class="circle-measure"></div>
-          <span class="role-count">7/15</span>
-        </div>
-        <div class="role-circle-container">
-          <span class="role-title">Cast</span>
-          <div class="role-circle">
-          </div>
-          <div class="circle-fill"></div>
-          <div class="circle-measure"></div>
-          <span class="role-count">7/15</span>
-        </div>
-        <div class="role-circle-container">
-          <span class="role-title">Cast</span>
-          <div class="role-circle">
-          </div>
-          <div class="circle-fill"></div>
-          <div class="circle-measure"></div>
-          <span class="role-count">7/15</span>
-        </div>
-        <div class="role-circle-container">
-          <span class="role-title">Cast</span>
-          <div class="role-circle">
-          </div>
-          <div class="circle-fill"></div>
-          <div class="circle-measure"></div>
-          <span class="role-count">7/15</span>
-        </div>
-        <div class="role-circle-container">
-          <span class="role-title">Cast</span>
-          <div class="role-circle">
-          </div>
-          <div class="circle-fill"></div>
-          <div class="circle-measure"></div>
-          <span class="role-count">7/15</span>
-        </div>
-        <div class="role-circle-container">
-          <span class="role-title">Cast</span>
-          <div class="role-circle">
-          </div>
-          <div class="circle-fill"></div>
-          <div class="circle-measure"></div>
-          <span class="role-count">7/15</span>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>
