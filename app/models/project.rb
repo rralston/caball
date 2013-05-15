@@ -12,23 +12,23 @@ class Project < ActiveRecord::Base
   
   def roles_percent
     total_roles = roles.length
-    open_roles = 0
+    filled_roles = 0
     roles.each do |role|
       if role.filled
-        open_roles += 1
+        filled_roles += 1
       end
     end
     if total_roles == 0
       return 10
     else
-      return ((open_roles.to_f / total_roles.to_f) * 10).to_i
+      return ((filled_roles.to_f / total_roles.to_f) * 10).to_i
     end
   end
   
   def open_roles
     open_roles = 0
     roles.each do |role|
-      if role.filled
+      if !role.filled
         open_roles += 1
       end
     end
