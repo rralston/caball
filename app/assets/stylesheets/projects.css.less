@@ -71,7 +71,7 @@
   
   .follow-container {
     
-    .follow-button {
+    a {
       display: inline-block;
       position: relative;
       background-color: #666;
@@ -83,15 +83,12 @@
       vertical-align: middle;
       padding: 4px 0;
       cursor: pointer;
-      
-      a {
-        color: @white;
-      }
-      
-      img {
-        width: 20px;
-      }
     }
+    
+    a:hover {
+      background-color: darken(#666, 10%);
+    }
+    
     .follow-counts {
       text-align: center;
       display: inline-block;
