@@ -24,26 +24,15 @@ var Projects = {
     },
     
     handlers: function() {
-      $(window).resize(Projects.Show.equalHeights);
-      $(window).load(Projects.Show.equalHeights);
       
-    },
-    
-    /* This resizes the roles boxes so that they're all equal height and have equal proportions */
-    equalHeights: function() {
-      
-      var maxHeight=0;
-      $('.roles-row .roles .well').height('auto');
-      $('.roles-row .roles .well').each(function(){
-          if($(this).height()>maxHeight){
-              maxHeight=$(this).height();
-          }
+      $('.navigate-button').on('click', function() {
+        var target = $(this).data('target');
+        $('html, body').animate({scrollTop: $("#" + target).offset().top}, 2000);
       });
-     
-      $('.roles-row .roles .well').height(maxHeight);
     },
     
     styleUpdates: function() {
+      
       function rearrangeImages() {
         var baseRowOffset = 60;
         var deviationRowOffset = 100;
