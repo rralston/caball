@@ -14,15 +14,11 @@
       
       <div class="row-fluid follow-roles-bar">
         <div class="span3 follow-container">
-          <%= link_to(friendships_path(friend_id: @producer), method: :post, :class => '') do %>
           <div class="follow-button">
-            Follow
+            <%= render :partial => 'follow_button', :locals => {:user => @project.user} %>
           </div>
-          <% end %>
-          <div class="follow-counts">
-            <div class="row-fluid">
-              <div class="numbers"><%= @producer.friendships.all.count %> Fans</div>
-            </div>
+          <div class="follow-count">
+            <%= @producer.friendships.all.count %> Fans
           </div>
         </div>
         
@@ -148,6 +144,7 @@
           <% end %> 
           <div class="row-fluid message-row">
             <div class="span12 message-span">
+              <% if current_user %>
               <a data-toggle="modal" data-target="#message-modal" 
                     data-remote ="<%= new_conversation_path(:recipient => @producer.email, :modal => true)%>"
                     data-keyboard="true" class="message-button"><%= image_tag('mail_icon.png') %> Message</a>
@@ -161,6 +158,7 @@
                   </div>
                 </div>
               <!-- Message Modal --> 
+              <% end %>
             </div>
           </div>
         </div>

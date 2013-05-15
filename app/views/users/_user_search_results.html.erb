@@ -58,6 +58,7 @@
     </div>
     
     <div class="message-follow-row">
+      <% if current_user %>
       <a data-toggle="modal" data-target="#message-modal-<%= counter %>" 
             data-remote ="<%= new_conversation_path(:recipient => user.email, :modal => true)%>"
             data-keyboard="true" class="message-button"><%= image_tag('mail_icon.png') %> Message</a>
@@ -71,6 +72,7 @@
           </div>
         </div>
       <!-- Message Modal --> 
+      <% end %>
       <div class="follow-button">
         <%= render :partial => "follow_button", :locals => {:user => user} %>
       </div>

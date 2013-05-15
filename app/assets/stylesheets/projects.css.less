@@ -70,39 +70,39 @@
   }
   
   .follow-container {
+    position: relative;
+    top: 10px;
+    left: 10px;
     
-    a {
+    .follow-button {
       display: inline-block;
       position: relative;
-      background-color: #666;
-      width: 100px;
-      margin: 10px 0 10px 10px;
+      
+      a {
+        .border-radius(5px);
+        color: @white;
+        text-align: center;
+        padding:5px;
+        cursor: pointer;
+        color: @white;
+        background-color: #666;
+      }
+      
+      img {
+        width: 25px;
+      }
+    }
+    
+    .follow-count {
+      display: inline-block;
       .border-radius(5px);
       color: @white;
       text-align: center;
-      vertical-align: middle;
-      padding: 4px 0;
+      padding: 2px 5px 1px 5px;
       cursor: pointer;
-    }
-    
-    a:hover {
-      background-color: darken(#666, 10%);
-    }
-    
-    .follow-counts {
-      text-align: center;
-      display: inline-block;
-      
-      .numbers {
-        color: @white;
-        display: inline-block;
-        vertical-align: middle;
-        line-height: 2em;
-        background-color: #666;
-        .border-radius(5px);
-        text-align: center;
-        width: 100px;
-      }
+      color: @white;
+      background-color: #666;
+     
     }
     
     .follow-button:hover {
