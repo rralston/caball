@@ -1,3 +1,48 @@
+/* These circles get displayed on multiple project pages. */
+.circle-measure-0 {
+  height: 70%;
+}
+
+.circle-measure-1 {
+  height: 61.5%;
+}
+
+.circle-measure-2 {
+  height: 55%;
+}
+
+.circle-measure-3 {
+  height: 48.5%;
+}
+
+.circle-measure-4 {
+  height: 42%;
+}
+
+.circle-measure-5 {
+  height: 35.5%;
+}
+
+.circle-measure-6 {
+  height: 29%;
+}
+
+.circle-measure-7 {
+  height: -22.5%;
+}
+
+.circle-measure-8 {
+  height: -16%;
+}
+
+.circle-measure-9 {
+  height: -10.5%;
+}
+
+.circle-measure-10 {
+  display: none;
+}
+
 /* Projects Display Page */
 
 #projects-show {
@@ -93,6 +138,7 @@
   
   h3 {
     font-size: 1.3em;
+    line-height: 1.3em;
     font-weight: 400;
     color: #4c99c0;
    }
@@ -136,6 +182,15 @@
           font-size: 0.7em;
         }
         
+        .circle-measure {    
+          top: 0;
+          width: 80px;
+          z-index: 8;
+          background-color: @white;
+          position: absolute;
+          left: 8px;
+        }
+        
         .role-count {
           position: relative;
           float: left;
@@ -163,110 +218,6 @@
           top: 5px;
           left: 5px;
           z-index: 7;
-        }
-        
-        .circle-measure-0 {
-          height: 70px;
-          width: 80px;
-          z-index: 8;
-          background-color: @white;
-          position: absolute;
-          top: 7%;
-          left: 8px;
-        }
-        
-        .circle-measure-1 {
-          height: 70px;
-          width: 80px;
-          z-index: 8;
-          background-color: @white;
-          position: absolute;
-          top: 0%;
-          left: 8px;
-        }
-        
-        .circle-measure-2 {
-          height: 70px;
-          width: 80px;
-          z-index: 8;
-          background-color: @white;
-          position: absolute;
-          top: -5%;
-          left: 8px;
-        }
-        
-        .circle-measure-3 {
-          height: 70px;
-          width: 80px;
-          z-index: 8;
-          background-color: @white;
-          position: absolute;
-          top: -9%;
-          left: 8px;
-        }
-        
-        .circle-measure-4 {
-          height: 70px;
-          width: 80px;
-          z-index: 8;
-          background-color: @white;
-          position: absolute;
-          top: -14%;
-          left: 8px;
-        }
-        
-        .circle-measure-5 {
-          height: 70px;
-          width: 80px;
-          z-index: 8;
-          background-color: @white;
-          position: absolute;
-          top: -20%;
-          left: 8px;
-        }
-        
-        .circle-measure-6 {
-          height: 70px;
-          width: 80px;
-          z-index: 8;
-          background-color: @white;
-          position: absolute;
-          top: -26%;
-          left: 8px;
-        }
-        
-        .circle-measure-7 {
-          height: 70px;
-          width: 80px;
-          z-index: 8;
-          background-color: @white;
-          position: absolute;
-          top: -31%;
-          left: 8px;
-        }
-        
-        .circle-measure-8 {
-          height: 70px;
-          width: 80px;
-          z-index: 8;
-          background-color: @white;
-          position: absolute;
-          top: -36%;
-          left: 8px;
-        }
-        
-        .circle-measure-9 {
-          height: 70px;
-          width: 80px;
-          z-index: 8;
-          background-color: @white;
-          position: absolute;
-          top: -40%;
-          left: 8px;
-        }
-        
-        .circle-measure-10 {
-          display: none;
         }
       }
     }
@@ -743,13 +694,12 @@
       }
       
       .circle-measure {
-        height: 50px;
         width: 60px;
         z-index: 8;
         background-color: @white;
         position: absolute;
-        top: 0%;
         left: 3px;
+        top: 0;
       }
     }
     

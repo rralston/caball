@@ -188,7 +188,7 @@
           <div class="role-circle">
           </div>
           <div class="circle-fill"></div>
-          <div class="circle-measure-<%= ((@sorted_roles[role_name][:filled_count] / @sorted_roles[role_name][:total_count].to_f) * 10).to_i %>"></div>
+          <div class="circle-measure circle-measure-<%= ((@sorted_roles[role_name][:filled_count] / @sorted_roles[role_name][:total_count].to_f) * 10).to_i %>"></div>
           <span class="role-count"><%= @sorted_roles[role_name][:filled_count]%>/<%= @sorted_roles[role_name][:total_count]%></span>
         </div>
         <% end %>
