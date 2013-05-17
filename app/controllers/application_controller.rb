@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
   #News Feed
   include PublicActivity::StoreController
+  protect_from_forgery
   
   before_filter :subdomain_view_path
   helper_method :current_user
