@@ -25,7 +25,7 @@
           </div>
           <div class="field roles">
             <h3>Open Roles</h3>
-            <%= f.select(:roles_id_cont, options_for_select(@talents), {}, {:multiple=> true, :size => 5, :class => 'roles-input' })
+            <%= f.select(:roles_name_cont, options_for_select(@talents), {}, {:multiple=> true, :size => 5, :class => 'roles-input' })
             %>
           </div>
           <% end %>

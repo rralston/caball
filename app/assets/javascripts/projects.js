@@ -107,7 +107,7 @@ var Projects = {
         data: {              
           'q[title_cont]': searchTerm,
           'q[location_cont]': searchLocation,
-          'q[roles_id_eq]': searchRole,
+          'q[roles_name_eq]': searchRole,
           'q[genre_cont]': searchGenre
           
         },

@@ -57,9 +57,12 @@
           </div>
         <!-- Message Modal -->
         <% end %>
-        <div class="follow-button">
+				<!-- This gave result 'partial not found' so have commented it out for now. -->
+        <% if false %>
+				<div class="follow-button">
           <%= render :partial => 'follow_button', :locals => {:user => proj.user} %>
         </div>
+				<% end %>
         <div class="follow-count">
           <span class="fan-count" data-user-id="<%= proj.user.id %>"><%= Friendship.where( :friend_id => proj.user.id).count %></span> Fans
         </div>
