@@ -341,6 +341,7 @@
               <label class="control-label">Your Participation</label>
               <div class="controls">
                 <%= video.text_area :user_description, :class => 'text_field', :rows => 5 %>
+								<%= video.check_box :_destroy %> Click Here to Delete
               </div>
             </div>
             
