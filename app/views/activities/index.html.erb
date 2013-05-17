@@ -1,8 +1,17 @@
 <h1>Friends' Activities</h1>
 <% @activities.each do |activity| %>
   <div class="activity">
-    <%= link_to activity.owner.name, activity.owner if activity.owner %>
-	  	<%= User.find(activity.trackable.user).name %>
+		<% if activity.owner %>
+			<% if User.find(activity.trackable.user).profiles.present? %>
+				<%= image_tag User.find(activity.trackable.user).profiles.image.url(:medium), :class => "producer-image", :width => 70 %>
+	    <% end %>
+			<%= link_to activity.owner.name, activity.owner  %>
+		<% else %>
+		<% if User.find(activity.trackable.user).profiles.present? %>
+			<%= image_tag User.find(activity.trackable.user).profiles.image.url(:medium), :class => "producer-image", :width => 70 %>
+    <% end %>
+			<%= link_to User.find(activity.trackable.user).name, user_path((activity.trackable.user).id) %>
+		<% end %>
 			<!-- <%= activity.inspect %> -->
 			<% if activity.trackable_type == "Project" %>
 			<!-- <%= activity.trackable_id %> -->
@@ -10,11 +19,11 @@
 		  	This is a project called <%= Project.find(activity.trackable_id).title %> -->
 				<% if activity.key == "project.create" %>
 				created a Project called 
-				<%= Project.find(activity.trackable_id).title %>
+				<%= link_to Project.find(activity.trackable_id).title, project_path(activity.trackable_id) %>
 				<% end %>
 					<% if activity.key == "project.update" %>
 					updated a Project called 
-					<%= Project.find(activity.trackable_id).title %>
+					<%= link_to Project.find(activity.trackable_id).title, project_path(activity.trackable_id) %>
 					<% end %>
 			<% end %>
 			<% if activity.trackable_type == "Blog" %>
