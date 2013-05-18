@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       format.html # index.html.erb
       format.json { render :json => {
                    :success => true, 
-                   :html => render_to_string(:partial => 'user_search_results', 
+                   :html => render_to_string(:partial => '/users/user_search_results.html.erb', 
                                              :layout => false, :formats => [:html], :locals => {} ) 
                   } }
     end

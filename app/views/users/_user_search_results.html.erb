@@ -74,7 +74,7 @@
       <!-- Message Modal --> 
       <% end %>
       <div class="follow-button">
-        <%= render :partial => "follow_button", :locals => {:user => user} %>
+        <%= render :partial => "/application/follow_button.html.erb", :locals => {:user => user} %>
       </div>
       <div class="follow-count">
         <span class="fan-count" data-user-id="<%= user.id%>"><%= Friendship.where( :friend_id => user.id).count %></span> Fans
