@@ -86,7 +86,7 @@ var Projects = {
         }
       });
       
-      $('#project_search .icon-search').on('click', Projects.Index.ajaxSearch);
+      $('.projects-search .icon-search').on('click', Projects.Index.ajaxSearch);
       
     },
     
@@ -94,10 +94,10 @@ var Projects = {
       var searchTerm = $('.project-title-input').val();  
       var searchLocation = $('.location-input').val();
       var searchRoles = $('.roles-input').val();
-      var searchGenres = $('.genres-input').val()
+      var searchGenres = $('.genres-input').val();
       var searchRole, searchGenre;
-      if(searchRoles !== null) { searchRole = searchRoles[0]; }
-      if(searchGenres !== null) { searchGenre = searchGenres[0]; }
+      if(searchRoles !== null) { searchRole = searchRoles[0]; } // Right now we can only search for one role
+      if(searchGenres !== null) { searchGenre = searchGenres[0]; } // Right now we can only search for one genre
       
       /* Do the ajax call to get results from the server */
       $.ajax({

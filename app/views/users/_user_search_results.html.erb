@@ -41,7 +41,7 @@
     <div class="row-fluid headline">
       <span class="headline-content">
         <% if user.headline.present? %>
-          <%= shorten :text => user.headline, :length => 100, :partial => "more_headline", :counter => counter %>
+          <%= shorten :text => user.headline, :length => 100, :partial => "more_headline.html.erb", :counter => counter %>
           <!-- Headline Modal -->
             <div id="headline-modal-<%= counter %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-header left-aligned">

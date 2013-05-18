@@ -130,7 +130,7 @@
               <%= talent_field.label "Talent", :class => 'control-label' %>
               <div class="controls">
                 <%= talent_field.check_box :_destroy %> Click Here to Delete
-                <%= talent_field.select(:name, [['Actor'], ['Producer'], ['Director'], ['Technical'], ['Stuntmen'], ['Fan'], ['Talent Manager']], {}, {:class => 'talent-select', :'data-index' => index})%>
+                <%= talent_field.select(:name, @talents, {}, {:class => 'talent-select', :'data-index' => index})%>
               </div>
             </div>
             <% end %>

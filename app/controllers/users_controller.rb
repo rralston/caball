@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     @search = User.search(params[:q])
     @users = @search.result
     @search.build_condition
+    user_fields
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => {
@@ -79,7 +80,8 @@ class UsersController < ApplicationController
      @user = User.find(params[:id])
      if @user.characteristics.nil?
         @user.build_characteristics
-      end
+     end
+     user_fields
      @videos = @user.videos
      # unless @videos.first.present?
      #   3.times do
@@ -140,6 +142,10 @@ class UsersController < ApplicationController
      if params[:q]
        redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return   
      end
+  end
+  
+  def user_fields
+     @talents = {'Actor' => 'Actor', 'Producer' => 'Producer', 'Director' => 'Director', 'Technical' => 'Technical', 'Stuntmen' => 'Stuntmen', 'Fan' => 'Fan', 'Talent Manager' => 'Talent Manager'}
   end
 end
 
