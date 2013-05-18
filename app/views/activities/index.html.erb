@@ -1,5 +1,6 @@
 <h1>Friends' Activities</h1>
 <% @activities.each do |activity| %>
+  <% if not activity.trackable.nil? %>
   <div class="activity">
 		<% if activity.owner %>
 			<% if User.find(activity.trackable.user).profiles.present? %>
@@ -38,4 +39,5 @@
 				<% end %>
 			<% end %>
 	</div>
+	<% end %>
 <% end %>
