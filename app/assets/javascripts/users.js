@@ -308,11 +308,11 @@ var Users = {
         if(e.charCode == 13) {
           
           Users.Index.ajaxSearch();
-
+          return false;
         }
       });
       
-       $('.users-search .icon-search').on('click', Users.Index.ajaxSearch);
+      $('.users-search .icon-search').on('click', function() {Users.Index.ajaxSearch();});
       
     },
     
