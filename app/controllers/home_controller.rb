@@ -4,6 +4,7 @@ class HomeController < ApplicationController
   def index
     @projects = Project.where(:featured => true).first(3)
     @users = User.where(:featured => true).first(3)
+    @activities = PublicActivity::Activity.order("created_at desc").where(owner_id: current_user.friend_ids, owner_type: "User")
   end
 
   def about
