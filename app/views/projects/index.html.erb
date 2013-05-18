@@ -23,6 +23,11 @@
             <%= f.text_field :location_cont, :placeholder => 'Location' , :class => 'location-input' 
             %>
           </div>
+          <div class="field type">
+            <h3>Type</h3>
+            <%= f.select(:is_type_cont, options_for_select(@is_type), {}, {:multiple=> true, :size => @is_type.length, :class => 'is-type-input' })
+            %>
+          </div>
           <div class="field roles">
             <h3>Open Roles</h3>
             <%= f.select(:roles_name_cont, options_for_select(@talents), {}, {:multiple=> true, :size => 5, :class => 'roles-input' })
