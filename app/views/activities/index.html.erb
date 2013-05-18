@@ -3,9 +3,11 @@
   <% if not activity.trackable.nil? %>
   <div class="activity">
 		<% if activity.owner %>
+			<% if activity.trackable %>
 			<% if User.find(activity.trackable.user).profiles.present? %>
 				<%= image_tag User.find(activity.trackable.user).profiles.image.url(:medium), :class => "producer-image", :width => 70 %>
 	    <% end %>
+	<% end %>
 			<%= link_to activity.owner.name, activity.owner  %>
 		<% else %>
 		<% if User.find(activity.trackable.user).profiles.present? %>
@@ -31,12 +33,19 @@
 		  	<% if activity.key == "blog.create" %>
 				Posted a status update 
 				<% end %>
+				<% if activity.key == "blog.update" %>
+				Edited a status update 
+				<% end %>
 			<% end %>
 			<% if activity.trackable_type == "Comment" %>
 		  	<% if activity.key == "comment.create" %>
 				Posted a Project update 
 				<%= Project.find(activity.trackable_id).title %>
 				<% end %>
+				<% if activity.key == "comment.update" %>
+		  	Edited a Project update
+				<%= Project.find(activity.trackable_id).title %>
+			<% end %>
 			<% end %>
 	</div>
 	<% end %>
