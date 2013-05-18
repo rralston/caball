@@ -18,7 +18,9 @@ var Users = {
       // For now, only if there aren't errors in the form
       $('#navigation li').on('click', function() {
         if(!$('#formElem').data('errors')){
-          $('#formElem').ajaxSubmit();
+          $('#formElem').ajaxSubmit({
+            dataType: 'json'
+          });
         }
       });
       
@@ -70,9 +72,7 @@ var Users = {
       });
       
       /* Add handler for numerous.js if we're adding additional entries to form so that it resizes 
-         div height
-       */
-            
+         div height */
       Numerous.init({
         'photos-list' : {
           'add' : function(form){

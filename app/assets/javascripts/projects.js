@@ -7,10 +7,61 @@ var Projects = {
   
   Edit: {
     
-    init: function() {
-      console.log('edit project init');
+    init: function() {   
+      Projects.Edit.handlers();
+    },
+    
+    handlers: function() {
+      // When user clicks on tab to go to next part of form, they're data will be uploaded/saved
+      // For now, only if there aren't errors in the form
+      $('#navigation li').on('click', function() {
+        if(!$('#formElem').data('errors')){
+          $('#formElem').ajaxSubmit({
+            dataType: 'json'
+          });
+        }
+      });
       
-      Numerous.init();
+      // For Project Edit form - slides when you press tab on the last input
+      $('#formElem fieldset').each(function() {
+          $this = $(this);
+          $inputField = $this.find('.control-group').last().children().last();
+          $inputField.on('keydown', function(e){
+            if (e.which == 9){          
+              var current = $('#steps').data('index');
+              $('#navigation li:nth-child(' + (parseInt(current)+1) + ') a').click();
+              /* force the blur for validation */
+              $(this).blur();
+              e.preventDefault();
+            }
+        });
+      });
+      
+      // For Project form - if there are errors don't allow the user to submit
+      $('#submit-user-form').bind('click',function(){
+        if($('#formElem').data('errors')){
+          Alert.newAlert('error', 'Please go back and correct any errors.');
+          return false;
+        } 
+      });
+      
+      /* Add handler for numerous.js if we're adding additional entries to form so that it resizes 
+         div height  */
+      Numerous.init({
+        'roles-list' : {
+          'add' : function(form){
+            var current = $('#steps').data('index');
+            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
+            $('#steps').height(stepHeight);
+          },
+  
+          'remove' : function(form){
+            var current = $('#steps').data('index');
+            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
+            $('#steps').height(stepHeight);
+          }
+        },
+      });
     }
   },
   

@@ -94,8 +94,16 @@ class ProjectsController < ApplicationController
    respond_to do |format|
      if @project.save
        format.html { redirect_to @project, :notice => 'Project was successfully created.' }
+       format.json { render :json => {
+                        :success => true, 
+                        :notice => 'Project info was saved' 
+                      } }
      else
        format.html { render :action => "new" }
+       format.json { render :json => {
+                        :success => true, 
+                        :notice => 'Project info was saved' 
+                      } }
      end
    end
  end
@@ -107,8 +115,16 @@ class ProjectsController < ApplicationController
      respond_to do |format|
        if @project.update_attributes(params[:project])
          format.html { redirect_to @project, :notice => @project.title + ' Project was successfully updated.' }
+         format.json { render :json => {
+                        :success => true, 
+                        :notice => 'Project info was saved' 
+                      } }
        else
          format.html { render :action => "edit", :notice => 'Project was not created.' }
+         format.json { render :json => {
+                        :success => true, 
+                        :notice => 'Project info was saved' 
+                      } }
        end
      end
    end

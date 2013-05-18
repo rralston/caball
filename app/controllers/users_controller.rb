@@ -108,8 +108,16 @@ class UsersController < ApplicationController
      respond_to do |format|
        if @user.save
          format.html { redirect_to @user, :notice => 'User was successfully created.' }
+         format.json { render :json => {
+                        :success => true, 
+                        :notice => 'User\'s info was saved' 
+                      } }
        else
          format.html { render :action => "new" }
+         format.json { render :json => {
+                        :success => true, 
+                        :notice => 'User\'s info was saved' 
+                      } }
        end
      end
    end
@@ -121,8 +129,16 @@ class UsersController < ApplicationController
      respond_to do |format|
        if @user.update_attributes(params[:user])
          format.html { redirect_to @user, :notice => @user.name.possessive + ' Profile was successfully updated.' }
+         format.json { render :json => {
+                        :success => true, 
+                        :notice => 'User\'s info was saved' 
+                      } }
        else
          format.html { render :action => "edit", :error => 'User was successfully created.' }
+         format.json { render :json => {
+                        :success => true, 
+                        :notice => 'User\'s info was saved' 
+                      } }
        end
      end
    end
