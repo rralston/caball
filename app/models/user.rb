@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
 
   acts_as_messageable
     
-
+  geocoded_by :location   # can also be an IP address
+  after_validation :geocode          # auto-fetch coordinates
 
   def self.from_omniauth(auth)
   where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
