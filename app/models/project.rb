@@ -10,6 +10,9 @@ class Project < ActiveRecord::Base
   accepts_nested_attributes_for :roles, :photos, :videos, :allow_destroy => true  
   validates_presence_of :title, :description, :message => "is required"
   
+  geocoded_by :location   # can also be an IP address
+  after_validation :geocode          # auto-fetch coordinates
+  
   def roles_percent
     total_roles = roles.length
     filled_roles = 0
