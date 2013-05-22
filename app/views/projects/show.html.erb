@@ -56,7 +56,7 @@
             </div>
             <div class="project-details-content">
               <span class="project-detail">
-                <%= if @project.genre.present? then @project.genre end %>
+                <% if @project.genre.present? %><%= @project.genre %><% end %>
               </span>
               <span class="project-detail">
                 <%= if @project.status.present? then @project.status end %>
