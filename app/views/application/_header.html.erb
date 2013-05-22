@@ -100,8 +100,8 @@
                 <% end %>
                 <ul class="dropdown-menu">    
                   <li>
-										<% if @activities.present? %>
-                    <%= render :partial => 'activities', :locals => {:activities => @activities} %>
+										<% if activities %>
+                      <%= render :partial => 'activities', :locals => {:activities => (activities.first(5))} %>
 										<% end %>
                   </li>
                 </ul>
