@@ -191,6 +191,50 @@
         </div>
         <% end %>
       </div>
+      <% accordion_counter = 0 %>
+      <% modal_counter = 0 %>
+      <div class="span12 roles-details accordion" id="role-accordion">
+        <div class="accordion-group">
+          <% @sorted_roles.each do |role_name, role_array| %>
+          <div class="role-box">
+            <div class="role-type-title accordion-heading">
+              <a data-toggle="collapse" data-parent="#role-accordion" data-target= "#collapse-<%= accordion_counter %>" href="#collapse-<%= accordion_counter %>">
+                <h3><%= role_name %></h3>
+              </a>
+            </div>
+            <div id="collapse-<%= accordion_counter %>" class="accordion-body collapse role-type-content <%= accordion_counter == 0  ? 'in' : '' %>">
+              <% @sorted_roles[role_name][:role_list].each_with_index do |role, counter| %>
+              <% if counter % 4 == 0 and counter != 0%>
+              <hr class="hrule"></hr>
+              <% end %>
+              <div class="role span3">
+                <div class="role-title">
+                  <%= role.subrole %>
+                </div>
+                <div class="button btn btn-inverse info-button" data-toggle="modal" data-target="#role-modal-<%= modal_counter %>" data-keyboard="true" >
+                  Info
+                </div>
+                <!-- Role Info Modal -->
+                  <div id="role-modal-<%= modal_counter %>" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <% modal_counter += 1 %>
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h3><span><%= role.subrole%></span></h3>
+                    </div>
+                    <div class="modal-body">
+                      <%= simple_format role.description %>
+                    </div>
+                  </div>
+                  <!-- Role Info Modal -->
+              </div>            
+              <% end %>
+              <% accordion_counter += 1 %>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
