@@ -186,7 +186,9 @@
       </div>
       <div class="clearfix"></div>
       <div class="span12 role-circles">
+        <% accordion_target = 0 %>
         <% @sorted_roles.each do |role_name, role_array| %>
+        <a data-toggle="collapse" data-parent="#role-accordion" data-target="#collapse-<%= accordion_target %>" href="#collapse-<%= accordion_target %>">
         <div class="role-circle-container">
           <span class="role-title"><%= role_name %></span>
           <div class="role-circle">
@@ -195,6 +197,8 @@
           <div class="circle-measure circle-measure-<%= ((@sorted_roles[role_name][:filled_count] / @sorted_roles[role_name][:total_count].to_f) * 10).to_i %>"></div>
           <span class="role-count"><%= @sorted_roles[role_name][:filled_count]%>/<%= @sorted_roles[role_name][:total_count]%></span>
         </div>
+        </a>
+        <% accordion_target+=1 %>
         <% end %>
       </div>
       <% accordion_counter = 0 %>
@@ -217,6 +221,7 @@
                 <div class="role-title">
                   <%= role.subrole %>
                 </div>
+                <%= image_tag 'actor_icon.png' %>
                 <div class="button btn btn-inverse info-button" data-toggle="modal" data-target="#role-modal-<%= modal_counter %>" data-keyboard="true" >
                   Info & Apply
                 </div>
