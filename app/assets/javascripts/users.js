@@ -16,6 +16,7 @@ var Users = {
       
       // When user clicks on tab to go to next part of form, they're data will be uploaded/saved
       // For now, only if there aren't errors in the form
+      /* We are scrapping this for now
       $('#navigation li').on('click', function() {
         if(!$('#formElem').data('errors')){
           $('#formElem').ajaxSubmit({
@@ -23,6 +24,7 @@ var Users = {
           });
         }
       });
+      */
       
       // For User Edit form - slides when you press tab on the last input
       $('#formElem fieldset').each(function() {
