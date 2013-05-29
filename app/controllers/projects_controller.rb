@@ -89,6 +89,8 @@ class ProjectsController < ApplicationController
   end
   
  def create
+   search
+   project_fields
    @project = Project.new(params[:project])
    @project.user_id = current_user.id
    respond_to do |format|
