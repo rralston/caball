@@ -155,11 +155,10 @@
             <% end %>
 
             <%= f.fields_for :characteristics_attributes do |c|   %>
-            <% if @user.talents.first.name.downcase == 'actor' or @user.talents.second.name.downcase == 'actor' %>
+
+						
             <div class="row-fluid actor-characteristics">
-            <% else %>
-            <div class="row-fluid actor-characteristics hidden">
-            <% end %>
+						
               <h3>Physical Characteristics</h3>
               <div class="span4">
                 <div class="control-group">
