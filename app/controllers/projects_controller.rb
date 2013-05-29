@@ -112,6 +112,7 @@ class ProjectsController < ApplicationController
      # correct_project_owner?
      # Define Security Measures
      @project = Project.find(params[:id])
+
      respond_to do |format|
        if @project.update_attributes(params[:project])
          format.html { redirect_to @project, :notice => @project.title + ' Project was successfully updated.' }
@@ -127,6 +128,8 @@ class ProjectsController < ApplicationController
                       } }
        end
      end
+     rescue ActiveRecord::RecordNotFound
+         redirect_to :action => 'show'
    end
 
    def destroy
