@@ -217,7 +217,7 @@
                   <%= role.subrole %>
                 </div>
                 <div class="button btn btn-inverse info-button" data-toggle="modal" data-target="#role-modal-<%= modal_counter %>" data-keyboard="true" >
-                  Info
+                  Info & Apply
                 </div>
                 <!-- Role Info Modal -->
                   <div id="role-modal-<%= modal_counter %>" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -228,6 +228,12 @@
                     </div>
                     <div class="modal-body">
                       <%= simple_format role.description %>
+											<% if current_user %>
+											<%= link_to 'Apply', new_conversation_path(:recipient => User.find(@project.user_id).email, :subject => role.name+"-"+@project.title ), class: "btn btn-small btn-success" %>
+											<% else %>
+											<%= link_to "Sign In to Apply!", "/auth/facebook", id: "sign_in", class: "btn btn-small btn-success" %>
+											
+											<% end %>
                     </div>
                   </div>
                   <!-- Role Info Modal -->
