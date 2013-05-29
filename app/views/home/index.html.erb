@@ -2,7 +2,9 @@
   <div class="container-fluid lunchbox-container">
     <div class="home-header">
       <h1>FILM <span class="white-text">BEGINS</span> HERE</h1>
-      <span class="start-creating">Start Creating, Free!</span>
+      <%= link_to "/auth/facebook", id: "sign_in" do %>
+				<span class="start-creating">Start Creating, Free!</span>
+			<% end %>
       <div class="lunchbox-caption">
         Filmaking requires a lot of people with different talents. Filmzu takes the headache out of searching for them,
         and brings them all to one place. See how easy Filmzu makes creating premium video content.
