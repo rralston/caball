@@ -94,14 +94,14 @@
             <div class="control-group">
             <%= p.label :genre, :class => 'control-label' %>
               <div class="controls">
-                <%= p.select(:genre, options_for_select(@genres, @project.genre), {}, {:multiple => true, :size => 3 }) %>
+                <%= p.select(:genre, options_for_select(@genres, @project.genre), {}, {:multiple => false, :size => 3 }) %>
               </div>
             </div>
           
             <div class="control-group">
             <%= p.label 'Type', :class => 'control-label' %>
               <div class="controls">
-                <%= p.select(:is_type, options_for_select(@is_type, @project.is_type), {}, {:multiple => true, :size => 3 }) %>
+                <%= p.select(:is_type, options_for_select(@is_type, @project.is_type), {}, {:multiple => false, :size => 3 }) %>
               </div>
             </div>
           </div>
