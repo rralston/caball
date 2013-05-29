@@ -141,6 +141,8 @@ class UsersController < ApplicationController
                       } }
        end
      end
+     rescue ActiveRecord::RecordNotFound
+          redirect_to :action => 'show'
    end
 
    def destroy
