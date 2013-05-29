@@ -35,14 +35,10 @@
         </p> 
         <% if blog.user == current_user %> 
           <p>
-<%
-=begin
-%> I'm not sure why these links aren't working...
-          <%= link_to "Edit", edit_project_comment_path(@user, blog) %> |
+
+          <%= link_to "Edit", edit_user_blog_path(@project, blog) %> |
           <%= link_to "Destroy", [@project, blog], method: :delete %>
-<%
-=end
-%>
+
           </p>
         <% end %>
       </div>
