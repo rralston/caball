@@ -42,7 +42,8 @@
         </div>
       </div>
       <div class="message-follow-row row-fluid">
-        <a data-toggle="modal" data-target="#message-modal-<%= counter %>" 
+        <% if current_user %>
+				<a data-toggle="modal" data-target="#message-modal-<%= counter %>" 
               data-remote ="<%= new_conversation_path(:recipient => proj.user.email, :modal => true)%>"
               data-keyboard="true" class="message-button featured-projects-button"><%= image_tag('mail_icon.png') %> Message</a>
         <!-- Message Modal -->
@@ -54,13 +55,15 @@
             <div class="modal-body">
             </div>
           </div>
-        <!-- End Message Modal --> 
+        <!-- End Message Modal --> <% end %>
         <div class="follow-count featured-projects-button">
           <span class="fan-count" data-user-id="<%= proj.user.id %>"><%= Friendship.where( :friend_id => proj.user.id).count %></span> Followers
         </div>
-        <div class="follow-button featured-projects-button">
-          <%= render :partial => 'follow_button', :locals => {:user => proj.user} %>
-        </div>
+        <% if current_user %>
+					<div class="follow-button featured-projects-button">
+          	<%= render :partial => 'follow_button', :locals => {:user => proj.user} %>
+        	</div>
+				<% end %>
       </div>
       <!-- Projects Description Modal -->
       <div id="projects-description-<%= counter %>" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
