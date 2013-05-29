@@ -250,11 +250,11 @@
         <fieldset class="step producers-corner">
           <div class="span12">
             <h2>Producer's Corner</h2>
-            
+            <h3>Please keep this under 250 Characters</h3>
             <div class="control-group">
             <%= p.label :thoughts, :class => 'control-label' %>
               <div class="controls">
-              <%= p.text_area :thoughts, :class => 'textarea', :rows => "5" %> 
+              <%= p.text_area :thoughts, :class => 'textarea', :maxlength => 250, :rows => "5" %> 
               </div>
             </div>
             
