@@ -21,11 +21,11 @@
         This is a project called <%= Project.find(activity.trackable_id).title %> -->
         <% if activity.key == "project.create" %>
         created a Project called 
-        <%= link_to Project.find(activity.trackable_id).title, project_path(activity.trackable_id) %>
+        <%= link_to Project.find(activity.trackable.project.id).title, project_path(activity.trackable.project.id) %>
         <% end %>
           <% if activity.key == "project.update" %>
           updated a Project called 
-          <%= link_to Project.find(activity.trackable_id).title, project_path(activity.trackable_id) %>
+	        <%= link_to Project.find(activity.trackable.project.id).title, project_path(activity.trackable.project.id) %>
           <% end %>
       <% end %>
       <% if activity.trackable_type == "Blog" %>
@@ -38,12 +38,12 @@
       <% end %>
       <% if activity.trackable_type == "Comment" %>
         <% if activity.key == "comment.create" %>
-        Posted a Project update 
-        <%= Project.find(activity.trackable_id).title %>
+        Posted a Project update to
+        <%= link_to Project.find(activity.trackable.project.id).title, project_path(activity.trackable.project.id) %>
         <% end %>
         <% if activity.key == "comment.update" %>
-        Edited a Project update
-        <%= Project.find(activity.trackable_id).title %>
+        Edited a Project update on
+        <%= link_to Project.find(activity.trackable.project.id).title, project_path(activity.trackable.project.id) %>
       <% end %>
       <% end %>
   </div>
