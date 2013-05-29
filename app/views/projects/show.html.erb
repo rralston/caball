@@ -22,7 +22,8 @@
           </div>
 					<% if current_user %>
 					<% if current_user.id == @project.user_id %>
-					<%= link_to "Edit", edit_project_url(@project), :class => 'btn btn-small btn-primary' %>
+					<%= link_to edit_project_url(@project), :class => 'btn btn-small btn-primary' do %>
+					<i class="icon-wrench icon-white"></i> Edit<% end %>
 					<% end %>
 					<% end %>
         </div>
