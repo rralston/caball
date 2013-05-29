@@ -36,7 +36,8 @@
                 <% end %>
               </div>
               <div class="span5 centered-text details">
-                <h3><% if @user.name.present?%><%= @user.name %><% end %></h3>
+                <h3><% if @user.name.present?%><%= @user.name %><% end %><% if @user.imdb_url.present? %><%= link_to @user.imdb_url, :class => 'btn btn-mini btn-warning' do %>
+								<i class="icon-star icon-white"> IMDB</i><% end %><% end %></h3>
                 <% if @user.location.present? %>
                   <span data-toggle="modal" data-target="#location-modal" data-keyboard="true" class="location-modal-button">
                      <%= @user.location %>
