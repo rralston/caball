@@ -36,7 +36,7 @@
         <% if blog.user == current_user %> 
           <p>
 
-          <%= link_to "Edit", edit_user_blog_path(@project, blog) %> |
+          <%= link_to "Edit", edit_project_comment_path(@project, blog) %> |
           <%= link_to "Destroy", [@project, blog], method: :delete %>
 
           </p>
