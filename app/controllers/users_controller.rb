@@ -107,6 +107,7 @@ class UsersController < ApplicationController
      # end
      respond_to do |format|
        if @user.save
+         UserMailer.signup_confirmation(@user).deliver
          format.html { redirect_to @user, :notice => 'User was successfully created.' }
          format.json { render :json => {
                         :success => true, 

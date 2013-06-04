@@ -70,7 +70,7 @@ gem 'hpricot'
 gem 'omniauth-facebook'
 
 #Messaging
-gem 'mailboxer'
+gem 'mailboxer', github: 'rralston/mailboxer'
 gem 'haml-rails'
 gem 'simple_form'
 
