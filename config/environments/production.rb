@@ -47,7 +47,7 @@ Caball::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  # config.action_controller.asset_host = "http://assets.example.com"
+   config.action_controller.asset_host = "https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += %w( admin/admin.css admin/*.js )
@@ -68,4 +68,18 @@ Caball::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+  
+  # Change mail delvery to either :smtp, :sendmail, :file, :test
+  config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+                     :address        => "smtp.gmail.com",
+                     :port           => 587,
+                     :authentication => :plain,
+                     :user_name      => "notifications@filmzu.com",
+                     :password       => "Filmzuexperiences",
+                     :openssl_verify_mode  => 'none'
+   }
+  
+  # Change when Push to the Website or will Error out
+  config.action_mailer.default_url_options = { :host => 'mysterious-brook-4528.herokuapp.com' }
 end

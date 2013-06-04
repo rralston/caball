@@ -21,11 +21,11 @@
 
 <body class="theme" data-controller="<%= controller_name %>" data-action="<%= action_name %>">
     
+  <div id="wrap">
   <%= render 'header' %>
-
-  <div id="content" role="main">
-	  
-    <%= yield %>
+    <div id="<%= controller_name %>-<%= action_name %>" role="main" class="main-content">
+      <%= yield %>
+    </div>
   </div>
 
   <%= render 'footer' %>

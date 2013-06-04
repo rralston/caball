@@ -1,17 +1,20 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
   #News Feed
   include PublicActivity::StoreController
+  protect_from_forgery
   
   before_filter :subdomain_view_path
   helper_method :current_user
   hide_action :current_user
-  helper_method :notification
+  helper_method :notification  
+  helper_method :activities
   # Security & Authentication
   helper_method :user_signed_in?
   helper_method :correct_user?
   # Search
   helper_method :search
+  
+  
   private
 
   def subdomain_view_path
@@ -29,14 +32,21 @@ class ApplicationController < ActionController::Base
   
   # Project Comments System
   
-    def current_user
-      @current_user ||= User.find(session[:user_id]) if session[:user_id]
-    end
-    helper_method :current_user
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+  helper_method :current_user
 
-    def require_login
-      redirect_to login_url, alert: "You must first log in or sign up." if current_user.nil?
+  def require_login
+    redirect_to login_url, alert: "You must first log in or sign up." if current_user.nil?
+  end
+  
+  
+  def activities
+    if @current_user
+      activities = PublicActivity::Activity.order("created_at desc").where(owner_id: current_user.friend_ids, owner_type: "User")
     end
+  end
   
   #Notification System  
   def notification
@@ -47,6 +57,8 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+  
+  
   
   # Authentication
   

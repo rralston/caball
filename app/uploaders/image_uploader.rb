@@ -11,9 +11,14 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include Sprockets::Helpers::IsolatedHelper
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
-  # storage :fog
+  storage :fog
+  
+  # storage :file Previously before CDN for Heroku
 
+  def cache_dir
+      "#{Rails.root}/tmp/uploads"
+  end
+    
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
@@ -24,12 +29,13 @@ class ImageUploader < CarrierWave::Uploader::Base
   def default_url
     # For Rails 3.1+ asset pipeline compatibility:
     # asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
-  
-    # Profiles doesn't have an "imageable_type", but photos do
-    begin
-      "/images/fallback/#{model.imageable_type}_" + [version_name, "default.png"].compact.join('_')
-    rescue Exception => e
-      "/images/fallback/#{model.class}_" + [version_name, "default.png"].compact.join('_')
+    puts YAML::dump(model)
+    puts YAML::dump(model.respond_to?('imageable_type'))
+    #raise "very confusing ... model.class = " + model.class.to_s + " version = " + version_name
+    if model.respond_to?('imageable_type')
+      "/images/fallback/#{model.imageable_type.to_s}_" + [version_name, "default.png"].compact.join('_')
+    else
+      "/images/fallback/#{model.class.to_s}_" + [version_name, "default.png"].compact.join('_')
     end
   end
 

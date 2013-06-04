@@ -1,5 +1,8 @@
 @import "twitter/bootstrap/bootstrap";
-@import "twitter/bootstrap/responsive";
+
+/* Right now we're going to scrap the responsive stuff until I can figure out 
+/* which sizes its using. */
+/*@import "twitter/bootstrap/responsive";*/
 
 // Set the correct sprite paths
 @iconSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings.png");
@@ -32,3 +35,13 @@
 
 @import "global.css.less";
 @import "prefixer.less";
+
+.activity {
+  border-bottom: solid 1px #CCC;
+  padding: 16px 0;
+  em {
+    color: #777;
+    font-size: 12px;
+    padding-left: 5px;
+  }
+}

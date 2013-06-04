@@ -1,0 +1,51 @@
+<% activities.each do |activity| %>
+  <% if not activity.trackable.nil? %>
+  <div class="activity">
+    <% if activity.owner %>
+      <% if activity.trackable %>
+      <% if User.find(activity.trackable.user).profiles.present? %>
+        <%= image_tag User.find(activity.trackable.user).profiles.image.url(:medium), :class => "producer-image", :width => 70 %>
+      <% end %>
+  <% end %>
+      <%= link_to activity.owner.name, activity.owner  %>
+    <% else %>
+    <% if User.find(activity.trackable.user).profiles.present? %>
+      <%= image_tag User.find(activity.trackable.user).profiles.image.url(:medium), :class => "producer-image", :width => 70 %>
+    <% end %>
+      <%= link_to User.find(activity.trackable.user).name, user_path((activity.trackable.user).id) %>
+    <% end %>
+      <!-- <%= activity.inspect %> -->
+      <% if activity.trackable_type == "Project" %>
+      <!-- <%= activity.trackable_id %> -->
+      <!-- <%= link_to(Project.find(activity.trackable_id).id) %>
+        This is a project called <%= Project.find(activity.trackable_id).title %> -->
+        <% if activity.key == "project.create" %>
+        created a Project called 
+        <%= link_to Project.find(activity.trackable.project.id).title, project_path(activity.trackable.project.id) %>
+        <% end %>
+          <% if activity.key == "project.update" %>
+          updated a Project called 
+	        <%= link_to Project.find(activity.trackable.project.id).title, project_path(activity.trackable.project.id) %>
+          <% end %>
+      <% end %>
+      <% if activity.trackable_type == "Blog" %>
+        <% if activity.key == "blog.create" %>
+        Posted a status update 
+        <% end %>
+        <% if activity.key == "blog.update" %>
+        Edited a status update 
+        <% end %>
+      <% end %>
+      <% if activity.trackable_type == "Comment" %>
+        <% if activity.key == "comment.create" %>
+        Posted a Project update to
+        <%= link_to Project.find(activity.trackable.project.id).title, project_path(activity.trackable.project.id) %>
+        <% end %>
+        <% if activity.key == "comment.update" %>
+        Edited a Project update on
+        <%= link_to Project.find(activity.trackable.project.id).title, project_path(activity.trackable.project.id) %>
+      <% end %>
+      <% end %>
+  </div>
+  <% end %>
+<% end %>

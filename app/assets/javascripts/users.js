@@ -16,11 +16,15 @@ var Users = {
       
       // When user clicks on tab to go to next part of form, they're data will be uploaded/saved
       // For now, only if there aren't errors in the form
+      /* We are scrapping this for now
       $('#navigation li').on('click', function() {
         if(!$('#formElem').data('errors')){
-          $('#formElem').ajaxSubmit();
+          $('#formElem').ajaxSubmit({
+            dataType: 'json'
+          });
         }
       });
+      */
       
       // For User Edit form - slides when you press tab on the last input
       $('#formElem fieldset').each(function() {
@@ -70,11 +74,22 @@ var Users = {
       });
       
       /* Add handler for numerous.js if we're adding additional entries to form so that it resizes 
-         div height
-       */
-            
+         div height */
       Numerous.init({
         'photos-list' : {
+          'add' : function(form){
+            var current = $('#steps').data('index');
+            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
+            $('#steps').height(stepHeight);
+          },
+  
+          'remove' : function(form){
+            var current = $('#steps').data('index');
+            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
+            $('#steps').height(stepHeight);
+          }
+        },
+        'videos-list' : {
           'add' : function(form){
             var current = $('#steps').data('index');
             var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
@@ -97,7 +112,8 @@ var Users = {
       console.log("init show users");   
       Users.Show.handlers();
       Users.Show.modalHandlers();
-      $('div[data-link=about_me]').trigger('click');
+      
+      $('span[data-link=updates]').trigger('click');
     },
     
     handlers: function () {
@@ -106,6 +122,42 @@ var Users = {
         var link = $(this).data('link');
         Users.Show.displayContent(link, $(this));
       });
+    },
+    
+    styleUpdates: function() {
+      function rearrangeImages() {
+        var baseRowOffset = 60;
+        var deviationRowOffset = 100;
+        
+        $('.blog-post').each(function(index) {
+          if(index % 2 == 1) {
+            var offset = baseRowOffset + (Math.random() * deviationRowOffset);
+            $(this).css('margin-top', offset + 'px');
+          }
+        });
+        
+        /* In order to handle really tall images */
+       $('.blog-post').each(function(index) {
+         if(index > 1) {
+           var diff = $(this).offset().top - ($('.blog-post').eq(index - 2).offset().top + $('.blog-post').eq(index - 2).height());
+           if(diff < 0) {
+             $('.blog-post').eq(index-1).css('margin-bottom', (diff * -1) + 'px');
+           }
+         }
+       });
+        
+        $('.blog-circle').not('.blog-circle-top').each(function(index) {
+          
+          var top = $('.blog-arrow').eq(index).offset().top - $('.drawer-content').offset().top;
+          
+          $(this).css('top', top);
+          
+        });
+      }
+      
+      
+      $(window).load(rearrangeImages);
+      rearrangeImages();
     },
     
     displayContent: function(link, menuItem) {
@@ -131,6 +183,9 @@ var Users = {
             
             if($(this).data('link') === 'reel')
               Global.initFlow();
+              
+            if($(this).data('link') === 'updates')
+              Users.Show.styleUpdates();
             
           }
             
@@ -146,28 +201,6 @@ var Users = {
     
     modalHandlers: function () {
       
-      /* So that the messaging modal sizes appropriately */
-      $('#message-modal').on('show', function () {
-        $(this).css({
-        'margin-left': function () {
-            return -($(this).width() / 2);
-          }
-        });
-      });
-      
-      
-      /* Event listeners for messaging modal buttons */
-      $('#message-modal').on('shown', function () {
-        $('input[value="Cancel"]').on('click', function () {
-          $('#message-modal').modal('hide');
-          return false;
-        });
-        
-        $('#message-modal').on('hidden', function () {
-          $('input[value="Cancel"]').off('click');
-        });
-      });
-      
       /* Photo carousel for the photos modal */
       $('#photos-modal').on('shown', function () {
         $('#photoCarousel').carousel(0);
@@ -180,55 +213,6 @@ var Users = {
           }
         });
       });
-      
-      $('.follow').on('click', ajaxFollow);
-      
-      function ajaxFollow() {
-        $(this).button('loading');
-        $.ajax({
-          url: $(this).attr('href'),
-          type: $(this).data('method').toUpperCase(),
-          contentType: 'application/json; charset=utf-8',
-          success: function (data) {
-              if(data.success) {
-                if(data.created) {
-                  
-                   // We have to update which friendship to remove now
-                  newId = data.friendship.id;
-                  $('.follow.stop-following').attr('href', '/friendships/' + newId);
-                  $('#bootstrap-alert-placeholder').html('<div class="alert alert-success"><a class="close" data-dismiss="alert">×</a><span>'+data.notice+'</span></div>');
-                  $('.follow').button('reset');
-                  $('.follow.stop-following').removeClass('hidden');
-                  $('.follow.start-following').addClass('hidden');
-                  
-                  $('.alert').alert();
-                  // We have to set our own timeout for closing the alert
-                  window.setTimeout(function() { $(".alert").alert('close'); }, 2000);
-                }
-                else if (data.destroyed) {
-                  
-                  $('#bootstrap-alert-placeholder').html('<div class="alert fade in"><a class="close" data-dismiss="alert">×</a><span>'+data.notice+'</span></div>');
-                  $('.follow').button('reset');
-                  $('.follow.stop-following').addClass('hidden');
-                  $('.follow.start-following').removeClass('hidden');
-                  
-                  $('.alert').alert();
-                  // We have to set our own timeout for closing the alert
-                  window.setTimeout(function() { $(".alert").alert('close'); }, 2000);
-                }
-                else {
-                  $('.follow').button('reset');
-                  $('#bootstrap-alert-placeholder').html('<div class="alert fade in alert-error"><a class="close" data-dismiss="alert">×</a><span>There was a problem following. Please try again...</span></div>');
-                }
-              }
-          },
-          error: function () {
-            $('.follow').button('reset');
-            $('#bootstrap-alert-placeholder').html('<div class="alert fade in alert-error"><a class="close" data-dismiss="alert">×</a><span>There was a problem following. Please try again...</span></div>');
-          }
-        });
-        return false;
-      }
 
       $('.role-more a').on('click', function () {
         // Now we have to figure out whether we'll display role 1 or role 2
@@ -324,35 +308,49 @@ var Users = {
       /* We want to catch the search input and use ajax to display search results instead */
       $('#user_search input').on( 'keypress', function(e) {
         if(e.charCode == 13) {
-          searchTerm = $(this).val();
           
-          /* Do the ajax call to get results from the server */
-          $.ajax({
-            url: '/users',
-            contentType: "application/json; charset=utf-8",
-            type: 'GET',
-            data: {
-              'q[name_cont]': searchTerm
-            },
-            dataType: 'json',
-            success: function(data) {
-              console.log(data);
-              if(data.success)
-                $('.users-search .search-results').html(data.html);
-              else 
-                Alert.newAlert("error", "There was an error processing your search");
-           
-            },
-            error: function() {
-              Alert.newAlert("error", "There was an error processing your search");
-            }
-          });
+          Users.Index.ajaxSearch();
           return false;
         }
       });
       
+      $('.users-search .icon-search').on('click', function() {Users.Index.ajaxSearch();});
       
-    }
+    },
+    
+    ajaxSearch: function() {
+      var searchTerm = $('.user-title-input').val();  
+      var searchLocation = $('.location-input').val();
+      var searchTalents = $('.talents-input').val();
+      
+      var searchTalent;
+      if(searchTalents !== null) { searchTalent = searchTalents[0]; } // Right now we can only search for one talent
+      /* Do the ajax call to get results from the server */
+      $.ajax({
+        url: '/users',
+        contentType: "application/json; charset=utf-8",
+        type: 'GET',
+        data: {              
+          'q[name_cont]': searchTerm,
+          'q[location_cont]': searchLocation,  
+          'q[talents_name_cont]': searchTalent,          
+        },
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          if(data.success) {
+            $('.users-search .search-results').html(data.html);
+          }
+          else 
+            Alert.newAlert("error", "There was an error processing your search");
+       
+        },
+        error: function() {
+          Alert.newAlert("error", "There was an error processing your search");
+        }
+      });
+      return false;
+    },
     
   }
     
