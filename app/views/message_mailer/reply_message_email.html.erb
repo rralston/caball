@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>You have a new reply: <%= @message.subject.html_safe? ? @message.subject : strip_tags(@message.subject) %></h1>
+    <p>
+      You have received a new reply:
+    </p>
+    <blockquote>
+      <p>
+        <%= raw @message.body %>
+      </p>
+    </blockquote>
+    <p>
+      Reply from <%= link_to User.find(@message.sender_id).name, root_url+user_path(User.find(@message.sender_id)) %>. Please visit <%= link_to "Filmzu.com" ,root_url %> and go to your inbox for more info.
+    </p>
+  </body>
+</html>
