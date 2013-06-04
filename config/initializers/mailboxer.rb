@@ -4,7 +4,7 @@ Mailboxer.setup do |config|
   config.uses_emails = true
   
   #Configures the default from for the email sent for Messages and Notifications of Mailboxer
-  config.default_from = "notifications@filmzu.com"
+  config.default_from = "\"Filmzu Notifications\" <notification@filmzu.com>"
   
   #Configures the methods needed by mailboxer
   config.email_method = :mailboxer_email
