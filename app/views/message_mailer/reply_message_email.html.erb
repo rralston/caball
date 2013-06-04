@@ -14,7 +14,7 @@
       </p>
     </blockquote>
     <p>
-      Visit <%= link_to root_url,root_url %> and go to your inbox for more info.
+      Reply from <%= link_to User.find(@message.sender_id).name, root_url+user_path(User.find(@message.sender_id)) %>. Please visit <%= link_to "Filmzu.com" ,root_url %> and go to your inbox for more info.
     </p>
   </body>
 </html>
