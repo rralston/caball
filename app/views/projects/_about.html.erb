@@ -5,14 +5,14 @@
         <div class="span3">
           <h5>
           <a data-toggle="modal" data-target="#message-modal" 
-                        data-remote ="<%= new_conversation_path(:recipient => User.find(@project.id).email, :modal => true)%>"
+                        data-remote ="<%= new_conversation_path(:recipient => User.find(@project.user_id).email, :modal => true)%>"
                         data-keyboard="true" class="message-button">Message</a>
           </h5>
           <!-- Message Modal -->
             <div id="message-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3><span>Message <%= User.find(@project.id).name.split[0..0].join(" ") %></span></h3>
+                <h3><span>Message <%= User.find(@project.user_id).name.split[0..0].join(" ") %></span></h3>
               </div>
               <div class="modal-body">
               </div>

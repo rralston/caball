@@ -5,76 +5,131 @@ var Projects = {
     console.log("init projects");
   },
   
-  Show: {
-    init: function () {
-      console.log("init show project");   
-      Projects.Show.handlers();
-      
-      /* This breaks if we don't actually have the slider in the html so I'm commenting it out until 
-       * the slider finds a home.
-       */
-      //Projects.Show.initFlow();
-      Projects.Show.modalHandlers();
+  Edit: {
+    
+    init: function() {   
+      Projects.Edit.handlers();
     },
     
     handlers: function() {
-      $(window).resize(Projects.Show.equalHeights);
-      $(window).load(Projects.Show.equalHeights);
-      
-    },
-    
-    modalHandlers: function() {
-      
-      /* So that the messaging modal sizes amodalHandlers: function () {ppropriately */
-      $('#message-modal').on('show', function () {
-        $(this).css({
-        'margin-left': function () {
-            return -($(this).width() / 2);
-          }
+      // When user clicks on tab to go to next part of form, they're data will be uploaded/saved
+      // For now, only if there aren't errors in the form.
+      /* We are scrapping this for now
+      $('#navigation li').on('click', function() {
+        if(!$('#formElem').data('errors')){
+          $('#formElem').ajaxSubmit({
+            dataType: 'json'
+          });
+        }
+      });
+      */
+      // For Project Edit form - slides when you press tab on the last input
+      $('#formElem fieldset').each(function() {
+          $this = $(this);
+          $inputField = $this.find('.control-group').last().children().last();
+          $inputField.on('keydown', function(e){
+            if (e.which == 9){          
+              var current = $('#steps').data('index');
+              $('#navigation li:nth-child(' + (parseInt(current)+1) + ') a').click();
+              /* force the blur for validation */
+              $(this).blur();
+              e.preventDefault();
+            }
         });
       });
       
-      
-      /* Event listeners for messaging modal buttons */
-      $('#message-modal').on('shown', function () {
-        $('input[value="Cancel"]').on('click', function () {
-          $('#message-modal').modal('hide');
+      // For Project form - if there are errors don't allow the user to submit
+      $('#submit-user-form').bind('click',function(){
+        if($('#formElem').data('errors')){
+          Alert.newAlert('error', 'Please go back and correct any errors.');
           return false;
+        } 
+      });
+      
+      /* Add handler for numerous.js if we're adding additional entries to form so that it resizes 
+         div height  */
+      Numerous.init({
+        'roles-list' : {
+          'add' : function(form){
+            var current = $('#steps').data('index');
+            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
+            $('#steps').height(stepHeight);
+          },
+  
+          'remove' : function(form){
+            var current = $('#steps').data('index');
+            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
+            $('#steps').height(stepHeight);
+          }
+        },
+      });
+    }
+  },
+  
+  Show: {
+    
+    init: function () {
+      Projects.Show.handlers();
+      
+      Global.initFlow();
+      Projects.Show.styleUpdates();
+    },
+    
+    handlers: function() {
+      
+      $('.navigate-button').on('click', function() {
+        var target = $(this).data('target');
+        $('html, body').animate({scrollTop: $("#" + target).offset().top}, 2000);
+      });
+    },
+    
+    styleUpdates: function() {
+      
+      function rearrangeImages() {
+        var baseRowOffset = 60;
+        var deviationRowOffset = 100;
+        
+        $('.blog-post').each(function(index) {
+          if(index % 2 == 1) {
+            var offset = baseRowOffset + (Math.random() * deviationRowOffset);
+            $(this).css('margin-top', offset + 'px');
+          }
         });
         
-        $('#message-modal').on('hidden', function () {
-          $('input[value="Cancel"]').off('click');
+        /* In order to handle really tall images */
+       $('.blog-post').each(function(index) {
+         if(index > 1) {
+           var diff = $(this).offset().top - ($('.blog-post').eq(index - 2).offset().top + $('.blog-post').eq(index - 2).height());
+           if(diff < 0) {
+             $('.blog-post').eq(index-1).css('margin-bottom', (diff * -1) + 'px');
+           }
+         }
+       });
+        
+        $('.blog-circle').not('.blog-circle-top').each(function(index) {
+          
+          var top = $('.blog-arrow').eq(index).offset().top - $('#comments').offset().top;
+          
+          $(this).css('top', top);
+          
         });
-      });
-    },
-    
-    /* This resizes the roles boxes so that they're all equal height and have equal proportions */
-    equalHeights: function() {
+      }
       
-      var maxHeight=0;
-      $('.roles-row .roles .well').height('auto');
-      $('.roles-row .roles .well').each(function(){
-          if($(this).height()>maxHeight){
-              maxHeight=$(this).height();
-          }
-      });
-     
-      $('.roles-row .roles .well').height(maxHeight);
-    }
+      
+      $(window).load(rearrangeImages);
+      rearrangeImages();
+    },
     
   },
   
   Index: {
     
     init: function() {
-      console.log("Project search init");
       Projects.Index.handlers();
-      Projects.Index.modalHandlers();
       
     },
     
     handlers: function() {
-      console.log("projects handlers init");
       
       /* We want to catch the search input and use ajax to display search results instead */
       $('#project_search input').on( 'keypress', function(e) {
@@ -83,46 +138,18 @@ var Projects = {
         }
       });
       
-      $('#project_search .icon-search').on('click', Projects.Index.ajaxSearch);
+      $('.projects-search .icon-search').on('click', Projects.Index.ajaxSearch);
       
-      $(window).load(Projects.Index.equalHeights);
-      $(window).resize(Projects.Index.equalHeights);
-      
-    },
-    
-    modalHandlers: function() {
-      
-      /* So that the messaging modal sizes amodalHandlers: function () {ppropriately */
-      $('#message-modal').on('show', function () {
-        $(this).css({
-        'margin-left': function () {
-            return -($(this).width() / 2);
-          }
-        });
-      });
-      
-      
-      /* Event listeners for messaging modal buttons */
-      $('#message-modal').on('shown', function () {
-        $('input[value="Cancel"]').on('click', function () {
-          $('#message-modal').modal('hide');
-          return false;
-        });
-        
-        $('#message-modal').on('hidden', function () {
-          $('input[value="Cancel"]').off('click');
-        });
-      });
     },
     
     ajaxSearch: function() {
       var searchTerm = $('.project-title-input').val();  
       var searchLocation = $('.location-input').val();
       var searchRoles = $('.roles-input').val();
-      var searchGenres = $('.genres-input').val()
+      var searchGenres = $('.genres-input').val();
       var searchRole, searchGenre;
-      if(searchRoles !== null) { searchRole = searchRoles[0]; }
-      if(searchGenres !== null) { searchGenre = searchGenres[0]; }
+      if(searchRoles !== null) { searchRole = searchRoles[0]; } // Right now we can only search for one role
+      if(searchGenres !== null) { searchGenre = searchGenres[0]; } // Right now we can only search for one genre
       
       /* Do the ajax call to get results from the server */
       $.ajax({
@@ -132,7 +159,7 @@ var Projects = {
         data: {              
           'q[title_cont]': searchTerm,
           'q[location_cont]': searchLocation,
-          'q[roles_id_eq]': searchRole,
+          'q[roles_name_eq]': searchRole,
           'q[genre_cont]': searchGenre
           
         },
@@ -153,28 +180,6 @@ var Projects = {
       });
       return false;
     },
-    
-    /* This resizes the project boxes so that they're all equal height and have equal proportions */
-    equalHeights: function() {
-      
-      var maxHeight=0;
-      $('.projects-search .projects-box').height('auto');
-      $('.projects-search .projects-box').each(function(){
-          if($(this).height()>maxHeight){
-              maxHeight=$(this).height();
-          }
-      });
-      
-      $('.projects-search .projects-box .project-description').height('auto');
-      $('.projects-search .projects-box').height(maxHeight);
-      maxHeight = 0;
-      $('.projects-search .projects-box .project-description').each(function(){
-          if($(this).height()>maxHeight){
-              maxHeight=$(this).height();
-          }
-      });
-      $('.projects-search .projects-box .project-description').height(maxHeight);
-    }
   }
   
 }

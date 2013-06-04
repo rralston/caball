@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '1.9.3'
+
 gem 'rails', '3.2.8'
 
 # Bundle edge Rails instead:
@@ -7,6 +9,8 @@ gem 'rails', '3.2.8'
 
 gem 'pg'
 
+# Ok lets try out the heroku business
+gem 'heroku'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -66,7 +70,7 @@ gem 'hpricot'
 gem 'omniauth-facebook'
 
 #Messaging
-gem 'mailboxer'
+gem 'mailboxer', github: 'rralston/mailboxer'
 gem 'haml-rails'
 gem 'simple_form'
 
@@ -87,3 +91,9 @@ gem 'newrelic_rpm'
 
 #FB Style Newsfeeds
 gem 'public_activity'
+
+# Heroku CDN Link to AWS
+gem "asset_sync"
+
+# Carrier Wave link to AWS S#
+gem 'fog'

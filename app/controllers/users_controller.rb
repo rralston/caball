@@ -8,11 +8,12 @@ class UsersController < ApplicationController
     @search = User.search(params[:q])
     @users = @search.result
     @search.build_condition
+    user_fields
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => {
                    :success => true, 
-                   :html => render_to_string(:partial => 'user_search_results', 
+                   :html => render_to_string(:partial => '/users/user_search_results.html.erb', 
                                              :layout => false, :formats => [:html], :locals => {} ) 
                   } }
     end
@@ -79,7 +80,8 @@ class UsersController < ApplicationController
      @user = User.find(params[:id])
      if @user.characteristics.nil?
         @user.build_characteristics
-      end
+     end
+     user_fields
      @videos = @user.videos
      # unless @videos.first.present?
      #   3.times do
@@ -91,6 +93,7 @@ class UsersController < ApplicationController
      end
      unless @user.talents.exists?
        @user.talents.build
+       @user.talents.build 
      end
      # if @user.talents.second.nil?
      #   @user.talents.second.build
@@ -104,9 +107,18 @@ class UsersController < ApplicationController
      # end
      respond_to do |format|
        if @user.save
+         UserMailer.signup_confirmation(@user).deliver
          format.html { redirect_to @user, :notice => 'User was successfully created.' }
+         format.json { render :json => {
+                        :success => true, 
+                        :notice => 'User\'s info was saved' 
+                      } }
        else
          format.html { render :action => "new" }
+         format.json { render :json => {
+                        :success => true, 
+                        :notice => 'User\'s info was saved' 
+                      } }
        end
      end
    end
@@ -118,10 +130,20 @@ class UsersController < ApplicationController
      respond_to do |format|
        if @user.update_attributes(params[:user])
          format.html { redirect_to @user, :notice => @user.name.possessive + ' Profile was successfully updated.' }
+         format.json { render :json => {
+                        :success => true, 
+                        :notice => 'User\'s info was saved' 
+                      } }
        else
          format.html { render :action => "edit", :error => 'User was successfully created.' }
+         format.json { render :json => {
+                        :success => true, 
+                        :notice => 'User\'s info was saved' 
+                      } }
        end
      end
+     rescue ActiveRecord::RecordNotFound
+          redirect_to :action => 'show'
    end
 
    def destroy
@@ -139,6 +161,10 @@ class UsersController < ApplicationController
      if params[:q]
        redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return   
      end
+  end
+  
+  def user_fields
+     @talents = {'Actor' => 'Actor', 'Producer' => 'Producer', 'Director' => 'Director', 'Technical' => 'Technical', 'Stuntmen' => 'Stuntmen', 'Fan' => 'Fan', 'Talent Manager' => 'Talent Manager'}
   end
 end
 
