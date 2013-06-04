@@ -45,7 +45,7 @@ Caball::Application.configure do
                      :address        => "smtp.gmail.com",
                      :port           => 587,
                      :authentication => :plain,
-                     :user_name      => "notifications@filmzu.com",
+                     :user_name      => "notification@filmzu.com",
                      :password       => "Filmzuexperiences",
                      :openssl_verify_mode  => 'none'
    }
