@@ -1,4 +1,6 @@
 Caball::Application.routes.draw do
+  resources :search_suggestions
+
   get "activities/index"
 
   match "/skills(/*path)" => redirect{ |params| "http://skills.filmzu.com" + (params[:path] ? "#{params[:path]}" : '/')}  

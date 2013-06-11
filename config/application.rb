@@ -65,5 +65,8 @@ module Caball
 
     # Precompile additional asset types
     config.assets.precompile += %w( .svg .eot .woff .ttf )
+    
+    # Circumvent Middleware for Faster Search Auto-Complete
+    config.middleware.insert_before 0, "SearchSuggestions"
   end
 end
