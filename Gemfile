@@ -97,3 +97,6 @@ gem "asset_sync"
 
 # Carrier Wave link to AWS S#
 gem 'fog'
+
+# Performance Testing
+gem 'rack-mini-profiler'
