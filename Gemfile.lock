@@ -162,6 +162,7 @@ GEM
     mime-types (1.22)
     multi_json (1.7.2)
     multipart-post (1.2.0)
+    mysql2 (0.3.11)
     net-scp (1.1.0)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.1)
@@ -186,7 +187,6 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    pg (0.15.1)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
@@ -317,9 +317,9 @@ DEPENDENCIES
   kaminari
   less-rails
   mailboxer!
+  mysql2
   newrelic_rpm
   omniauth-facebook
-  pg
   possessive
   public_activity
   rails (= 3.2.8)
