@@ -41,5 +41,10 @@ class User < ActiveRecord::Base
      # user.location = auth.info.user_hometown
      user.save!
    end
+
+
  end
+    def profile_pic
+    profiles.image.url(:medium) rescue "/assets/actor.png"
+   end
 end
