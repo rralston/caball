@@ -5,15 +5,17 @@ class Video < ActiveRecord::Base
 
   def movie_details
     video = VideoInfo.get(self.url)
-    self.provider        = video.provider     
-    self.title           = video.title  
-    self.description     = video.description 
-    self.keywords        = video.keywords      
-    self.duration        = video.duration   
-    self.date            = video.date       
-    self.thumbnail_small = video.thumbnail_small
-    self.thumbnail_large = video.thumbnail_large
-    self.embed_url       = video.embed_url      
-    self.embed_code      = video.embed_code
+    if video.present?
+      self.provider        = video.provider     
+      self.title           = video.title  
+      self.description     = video.description 
+      self.keywords        = video.keywords      
+      self.duration        = video.duration   
+      self.date            = video.date       
+      self.thumbnail_small = video.thumbnail_small
+      self.thumbnail_large = video.thumbnail_large
+      self.embed_url       = video.embed_url      
+      self.embed_code      = video.embed_code
+    end
   end
 end

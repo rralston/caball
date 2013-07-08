@@ -143,26 +143,28 @@
             <!-- Begin Photos -->
             <%= p.fields_for :photos do |p|  %>
             <% if p.object.image.present? %>
-            <div class="control-group">
-              <div class="controls">
-                <img src=<%= p.object.image.url(:medium) %> class="img-polaroid" >
-                <%= p.check_box :_destroy %> Delete Image               
+              <div class="control-group">
+                <div class="controls">
+                  <img src=<%= p.object.image.url(:medium) %> class="img-polaroid" >
+                  <%= p.check_box :_destroy %> Delete Image               
                 </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">Description</label>
-              <div class="controls">
-            <%= p.text_field :description, :class => 'text_field' %>
-            </div>
-            </div>
-            <% else %>
-            <div class="control-group">
-              <label class="control-label">Project Images</label>
-              <div class="controls">
-                <%= p.file_field :image %>
               </div>
-            </div>
+              <div class="control-group">
+                <label class="control-label">Description</label>
+                <div class="controls">
+                  <%= p.text_field :description, :class => 'text_field' %>
+                </div>
+              </div>
+
+            <% else %>
+              <div class="control-group">
+                <label class="control-label">Project Images</label>
+                <div class="controls">
+                  <%= p.file_field :image %>
+                </div>
+              </div>
             <% end %>
+
             <% end %>
           </div>
         </fieldset>
