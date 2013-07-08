@@ -31,20 +31,19 @@ class User < ActiveRecord::Base
   after_validation :geocode          # auto-fetch coordinates
 
   def self.from_omniauth(auth)
-  where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
-     user.provider = auth.provider
-     user.uid = auth.uid
-     user.name = auth.info.name
-     user.oauth_token = auth.credentials.token
-     user.oauth_expires_at = Time.at(auth.credentials.expires_at)
-     user.email = auth.info.email
-     # user.location = auth.info.user_hometown
-     user.save!
-   end
-
-
- end
-    def profile_pic
+    where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.name = auth.info.name
+      user.oauth_token = auth.credentials.token
+      user.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      user.email = auth.info.email
+      # user.location = auth.info.user_hometown
+      user.save!
+    end
+  end
+  
+  def profile_pic
     profiles.image.url(:medium) rescue "/assets/actor.png"
-   end
+  end
 end

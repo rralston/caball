@@ -45,13 +45,24 @@ gem 'unicorn'
 gem 'capistrano'
 gem 'cap_bootstrap', github: 'benrs44/cap_bootstrap'
 
-# To use debugger
-# gem 'debugger'
+gem 'awesome_print'
 
-gem "rspec-rails", :group => [:test, :development]
+group :test, :development do
+  gem 'rspec-rails', '>= 2.0.1'
+  gem "capybara-webkit"
+  gem 'capybara'
+  gem 'launchy'
+  gem 'selenium-webdriver'
+  gem 'shoulda-matchers'
+  gem 'ci_reporter'
+  gem "factory_girl_rails", "~> 4.0"
+  # DRb server RSpec
+  gem "spork-rails"
+  # To use debugger
+  gem 'debugger'
+end
+
 group :test do
-  gem "factory_girl_rails"
-  gem "capybara"
   gem "guard-rspec"
   gem 'rb-fsevent', '~> 0.9.1'
 end
