@@ -7,10 +7,10 @@
           <div class="span6">
             <div class="row-fluid">
               <div class="span7">
-                <% if @user.profiles.present? %> 
+                <% if @user.profile.present? %> 
                   <a href="#">
                     <div class="profile-pic">  
-                    <%= image_tag @user.profiles.image, :"data-toggle" => "modal", :"data-target" => "#photos-modal", :"data-keyboard"=>"true" %>
+                    <%= image_tag @user.profile.image, :"data-toggle" => "modal", :"data-target" => "#photos-modal", :"data-keyboard"=>"true" %>
                     </div>
                   </a>
                   <!-- Photos Modal -->
@@ -18,7 +18,7 @@
                     <div class="modal-body">
                       <div id="photoCarousel" class="carousel slide" data-interval="false">
                         <div class="carousel-inner">
-                          <div class="active item"><div class="item-container"><%= image_tag @user.profiles.image %></div></div>
+                          <div class="active item"><div class="item-container"><%= image_tag @user.profile.image %></div></div>
                           <% @user.photos.each_with_index do |photo, counter| %>
                             <div class="item">
                               <div class="item-container"><%= image_tag photo.image %>
@@ -124,8 +124,8 @@
             <% end %>
             <div class="follow-images">
               <% @followers_following.first(12).each_with_index do |user, index| %>
-                <% if user.profiles.present? %>
-                  <%= link_to user do%> <%= image_tag user.profiles.image.url(:tiny) %> <% end %>
+                <% if user.profile.present? %>
+                  <%= link_to user do%> <%= image_tag user.profile.image.url(:tiny) %> <% end %>
                 <% end %>
               <% end %>
               <div class="clearfix"></div>

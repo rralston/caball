@@ -9,7 +9,7 @@ describe User do
 
   context "Associations" do
     it { should have_one(:characteristics).dependent(:destroy) }
-    it { should have_one(:profiles).dependent(:destroy) }
+    it { should have_one(:profile).dependent(:destroy) }
     it { should have_many(:photos).dependent(:destroy) }
     it { should have_many(:videos).dependent(:destroy) }
     it { should have_many(:projects).dependent(:destroy) }
@@ -19,7 +19,7 @@ describe User do
     it { should have_many(:comments) }
     it { should have_many(:blogs).dependent(:destroy) }
 
-    it { should accept_nested_attributes_for :profiles }
+    it { should accept_nested_attributes_for :profile }
     it { should accept_nested_attributes_for :characteristics }
     it { should accept_nested_attributes_for :photos }
     it { should accept_nested_attributes_for :videos }

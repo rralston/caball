@@ -66,7 +66,7 @@ class UsersController < ApplicationController
      search
      @user = User.new
      @user.build_characteristics
-     @user.build_profiles
+     @user.build_profile
      # @user.build_photos (this was building before save)
      # @user.talents.build
      respond_to do |format|
@@ -88,8 +88,8 @@ class UsersController < ApplicationController
      #     @videos.build
      #    end
      # end
-     if @user.profiles.nil?
-       @user.build_profiles
+     if @user.profile.nil?
+       @user.build_profile
      end
      unless @user.talents.exists?
        @user.talents.build
