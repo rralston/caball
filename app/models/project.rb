@@ -14,27 +14,19 @@ class Project < ActiveRecord::Base
   after_validation :geocode          # auto-fetch coordinates
   
   def roles_percent
-    total_roles = roles.length
-    filled_roles = 0
-    roles.each do |role|
-      if role.filled
-        filled_roles += 1
-      end
-    end
-    if total_roles == 0
-      return 10
+    if roles.size > 0
+      ((filled_roles.size.to_f / roles.size.to_f) * 10).to_i
     else
-      return ((filled_roles.to_f / total_roles.to_f) * 10).to_i
+      10
     end
   end
   
   def open_roles
-    open_roles = 0
-    roles.each do |role|
-      if !role.filled
-        open_roles += 1
-      end
-    end
-    return open_roles
+    # returns all open roles
+    roles.select{ |role| !role.filled }
+  end
+
+  def filled_roles
+    roles.select{ |role| role.filled }
   end
 end

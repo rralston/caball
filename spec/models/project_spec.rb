@@ -53,7 +53,7 @@ describe Project do
 
   context "Open rules" do
     subject { @project_with_roles }
-    its(:open_roles) { should == 2 }
+    its(:open_roles) { should =~ @roles[1..2] }
   end
 
 end
