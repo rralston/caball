@@ -1,3 +1,5 @@
+<a href='http://37.139.7.47:8080/job/caball/'><img src='http://37.139.7.47:8080/job/caball/badge/icon'></a>
+
 == Welcome to Filmzu 
 
 Hello, Bro's and Brajette's the future of independent film!
