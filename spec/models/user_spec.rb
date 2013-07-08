@@ -27,6 +27,14 @@ describe User do
     it { should accept_nested_attributes_for :talents }
   end
 
+  context "Validations" do
+    before(:all){
+      @user = User.new
+      @user.valid?
+    }
+    specify { @user.errors.full_messages.join(', ').should == 'Name is required, Name is required, Email is required, Email is required' }
+  end
+
   context "Should create user when called with OmniAuth response hash" do
     before(:all){
       @auth = OmniAuth.config.mock_auth[:facebook]
