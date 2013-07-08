@@ -1,4 +1,4 @@
-<a href='http://37.139.7.47:8080/job/caball/'><img src='http://37.139.7.47:8080/job/caball/badge/icon'></a>
+[![Build Status](http://37.139.7.47:8080/job/caball/badge/icon)](http://37.139.7.47:8080/job/caball/)
 
 == Welcome to Filmzu 
 
