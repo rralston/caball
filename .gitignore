@@ -9,7 +9,7 @@
 
 # Ignore database.yml
 # Change for Heroku to Read
-# /config/database.yml
+/config/database.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
