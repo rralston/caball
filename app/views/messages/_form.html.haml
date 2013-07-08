@@ -1,0 +1,9 @@
+.well
+  = simple_form_for :message, url: [:reply, conversation] do |f|
+    = f.input :subject
+    = f.input :body
+    .form-actions
+    = f.button :submit, 'Send Message', class: 'btn-primary'
+    = submit_tag 'Clear', type: :reset, class: 'btn btn-danger'
+    = button_to "Go Back", '#', :onclick => 'history.back(); return false;'
+

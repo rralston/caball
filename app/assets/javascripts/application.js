@@ -12,4 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require twitter/bootstrap
+//= require users/bootstrap-lightbox.js
+//= require projects/numerous-2.1.1.js
+//= require projects/slider.js
+//= require application/sliding.form.js
+//= require users/jquery.form.js
+//= require_directory .
+//= require init

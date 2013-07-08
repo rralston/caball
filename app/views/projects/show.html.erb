@@ -1,0 +1,292 @@
+<div class="container">
+  <div class="row-fluid">
+    <div class="span12">
+
+      <div class="row-fluid">
+        <div class="page-header centered-text">
+          <h1>
+            <%= @project.title %> 
+          </h1>
+          <span>By <%= @project.user.name %></span>
+          
+        </div>
+      </div>
+      
+      <div class="row-fluid follow-roles-bar">
+        <div class="span3 follow-container">
+          <div class="follow-button">
+            <%= render :partial => 'follow_button', :locals => {:user => @project.user} %>
+          </div>
+          <div class="follow-count">
+            <%= @producer.friendships.all.count %> Fans 
+          </div>
+					<% if current_user %>
+					<% if current_user.id == @project.user_id %>
+					<%= link_to edit_project_url(@project), :class => 'btn btn-small btn-primary' do %>
+					<i class="icon-wrench icon-white"></i><% end %>
+					<% end %>
+					<% end %>
+        </div>
+        
+        <div class="span4 offset5 roles-buttons">
+          <span class="navigate-button" data-target="roles">Roles</span>
+          <span class="vrule"></span>
+          <span class="navigate-button" data-target="producer">Producer</span>
+          <span class="vrule"></span>
+          <span class="navigate-button" data-target="comments">Update</span>
+        </div>
+      </div>
+      
+      <div class="row-fluid about-content">
+        <div class="span8 video-stuff-container">
+          <div class="row-fluid reel-slider">
+            <% comment = "3d Reel Slider" %>
+            <div class="row-fluid">
+              <div class="royalSlider rsDefault">
+
+                <% @real_videos.each_with_index do |video| %>
+                  <img src="<%= video.thumbnail_large %>" data-rsVideo="<%= video.url %>" />
+                <% end %>    
+
+              </div>  
+            </div>
+          </div>
+          <div class="headline-container">
+            <p>"A girl wakes up on the COAST of Ireland, with no memory of who she is and how she got there.”</p>
+          </div>
+        </div>
+        <div class="span4 project-details">
+          <div class="well details-well">
+            <div class="project-details-title">
+              <h3>Project Details:</h3>
+            </div>
+            <div class="project-details-content">
+              <span class="project-detail">
+                <% if @project.genre.present? %><%= @project.genre %><% end %>
+              </span>
+              <span class="project-detail">
+                <%= if @project.status.present? then @project.status end %>
+              </span>
+            <div class="shooting-locations-title">
+                <h3>Location:</h3>
+            </div>
+            <div class="shooting-locations-content">
+              <% if !@project.location.nil? %>
+              <div class="shooting-location">
+                <%= @project.location %>
+              </div>
+              <% end %>
+            </div>
+            <div class="open-roles-title">
+              <h3>Open Roles:</h3>
+            </div>
+            <div class="open-roles-content">
+              <% @sorted_roles.each do |role_name, role| %>
+              <div class="open-role"> <%= role_name %> (<%= @sorted_roles[role_name][:open_count] %>)</div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        
+        <div class="well dates-well">
+          <div class="dates-title">
+            <h3>Important Dates:</h3>
+          </div>
+          <% if @project.start.present? %>
+          <div class="date"><%= @project.start %> - Start</div>
+          <% end %>
+          <% if @project.end.present? %>
+          <div class="date"><%= @project.end %> - End</div>
+          <% end %>
+        </div>
+      </div> 
+    
+      <div class="span12 about-text-images">
+        <div class="row-fluid">
+          <div class="span6 about-text">
+            <p>
+              <%= shorten :text => @project.description, :length => 1500, :formatted => true, :partial => "more_project_about"%>
+            </p>
+            <!-- About Project Modal -->
+              <div id="project-about-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                  <h3><span><%= @project.title%></span></h3>
+                </div>
+                <div class="modal-body">
+                  <%= simple_format @project.description %>
+                </div>
+              </div>
+            <!-- About Project Modal -->
+          </div>
+          <div class="span6 photo-gallery">
+            <div class="row-fluid reel-slider">
+              <% comment = "3d Reel Slider" %>
+              <div class="row-fluid">
+                <div class="royalSlider rsDefault">
+                  
+                  <% @project.photos.each do |photo| %>
+                    <img src="<%= photo.image.url(:large) %>" />
+                  <%end%>
+                  
+                </div>  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>   
+    </div> 
+    <div class="row-fluid producer-container" id="producer">
+      <div class="span2 producer-profile">
+        <div class="producer-title">
+          <h3>Producer</h3>
+        </div>
+        <div class="producer-content">
+          <%= link_to @producer do %>
+          <%= image_tag @producer.profiles.image.url(:medium), :class => "producer-image", :width => 150 %>
+          <div class="producer-name">
+            <h3><%= @producer.name %></h3>
+          </div>
+          <% end %> 
+          <div class="row-fluid message-row">
+            <div class="span12 message-span">
+              <% if current_user %>
+              <a data-toggle="modal" data-target="#message-modal" 
+                    data-remote ="<%= new_conversation_path(:recipient => @producer.email, :modal => true)%>"
+                    data-keyboard="true" class="message-button"><%= image_tag('mail_icon.png') %> Message</a>
+              <!-- Message Modal -->
+                <div id="message-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3><span>Message <%= @producer.name.split[0..0].join(" ") %></span></h3>
+                  </div>
+                  <div class="modal-body">
+                  </div>
+                </div>
+              <!-- Message Modal --> 
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="span9 producer-headline">
+        <div class="vrule"></div>
+        <div class="producer-headline-title">
+          <h3>In the Producer's Words:</h3>
+        </div>
+        <div class="producer-headline-content">
+          <h3><%= @project.thoughts %></h3>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row-fluid roles-container" id="roles">
+      <div class="roles-title">
+        <h3>Roles</h3>
+      </div>
+      <div class="clearfix"></div>
+      <div class="span12 role-circles">
+        <% accordion_target = 0 %>
+        <% @sorted_roles.each do |role_name, role_array| %>
+        <a data-toggle="collapse" data-parent="#role-accordion" data-target="#collapse-<%= accordion_target %>" href="#collapse-<%= accordion_target %>">
+        <div class="role-circle-container">
+          <span class="role-title"><%= role_name %></span>
+          <div class="role-circle">
+          </div>
+          <div class="circle-fill"></div>
+          <div class="circle-measure circle-measure-<%= ((@sorted_roles[role_name][:filled_count] / @sorted_roles[role_name][:total_count].to_f) * 10).to_i %>"></div>
+          <span class="role-count"><%= @sorted_roles[role_name][:filled_count]%>/<%= @sorted_roles[role_name][:total_count]%></span>
+        </div>
+        </a>
+        <% accordion_target+=1 %>
+        <% end %>
+      </div>
+      <% accordion_counter = 0 %>
+      <% modal_counter = 0 %>
+      <div class="span12 roles-details accordion" id="role-accordion">
+        <div class="accordion-group">
+          <% @sorted_roles.each do |role_name, role_array| %>
+          <div class="role-box">
+            <div class="role-type-title accordion-heading">
+              <a data-toggle="collapse" data-parent="#role-accordion" data-target= "#collapse-<%= accordion_counter %>" href="#collapse-<%= accordion_counter %>">
+                <h3><%= role_name %></h3>
+              </a>
+            </div>
+            <div id="collapse-<%= accordion_counter %>" class="accordion-body collapse role-type-content <%= accordion_counter == 0  ? 'in' : '' %>">
+              <% @sorted_roles[role_name][:role_list].each_with_index do |role, counter| %>
+              <% if counter % 4 == 0 and counter != 0%>
+              <hr class="hrule"></hr>
+              <% end %>
+              <div class="role span3">
+                <div class="role-title">
+                  <%= role.subrole %>
+                </div>
+                <%= image_tag 'actor_icon.png' %>
+                <div class="button btn btn-inverse info-button" data-toggle="modal" data-target="#role-modal-<%= modal_counter %>" data-keyboard="true" >
+                  Info & Apply
+                </div>
+                <!-- Role Info Modal -->
+                  <div id="role-modal-<%= modal_counter %>" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <% modal_counter += 1 %>
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h3><span><%= role.subrole%></span></h3>
+                    </div>
+                    <div class="modal-body">
+                      <%= simple_format role.description %>
+											<% if current_user %>
+											<%= link_to 'Apply', new_conversation_path(:recipient => User.find(@project.user_id).email, :subject => role.name+"-"+@project.title ), class: "btn btn-small btn-success" %>
+											<% else %>
+											<%= link_to "Sign In to Apply!", "/auth/facebook", id: "sign_in", class: "btn btn-small btn-success" %>
+											
+											<% end %>
+                    </div>
+                  </div>
+                  <!-- Role Info Modal -->
+              </div>            
+              <% end %>
+              <% accordion_counter += 1 %>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if current_user %>
+<% if current_user.id == @project.user_id %>
+<div class="container" id="add-updates">
+  <div class="span11">
+    <div class="row-fluid">
+      <div class="new-update-title">
+          <h3>
+              Create a New Update
+          </h3>
+      </div>
+    </div>
+    <%= render 'comments/form' %>
+  </div>
+</div>
+<% end %>
+<% end %>
+<% if @project.comments.present? %>
+<div id="comments">
+	<div class="container-fluid">
+	    <div class="row-fluid">
+	      <div class="span12">
+	        <div class="row-fluid">
+	          <div class="updates-title">
+	              <h3>
+	                  Updates
+	              </h3>
+	          </div>
+	        </div>
+  				<%= render :partial => 'comments/comment', :locals => {:blogs => @project.comments} %>
+				</div>
+		  </div>
+	</div>
+</div>
+<% end %>

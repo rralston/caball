@@ -1,0 +1,8 @@
+.well
+	= simple_form_for :conversation, url: :conversations do |f|
+		= f.input :recipients, {:name => "title", :value => 'sup' }
+		= f.input :subject
+		= f.input :body
+		.form-actions
+			= f.button :submit, class: 'btn-primary'
+			= submit_tag 'Cancel', type: :reset, class: 'btn btn-danger'

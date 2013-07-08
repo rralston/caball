@@ -1,0 +1,72 @@
+<section id="home" class="section home-section">
+  <div class="container-fluid lunchbox-container">
+    <div class="home-header">
+      <h1>FILM <span class="white-text">BEGINS</span> HERE</h1>
+      <%= link_to "/auth/facebook", id: "sign_in" do %>
+				<span class="start-creating">Start Creating, Free!</span>
+			<% end %>
+      <div class="lunchbox-caption">
+        Filmaking requires a lot of people with different talents. Filmzu takes the headache out of searching for them,
+        and brings them all to one place. See how easy Filmzu makes creating premium video content.
+      </div>
+      <div class="row blurb-list">
+        <div class="span4">
+          Staff your new project with talented people that want to be a part of your film.
+        </div>
+        <div class="span4">
+          Search for talented film and video professionals in your area!
+        </div>
+        <div class="span4">
+          Digital library with current how-to articles, videos, and interview to help hone your skill and learn new ones too!
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container home-content">
+    <div class="content-header">
+      Take a look how Filmzu is the key to creating great film and video
+    </div>
+    <div class="row">
+      <div class="span6 roles-image sample-image">
+        <%= image_tag 'roles_sample.png'%>
+      </div>
+      <div class="span6 roles-text content-text">
+        The first platform with an active application process. 
+        Film and video professionals can look through projects to find ones they are interested in,
+        based on genre, location, schedule and more! 
+        Producers review only the individuals that want to work on the project!
+      </div>
+    </div>
+    <div class="row">
+      <div class="span6 profiles-text content-text">
+        Search for film and video professionals in your area. Whether you want to start a new project, or find
+        someone to work on an existing one, Filmzu is the destination spot to find wrtiers, actors, editors, and everything in between!
+      </div>
+      <div class="span6 profiles-image sample-image">
+        <%= image_tag 'profiles_sample.png'%>
+      </div>
+    </div>
+    <div class="row">
+      <div class="span6 how-to-image sample-image">
+        <%= image_tag 'homepage_3d_icon.png'%>
+      </div>
+      <div class="span6 how-to-text content-text">
+        Read through information and How-To videos. 
+        From DIY videos to make your own dolly, and other tips to help you save money. 
+        We also review the latest products and talk about all these ways you can spend your money!
+      </div>
+    </div>
+    <div class="row featured-projects featured-stuff">
+      <div class="featured-projects-bubble featured-bubble"><span>Featured Projects</span></div>
+      <%= render :partial => 'featured_projects' %>
+    </div>
+    <div class="row featured-users featured-stuff">
+      <div class="featured-users-bubble featured-bubble"><span>Featured Users</span></div>
+      <%= render :partial => 'featured_users' %>
+    </div>
+  </div>
+</section>
+ 
+
+								
+         

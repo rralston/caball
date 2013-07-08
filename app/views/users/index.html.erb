@@ -1,0 +1,36 @@
+<section class="users-search">
+  <div class="container">
+    <div class="row">
+      <!-- Left Column for Search Terms-->
+      <div class='span3 search-column'>
+        <div class="users-search-title">
+          <h3>USERS</h3>
+        </div>
+        <div class="users-search-content">
+          <%= search_form_for @search do |f| %>
+          <div class="field project-title">
+            <%= f.text_field :name_cont, :placeholder => 'Find a User...', :class => 'user-title-input' %>
+            <i class="icon-search"></i>
+          </div>
+          <div class="field location">
+            <h3>Location</h3>
+            <%= f.text_field :location_cont, :placeholder => 'Location' , :class => 'location-input' %>
+          </div>
+          <div class="field roles">
+            <h3>Roles</h3>
+            <div class="roles-bounding-box">
+              <%= f.select(:talents_name_cont, options_for_select(@talents), {}, {:multiple=> true, :size => @talents.length, :class => 'talents-input' }) %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      
+      <!-- Right Column for displaying users-->
+      <div class='span9 search-results'>
+        <%= render :partial => 'user_search_results' %>
+      </div>
+      
+    </div>
+  </div>
+</section>

@@ -1,0 +1,45 @@
+<div class="row-fluid">
+  <%= image_tag 'vertical_rule.png', :class => "vertical-rule" %>
+  <%= image_tag 'blog_circle.png', :class => "blog-circle blog-circle-top" %>
+  <% blogs.sort! {|a, b| Time.now - a.created_at <=> Time.now - b.created_at}%>
+  <% blogs.each_with_index do |blog, counter| %>
+    <% if counter.even? %>
+    <%= image_tag 'blog_circle.png', :class => "blog-circle" %>
+    <div class="blog-post span5" id="blog<%=counter%>">
+      <div class="blog-arrow blog-arrow-left" ></div>
+    <% else %>
+    <%= image_tag 'blog_circle.png', :class => "blog-circle" %>
+    <div class="blog-post span5 offset2" id="blog<%=counter%>">
+      <div class="blog-arrow blog-arrow-right" ></div>
+    <% end %>
+      <div class="well">
+        <h5>
+          <%= link_to blog.user.name, blog.user %> created a new update
+    	    <% if blog.created_at > Time.now.beginning_of_day %>
+    	      <%="#{time_ago_in_words(blog.created_at)} ago"%>
+    	    <% else %>
+    	      on <%= blog.created_at.strftime('%A %d %B %Y at %I:%M%p') %>
+    	    <% end %>
+        </h5>
+        <p>
+        	<%= raw blog.content %><br><br>
+      		<% if blog.created_at != blog.updated_at %>
+      		  <i>
+      			<% if blog.updated_at > Time.now.beginning_of_day %>
+    			    Edited <%="#{time_ago_in_words(blog.updated_at)} ago"%>  
+      			<% else %>
+    			    Edited on <%= blog.created_at.strftime("%A %d %B %Y at %I:%M%p") %> 
+      			<% end %>
+      			</i>
+      		<% end %>
+        </p> 
+      	<% if blog.user == current_user %> 
+  	      <p>
+          <%= link_to "Edit", edit_user_blog_path(@user, blog) %> |
+          <%= link_to "Destroy", [@user, blog], method: :delete %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
