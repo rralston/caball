@@ -52,4 +52,22 @@ describe User do
     specify { subject.mailboxer_email(nil).should eql(subject.email) }
   end
 
+  context "Profile Pic" do
+    context "When a profile pic exists, it shoudl return the medium version of it" do
+      before(:all){
+        @user = FactoryGirl.create(:user)
+        @profile = FactoryGirl.create(:profile, :image => File.open(File.join(Rails.root, '/spec/fixtures/images/apple.jpeg')))
+        @user.profile = @profile
+        @user.save
+      }
+      subject { @user }
+
+      its(:profile_pic) { should eql(@profile.image.url(:medium)) }
+
+      after(:all){
+        clean_local_uploads
+      }
+    end
+  end
+
 end
