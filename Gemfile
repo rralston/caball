@@ -54,6 +54,7 @@ group :test do
   gem "capybara"
   gem "guard-rspec"
   gem 'rb-fsevent', '~> 0.9.1'
+  gem 'database_cleaner'
 end
 
 #Image Uploader

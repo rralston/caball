@@ -1,8 +1,9 @@
 class Comment < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller && controller.current_user }
-  attr_accessible :content
+  attr_accessible :content, :project_id
 
+  has_many :likes, :as => :loveable
   belongs_to :user
   belongs_to :project
 end

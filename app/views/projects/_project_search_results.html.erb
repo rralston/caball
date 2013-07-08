@@ -6,6 +6,9 @@
           <%= proj.title %>
         </h3>
       <% end %>
+      <div class="love-button">
+        <%= render :partial => '/application/love_button.html.erb', :locals => {:proj => proj} %>
+      </div>
       <span class="producer-name">Producer: <%= link_to user_path(proj.user) do proj.user.name end %></span>
       <span class="location-name"><%= if proj.location.present? then proj.location end %></span>
       <div class="row-fluid thumbnail-container">

@@ -14,6 +14,7 @@ Caball::Application.routes.draw do
   resources :conversations
   resources :notifications
   resources :friendships
+  resources :likes
   
   # News feed
   

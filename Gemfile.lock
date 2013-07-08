@@ -76,6 +76,7 @@ GEM
       execjs
     coffee-script-source (1.6.2)
     commonjs (0.2.6)
+    database_cleaner (1.0.1)
     diff-lcs (1.2.2)
     erubis (2.7.0)
     excon (0.20.1)
@@ -306,6 +307,7 @@ DEPENDENCIES
   capybara
   carrierwave
   coffee-rails (~> 3.2.1)
+  database_cleaner
   factory_girl_rails
   fog
   geocoder

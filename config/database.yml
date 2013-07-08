@@ -20,8 +20,9 @@ development:
   pool: 5
   database: caball_development
   username: root
-  password: root
+  password: 
   host: localhost
+  socket: /opt/lampp/var/mysql/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -31,9 +32,10 @@ test:
   database: caball_test
   host: localhost
   username: root
-  password: root
+  password: 
   pool: 5
   timeout: 5000
+  socket: /opt/lampp/var/mysql/mysql.sock
 
 production:
   adapter: postgresql
@@ -43,3 +45,4 @@ production:
   password: 
   pool: 5
   timeout: 5000
+  socket: /opt/lampp/var/mysql/mysql.sock
