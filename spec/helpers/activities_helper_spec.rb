@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'request_helper'
 
 # Specs in this file have access to a helper object that includes
 # the ActivitiesHelper. For example:

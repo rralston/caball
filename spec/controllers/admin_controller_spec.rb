@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'request_helper'
 
-describe AdminController do
+describe Admin::AdminController do
 
   describe "GET 'index'" do
     it "returns http success" do

@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'request_helper'
+require 'request_helper'
 
 describe User do
   before(:all) do

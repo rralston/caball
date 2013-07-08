@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'request_helper'
 
 # Specs in this file have access to a helper object that includes
 # the AdminHelper. For example:
@@ -10,6 +11,6 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe AdminHelper do
+describe Admin::AdminHelper do
   pending "add some examples to (or delete) #{__FILE__}"
 end
