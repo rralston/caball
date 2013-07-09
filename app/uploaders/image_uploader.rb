@@ -11,7 +11,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include Sprockets::Helpers::IsolatedHelper
 
   # Choose what kind of storage to use for this uploader:
-  if Rails.env.test? or Rails.env.cucumber?
+  if Rails.env.test? or Rails.env.cucumber? or Rails.env.development?
     storage :file
   else
     storage :fog

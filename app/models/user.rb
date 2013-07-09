@@ -11,6 +11,10 @@ class User < ActiveRecord::Base
     #if false
     #return nil
   end
+
+  after_create do |user|
+    UserMailer.signup_confirmation(user).deliver
+  end
   
   has_one :characteristics, :dependent => :destroy
   has_one :profile, :dependent => :destroy
@@ -20,6 +24,8 @@ class User < ActiveRecord::Base
   has_many :talents, :dependent => :destroy
   has_many :friendships
   has_many :friends, through: :friendships
+  has_many :inverse_friendships, class_name: "Friendship"
+  has_many :inverse_friends, through: :inverse_friendships, source: :user, foreign_key: "friend_id"
   accepts_nested_attributes_for :profile, :reject_if => :all_blank
   has_many :comments
   has_many :blogs, :dependent => :destroy
@@ -41,6 +47,18 @@ class User < ActiveRecord::Base
       # user.location = auth.info.user_hometown
       user.save!
     end
+  end
+
+  def self.types
+    {
+      'Actor' => 'Actor', 
+      'Producer' => 'Producer', 
+      'Director' => 'Director', 
+      'Technical' => 'Technical', 
+      'Stuntmen' => 'Stuntmen', 
+      'Fan' => 'Fan', 
+      'Talent Manager' => 'Talent Manager'
+    }
   end
   
   def profile_pic

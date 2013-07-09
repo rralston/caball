@@ -57,18 +57,6 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-  
-  
-  
-  # Authentication
-  
-  def require_login
-    redirect_to login_url, alert: "You must first log in or sign up." if current_user.nil?
-  end
-  
-  def current_user
-       @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  end
    
   def user_signed_in?
       return true if current_user
