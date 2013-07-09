@@ -18,5 +18,12 @@ class Ability
     can [:update, :destroy], Project do |project|
       project.user == user
     end
+
+    can :create, Friendship do
+      user.persisted?
+    end
+    can :destroy, Friendship do |friendship|
+      friendship.user == user
+    end
   end
 end
