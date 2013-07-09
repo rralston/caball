@@ -1,9 +1,9 @@
 <% @users.each_with_index do |user, counter| %>
 <div class="row-fluid result">
   <div class="span2">
-    <% if user.profiles.present? %>
+    <% if user.profile.present? %>
     <%= link_to user do %>
-      <%= image_tag user.profiles.image %>
+      <%= image_tag user.profile.image %>
     <% end %>
     <% end %>
   </div>

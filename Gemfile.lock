@@ -48,7 +48,9 @@ GEM
     asset_sync (0.5.4)
       activemodel
       fog
+    awesome_print (1.1.0)
     builder (3.0.4)
+    cancan (1.6.9)
     capistrano (2.14.2)
       highline
       net-scp (>= 1.0.0)
@@ -62,11 +64,16 @@ GEM
       rack-test (>= 0.5.4)
       selenium-webdriver (~> 2.0)
       xpath (~> 1.0.0)
+    capybara-webkit (1.0.0)
+      capybara (~> 2.0, >= 2.0.2)
+      json
     carrierwave (0.8.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
+    ci_reporter (1.9.0)
+      builder (>= 2.1.2)
     coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -75,8 +82,18 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
+    columnize (0.3.6)
     commonjs (0.2.6)
+<<<<<<< HEAD
     database_cleaner (1.0.1)
+=======
+    debugger (1.6.0)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.2.1)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.2.3)
+>>>>>>> b81ec3b968ddf40670712f52b6f6e9fc9f819767
     diff-lcs (1.2.2)
     erubis (2.7.0)
     excon (0.20.1)
@@ -103,6 +120,10 @@ GEM
     foreigner (1.4.1)
       activerecord (>= 3.0.0)
     formatador (0.2.4)
+    fuubar (1.1.1)
+      rspec (~> 2.0)
+      rspec-instafail (~> 0.2.0)
+      ruby-progressbar (~> 1.0)
     geocoder (1.1.6)
     guard (1.7.0)
       formatador (>= 0.2.4)
@@ -224,7 +245,7 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     raindrops (0.10.0)
-    rake (10.0.4)
+    rake (10.1.0)
     ransack (0.7.2)
       actionpack (~> 3.0)
       activerecord (~> 3.0)
@@ -243,6 +264,7 @@ GEM
     rspec-core (2.13.1)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
+    rspec-instafail (0.2.4)
     rspec-mocks (2.13.1)
     rspec-rails (2.13.0)
       actionpack (>= 3.0)
@@ -252,6 +274,7 @@ GEM
       rspec-expectations (~> 2.13.0)
       rspec-mocks (~> 2.13.0)
     ruby-hmac (0.4.0)
+    ruby-progressbar (1.1.1)
     rubyzip (0.9.9)
     sass (3.2.7)
     sass-rails (3.2.6)
@@ -263,10 +286,16 @@ GEM
       multi_json (~> 1.0)
       rubyzip
       websocket (~> 1.0.4)
+    shoulda-matchers (2.2.0)
+      activesupport (>= 3.0.0)
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
     slop (3.4.4)
+    spork (1.0.0rc3)
+    spork-rails (3.2.1)
+      rails (>= 3.0.0, < 3.3.0)
+      spork (>= 1.0rc0)
     sprockets (2.1.3)
       hike (~> 1.2)
       rack (~> 1.0)
@@ -302,14 +331,24 @@ PLATFORMS
 
 DEPENDENCIES
   asset_sync
+  awesome_print
+  cancan
   cap_bootstrap!
   capistrano
   capybara
+  capybara-webkit
   carrierwave
+  ci_reporter
   coffee-rails (~> 3.2.1)
+<<<<<<< HEAD
   database_cleaner
   factory_girl_rails
+=======
+  debugger
+  factory_girl_rails (~> 4.0)
+>>>>>>> b81ec3b968ddf40670712f52b6f6e9fc9f819767
   fog
+  fuubar
   geocoder
   guard-rspec
   haml-rails
@@ -317,6 +356,7 @@ DEPENDENCIES
   hpricot
   jquery-rails
   kaminari
+  launchy
   less-rails
   mailboxer!
   mysql2
@@ -328,9 +368,12 @@ DEPENDENCIES
   ransack
   rb-fsevent (~> 0.9.1)
   rmagick
-  rspec-rails
+  rspec-rails (>= 2.0.1)
   sass-rails (~> 3.2.3)
+  selenium-webdriver
+  shoulda-matchers
   simple_form
+  spork-rails
   therubyracer
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)

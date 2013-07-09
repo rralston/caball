@@ -8,8 +8,8 @@
       <div class="row-fluid thumbnail-container">
         <%= link_to project_path(user.id) do %>
           <div class='thumbnail-figure span6'>
-            <% if user.profiles.present? %>
-            <%= image_tag(user.profiles.image.url(:medium), :class => "profile-image") %>
+            <% if user.profile.present? %>
+            <%= image_tag(user.profile.image.url(:medium), :class => "profile-image") %>
             <% end %>
           </div>
         <% end %>
