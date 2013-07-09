@@ -34,7 +34,7 @@
           <% end %>
         </p> 
         <p>
-          <div class="comment-love">
+          <div class="comment-love" id="Comment-<%= blog.id %>">
             <%= render :partial => '/application/love_form.html.erb', :locals => { :id => blog.id, :type => 'Comment' } %>
           </div> |
           <% if blog.user == current_user %> 

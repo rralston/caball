@@ -61,12 +61,12 @@
           render :partial => '/application/follow_button.html.erb', :locals => {:user => proj.user} 
         </div>-->
         <div class="follow-count">
-          <span class="fan-count" data-user-id="<%= proj.user.id %>">
-            <!-- Friendship.where( :friend_id => proj.user.id).count --> <%= proj.likes.all.count %>
-          </span> Fans
+          <span class="fan-count" data-user-id="<%= proj.user.id %>" id="count-<%= proj.id %>">
+            <!-- Friendship.where( :friend_id => proj.user.id).count --> <%= pluralize proj.likes.all.count, 'Fan' %>
+          </span>
         </div>
         
-        <div class="love-button">
+        <div class="love-button" id="Project-<%= proj.id %>">
           <%= render :partial => '/application/love_form.html.erb', :locals => {:id => proj.id, :type => 'Project'} %>
         </div>
       </div>

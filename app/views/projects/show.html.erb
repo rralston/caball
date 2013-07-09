@@ -13,13 +13,13 @@
       
       <div class="row-fluid follow-roles-bar">
         <div class="span4 follow-container">
-          <div class="love-button">
+          <div class="love-button" id="Project-<%= @project.id %>">
             <%= render :partial => '/application/love_form.html.erb', :locals => {:id => @project.id, :type => 'Project'} %>
           </div>
           <!--<div class="follow-button">
             render :partial => 'follow_button', :locals => {:user => @project.user}
           </div>-->
-          <div class="follow-count">
+          <div class="follow-count" id="count-<%= @project.id %>">
             <!-- @producer.friendships.all.count %> Fans -->
             <%= @project.likes.all.count %> Fans
           </div>
