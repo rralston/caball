@@ -8,12 +8,14 @@
             <%= @project.title %> 
           </h1>
           <span>By <%= @project.user.name %></span>
-          
         </div>
       </div>
       
       <div class="row-fluid follow-roles-bar">
-        <div class="span3 follow-container">
+        <div class="span4 follow-container">
+          <div class="love-button">
+            <%= render :partial => '/application/love_form.html.erb', :locals => {:id => @project.id, :type => 'Project'} %>
+          </div>
           <div class="follow-button">
             <%= render :partial => 'follow_button', :locals => {:user => @project.user} %>
           </div>
@@ -28,7 +30,7 @@
 					<% end %>
         </div>
         
-        <div class="span4 offset5 roles-buttons">
+        <div class="span4 offset4 roles-buttons">
           <span class="navigate-button" data-target="roles">Roles</span>
           <span class="vrule"></span>
           <span class="navigate-button" data-target="producer">Producer</span>

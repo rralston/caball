@@ -33,14 +33,15 @@
             </i>
           <% end %>
         </p> 
-        <% if blog.user == current_user %> 
-          <p>
-
+        <p>
+          <div class="comment-love">
+            <%= render :partial => '/application/love_form.html.erb', :locals => { :id => blog.id, :type => 'Comment' } %>
+          </div> |
+          <% if blog.user == current_user %> 
           <%= link_to "Edit", edit_project_comment_path(@project, blog) %> |
           <%= link_to "Destroy", [@project, blog], method: :delete %>
-
-          </p>
-        <% end %>
+          <% end %>
+        </p>
       </div>
     </div>
   <% end %>

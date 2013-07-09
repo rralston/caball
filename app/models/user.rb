@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   has_many :talents, :dependent => :destroy
   has_many :friendships
   has_many :likes
+  has_many :lovers, :class_name => 'Like', :as => :loveable
   has_many :friends, through: :friendships
   accepts_nested_attributes_for :profiles, :reject_if => :all_blank
   has_many :comments

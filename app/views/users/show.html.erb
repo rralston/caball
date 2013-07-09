@@ -117,6 +117,11 @@
       <div class="span10 offset1">
         <div class="row-fluid">
           <div class="span3 follow-container">
+            <% if current_user.id != @user.id %>
+              <div class="user-love">
+                <%= render :partial => "application/love_form.html.erb", :locals => { :id =>@user.id, :type => 'User' } %>
+              </div>
+            <% end %>
             <% if current_user %>
             <div class="follow-button">
               <%= render :partial => 'follow_button', :locals => {:user => @user} %>

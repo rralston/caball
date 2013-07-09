@@ -1,14 +1,13 @@
 class LikesController < ApplicationController
 	def create
-		if(params[:like][:loveable_type] == 'Project')
-			@project = Project.find(params[:like][:loveable_id])
-			@project.likes.create(user_id: current_user.id)
-			redirect_to projects_path
-		end
+		session[:back] = request.referer
+		current_user.likes.create(loveable_id: params[:like][:loveable_id], loveable_type: params[:like][:loveable_type])
+		redirect_to session[:back]
 	end
 
 	def destroy
+		session[:back] = request.referer
 		Like.find(params[:id]).destroy
-		redirect_to projects_path
+		redirect_to session[:back]
 	end
 end

@@ -35,6 +35,9 @@
         </p> 
       	<% if blog.user == current_user %> 
   	      <p>
+          <div class="blog-love">
+            <%= render :partial => 'application/love_form.html.erb', :locals => { :id => blog.id, :type => 'Blog' } %> 
+          </div> |
           <%= link_to "Edit", edit_user_blog_path(@user, blog) %> |
           <%= link_to "Destroy", [@user, blog], method: :delete %>
           </p>
