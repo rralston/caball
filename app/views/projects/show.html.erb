@@ -16,11 +16,12 @@
           <div class="love-button">
             <%= render :partial => '/application/love_form.html.erb', :locals => {:id => @project.id, :type => 'Project'} %>
           </div>
-          <div class="follow-button">
-            <%= render :partial => 'follow_button', :locals => {:user => @project.user} %>
-          </div>
+          <!--<div class="follow-button">
+            render :partial => 'follow_button', :locals => {:user => @project.user}
+          </div>-->
           <div class="follow-count">
-            <%= @producer.friendships.all.count %> Fans 
+            <!-- @producer.friendships.all.count %> Fans -->
+            <%= @project.likes.all.count %> Fans
           </div>
 					<% if current_user %>
 					<% if current_user.id == @project.user_id %>

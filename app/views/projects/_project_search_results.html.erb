@@ -6,9 +6,6 @@
           <%= proj.title %>
         </h3>
       <% end %>
-      <div class="love-button">
-        <%= render :partial => '/application/love_form.html.erb', :locals => {:id => proj.id, :type => 'Project'} %>
-      </div>
       <span class="producer-name">Producer: <%= link_to user_path(proj.user) do proj.user.name end %></span>
       <span class="location-name"><%= if proj.location.present? then proj.location end %></span>
       <div class="row-fluid thumbnail-container">
@@ -60,11 +57,17 @@
           </div>
         <!-- Message Modal -->
         <% end %>
-				<div class="follow-button">
-          <%= render :partial => '/application/follow_button.html.erb', :locals => {:user => proj.user} %>
-        </div>
+				<!--<div class="follow-button">
+          render :partial => '/application/follow_button.html.erb', :locals => {:user => proj.user} 
+        </div>-->
         <div class="follow-count">
-          <span class="fan-count" data-user-id="<%= proj.user.id %>"><%= Friendship.where( :friend_id => proj.user.id).count %></span> Fans
+          <span class="fan-count" data-user-id="<%= proj.user.id %>">
+            <!-- Friendship.where( :friend_id => proj.user.id).count --> <%= proj.likes.all.count %>
+          </span> Fans
+        </div>
+        
+        <div class="love-button">
+          <%= render :partial => '/application/love_form.html.erb', :locals => {:id => proj.id, :type => 'Project'} %>
         </div>
       </div>
       <!-- Projects Description Modal -->
