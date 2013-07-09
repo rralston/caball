@@ -1,0 +1,53 @@
+<div class="row">
+  <div class="span7">
+      <h4> Conversations <% if notification %>- New (<%= notification %>)<% end %></h4>
+
+      <div class="accordion" id="accordion2">
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+              Inbox
+            </a>
+          </div>
+          <div id="collapseOne" class="accordion-body collapse in">
+            <div class="accordion-inner">
+              <ul class="unstyled">
+                <%= render @user.mailbox.inbox %>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+              Sentbox
+            </a>
+          </div>
+          <div id="collapseTwo" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <ul class="unstyled">
+                <%= render @user.mailbox.sentbox %>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+              Trash
+            </a>
+          </div>
+          <div id="collapseThree" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <ul class="unstyled">
+                <%= render @user.mailbox.trash %>
+              </ul>
+            </div>
+          </div>
+        </div>
+    <!-- <%= link_to 'Start New Conversation', :new_conversation, {:class => 'btn'} %> -->
+      </div>
+  </div>
+</div>

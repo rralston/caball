@@ -21,31 +21,15 @@
     </div>
     <div class='users-view span10'>
       
-      <div class='row'>
-        <div class='user-img span3'>
-          <img src='<%= @user.profile_pic %>'>
-        </div>
-        <div class='span7'>
-          <h4>Welcome, <%= @user.name %>!</h4>
-          <i class='icon-star'></i> You have <%= pluralize(notification, 'notification') %>
-          <br>
-          <a href='projects/new' class='btn btn-inverse'> 
-            <i class='icon-plus'></i> New Project
-          </a>
-          <a href='events/new' class='btn btn-inverse'> 
-            <i class='icon-plus'></i> New Event
-          </a>
-        </div>
-        
-      </div>
+      <%= render :partial => 'dashboard/user_profile_summary' %>
       
       <div class='row'>
         <div class='tab-content span7'>
           <div class='tab-pane active' id='home'>
-            this is home page
+            <%= render :partial => 'dashboard/user_home' %>
           </div>
           <div class='tab-pane' id='messages'>
-            Your messages with appear here
+            <%= render :partial => 'dashboard/messages' %>
           </div>
           <div class='tab-pane' id='projects'>
             All your projects here
