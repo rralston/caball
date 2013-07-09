@@ -15,7 +15,11 @@ class ApplicationController < ActionController::Base
   helper_method :search
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
+    if request.xhr?
+      render :text => false
+    else
+      redirect_to root_url, notice: "You are not authorized to access the page."
+    end
   end
   
   private

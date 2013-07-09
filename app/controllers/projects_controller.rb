@@ -93,7 +93,6 @@ class ProjectsController < ApplicationController
                     } }
       end
     end
-    redirect_to :action => 'show'
   end
 
   def destroy
