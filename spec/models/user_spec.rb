@@ -76,4 +76,20 @@ describe User do
       }
     end
   end
+
+  context "details complete" do
+    context "location is present" do
+      let(:user) { FactoryGirl.create(:user, location: "Some-place") }
+      it "should return true" do
+        user.details_complete?.should == true
+      end
+    end
+    context "location is not present" do
+      let(:user) { FactoryGirl.create(:user, location: nil) }
+      it "should return false" do
+        user.details_complete?.should == false
+      end
+    end
+  end
+
 end

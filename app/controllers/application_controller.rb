@@ -13,7 +13,10 @@ class ApplicationController < ActionController::Base
   helper_method :correct_user?
   # Search
   helper_method :search
-  
+
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
   
   private
 
@@ -22,9 +25,9 @@ class ApplicationController < ActionController::Base
   end
   
   # Search for Home Directory
-  def search
-   @search = User.search(params[:q])
-   @users = @search.result
+  def search(model=User, instance="users")
+   @search = model.search(params[:q])
+   instance_variable_set("@#{instance}", @search.result)
      if params[:q]
        redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return
      end
