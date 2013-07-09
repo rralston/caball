@@ -64,4 +64,8 @@ class User < ActiveRecord::Base
   def profile_pic
     profile.image.url(:medium) rescue "/assets/actor.png"
   end
+
+  def details_complete?
+    self.location.present?
+  end
 end
