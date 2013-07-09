@@ -45,9 +45,9 @@
             <li class="widgets">
               <div class="search">
                 <% if params[:controller] == 'projects' then %>
-                <%= search_form_for @search do |f| %><%= f.text_field :title_cont, :placeholder => 'Find a Project...' %><% end %>
+                  <%= search_form_for @search do |f| %><%= f.text_field :title_cont, :placeholder => 'Find a Project...' %><% end %>
                 <% else %>
-                <%= search_form_for @search do |f| %><%= f.text_field :name_cont, :placeholder => 'Find Talent...' %><% end %>
+                  <%= search_form_for @search do |f| %><%= f.text_field :name_cont, :placeholder => 'Find Talent...' %><% end %>
                 <% end %>
                 <div class="search-magnifying-icon"></div>
               </div>
@@ -65,7 +65,7 @@
                 <ul class="dropdown-menu">    
                   <li>
                     <%= link_to user_path(current_user) do %>
-                    <i class="icon-user icon-white"></i><strong><%= current_user.name %></strong>
+                      <i class="icon-user icon-white"></i><strong><%= current_user.name %></strong>
                     <% end %>
                   </li>
                   <% if current_user.admin == true %>
@@ -126,38 +126,41 @@
     </div>
   </nav>
 </header>
+
 <% if flash[:notice] %>
-<div class="alert alert-success">
-  <button type="button" class="close" data-dismiss="alert">
-    ×
-  </button>
-  <%= flash[:notice] %>
-</div>
-<% end %>
-<% if flash[:error] %>
-<div class="alert alert-error">
-  <button type="button" class="close" data-dismiss="alert">
-    ×
-  </button>
-  <%= flash[:error] %>
-</div>
-<% end %>
-<% if flash[:alert] %>
-<div class="alert">
-  <button type="button" class="close" data-dismiss="alert">
-    ×
-  </button>
-  <%= flash[:alert] %>
-</div>
-<% end %>
-<% if flash[:info] %>
-<div class="alert alert-info">
-  <button type="button" class="close" data-dismiss="alert">
-    ×
-  </button>
-  <%= flash[:info] %>
-</div>
+  <div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">
+      ×
+    </button>
+    <%= flash[:notice] %>
+  </div>
 <% end %>
 
-<% comment = "This is a generic placeholder for bootstrap alerts created through JS." %>
+<% if flash[:error] %>
+  <div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">
+      ×
+    </button>
+    <%= flash[:error] %>
+  </div>
+<% end %>
+
+<% if flash[:alert] %>
+  <div class="alert">
+    <button type="button" class="close" data-dismiss="alert">
+      ×
+    </button>
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<% if flash[:info] %>
+  <div class="alert alert-info">
+    <button type="button" class="close" data-dismiss="alert">
+      ×
+    </button>
+    <%= flash[:info] %>
+  </div>
+<% end %>
+
 <div id="bootstrap-alert-placeholder" class="js-alert"></div>

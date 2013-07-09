@@ -1,39 +1,34 @@
 <div class="row-fluid">
   <%= image_tag 'vertical_rule.png', :class => "vertical-rule" %>
   <%= image_tag 'blog_circle.png', :class => "blog-circle blog-circle-top" %>
-  <% blogs.sort! {|a, b| Time.now - a.created_at <=> Time.now - b.created_at}%>
+
+  <% blogs.sort! { |a, b| Time.now - a.created_at <=> Time.now - b.created_at } %>
+
   <% blogs.each_with_index do |blog, counter| %>
-    <% if counter.even? %>
+    
+    <% width_class = counter.even? ? 'span5' : 'span5 offset2' %>
+    <% arrow_class = counter.even? ? 'blog-arrow-left' : 'blog-arrow-right' %>
+
     <%= image_tag 'blog_circle.png', :class => "blog-circle" %>
-    <div class="blog-post span5" id="blog<%=counter%>">
-      <div class="blog-arrow blog-arrow-left" ></div>
-    <% else %>
-    <%= image_tag 'blog_circle.png', :class => "blog-circle" %>
-    <div class="blog-post span5 offset2" id="blog<%=counter%>">
-      <div class="blog-arrow blog-arrow-right" ></div>
-    <% end %>
+
+    <div class="blog-post <%= width_class %>" id="blog<%= counter %>">
+      <div class="blog-arrow <%= arrow_class %>"></div>
       <div class="well">
         <h5>
           <%= link_to blog.user.name, blog.user %> created a new update
-    	    <% if blog.created_at > Time.now.beginning_of_day %>
-    	      <%="#{time_ago_in_words(blog.created_at)} ago"%>
-    	    <% else %>
-    	      on <%= blog.created_at.strftime('%A %d %B %Y at %I:%M%p') %>
-    	    <% end %>
+          <%= "#{date_time_summary(blog.created_at)}" %>
         </h5>
+        
         <p>
-        	<%= raw blog.content %><br><br>
+        	<%= raw blog.content %>
+          <br>
+          <br>
       		<% if blog.created_at != blog.updated_at %>
-      		  <i>
-      			<% if blog.updated_at > Time.now.beginning_of_day %>
-    			    Edited <%="#{time_ago_in_words(blog.updated_at)} ago"%>  
-      			<% else %>
-    			    Edited on <%= blog.created_at.strftime("%A %d %B %Y at %I:%M%p") %> 
-      			<% end %>
-      			</i>
+      		  <i> Edited <%= "#{date_time_summary(blog.updated_at)}" %> </i>
       		<% end %>
         </p>  
-  	      <p>
+	      
+        <p>
           <div class="blog-love" id="Blog-<%= blog.id %>">
             <%= render :partial => 'application/love_form.html.erb', :locals => { :id => blog.id, :type => 'Blog' } %> 
           </div>
@@ -43,8 +38,10 @@
           <% if can? :destroy, blog %> |
             <%= link_to "Destroy", [@user, blog], method: :delete %>
           <% end %>
-          </p>
+        </p>
+        
       </div>
     </div>
   <% end %>
+
 </div>
