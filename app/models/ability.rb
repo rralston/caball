@@ -25,5 +25,12 @@ class Ability
     can :destroy, Friendship do |friendship|
       friendship.user == user
     end
+
+    can [:create, :read], Comment do
+      user.persisted?
+    end
+    can [:update, :destroy], Comment do |comment|
+      comment.user == user
+    end
   end
 end
