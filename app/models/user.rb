@@ -50,15 +50,23 @@ class User < ActiveRecord::Base
   end
 
   def self.types
-    {
-      'Actor' => 'Actor', 
-      'Producer' => 'Producer', 
-      'Director' => 'Director', 
-      'Technical' => 'Technical', 
-      'Stuntmen' => 'Stuntmen', 
-      'Fan' => 'Fan', 
-      'Talent Manager' => 'Talent Manager'
-    }
+    # {
+    #   'Actor' => 'Actor', 
+    #   'Producer' => 'Producer', 
+    #   'Director' => 'Director', 
+    #   'Technical' => 'Technical', 
+    #   'Stuntmen' => 'Stuntmen', 
+    #   'Fan' => 'Fan', 
+    #   'Talent Manager' => 'Talent Manager'
+    # }
+    {'Actor / Actress' => 'Actor / Actress', 'Animators' => 'Animators', 'Art' => 'Art', 'Audio' => 'Audio', 
+    'Casting Director' => 'Casting Director', 'Cinematographer / DP' => 'Cinematographer / DP', 'Composer' => 'Composer', 
+    'Costumes' => 'Costumes', 'Director' => 'Director', 'Distribution Professional' => 'Distribution Professional', 
+    'Editor' => 'Editor', 'Executive Producer' => 'Executive Producer', 'Hairstylist / Makeup Artist' => 'Hairstylist / Makeup Artist', 
+    'Lighting / Electrical' => 'Lighting / Electrical', 'Other' => 'Other', 'Personal Assistant' => 'Personal Assistant', 'Producer' => 'Producer', 
+    'Production Staff' => 'Production Staff', 'Props' => 'Props', 'Set Design' => 'Set Design', 'Sound' => 'Sound',
+    'Stuntman' => 'Stuntman', 'Talent Agent / Literary Agent' => 'Talent Agent / Literary Agent', 'Talent Manager' => 'Talent Manager', 
+    'Visual Effects' => 'Visual Effects', 'Writer' => 'Writer'}
   end
   
   def profile_pic
