@@ -4,6 +4,9 @@ class HomeController < ApplicationController
   def index
     @projects = Project.where(:featured => true).first(3)
     @users = User.where(:featured => true).first(3)
+    if current_user.present?
+      redirect_to '/dashboard'
+    end
   end
 
   def about

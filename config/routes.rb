@@ -27,6 +27,8 @@ Caball::Application.routes.draw do
     get page, controller: "home", action: page
   end
 
+  match 'dashboard' => 'users#dashboard'
+
   match 'projects/show' => 'projects#show'
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')

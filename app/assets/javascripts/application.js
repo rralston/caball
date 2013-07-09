@@ -20,3 +20,4 @@
 //= require users/jquery.form.js
 //= require_directory .
 //= require init
+//= require plugins/manifest.js

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:dashboard]
   before_filter :search, only: [:index, :show, :new, :edit, :update]
   
   def index
@@ -86,4 +86,12 @@ class UsersController < ApplicationController
       format.html { redirect_to root_url, :notice => 'Sorry to see you leave :-(' }
     end
   end
+
+  def dashboard
+    search
+    @user = current_user
+    render :template => 'dashboard/index'
+  end
+
+
 end
