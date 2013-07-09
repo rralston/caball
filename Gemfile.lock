@@ -50,6 +50,7 @@ GEM
       fog
     awesome_print (1.1.0)
     builder (3.0.4)
+    cancan (1.6.9)
     capistrano (2.14.2)
       highline
       net-scp (>= 1.0.0)
@@ -327,6 +328,7 @@ PLATFORMS
 DEPENDENCIES
   asset_sync
   awesome_print
+  cancan
   cap_bootstrap!
   capistrano
   capybara
