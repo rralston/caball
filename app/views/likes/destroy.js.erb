@@ -1,0 +1,3 @@
+$('.love-button').html('<%= escape_javascript( render :partial => "application/love_form.html.erb", :locals => {:id => params[:like][:loveable_id], :type => params[:like][:loveable_type]} ) %>');
+$('.comment-love').html('<%= escape_javascript( render :partial => "application/love_form.html.erb", :locals => {:id => params[:like][:loveable_id], :type => params[:like][:loveable_type]} ) %>');
+$('.blog-love').html('<%= escape_javascript( render :partial => "application/love_form.html.erb", :locals => {:id => params[:like][:loveable_id], :type => params[:like][:loveable_type]} ) %>');
