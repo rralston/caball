@@ -1,14 +1,9 @@
 class CommentsController < ApplicationController
 
-  before_filter :require_login
+  load_and_authorize_resource
   before_filter :load_project
   
-  def current_user
-       @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  end
-  
   def create
-    @project = Project.find(params[:project_id])
     @comment = @project.comments.build(params[:comment])
     @comment.user = current_user
     if @comment.save
@@ -20,13 +15,9 @@ class CommentsController < ApplicationController
 
   def edit
     search
-    @project = Project.find(params[:project_id])
-    @comment = current_user.comments.find(params[:id])
   end
 
   def update
-    @project = Project.find(params[:project_id])
-    @comment = current_user.comments.find(params[:id])
     if @comment.update_attributes(params[:comment])
       redirect_to @project, notice: "Comment was updated."
     else
@@ -35,15 +26,13 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @project = Project.find(params[:project_id])
-    @comment = current_user.comments.find(params[:id])
     @comment.destroy
     redirect_to @project, notice: "Comment was destroyed."
   end
 
-private
+  private
 
   def load_project
-    @comment = Project.find(params[:project_id])
+    @project = Project.find(params[:project_id])
   end
 end
