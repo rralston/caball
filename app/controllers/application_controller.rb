@@ -22,7 +22,6 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  private
 
   def subdomain_view_path
     prepend_view_path "app/views/#{request.subdomain}_subdomain" if request.subdomain.present?

@@ -32,16 +32,18 @@
       			<% end %>
       			</i>
       		<% end %>
-        </p> 
-      	<% if blog.user == current_user %> 
+        </p>  
   	      <p>
           <div class="blog-love" id="Blog-<%= blog.id %>">
             <%= render :partial => 'application/love_form.html.erb', :locals => { :id => blog.id, :type => 'Blog' } %> 
-          </div> |
-          <%= link_to "Edit", edit_user_blog_path(@user, blog) %> |
-          <%= link_to "Destroy", [@user, blog], method: :delete %>
+          </div>
+          <% if can? :edit, blog %> |
+            <%= link_to "Edit", edit_user_blog_path(@user, blog) %>
+          <% end  %>
+          <% if can? :destroy, blog %> |
+            <%= link_to "Destroy", [@user, blog], method: :delete %>
+          <% end %>
           </p>
-        <% end %>
       </div>
     </div>
   <% end %>

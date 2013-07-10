@@ -36,10 +36,12 @@
         <p>
           <div class="comment-love" id="Comment-<%= blog.id %>">
             <%= render :partial => '/application/love_form.html.erb', :locals => { :id => blog.id, :type => 'Comment' } %>
-          </div> |
-          <% if blog.user == current_user %> 
-          <%= link_to "Edit", edit_project_comment_path(@project, blog) %> |
-          <%= link_to "Destroy", [@project, blog], method: :delete %>
+          </div> 
+          <% if can? :edit, blog %> |
+            <%= link_to "Edit", edit_project_comment_path(@project, blog) %> 
+          <% end %>
+          <% if can? :destroy, blog %> |
+            <%= link_to "Destroy", [@project, blog], method: :delete %>
           <% end %>
         </p>
       </div>

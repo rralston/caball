@@ -36,8 +36,22 @@ class Ability
     can [:create, :read], Blog do
       user.persisted?
     end
-    can [:destroy, :update], Blog do |blog|
+    can [:edit, :destroy, :update], Blog do |blog|
       blog.try(:user) == user
+    end
+
+    can :create, Like do
+      user.persisted?
+    end
+    can :destroy, Like do |like|
+      like.try(:user) == user
+    end
+
+    can [:new, :create], Conversation do
+      user.persisted?
+    end
+    can [:destroy,:reply,:read,:unread,:trash,:untrash,:index,:show] do |conversation|
+      user.persisted? && user.mailbox.conversations.includes?(conversation)
     end
   end
 end

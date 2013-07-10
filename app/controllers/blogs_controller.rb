@@ -5,7 +5,7 @@ class BlogsController < ApplicationController
   def create
     @blog = current_user.blogs.build(params[:blog])
     if @blog.save
-      redirect_to @user, notice: "Blog was created."
+      redirect_to current_user, notice: "Blog was created."
     else
       render :new
     end

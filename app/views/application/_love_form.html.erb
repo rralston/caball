@@ -1,4 +1,4 @@
-<%= stylesheet_link_tag 'custom' %>
+<%= stylesheet_link_tag 'likes' %>
 <% like = Like.where(loveable_id: id,loveable_type: type,user_id: current_user.id) %>
 <% if like.count == 0 %>
 	<%=form_for(Like.new, method: :post, :remote => true) do |f|%>
