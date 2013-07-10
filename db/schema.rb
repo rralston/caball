@@ -194,6 +194,7 @@ ActiveRecord::Schema.define(:version => 20130712085406) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.text     "description2"
+    t.string   "experience"
   end
 
   create_table "users", :force => true do |t|
