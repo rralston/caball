@@ -1,38 +1,43 @@
 class Admin::AdminController < Admin::BaseController
-  
-  #Sign-In Check
-  helper_method :current_user
-  before_filter :user_signed_in?
-  #Admin Status Check
   before_filter :require_admin
+
+  include Admin::AdminHelper
   
   def index
-    @users = User.all.count
-    @users_weekly = User.where('created_at >= ?', 1.week.ago).count
-    @users_2weeks = User.where('created_at >= ?', 2.week.ago).count - @users_weekly
-    @users_3weeks = User.where('created_at >= ?', 3.week.ago).count - @users_2weeks
-    @users_4weeks = User.where('created_at >= ?', 4.week.ago).count - @users_3weeks
-    @percentage = @users_weekly-@users_2weeks
-    @projects = Project.all.count
-    @projects_weekly = Project.where('created_at >= ?', 1.week.ago).count
-    @projects_2weeks = Project.where('created_at >= ?', 2.week.ago).count - @projects_weekly
-    @projects_3weeks = Project.where('created_at >= ?', 3.week.ago).count - @projects_2weeks
-    @projects_4weeks = Project.where('created_at >= ?', 4.week.ago).count - @projects_3weeks
+    # users analysis
+    @users = User.all
+    @users_count = @users.count
+    @users_weekly = objects_created_within_date_range(@users, 1.week.ago, Time.now).count
+    @users_2weeks = objects_created_within_date_range(@users, 2.week.ago, 1.week.ago).count
+    @users_3weeks = objects_created_within_date_range(@users, 3.week.ago, 2.week.ago).count
+    @users_4weeks = objects_created_within_date_range(@users, 4.week.ago, 3.week.ago).count
+    @percentage = @users_weekly - @users_2weeks
     @recent_users = User.order('created_at DESC').last(10)
+    # project analysis
+    @projects = Project.all
+    @projects_count = @projects.count
+    @projects_weekly = objects_created_within_date_range(@projects, 1.week.ago, Time.now).count
+    @projects_2weeks = objects_created_within_date_range(@projects, 2.week.ago, 1.week.ago).count
+    @projects_3weeks = objects_created_within_date_range(@projects, 3.week.ago, 2.week.ago).count
+    @projects_4weeks = objects_created_within_date_range(@projects, 4.week.ago, 3.week.ago).count
     @recent_projects = Project.order('created_at DESC').last(10)
-    @conversations_weekly = Conversation.where('created_at >= ?', 1.week.ago).count
+    # conversation analysis
+    @conversations_weekly = objects_created_within_date_range(Conversation.all, 1.week.ago, Time.now)
   end
+
   def users
     @count = User.all.count
     # @users = User.order("name").page(params[:page]).per(10)
     @search = User.search(params[:q])
     @users = @search.result.order("name").page(params[:page]).per(10)
   end
+
   def user_images
     @count = Photo.where('imageable_type = ? AND image = ?', "User", "Profile_Image.jpg").count
     @search = Photo.where('imageable_type = ? AND image = ?', "User", "Profile_Image.jpg").search(params[:q])
     @photos = @search.result.order("id").page(params[:page]).per(20)
   end
+
   def interrogate
     @user = User.find(params[:id])
     @projects = @user.projects
@@ -41,17 +46,20 @@ class Admin::AdminController < Admin::BaseController
       format.html # show.html.erb
     end
   end
+
   def projects
     @count = Project.all.count
     # @projects = Project.order("title").page(params[:page]).per(10)
     @search = Project.search(params[:q])
     @projects = @search.result.order("title").page(params[:page]).per(10)
   end
+
   def project_images
     @count = Photo.where('imageable_type = ? AND image = ?', "Project", "Profile_Image.jpg").count
     @search = Photo.where('imageable_type = ? AND image = ?', "Project", "Profile_Image.jpg").search(params[:q])
     @photos = @search.result.order("id").page(params[:page]).per(20)
   end
+
   def messages
     @count = Notification.all.count
     @search = Notification.search(params[:q])
@@ -60,19 +68,11 @@ class Admin::AdminController < Admin::BaseController
   end
   
   private
-  def current_user
-       @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  end
-  def user_signed_in?
-      unless current_user
-      redirect_to root_url, :flash => { :error => "Please Sign in!" }
-  end
-  end
+ 
   def require_admin
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
-    unless @current_user.admin == true
+    unless current_user.admin
       redirect_to root_url, :flash => { :error => "Access denied." }
     end
   end
-end
 
+end

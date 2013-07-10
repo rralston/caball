@@ -20,14 +20,14 @@
 						<li>
 							<div class="left peity_line_good"><span><%= @users_4weeks %>,<%= @users_3weeks %>,<%= @users_2weeks %>,<%= @users_weekly %></span>+ <%= @percentage %></div>
 							<div class="right">
-								<strong><%= @users %></strong>
+								<strong><%= @users_count %></strong>
 								Users
 							</div>
 						</li>
 						<li>
 							<div class="left peity_bar_good"><span><%= @projects_4weeks %>,<%= @projects_3weeks %>,<%= @projects_2weeks %>,<%= @projects_weekly %></span>+ <%= @projects_weekly %></div>
 							<div class="right">
-								<strong><%= @projects %></strong>
+								<strong><%= @projects_count %></strong>
 								Projects
 							</div>
 						</li>
@@ -46,10 +46,10 @@
 							<div class="row-fluid">
 							<div class="span4">
 								<ul class="site-stats">
-									<li><i class="icon-user"></i> <strong><%= @users %></strong> <small>Total Users</small></li>
+									<li><i class="icon-user"></i> <strong><%= @users_count %></strong> <small>Total Users</small></li>
 									<li><i class="icon-arrow-right"></i> <strong><%= @users_weekly %></strong> <small>New Users (last week)</small></li>
 									<li class="divider"></li>
-									<li><i class="icon-facetime-video"></i> <strong><%= @projects %></strong> <small>Total Projects</small></li>
+									<li><i class="icon-facetime-video"></i> <strong><%= @projects_count %></strong> <small>Total Projects</small></li>
 									<li><i class="icon-play"></i> <strong><%= @projects_weekly %></strong> <small>New Projects (last week)</small></li>
 									<li class="divider"></li>
 									<li><i class="icon-envelope"></i> <strong><%= @conversations_weekly %></strong> <small>Conversations (last week)</small></li>
