@@ -32,5 +32,12 @@ class Ability
     can [:update, :destroy], Comment do |comment|
       comment.user == user
     end
+
+    can [:create, :read], Blog do
+      user.persisted?
+    end
+    can [:destroy, :update], Blog do |blog|
+      blog.try(:user) == user
+    end
   end
 end

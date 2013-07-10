@@ -1,16 +1,9 @@
 class BlogsController < ApplicationController
 
-  before_filter :require_login
-  before_filter :load_user
-  
-  def current_user
-       @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  end
+  load_and_authorize_resource
   
   def create
-    @user = User.find(params[:user_id])
-    @blog = @user.blogs.build(params[:blog])
-    @blog.user = current_user
+    @blog = current_user.blogs.build(params[:blog])
     if @blog.save
       redirect_to @user, notice: "Blog was created."
     else
@@ -20,30 +13,21 @@ class BlogsController < ApplicationController
 
   def edit
     search
-    @user = User.find(params[:user_id])
+    @user = current_user
     @blog = current_user.blogs.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:user_id])
     @blog = current_user.blogs.find(params[:id])
     if @blog.update_attributes(params[:blog])
-      redirect_to @user, notice: "Blog was updated."
+      redirect_to current_user, notice: "Blog was updated."
     else
       render :edit
     end
   end
 
   def destroy
-    @user = User.find(params[:user_id])
-    @blog = current_user.blogs.find(params[:id])
     @blog.destroy
-    redirect_to @user, notice: "Blog was destroyed."
-  end
-
-private
-
-  def load_user
-    @blog = User.find(params[:user_id])
+    redirect_to current_user, notice: "Blog was destroyed."
   end
 end
