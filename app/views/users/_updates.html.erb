@@ -19,11 +19,9 @@
   <% end %>
   <div class="row-fluid">
     <div class="span10 offset1 drawer-content">
-  
-      <% if @user.blogs.present? %>      
+      <% if @user.blogs.present? %>
         <%= render(:partial => '/blogs/blog', :formats => [:html], :locals => {:blogs => @user.blogs}) %>
       <% end %>
-  
     </div>
   </div>
 </div>

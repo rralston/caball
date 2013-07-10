@@ -1,0 +1,29 @@
+// Place all the styles related to the Likes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.love-button{
+	display: inline-block;
+}
+
+.follow-container {
+	.love-button{
+		display: inline-block;
+		margin-right: 5px;
+	}
+}
+
+.blog-love{
+	display: inline-block;
+}
+
+.comment-love{
+	display: inline-block;
+}
+
+.user-love{
+	display: inline-block;
+	position: absolute;
+	margin-left: 10px;
+	margin-top: 15px;
+}

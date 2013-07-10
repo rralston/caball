@@ -21,7 +21,7 @@
             <div class="role-circle"></div>
             <div class="circle-fill"></div>
             <div class="circle-measure circle-measure-<%= proj.roles_percent %>"></div>
-            <span class="role-count"><%= proj.open_roles %> Open Roles</span>
+            <span class="role-count"><%= proj.open_roles.size %> Open Roles</span>
           </div>
         </div>
       </div>
@@ -57,11 +57,17 @@
           </div>
         <!-- Message Modal -->
         <% end %>
-				<div class="follow-button">
-          <%= render :partial => '/application/follow_button.html.erb', :locals => {:user => proj.user} %>
-        </div>
+				<!--<div class="follow-button">
+          render :partial => '/application/follow_button.html.erb', :locals => {:user => proj.user} 
+        </div>-->
         <div class="follow-count">
-          <span class="fan-count" data-user-id="<%= proj.user.id %>"><%= Friendship.where( :friend_id => proj.user.id).count %></span> Fans
+          <span class="fan-count" data-user-id="<%= proj.user.id %>" id="count-<%= proj.id %>">
+            <!-- Friendship.where( :friend_id => proj.user.id).count --> <%= pluralize proj.likes.all.count, 'Fan' %>
+          </span>
+        </div>
+        
+        <div class="love-button" id="Project-<%= proj.id %>">
+          <%= render :partial => '/application/love_form.html.erb', :locals => {:id => proj.id, :type => 'Project'} %>
         </div>
       </div>
       <!-- Projects Description Modal -->

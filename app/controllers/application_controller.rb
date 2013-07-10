@@ -13,18 +13,24 @@ class ApplicationController < ActionController::Base
   helper_method :correct_user?
   # Search
   helper_method :search
+
+  rescue_from CanCan::AccessDenied do |exception|
+    if request.xhr?
+      render :text => false
+    else
+      redirect_to root_url, notice: "You are not authorized to access the page."
+    end
+  end
   
-  
-  private
 
   def subdomain_view_path
     prepend_view_path "app/views/#{request.subdomain}_subdomain" if request.subdomain.present?
   end
   
   # Search for Home Directory
-  def search
-   @search = User.search(params[:q])
-   @users = @search.result
+  def search(model=User, instance="users")
+   @search = model.search(params[:q])
+   instance_variable_set("@#{instance}", @search.result)
      if params[:q]
        redirect_to(:controller => :users, :action => :index, :q => params[:q]) and return
      end
@@ -56,18 +62,6 @@ class ApplicationController < ActionController::Base
     notification
       end
     end
-  end
-  
-  
-  
-  # Authentication
-  
-  def require_login
-    redirect_to login_url, alert: "You must first log in or sign up." if current_user.nil?
-  end
-  
-  def current_user
-       @current_user ||= User.find(session[:user_id]) if session[:user_id]
   end
    
   def user_signed_in?

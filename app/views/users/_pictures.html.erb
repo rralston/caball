@@ -7,7 +7,7 @@
   <div class="row-fluid">
     <div id="photoCarouselDiv" class="carousel slide" data-interval="false">
       <div class="carousel-inner">
-        <div class="active item"><div class="item-container"><%= image_tag @user.profiles.image %></div></div>
+        <div class="active item"><div class="item-container"><%= image_tag @user.profile.image %></div></div>
         <% @user.photos.each_with_index do |photo, counter| %>
           <div class="item">
             <div class="item-container"><%= image_tag photo.image %>

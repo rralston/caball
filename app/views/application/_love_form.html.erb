@@ -1,0 +1,13 @@
+<%= stylesheet_link_tag 'likes' %>
+<% like = Like.where(loveable_id: id,loveable_type: type,user_id: current_user.id) %>
+<% if like.count == 0 %>
+	<%=form_for(Like.new, method: :post, :remote => true) do |f|%>
+		<%= f.hidden_field :loveable_id, value: id %>
+		<%= f.hidden_field :loveable_type, value: type %>
+		<%= f.submit 'Love', :type => :image, :src => '/images/love_off.png' %>
+	<% end %>
+<% else %>
+	<%=form_for(like.first, method: :delete, :remote => true) do |f|%>
+		<%= f.submit 'Love', :type => :image, :src => '/images/love_on.png' %>
+	<% end %>
+<% end %>

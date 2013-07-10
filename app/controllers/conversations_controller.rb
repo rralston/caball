@@ -1,5 +1,7 @@
 class ConversationsController < ApplicationController
-  before_filter :authenticate_user!
+
+  load_and_authorize_resource
+  
   before_filter :search
   helper_method :mailbox, :conversation
   
@@ -29,10 +31,10 @@ class ConversationsController < ApplicationController
 
   # Destroy Message form the System
   def destroy
-   Notification.find(params[:id]).destroy
-   respond_to do |format|
-     format.html { redirect_to admin_admin_messages_url, :notice => 'Message has been deleted' }
-   end
+    Notification.find(params[:id]).destroy
+    respond_to do |format|
+      format.html { redirect_to admin_admin_messages_url, :notice => 'Message has been deleted' }
+    end
   end
   
   def reply

@@ -113,56 +113,58 @@
             <h4>Youtube / Vimeo Video</h4>
             <!-- Begin Videos -->
             <%= p.fields_for :videos do |video| %>
-            <% if @videos.present?  %>
-            <% if video.object.thumbnail_small.present? %>
-            <div class="control-group">
-            <label class="control-label">Video Preview</label>
-              <div class="controls">
-                <img src=<%= video.object.thumbnail_small %> class="img-polaroid" >
-                <%= video.check_box :_destroy %> Click Here to Delete
-              </div>
-            </div>
-            <% end %>
-            <div class="control-group">
-              <%= video.label :url, :class => 'control-label' %>
-              <div class="controls">
-                <%= video.text_field(:url) %>
-              </div>
-            </div>
-            <% else %> 
-            <div class="control-group">
-              <label class="control-label">URL</label>
-              <div class="controls">
-              <%= video.text_field(:url) %>
-              </div>
-            </div>
-            <% end %>
+              <% if @videos.present? %>
+                <% if video.object.thumbnail_small.present? %>
+                  <div class="control-group">
+                  <label class="control-label">Video Preview</label>
+                    <div class="controls">
+                      <img src=<%= video.object.thumbnail_small %> class="img-polaroid" >
+                      <%= video.check_box :_destroy %> Click Here to Delete
+                    </div>
+                  </div>
+                <% end %>
+                <div class="control-group">
+                  <%= video.label :url, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= video.text_field(:url) %>
+                  </div>
+                </div>
+              <% else %> 
+                <div class="control-group">
+                  <label class="control-label">URL</label>
+                  <div class="controls">
+                  <%= video.text_field(:url) %>
+                  </div>
+                </div>
+              <% end %>
             <% end %>
             <!-- End Videos -->
             <h4>Photos</h4>
             <!-- Begin Photos -->
             <%= p.fields_for :photos do |p|  %>
             <% if p.object.image.present? %>
-            <div class="control-group">
-              <div class="controls">
-                <img src=<%= p.object.image.url(:medium) %> class="img-polaroid" >
-                <%= p.check_box :_destroy %> Delete Image               
+              <div class="control-group">
+                <div class="controls">
+                  <img src=<%= p.object.image.url(:medium) %> class="img-polaroid" >
+                  <%= p.check_box :_destroy %> Delete Image               
                 </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label">Description</label>
-              <div class="controls">
-            <%= p.text_field :description, :class => 'text_field' %>
-            </div>
-            </div>
-            <% else %>
-            <div class="control-group">
-              <label class="control-label">Project Images</label>
-              <div class="controls">
-                <%= p.file_field :image %>
               </div>
-            </div>
+              <div class="control-group">
+                <label class="control-label">Description</label>
+                <div class="controls">
+                  <%= p.text_field :description, :class => 'text_field' %>
+                </div>
+              </div>
+
+            <% else %>
+              <div class="control-group">
+                <label class="control-label">Project Images</label>
+                <div class="controls">
+                  <%= p.file_field :image %>
+                </div>
+              </div>
             <% end %>
+
             <% end %>
           </div>
         </fieldset>

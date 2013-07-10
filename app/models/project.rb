@@ -2,6 +2,7 @@ class Project < ActiveRecord::Base
   include PublicActivity::Model
   tracked
   belongs_to :user
+  has_many :likes, :as => :loveable
   has_many :roles, :dependent => :destroy
   has_many :photos, :as => :imageable, :dependent => :destroy
   has_many :videos, :as => :videoable, :dependent => :destroy
@@ -14,27 +15,41 @@ class Project < ActiveRecord::Base
   after_validation :geocode          # auto-fetch coordinates
   
   def roles_percent
-    total_roles = roles.length
-    filled_roles = 0
-    roles.each do |role|
-      if role.filled
-        filled_roles += 1
-      end
-    end
-    if total_roles == 0
-      return 10
+    if roles.size > 0
+      ((filled_roles.size.to_f / roles.size.to_f) * 10).to_i
     else
-      return ((filled_roles.to_f / total_roles.to_f) * 10).to_i
+      10
     end
   end
   
   def open_roles
-    open_roles = 0
-    roles.each do |role|
-      if !role.filled
-        open_roles += 1
-      end
-    end
-    return open_roles
+    # returns all open roles
+    roles.select{ |role| !role.filled }
   end
+
+  def filled_roles
+    roles.select{ |role| role.filled }
+  end
+
+  def self.genres
+    { 'Action' => 'Action', 'Adventure' => 'Adventure', 'Animation' => 'Animation', 'Biography' => 'Biography',
+    'Comedy' => 'Comedy', 'Crime' => 'Crime', 'Documentary' => 'Documentary', 'Drama' => 'Drama', 'Family' => 'Family',
+    'Fantasy' => 'Fantasy', 'Film-Noir' => 'Film-Noir', 'History' => 'History', 'Horror' => 'Horror', 'Musical' => 'Musical',
+    'Mystery' => 'Mystery', 'Romance' => 'Romance', 'Scifi' => 'Scifi', 'Sports' => 'Sports', 'Thriller' => 'Thriller',
+    'War' => 'War', 'Western' => 'Western' }
+  end
+
+  def self.types
+    {'Feature Length' => 'Feature Length', 'Music Video' => 'Music Video', 'Reality' => 'Reality', 'Short' => 'Short',
+    'TV Series' => 'TV Series', 'Webisode' => 'Webisode'}
+  end
+
+  def self.status_stages
+    { 'Draft' => 'Draft', 'Pre-Production' => 'Pre-Production', 'Greenlight' => 'Greenlight', 'Post-Production' => 'Post-Production', 'Completed' => 'Completed'}
+  end
+
+  def self.compensation_stages
+    {'Paid' => 'Paid', 'Low-Paid' => 'Low-Paid', 'Copy / Credit' => 'Copy / Credit'}
+  end
+
 end

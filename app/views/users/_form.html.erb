@@ -82,13 +82,13 @@
               </div>
             </div>
 
-            <%= f.fields_for :profiles do |p|  %>
+            <%= f.fields_for :profile do |p|  %>
 
-            <% if @user.profiles.image.present? %>
+            <% if @user.profile.image.present? %>
             <div class="control-group">
               <%= p.label "Profile Photo", :class => 'control-label' %>
               <div class="controls">
-                <%= image_tag @user.profiles.image.url(:medium), {:class => "img-polaroid"} %>
+                <%= image_tag @user.profile.image.url(:medium), {:class => "img-polaroid"} %>
                 <%= p.check_box :_destroy %> Click Here to Delete
 
               </div>

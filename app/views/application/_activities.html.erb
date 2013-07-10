@@ -3,14 +3,14 @@
   <div class="activity">
     <% if activity.owner %>
       <% if activity.trackable %>
-      <% if User.find(activity.trackable.user).profiles.present? %>
-        <%= image_tag User.find(activity.trackable.user).profiles.image.url(:medium), :class => "producer-image", :width => 70 %>
+      <% if User.find(activity.trackable.user).profile.present? %>
+        <%= image_tag User.find(activity.trackable.user).profile.image.url(:medium), :class => "producer-image", :width => 70 %>
       <% end %>
   <% end %>
       <%= link_to activity.owner.name, activity.owner  %>
     <% else %>
-    <% if User.find(activity.trackable.user).profiles.present? %>
-      <%= image_tag User.find(activity.trackable.user).profiles.image.url(:medium), :class => "producer-image", :width => 70 %>
+    <% if User.find(activity.trackable.user).profile.present? %>
+      <%= image_tag User.find(activity.trackable.user).profile.image.url(:medium), :class => "producer-image", :width => 70 %>
     <% end %>
       <%= link_to User.find(activity.trackable.user).name, user_path((activity.trackable.user).id) %>
     <% end %>
