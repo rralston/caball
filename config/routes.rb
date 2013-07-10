@@ -17,8 +17,9 @@ Caball::Application.routes.draw do
   resources :likes
   
   # News feed
-  
+  match 'activities/load_more' => 'activities#next_activities'
   resources :activities
+  
   
   # Static Pages 
   

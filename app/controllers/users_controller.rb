@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
 
   load_and_authorize_resource :except => [:dashboard]
-  before_filter :search, only: [:index, :show, :new, :edit, :update]
+  before_filter :search, only: [:index, :show, :new, :edit, :update, :dashboard]
   
   def index
     @talents = User.types
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => {
-                   :success => true, 
+                   :success => true,
                    :html => render_to_string(:partial => '/users/user_search_results.html.erb', 
                                              :layout => false, :formats => [:html], :locals => {} ) 
                   } }
@@ -88,7 +88,6 @@ class UsersController < ApplicationController
   end
 
   def dashboard
-    search
     @user = current_user
     render :template => 'dashboard/index'
   end

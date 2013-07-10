@@ -30,15 +30,16 @@
 
         <p>
           <div class="comment-love" id="Comment-<%= blog.id %>">
-            <%= render :partial => '/application/love_form.html.erb', :locals => { :id => blog.id, :type => 'Comment' } %>
+            <%= render :partial => '/application/love_form.html.erb', :locals => { :id => comment.id, :type => 'Comment' } %>
           </div> 
-          <% if can? :edit, blog %> |
-            <%= link_to "Edit", edit_project_comment_path(@project, blog) %> 
+          <% if can? :edit, comment %> |
+            <%= link_to "Edit", edit_project_comment_path(@project, comment) %> 
           <% end %>
-          <% if can? :destroy, blog %> |
-            <%= link_to "Destroy", [@project, blog], method: :delete %>
+          <% if can? :destroy, comment %> |
+            <%= link_to "Destroy", [@project, comment], method: :delete %>
           <% end %>
         </p>
+
       </div>
     </div>
   <% end %>

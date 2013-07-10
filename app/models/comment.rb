@@ -6,4 +6,12 @@ class Comment < ActiveRecord::Base
   has_many :likes, :as => :loveable
   belongs_to :user
   belongs_to :project
+
+  def attributes
+    hash = super
+    extra_hash = {
+      'project' => project
+    }
+    hash.merge!(extra_hash)
+  end
 end

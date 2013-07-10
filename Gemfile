@@ -98,6 +98,7 @@ gem 'possessive'
 
 #Pagination
 gem "kaminari"
+gem 'will_paginate', '~> 3.0'
 
 #Web App Monitoring
 gem 'newrelic_rpm'

@@ -1,3 +1,6 @@
+<%= stylesheet_link_tag "dashboard/dashboard" %>
+<%= javascript_include_tag "dashboard/dashboard_manifest" %>
+
 <div class='container'>
   <div class='row'>
     <div class='span2'>
@@ -43,7 +46,7 @@
         </div>
 
         <div class='span3 widgets'>
-          Her come widgets
+          Here comes the widgets
         </div>
       </div>
     </div>
@@ -51,3 +54,22 @@
     
   </div>
 </div>
+
+<%= render :partial => 'dashboard/templates/activities' %>
+
+<script type="text/javascript">
+
+  app.activities = new app.collections.activities()
+
+  app.activities.reset(<%= raw activities.first(5).to_json(:include => [
+                                                      :owner, 
+                                                      :trackable
+                                                    ]
+                                                  ) 
+                      %>)
+
+  app.activities_view = new app.views.activities({ collection: app.activities })
+
+  $('#activities_container').html(app.activities_view.render().el)
+
+</script>
