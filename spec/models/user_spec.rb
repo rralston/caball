@@ -60,6 +60,14 @@ describe User do
     specify { subject.mailboxer_email(nil).should eql(subject.email) }
   end
 
+  context "experience" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:talent) { FactoryGirl.create(:talent, :experience => User.experience['0-2 year(s)']) }
+    before { user.talents.push(talent) }
+
+    it { user.talents.first.experience.should == User.experience['0-2 year(s)'] }
+  end
+
   context "Profile Pic" do
     context "When a profile pic exists, it shoudl return the medium version of it" do
       before(:all){
