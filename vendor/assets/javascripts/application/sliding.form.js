@@ -136,7 +136,7 @@ $(function() {
     /* Create a data element for the current-index for fetching elsewhere */
     $('#steps').data('index', current);
       
-    var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height() + 50;
+    var stepHeight = $('#steps .step:eq(' + (current - 1) + ')').height() + 50;
     $('#steps').height(stepHeight);  
 	
 	}
