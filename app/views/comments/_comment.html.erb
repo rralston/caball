@@ -29,7 +29,7 @@
         </p> 
 
         <p>
-          <div class="comment-love" id="Comment-<%= blog.id %>">
+          <div class="comment-love" id="Comment-<%= comment.id %>">
             <%= render :partial => '/application/love_form.html.erb', :locals => { :id => comment.id, :type => 'Comment' } %>
           </div> 
           <% if can? :edit, comment %> |

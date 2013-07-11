@@ -92,4 +92,36 @@ describe User do
     end
   end
 
+  context "recommendations" do
+    before(:all){
+      @project_owner = FactoryGirl.create(:user)
+      @roles = [
+        FactoryGirl.create(:role, :name => "Actor", :filled => true),
+        FactoryGirl.create(:role, :name => "Lighting", :filled => false),
+        FactoryGirl.create(:role, :name => "Actor", :filled => true),
+        FactoryGirl.create(:role, :name => "Lighting", :filled => false),
+        FactoryGirl.create(:role, :name => "Other", :filled => false)
+      ]
+      @project_1 = FactoryGirl.create(:project, :roles => @roles[0..1], :user => @project_owner)
+      @project_2 = FactoryGirl.create(:project, :roles => @roles[2..4], :user => @project_owner)
+    }
+
+    context "gives all required role's names array " do
+      specify { @project_owner.roles_required.should =~ @roles.select{|role| !role.filled}.map(&:name).uniq! }  
+    end
+
+    context "recommended people" do
+      before(:all){
+        @required_talents = @roles.select{|role| !role.filled}.map(&:name).uniq!.map { |role_name|
+          FactoryGirl.create(:talent, :name => role_name)
+        }
+        @user_1 = FactoryGirl.create(:user, :talents => [@required_talents[0]]) 
+        @user_2 = FactoryGirl.create(:user, :talents => [@required_talents[1]])
+      }
+      specify { @project_owner.recommended_people.should =~ [@user_1, @user_2] }
+    end
+
+
+  end
+
 end

@@ -78,4 +78,17 @@ class User < ActiveRecord::Base
   def details_complete?
     self.location.present?
   end
+
+  def recommended_people
+    User.joins(:talents).where(:talents => {:name => roles_required}).uniq
+  end
+
+  def roles_required
+    # return array of all role names required.
+    all_roles = self.projects.map{ |project|
+      project.open_roles.map(&:name)
+    }
+    all_roles.flatten!.uniq
+  end
+
 end
