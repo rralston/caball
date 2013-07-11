@@ -92,9 +92,27 @@ describe User do
     end
   end
 
+  context "returns a array of talent names" do
+    before(:all){
+      @talents = [
+        FactoryGirl.create(:talent, :name => 'talent1'),
+        FactoryGirl.create(:talent, :name => 'talent1'),
+        FactoryGirl.create(:talent, :name => 'talent2')
+      ]
+      @user = FactoryGirl.create(:user, :talents => @talents)
+    }
+    subject { @user }
+    its(:talent_names) { should =~ @talents.map(&:name).uniq }
+  end
+
   context "recommendations" do
     before(:all){
-      @project_owner = FactoryGirl.create(:user)
+      @owner_talents = [
+        FactoryGirl.create(:talent, :name => 'talent1'),
+        FactoryGirl.create(:talent, :name => 'talent1'),
+        FactoryGirl.create(:talent, :name => 'talent2')
+      ]
+      @project_owner = FactoryGirl.create(:user, :talents => @owner_talents)
       @roles = [
         FactoryGirl.create(:role, :name => "Actor", :filled => true),
         FactoryGirl.create(:role, :name => "Lighting", :filled => false),
@@ -121,7 +139,24 @@ describe User do
       specify { @project_owner.recommended_people.should =~ [@user_1, @user_2] }
     end
 
-
+    context "recommended projects" do
+      before(:all){
+        @project_1 = FactoryGirl.create(:project, :roles => [
+          FactoryGirl.create(:role, :name => @owner_talents[0].name, :filled => false),
+          FactoryGirl.create(:role, :name => @owner_talents[1].name, :filled => true)
+        ])
+        @project_2 = FactoryGirl.create(:project, :roles => [
+          FactoryGirl.create(:role, :name => @owner_talents[0].name, :filled => false),
+          FactoryGirl.create(:role, :name => @owner_talents[2].name, :filled => false)
+        ])
+        @project_3 = FactoryGirl.create(:project, :roles => [
+          FactoryGirl.create(:role, :name => @owner_talents[0].name, :filled => true),
+          FactoryGirl.create(:role, :name => @owner_talents[2].name, :filled => true)
+        ])
+      }
+      subject { @project_owner }
+      its(:recommended_projects) { should =~ [@project_1, @project_2] }
+    end
   end
 
 end

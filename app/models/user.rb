@@ -80,7 +80,13 @@ class User < ActiveRecord::Base
   end
 
   def recommended_people
+    # pick users with talents as the open roles in the projects owned by the current user
     User.joins(:talents).where(:talents => {:name => roles_required}).uniq
+  end
+
+  def recommended_projects
+    # pick all projects whose open roles match with the user's talent names
+    Project.joins(:roles).where(:roles => {:name => talent_names, :filled => false}).uniq
   end
 
   def roles_required
@@ -89,6 +95,10 @@ class User < ActiveRecord::Base
       project.open_roles.map(&:name)
     }
     all_roles.flatten!.uniq
+  end
+
+  def talent_names
+    self.talents.map(&:name).uniq
   end
 
 end
