@@ -74,6 +74,7 @@ GEM
       ffi (~> 1.0, >= 1.0.11)
     ci_reporter (1.9.0)
       builder (>= 2.1.2)
+    client_side_validations (3.2.1)
     coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -345,6 +346,7 @@ DEPENDENCIES
   capybara-webkit
   carrierwave
   ci_reporter
+  client_side_validations
   coffee-rails (~> 3.2.1)
   database_cleaner
   debugger

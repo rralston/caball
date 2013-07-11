@@ -18,6 +18,7 @@
 //= require projects/slider.js
 //= require application/sliding.form.js
 //= require users/jquery.form.js
+//= require rails.validations
 //= require_directory .
 //= require init
 //= require plugins/manifest.js

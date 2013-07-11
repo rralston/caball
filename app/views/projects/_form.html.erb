@@ -42,7 +42,7 @@
         <div class="clearfix"></div>
       </div>
       <div id="steps">
-        <%= form_for @project, :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'formElem'} do |p| %>
+        <%= form_for @project, :validate => true, :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'formElem'} do |p| %>
 
         <fieldset class="step details">
           <div class="span12">
@@ -50,7 +50,7 @@
             <div class="control-group">
             <%= p.label :title, :class => 'control-label' %>
               <div class="controls">
-              <%= p.text_field :title, :class => 'text_field' %>
+              <%= p.text_field :title, :class => 'text_field required' %>
               </div>
             </div>
           
@@ -236,11 +236,19 @@
             <h2>Project Description</h2>
             
             <div class="control-group">
-            <%= p.label :description, :class => 'control-label' %>
+              <%= p.label :description, :class => 'control-label' %>
               <div class="controls">
-              <%= p.text_area :description, :class => 'textarea', :rows => "5" %> 
+                <%= p.text_area :description, :class => 'textarea', :rows => "5" %> 
               </div>
             </div>
+
+            <div class="control-group">
+              <%= p.label :headline, :class => 'control-label' %>
+              <div class="controls">
+                <%= p.text_area :headline, :class => 'textarea', :rows => "5" %> 
+              </div>
+            </div>
+
           </div>
         </fieldset>
         

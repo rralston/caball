@@ -112,3 +112,6 @@ gem "asset_sync"
 # Carrier Wave link to AWS S#
 gem 'fog'
 gem 'cancan'
+
+# client side validtions
+gem 'client_side_validations'
