@@ -80,6 +80,8 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    genre = params[:project][:genre].reject {|c| c.empty?}
+    params[:project][:genre] = genre.join(',')
     respond_to do |format|
       if @project.update_attributes(params[:project])
         format.html { redirect_to @project, :notice => @project.title + ' Project was successfully updated.' }

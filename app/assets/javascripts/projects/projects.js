@@ -39,7 +39,8 @@ var Projects = {
       });
       
       // For Project form - if there are errors don't allow the user to submit
-      $('#submit-user-form').bind('click',function(){
+      $('.submit-form').bind('click',function(){
+          console.log('Sample');
         if($('#formElem').data('errors')){
           Alert.newAlert('error', 'Please go back and correct any errors.');
           return false;
@@ -179,7 +180,16 @@ var Projects = {
         }
       });
       return false;
-    },
+    }
+  },
+
+  validateGenre: function(){
+    var hasError;
+    if($('fieldset div .genre-select').val().length > 2){
+      console.log('dskjn');
+      hasError = true;
+    }
+    return hasError;
   }
   
 }

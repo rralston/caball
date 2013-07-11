@@ -92,9 +92,9 @@
             </div>
           
             <div class="control-group">
-            <%= p.label :genre, :class => 'control-label' %>
+            <%= p.label :genre, :class => 'control-label' %>(select maximum 2)
               <div class="controls">
-                <%= p.select(:genre, options_for_select(@genres, @project.genre), {}, {:multiple => false, :size => 3 }) %>
+                <%= p.select(:genre, options_for_select(@genres, @project.genre), {}, {:multiple => true, :size => 3 , :class => 'genre-select'}) %>
               </div>
             </div>
           
@@ -272,7 +272,7 @@
             
             <p>Terms and Conditions</p>
             <div class="button-container">
-              <%= p.submit 'Accept and Submit', :class => 'btn btn-primary' %>
+              <%= p.submit 'Accept and Submit', :class => 'btn btn-primary submit-form' %>
             </div>
             
           </div>
