@@ -4,10 +4,7 @@ require 'request_helper'
 describe ActivitiesController do
 
   describe "GET 'index'" do
-    it "returns http success" do
-      get 'index'
-      response.should be_success
-    end
+    pending "spec for activities controller"
   end
 
 end
