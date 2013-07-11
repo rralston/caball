@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  load_and_authorize_resource :except => [:dashboard]
+  load_and_authorize_resource :except => [:dashboard, :next_recommended_projects, :next_recommended_people]
   before_filter :search, only: [:index, :show, :new, :edit, :update, :dashboard]
   
   def index
@@ -90,6 +90,20 @@ class UsersController < ApplicationController
   def dashboard
     @user = current_user
     render :template => 'dashboard/index'
+  end
+
+  def next_recommended_projects
+    projects = current_user.recommended_projects.paginate(:page => params[:page_number], :per_page => RECOMMENDED_PROJECTS_PER_PAGE)
+    respond_to do |format|
+      format.json { render :json => projects.to_json() }
+    end
+  end
+
+  def next_recommended_people
+    people = current_user.recommended_people.paginate(:page => params[:page_number], :per_page => RECOMMENDED_PEOPLE_PER_PAGE)
+    respond_to do |format|
+      format.json { render :json => people.to_json() }
+    end
   end
 
 

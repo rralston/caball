@@ -57,20 +57,29 @@
 </div>
 
 <%= render :partial => 'dashboard/templates/activities' %>
+<%= render :partial => 'dashboard/templates/recommended_people' %>
+<%= render :partial => 'dashboard/templates/recommended_project' %>
 
 <script type="text/javascript">
 
   app.activities = new app.collections.activities()
 
-  app.activities.reset(<%= raw activities.first(5).to_json(:include => [
-                                                      :owner, 
+  app.activities.reset(<%= raw activities.first(ACTIVITIES_PER_PAGE).to_json(:include => [
+                                                      :owner,
                                                       :trackable
                                                     ]
                                                   ) 
                       %>)
-
   app.activities_view = new app.views.activities({ collection: app.activities })
 
   $('#activities_container').html(app.activities_view.render().el)
+
+  app.recommended_people = new app.collections.recommended_people(<%= raw current_user.recommended_people.limit(RECOMMENDED_PEOPLE_PER_PAGE).to_json() %>)
+  app.recommended_people_view = new app.views.recommended_people({ collection: app.recommended_people })
+  $('.recommended_people_container').html(app.recommended_people_view.render().el)
+
+  app.recommended_projects = new app.collections.recommended_projects(<%= raw current_user.recommended_projects.limit(RECOMMENDED_PROJECTS_PER_PAGE).to_json() %>)
+  app.recommended_projects_view = new app.views.recommended_projects({ collection: app.recommended_projects })
+  $('.recommended_projects_container').html(app.recommended_projects_view.render().el)
 
 </script>

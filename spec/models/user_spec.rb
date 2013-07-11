@@ -108,9 +108,9 @@ describe User do
   context "recommendations" do
     before(:all){
       @owner_talents = [
+        FactoryGirl.create(:talent, :name => 'Lighting'),
         FactoryGirl.create(:talent, :name => 'talent1'),
-        FactoryGirl.create(:talent, :name => 'talent1'),
-        FactoryGirl.create(:talent, :name => 'talent2')
+        FactoryGirl.create(:talent, :name => 'Other')
       ]
       @project_owner = FactoryGirl.create(:user, :talents => @owner_talents)
       @roles = [
