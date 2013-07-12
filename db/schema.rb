@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130712085406) do
+ActiveRecord::Schema.define(:version => 20130712123211) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -73,6 +73,16 @@ ActiveRecord::Schema.define(:version => 20130712085406) do
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
+
+  create_table "endorsements", :force => true do |t|
+    t.integer  "receiver_id"
+    t.integer  "sender_id"
+    t.text     "message"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "endorsements", ["receiver_id", "sender_id"], :name => "index_endorsements_on_receiver_id_and_sender_id"
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"

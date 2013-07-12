@@ -18,6 +18,8 @@ describe User do
     it { should have_many(:comments) }
     it { should have_many(:blogs).dependent(:destroy) }
     it { should have_many(:role_applications).dependent(:destroy) }
+    it { should have_many(:sent_endorsements).dependent(:destroy) }
+    it { should have_many(:received_endorsements).dependent(:destroy) }
 
     it { should accept_nested_attributes_for :profile }
     it { should accept_nested_attributes_for :characteristics }

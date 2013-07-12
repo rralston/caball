@@ -31,7 +31,14 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :profile, :reject_if => :all_blank
   has_many :comments
   has_many :blogs, :dependent => :destroy
+
+  has_many :sent_endorsements, :class_name => 'Endorsement', :foreign_key => 'sender_id', :dependent => :destroy
+  has_many :received_endorsements, :class_name => 'Endorsement', :foreign_key => 'receiver_id', :dependent => :destroy
+
+
   accepts_nested_attributes_for :characteristics, :photos, :videos, :projects, :talents, :allow_destroy => true
+
+
 
   has_many :role_applications, :dependent => :destroy
   attr_accessible :name, :email, :location, :about, :profile, :profile_attributes,
