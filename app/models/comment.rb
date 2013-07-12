@@ -7,8 +7,8 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :project
 
-  def attributes
-    hash = super
+  def serializable_hash(options)
+    hash = super(options)
     extra_hash = {
       'project' => project
     }

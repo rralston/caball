@@ -64,7 +64,8 @@
 
   app.activities = new app.collections.activities()
 
-  app.activities.reset(<%= raw activities.first(ACTIVITIES_PER_PAGE).to_json(:include => [
+  app.activities.reset(<%= raw current_user.activities_feed.first(ACTIVITIES_PER_PAGE).
+                                          to_json(:include => [
                                                       :owner,
                                                       :trackable
                                                     ]

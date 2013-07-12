@@ -18,6 +18,12 @@ Caball::Application.routes.draw do
   resources :notifications
   resources :friendships
   resources :likes
+
+  resources :role_applications
+  match 'roles_applicants' => 'roles#applicants_list', :via => 'POST'
+  match 'role_applications/approve' => 'role_applications#approve', :via => 'POST'
+  match 'role_applications/un_approve' => 'role_applications#un_approve', :via => 'POST'
+
   
   # News feed
   match 'activities/load_more' => 'activities#next_activities'

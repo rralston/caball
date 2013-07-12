@@ -4,6 +4,7 @@ app.views.activity = Backbone.View.extend
     this.blog_activity_template = _.template($('#blog_activity_template').html())
     this.project_activity_template = _.template($('#project_activity_template').html())
     this.comment_activity_template = _.template($('#comment_activity_template').html())
+    this.roleapplication_activity_template = _.template($('#roleapplication_activity_template').html())
 
   render: ()->
     trackable_type = this.model.get('trackable_type').toLowerCase()

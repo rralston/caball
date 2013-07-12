@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130712053800) do
+ActiveRecord::Schema.define(:version => 20130712085406) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -169,8 +169,10 @@ ActiveRecord::Schema.define(:version => 20130712053800) do
   create_table "role_applications", :force => true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.text     "message"
+    t.boolean  "approved",   :default => false
   end
 
   add_index "role_applications", ["user_id", "role_id"], :name => "index_role_applications_on_user_id_and_role_id"

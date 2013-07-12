@@ -156,8 +156,35 @@ describe User do
         ])
       }
       subject { @project_owner }
-      its(:recommended_projects) { should =~ [@project_1, @project_2] }
+      its(:recommended_projects) { should include(@project_1, @project_2) }
     end
+  end
+
+  context "activities feed" do
+    before(:all){
+      @project_owner = FactoryGirl.create(:user)
+      @roles = [
+        FactoryGirl.create(:role, :name => "Actor", :filled => true),
+        FactoryGirl.create(:role, :name => "Lighting", :filled => false),
+        FactoryGirl.create(:role, :name => "Actor", :filled => true),
+        FactoryGirl.create(:role, :name => "Lighting", :filled => false),
+        FactoryGirl.create(:role, :name => "Other", :filled => false)
+      ]
+      @project_1 = FactoryGirl.create(:project, :roles => @roles[0..1], :user => @project_owner)
+      @friend = FactoryGirl.create(:user, :friends => [@project_owner])
+      @owner_blog1 = FactoryGirl.create(:blog, :content => 'test blog', :user => @project_owner)
+      @activity_1 = Activity.last.update_attributes(:owner => @project_owner)
+      @act_with_receipt = FactoryGirl.create(:role_application).create_activity action: 'create', recipient: @friend, owner: @project_owner
+    }
+
+    specify { @friend.friends_activities.map(&:trackable).should include(@owner_blog1) }
+    specify { @friend.friends_activities.map(&:id).should_not include(@act_with_receipt.id) }
+
+    specify { @friend.addressed_activities.map(&:trackable).should_not include(@owner_blog1) }
+    specify { @friend.addressed_activities.map(&:id).should include(@act_with_receipt.id) }  
+
+    specify { @friend.activities_feed.should =~ [@friend.friends_activities, @friend.addressed_activities].flatten }  
+    
   end
 
 end

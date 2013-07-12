@@ -46,3 +46,18 @@
   <a href='project/<%%= trackable.id %>'> <%%= trackable.title %> </a>
 
 </script>
+
+<script type="script/template" id='roleapplication_activity_template'>
+
+  <div class=''>
+    <a href='users/'<%%= owner.id %>> <%%= owner.name %> </a>
+    
+    <%% if(key == 'role_application.create'){ %>
+      has applied for the <%%= trackable.role.name %> (<%%= trackable.role.subrole %>) role in <a href='project/<%%= trackable.role.project.id %>'> <%%= trackable.role.project.title %> </a>
+    <%% } %>
+
+  </div>
+
+  <a href='project/<%%= trackable.id %>'> <%%= trackable.title %> </a>
+
+</script>
