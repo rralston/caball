@@ -13,12 +13,16 @@ class RoleApplicationsController < ApplicationController
     role_application = current_user.role_applications.create(params[:role_application])
     # debugger
 
+    project_owner = role_application.project.user
+    
     # send message and email to the project owner
     message_body = "Role Application - #{role_application.role.name} (#{role_application.role.subrole})"
-    conversation = current_user.send_message(role_application.project.user, role_application.message, message_body ).conversation
+    conversation = current_user.
+                    send_message(project_owner, role_application.message, message_body).
+                      conversation
 
     # create a public activity addressed to the project owner
-    role_application.create_activity action: 'create', recipient: role_application.project.user, owner: current_user
+    role_application.create_activity action: 'create', recipient: project_owner, owner: current_user
 
     redirect_to project_path(role_application.project), :notice => 'Your application is submittied, Project owner will get back to you soon.'
   end
@@ -29,6 +33,7 @@ class RoleApplicationsController < ApplicationController
     if not role.filled
       role_application.update_attributes(:approved => true)  
       role.update_attributes(:filled => true)
+      role.send_role_filled_messages
 
       render :json => role_application.to_json()
     else

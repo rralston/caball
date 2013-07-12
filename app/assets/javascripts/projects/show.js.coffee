@@ -19,13 +19,15 @@ $(document).ready ()->
     btn = $(event.target)
     role_id = btn.data('roleid')
     application_id = btn.data('applicationid')
+    btn.attr('disabled', 'disabled')
+    app.fn.show_loader_in_div(btn)
     $.ajax
       url: '/role_applications/approve'
       data:
         application_id: application_id
       type: 'POST'
       success: (resp)->
-        console.log resp
+        btn.attr('disabled', false)
         if resp != 'false'
           alert 'Applicant added to the role'
           btn.removeClass('select_applicant').addClass('remove_applicant').html('Remove')
@@ -47,4 +49,5 @@ $(document).ready ()->
           alert 'Applicant un approved to the role'
           btn.removeClass('remove_applicant').addClass('select_applicant').html('Select')
         else
-          alert 'Error processing application'      
+          alert 'Error processing application'
+
