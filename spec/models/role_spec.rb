@@ -8,6 +8,7 @@ describe Role do
 
   context "Associations" do
     it { should belong_to(:project) }
+    it { should have_many(:applications).class_name("RoleApplication").dependent(:destroy) }
   end
 
 end

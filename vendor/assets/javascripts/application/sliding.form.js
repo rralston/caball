@@ -100,6 +100,12 @@ $(function() {
 			  $this.removeClass('input-error');
 			
 		});
+
+		// errors identified by client side validation gem
+		if($('#formElem').children(':nth-child('+ parseInt(step + 1) +')').find('.field_with_errors').length > 0){
+			hasError = true
+		}
+
 		var $link = $('#navigation li:nth-child(' + parseInt(step) + ') a');
 		$link.parent().find('.error,.checked').remove();
 		
