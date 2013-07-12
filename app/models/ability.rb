@@ -68,5 +68,9 @@ class Ability
     can [:approve, :un_approve], RoleApplication do |application|
       user.persisted? && application.role.project.user_id == user.id
     end
+
+    can :create, Endorsement do |endorsement|
+      user.persisted? && user.friend_ids.include?(endorsement.receiver_id) && !user.sent_endorsements.map(&:receiver_id).include?(endorsement.receiver_id)
+    end
   end
 end

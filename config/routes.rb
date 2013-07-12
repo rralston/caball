@@ -18,6 +18,7 @@ Caball::Application.routes.draw do
   resources :notifications
   resources :friendships
   resources :likes
+  resources :endorsements
 
   resources :role_applications
   match 'roles_applicants' => 'roles#applicants_list', :via => 'POST'

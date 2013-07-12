@@ -1,0 +1,19 @@
+<!-- Endorsement Modal -->
+<div id="endorsement_modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Endorse <%= @user.name.split[0..0].join(" ") %></span></h3>
+  </div>
+  <div class="modal-body">
+    <%= form_for Endorsement.new, :remote => true  do |endorsement| %>
+      <%= endorsement.label :message %>
+      <%= endorsement.text_area :message, :rows => 10 %>
+
+      <%= endorsement.hidden_field :receiver_id, :value => @user.id %>
+      <%= endorsement.hidden_field :sender_id, :value => current_user.id %>
+
+      <%= endorsement.submit 'Endorse' %>
+    <% end %>
+  </div>
+</div>
+<!-- Endorsement Modal -->

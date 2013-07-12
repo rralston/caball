@@ -80,29 +80,45 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <h3><span><%= @user.name.split[0..0].join(" ") %></span></h3>
                   </div>
+
                   <div class="modal-body">
                     <%= simple_format @user.headline %>  
                   </div>
                 </div>
-                <!-- End Headline Modal --> 
-            <% end %>
-          </div>
-          <div class="row-fluid message-row">
-            <% if current_user!=@user %>
-            <div class="span7 offset8 message-span">
-              <a data-toggle="modal" data-target="#message-modal" 
-                    data-remote ="<%= new_conversation_path(:recipient => @user.email, :modal => true)%>"
-                    data-keyboard="true" class="message-button"><%= image_tag('mail_icon.png') %> Message</a>
-              <!-- Message Modal -->
-                <div id="message-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3><span>Message <%= @user.name.split[0..0].join(" ") %></span></h3>
+
+                  <!-- End Headline Modal --> 
+              <% end %>
+            </div>
+            <div class="row-fluid message-row">
+              <% if current_user %>
+              <div class="span7 offset5 message-span">
+
+                <% if can? :create, Endorsement.new(:receiver_id => @user.id) %>
+                  <a data-toggle="modal" data-target='#endorsement_modal' class='message-button'>
+                    Endorse
+                  </a>
+                
+                  <%= render :partial => 'users/endorsement_form_modal' %>
+                <% end %>
+                
+
+                <a data-toggle="modal" data-target="#message-modal" 
+                      data-remote ="<%= new_conversation_path(:recipient => @user.email, :modal => true)%>"
+                      data-keyboard="true" class="message-button"><%= image_tag('mail_icon.png') %> Message</a>
+                
+                <!-- Message Modal -->
+                  <div id="message-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h3><span>Message <%= @user.name.split[0..0].join(" ") %></span></h3>
+                    </div>
+                    <div class="modal-body">
+                    </div>
                   </div>
-                  <div class="modal-body">
-                  </div>
-                </div>
-              <!-- Message Modal --> 
+                <!-- Message Modal --> 
+
+              </div>
+              <% end %>
             </div>
             <% end %>
           </div>
