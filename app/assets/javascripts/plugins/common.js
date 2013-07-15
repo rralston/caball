@@ -23,4 +23,27 @@ app.fn.initialize_datetime_picker = function(selector){
   });
 }
 
+app.fn.bind_report_event = function(){
+  $('body').on('click', '.report-btn',  function(event){
+    btn = $(event.target)
+    btn.attr('disabled', 'disabled')
+    $.ajax({
+      url: '/report',
+      type: 'POST',
+      data: {
+        entity: btn.attr('data-entity'),
+        id: btn.attr('data-id')
+      },
+      success: function(resp){
+        if(resp == 'true'){
+         alert('Feedback noted. Thank You for helping us') 
+         btn.attr('disabled', false)
+         $('#report-modal').modal('hide')
+        }
+      }
+    })
+  });
+}
+  
+
   

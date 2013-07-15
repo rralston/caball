@@ -26,11 +26,13 @@
             <%= @project.likes.all.count %> Fans
           </div>
 					<% if current_user %>
-					<% if current_user.id == @project.user_id %>
-					<%= link_to edit_project_url(@project), :class => 'btn btn-small btn-primary' do %>
-					<i class="icon-wrench icon-white"></i><% end %>
+  					<% if current_user.id == @project.user_id %>
+    					<%= link_to edit_project_url(@project), :class => 'btn btn-small btn-primary' do %>
+    					  <i class="icon-wrench icon-white"></i>
+              <% end %>
+  					<% end %>
 					<% end %>
-					<% end %>
+          <%= render :partial => 'report_modal', :locals => { :entity => @project } %>
         </div>
         
         <div class="span4 offset4 roles-buttons">

@@ -25,6 +25,7 @@ Caball::Application.routes.draw do
   match 'role_applications/approve' => 'role_applications#approve', :via => 'POST'
   match 'role_applications/un_approve' => 'role_applications#un_approve', :via => 'POST'
 
+  match 'report' => 'application#report'
   
   # News feed
   match 'activities/load_more' => 'activities#next_activities'

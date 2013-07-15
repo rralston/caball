@@ -79,4 +79,11 @@ class ApplicationController < ActionController::Base
       redirect_to new_user_url, :error => 'You need to sign in for access to this page.'
     end
   end
+
+  def report
+    entity_class = params[:entity].camelize.constantize
+    entity = entity_class.find(params[:id])
+    UserMailer.report_entity_mail(current_user, entity).deliver
+    render :text => true
+  end
 end
