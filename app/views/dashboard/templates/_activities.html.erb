@@ -61,3 +61,19 @@
   <a href='project/<%%= trackable.id %>'> <%%= trackable.title %> </a>
 
 </script>
+
+
+<script type="script/template" id='endorsement_activity_template'>
+
+  <div class=''>
+    <a href='users/'<%%= owner.id %>> <%%= owner.name %> </a>
+    <%% console.log(this) %>
+    <%% if(key == 'endorsement.create'){ %>
+      has endrosed <a href='users/<%%= trackable.receiver.id %>'> <%%= trackable.receiver.name %> </a>
+    <%% } %>
+
+  </div>
+
+  <a href='project/<%%= trackable.id %>'> <%%= trackable.title %> </a>
+
+</script>

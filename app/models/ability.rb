@@ -71,8 +71,7 @@ class Ability
 
     can :create, Endorsement do |endorsement|
       user.persisted? &&
-        user.friend_ids.include?(endorsement.receiver_id) &&
-          !user.sent_endorsements.map(&:receiver_id).include?(endorsement.receiver_id)
+        user.friend_ids.include?(endorsement.receiver_id)
     end
   end
 end
