@@ -7,10 +7,13 @@ class Project < ActiveRecord::Base
   has_many :photos, :as => :imageable, :dependent => :destroy
   has_many :videos, :as => :videoable, :dependent => :destroy
   has_many :comments, :dependent => :destroy
+  has_many :project_dates, :dependent => :destroy
+
+
   attr_accessible :title, :description, :start, :end, :featured, :roles_attributes,
                   :photos_attributes, :videos_attributes, :status, :genre, :is_type,
-                  :thoughts, :compensation, :location, :headline
-  accepts_nested_attributes_for :roles, :photos, :videos, :allow_destroy => true  
+                  :thoughts, :compensation, :location, :headline, :project_dates_attributes
+  accepts_nested_attributes_for :roles, :photos, :videos, :project_dates, :allow_destroy => true  
   validates_presence_of :title, :description, :message => "is required"
   validates :headline, :length => { :maximum => 300 }
   

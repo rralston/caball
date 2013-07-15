@@ -3,10 +3,11 @@
  
 <script>
 	$(function() {
-		$( "#start" ).datepicker({ dateFormat: "yy-mm-dd" });
-		$( "#end" ).datepicker({ dateFormat: "yy-mm-dd" });
+		app.fn.initialize_datetime_picker('.datetime_field')
 	});
 </script>
+
+
 <% @project.errors.full_messages.each do |error| %>
     <div class="alert alert-error">
         <button type="button" class="close" data-dismiss="alert">×</button>
@@ -60,21 +61,28 @@
               <%= p.text_field :location, :class => 'text_field' %>
               </div>
             </div>
-            
+
+            <h4>Important Dates</h4>
+
             <div class="dates-container">
-              <div class="control-group">
-              <%= p.label :start, :class => 'control-label' %>
-                <div class="controls">
-                <%= p.text_field :start, :id => 'start' %>
-                </div>
+              
+              <%= p.fields_for :project_dates do |date| %>
+                <%= render :partial => 'projects/imp_dates_input', :locals => { :date => date } %>
+              <% end %>
+
+              <div id='fields-for-project_dates-list' class='numerous'>
+                <%= p.fields_for :project_dates, ProjectDate.new, :child_index => 'replace_this' do |date| %>
+
+                  <%= render :partial => 'projects/imp_dates_input', :locals => { :date => date } %>
+
+                  <%= link_to 'Remove', '#', :class => 'numerous-remove pull-left' %>
+
+                <% end %>
               </div>
-            
-              <div class="control-group">
-              <%= p.label :end, :class => 'control-label' %>
-                <div class="controls">
-                <%= p.text_field :end, :id => 'end' %>
-                </div>
-              </div>
+
+              <div id='project_dates-list'></div>
+
+              <%= link_to 'Add an important Date', '#', :id => 'add-to-project_dates-list' %>
             </div>
           
             <div class="control-group">
@@ -94,14 +102,16 @@
             <div class="control-group">
             <%= p.label :genre, :class => 'control-label' %>(select maximum 2)
               <div class="controls">
-                <%= p.select(:genre, options_for_select(@genres, @project.genre), {}, {:multiple => true, :size => 3 , :class => 'genre-select'}) %>
+
+                <%= p.select(:genre, options_for_select(@genres, @project.genre), {}, {:multiple => false}) %>
+
               </div>
             </div>
           
             <div class="control-group">
             <%= p.label 'Type', :class => 'control-label' %>
               <div class="controls">
-                <%= p.select(:is_type, options_for_select(@is_type, @project.is_type), {}, {:multiple => false, :size => 3 }) %>
+                <%= p.select(:is_type, options_for_select(@is_type, @project.is_type), {}, {:multiple => false}) %>
               </div>
             </div>
           </div>
@@ -172,63 +182,71 @@
         <fieldset class="step roles-content">
           <div class="span12">
             <h2>Talent Required</h2>
-            <% if @project.roles.exists? %>
-            <%= p.fields_for :roles do |role|   %>
-             <div class="control-group">
-                <%= role.label :name, :class => 'control-label' %>
-                <div class="controls">
-                  <%= role.select :name, @talents%>
-                 </div>
-             </div>
             
-            <div class="control-group">
-            <%= role.label :subrole, :class => 'control-label' %>
-              <div class="controls">
-              <%= role.text_area :subrole, :class => 'textarea', :rows => "1" %>  
-              </div>
-            </div>
-          
-            <div class="control-group">
-            <%= role.label :description, :class => 'control-label' %>
-              <div class="controls">
-              <%= role.text_area :description, :class => 'textarea', :rows => "5" %>  
-              <br><%= role.check_box :filled %> Role Filled?
-              <br>
-              <%= role.check_box :_destroy %> Click Here to Destroy
-              </div>
-            </div>
+            <% if @project.roles.exists? %>
+              
+              <%= p.fields_for :roles do |role|   %>
+                <div class="control-group">
+                  <%= role.label :name, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= role.select :name, @talents%>
+                   </div>
+                </div>
+              
+                <div class="control-group">
+                  <%= role.label :subrole, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= role.text_area :subrole, :class => 'textarea', :rows => "1" %>  
+                  </div>
+                </div>
+              
+                <div class="control-group">
+                <%= role.label :description, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= role.text_area :description, :class => 'textarea', :rows => "5" %>  
+                    <br>
+                    <%= role.check_box :filled %> Role Filled?
+                    <br>
+                    <%= role.check_box :_destroy %> Click Here to Destroy
+                  </div>
+                </div>
+              <% end %>
+
             <% end %>
-            <% end %>
+
             <div id="fields-for-roles-list" class="numerous">
               <%= p.fields_for :roles, Role.new, :child_index => 'replace_this' do |role| %>
-              <div class="control-group">
+                <div class="control-group">
                   <%= role.label :name, :class => 'control-label' %>
                   <div class="controls">
                     <%= role.select(:name, options_for_select(@talents)) %>
-                   </div>
-               </div>
+                  </div>
+                </div>
+                
+                <div class="control-group">
+                  <%= role.label :subrole, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= role.text_area :subrole, :class => 'textarea', :rows => "1" %>  
+                  </div>
+                </div>
               
-              <div class="control-group">
-              <%= role.label :subrole, :class => 'control-label' %>
-                <div class="controls">
-                <%= role.text_area :subrole, :class => 'textarea', :rows => "1" %>  
+                <div class="control-group">
+                  <%= role.label :description, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= role.text_area :description, :class => 'textarea', :rows => "5" %>  
+                    <%= role.check_box :filled %> Role Filled?
+                  </div>
                 </div>
-              </div>
-            
-              <div class="control-group">
-              <%= role.label :description, :class => 'control-label' %>
-                <div class="controls">
-                <%= role.text_area :description, :class => 'textarea', :rows => "5" %>  
-                <%= role.check_box :filled %> Role Filled?
-                </div>
-              </div>
-            
-              <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+              
+                <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
               <% end %>
             </div>
+
             <div id="roles-list"></div>
+            
             <%= link_to 'Add More Talent', '#', :id => 'add-to-roles-list' %>
           </div>
+
         </fieldset>
         
         <fieldset class="step project-description">

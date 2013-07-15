@@ -97,12 +97,13 @@
           <div class="dates-title">
             <h3>Important Dates:</h3>
           </div>
-          <% if @project.start.present? %>
-          <div class="date"><%= @project.start %> - Start</div>
+          
+          <% @project.project_dates.each do |date| %>
+            <div class="date">
+              <%= date.date_time %> - <%= date.description %>
+            </div>
           <% end %>
-          <% if @project.end.present? %>
-          <div class="date"><%= @project.end %> - End</div>
-          <% end %>
+          
         </div>
       </div> 
     

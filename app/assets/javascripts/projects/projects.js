@@ -52,17 +52,23 @@ var Projects = {
       Numerous.init({
         'roles-list' : {
           'add' : function(form){
-            var current = $('#steps').data('index');
-            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
-            $('#steps').height(stepHeight);
+            app.fn.resize_form()
           },
   
           'remove' : function(form){
-            var current = $('#steps').data('index');
-            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
-            $('#steps').height(stepHeight);
+            app.fn.resize_form()
           }
         },
+        'project_dates-list': {
+          'add' : function(form){
+            app.fn.resize_form()
+            app.fn.initialize_datetime_picker('.datetime_field')
+          },
+  
+          'remove' : function(form){
+            app.fn.resize_form()
+          }
+        }
       });
     }
   },

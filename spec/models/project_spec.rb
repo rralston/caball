@@ -18,9 +18,11 @@ describe Project do
     it { should have_many(:photos).dependent(:destroy) }
     it { should have_many(:videos).dependent(:destroy) }
     it { should have_many(:comments).dependent(:destroy) }
+    it { should have_many(:project_dates).dependent(:destroy) }
     it { should accept_nested_attributes_for :roles }
     it { should accept_nested_attributes_for :photos }
     it { should accept_nested_attributes_for :videos }
+    it { should accept_nested_attributes_for :project_dates }
   end
 
   context "Validations" do

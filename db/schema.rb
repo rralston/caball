@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130712123211) do
+ActiveRecord::Schema.define(:version => 20130715102124) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -142,11 +142,19 @@ ActiveRecord::Schema.define(:version => 20130712123211) do
     t.datetime "created_at",   :null => false
   end
 
+  create_table "project_dates", :force => true do |t|
+    t.integer  "project_id"
+    t.string   "description"
+    t.string   "date_time"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "project_dates", ["project_id"], :name => "index_project_dates_on_project_id"
+
   create_table "projects", :force => true do |t|
     t.string   "title"
     t.text     "description"
-    t.date     "start"
-    t.date     "end"
     t.integer  "user_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
