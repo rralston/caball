@@ -80,8 +80,9 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    genre = params[:project][:genre].reject {|c| c.empty?}
-    params[:project][:genre] = genre.join(',')
+    params[:project][:genre] = params[:project][:genre].to_json()
+    params[:project][:is_type] = params[:project][:is_type].to_json()
+
     respond_to do |format|
       if @project.update_attributes(params[:project])
         format.html { redirect_to @project, :notice => @project.title + ' Project was successfully updated.' }

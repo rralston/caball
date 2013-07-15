@@ -1,126 +1,8 @@
 <%= javascript_include_tag "projects/projects_manifest" %>
-<%= stylesheet_link_tag "projects/manifest.css" %>
-
-<div class='container'>
-  <div class='row'>
-    <div class='span12'>
-      
-      <div class='row project-main-head'>
-        <div class='span5 project-image'>
-        </div>
-
-        <div class='span7'>
-          <div class='row'>
-            <div class='span7'>
-
-              <div class='btn-custom pull-left btn-grey disabled'>
-                Love This
-              </div>
-              <div class='btn-custom pull-left btn-grey disabled'>
-                Like This
-              </div>
-              <div class='btn-custom pull-left btn-grey'>
-                Message
-              </div>
-
-              <div class='btn-custom pull-left btn-red'>
-                Follow
-              </div>
-            </div>
-          </div>
-
-          <div class='row'>
-            <div class='span7'>
-              <h2><%= @project.title %></h2>
-            </div>
-            
-            <div class='span7 project-created-by'>
-              <i>created by </i>
-              <%= link_to @project.user.name, "users/#{@project.user.id}" %>
-            </div>
-
-            <div class='span7 project-description'>
-              <%= @project.description %>
-              <div class='shaded-divider'></div>
-            </div>
-            
-          </div>
-
-          <div class='row'>
-            <div class='span7'>
-              <% if !@project.location.nil? %>
-                <div class='location-img-blue pull-left'></div>
-                Shooting in <%= @project.location %>
-              <% end %>
-            </div>
-            
-            <div class='span7 project-genres'>
-              <ul>
-                <% JSON.parse(@project.genre).each do |genre| %>
-                  <% if genre.present? %>
-                    <li> <%= genre %> </li>
-                  <% end %>
-                <% end %>
-              </ul>
-            </div>
-
-            <div class='span7 project-types'>
-              <ul>
-                <% JSON.parse(@project.is_type).each do |type| %>
-                  <% if type.present? %>
-                    <li class='badge badge-custom-green'> <%= type %> </li>
-                  <% end %>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class='row'>
-        
-        <div class='span8 project-wall'>
-          <div class='row'>
-            <div class='headline'>
-              <i>
-                <span class='big-quotes'>"</span>
-                <%= @project.headline %>
-                <span class='big-quotes'>"</span>
-              </i>
-            </div>
-          </div>
-
-
-
-        </div>
-        
-        <div class='span4 project-right-divs'>
-          <div class='row imp-dates-div'>
-            <div class='span4'>
-              <div class='imp-date-head'>
-                IMPORTANT DATES
-              </div>
-              
-              <div class='imp-dates'>
-                
-              </div>
-              
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-    </div>
-  </div>
-</div>
-
 
 <div class="container">
   <div class="row-fluid">
     <div class="span12">
-
 
       <div class="row-fluid">
         <div class="page-header centered-text">
@@ -144,13 +26,11 @@
             <%= @project.likes.all.count %> Fans
           </div>
 					<% if current_user %>
-  					<% if current_user.id == @project.user_id %>
-    					<%= link_to edit_project_url(@project), :class => 'btn btn-small btn-primary' do %>
-    					  <i class="icon-wrench icon-white"></i>
-              <% end %>
-  					<% end %>
+					<% if current_user.id == @project.user_id %>
+					<%= link_to edit_project_url(@project), :class => 'btn btn-small btn-primary' do %>
+					<i class="icon-wrench icon-white"></i><% end %>
 					<% end %>
-          <%= render :partial => 'report_modal', :locals => { :entity => @project } %>
+					<% end %>
         </div>
         
         <div class="span4 offset4 roles-buttons">
@@ -217,13 +97,12 @@
           <div class="dates-title">
             <h3>Important Dates:</h3>
           </div>
-          
-          <% @project.project_dates.each do |date| %>
-            <div class="date">
-              <%= date.date_time %> - <%= date.description %>
-            </div>
+          <% if @project.start.present? %>
+          <div class="date"><%= @project.start %> - Start</div>
           <% end %>
-          
+          <% if @project.end.present? %>
+          <div class="date"><%= @project.end %> - End</div>
+          <% end %>
         </div>
       </div> 
     
