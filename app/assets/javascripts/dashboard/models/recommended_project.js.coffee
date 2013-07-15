@@ -1,0 +1,1 @@
+app.models.recommended_project = Backbone.Model.extend()

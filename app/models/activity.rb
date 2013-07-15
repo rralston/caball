@@ -4,5 +4,4 @@ def user
   User.find(trackable.user)
 end
 
-
 end

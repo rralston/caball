@@ -3,6 +3,16 @@ class ActivitiesController < ApplicationController
   before_filter :search
 
   def index
-    @activities = Activity.order("created_at desc").where(:owner_id => current_user.friend_ids, :owner_type => 'User')
+    @activities = current_user.activities_feed
+  end
+
+  def next_activities
+    activities = current_user.activities_feed.
+                  paginate(:page => params[:page_number], :per_page => ACTIVITIES_PER_PAGE)
+    render :json => activities.to_json(:include => [
+                                                    :owner, 
+                                                    :trackable
+                                                  ]
+                                                )
   end
 end

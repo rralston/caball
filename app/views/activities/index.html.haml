@@ -1,9 +1,0 @@
-%h1 Friends' Activities
-- @activities.each do |activity|
-  - user = activity.owner || activity.user || User.new
-  / Print activity only if the trackable object is present
-  - if activity.trackable
-    .activity
-      = image_tag user.profile_pic, :class => "producer-image", :width => 70
-      = link_to user.name, user
-      = render_activity activity

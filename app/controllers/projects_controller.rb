@@ -29,7 +29,9 @@ class ProjectsController < ApplicationController
       else
         @sorted_roles[role.name] = {:role_list => [role], :open_count => 0, :filled_count => 0, :total_count => 0}
       end
+
       @sorted_roles[role.name][:total_count] += 1
+
       if role.filled
         @sorted_roles[role.name][:filled_count] += 1
       else
@@ -78,6 +80,8 @@ class ProjectsController < ApplicationController
   end
 
   def update
+    genre = params[:project][:genre].reject {|c| c.empty?}
+    params[:project][:genre] = genre.join(',')
     respond_to do |format|
       if @project.update_attributes(params[:project])
         format.html { redirect_to @project, :notice => @project.title + ' Project was successfully updated.' }

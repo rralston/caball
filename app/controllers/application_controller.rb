@@ -21,6 +21,12 @@ class ApplicationController < ActionController::Base
       redirect_to root_url, notice: "You are not authorized to access the page."
     end
   end
+
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
+  helper_method :current_user
   
 
   def subdomain_view_path
@@ -37,11 +43,6 @@ class ApplicationController < ActionController::Base
   end
   
   # Project Comments System
-  
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  end
-  helper_method :current_user
 
   def require_login
     redirect_to login_url, alert: "You must first log in or sign up." if current_user.nil?
@@ -57,10 +58,8 @@ class ApplicationController < ActionController::Base
   #Notification System  
   def notification
     if @current_user
-    notification = @current_user.receipts.where(:receiver_id == :user_id).is_unread.count
-    if notification > 0
-    notification
-      end
+      notification = @current_user.receipts.where(:receiver_id => :user_id).is_unread.count
+      notification if notification > 0
     end
   end
    

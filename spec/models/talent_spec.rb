@@ -8,6 +8,7 @@ describe Talent do
 
   context "Associations" do
     it { should belong_to(:user) }
+    it { should respond_to(:experience) }
   end
 
 end

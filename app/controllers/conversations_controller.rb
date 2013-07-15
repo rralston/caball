@@ -7,9 +7,8 @@ class ConversationsController < ApplicationController
   
   def new
     @recipient = params[:recipient]
-    if params[:subject]
-      @subject  = params[:subject]
-    end
+    @subject  = params[:subject] if params[:subject]
+
     if params[:modal]
       @modal = true
       respond_to do |format|

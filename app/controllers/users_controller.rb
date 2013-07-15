@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
 
-  load_and_authorize_resource
-  before_filter :search, only: [:index, :show, :new, :edit, :update]
+  load_and_authorize_resource :except => [:dashboard, :next_recommended_projects, :next_recommended_people]
+  before_filter :search, only: [:index, :show, :new, :edit, :update, :dashboard]
   
   def index
     @talents = User.types
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => {
-                   :success => true, 
+                   :success => true,
                    :html => render_to_string(:partial => '/users/user_search_results.html.erb', 
                                              :layout => false, :formats => [:html], :locals => {} ) 
                   } }
@@ -40,6 +40,7 @@ class UsersController < ApplicationController
 
   def edit
     @talents = User.types
+    @experience = User.experience
     @videos = @user.videos
     @user.talents.present? || [@user.talents.build, @user.talents.build]
   end
@@ -86,4 +87,25 @@ class UsersController < ApplicationController
       format.html { redirect_to root_url, :notice => 'Sorry to see you leave :-(' }
     end
   end
+
+  def dashboard
+    @user = current_user
+    render :template => 'dashboard/index'
+  end
+
+  def next_recommended_projects
+    projects = current_user.recommended_projects.paginate(:page => params[:page_number], :per_page => RECOMMENDED_PROJECTS_PER_PAGE)
+    respond_to do |format|
+      format.json { render :json => projects.to_json() }
+    end
+  end
+
+  def next_recommended_people
+    people = current_user.recommended_people.paginate(:page => params[:page_number], :per_page => RECOMMENDED_PEOPLE_PER_PAGE)
+    respond_to do |format|
+      format.json { render :json => people.to_json() }
+    end
+  end
+
+
 end

@@ -98,6 +98,7 @@ gem 'possessive'
 
 #Pagination
 gem "kaminari"
+gem 'will_paginate', '~> 3.0'
 
 #Web App Monitoring
 gem 'newrelic_rpm'
@@ -111,3 +112,6 @@ gem "asset_sync"
 # Carrier Wave link to AWS S#
 gem 'fog'
 gem 'cancan'
+
+# client side validtions
+gem 'client_side_validations'

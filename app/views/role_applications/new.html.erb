@@ -1,0 +1,23 @@
+<div class='well'>
+  
+  <%= form_for RoleApplication.new do |role_application| %>
+    <h3>Role Application</h3>
+    Project - <%= @role.project.title %> <br/>
+    Role - <%= @role.name %> <br/>
+    SubRole - <%= @role.subrole %> <br/>
+
+    <div class="control-group">
+      <%= role_application.label :message, :class => 'control-label' %>
+      <label class='control-label' for='role_application[message]'>
+        Leave a message to the Project Creator
+      </label>
+      <div class="controls">
+        <%= role_application.text_area :message, :class => 'text_area required', :rows => 10 %>
+      </div>
+    </div>
+
+    <input type='hidden' name='role_application[role_id]' value= <%= @role.id %> >
+
+    <%= role_application.submit 'Submit Application', :class => 'btn btn-success' %>
+  <% end %>
+</div>

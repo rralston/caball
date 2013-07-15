@@ -50,8 +50,23 @@ class Ability
     can [:new, :create], Conversation do
       user.persisted?
     end
-    can [:destroy,:reply,:read,:unread,:trash,:untrash,:index,:show] do |conversation|
-      user.persisted? && user.mailbox.conversations.includes?(conversation)
+
+    can [:destroy,:reply,:read,:unread,:trash,:untrash,:index,:show], Conversation do |conversation|
+      user.persisted? && user.mailbox.conversations.include?(conversation)
+    end
+
+    can :create, RoleApplication do
+      user.persisted?
+    end
+
+    can :read, Role
+
+    can :manage, Role do |role|
+      user.persisted? && role.project.user_id == user.id
+    end
+
+    can [:approve, :un_approve], RoleApplication do |application|
+      user.persisted? && application.role.project.user_id == user.id
     end
   end
 end

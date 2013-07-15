@@ -1,0 +1,63 @@
+<script type="script/template" id='blog_activity_template'>
+  
+  <div class='activity_summary'>
+    <a href='users/'<%%= owner.id %>> <%%= owner.name %> </a>
+    <%% if(key == 'blog.create'){ %>
+      <%= render :partial => 'public_activity/blog/create' %>
+    <%% }else if(key == 'blog.update'){ %>
+      <%= render :partial => 'public_activity/blog/update' %>
+    <%% } %>
+  </div>
+
+  <%%= trackable.content %>
+
+</script>
+
+<script type="script/template" id='comment_activity_template'>
+
+  <div class='activity_summary'>
+    <a href='users/'<%%= owner.id %>> <%%= owner.name %> </a>
+    <%% if(key == 'comment.create'){ %>
+      posted a Project update to
+      <a href='project/<%%= trackable.project.id %>'> <%%= trackable.project.title %> </a>
+    <%% }else if(key == 'comment.update'){ %>
+      edited a Project update to
+      <a href='project/<%%= trackable.project.id %>'> <%%= trackable.project.title %> </a>
+    <%% } %>
+    <br/>
+  </div>
+
+  <%%= trackable.content %>
+
+</script>
+
+<script type="script/template" id='project_activity_template'>
+
+  <div class='activity_summary'>
+    <a href='users/'<%%= owner.id %>> <%%= owner.name %> </a>
+    <%% if(key == 'project.create'){ %>
+      created a Project called
+      <a href='project/<%%= trackable.id %>'> <%%= trackable.title %> </a>
+    <%% }else if(key == 'project.update'){ %>
+      updated the Project
+    <%% } %>
+  </div>
+
+  <a href='project/<%%= trackable.id %>'> <%%= trackable.title %> </a>
+
+</script>
+
+<script type="script/template" id='roleapplication_activity_template'>
+
+  <div class=''>
+    <a href='users/'<%%= owner.id %>> <%%= owner.name %> </a>
+    
+    <%% if(key == 'role_application.create'){ %>
+      has applied for the <%%= trackable.role.name %> (<%%= trackable.role.subrole %>) role in <a href='project/<%%= trackable.role.project.id %>'> <%%= trackable.role.project.title %> </a>
+    <%% } %>
+
+  </div>
+
+  <a href='project/<%%= trackable.id %>'> <%%= trackable.title %> </a>
+
+</script>

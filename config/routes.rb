@@ -3,6 +3,9 @@ Caball::Application.routes.draw do
 
   match "/skills(/*path)" => redirect{ |env, req| "http://skills.filmzu.com" + (req.path ? "#{req.path}" : '/')}
 
+  match 'users/recommended_projects' => 'users#next_recommended_projects'
+  match 'users/recommended_people' => 'users#next_recommended_people'
+
   resources :users do 
     resources :characteristics, :photos, :talents, :profile, :blogs
   end
@@ -15,10 +18,17 @@ Caball::Application.routes.draw do
   resources :notifications
   resources :friendships
   resources :likes
+
+  resources :role_applications
+  match 'roles_applicants' => 'roles#applicants_list', :via => 'POST'
+  match 'role_applications/approve' => 'role_applications#approve', :via => 'POST'
+  match 'role_applications/un_approve' => 'role_applications#un_approve', :via => 'POST'
+
   
   # News feed
-  
+  match 'activities/load_more' => 'activities#next_activities'
   resources :activities
+  
   
   # Static Pages 
   
@@ -26,6 +36,8 @@ Caball::Application.routes.draw do
   %w[privacy terms about].each do |page|
     get page, controller: "home", action: page
   end
+
+  match 'dashboard' => 'users#dashboard'
 
   match 'projects/show' => 'projects#show'
   match 'auth/:provider/callback', to: 'sessions#create'

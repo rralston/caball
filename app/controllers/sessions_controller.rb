@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id
     if user.details_complete?
-      redirect_to user_url(session[:user_id]), {:notice => 'Welcome back to Caball, you are now signed in!'}
+      redirect_to '/dashboard', {:notice => 'Welcome back to Caball, you are now signed in!'}
     else
       redirect_to edit_user_url(session[:user_id]), {:notice => 'Thanks for signing up! How about a few more details?'}
     end

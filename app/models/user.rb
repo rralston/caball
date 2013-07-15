@@ -32,7 +32,13 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :blogs, :dependent => :destroy
   accepts_nested_attributes_for :characteristics, :photos, :videos, :projects, :talents, :allow_destroy => true
-  attr_accessible :name, :email, :location, :about, :profile, :profile_attributes, :imdb_url, :characteristics_attributes, :photos_attributes, :talents_attributes, :photo, :videos_attributes, :projects_attributes, :admin, :gender, :headline, :featured
+
+  has_many :role_applications, :dependent => :destroy
+  attr_accessible :name, :email, :location, :about, :profile, :profile_attributes,
+                  :imdb_url, :characteristics_attributes, :photos_attributes,
+                  :talents_attributes, :photo, :videos_attributes, :projects_attributes,
+                  :admin, :gender, :headline, :featured
+
   validates_presence_of :name, :email, :message => "is required"
     
   geocoded_by :location   # can also be an IP address
@@ -49,6 +55,16 @@ class User < ActiveRecord::Base
       # user.location = auth.info.user_hometown
       user.save!
     end
+  end
+
+  def self.experience
+    #Experience of the user in hash
+    {
+      '0-2 year(s)' => '0 to 2 year(s)',
+      '3-5 years' => '3 to 5 years',
+      '6-10 years' => '6 to 10 years',
+      '10+ years' => 'above 10 years',
+    }
   end
 
   def self.types
@@ -78,4 +94,47 @@ class User < ActiveRecord::Base
   def details_complete?
     self.location.present?
   end
+
+  def recommended_people
+    # pick users with talents as the open roles in the projects owned by the current user
+    User.joins(:talents).
+          where(:talents => {:name => roles_required}).
+            where('user_id != ?', self.id).uniq
+  end
+
+  def recommended_projects
+    # pick all projects whose open roles match with the user's talent names
+    Project.joins(:roles).
+              where(:roles => {:name => talent_names, :filled => false}).
+                where('project_id NOT IN (?)', self.project_ids).uniq
+  end
+
+  def roles_required
+    # return array of all role names required.
+    all_roles = self.projects.map{ |project|
+      project.open_roles.map(&:name)
+    }
+    all_roles.flatten.uniq
+  end
+
+  def talent_names
+    self.talents.map(&:name).uniq
+  end
+
+  def activities_feed
+    Activity.order("created_at DESC").
+      where('(owner_id in (?) AND owner_type = ? AND recipient_id IS NULL) OR (recipient_id = ?)', self.friend_ids, 'User', self.id)
+  end
+
+  def friends_activities
+    Activity.order("created_at desc").
+              where(:owner_id => self.friend_ids, :owner_type => 'User').
+              where(:recipient_id => nil)
+  end
+
+  def addressed_activities
+    Activity.order("created_at desc").
+              where(:recipient_id => self.id)
+  end
+
 end
