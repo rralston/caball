@@ -26,7 +26,7 @@ $(function() {
 	show the navigation bar
 	*/
 	$('#navigation').show();
-	
+
 	/*
 	when clicking on a navigation link 
 	the form slides to the corresponding fieldset
@@ -75,6 +75,7 @@ $(function() {
 				FormErrors = true;
 		}
 		$('#formElem').data('errors',FormErrors);	
+		console.log(FormErrors);
 	}
 	
 	/*
@@ -105,6 +106,16 @@ $(function() {
 		if($('#formElem').children(':nth-child('+ parseInt(step + 1) +')').find('.field_with_errors').length > 0){
 			hasError = true
 		}
+		//console.log($('fieldset div .genre-select').val().length);
+
+		if($('fieldset div .genre-select').length){
+			if(Projects.validateGenre()){
+				hasError = true;
+				$this.addClass('input-error');
+			}
+			else
+			  $this.removeClass('input-error');
+	  }
 
 		var $link = $('#navigation li:nth-child(' + parseInt(step) + ') a');
 		$link.parent().find('.error,.checked').remove();
@@ -141,9 +152,7 @@ $(function() {
 	 
     /* Create a data element for the current-index for fetching elsewhere */
     $('#steps').data('index', current);
-      
-    var stepHeight = $('#steps .step:eq(' + (current - 1) + ')').height() + 50;
-    $('#steps').height(stepHeight);  
-	
+	    var stepHeight = $('#steps .step:eq(' + (current - 1) + ')').height() + 50;
+	    $('#steps').height(stepHeight);
 	}
 });

@@ -125,15 +125,21 @@
               </div>
             </div>
             <% @user.talents.each_with_index do |talent, index| %>
-            <%= f.fields_for :talents, talent, :child_index => index do |talent_field| %>
-            <div class="control-group">
-              <%= talent_field.label "Talent", :class => 'control-label' %>
-              <div class="controls">
-                <%= talent_field.check_box :_destroy %> Click Here to Delete
-                <%= talent_field.select(:name, @talents, {}, {:class => 'talent-select', :'data-index' => index})%>
-              </div>
-            </div>
-            <% end %>
+              <%= f.fields_for :talents, talent, :child_index => index do |talent_field| %>
+                <div class="control-group">
+                  <%= talent_field.label "Talent", :class => 'control-label' %>
+                  <div class="controls">
+                    <%= talent_field.check_box :_destroy %> Click Here to Delete
+                    <%= talent_field.select(:name, @talents, {}, {:class => 'talent-select', :'data-index' => index})%>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <%= talent_field.label "Experience", :class => 'control-label' %>
+                  <div class="controls">
+                    <%= talent_field.select(:experience, @experience, {}, {:class => 'experience-select', :'data-index' => index})%>
+                  </div>
+                </div>
+              <% end %>
             <% end %>
           </div>
         </fieldset>

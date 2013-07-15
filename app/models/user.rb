@@ -57,6 +57,16 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.experience
+    #Experience of the user in hash
+    {
+      '0-2 year(s)' => '0 to 2 year(s)',
+      '3-5 years' => '3 to 5 years',
+      '6-10 years' => '6 to 10 years',
+      '10+ years' => 'above 10 years',
+    }
+  end
+
   def self.types
     # {
     #   'Actor' => 'Actor', 

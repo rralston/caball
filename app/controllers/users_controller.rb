@@ -40,6 +40,7 @@ class UsersController < ApplicationController
 
   def edit
     @talents = User.types
+    @experience = User.experience
     @videos = @user.videos
     @user.talents.present? || [@user.talents.build, @user.talents.build]
   end

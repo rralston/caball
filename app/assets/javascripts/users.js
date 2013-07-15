@@ -350,7 +350,7 @@ var Users = {
         }
       });
       return false;
-    },
+    }
     
   }
     
