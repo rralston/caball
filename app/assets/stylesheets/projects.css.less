@@ -1,3 +1,70 @@
+.role-circles {
+      
+      margin-left: 0px;
+      text-align: center;
+      
+      .role-circle-container {
+        display: inline-block;
+        position: relative;
+        margin: 0 10px;
+        width: 80px;
+        height: 120px;
+        
+        .role-title {
+          position: relative;
+          float: left;
+          top: -30px;
+          width: 100px;
+          z-index: 10;
+          white-space: nowrap;
+          text-align: left;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-size: 0.7em;
+        }
+        
+        .circle-measure {    
+          top: 0;
+          width: 80px;
+          z-index: 8;
+          background-color: @white;
+          position: absolute;
+          left: 8px;
+        }
+        
+        .role-count {
+          position: relative;
+          float: left;
+          top: 70px;
+          width: 80px;
+        }
+        
+        .role-circle {
+          border: 3px solid #4c99c0;
+          background-color: transparent;
+          .border-radius(45px);
+          width: 80px;
+          height: 80px;
+          z-index: 9;
+          position: absolute;
+        }
+        
+        .circle-fill {
+          border: 3px solid @white;
+          background-color: #4c99c0;
+          .border-radius(45px);
+          width: 70px;
+          height: 70px;
+          position: absolute;
+          top: 5px;
+          left: 5px;
+          z-index: 7;
+        }
+      }
+    }
+
+
+
 /* These circles get displayed on multiple project pages. */
 .circle-measure-0 {
   height: 70%;
@@ -257,72 +324,9 @@
       }
       
     }
-    
-    .role-circles {
-      
-      margin-left: 0px;
-      text-align: center;
-      
-      .role-circle-container {
-        display: inline-block;
-        position: relative;
-        margin: 0 10px;
-        width: 80px;
-        height: 120px;
-        
-        .role-title {
-          position: relative;
-          float: left;
-          top: -30px;
-          width: 100px;
-          z-index: 10;
-          white-space: nowrap;
-          text-align: left;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          font-size: 0.7em;
-        }
-        
-        .circle-measure {    
-          top: 0;
-          width: 80px;
-          z-index: 8;
-          background-color: @white;
-          position: absolute;
-          left: 8px;
-        }
-        
-        .role-count {
-          position: relative;
-          float: left;
-          top: 70px;
-          width: 80px;
-        }
-        
-        .role-circle {
-          border: 3px solid #4c99c0;
-          background-color: transparent;
-          .border-radius(45px);
-          width: 80px;
-          height: 80px;
-          z-index: 9;
-          position: absolute;
-        }
-        
-        .circle-fill {
-          border: 3px solid @white;
-          background-color: #4c99c0;
-          .border-radius(45px);
-          width: 70px;
-          height: 70px;
-          position: absolute;
-          top: 5px;
-          left: 5px;
-          z-index: 7;
-        }
-      }
-    }
   }
+
+
   
   .producer-container {
     margin-top: 20px;

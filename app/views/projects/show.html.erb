@@ -91,6 +91,40 @@
             </div>
           </div>
 
+          <div class='row roles-div'>
+            <div class='span8 available-roles-head'>
+              Available Roles
+            </div>
+            <div class='grey-divider'></div>
+            <div class="span8 role-circles">
+              <% accordion_target = 0 %>
+              
+              <% @sorted_roles.each do |role_name, role_array| %>
+                <a data-toggle="collapse" data-parent="#role-accordion" data-target="#collapse-<%= accordion_target %>" href="#collapse-<%= accordion_target %>">
+                  <div class="role-circle-container">
+                    <span class="role-title">
+                      <%= role_name %>
+                    </span>
+                    
+                    <div class="role-circle"> </div>
+                    <div class="circle-fill"> </div>
+
+                    <div class="circle-measure circle-measure-<%= ((@sorted_roles[role_name][:filled_count] / @sorted_roles[role_name][:total_count].to_f) * 10).to_i %>"> </div>
+                    
+                    <span class="role-count">
+                      <%= @sorted_roles[role_name][:filled_count]%>/<%= @sorted_roles[role_name][:total_count]%>
+                      <br/>
+                    </span>
+
+                  </div>
+                </a>
+
+                <% accordion_target+=1 %>
+              <% end %>
+
+            </div>
+          </div>
+
 
 
         </div>
@@ -103,9 +137,31 @@
               </div>
               
               <div class='imp-dates'>
-                
+                <% @project.project_dates.each do |date| %>
+                  
+                  <div class='imp-date'>
+                    
+                    <div class='date pull-left'>
+                      <div class='day'>
+                        <%= date.day %>
+                      </div>
+                      <div class='month'>
+                        <%= date.month_year %>
+                      </div>
+                    </div>
+                    
+                    <div class='date-details pull-left'>
+                      <div class='date-desc'>
+                        <%= date.description %>
+                      </div>
+                      <div class='date-time'>
+                        <%= date.formatted_time %>
+                      </div>
+                    </div>
+                    <div class='clearfix'></div>
+                  </div>
+                <% end %>
               </div>
-              
             </div>
           </div>
         </div>

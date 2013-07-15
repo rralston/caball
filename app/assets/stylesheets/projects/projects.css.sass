@@ -1,3 +1,7 @@
+$grey: #a5a8b1
+$light-grey: #d4d6dc
+$divider-border: #c6d0db
+
 .project-description
   margin-top: 20px
 
@@ -33,7 +37,7 @@
   background: url(/assets/project-healine-bg.png) repeat-x
   height: 100px
   padding: 25px
-  color: #a5a8b1
+  color: $grey
   font-size: 22px
   line-height: 25px
 
@@ -43,11 +47,106 @@
   top: 15px
 
 .imp-dates-div
-  padding: 20px 0px
+  padding-top: 20px
   height: auto
   background: url(/assets/grey-light-bg.png) repeat
+  .imp-date-head
+    font-size: 20px
+    text-align: center
+    color: white
+    letter-spacing: 6px
+  .imp-dates
+    margin-top: 30px
+    .imp-date
+      margin-bottom: 15px
+      .date
+        text-transform: uppercase
+        padding: 10px
+        background: black
+        color: $grey
+        text-align: center
+        .day
+          font-size: 22px
+      .date-details
+        padding: 10px 10px 10px 20px
+        color: $light-grey
 
-.imp-date-head
-  font-size: 23px
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// role circles
+.roles-div
+  background: #EAEDF0
+  .available-roles-head
+    padding: 20px 0px 20px 50px
+    font-size: 30px
+    border-bottom: 1px solid $divider-border
+
+.role-circles  
+  margin-left: 0px
   text-align: center
-  color: white
+  
+  .role-circle-container
+    display: inline-block
+    position: relative
+    margin: 0 10px
+    width: 80px
+    height: 120px
+    
+    .role-title
+      position: relative
+      float: left
+      top: -30px
+      width: 100px
+      z-index: 10
+      white-space: nowrap
+      text-align: left
+      overflow: hidden
+      text-overflow: ellipsis
+      font-size: 0.7em
+    
+    .circle-measure    
+      top: 0
+      width: 80px
+      z-index: 8
+      background-color: #EAEDF0
+      position: absolute
+      left: 8px
+    
+    .role-count
+      position: relative
+      float: left
+      top: 70px
+      width: 80px
+    
+    .role-circle
+      border: 3px solid #4c99c0
+      background-color: transparent
+      border-radius: 45px
+      width: 80px
+      height: 80px
+      z-index: 9
+      position: absolute
+    
+    .circle-fill
+      border: 3px solid #EAEDF0
+      background-color: #4c99c0
+      border-radius: 45px
+      width: 70px
+      height: 70px
+      position: absolute
+      top: 5px
+      left: 5px
+      z-index: 7
