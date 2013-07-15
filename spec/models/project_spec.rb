@@ -19,6 +19,9 @@ describe Project do
     it { should have_many(:videos).dependent(:destroy) }
     it { should have_many(:comments).dependent(:destroy) }
     it { should have_many(:project_dates).dependent(:destroy) }
+    it { should have_many(:likes).dependent(:destroy) }
+    it { should have_many(:fans) }
+    
     it { should accept_nested_attributes_for :roles }
     it { should accept_nested_attributes_for :photos }
     it { should accept_nested_attributes_for :videos }

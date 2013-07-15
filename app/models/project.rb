@@ -2,8 +2,9 @@ class Project < ActiveRecord::Base
   include PublicActivity::Model
   tracked
   belongs_to :user
-  has_many :likes, :as => :loveable
+  has_many :likes, :as => :loveable, :dependent => :destroy
   has_many :roles, :dependent => :destroy
+  has_many :fans, :through => :likes, :source => :user
   has_many :photos, :as => :imageable, :dependent => :destroy
   has_many :videos, :as => :videoable, :dependent => :destroy
   has_many :comments, :dependent => :destroy
