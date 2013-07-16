@@ -12,6 +12,7 @@ describe User do
     it { should have_many(:photos).dependent(:destroy) }
     it { should have_many(:videos).dependent(:destroy) }
     it { should have_many(:projects).dependent(:destroy) }
+    it { should have_many(:events).dependent(:destroy) }
     it { should have_many(:talents).dependent(:destroy) }
     it { should have_many(:friendships) }
     it { should have_many(:friends).through(:friendships) }
