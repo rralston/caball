@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130715102124) do
+ActiveRecord::Schema.define(:version => 20130716054728) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -235,6 +235,7 @@ ActiveRecord::Schema.define(:version => 20130715102124) do
     t.string   "imdb_url"
     t.text     "headline"
     t.boolean  "featured"
+    t.string   "expertise"
   end
 
   create_table "videos", :force => true do |t|

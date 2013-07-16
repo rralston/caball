@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :location, :about, :profile, :profile_attributes,
                   :imdb_url, :characteristics_attributes, :photos_attributes,
                   :talents_attributes, :photo, :videos_attributes, :projects_attributes,
-                  :admin, :gender, :headline, :featured
+                  :admin, :gender, :headline, :featured, :expertise
 
   validates_presence_of :name, :email, :message => "is required"
     
