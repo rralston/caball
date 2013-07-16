@@ -8,7 +8,7 @@ class Project < ActiveRecord::Base
   has_many :photos, :as => :imageable, :dependent => :destroy
   has_many :videos, :as => :videoable, :dependent => :destroy
   has_many :comments, :dependent => :destroy
-  has_many :project_dates, :dependent => :destroy
+  has_many :project_dates, :class_name => 'ImportantDate', :as => :important_dateable, :dependent => :destroy
 
 
   attr_accessible :title, :description, :start, :end, :featured, :roles_attributes,

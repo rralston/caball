@@ -71,7 +71,7 @@
               <% end %>
 
               <div id='fields-for-project_dates-list' class='numerous'>
-                <%= p.fields_for :project_dates, ProjectDate.new, :child_index => 'replace_this' do |date| %>
+                <%= p.fields_for :project_dates, ImportantDate.new, :child_index => 'replace_this' do |date| %>
 
                   <%= render :partial => 'projects/imp_dates_input', :locals => { :date => date } %>
 

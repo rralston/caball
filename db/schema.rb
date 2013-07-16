@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130716054728) do
+ActiveRecord::Schema.define(:version => 20130716113007) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -84,6 +84,20 @@ ActiveRecord::Schema.define(:version => 20130716054728) do
 
   add_index "endorsements", ["receiver_id", "sender_id"], :name => "index_endorsements_on_receiver_id_and_sender_id"
 
+  create_table "events", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "description"
+    t.string   "website"
+    t.string   "location"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "events", ["user_id"], :name => "index_events_on_user_id"
+
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
@@ -93,6 +107,19 @@ ActiveRecord::Schema.define(:version => 20130716054728) do
 
   add_index "friendships", ["friend_id"], :name => "index_friendships_on_friend_id"
   add_index "friendships", ["user_id"], :name => "index_friendships_on_user_id"
+
+  create_table "important_dates", :force => true do |t|
+    t.integer  "important_dateable_id"
+    t.string   "important_dateable_type"
+    t.string   "description"
+    t.string   "date_time"
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+    t.boolean  "is_start_date",           :default => false
+    t.boolean  "is_end_date",             :default => false
+  end
+
+  add_index "important_dates", ["important_dateable_id"], :name => "index_important_dates_on_important_dateable_id"
 
   create_table "likes", :force => true do |t|
     t.integer  "user_id"
@@ -125,11 +152,12 @@ ActiveRecord::Schema.define(:version => 20130716054728) do
     t.text     "description"
     t.string   "content_type"
     t.integer  "file_size"
-    t.datetime "updated_at",     :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "imageable_id"
     t.string   "imageable_type"
-    t.datetime "created_at",     :null => false
+    t.datetime "created_at",                        :null => false
     t.boolean  "primary"
+    t.boolean  "is_main",        :default => false
   end
 
   create_table "profiles", :force => true do |t|
@@ -141,16 +169,6 @@ ActiveRecord::Schema.define(:version => 20130716054728) do
     t.integer  "user_id"
     t.datetime "created_at",   :null => false
   end
-
-  create_table "project_dates", :force => true do |t|
-    t.integer  "project_id"
-    t.string   "description"
-    t.string   "date_time"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "project_dates", ["project_id"], :name => "index_project_dates_on_project_id"
 
   create_table "projects", :force => true do |t|
     t.string   "title"

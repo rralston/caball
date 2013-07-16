@@ -20,6 +20,8 @@ Caball::Application.routes.draw do
   resources :likes
   resources :endorsements
 
+  resources :events
+
   resources :role_applications
   match 'roles_applicants' => 'roles#applicants_list', :via => 'POST'
   match 'role_applications/approve' => 'role_applications#approve', :via => 'POST'

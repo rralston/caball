@@ -25,6 +25,8 @@ var Users = {
         }
       });
       */
+
+      app.fn.initalize_location_click_handler('#locate', 'input#user_location')
       
       // For User Edit form - slides when you press tab on the last input
       $('#formElem fieldset').each(function() {

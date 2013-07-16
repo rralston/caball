@@ -1,6 +1,6 @@
 FactoryGirl.define do
   
-  factory :project_date do
+  factory :important_date do
   end
   
 end

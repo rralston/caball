@@ -73,5 +73,11 @@ class Ability
       user.persisted? &&
         user.friend_ids.include?(endorsement.receiver_id)
     end
+
+    can [:new, :create], Event
+
+    can [:edit, :update], Event do |event|
+      event.user == user
+    end
   end
 end

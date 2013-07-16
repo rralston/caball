@@ -44,6 +44,52 @@ app.fn.bind_report_event = function(){
     })
   });
 }
+
+app.fn.initalize_location_click_handler = function(click_selector, input_selector){
+  
+  $(click_selector).click(function(){ 
+    (function() {
+      var getPosition = function (options) {
+        var deferred = $.Deferred();
+
+        navigator.geolocation.getCurrentPosition(
+          deferred.resolve,
+          deferred.reject,
+          options);
+
+        return deferred.promise();
+      };
+
+      var lookupCountry = function (position) {
+        var deferred = $.Deferred();
+
+        var latlng = new google.maps.LatLng(
+                            position.coords.latitude,
+                            position.coords.longitude);
+        var geoCoder = new google.maps.Geocoder();
+        geoCoder.geocode({ location: latlng }, deferred.resolve);
+
+        return deferred.promise();
+      };
+
+      var displayResults = function (results, status) {            
+        $(input_selector).val(results[3].formatted_address);  
+        var $loca = results[3].formatted_address;
+        alert($loca);
+          // $("body").append("<div>").text(results[3].formatted_address);      
+      };
+    
+    $(function () {
+        $.when(getPosition())
+         .pipe(lookupCountry)
+         .then(displayResults);
+     });
+
+    }());
+  });  
+}
+
+
   
 
   

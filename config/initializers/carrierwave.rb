@@ -1,5 +1,5 @@
 CarrierWave.configure do |config|
-  config.root = Rails.root.join('tmp') # adding these...
+  config.root = Rails.root.join('public') # adding these...
   config.cache_dir = 'carrierwave' # ...two lines
   
   config.fog_credentials = {

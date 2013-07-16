@@ -21,6 +21,7 @@ class User < ActiveRecord::Base
   has_many :photos, :as => :imageable, :dependent => :destroy
   has_many :videos, :as => :videoable, :dependent => :destroy
   has_many :projects, :dependent => :destroy
+  has_many :events, :dependent => :destroy
   has_many :talents, :dependent => :destroy
   has_many :friendships
   has_many :likes
