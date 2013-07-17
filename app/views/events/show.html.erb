@@ -1,0 +1,136 @@
+<%= javascript_include_tag "events/events_manifest" %>
+<%= stylesheet_link_tag "events/manifest.css" %>
+
+<div class='container'>
+  <div class='row'>
+    <div class='span12'>
+
+      <div class='row event-main-head'>
+        <div class='span8'>
+          <div class='row'>
+            <div class='span8 event-title'>
+              <h2><%= @event.title %></h2>
+            </div>
+            <div class='span8 event-date-time'>
+              <%= @event.start.date_time %> - <%= @event.end.date_time %>
+            </div>
+          </div>
+        </div>
+        <div class='span4'>
+          <div class='row text-center'>
+            
+            <% if @event.attending?(current_user) %>
+              <span class='span2 btn-custom btn-red center-div text-center btn-attend unattend' data-event-id='<%= @event.id %>' >
+                Attending
+              </span>
+            <% else %>
+              <span class='span2 btn-custom btn-red center-div text-center btn-attend' data-event-id='<%= @event.id %>' >
+                Attending
+              </span>
+            <% end %>
+          </div>
+
+          <div class='row'>
+            <div class='span4'>
+              <div class='row'>
+                <div class='span2 center-div'>
+                  <div class='row text-center'>
+                    <span class='btn-custom btn-light-grey'>
+                      Love This
+                    </span>
+                    <span class='btn-custom btn-light-grey'>
+                      Like This
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- event-main-head -->
+
+      <div class='row'>
+        <div class='span8'>
+          <div class='row event-photos'>
+            <div class='span8 photos-container'>
+              <img src="<%= @event.main_photo.image.url(:large) %>">
+            </div>
+          </div>
+
+          
+        </div>
+        <div class='span4 right-container'>
+          
+          <div class='row details-right grey-backdrop'>
+            <div class='location-details span4'>
+              <span class='location-img-blue pull-left'></span>
+              <span class='pull-left location-address'>
+                <%= @event.location %> India, Bamalorem Karnatakwe
+              </span>
+            </div>
+
+            <div class='row'>
+              <div class='shaded-divider'></div>
+            </div>
+            
+            <div class='event-links row'>
+              <div class='span4 text-center'>
+                <a href="<%= @event.website %>">Visit website</a>
+                <span class='dot-seperator-red'></span>
+                <a href="<%= @event.website %>">Visit Map</a>
+              </div>
+            </div>
+
+            <div class='desc row'>
+              <div class='span4 shrink-div'>
+                <%= @event.description %>
+              </div>
+            </div>
+
+            <div class='owner-row row'>
+              <div class='span4 shrink-div'>
+                <span class='pull-left owner-img'>
+                  <img src="<%= @event.user.photos.first.image %>" class='img-circle'>
+                </span>
+                <span class='owner pull-left'>
+                  created by
+                  <br/>
+                  <span class='owner-name'>
+                    <%= @event.user.name %>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class='connect-div row'>
+            <div class='span4 shrink-div head'>
+              <span class='pull-left'>
+                <h3>Who's Coming?</h3>
+                <i class='attending-summary'>
+                  41 attending
+                </i>
+              </span>
+              <span class='btn-show-all pull-right'></span>
+            </div>
+
+            <div class='span4 attenders-tiles'>
+              <% 8.times do %>
+                <div class='attender-img pull-left'>
+                  <img src="<%= @event.user.photos.first.image %>" class='img-square'>
+                </div>
+              <% end %>
+              <div class='attender-img empty-grey-tile pull-left'>
+                
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

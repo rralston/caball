@@ -21,6 +21,8 @@ Caball::Application.routes.draw do
   resources :endorsements
 
   resources :events
+  match 'events/attend' => 'events#attend', :via => 'POST'
+  match 'events/unattend' => 'events#unattend', :via => 'POST'
 
   resources :role_applications
   match 'roles_applicants' => 'roles#applicants_list', :via => 'POST'

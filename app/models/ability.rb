@@ -74,10 +74,19 @@ class Ability
         user.friend_ids.include?(endorsement.receiver_id)
     end
 
-    can [:new, :create], Event
+    can [:new, :create, :show], Event
 
     can [:edit, :update], Event do |event|
       event.user == user
     end
+
+    can [:attend], Event do |event|
+      !event.attends.map(&:user).include?(user)
+    end
+
+    can [:unattend], Event do |event|
+      event.attends.map(&:user).include?(user)
+    end
+
   end
 end

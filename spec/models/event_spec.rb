@@ -37,4 +37,27 @@ describe Event do
     }
     specify { @event.errors.full_messages.join(', ').should == 'Title is required, Title is required, Description is required, Description is required' }
   end
+
+  context "attending event" do
+    before(:all){
+      @att_1 = FactoryGirl.create(:user)
+      @att_2 = FactoryGirl.create(:user)
+
+      @event = FactoryGirl.create(:event)
+
+      @att1 = FactoryGirl.create(:attend, :user => @att_1)
+      @att2 = FactoryGirl.create(:attend, :user => @att_2)
+      @event.attends << [@att1, @att2]
+    }
+
+    context 'its should list are attendees' do
+      specify { @event.attendees.should =~ [@att_1, @att_2] }
+    end
+
+    context "its should tell if a user is attending the event" do
+      specify { @event.attending?(@att_1).should be true }
+      specify { @event.attending?(FactoryGirl.create(:user)).should be false }
+    end
+    
+  end
 end

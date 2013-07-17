@@ -2,6 +2,11 @@ class EventsController < ApplicationController
 
   load_and_authorize_resource
 
+  def show
+    search
+    @event = Event.find(params[:id])
+  end
+
   def new
     search
     @event = Event.new()
@@ -32,8 +37,16 @@ class EventsController < ApplicationController
     end
   end
 
-  def destroy
-    @blog.destroy
-    redirect_to current_user, notice: "Blog was destroyed."
+  def attend
+    event = Event.find(params[:id])
+    event.attends.create(:user => current_user)
+    render :text => true
   end
+
+  def unattend
+    event = Event.find(params[:id])
+    event.attends.where(:user_id => current_user.id).first.destroy
+    render :text => true
+  end
+
 end

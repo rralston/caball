@@ -33,6 +33,8 @@ class User < ActiveRecord::Base
   has_many :comments
   has_many :blogs, :dependent => :destroy
 
+  has_many :attends
+
   has_many :sent_endorsements, :class_name => 'Endorsement', :foreign_key => 'sender_id', :dependent => :destroy
   has_many :received_endorsements, :class_name => 'Endorsement', :foreign_key => 'receiver_id', :dependent => :destroy
 

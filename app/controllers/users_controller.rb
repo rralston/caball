@@ -64,7 +64,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    debugger
     respond_to do |format|
       if @user.update_attributes(params[:user])
         format.html { redirect_to @user, :notice => @user.name.possessive + ' Profile was successfully updated.' }
