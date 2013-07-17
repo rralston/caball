@@ -98,7 +98,13 @@ class User < ActiveRecord::Base
   end
   
   def profile_pic
-    profile.image.url(:medium) rescue "/assets/actor.png"
+    if profile.present? 
+      profile.image.url(:medium)
+    elsif photos.present?
+      photos.first.image.url(:medium)
+    else
+      "/assets/actor.png"
+    end
   end
 
   def details_complete?
@@ -145,6 +151,14 @@ class User < ActiveRecord::Base
   def addressed_activities
     Activity.order("created_at desc").
               where(:recipient_id => self.id)
+  end
+
+  def serializable_hash(options)
+    hash = super(options)
+    extra_hash = {
+      'profile_pic' => profile_pic
+    }
+    hash.merge!(extra_hash)
   end
 
 end

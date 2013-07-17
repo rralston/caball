@@ -13,14 +13,15 @@ Caball::Application.routes.draw do
   resources :projects do 
     resources :comments
   end
-  
+  resources :comments
   resources :conversations
   resources :notifications
   resources :friendships
   resources :likes
   resources :endorsements
-
+ 
   resources :events
+  match 'events/add_comment' => 'events#add_comment', :via => 'POST'
   match 'events/attend' => 'events#attend', :via => 'POST'
   match 'events/unattend' => 'events#unattend', :via => 'POST'
 

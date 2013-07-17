@@ -7,7 +7,7 @@ class Project < ActiveRecord::Base
   has_many :fans, :through => :likes, :source => :user
   has_many :photos, :as => :imageable, :dependent => :destroy
   has_many :videos, :as => :videoable, :dependent => :destroy
-  has_many :comments, :dependent => :destroy
+  has_many :comments, :as => :commentable, :dependent => :destroy
   has_many :project_dates, :class_name => 'ImportantDate', :as => :important_dateable, :dependent => :destroy
 
 

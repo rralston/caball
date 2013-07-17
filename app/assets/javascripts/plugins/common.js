@@ -2,6 +2,8 @@ window.app = window.app || {models: {}, collections: {}, views: {}, fn: {}, rout
 
 _.extend(app.events, Backbone.Events)
 
+app.constants.enter_key_code = 13;
+app.constants.esc_key_code = 27
 
 app.fn.show_loader_in_div = function(elem){
   // pass a jquery element

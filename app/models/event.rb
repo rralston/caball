@@ -12,7 +12,7 @@ class Event < ActiveRecord::Base
            :dependent => :destroy, :conditions => 'is_main = 0'
   
   has_many :videos, :as => :videoable, :dependent => :destroy
-  has_many :comments, :dependent => :destroy
+  has_many :comments, :as => :commentable, :dependent => :destroy
   
   has_many :other_important_dates, :class_name => 'ImportantDate',
            :as => :important_dateable, :dependent => :destroy, :conditions => 'is_start_date = 0 && is_end_date = 0'

@@ -1,0 +1,35 @@
+<script type="script/template" id='comment_template'>
+  <div class='comment'>
+
+    <img src='<%%= user.profile_pic %>' class='img-circle user-profile-img'>
+    <div class='comment-details'>
+      
+      <div class='row'>
+        <div class='commentor-name'>
+          <%%= user.name %>
+        </div>
+        <div class='commentor-location'>
+          <div class='pull-left location-img-grey'></div>
+          <div class='pull-left '>
+            <%%= user.location %>
+          </div>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='comment-content'>
+          <%%= content %>
+        </div>
+      </div>
+    </div>
+      
+    
+    <div class='row comment-actions'>
+      <div class='pull-right like-comment'>
+        <div class='pull-right likes-count'>12</div>
+        <div class='heart-blue pull-right'> </div>        
+      </div>
+    </div>
+
+  </div>
+</script>

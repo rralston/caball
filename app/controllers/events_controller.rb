@@ -49,4 +49,10 @@ class EventsController < ApplicationController
     render :text => true
   end
 
+  def add_comment
+    event = Event.find(params[:event_id])
+    create = event.comments.create(:content => params[:content], :user => current_user)
+    render :json => create.to_json(:include => [:user, :likes])
+  end
+
 end

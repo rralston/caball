@@ -51,13 +51,19 @@
       <!-- event-main-head -->
 
       <div class='row'>
-        <div class='span8'>
+        <div class='span8 grey-backdrop'>
+          
           <div class='row event-photos'>
             <div class='span8 photos-container'>
               <img src="<%= @event.main_photo.image.url(:large) %>">
             </div>
           </div>
 
+          <div class='row'>
+            <div class='pull-right' id='comments_div'>
+
+            </div>
+          </div>
           
         </div>
         <div class='span4 right-container'>
@@ -134,3 +140,24 @@
     </div>
   </div>
 </div>
+
+<%= render :partial => 'events/templates/comments' %>
+<%= render :partial => 'events/templates/comment' %>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+  app.event_data = <%= raw @event.to_json() %>
+  
+  app.comments = new app.collections.comments()
+
+  app.comments.reset(<%= raw @event.comments.to_json(:include => [:user, :likes]) %>)
+
+  app.comments_view = new app.views.comments({ collection: app.comments })
+
+  $('#comments_div').html(app.comments_view.render().el)
+
+});
+
+</script>
