@@ -76,17 +76,34 @@ describe User do
       before(:all){
         @user = FactoryGirl.create(:user)
         @profile = FactoryGirl.create(:profile, :image => File.open(File.join(Rails.root, '/spec/fixtures/images/apple.jpeg')))
+
+        @photo = FactoryGirl.create(:photo, :image => File.open(File.join(Rails.root, '/spec/fixtures/images/apple.jpeg')))
+        @user2= FactoryGirl.create(:user, :photos => [@photo])
+
+        @user3 = FactoryGirl.create(:user)
+
         @user.profile = @profile
         @user.save
       }
-      subject { @user }
 
-      its(:profile_pic) { should eql(@profile.image.url(:medium)) }
+      
+      specify { @user.profile_pic.should eql(@profile.image.url(:medium)) }
+      specify { @user2.profile_pic.should eql(@photo.image.url(:medium)) }
+      specify { @user3.profile_pic.should eql('/assets/actor.png') }
+
 
       after(:all){
         clean_local_uploads
       }
     end
+  end
+
+  context "to json should include profile pic" do
+    before(:all) do
+      @photo = FactoryGirl.create(:photo, :image => File.open(File.join(Rails.root, '/spec/fixtures/images/apple.jpeg')))
+      @user= FactoryGirl.create(:user, :photos => [@photo])
+    end
+    specify { @user.to_json().should include('profile_pic') }
   end
 
   context "details complete" do
