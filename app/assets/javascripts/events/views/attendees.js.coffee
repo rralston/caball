@@ -1,10 +1,12 @@
 app.views.attendees = Backbone.View.extend
   initialize: ()->
     this.template = _.template($('#attendees_template').html())
+    this.collection.on('add', this.render, this)
+    this.collection.on('remove', this.render, this)
 
   render: ()->
     this.$el.html( this.template(this.collection.toJSON()) )
-    this.collection.forEach(this.renderEach, this)
+    this.collection.last(8).forEach(this.renderEach, this)
     this
 
   renderEach: (attendee)->

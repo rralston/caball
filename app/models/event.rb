@@ -28,7 +28,7 @@ class Event < ActiveRecord::Base
           :dependent => :destroy, :conditions => 'is_end_date = 1'
 
   has_many :attends, :as => :attendable, :dependent => :destroy
-  has_many :attendees, :through => :attends, :source => :user
+  # has_many :attendees, :through => :attends, :source => :user
 
   attr_accessible :title, :description, :main_photo_attributes, :other_photos_attributes, :videos_attributes, :website,
                   :location, :other_important_dates_attributes, :user_id, :main_photo,
@@ -41,6 +41,10 @@ class Event < ActiveRecord::Base
   
   geocoded_by :location   # can also be an IP address
   after_validation :geocode, :if => :location_changed?  # auto-fetch coordinates
+
+  def attendees
+    attends.order('created_at').map(&:user)
+  end
 
   def attending?(user)
     attendees.include?(user)

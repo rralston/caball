@@ -39,14 +39,14 @@ class EventsController < ApplicationController
 
   def attend
     event = Event.find(params[:id])
-    event.attends.create(:user => current_user)
-    render :text => true
+    attend = event.attends.create(:user => current_user)
+    render :json => attend.user.to_json()
   end
 
   def unattend
     event = Event.find(params[:id])
-    event.attends.where(:user_id => current_user.id).first.destroy
-    render :text => true
+    attend = event.attends.where(:user_id => current_user.id).first.destroy
+    render :json => attend.user.to_json()
   end
 
   def add_comment

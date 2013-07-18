@@ -11,9 +11,15 @@
 
   <div class="span4 attenders-tiles" id='attendees_list'>
     
-    <%%= if(this.collection.length > 8) %>
-    <div class="attender-img empty-grey-tile pull-left">
-      
-    </div>
+    <%% if(this.collection.length > 8) { %>
+      <div class="attender-img empty-grey-tile pull-left text-center">
+        <div class='row grey-top-line'>
+        </div>
+        <div class='attendees-extra-count'>
+          +<%%= this.collection.length - 8 %>
+        </div>
+        MORE
+      </div>
+    <%% } %>
   </div>
 </script>

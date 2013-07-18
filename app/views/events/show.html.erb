@@ -77,7 +77,7 @@
             <div class='location-details span4'>
               <span class='location-img-blue pull-left'></span>
               <span class='pull-left location-address'>
-                <%= @event.location %> India, Bamalorem Karnatakwe
+                <%= @event.location %>
               </span>
             </div>
 
@@ -87,9 +87,9 @@
             
             <div class='event-links row'>
               <div class='span4 text-center'>
-                <a href="<%= @event.website %>">Visit website</a>
+                <a href="<%= @event.website %>" target='_blank'>Visit website</a>
                 <span class='dot-seperator-red'></span>
-                <a href="<%= @event.website %>">Visit Map</a>
+                <a href="<%= @event.website %>" data-toggle='modal' data-target='#event_map_modal'>Visit Map</a>
               </div>
             </div>
 
@@ -151,6 +151,8 @@
 <%= render :partial => 'events/templates/attendees' %>
 <%= render :partial => 'events/templates/attendee' %>
 
+<%= render :partial => 'events/modals' %>
+
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -172,6 +174,18 @@ $(document).ready(function(){
   app.attendees_view = new app.views.attendees({ collection: app.attendees })
 
   $('#who_coming').html( app.attendees_view.render().el )
+
+  var LatLong = new google.maps.LatLng(<%= @event.latitude %>, <%= @event.longitude %>)
+   var mapOptions = {
+    zoom: 10,
+    center: LatLong,
+  };
+  map = new google.maps.Map(document.getElementById('event-map'), mapOptions);
+  var marker = new google.maps.Marker({
+      position: LatLong,
+      map: map,
+      title: 'Event Location'
+  });
 
 });
 
