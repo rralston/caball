@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
   #Notification System  
   def notification
     if @current_user
-      notification = @current_user.receipts.where(:receiver_id => :user_id).is_unread.count
+      notification = @current_user.receipts.is_unread.count
       notification if notification > 0
     end
   end
