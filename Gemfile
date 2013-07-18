@@ -23,16 +23,14 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
-
-  # Twitter Boostrap and Upgrade dependencies
-  gem 'therubyracer'
-  gem 'less-rails'
-  gem 'twitter-bootstrap-rails'
-  
 end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+# Twitter Boostrap and Upgrade dependencies
+gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -112,7 +110,7 @@ gem 'public_activity'
 gem "asset_sync"
 
 # Carrier Wave link to AWS S#
-gem 'fog'
+gem 'fog', '~> 1.12.1'
 gem 'cancan'
 
 # client side validtions
