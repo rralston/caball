@@ -91,6 +91,19 @@ app.fn.initalize_location_click_handler = function(click_selector, input_selecto
   });  
 }
 
+app.fn.check_if_current_user_included = function(user_ids){
+  found_user = _.find(user_ids, function(user_id){
+    return user_id == app.current_user.id
+  })
+  return (typeof found_user != "undefined")
+}
+
+
+// <% if @event.liked_by?(current_user) %>
+//               <span class='span2 btn-custom btn-light-grey center-div text-center btn-like unlike' data-event-id='<%= @event.id %>' >
+//                 Un Like
+//               </span>
+//             <% else %>
 
   
 

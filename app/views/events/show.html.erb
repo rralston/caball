@@ -12,13 +12,13 @@
               <h2><%= @event.title %></h2>
             </div>
             <div class='span8 event-date-time'>
-              <%= @event.start.date_time %> - <%= @event.end.date_time %>
+              <%= @event.start.pretty_date %> - <%= @event.end.pretty_date %>
             </div>
           </div>
         </div>
         <div class='span4'>
+
           <div class='row text-center'>
-            
             <% if @event.attending?(current_user) %>
               <span class='span2 btn-custom btn-red center-div text-center btn-attend unattend' data-event-id='<%= @event.id %>' >
                 Attending
@@ -30,22 +30,18 @@
             <% end %>
           </div>
 
-          <div class='row'>
-            <div class='span4'>
-              <div class='row'>
-                <div class='span2 center-div'>
-                  <div class='row text-center'>
-                    <span class='btn-custom btn-light-grey'>
-                      Love This
-                    </span>
-                    <span class='btn-custom btn-light-grey'>
-                      Like This
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class='row text-center'>
+            <% if @event.liked_by?(current_user) %>
+              <span class='span2 btn-custom btn-light-grey center-div text-center btn-like unlike' data-event-id='<%= @event.id %>' >
+                Un Like
+              </span>
+            <% else %>
+              <span class='span2 btn-custom btn-light-grey center-div text-center btn-like' data-event-id='<%= @event.id %>' >
+                Like this
+              </span>
+            <% end %>
           </div>
+
         </div>
       </div>
       <!-- event-main-head -->
@@ -147,6 +143,8 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+
+  app.current_user = <%= raw current_user.to_json(:only => [:name, :id]) %>
 
   app.event_data = <%= raw @event.to_json() %>
   

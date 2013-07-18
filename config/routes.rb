@@ -18,6 +18,8 @@ Caball::Application.routes.draw do
   resources :notifications
   resources :friendships
   resources :likes
+  match 'likes/unlike' => 'likes#unlike', :via => 'POST'
+
   resources :endorsements
  
   resources :events

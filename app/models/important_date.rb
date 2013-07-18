@@ -22,9 +22,13 @@ class ImportantDate < ActiveRecord::Base
     full_date.split('-')[1]
   end
 
+  def month_string
+    months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+    months[month.to_i-1]
+  end
+
   def month_year
-    months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
-    "#{months[month.to_i-1]} \'#{year.last(2)}"
+    "#{month_string} \'#{year.last(2)}"
   end
 
   def time
@@ -37,6 +41,10 @@ class ImportantDate < ActiveRecord::Base
 
   def is_not_start_or_end?
     not is_start_date || is_end_date
+  end
+
+  def pretty_date
+    "#{month_string} #{day}, #{year} #{formatted_time}"
   end
 
 end
