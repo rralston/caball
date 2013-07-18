@@ -11,3 +11,14 @@ $(document).ready ()->
         $('.new_event').enableClientSideValidations();
 
   app.fn.initialize_datetime_picker('.date_time_field')
+
+
+  $('#event_tags').tagit
+    sortable: true
+    triggerKeys: ['comma', 'tab', 'space', 'enter']
+    tagsChanged: (tagValue, action, element) ->
+      console.log element
+      tag_value_array = _.map($('#event_tags').tagit('tags'), (tag) ->
+        tag.value
+      )
+      $('#event_tag_list').val(tag_value_array.toString())

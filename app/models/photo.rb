@@ -3,5 +3,9 @@ class Photo < ActiveRecord::Base
   attr_accessible :image, :description, :content_type, :file_size, :updated_at, :is_main
   mount_uploader :image, ImageUploader
 
-  validates_presence_of :image, :message => 'is required'
+  validates_presence_of :image, :message => 'is required', :if => :image_present?
+
+  def image_present?
+    image.try(:file).nil?
+  end
 end

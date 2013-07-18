@@ -27,8 +27,8 @@ class User < ActiveRecord::Base
   has_many :likes
   has_many :lovers, :class_name => 'Like', :as => :loveable
   has_many :friends, through: :friendships
-  has_many :inverse_friendships, class_name: "Friendship"
-  has_many :inverse_friends, through: :inverse_friendships, source: :user, foreign_key: "friend_id"
+  has_many :follows, class_name: "Friendship", foreign_key: "friend_id"
+  has_many :followers, through: :follows, source: :user, foreign_key: "friend_id"
   accepts_nested_attributes_for :profile, :reject_if => :all_blank
   has_many :comments
   has_many :blogs, :dependent => :destroy

@@ -215,4 +215,15 @@ describe User do
     
   end
 
+  context 'user following another user' do
+    before(:all){
+      @followed_user = FactoryGirl.create(:user)
+      @follower1 = FactoryGirl.create(:user, :friendships => [FactoryGirl.create(:friendship, :friend => @followed_user)])
+      @follower2 = FactoryGirl.create(:user, :friendships => [FactoryGirl.create(:friendship, :friend => @followed_user)])
+    }
+
+    specify { @followed_user.followers.should =~ [@follower2, @follower1] }
+
+  end
+
 end

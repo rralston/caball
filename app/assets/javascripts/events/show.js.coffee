@@ -43,3 +43,18 @@ $(document).ready ()->
             btn.html('Un Like').addClass('unlike')
         else
           alert 'Something went wrong. Please try later'
+
+  $('body').on 'click', '.btn-invite-followers', (event) ->
+    btn = $(event.target)
+    console.log 'inviting'
+    $.ajax
+      url: '/events/invite_followers'
+      type: 'POST'
+      data: 
+        event_id: btn.attr('data-event-id')
+      success: (resp)->
+        console.log resp
+        if resp != false
+          alert 'invited all your followers'
+        else
+          alert 'Something went wrong. Please try later'

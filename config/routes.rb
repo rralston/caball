@@ -26,6 +26,7 @@ Caball::Application.routes.draw do
   match 'events/add_comment' => 'events#add_comment', :via => 'POST'
   match 'events/attend' => 'events#attend', :via => 'POST'
   match 'events/unattend' => 'events#unattend', :via => 'POST'
+  match 'events/invite_followers' => 'events#invite_followers', :via => 'POST'
 
   resources :role_applications
   match 'roles_applicants' => 'roles#applicants_list', :via => 'POST'

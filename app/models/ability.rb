@@ -74,7 +74,7 @@ class Ability
         user.friend_ids.include?(endorsement.receiver_id)
     end
 
-    can [:new, :create, :show, :add_comment], Event
+    can [:new, :create, :show, :add_comment, :invite_followers], Event
 
     can [:edit, :update], Event do |event|
       event.user == user

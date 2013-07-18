@@ -86,11 +86,13 @@
               <div class='controls'>
                 <%= f.hidden_field :expertise, :class => 'text_field' %>
                 <!-- data name attr will create a select box with name as provided..! -->
-                <ul id="expertise_tags" class='tagit ui-sortable'>
-                  <%= @user.expertise.split(',').each do |exp_tag| %>
-                    <li data-value="<%= exp_tag %>"><%= exp_tag %> </li>
-                  <% end %>
-                </ul>
+                <% if @user.expertise.present? %>
+                  <ul id="expertise_tags" class='tagit ui-sortable'>
+                    <%= @user.expertise.split(',').each do |exp_tag| %>
+                      <li data-value="<%= exp_tag %>"><%= exp_tag %> </li>
+                    <% end %>
+                  </ul>
+                <% end %>
               </div>    
             </div>
             

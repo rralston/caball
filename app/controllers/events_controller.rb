@@ -55,4 +55,11 @@ class EventsController < ApplicationController
     render :json => create.to_json(:include => [:user, :likes])
   end
 
+  def invite_followers
+    event = Event.find(params[:event_id])
+    body = "#{current_user.name} has invited you to the event - #{event.title}"
+    current_user.send_message(current_user.followers, body, "Event Invitation - #{event.title}")
+    render :text => true
+  end
+
 end

@@ -2,6 +2,8 @@ class Event < ActiveRecord::Base
   include PublicActivity::Model
   tracked
 
+  acts_as_taggable
+
   belongs_to :user
 
   has_many :likes, :as => :loveable, :dependent => :destroy
@@ -30,7 +32,7 @@ class Event < ActiveRecord::Base
 
   attr_accessible :title, :description, :main_photo_attributes, :other_photos_attributes, :videos_attributes, :website,
                   :location, :other_important_dates_attributes, :user_id, :main_photo,
-                  :start_attributes, :end_attributes
+                  :start_attributes, :end_attributes, :tag_list
   
   accepts_nested_attributes_for :other_photos, :videos, :main_photo,
                                 :start, :end, :other_important_dates, :allow_destroy => true  

@@ -25,7 +25,7 @@
                 </span>
               <% else %>
                 <span class='span2 btn-custom btn-red center-div text-center btn-attend' data-event-id='<%= @event.id %>' >
-                  Attending
+                  Attend
                 </span>
               <% end %>
             </div>
@@ -40,6 +40,14 @@
                   Like this
                 </span>
               <% end %>
+            </div>
+
+            <div class='row text-center'>
+             
+              <span class='span2 btn-custom btn-light-grey center-div text-center btn-invite-followers' data-event-id='<%= @event.id %>' >
+                Invite Followers
+              </span>
+              
             </div>
           </div>
 
@@ -73,7 +81,7 @@
               </span>
             </div>
 
-            <div class='row'>
+            <div class='row clearfix'>
               <div class='shaded-divider'></div>
             </div>
             
@@ -107,7 +115,7 @@
             </div>
           </div>
 
-          <div class='connect-div row'>
+          <div class='connect-div row' id='who_coming'>
             <div class='span4 shrink-div head'>
               <span class='pull-left'>
                 <h3>Who's Coming?</h3>
@@ -118,7 +126,7 @@
               <span class='btn-show-all pull-right'></span>
             </div>
 
-            <div class='span4 attenders-tiles'>
+            <div class='span4 attenders-tiles' id='attendees_list'>
               <% 8.times do %>
                 <div class='attender-img pull-left'>
                   <img src="<%= @event.user.photos.first.image %>" class='img-square'>
@@ -140,6 +148,8 @@
 
 <%= render :partial => 'events/templates/comments' %>
 <%= render :partial => 'events/templates/comment' %>
+<%= render :partial => 'events/templates/attendees' %>
+<%= render :partial => 'events/templates/attendee' %>
 
 <script type="text/javascript">
 
@@ -156,6 +166,12 @@ $(document).ready(function(){
   app.comments_view = new app.views.comments({ collection: app.comments })
 
   $('#comments_div').html(app.comments_view.render().el)
+
+  app.attendees = new app.collections.attendees()
+  app.attendees.reset(<%= raw @event.attendees.to_json() %>)
+  app.attendees_view = new app.views.attendees({ collection: app.attendees })
+
+  $('#who_coming').html( app.attendees_view.render().el )
 
 });
 

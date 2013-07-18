@@ -117,3 +117,6 @@ gem 'cancan'
 
 # client side validtions
 gem 'client_side_validations'
+
+# tagging
+gem 'acts-as-taggable-on'

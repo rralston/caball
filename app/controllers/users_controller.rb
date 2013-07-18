@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def show
     @blog = Blog.new
     @real_videos = @user.videos.real
-    @followers_following = (@user.friends + @user.inverse_friends).uniq
+    @followers_following = (@user.friends + @user.followers).uniq
     if params[:link]
       partial = params[:link]
     end

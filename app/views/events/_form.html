@@ -32,6 +32,21 @@
             </div>
           </div>
 
+          <div class='control-grip'>
+            <%= event.label :tag_list, "Tags",  :class => 'control-label' %>
+
+            <div class='controls'>
+              <%= event.hidden_field :tag_list, :class => 'text_field' %>
+              <!-- data name attr will create a select box with name as provided..! -->
+              <ul id="event_tags" class='tagit ui-sortable'>
+                <% event.object.tag_list.each do |event_tag| %>
+                  <li data-value="<%= event_tag %>"><%= event_tag %> </li>
+                <% end %>
+              </ul>
+            </div>    
+          </div>
+
+
           <h3>Important Dates</h3>
 
           <%= event.fields_for :start, (@event.start || ImportantDate.new ) do |start| %>
@@ -91,7 +106,7 @@
                   <% end %>
 
                   <div class="controls">
-                    <%= event_main_photo.file_field :image %>
+                    <%= event_main_photo.file_field :image, :validate => true %>
                   </div>
                   <input type='hidden' value='1' name='event[main_photo_attributes][is_main]'>
                 </div>
