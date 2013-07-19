@@ -3,10 +3,17 @@
   <div class='row add-comment'>
     <div class='span8'>
       <div class='row'>
-        <img src='<%= current_user.profile_pic %>' class='img-circle user-profile-img'>
+        <% if current_user %>
+          <img src='<%= current_user.profile_pic %>' class='img-circle user-profile-img'>
+        <% end %>
         <textarea id='add_comment' placeholder='Add your event updates here' rows='5'></textarea>
       </div>
       <div class='row'>
+        <% if not current_user %>
+          <div class='span8' id='please_sign_in' style='disaplay:none;'>
+            <a href='/'>Sign in</a> to start discussing.
+          </div>  
+        <% end %>
         <div class='span8' id='comment_please_wait' style='disaplay:none;'>
           Please wait while we add your comment..
         </div>

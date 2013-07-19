@@ -33,11 +33,13 @@
             <div class='row text-center'>
               <% if @event.liked_by?(current_user) %>
                 <span class='span2 btn-custom btn-light-grey center-div text-center btn-like unlike' data-event-id='<%= @event.id %>' >
-                  Un Like
+                  <span class='like-thumb-icon'></span>
+                  <span class='text'>Un Like</span>
                 </span>
               <% else %>
                 <span class='span2 btn-custom btn-light-grey center-div text-center btn-like' data-event-id='<%= @event.id %>' >
-                  Like this
+                  <span class='like-thumb-icon'></span>
+                  <span class='text'>Like this</span>
                 </span>
               <% end %>
             </div>
@@ -60,7 +62,12 @@
           
           <div class='row event-photos'>
             <div class='span8 photos-container'>
-              <img src="<%= @event.main_photo.image.url(:large) %>">
+              <div class="fotorama" data-width="700" data-ratio="700/377" data-max-width="100%" data-nav="thumbs" data-fit="cover">
+                <img src="<%= @event.main_photo.image %>">
+                <% @event.other_photos.each do |photo|  %>
+                  <img src="<%= photo.image %>" >
+                <% end %>
+              </div>
             </div>
           </div>
 
@@ -80,10 +87,6 @@
                 <%= @event.location %>
               </span>
             </div>
-
-            <div class='row clearfix'>
-              <div class='shaded-divider'></div>
-            </div>
             
             <div class='event-links row'>
               <div class='span4 text-center'>
@@ -93,16 +96,14 @@
               </div>
             </div>
 
-            <div class='desc row'>
-              <div class='span4 shrink-div'>
-                <%= @event.description %>
-              </div>
+            <div class='row clearfix'>
+              <div class='grey-line-divider'></div>
             </div>
 
             <div class='owner-row row'>
               <div class='span4 shrink-div'>
                 <span class='pull-left owner-img'>
-                  <img src="<%= @event.user.photos.first.image %>" class='img-circle'>
+                  <img src="<%= @event.user.profile_pic %>" class='img-circle'>
                 </span>
                 <span class='owner pull-left'>
                   created by
@@ -111,33 +112,79 @@
                     <%= @event.user.name %>
                   </span>
                 </span>
+                
+                <% if current_user %>
+                  <span class='btn-custom btn-light-grey text-center btn-message_organizer pull-right' data-event-id='<%= @event.id %>' data-toggle='modal' data-target='#message_event_organizer_modal'>
+                    Message
+                  </span>
+                <% end %>  
+              </div>
+
+            </div>
+
+            <div class='row clearfix'>
+              <div class='grey-line-divider'></div>
+            </div>
+
+            <div class='row'>
+              <div class='span4 shrink-div text-center event-tags'>
+                <% @event.tag_list.each do |tag| %>
+                  <span class='badge badge-custom-green'>
+                    <%= tag %>
+                  </span>
+                <% end %>
               </div>
             </div>
+
+            <div class='row clearfix'>
+              <div class='shaded-divider'></div>
+            </div>
+
+            <div class='row'>
+              <div class='span4 text-center'>
+                <a href="#" class='g-link share-link'>
+                  <img src="/assets/g-link.png">
+                </a>
+                <a href="#" class='fb-link share-link'>
+                  <img src="/assets/fb-link.png">
+                </a>
+                <a href="#" class='twitter-link share-link'>
+                  <img src="/assets/twitter-link.png">
+                </a>
+              </div>
+            </div>
+
           </div>
 
-          <div class='connect-div row' id='who_coming'>
+          <div class='clearfix'></div>
+
+          <div class='row about-div right-extra-div'>
             <div class='span4 shrink-div head'>
               <span class='pull-left'>
-                <h3>Who's Coming?</h3>
-                <i class='attending-summary'>
-                  41 attending
-                </i>
+                <h3>About</h3>
               </span>
               <span class='btn-show-all pull-right'></span>
+
             </div>
 
-            <div class='span4 attenders-tiles' id='attendees_list'>
-              <% 8.times do %>
-                <div class='attender-img pull-left'>
-                  <img src="<%= @event.user.photos.first.image %>" class='img-square'>
-                </div>
-              <% end %>
-              <div class='attender-img empty-grey-tile pull-left'>
-                
+            <div class='span4'>
+              <div class='row clearfix'>
+                <div class='grey-line-divider'></div>
               </div>
+            </div>
+
+            <div class='span4 shrink-div desc'>
+              <%= @event.description %>
             </div>
           </div>
 
+          <div class='row clearfix'>
+            <div class='grey-line-divider no-margin'></div>
+          </div>
+
+          <div class='right-extra-div coming-div row' id='who_coming'>
+
+          </div>
 
         </div>
       </div>

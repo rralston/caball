@@ -62,4 +62,13 @@ class EventsController < ApplicationController
     render :text => true
   end
 
+  def send_message_to_organizer
+    sender = current_user
+    event = Event.find(params[:event_id])
+    message = params[:message]
+    subject = "Reg. Event - #{event.title}"
+    current_user.send_message(event.user, message, subject)
+    render :text => true
+  end
+
 end

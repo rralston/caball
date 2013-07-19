@@ -22,25 +22,25 @@ app.views.comments = Backbone.View.extend
   add_comment: (event)->
     _this = this
     element = $(event.target)
+    if app.current_user != null
+      $('#comment_please_wait').show()
+      element.attr('disabled', 'disabled')
 
-    $('#comment_please_wait').show()
-    element.attr('disabled', 'disabled')
-
-    if element.val() != ''
-      $.ajax
-        url: '/events/add_comment'
-        type: 'POST'
-        data:
-          event_id: app.event_data.id
-          content: element.val()
-        success: (resp)->
-          if resp != 'false'
-            comment = new app.models.comment(resp)
-            _this.collection.add(comment)
-            $('#comment_please_wait').hide()
-            element.attr('disabled', false)
-            element.val('')
-          else
-            alert 'There is some error posting your comment. Please try again later'
+      if element.val() != ''
+        $.ajax
+          url: '/events/add_comment'
+          type: 'POST'
+          data:
+            event_id: app.event_data.id
+            content: element.val()
+          success: (resp)->
+            if resp != 'false'
+              comment = new app.models.comment(resp)
+              _this.collection.add(comment)
+              $('#comment_please_wait').hide()
+              element.attr('disabled', false)
+              element.val('')
+            else
+              alert 'There is some error posting your comment. Please try again later'
 
 
