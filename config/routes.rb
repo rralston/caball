@@ -24,7 +24,6 @@ Caball::Application.routes.draw do
  
   resources :events
   match 'events/message_organizer' => 'events#send_message_to_organizer', :via => 'POST'
-  match 'events/add_comment' => 'events#add_comment', :via => 'POST'
   match 'events/attend' => 'events#attend', :via => 'POST'
   match 'events/unattend' => 'events#unattend', :via => 'POST'
   match 'events/invite_followers' => 'events#invite_followers', :via => 'POST'

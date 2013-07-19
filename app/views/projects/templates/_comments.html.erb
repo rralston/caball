@@ -8,9 +8,9 @@
         <% end %>
 
         <%= form_for Comment.new, :remote => true do |c|  %>
-          <%= c.hidden_field :commentable_type, :value => 'Event' %>
-          <%= c.hidden_field :commentable_id, :value => @event.id %>
-          <%= c.text_area :content, :placeholder => 'Add your event updates here'  %>
+          <%= c.hidden_field :commentable_type, :value => 'Project' %>
+          <%= c.hidden_field :commentable_id, :value => @project.id %>
+          <%= c.text_area :content, :placeholder => 'Add your project updates here'  %>
           <%= c.fields_for :photo, Photo.new do |p| %>
             <%= p.file_field :image %>
           <% end %>

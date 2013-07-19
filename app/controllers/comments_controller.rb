@@ -1,16 +1,12 @@
 class CommentsController < ApplicationController
 
   load_and_authorize_resource
-  before_filter :load_project
+  # before_filter :load_project, :except => [:add_comment]
   
   def create
-    @comment = @project.comments.build(params[:comment])
-    @comment.user = current_user
-    if @comment.save
-      redirect_to @project, notice: "Comment was created."
-    else
-      render :new
-    end
+    @comment = Comment.create(params[:comment])
+    @comment.update_attributes(:user => current_user)
+    render 'comments/comment_create_response'
   end
 
   def edit

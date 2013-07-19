@@ -1,0 +1,4 @@
+$.event.trigger({
+  type: 'newComment',
+  comment: <%= raw @comment.to_json(:include => [:user, :likes]) %>
+});

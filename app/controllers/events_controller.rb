@@ -49,12 +49,6 @@ class EventsController < ApplicationController
     render :json => attend.user.to_json()
   end
 
-  def add_comment
-    event = Event.find(params[:event_id])
-    create = event.comments.create(:content => params[:content], :user => current_user)
-    render :json => create.to_json(:include => [:user, :likes])
-  end
-
   def invite_followers
     event = Event.find(params[:event_id])
     body = "#{current_user.name} has invited you to the event - #{event.title}"

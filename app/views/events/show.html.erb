@@ -62,7 +62,7 @@
           
           <div class='row event-photos'>
             <div class='span8 photos-container'>
-              <div class="fotorama" data-width="700" data-ratio="700/377" data-max-width="100%" data-nav="thumbs" data-fit="cover">
+              <div class="fotorama" data-width="650" data-ratio="700/377" data-max-width="100%" data-nav="thumbs" data-fit="cover">
                 <img src="<%= @event.main_photo.image %>">
                 <% @event.other_photos.each do |photo|  %>
                   <img src="<%= photo.image %>" >
@@ -232,6 +232,18 @@ $(document).ready(function(){
       position: LatLong,
       map: map,
       title: 'Event Location'
+  });
+
+
+  // listen to the new comment creation event
+  $(document).on('newComment', function(event){
+    
+    comment = new app.models.comment(event.comment)
+
+    app.comments.add(comment)
+    
+    $('#comment_please_wait').hide()
+    $('textarea#comment_content').attr('disabled', false).val('')
   });
 
 });

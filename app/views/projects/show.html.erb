@@ -209,6 +209,27 @@
             </div>
           </div>
 
+          <div class='row'>
+            <div class='span8 grey-divider'></div>
+          </div>
+
+
+          <div class='row project-comments-container'>
+
+            <div class='span8 updates-head'>
+              Updates
+            </div>
+            <div class='span8 grey-divider'></div>
+            <div class='span8'>
+              <div class='row'>
+                <div class='pull-right' id='comments_div'>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          
 
 
         </div>
@@ -597,4 +618,36 @@
 </div>
 <% end %>
 
+<%= render :partial => 'projects/templates/comments' %>
+<%= render :partial => 'projects/templates/comment' %>
+
 <%= render :partial => 'projects/templates/role_applicant_template' %>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+  app.current_user = <%= raw current_user.to_json(:only => [:name, :id]) %>
+
+  app.project_data = <%= raw @project.to_json() %>
+
+  app.comments = new app.collections.comments()
+
+  app.comments.reset(<%= raw @project.comments.to_json(:include => [:user, :likes]) %>)
+
+  app.comments_view = new app.views.comments({ collection: app.comments })
+
+  $('#comments_div').html(app.comments_view.render().el)
+
+  $(document).on('newComment', function(event){
+    
+    comment = new app.models.comment(event.comment)
+
+    app.comments.add(comment)
+    
+    $('#comment_please_wait').hide()
+    $('textarea#comment_content').attr('disabled', false).val('')
+  });
+});
+
+
+</script>
