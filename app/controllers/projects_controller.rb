@@ -61,6 +61,9 @@ class ProjectsController < ApplicationController
   end
   
   def create
+    @project.genre   = params[:project][:genre].to_json()
+    @project.is_type = params[:project][:is_type].to_json()
+
     @project.user_id = current_user.id
     respond_to do |format|
       if @project.save
