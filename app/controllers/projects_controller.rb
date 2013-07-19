@@ -23,6 +23,7 @@ class ProjectsController < ApplicationController
     @real_videos = @project.videos.real
     # FIXME
     @sorted_roles = Hash.new
+    
     @project.roles.each do |role|
       if @sorted_roles.has_key?(role.name) then
         @sorted_roles[role.name][:role_list] << role

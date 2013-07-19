@@ -59,4 +59,22 @@ class Project < ActiveRecord::Base
     {'Paid' => 'Paid', 'Low-Paid' => 'Low-Paid', 'Copy / Credit' => 'Copy / Credit'}
   end
 
+  def roles_json
+
+    super_roles = self.roles.group_by(&:name).keys
+    roles_to_return = Hash.new
+
+    super_roles.each do |super_role|
+      sub_roles = roles.where(:name => super_role)
+      roles_to_return[super_role] = {
+        :subroles => sub_roles,
+        :open_count => sub_roles.where(:filled => false).count,
+        :filled_count => sub_roles.where(:filled => true).count,
+        :total_count => sub_roles.where(:name => super_role).count
+      }
+    end
+
+    roles_to_return
+  end
+
 end

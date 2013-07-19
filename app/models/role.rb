@@ -36,9 +36,11 @@ class Role < ActiveRecord::Base
   end
 
   def approved_user
-    self.applications.select{ |application|
-      application.approved
-    }.map(&:user).first
+    # self.applications.select{ |application|
+    #   application.approved
+    # }.map(&:user).first
+
+    User.first
   end
 
 end

@@ -1,6 +1,7 @@
 $grey: #a5a8b1
 $light-grey: #d4d6dc
 $divider-border: #c6d0db
+$role-circle-border: #1691de
 
 .project-description
   margin-top: 20px
@@ -69,13 +70,38 @@ $divider-border: #c6d0db
 
 
 
+.role-portfolio
+  width: 100px
+  margin-left: 20px
+  margin-top: 20px
+  text-align: center
+  .role-title
+    margin-bottom: 10px
+  .role-cast-pic
+    width: 60px
+    border: 5px solid $role-circle-border
+  .default-role-pic
+    display: block
+    margin: 0px auto
+  .role-apply-btn, .show_applicants
+    min-width: 30px
+    margin: 10px auto 0px auto
+    width: 68px
+    height: 12px
+    padding-top: 2px
+    padding-bottom: 10px
+  .show_applicants
+    width: 80px !important
+    font-size: 10px
+  .role-filled-sumary
+    margin-top: 10px
+    margin-left: -10px
 
-
-
-
-
-
-
+.role-filters
+  margin-left: 20px
+  text-align: center
+  .role-filter
+    margin: 5px 5px 
 
 
 
@@ -92,30 +118,34 @@ $divider-border: #c6d0db
 
 .role-circles  
   margin-left: 0px
-  text-align: center
+  text-align: left
+  padding-left: 30px
+  margin-top: 20px
   
+  .circle-wrapper
+    margin: 20px 0px 0px 5px
   .role-circle-container
     display: inline-block
     position: relative
-    margin: 0 10px
-    width: 80px
-    height: 120px
+    margin: 10px 20px
+    width: 60px
+    height: 110px
     
     .role-title
       position: relative
       float: left
-      top: -30px
-      width: 100px
+      top: -20px
+      width: 65px
       z-index: 10
       white-space: nowrap
-      text-align: left
+      text-align: center
       overflow: hidden
       text-overflow: ellipsis
-      font-size: 0.7em
+      font-size: 11px
     
     .circle-measure    
       top: 0
-      width: 80px
+      width: 60px
       z-index: 8
       background-color: #EAEDF0
       position: absolute
@@ -124,25 +154,31 @@ $divider-border: #c6d0db
     .role-count
       position: relative
       float: left
-      top: 70px
-      width: 80px
+      top: 50px
+      width: 65px
+      text-align: center
+      font-size: 12px
+
     
     .role-circle
-      border: 3px solid #4c99c0
+      border: 3px solid $role-circle-border
       background-color: transparent
       border-radius: 45px
-      width: 80px
-      height: 80px
+      width: 60px
+      height: 60px
       z-index: 9
       position: absolute
     
     .circle-fill
       border: 3px solid #EAEDF0
-      background-color: #4c99c0
+      background-color: $role-circle-border
       border-radius: 45px
-      width: 70px
-      height: 70px
+      width: 50px
+      height: 50px
       position: absolute
       top: 5px
       left: 5px
       z-index: 7
+      box-shadow: 17px -35px 50px -42px black inset
+      -moz-box-shadow: 17px -35px 50px -42px black inset
+      -webkit-box-shadow: 17px -35px 50px -42px black inset

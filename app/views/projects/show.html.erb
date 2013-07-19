@@ -95,24 +95,24 @@
             <div class='span8 available-roles-head'>
               Available Roles
             </div>
-            <div class='grey-divider'></div>
+            <div class='span8 grey-divider'></div>
+
             <div class="span8 role-circles">
-              <% accordion_target = 0 %>
-              
-              <% @sorted_roles.each do |role_name, role_array| %>
-                <a data-toggle="collapse" data-parent="#role-accordion" data-target="#collapse-<%= accordion_target %>" href="#collapse-<%= accordion_target %>">
+              <% accordion_target = 0 %>              
+              <% @project.roles_json.each do |name, super_role_details| %>
+                <a data-toggle="tab" href="#role-tab-<%= accordion_target %>" class='circle-wrapper'>
                   <div class="role-circle-container">
                     <span class="role-title">
-                      <%= role_name %>
+                      <%= name %>
                     </span>
                     
                     <div class="role-circle"> </div>
                     <div class="circle-fill"> </div>
 
-                    <div class="circle-measure circle-measure-<%= ((@sorted_roles[role_name][:filled_count] / @sorted_roles[role_name][:total_count].to_f) * 10).to_i %>"> </div>
+                    <div class="circle-measure circle-measure-<%= ((super_role_details[:filled_count] / super_role_details[:total_count].to_f) * 10).to_i %>"> </div>
                     
                     <span class="role-count">
-                      <%= @sorted_roles[role_name][:filled_count]%>/<%= @sorted_roles[role_name][:total_count]%>
+                      <%= super_role_details[:filled_count]%> of <%= super_role_details[:total_count]%>
                       <br/>
                     </span>
 
@@ -122,6 +122,90 @@
                 <% accordion_target+=1 %>
               <% end %>
 
+            </div>
+
+
+
+            <% accordion_counter = 0 %>
+            <% modal_counter = 0 %>
+            
+            <div class='span8 role-filters'>
+              <% @project.roles_json.each do |name, super_role_details| %>
+                  <a href="#role-tab-<%= accordion_counter %>" data-toggle='tab' class='badge badge-custom-green pull-left role-filter'>
+                    <%= name %>
+                  </a>
+                <% accordion_counter += 1 %>
+              <% end %>
+              </ul>
+            </div>
+
+            <% accordion_counter = 0 %>
+            <% modal_counter = 0 %>
+
+            <div class='span8 tab-content roles-display-tabs'>
+              <% @project.roles_json.each do |name, super_role_details| %>
+              
+                <div class='tab-pane' id='role-tab-<%= accordion_counter %>'>
+                  <% super_role_details[:subroles].each_with_index do |role, counter| %>
+                    
+                    <% if role.filled %>
+                      <div class='role-portfolio pull-left'>
+                        <div class="role-title">
+                          <%= role.subrole %>
+                        </div>  
+
+                        <%= image_tag role.approved_user.profile_pic, :class => 'img-circle role-cast-pic' %>
+
+                        <div class='role-filled-sumary'>
+                          <i class='icon-ok'></i> Filled
+                        </div>
+                      </div>
+                    <% else %>
+                      <div class='role-portfolio pull-left'>
+                        <div class="role-title">
+                          <%= role.subrole %>
+                        </div>
+
+                        <%= image_tag 'role-male-default.png', :class => 'default-role-pic' %>
+
+                        <% if can? :edit, @project %>
+                          <div class='btn-custom btn-red info-button show_applicants' data-id='<%= role.id %>'>
+                            Applicants <%= role.applications.size %>
+                          </div>
+                        <% else %>
+                          <div class="btn-custom btn-red info-button role-apply-btn" data-toggle="modal" data-target="#role-modal-<%= modal_counter %>" data-keyboard="true" >
+                              Apply
+                          </div>
+                        <% end %>
+                        
+                      </div>
+
+                      <!-- Role Info Modal -->
+                      <div id="role-modal-<%= modal_counter %>" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                          <h3><span> <%= role.subrole %> </span></h3>
+                        </div>
+
+                        <div class="modal-body">
+                          <%= simple_format role.description %>
+
+                          <% if current_user %>
+                           <%= link_to 'Apply', new_role_application_path(:role_id => role.id), class: "btn btn-small btn-success" %>
+                          <% else %>
+                           <%= link_to "Sign In to Apply!", "/auth/facebook", id: "sign_in", class: "btn btn-small btn-success" %>
+                          <% end %>
+                        </div>
+                      </div>
+                      <!-- Role Info Modal -->
+
+                    <% end %>
+
+                  <% modal_counter += 1 %>
+                  <% end %>
+                </div> 
+                <% accordion_counter += 1 %>   
+              <% end %>
             </div>
           </div>
 
