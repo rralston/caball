@@ -38,15 +38,6 @@ var Projects = {
         });
       });
       
-      // For Project form - if there are errors don't allow the user to submit
-      $('.submit-form').bind('click',function(){
-          console.log('Sample');
-        if($('#formElem').data('errors')){
-          Alert.newAlert('error', 'Please go back and correct any errors.');
-          return false;
-        } 
-      });
-      
       /* Add handler for numerous.js if we're adding additional entries to form so that it resizes 
          div height  */
       Numerous.init({
@@ -191,9 +182,11 @@ var Projects = {
 
   validateGenre: function(){
     var hasError;
-    if($('fieldset div .genre-select').val().length > 2){
-      console.log('dskjn');
+    if($('fieldset div #project_genre').val() && $('fieldset div #project_genre').val().length > 2){
+      $('fieldset div #project_genre').addClass('has_errors')
       hasError = true;
+    }else{
+      $('fieldset div #project_genre').removeClass('has_errors')
     }
     return hasError;
   }
