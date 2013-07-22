@@ -1,0 +1,49 @@
+<script type="script/template" id='role_application_template'>  
+  
+  <div class='row'>
+    <div class='user-cover-photo'  style='background: url(<%%= user.profile_pic %>) no-repeat'>
+    </div>
+  </div>
+  <img src='<%%= user.profile_pic %>' class='image-circle applicant-photo'>
+  <div class='row'>
+    <div class='span3 text-center'>
+      <div class='applicaton-name'>
+        <%%= user.name %>
+      </div>
+
+      <div class='applicant-location'>
+        <%%= user.location %>
+      </div
+
+      <div class='applicant-talent'>
+        <%%=  user.talent_names %>
+      </div>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='about-applicant pull-left'>
+      <%%= user.about %>
+    </div>
+
+    <div class='applicant-reputation'>
+      <div class='row'
+        <%%= user.lovers.length %>
+        <br/>
+        FANS
+      </div>
+
+      <div class='row'>
+        <a href='#' class='btn-view-cover btn-custom btn-grey disabled'>
+          View Cover
+        </a>
+
+        <a href='#' class='btn-view-resume btn-custom btn-grey disabled'>
+          View Resume
+        </a>
+      </div>
+      
+    </div>
+  </div>
+
+</script> 

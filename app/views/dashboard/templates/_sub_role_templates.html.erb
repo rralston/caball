@@ -1,7 +1,7 @@
 
 <script type="script/template" id='sub_role_filter_template'>  
-  <a href="#sub-role-tab-<%%= id %>" data-toggle='tab' class='badge badge-custom-green pull-left project-filter'>
-      <%%= name %>
+  <a href="#sub-role-tab-<%%= this.model.get('id') %>" data-toggle='tab' class='badge badge-custom-green pull-left project-filter'>
+      <%%= subrole %>
   </a>
 </script>
 
@@ -9,4 +9,8 @@
     Tab for sub - role <%%= subrole %>
     <br>
     applications count <%%= applications.length %>
+
+    <div class='sub_role_applicatons'>
+      
+    </div>
 </script>

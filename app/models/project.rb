@@ -93,7 +93,16 @@ class Project < ActiveRecord::Base
         :name => super_role,
         :subroles_json => sub_roles.to_json(:include => {
                                           :applications => {
-                                            :include => :user
+                                            :include => {
+                                              :user => {
+                                                :methods => [
+                                                  :talent_names
+                                                ],
+                                                :include => [
+                                                  :lovers
+                                                ]
+                                              }
+                                            }
                                           }
                                         }),
         :open_count => sub_roles.where(:filled => false).count,
