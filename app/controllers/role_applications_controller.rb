@@ -48,4 +48,16 @@ class RoleApplicationsController < ApplicationController
     render :json => role_application.to_json()
   end
 
+  def message_applicant
+    role_application = RoleApplication.find(params[:application_id])
+    message = params[:message]
+    role = role_application.role
+    applicant = role_application.user
+    # send message and email to the project owner
+    subject = "Reg. Role Application - #{role_application.role.name} (#{role_application.role.subrole})"
+
+    current_user.send_message(applicant, message, subject)
+
+  end
+
 end

@@ -1,43 +1,58 @@
 <script type="script/template" id='role_application_template'>  
   
   <div class='row'>
-    <div class='user-cover-photo'  style='background: url(<%%= user.profile_pic %>) no-repeat'>
+    <div class='user-cover-photo'  style='background: url(<%%= user.cover_photo.image.url %>) no-repeat'>
     </div>
   </div>
-  <img src='<%%= user.profile_pic %>' class='image-circle applicant-photo'>
+  <img src='<%%= user.profile_pic %>' class='img-circle applicant-photo'>
   <div class='row'>
-    <div class='span3 text-center'>
-      <div class='applicaton-name'>
+    <div class='span3 applicant-details grey-backdrop text-center'>
+      <div class='name'>
         <%%= user.name %>
       </div>
 
-      <div class='applicant-location'>
+      <div class='location'>
+        <div class='location-img-blue'></div>
         <%%= user.location %>
       </div
 
-      <div class='applicant-talent'>
+      <div class='talent'>
         <%%=  user.talent_names %>
       </div>
     </div>
   </div>
 
-  <div class='row'>
+  <div class='row white'>
     <div class='about-applicant pull-left'>
-      <%%= user.about %>
+      <div class='about-text'>
+        <%%= user.about %>
+      </div>
+
+      <div class='actions'>
+        <div class='action action-div message-applicant pull-left'>
+        </div>
+        <%% if(approved != true) { %>
+          <div class='action action-div accept pull-left'>
+          </div>
+        <%% } %>
+        <div class='action action-div reject pull-left'>
+        </div>
+      </div>
     </div>
 
-    <div class='applicant-reputation'>
-      <div class='row'
+    <div class='applicant-reputation pull-left'>
+      <div class='row text-center'>
         <%%= user.lovers.length %>
         <br/>
         FANS
       </div>
 
-      <div class='row'>
+      <div class='row buttons text-center'>
         <a href='#' class='btn-view-cover btn-custom btn-grey disabled'>
           View Cover
         </a>
-
+        <br/>
+        <br/>
         <a href='#' class='btn-view-resume btn-custom btn-grey disabled'>
           View Resume
         </a>

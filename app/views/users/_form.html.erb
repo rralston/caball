@@ -257,6 +257,37 @@
         </fieldset>
 
         <fieldset class="step more-photos">
+
+          <h2>Cover Photo</h2>
+          <%= f.fields_for :cover_photo, (@user.cover_photo || Photo.new) do |user_cover_photo|  %>
+
+            <div class='row'>
+              <div class='span3'>
+                <div class="control-group">
+                  <!-- if image exits, allow to change it -->
+                  <% if user_cover_photo.object.image.present? %>
+                    <img src=<%= user_cover_photo.object.image.url(:medium) %> class="img-rounded" >
+                  <% end %>
+
+                  <div class="controls">
+                    <%= user_cover_photo.file_field :image, :validate => true %>
+                  </div>
+                  <input type='hidden' value='1' name='user[cover_photo_attributes][is_cover]'>
+                </div>
+              </div>
+
+              <div class='span3'>
+                <div class="control-group">
+                  <label class="control-label">Image Description</label>
+                  <div class="controls">
+                    <%= user_cover_photo.text_field :description %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+
           <h2>More Photos</h2>
 
           <%= f.fields_for :photos do |p|  %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130722053345) do
+ActiveRecord::Schema.define(:version => 20130722152347) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(:version => 20130722053345) do
     t.datetime "created_at",                        :null => false
     t.boolean  "primary"
     t.boolean  "is_main",        :default => false
+    t.boolean  "is_cover",       :default => false
   end
 
   create_table "profiles", :force => true do |t|
