@@ -37,6 +37,10 @@ describe Project do
   end
 
   context "filled roled" do
+    before{
+      # just to make sure. line no 71 might be executed first
+      @roles[1].update_attributes(:filled => false)
+    }
     subject { @project_with_roles }
     its(:filled_roles) { should =~ [@roles[0]] }
   end
@@ -59,6 +63,17 @@ describe Project do
   context "Open rules" do
     subject { @project_with_roles }
     its(:open_roles) { should =~ @roles[1..2] }
+  end
+
+  context "pending applications" do
+    before{
+      role_application1  = FactoryGirl.create(:role_application, :approved => true, :role => @roles[1])
+      @roles[1].update_attributes(:filled => true)
+      role_application2  = FactoryGirl.create(:role_application, :approved => false, :role => @roles[1])  
+      @role_application3  = FactoryGirl.create(:role_application, :approved => false, :role => @roles[2])  
+      @role_application4  = FactoryGirl.create(:role_application, :approved => false, :role => @roles[2])  
+    }
+    specify { @project_with_roles.pending_applications.should =~ [@role_application3, @role_application4] }
   end
 
 end

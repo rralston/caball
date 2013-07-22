@@ -4,7 +4,7 @@
 
 <div class='container'>
   <div class='row'>
-    <div class='span2'>
+    <div class='span1'>
       <ul class='nav nav-pills nav-stacked'>
         <li>
           <a href='#home' data-toggle='tab' class='active'> Home </a>
@@ -25,17 +25,23 @@
     </div>
     <div class='users-view span10'>
       
-      <%= render :partial => 'dashboard/user_profile_summary' %>
+      
       
       <div class='row'>
-        <div class='tab-content span7'>
-          <div class='tab-pane active' id='home'>
+        <div class='dashboard-tabs tab-content span11'>
+          <div class='tab-pane' id='home'>
+            <%= render :partial => 'dashboard/user_profile_summary' %>
             <%= render :partial => 'dashboard/user_home' %>
+            <div class='span3 dashboard_widgets'>
+              <%= render :partial => 'dashboard/recommended_people' %>
+              <%= render :partial => 'dashboard/recommended_projects' %>
+            </div>
+
           </div>
           <div class='tab-pane' id='messages'>
             <%= render :partial => 'dashboard/messages' %>
           </div>
-          <div class='tab-pane' id='projects'>
+          <div class='tab-pane active' id='projects'>
             <%= render :partial => 'dashboard/projects' %>
           </div>
           <div class='tab-pane' id='events'>
@@ -45,21 +51,22 @@
             Your settings
           </div>
         </div>
-
-        <div class='span3 dashboard_widgets'>
-          <%= render :partial => 'dashboard/recommended_people' %>
-          <%= render :partial => 'dashboard/recommended_projects' %>
-        </div>
       </div>
     </div>
-    
-    
+  
   </div>
 </div>
 
 <%= render :partial => 'dashboard/templates/activities' %>
 <%= render :partial => 'dashboard/templates/recommended_people' %>
 <%= render :partial => 'dashboard/templates/recommended_project' %>
+<%= render :partial => 'dashboard/templates/user_projects' %>
+<%= render :partial => 'dashboard/templates/user_project' %>
+<%= render :partial => 'dashboard/templates/applied_project' %>
+<%= render :partial => 'dashboard/templates/manage_project' %>
+<%= render :partial => 'dashboard/templates/project_fans' %>
+<%= render :partial => 'dashboard/templates/project_fan' %>
+<%= render :partial => 'dashboard/templates/super_role_templates' %>
 
 <script type="text/javascript">
 
@@ -80,8 +87,39 @@
   app.recommended_people_view = new app.views.recommended_people({ collection: app.recommended_people })
   $('.recommended_people_container').html(app.recommended_people_view.render().el)
 
+
   app.recommended_projects = new app.collections.recommended_projects(<%= raw current_user.recommended_projects.limit(RECOMMENDED_PROJECTS_PER_PAGE).to_json() %>)
   app.recommended_projects_view = new app.views.recommended_projects({ collection: app.recommended_projects })
   $('.recommended_projects_container').html(app.recommended_projects_view.render().el)
+
+
+  app.user_projects = new app.collections.user_projects()
+  user_projects_view = new app.views.user_projects({ collection: app.user_projects })
+  app.user_projects.reset(<%= raw current_user.projects.to_json(:include => [
+                                                              :open_roles,
+                                                              :filled_roles,
+                                                              :roles,
+                                                              :photos,
+                                                              :fans
+                                                            ],
+                                                            :methods => [
+                                                              :pending_applications,
+                                                              :roles_json,
+                                                              :roles_for_dashboard,
+                                                              :roles_percent
+                                                            ]) %>)
+  $('#dashboard_projects').html(user_projects_view.render().el)
+
+  applied_projects = new app.collections.applied_projects()
+  applied_projects_view = new app.views.applied_projects({ collection: applied_projects })
+  applied_projects.reset(<%= raw current_user.applied_projects.to_json(:include => [
+                                                              :open_roles,
+                                                              :filled_roles,
+                                                              :roles,
+                                                              :photos
+                                                            ]) 
+                          %>)
+  $('#dashboard_projects').find('#applied-projects').html(applied_projects_view.render().el)
+
 
 </script>

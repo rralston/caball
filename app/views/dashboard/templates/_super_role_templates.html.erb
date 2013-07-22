@@ -1,0 +1,29 @@
+<script type="script/template" id='super_role_circle_template'>  
+  <div class='name'>
+    <%%= name %>
+  </div>
+  <div class="role-circle-container">
+    <div class="role-circle"> </div>
+    <div class="circle-fill"> </div>
+
+    <div class="circle-measure circle-measure-<%%= parseInt((parseFloat(filled_count) / parseFloat(total_count)) * 10) %>"> </div>
+    <span class="role-count">
+      <%%= filled_count %> of <%%= total_count %>
+    </span>
+  </div>  
+</script>
+
+<script type="script/template" id='super_role_filter_template'>  
+  <a href="#super-role-tab-<%%= id %>" data-toggle='tab' class='badge badge-custom-green pull-left project-filter'>
+      <%%= name %>
+  </a>
+</script>
+
+<script type="script/template" id='super_role_tab_template'>  
+    Tab for role <%%= name %>
+    <br>
+    <div class='row'>
+      <div class='span11 .sub_roles_filters'>
+      </div>
+    </div>
+</script>

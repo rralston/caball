@@ -153,6 +153,12 @@ class User < ActiveRecord::Base
               where(:recipient_id => self.id)
   end
 
+  def applied_projects
+    role_applications.map{ |application|
+      application.role.project
+    }.uniq
+  end
+
   def serializable_hash(options)
     hash = super(options)
     extra_hash = {

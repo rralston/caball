@@ -88,7 +88,7 @@
             <div class="control-group">
             <%= p.label 'Project Type', :class => 'control-label' %>
               <div class="controls">
-              <%= p.select(:status, options_for_select(@status, @project.status)) %>
+                <%= p.select(:status, options_for_select(@status, @project.status)) %>
               </div>
             </div>
         
@@ -109,9 +109,17 @@
             <div class="control-group">
             <%= p.label 'Type', :class => 'control-label' %>
               <div class="controls">
-                <%= p.select(:is_type, options_for_select(@is_type, @project.is_type), {}, {:multiple => true, :size => 3 }) %>
+                <%= p.select(:is_type, options_for_select(@is_type, @project.is_type), {}) %>
               </div>
             </div>
+
+            <div class="control-group">
+            <%= p.label 'Union / Non-union', :class => 'control-label' %>
+              <div class="controls">
+                <%= p.select(:union, options_for_select(@unions, @project.union), {}) %>
+              </div>
+            </div>
+
           </div>
         </fieldset>
         

@@ -63,7 +63,6 @@ class ProjectsController < ApplicationController
   
   def create
     @project.genre   = params[:project][:genre].to_json()
-    @project.is_type = params[:project][:is_type].to_json()
 
     @project.user_id = current_user.id
     respond_to do |format|
@@ -85,7 +84,6 @@ class ProjectsController < ApplicationController
 
   def update
     params[:project][:genre] = params[:project][:genre].to_json()
-    params[:project][:is_type] = params[:project][:is_type].to_json()
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
@@ -115,6 +113,7 @@ class ProjectsController < ApplicationController
     @talents = User.types
     @genres = Project.genres
     @is_type = Project.types
+    @unions = Project.unions
     @status = Project.status_stages
     @compensation = Project.compensation_stages
   end

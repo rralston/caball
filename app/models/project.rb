@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_many :likes, :as => :loveable, :dependent => :destroy
   has_many :roles, :dependent => :destroy
+  has_many :applications, :through => :roles
   has_many :fans, :through => :likes, :source => :user
   has_many :photos, :as => :imageable, :dependent => :destroy
   has_many :videos, :as => :videoable, :dependent => :destroy
@@ -13,7 +14,7 @@ class Project < ActiveRecord::Base
 
   attr_accessible :title, :description, :start, :end, :featured, :roles_attributes,
                   :photos_attributes, :videos_attributes, :status, :genre, :is_type,
-                  :thoughts, :compensation, :location, :headline, :project_dates_attributes
+                  :thoughts, :compensation, :location, :headline, :project_dates_attributes, :union
   accepts_nested_attributes_for :roles, :photos, :videos, :project_dates, :allow_destroy => true  
   validates_presence_of :title, :description, :message => "is required"
   validates :headline, :length => { :maximum => 300 }
@@ -59,6 +60,10 @@ class Project < ActiveRecord::Base
     {'Paid' => 'Paid', 'Low-Paid' => 'Low-Paid', 'Copy / Credit' => 'Copy / Credit'}
   end
 
+  def self.unions
+    {'Union' => 'Union', 'Non-union' => 'Non-union'}
+  end
+
   def roles_json
 
     super_roles = self.roles.group_by(&:name).keys
@@ -75,6 +80,32 @@ class Project < ActiveRecord::Base
     end
 
     roles_to_return
+  end
+
+  def roles_for_dashboard
+    super_roles = self.roles.group_by(&:name).keys
+    roles_to_return = []
+
+    super_roles.each_with_index do |super_role, index|
+      sub_roles = roles.where(:name => super_role)
+      roles_to_return << {
+        :id => index,
+        :name => super_role,
+        :subroles_json => sub_roles.to_json(:include => {
+                                          :applications => {
+                                            :include => :user
+                                          }
+                                        }),
+        :open_count => sub_roles.where(:filled => false).count,
+        :filled_count => sub_roles.where(:filled => true).count,
+        :total_count => sub_roles.where(:name => super_role).count
+      }
+    end
+    roles_to_return
+  end
+
+  def pending_applications
+    applications.where(:role_applications => { :approved => false }, :roles => { :filled => false })
   end
 
 end

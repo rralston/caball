@@ -226,4 +226,20 @@ describe User do
 
   end
 
+  context "applied projects" do
+    before{
+      @role = FactoryGirl.create(:role, :name => 'Actor', :subrole => 'Something')
+      @role2 = FactoryGirl.create(:role, :name => 'Actor', :subrole => 'Something')
+      @project_owner = FactoryGirl.create(:user)
+      @project = FactoryGirl.create(:project, :user => @project_owner, :roles => [@role])
+      @project2 = FactoryGirl.create(:project, :user => @project_owner, :roles => [@role2])
+      @applied_user = FactoryGirl.create(:user, :role_applications => [
+                                                    FactoryGirl.create(:role_application, :role => @role),
+                                                    FactoryGirl.create(:role_application, :role => @role2)
+                                        ])
+    }
+      
+    specify { @applied_user.applied_projects.should =~ [@project, @project2] }
+  end
+
 end

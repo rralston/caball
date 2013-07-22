@@ -1,3 +1,21 @@
+$role-circle-border: #1691de
+$divider-border: #c6d0db
+$grey-backdrop-text: #636a73
+
+.dashboard-tabs
+  .tab-pane
+  background: #eaedf0
+  overflow: hidden
+
+.dashboard-tab-heading
+  padding: 20px
+  font-size: 20px
+  border-bottom: 1px solid $divider-border
+  margin-bottom: 10px
+  color: $grey-backdrop-text
+.dashboard-tab-heading.secondary
+  border-top: 1px solid $divider-border
+
 .dashboard_widgets
   .widget
     width: 190px
@@ -11,3 +29,193 @@
     .activity_summary
       font-size: 10px
       font-style: italic
+
+#dashboard_projects
+  
+  .projects-filter
+    margin-bottom: 20px
+    a
+      margin-left: 20px
+  .project
+    position: relative
+    width: 270px
+    margin-left: 20px
+    float: left
+    margin-bottom: 20px
+    -webkit-box-shadow: 0px 0px 19px -7px black
+    box-shadow: 0px 0px 19px -7px black
+    -moz-box-shadow: 0px 0px 19px -7px black
+    .project-head
+      height: 160px
+      .project-backdrop
+        position: absolute
+        width: 270px
+        height: 160px
+        z-index: 0
+        background-size: cover !important
+      .project-title, .project-headline
+        padding: 0px 20px
+        position: relative
+      .project-headline
+        position: relative
+        color: white
+        font-size: 10px
+        height: 80px
+        overflow: hidden
+      .project-title
+        padding-top: 20px
+        color: white
+    .project-summary
+      background: white
+      height: 150px
+      position: relative
+      .message
+        width: 150px
+        height: 130px
+        padding: 10px
+        .status
+          margin-left: 10px 
+          .status-text
+            text-transform: uppercase
+            font-weight: bold
+            color: black 
+        a:hover
+          text-decoration: none
+          color: black
+        .btn-manage, .btn-message
+          position: absolute
+          bottom: 0px
+          color: black
+
+      .roles-summary
+        -webkit-box-shadow: 8px -100px 305px -134px black inset
+        box-shadow: 8px -100px 305px -134px black inset
+        -moz-box-shadow: 8px -100px 305px -134px black inset
+        width: 100px
+        height: 150px
+        .role-circle-container
+          top: -30px
+          left: 15px
+        .role-count
+          white-space: nowrap
+          font-size: 10px
+          margin-top: 15px
+          color: $role-circle-border
+          font-weight: bold
+        .applications-summary
+          position: relative
+          font-size: 12px
+          -webkit-box-shadow: 8px -44px 168px -25px #7e878e inset
+          box-shadow: 8px -44px 168px -25px #7e878e inset
+          -moz-box-shadow: 8px -44px 168px -25px #7e878e inset
+          top: -46px
+          padding: 10px 0px
+
+
+  .manage_project
+    .project-head
+      background: url(/assets/dashboard-section-bg.png) repeat-x
+    .project-title
+      width: 440px
+    .title
+      padding: 20px
+      font-size: 35px
+      color: white
+      line-height: 40px
+    .project-fans
+      width: 255px
+    .project-fans-tiles
+      .fan-img
+        width: 85px
+      .empty-grey-tile
+        width: 85px
+        height: 85px
+      .fans-extra-count
+        font-size: 25px
+        margin-top: 15px
+        margin-left: -5px
+        margin-bottom: 5px
+      .grey-top-line
+        margin-top: 12px
+    .project-roles-filled
+      width: 110px
+      color: white
+    .super-role-circle
+      text-align: center
+      width: 140px
+      margin-left: 25px
+      .role-count
+        margin-top: 20px
+    .super-role-filter
+      margin-left: 10px
+
+
+
+
+  .role-circles  
+    margin-left: 0px
+    text-align: left
+    padding-left: 30px
+    margin-top: 20px
+    
+    .circle-wrapper
+      margin: 20px 0px 0px 5px
+  .role-circle-container
+    display: inline-block
+    position: relative
+    width: 60px
+    height: 110px
+    
+    .role-title
+      position: relative
+      float: left
+      top: -20px
+      width: 65px
+      z-index: 10
+      white-space: nowrap
+      text-align: center
+      overflow: hidden
+      text-overflow: ellipsis
+      font-size: 11px
+    
+    .circle-measure    
+      top: 0
+      width: 60px
+      z-index: 8
+      background-color: #EAEDF0
+      position: absolute
+      left: 3px
+      border-radius: 30px
+      background: white
+    
+    .role-count
+      position: relative
+      float: left
+      top: 50px
+      width: 65px
+      text-align: center
+      font-size: 12px
+
+    
+    .role-circle
+      border: 3px solid $role-circle-border
+      background-color: transparent
+      border-radius: 45px
+      width: 60px
+      height: 60px
+      z-index: 9
+      position: absolute
+    
+    .circle-fill
+      border: 3px solid #EAEDF0
+      background-color: $role-circle-border
+      border-radius: 45px
+      width: 50px
+      height: 50px
+      position: absolute
+      top: 5px
+      left: 5px
+      z-index: 7
+      box-shadow: 17px -35px 50px -42px black inset
+      -moz-box-shadow: 17px -35px 50px -42px black inset
+      -webkit-box-shadow: 17px -35px 50px -42px black inset

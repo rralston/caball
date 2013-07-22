@@ -118,7 +118,7 @@ $(function() {
 		//console.log($('fieldset div .genre-select').val().length);
 
 		if($('fieldset div #project_genre').length){
-			if(Projects.validateGenre()){
+			if(Projects.validateGenre() || Projects.validateType() ){
 				hasError = true;
 				$this.addClass('input-error');
 			}
