@@ -99,7 +99,8 @@ class Project < ActiveRecord::Base
                                                   :talent_names
                                                 ],
                                                 :include => [
-                                                  :lovers
+                                                  :lovers,
+                                                  :resume
                                                 ]
                                               }
                                             }
@@ -111,6 +112,10 @@ class Project < ActiveRecord::Base
       }
     end
     roles_to_return
+  end
+
+  def paricipant_mails
+    applications.map(&:user).map(&:email).join(', ')
   end
 
   def pending_applications

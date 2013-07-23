@@ -41,11 +41,11 @@
           <div class='tab-pane' id='messages'>
             <%= render :partial => 'dashboard/messages' %>
           </div>
-          <div class='tab-pane active' id='projects'>
+          <div class='tab-pane' id='projects'>
             <%= render :partial => 'dashboard/projects' %>
           </div>
-          <div class='tab-pane' id='events'>
-            Your events
+          <div class='tab-pane active' id='events'>
+            <%= render :partial => 'dashboard/events' %>
           </div>
           <div class='tab-pane' id='settings'>
             Your settings
@@ -60,6 +60,8 @@
 <%= render :partial => 'dashboard/templates/activities' %>
 <%= render :partial => 'dashboard/templates/recommended_people' %>
 <%= render :partial => 'dashboard/templates/recommended_project' %>
+
+<!-- Projects -->
 <%= render :partial => 'dashboard/templates/user_projects' %>
 <%= render :partial => 'dashboard/templates/user_project' %>
 <%= render :partial => 'dashboard/templates/applied_project' %>
@@ -69,6 +71,16 @@
 <%= render :partial => 'dashboard/templates/super_role_templates' %>
 <%= render :partial => 'dashboard/templates/sub_role_templates' %>
 <%= render :partial => 'dashboard/templates/role_application' %>
+
+<%= render :partial => 'dashboard/modals' %>
+
+<!-- events -->
+<%= render :partial => 'dashboard/templates/user_events' %>
+<%= render :partial => 'dashboard/templates/user_event' %>
+<%= render :partial => 'dashboard/templates/attending_events' %>
+<%= render :partial => 'dashboard/templates/attending_event' %>
+
+<%= render :partial => 'conversations/send_new_message_modal' %>
 
 <script type="text/javascript">
 
@@ -95,9 +107,11 @@
   $('.recommended_projects_container').html(app.recommended_projects_view.render().el)
 
 
-  app.user_projects = new app.collections.user_projects()
-  user_projects_view = new app.views.user_projects({ collection: app.user_projects })
-  app.user_projects.reset(<%= raw current_user.projects.to_json(:include => [
+// PROJECTS
+// user projects
+  user_projects = new app.collections.user_projects()
+  app.user_projects_view = new app.views.user_projects({ collection: user_projects })
+  user_projects.reset(<%= raw current_user.projects.to_json(:include => [
                                                               :open_roles,
                                                               :filled_roles,
                                                               :roles,
@@ -106,22 +120,78 @@
                                                             ],
                                                             :methods => [
                                                               :pending_applications,
+                                                              :paricipant_mails,
                                                               :roles_json,
                                                               :roles_for_dashboard,
                                                               :roles_percent
                                                             ]) %>)
-  $('#dashboard_projects').html(user_projects_view.render().el)
-
+// Applied projects
   applied_projects = new app.collections.applied_projects()
-  applied_projects_view = new app.views.applied_projects({ collection: applied_projects })
+  app.applied_projects_view = new app.views.applied_projects({ collection: applied_projects })
   applied_projects.reset(<%= raw current_user.applied_projects.to_json(:include => [
                                                               :open_roles,
                                                               :filled_roles,
                                                               :roles,
-                                                              :photos
+                                                              :photos,
+                                                              :user
                                                             ]) 
                           %>)
-  $('#dashboard_projects').find('#applied-projects').html(applied_projects_view.render().el)
 
+
+  // EVENTS
+  // user created event
+  app.user_events = new app.collections.user_events()
+  app.user_events_view = new app.views.user_events({ collection: app.user_events })
+  app.user_events.reset(<%= raw current_user.events.to_json(:include => [
+                                                          :attendees,
+                                                          { 
+                                                            :start => {
+                                                              :methods => [
+                                                                :day,
+                                                                :month_year
+                                                              ]
+                                                            }
+                                                          },
+                                                          {
+                                                            :end => {
+                                                              :methods => [
+                                                                :day,
+                                                                :month_year
+                                                              ]
+                                                            } 
+                                                          },
+                                                          :comments,
+                                                          :likes,
+                                                          :main_photo
+                                                        ]) %>)
+  $('#dashboard_events').html(app.user_events_view.render().el)
+
+  // user attending events
+  app.attending_events = new app.collections.attending_events()
+  app.attending_events_view = new app.views.attending_events({ collection: app.attending_events })
+  app.attending_events.reset(<%= raw current_user.attending_events.to_json(:include => [
+                                                                            :attendees,
+                                                                            { 
+                                                                              :start => {
+                                                                                :methods => [
+                                                                                  :day,
+                                                                                  :month_year
+                                                                                ]
+                                                                              }
+                                                                            },
+                                                                            {
+                                                                              :end => {
+                                                                                :methods => [
+                                                                                  :day,
+                                                                                  :month_year
+                                                                                ]
+                                                                              } 
+                                                                            },
+                                                                            :comments,
+                                                                            :likes,
+                                                                            :main_photo,
+                                                                            :user
+                                                                          ]) %>)
+  $('#dashboard_events').find('#attending-events').html(app.attending_events_view.render().el)
 
 </script>

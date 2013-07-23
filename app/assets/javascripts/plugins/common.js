@@ -98,6 +98,59 @@ app.fn.check_if_current_user_included = function(user_ids){
   return (typeof found_user != "undefined")
 }
 
+app.fn.bind_click_event_on_modal_btn = function(selector){
+  
+  $('body').on('click', selector +' .btn-send-message-generic', function(event){
+    var modal = $('#send_message_generic_modal')
+    var subject = modal.find('#message_subject').val()
+    var body = modal.find('#message_body').val()
+    var recipients = modal.find('#message_recipients').val()
+    var btn = modal.find('.btn-send-message-generic')
+    
+    if (subject == '' || body == '')
+      alert('Enter Subject and Message')
+    
+    else{
+      btn.html('Please wait..')
+      btn.attr('disabled', 'disabled')
+      $.ajax({
+        url: '/conversations/send-generic-message',
+        type: 'POST',
+        data:{
+          subject: subject,
+          message: body,
+          recipients: recipients
+        },
+        success: function(resp){
+          if(resp != 'false')
+            modal.modal('hide')
+          else
+            alert('Something went Wrong, Please try again')
+
+          btn.attr('disabled', false)
+          btn.html('Send Message')  
+        }
+          
+      });
+    }
+  });
+}
+
+app.fn.show_generic_message_modal = function(event){
+  modal = $('#send_message_generic_modal')
+  btn = $(event.target)
+  app.btn = btn
+  modal.find('.header-text').html(btn.attr('data-message-header'))
+
+  modal.find('#message_recipients').val(btn.attr('data-message-recipients'))
+
+  modal.find('#message_subject').val(btn.attr('data-message-subject'))
+
+  modal.modal('show')
+
+  app.fn.bind_click_event_on_modal_btn('#send_message_generic_modal')
+
+}
 
 // <% if @event.liked_by?(current_user) %>
 //               <span class='span2 btn-custom btn-light-grey center-div text-center btn-like unlike' data-event-id='<%= @event.id %>' >

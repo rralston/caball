@@ -6,11 +6,18 @@ app.views.role_application = Backbone.View.extend
   events:
     'click .action.accept': 'approve'
     'click .action.reject': 'cancel_action'
-
+    'click .btn-view-cover': 'show_cover'
 
   render: ()->
     this.$el.html(this.template( this.model.toJSON() ))
     return this
+
+  show_cover: (event)->
+    event.stopPropagation()
+    modal = $('#view_cover')
+    modal.find('.cover-header').html('Cover - '+this.model.get('user').name)
+    modal.find('#cover-message').html(this.model.get('message'))
+    modal.modal('show')
 
   approve: (event)->
     _this = this

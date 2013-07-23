@@ -15,6 +15,7 @@ Caball::Application.routes.draw do
   end
   resources :comments
   resources :conversations
+  match 'conversations/send-generic-message' => 'conversations#send_message_generic', :via => 'POST'
   resources :notifications
   resources :friendships
   resources :likes

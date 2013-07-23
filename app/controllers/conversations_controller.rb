@@ -2,7 +2,7 @@ class ConversationsController < ApplicationController
 
   load_and_authorize_resource
   
-  before_filter :search
+  before_filter :search, :except => [:send_message_generic]
   helper_method :mailbox, :conversation
   
   def new
@@ -26,6 +26,15 @@ class ConversationsController < ApplicationController
       send_message(recipients, *conversation_params(:body, :subject)).conversation
 
     redirect_to conversations_url, :notice => 'Your Message was successfully sent.'
+  end
+
+  def send_message_generic
+    recipient_emails = params[:recipients].split(',')
+    recipients = User.where(email: recipient_emails).all
+    subject = params[:subject]
+    message = params[:message]
+    current_user.send_message(recipients, message, subject)
+    render :text => true
   end
 
   # Destroy Message form the System

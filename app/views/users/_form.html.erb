@@ -154,6 +154,16 @@
                 </div>
               <% end %>
             <% end %>
+
+            <h3>Upload Your Resume</h3>
+            <%= f.fields_for :resume, @user.resume || Resume.new do |r|  %>
+              <div class="control-group">
+                <%= r.label "Resume", :class => 'control-label' %>
+                <div class="controls">
+                  <%= r.file_field :document %>
+                </div>
+              </div>
+            <% end %>
           </div>
         </fieldset>
 
@@ -291,40 +301,40 @@
           <h2>More Photos</h2>
 
           <%= f.fields_for :photos do |p|  %>
-          <% if @user.photos.exists? %>
-          <div class="control-group">
-            <%= p.label "Photo", :class => 'control-label' %>
-            <div class="controls">
-              <%= image_tag p.object.image.url(:medium), {:class => "img-polaroid"} %>
-              <%= p.file_field :image %>
-              <%= p.check_box :_destroy %> Click Here to Destroy
-            </div>
-          </div>
+            <% if @user.photos.exists? %>
+              <div class="control-group">
+                <%= p.label "Photo", :class => 'control-label' %>
+                <div class="controls">
+                  <%= image_tag p.object.image.url(:medium), {:class => "img-polaroid"} %>
+                  <%= p.file_field :image %>
+                  <%= p.check_box :_destroy %> Click Here to Destroy
+                </div>
+              </div>
 
-          <div class="control-group">
-            <%= p.label "Description", :class => 'control-label' %>
-            <div class="controls">
-              <%= p.text_area :description, :class => 'textarea', :rows => "5"%>
-            </div>
-          </div>
-          <% else %>
+              <div class="control-group">
+                <%= p.label "Description", :class => 'control-label' %>
+                <div class="controls">
+                  <%= p.text_area :description, :class => 'textarea', :rows => "5"%>
+                </div>
+              </div>
+            <% else %>
 
-          <div class="control-group">
-            <%= p.label :description, :class => 'control-label' %>
-            <div class="controls">
-              <%= p.text_field :description, :class => 'text_field' %>
-            </div>
-          </div>
-          <div class="control-group">
-            <p>
-              Please Upload Additional Images
-            </p>
-            <div class="controls">
-              <%= p.file_field :image %>
-            </div>
-          </div>
+              <div class="control-group">
+                <%= p.label :description, :class => 'control-label' %>
+                <div class="controls">
+                  <%= p.text_field :description, :class => 'text_field' %>
+                </div>
+              </div>
+              <div class="control-group">
+                <p>
+                  Please Upload Additional Images
+                </p>
+                <div class="controls">
+                  <%= p.file_field :image %>
+                </div>
+              </div>
 
-          <% end %>
+            <% end %>
           <% end %>
 
           <% comment= "Allowing for multiple photos here..." %>

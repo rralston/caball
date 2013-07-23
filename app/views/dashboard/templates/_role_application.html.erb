@@ -1,22 +1,23 @@
 <script type="script/template" id='role_application_template'>  
   
   <div class='row'>
+    <div class='backdrop-cover'></div>
     <div class='user-cover-photo'  style='background: url(<%%= user.cover_photo.image.url %>) no-repeat'>
     </div>
   </div>
   <img src='<%%= user.profile_pic %>' class='img-circle applicant-photo'>
   <div class='row'>
     <div class='span3 applicant-details grey-backdrop text-center'>
-      <div class='name'>
-        <%%= user.name %>
+      <div class='name bold'>
+        <a href='/users/<%%= user.id %>' target='_blank'><%%= user.name %></a>
       </div>
 
       <div class='location'>
-        <div class='location-img-blue'></div>
+        <div class='location-img-blue light'></div>
         <%%= user.location %>
       </div
 
-      <div class='talent'>
+      <div class='talent medium'>
         <%%=  user.talent_names %>
       </div>
     </div>
@@ -24,12 +25,12 @@
 
   <div class='row white'>
     <div class='about-applicant pull-left'>
-      <div class='about-text'>
+      <div class='about-text regular'>
         <%%= user.about %>
       </div>
 
       <div class='actions'>
-        <div class='action action-div message-applicant pull-left'>
+        <div class='action action-div message-applicant pull-left' data-message-subject='Regarding Your role appliation - <%%= role.name %>' data-message-recipients='<%%= user.email %>' data-message-header='Message Applicant - <%%= user.name %>'>
         </div>
         <%% if(approved != true) { %>
           <div class='action action-div accept pull-left'>
@@ -48,14 +49,16 @@
       </div>
 
       <div class='row buttons text-center'>
-        <a href='#' class='btn-view-cover btn-custom btn-grey disabled'>
+        <a href='#' class='btn-view-cover btn-custom btn-grey disabled bold'>
           View Cover
         </a>
         <br/>
         <br/>
-        <a href='#' class='btn-view-resume btn-custom btn-grey disabled'>
-          View Resume
-        </a>
+        <%% if(user.resume){ %>
+          <a href='<%%= user.resume.document.url %>' target='_black' class='btn-view-resume btn-custom btn-grey disabled bold'>
+            View Resume
+          </a>
+        <%% } %>
       </div>
       
     </div>

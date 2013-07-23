@@ -3,19 +3,30 @@
   <div class='project-head span11'>
     <div class='project-title span4'>
       <div class='row'>
-        <div class='title'>
+        <div class='title medium'>
           <%%= title %>
+        </div>
+        <div class='manage-btns'>
+          <a href='/projects/<%%= id %>/edit' class='manage-btn regular pull-left'>
+            <div class='gear-grey'></div> Edit Project Settings
+          </a>
+
+          <%% if(status!='Completed'){ %>
+            <a href='#' class='manage-btn pull-right regular mark_done'>
+              <i class='icon-ok'></i> Mark Project Done
+            </a>
+          <%% } %>
         </div>
       </div>
       
     </div>
     
-    <div id='project-fans' class='span4'>
+    <div id='project-fans' class='pull-left'>
       
     </div>
     
 
-    <div class='project-roles-filled span2'>
+    <div class='project-roles-filled pull-left text-center'>
       <div class='row'>
         Roles Filled
       </div>
@@ -28,8 +39,8 @@
         </div> 
       </div>
 
-      <div class='row'>
-        Manage Applications
+      <div class='btn-custom message-participants btn-dark-grey medium action-div' data-message-subject='Regarding Your role appliations - <%%= title %>' data-message-recipients='<%%= paricipant_mails %>' data-message-header='Message Participants - <%%= title %>'>
+        <div class='pencil-black'></div> Message Participants
       </div>
     </div>
 
@@ -42,6 +53,13 @@
 
         </div>
       </div>
+
+      <div class='row'>
+        <div class='span11 dashboard-tab-heading secondary'>
+          Applicants
+        </div>
+      </div>
+
 
       <div class='row'>
         <div class='span11' id='project-roles-filters'>

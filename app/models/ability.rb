@@ -47,7 +47,7 @@ class Ability
       like.try(:user) == user
     end
 
-    can [:new, :create], Conversation do
+    can [:new, :create, :send_message_generic], Conversation do
       user.persisted?
     end
 

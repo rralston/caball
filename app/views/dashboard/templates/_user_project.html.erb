@@ -2,6 +2,7 @@
     <div class='project-head'>
       <div class='project-backdrop'  style='background: url(<%%= photos[0].image.url %>) no-repeat'>
       </div>
+      <div class='backdrop-cover'></div>
       <div class='project-title'>
         <%%= title %>
       </div>
@@ -13,7 +14,7 @@
     <div class='project-summary'>
       <div class='message pull-left'>
         <div class='status'> Status: <span class='status-text'><%%= status %></span></div>
-        <a href="#"  class='btn-manage btn-custom btn-grey disabled'>
+        <a href="#"  class='btn-manage btn-custom btn-cement medium'>
           Manage Project
         </a>
       </div>
@@ -23,13 +24,13 @@
           <div class="circle-fill"> </div>
 
           <div class="circle-measure circle-measure-<%%= parseInt((parseFloat(filled_roles.length) / parseFloat(roles.length)) * 10) %>"> </div>
-          <span class="role-count">
+          <span class="role-count medium">
             <%%= open_roles.length %> Open Roles
           </span>
         </div>  
 
         
-        <div class='applications-summary text-center'>
+        <div class='applications-summary text-center medium'>
           <%%= pending_applications.length %>
           <br/>
           PENDING APPLICATIONS        

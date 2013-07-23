@@ -242,4 +242,21 @@ describe User do
     specify { @applied_user.applied_projects.should =~ [@project, @project2] }
   end
 
+  context "attending events" do
+    before(:all){
+      @attending_user = FactoryGirl.create(:user)
+
+      @event1 = FactoryGirl.create(:event)
+      @event2 = FactoryGirl.create(:event)
+
+      @att1 = FactoryGirl.create(:attend, :user => @attending_user)
+      @att2 = FactoryGirl.create(:attend, :user => @attending_user)
+      
+      @event1.attends << [@att1]
+      @event2.attends << [@att2]
+    }
+
+    specify { @attending_user.attending_events.should =~ [@event1, @event2] }
+  end
+
 end

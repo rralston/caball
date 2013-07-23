@@ -7,6 +7,9 @@ app.views.manage_project = Backbone.View.extend
     this.super_roles_collection = new app.collections.super_roles()
     this.super_roles_collection.reset(this.model.get('roles_for_dashboard'))
 
+  events: 
+    'click .mark_done': 'mark_as_done'
+
   render: ()->
     this.$el.html( this.template(this.model.toJSON()) )
     
@@ -38,3 +41,13 @@ app.views.manage_project = Backbone.View.extend
     super_role_tabs_view = new app.views.super_role_tabs({ collection: this.super_roles_collection })
     this.$el.find('#project-roles-tabs').html( super_role_tabs_view.render().el )
 
+  mark_as_done: ()->
+    _this = this
+    console.log 'here'
+    this.model.set('status', 'Completed')
+    this.model.save
+      success: (model, response) ->
+        if response
+            console.log response
+            alert('Project marked as Done')
+            _this.render()

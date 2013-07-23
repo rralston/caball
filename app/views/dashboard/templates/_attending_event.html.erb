@@ -1,0 +1,37 @@
+<script type="script/template" id='attending_event_template'>
+    <div class='event-head'>
+      <div class='event-backdrop'  style='background: url(<%%= main_photo.image.url %>) no-repeat'>
+      </div>
+      <div class='backdrop-cover'></div>
+
+      <div class='event-title'>
+        <%%= title %>
+      </div>
+      <div class='event-headline'> 
+        <%%= description %>
+      </div>
+    </div>
+    
+    <div class='event-summary'>
+      created by<br>
+      <%%= user.profile_pic %>
+
+      ID : <%%= id %>
+      <br/>
+      start-date <%%= start.date_time %>
+      <br/>
+      end-date <%%= end.date_time %>
+
+      <div class='attendees-details'>
+        <div class='attendees pull-left'>
+          ATTENDING: <br/>
+
+        </div>
+        <div class='pull-right'>
+          <%%= attendees.length %><br>
+          TOTAL ATTENDING
+        </div>
+      </div>
+    </div> 
+  
+</script>

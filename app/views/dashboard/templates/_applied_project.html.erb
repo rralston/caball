@@ -2,6 +2,7 @@
     <div class='project-head'>
       <div class='project-backdrop'  style='background: url(<%%= photos[0].image.url %>) no-repeat'>
       </div>
+      <div class='backdrop-cover'></div>
       <div class='project-title'>
         <%%= title %>
       </div>
@@ -13,7 +14,7 @@
     <div class='project-summary'>
       <div class='message pull-left'>
         <div class='status'> Status: <span class='status-text'><%%= status %></span></div>
-        <a href='#' class='btn-message btn-custom btn-grey disabled'>
+        <a href='#' class='btn-message btn-custom btn-cement medium send-generic-message' data-message-subject='Regarding Role Application - <%%= title %>' data-message-header='Message Project Owner - <%%= title %>' data-message-recipients='<%%= user.email %>' >
           Message
         </a>
       </div>
@@ -23,7 +24,7 @@
           <div class="circle-fill"> </div>
 
           <div class="circle-measure circle-measure-<%%= parseInt((parseFloat(filled_roles.length) / parseFloat(roles.length)) * 10) %>"> </div>
-          <span class="role-count">
+          <span class="role-count medium">
             <%%= open_roles.length %> Open Roles
           </span>
         </div>

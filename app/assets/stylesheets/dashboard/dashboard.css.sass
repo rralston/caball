@@ -6,13 +6,33 @@ $grey-backdrop-text: #636a73
   .tab-pane
   background: #eaedf0
   overflow: hidden
+.dashboard-tab-main-head
+  background: url(/assets/dashboard-section-bg.png) repeat
+  min-height: 130px
+  padding: 40px
+  color: white
+  .dashboard-tab-name
+    font-size: 40px
+    margin: 20px 0px
+    margin-left: 20px
+  .dashboard-tab-desc
+    font-size: 20px
+    margin-left: 20px
+
+.dashboard-tab-main-head
+  a.new-project, a.new-project:hover
+    color: white
+    font-size: 20px
+    padding-left: 20px
+    padding-right: 20px
+
 
 .dashboard-tab-heading
   padding: 20px
   font-size: 20px
   border-bottom: 1px solid $divider-border
   margin-bottom: 10px
-  color: $grey-backdrop-text
+  color: #969fab
 .dashboard-tab-heading.secondary
   border-top: 1px solid $divider-border
 
@@ -53,13 +73,22 @@ $grey-backdrop-text: #636a73
         height: 160px
         z-index: 0
         background-size: cover !important
+      .backdrop-cover
+        width: 270px
+        height: 160px
+        position: absolute
+        background: black
+        opacity: 0.5
+        filter: alpha(opacity=50)
       .project-title, .project-headline
         padding: 0px 20px
         position: relative
+        font-size: 17px
       .project-headline
         position: relative
         color: white
-        font-size: 10px
+        font-size: 12px
+        margin-top: 5px
         height: 80px
         overflow: hidden
       .project-title
@@ -96,9 +125,13 @@ $grey-backdrop-text: #636a73
         .role-circle-container
           top: -30px
           left: 15px
+        .circle-measure
+          border-radius: 0px
+          border-top-left-radius: 30px
+          border-top-right-radius: 30px
         .role-count
           white-space: nowrap
-          font-size: 10px
+          font-size: 12px
           margin-top: 15px
           color: $role-circle-border
           font-weight: bold
@@ -117,12 +150,19 @@ $grey-backdrop-text: #636a73
       background: url(/assets/dashboard-section-bg.png) repeat-x
     .project-title
       width: 440px
+      max-height: 255px
     .title
       padding: 20px
-      font-size: 35px
+      font-size: 30px
       color: white
+      overflow: hidden
       line-height: 40px
-    .project-fans
+    .manage-btns
+      padding: 0px 30px
+      a
+        color: #b1b5c2
+
+    #project-fans
       width: 255px
     .project-fans-tiles
       .fan-img
@@ -138,16 +178,51 @@ $grey-backdrop-text: #636a73
       .grey-top-line
         margin-top: 12px
     .project-roles-filled
-      width: 110px
+      font-size: 17px
+      width: 185px
       color: white
+      padding-top: 10px
+      .role-circle-container
+        margin-top: 10px
+        margin-bottom: -15px
+        .role-circle
+          width: 70px
+          height: 70px
+        .circle-fill
+          width: 60px
+          height: 60px
+          border: 0px
+          left: 8px
+          top: 8px
+        .circle-measure
+          top: 8px
+          width: 70px
+          border-radius: 0px
+          background: url(/assets/dashboard-section-bg.png) repeat
+      .message-participants
+        margin-left: 20px
+        font-size: 14px
+        padding-left: 5px
+        padding-right: 5px
+        width: 140px
+    #project-roles-main-container
+      #project-roles-circles
+        background: #d1d3da
+        padding-top: 20px
     .super-role-circle
+      color: #1691de
       text-align: center
       width: 140px
       margin-left: 25px
+      .circle-measure
+        border-radius: 0px
+        background: #d1d3da
+      .circle-fill
+        border: 3px solid #d1d3da
       .role-count
         margin-top: 20px
     .super-role-filter
-      margin-left: 10px
+      margin: 5px
     .sub_roles_filters
       margin-left: 20px
       margin-top: 20px
@@ -156,7 +231,8 @@ $grey-backdrop-text: #636a73
 
     .role_application
       margin-left: 30px
-      margin-bototm: 20px
+      margin-bottom: 10px
+      margin-top: 30px
       width: 250px
       position: relative
       -webkit-box-shadow: 0px 0px 19px -7px black
@@ -165,7 +241,14 @@ $grey-backdrop-text: #636a73
       .user-cover-photo
         height: 110px
         width: 250px
-        background-size: cover
+        background-size: cover !important
+      .backdrop-cover
+        height: 110px
+        width: 250px
+        position: absolute
+        background: black
+        opacity: 0.5
+        filter: alpha(opacity=50)
       img.applicant-photo
         width: 90px 
         border: 5px solid white
@@ -176,8 +259,9 @@ $grey-backdrop-text: #636a73
         padding-top: 30px
         width: 100%
         .name
-          font-size: 15px
-          font-weight: bold
+          a, a:hover
+            font-size: 18px
+            color: #4c4f5b
         .location
           .location-img-blue
             display: inline-block
@@ -185,8 +269,10 @@ $grey-backdrop-text: #636a73
             top: 6px
           font-size: 12px
           margin-top: -5px
+          color: #81898f
         .talent
           font-size: 12px
+          color: #81898f
       .white
         background: white
       .about-applicant
@@ -195,10 +281,11 @@ $grey-backdrop-text: #636a73
         height: 155px
         .about-text
           padding: 10px
-          font-size: 10px
+          font-size: 12px
           height: 85px
           overflow: hidden
           line-height: 15px
+          color: #abacaf
         .actions
           margin-top: 15px
           .action
@@ -223,11 +310,11 @@ $grey-backdrop-text: #636a73
           position: absolute
           bottom: 10px
           .btn-custom:hover, .btn-custom
-            padding-left: 6px
-            padding-right: 6px
+            padding-left: 4px
+            padding-right: 4px
             text-decoration: none
-            color: black
-            font-size: 12px
+            color: #515961
+            font-size: 14px
           .btn-view-cover, .btn-view-cover:hover 
             padding-left: 10px
             padding-right: 10px
@@ -303,3 +390,107 @@ $grey-backdrop-text: #636a73
       box-shadow: 17px -35px 50px -42px black inset
       -moz-box-shadow: 17px -35px 50px -42px black inset
       -webkit-box-shadow: 17px -35px 50px -42px black inset
+
+#dashboard_events
+  .events-filter
+    margin-bottom: 20px
+    a
+      margin-left: 20px
+  .event
+    position: relative
+    width: 270px
+    margin-left: 20px
+    float: left
+    margin-bottom: 20px
+    -webkit-box-shadow: 0px 0px 19px -7px black
+    box-shadow: 0px 0px 19px -7px black
+    -moz-box-shadow: 0px 0px 19px -7px black
+    .event-head
+      height: 150px
+      .event-backdrop
+        position: absolute
+        width: 270px
+        height: 150px
+        z-index: 0
+        background-size: cover !important
+      .backdrop-cover
+        width: 270px
+        height: 150px
+        position: absolute
+        background: black
+        opacity: 0.5
+        filter: alpha(opacity=50)
+      .event-title, .project-headline
+        padding: 10px 60px 0px 20px
+        color: white
+        position: relative
+        font-size: 17px
+      .event-headline
+        position: relative
+        color: white
+        font-size: 12px
+        margin-top: 5px
+        height: 80px
+        padding: 0px 20px
+        overflow: hidden
+      .event-location
+        position: relative
+        color: white
+        padding: 10px 60px 0px 20px
+        .location-img-blue
+          display: inline-block
+          background-size: 100% 100%
+          width: 11px
+          height: 16px
+          top: 2px
+          margin-right: 5px
+          position: relative
+      .date
+        text-transform: uppercase
+        padding: 10px
+        background: black
+        color: #a5a8b1
+        text-align: center
+        position: absolute
+        top: 0px
+        right: 0px
+        .day
+          font-size: 18px
+        .month
+          font-size: 12px
+
+    .event-summary  
+      background: white
+      height: 165px
+      position: relative
+      a:hover, a
+        text-decoration: none
+        color: black
+      .gradient
+        -webkit-box-shadow: 8px -100px 305px -134px black inset
+        -moz-box-shadow: 8px -100px 305px -134px black inset
+        -webkit-box-shadow: 8px -100px 305px -134px black inset
+      .event-actions
+        padding: 10px
+        margin-top: -10px
+        width: 90%
+      .attendees-details
+        padding: 10px
+        width: 95%
+        .attendees
+          margin-top: 8px
+          font-size: 11px
+          letter-spacing: 2px
+          width: 160px
+        .attendees-summary
+          width: 80px
+          font-size: 10px
+          line-height: 15px
+          .count
+            font-size: 30px
+            margin-bottom: 10px
+
+      .event-attendee-pic
+        width: 24px
+        margin-right: 7px
+        margin-top: 4px

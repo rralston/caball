@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   has_one :characteristics, :dependent => :destroy
   has_one :profile, :dependent => :destroy
   has_many :photos, :as => :imageable, :dependent => :destroy, :conditions => { :is_cover => false }
+  has_one :resume, :as => :documentable, :dependent => :destroy
   has_one :cover_photo, :class_name =>'Photo' , :as => :imageable, :dependent => :destroy, :conditions => { :is_cover => true }
   has_many :videos, :as => :videoable, :dependent => :destroy
   has_many :projects, :dependent => :destroy
@@ -40,7 +41,7 @@ class User < ActiveRecord::Base
   has_many :received_endorsements, :class_name => 'Endorsement', :foreign_key => 'receiver_id', :dependent => :destroy
 
 
-  accepts_nested_attributes_for :characteristics, :photos, :videos, :projects, :talents, :cover_photo, :allow_destroy => true
+  accepts_nested_attributes_for :characteristics, :photos, :videos, :projects, :talents, :cover_photo, :resume, :allow_destroy => true
 
 
 
@@ -48,7 +49,8 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :location, :about, :profile, :profile_attributes,
                   :imdb_url, :characteristics_attributes, :photos_attributes,
                   :talents_attributes, :photo, :videos_attributes, :projects_attributes,
-                  :admin, :gender, :headline, :featured, :expertise, :cover_photo_attributes
+                  :admin, :gender, :headline, :featured, :expertise, :cover_photo_attributes,
+                  :resume_attributes
 
   validates_presence_of :name, :email, :message => "is required"
     
@@ -167,6 +169,10 @@ class User < ActiveRecord::Base
       'cover_photo' => cover_photo
     }
     hash.merge!(extra_hash)
+  end
+
+  def attending_events
+    attends.where(:attendable_type => 'Event').map(&:attendable)
   end
 
 end

@@ -1,5 +1,6 @@
 app.views.applied_projects = Backbone.View.extend
   render: ()->
+    this.$el.html('')
     this.collection.forEach(this.renderEach, this)
     return this
 

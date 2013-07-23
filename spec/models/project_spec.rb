@@ -65,14 +65,19 @@ describe Project do
     its(:open_roles) { should =~ @roles[1..2] }
   end
 
-  context "pending applications" do
+  context "applications" do
     before{
-      role_application1  = FactoryGirl.create(:role_application, :approved => true, :role => @roles[1])
+      @user1 = FactoryGirl.create(:user)
+      @user2 = FactoryGirl.create(:user)
+      @user3 = FactoryGirl.create(:user)
+      @user4 = FactoryGirl.create(:user)
+      role_application1  = FactoryGirl.create(:role_application, :approved => true, :role => @roles[1], :user => @user1, :user => @user)
       @roles[1].update_attributes(:filled => true)
-      role_application2  = FactoryGirl.create(:role_application, :approved => false, :role => @roles[1])  
-      @role_application3  = FactoryGirl.create(:role_application, :approved => false, :role => @roles[2])  
-      @role_application4  = FactoryGirl.create(:role_application, :approved => false, :role => @roles[2])  
+      role_application2  = FactoryGirl.create(:role_application, :approved => false, :role => @roles[1], :user => @user2)  
+      @role_application3  = FactoryGirl.create(:role_application, :approved => false, :role => @roles[2], :user => @user3)  
+      @role_application4  = FactoryGirl.create(:role_application, :approved => false, :role => @roles[2], :user => @user4)  
     }
+    specify { @project.paricipant_mails.should == [@user1, @user2, @user3, @user4].map(&:email) }
     specify { @project_with_roles.pending_applications.should =~ [@role_application3, @role_application4] }
   end
 
