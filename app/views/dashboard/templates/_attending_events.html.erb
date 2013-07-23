@@ -1,18 +1,22 @@
 <script type="script/template" id='attending_events_template'> 
-  <div class='row events-filter'>
-    <a href="#attending-event-tab-upcoming" data-toggle='tab' class='badge badge-custom-green pull-left event-filter active'>
-      UPCOMING
-    </a>
+  <ul class='row events-filter custom-green-filters nav'>
 
-    <a href="#attending-event-tab-popular" data-toggle='tab' class='badge badge-custom-green pull-left event-filter'>
-      POPULAR
-    </a>
-
-    <a href="#attending-event-tab-nearby" data-toggle='tab' class='badge badge-custom-green pull-left event-filter'>
-      LOCATION
-    </a>
-
-  </div>
+    <li class='active'>
+      <a href="#attending-event-tab-upcoming" data-toggle='tab' class='badge badge-custom-green pull-left event-filter active'>
+        UPCOMING
+      </a>
+    </li>
+    <li>
+      <a href="#attending-event-tab-popular" data-toggle='tab' class='badge badge-custom-green pull-left event-filter'>
+        POPULAR
+      </a>
+    </li>
+    <li>
+      <a href="#attending-event-tab-nearby" data-toggle='tab' class='badge badge-custom-green pull-left event-filter'>
+        LOCATION
+      </a>
+    </li>
+  </ul>
 
   <div class='row'>
     <div class='tab-content events-display-tabs'>

@@ -29,7 +29,7 @@
       
       <div class='row'>
         <div class='dashboard-tabs tab-content span11'>
-          <div class='tab-pane' id='home'>
+          <div class='tab-pane active' id='home'>
             <%= render :partial => 'dashboard/user_profile_summary' %>
             <%= render :partial => 'dashboard/user_home' %>
             <div class='span3 dashboard_widgets'>
@@ -44,7 +44,7 @@
           <div class='tab-pane' id='projects'>
             <%= render :partial => 'dashboard/projects' %>
           </div>
-          <div class='tab-pane active' id='events'>
+          <div class='tab-pane' id='events'>
             <%= render :partial => 'dashboard/events' %>
           </div>
           <div class='tab-pane' id='settings'>
