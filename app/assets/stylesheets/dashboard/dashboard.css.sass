@@ -20,7 +20,7 @@ $grey-backdrop-text: #636a73
     margin-left: 20px
 
 .dashboard-tab-main-head
-  a.new-project, a.new-project:hover
+  a.new-project, a.new-project:hover, a.new-event, a.new-event:hover
     color: white
     font-size: 20px
     padding-left: 20px
@@ -467,9 +467,9 @@ $grey-backdrop-text: #636a73
         text-decoration: none
         color: black
       .gradient
-        -webkit-box-shadow: 8px -100px 305px -134px black inset
-        -moz-box-shadow: 8px -100px 305px -134px black inset
-        -webkit-box-shadow: 8px -100px 305px -134px black inset
+        -webkit-box-shadow: 8px -100px 305px -200px black inset
+        -moz-box-shadow: 8px -100px 305px -200px black inset
+        -webkit-box-shadow: 8px -100px 305px -200px black inset
       .event-actions
         padding: 10px
         margin-top: -10px
@@ -489,6 +489,29 @@ $grey-backdrop-text: #636a73
           .count
             font-size: 30px
             margin-bottom: 10px
+      .event-popularity
+        padding: 5px
+        .likes, .comments
+          margin-right: 10px
+          .icon
+            margin-right: 5px
+      .event-owner
+        margin-top: 10px
+      .owner-img
+        width: 45px
+        margin-left: 10px
+      .owner
+        font-size: 13px
+        width: 140px
+        margin-left: 10px
+      .owner-name
+        margin-top: 2px
+        a, a:hover
+          color: #e44f65
+          font-size: 15px
+      .btn-unattend
+        min-width: 40px
+        width: 90px
 
       .event-attendee-pic
         width: 24px

@@ -49,6 +49,7 @@ describe Event do
 
     context 'its should list are attendees' do
       specify { @event.attendees.should =~ [@att_1, @att_2] }
+      specify { @event.attendees_emails.should =~ [@att_1.email, @att_2.email] }
     end
 
     context "its should tell if a user is attending the event" do

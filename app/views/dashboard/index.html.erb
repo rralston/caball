@@ -84,6 +84,8 @@
 
 <script type="text/javascript">
 
+  app.current_user = <%= raw current_user.to_json() %>
+
   app.activities = new app.collections.activities()
 
   app.activities.reset(<%= raw current_user.activities_feed.first(ACTIVITIES_PER_PAGE).
@@ -163,6 +165,9 @@
                                                           :comments,
                                                           :likes,
                                                           :main_photo
+                                                        ],
+                                                        :methods => [
+                                                          :attendees_emails
                                                         ]) %>)
   $('#dashboard_events').html(app.user_events_view.render().el)
 

@@ -46,6 +46,10 @@ class Event < ActiveRecord::Base
     attends.order('created_at').map(&:user)
   end
 
+  def attendees_emails
+    attendees.map(&:email)
+  end
+
   def attending?(user)
     attendees.include?(user)
   end

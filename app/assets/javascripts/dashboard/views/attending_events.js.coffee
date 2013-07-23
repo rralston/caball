@@ -4,10 +4,9 @@ app.views.attending_events = Backbone.View.extend
   
   render: ()->
     this.$el.html(this.template)
-    # this.collection.forEach(this.renderEach, this)
     this.collection.popular_events().forEach(this.renderEachPopular, this)
     this.collection.upcoming_events().forEach(this.renderEachUpcoming, this)
-    this.collection.past_events().forEach(this.renderEachPast, this)
+    this.collection.nearby_events().forEach(this.renderEachNearby, this)
     return this
 
   renderElem: (attending_event)->
@@ -20,5 +19,5 @@ app.views.attending_events = Backbone.View.extend
   renderEachUpcoming: (attending_event) ->
     this.$el.find('#attending-event-tab-upcoming').append( this.renderElem(attending_event).el )
 
-  renderEachPast: (attending_event) ->
-    this.$el.find('#attending-event-tab-past').append( this.renderElem(attending_event).el )
+  renderEachNearby: (attending_event) ->
+    this.$el.find('#attending-event-tab-nearby').append( this.renderElem(attending_event).el )

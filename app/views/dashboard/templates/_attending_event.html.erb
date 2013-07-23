@@ -7,30 +7,73 @@
       <div class='event-title'>
         <%%= title %>
       </div>
-      <div class='event-headline'> 
+      <div class='event-location light'>
+        <div class="location-img-blue pull-left"></div>
+        <%%= location %>
+      </div>
+      <div class='event-headline light'> 
         <%%= description %>
+      </div>
+
+      <div class="date pull-left medium">
+        <div class="day">
+          <%%= start.day %>
+        </div>
+        <div class="month regular">
+          <%%= start.month_year %>
+        </div>
       </div>
     </div>
     
     <div class='event-summary'>
-      created by<br>
-      <%%= user.profile_pic %>
+      <div class='gradient clearfix'>
+        <div class='event-owner pull-left'>
+          <span class="pull-left owner-img">
+            <img src="<%%= user.profile_pic %>" class="img-circle">
+          </span>
 
-      ID : <%%= id %>
-      <br/>
-      start-date <%%= start.date_time %>
-      <br/>
-      end-date <%%= end.date_time %>
-
-      <div class='attendees-details'>
-        <div class='attendees pull-left'>
-          ATTENDING: <br/>
+          <span class="owner pull-left">
+                  created by
+                  <br>
+            <span class="owner-name">
+              <a href='users/<%%= user.id %>' target='_blank'><%%= user.name %></a>
+            </span>
+          </span>
 
         </div>
-        <div class='pull-right'>
-          <%%= attendees.length %><br>
-          TOTAL ATTENDING
+
+        <div class='attendees-details pull-left'>
+          <div class='attendees pull-left light'>
+            ATTENDING: <br/>
+
+            <%% _.first(attendees, 5).forEach(function(attendee){ %>
+              <img src='<%%= attendee.profile_pic %>' class='img-circle event-attendee-pic pull-left'>
+            <%% }) %>
+
+          </div>
+          <div class='pull-right attending-btn text-center'>
+            <a href="#" class='btn-unattend btn-custom btn-cement medium pull-left'>
+              <i class='icon-ok'></i> Attending
+            </a>
+          </div>
         </div>
+      </div>
+      <div class='event-popularity clearfix'>
+        
+        <div class='likes pull-right'>
+          <div class='pull-right'>
+            <%%= likes.length %>
+          </div>
+          <div class="heart-blue icon pull-right"> </div>
+        </div>
+
+        <div class='comments pull-right'>
+          <div class='pull-right'>
+            <%%= comments.length %>
+          </div>
+          <div class="heart-blue icon pull-right"> </div>
+        </div>
+        
       </div>
     </div> 
   
