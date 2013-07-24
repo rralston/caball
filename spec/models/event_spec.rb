@@ -73,4 +73,10 @@ describe Event do
     specify { @event.liked_by?(@user).should == true }
     specify { @event.liked_by?(FactoryGirl.create(:user)).should == false }
   end
+
+  # context "search events" do
+  #   before(:all){
+  #     @event1 = FactoryGirl.create(:title => 'mazing')
+  #   }
+  # end
 end

@@ -28,10 +28,10 @@
     <div class='event-summary'>
       <div class='gradient clearfix'>
         <div class='event-actions pull-left'>
-          <a href="/events/<%%= id %>/edit" target='_blank'  class='btn-manage btn-custom btn-cement medium pull-left event-action'>
+          <a href="/events/<%%= id %>/edit" target='_blank'  class='btn-edit btn-custom btn-cement medium pull-left event-action'>
             Edit Details
           </a>
-          <a class='btn-manage btn-custom btn-cement send-generic-message medium pull-right event-action' data-message-subject='Reg. Event - <%%= title %>' data-message-recipients='<%%= attendees_emails.join(",") %>' data-message-header='Message Attendees - <%%= title %>'>
+          <a class='btn-message-attendees btn-custom btn-cement send-generic-message medium pull-right event-action' data-message-subject='Reg. Event - <%%= title %>' data-message-recipients='<%%= attendees_emails.join(",") %>' data-message-header='Message Attendees - <%%= title %>'>
             Message Attendees
           </a>
         </div>
