@@ -24,6 +24,7 @@ Caball::Application.routes.draw do
   resources :endorsements
  
   resources :events
+  match 'events/load_more' => 'events#load_more', :via => 'POST'
   match 'events/message_organizer' => 'events#send_message_to_organizer', :via => 'POST'
   match 'events/attend' => 'events#attend', :via => 'POST'
   match 'events/unattend' => 'events#unattend', :via => 'POST'

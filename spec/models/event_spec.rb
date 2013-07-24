@@ -74,9 +74,44 @@ describe Event do
     specify { @event.liked_by?(FactoryGirl.create(:user)).should == false }
   end
 
-  # context "search events" do
-  #   before(:all){
-  #     @event1 = FactoryGirl.create(:title => 'mazing')
-  #   }
-  # end
+  context "search events" do
+    before(:all){
+      # sleep is to make sure, they have different created_at times
+      @event0 = FactoryGirl.create(:event, :title => 'bangalore event', :location => 'Delhi', 
+                                    :attends => [
+                                            FactoryGirl.create(:attend),
+                                            FactoryGirl.create(:attend)
+                                          ],
+                                    :start => FactoryGirl.create(:important_date, :is_start_date => true, :date_time =>'2023-07-17 14:50'))
+      sleep 1
+      @event1 = FactoryGirl.create(:event, :title => 'mazing', :location => 'JayaNagar, Bangalore, IN',
+                                    :start => FactoryGirl.create(:important_date, :is_start_date => true, :date_time =>'2023-07-17 14:00'))
+      sleep 1
+      @event2 = FactoryGirl.create(:event, :title => 'search me like this', :location => 'Indira Nagar, Bangalore, IN',
+                                    :attends => [FactoryGirl.create(:attend)],
+                                    :start => FactoryGirl.create(:important_date, :is_start_date => true, :date_time =>'2023-07-18 14:50'))
+      sleep 1
+      @event3 = FactoryGirl.create(:event, :title => 'Search me somehow', :location => 'Vellore, TamilNadu, IN')
+      @event4 = FactoryGirl.create(:event, :title => 'searchme text', :location => 'Hyderabad, India')
+    }
+
+    specify { Event.in_location('bangalore').should =~ [ @event1, @event2 ] }
+    specify { Event.in_location('632014').should =~ [ @event3 ] }
+
+    specify { Event.with_keyword('search me').should =~ [ @event3, @event2 ] }
+
+    specify { Event.search_all('bangalore').should =~ [ @event1, @event2, @event0 ] }
+    specify { Event.search_all('search me').should =~ [ @event3, @event2 ] }
+
+    specify { Event.search_all_with_pagination('bangalore', 1, 1).size.should == 1}
+
+    specify { Event.search_new_events('bangalore').should == [@event0, @event1, @event2]  }
+    specify { Event.search_new_events('bangalore', 2, 1).should == [@event1]  }
+
+    specify { Event.search_popular_events('bangalore').should == [@event0, @event2, @event1]  }
+    specify { Event.search_popular_events('bangalore', 2, 1).should == [@event2]  }
+
+    specify { Event.search_events_order_by_date('bangalore').should == [@event2, @event0, @event1]  }
+    specify { Event.search_events_order_by_date('bangalore', 2, 1).should == [@event0]  }
+  end
 end

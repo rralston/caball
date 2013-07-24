@@ -46,6 +46,11 @@ class Event < ActiveRecord::Base
     attends.order('created_at').map(&:user)
   end
 
+  def self.upcoming_events
+    # TODO: change this to only > 
+    Event.joins(:start).where("important_dates.date_time > ? OR important_dates.date_time < ?", Time.now, Time.now)
+  end
+
   def attendees_emails
     attendees.map(&:email)
   end
@@ -56,6 +61,135 @@ class Event < ActiveRecord::Base
 
   def liked_by?(user)
     likers.include?(user)
+  end
+
+  def self.in_location(query)
+    Event.upcoming_events.near(query)
+  end
+
+  def self.with_keyword(word)
+    Event.upcoming_events.where("title like ?", "%#{word}%")
+  end
+
+  def self.search_all(query)
+    result = Event.in_location(query) + Event.with_keyword(query)
+    result
+  end
+
+  def self.search_all_with_pagination(query, page, per_page = 10)
+    Kaminari.paginate_array( Event.search_all(query) ).page(page).per(per_page)
+  end
+
+
+  def self.search_new_events(query, page = nil, per_page = 10)
+    search_result = Event.search_all(query)
+    ordered = Event.order_by_new(search_result)
+    if page.present?
+      Kaminari.paginate_array( ordered ).page(page).per(per_page) 
+    else
+      ordered
+    end
+  end
+
+  def self.search_popular_events(query, page = nil, per_page = 10)
+    search_result = Event.search_all(query)
+    ordered = Event.order_by_popularity(search_result).reverse
+    if page.present?
+      Kaminari.paginate_array( ordered ).page(page).per(per_page) 
+    else
+      ordered
+    end 
+  end
+
+  def self.search_events_order_by_date(query, page = nil, per_page = 10)
+    search_result = Event.search_all(query)
+    ordered = Event.order_by_start_date(search_result).reverse
+    if page.present?
+      Kaminari.paginate_array( ordered ).page(page).per(per_page) 
+    else
+      ordered
+    end 
+  end
+
+  def self.order_by_new(events)
+    events.sort_by(&:created_at)
+  end
+
+  def self.order_by_popularity(events)
+    events.sort_by{ |events|
+      events.attends.size
+    }
+  end
+
+  def self.order_by_start_date(events)
+    events.sort_by{ |events|
+      events.start.date_time
+    }
+  end
+
+
+  def self.new_events(page = nil, per_page = 10)
+    if page.nil?
+      Event.order_by_new(Event.upcoming_events)
+    else
+      Kaminari.paginate_array(Event.order_by_new(Event.upcoming_events)).page(page).per(per_page)
+    end
+  end
+
+  def self.popular_events(page = nil, per_page = 10)
+    if page.nil?
+      Event.order_by_popularity(Event.upcoming_events)
+    else
+      Kaminari.paginate_array(Event.order_by_popularity(Event.upcoming_events)).page(page).per(per_page)
+    end
+  end
+
+  def self.events_ordered_by_date(page = nil, per_page = 10)
+    if page.nil?
+      Event.order_by_start_date(Event.upcoming_events)
+    else
+      Kaminari.paginate_array(Event.order_by_start_date(Event.upcoming_events)).page(page).per(per_page)
+    end
+  end
+
+  def as_json(options = {})
+    json = super(options)
+    if options[:check_user].present?
+      # tells if the user is attending particular event.
+      json[:user_attending] = self.attending?(options[:check_user])
+    end
+
+    json
+  end
+
+  def self.custom_json(events, user = nil)
+    # user is passed to include if he is attending the event.
+    events.to_json(:include => [
+                      :user,
+                      :comments,
+                      :main_photo,
+                      :likes,
+                      { 
+                        :start => {
+                          :methods => [
+                            :day,
+                            :month_year,
+                            :pretty_date
+                          ]
+                        }
+                      },
+                      { 
+                        :end => {
+                          :methods => [
+                            :day,
+                            :month_year,
+                            :pretty_date
+                          ]
+                        }
+                      }
+                    ],
+                    :check_user => user
+                  )
   end
 
 end

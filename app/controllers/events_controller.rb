@@ -2,6 +2,61 @@ class EventsController < ApplicationController
 
   load_and_authorize_resource
 
+  def index
+    search
+    @params_used = params
+    if params[:search].present?
+      query = params[:search]
+      @new_events     = Event.search_new_events(query, 1, EVENTS_PER_PAGE_IN_INDEX)
+      @popular_events = Event.search_popular_events(query, 1, EVENTS_PER_PAGE_IN_INDEX)
+      @events_by_time = Event.search_events_order_by_date(query, 1, EVENTS_PER_PAGE_IN_INDEX)
+    else
+      @new_events     = Event.new_events(1, EVENTS_PER_PAGE_IN_INDEX)
+      @popular_events = Event.popular_events(1, EVENTS_PER_PAGE_IN_INDEX)
+      @events_by_time = Event.events_ordered_by_date(1, EVENTS_PER_PAGE_IN_INDEX)
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { 
+        response = {
+          :new_events => @new_events,
+          :popular_events => @popular_events,
+          :events_by_time => @events_by_time
+        }
+        render :json => Event.custom_json(response, current_user)
+      }
+    end
+  end
+
+  def load_more
+    type = params[:type]
+    page = params[:page]
+    
+    if params[:search].present?
+      query = params[:search]
+      events = case type
+      when 'popular'
+        Event.search_popular_events(query, page, EVENTS_PER_PAGE_IN_INDEX)
+      when 'new'
+        Event.search_new_events(query, page, EVENTS_PER_PAGE_IN_INDEX)
+      when 'date'
+        Event.search_events_order_by_date(query, page, EVENTS_PER_PAGE_IN_INDEX)
+      end
+    else
+      events = case type
+      when 'popular'
+        Event.popular_events(page, EVENTS_PER_PAGE_IN_INDEX)
+      when 'new'
+        Event.new_events(page, EVENTS_PER_PAGE_IN_INDEX)
+      when 'date'
+        Event.events_ordered_by_date(page, EVENTS_PER_PAGE_IN_INDEX)
+      end
+    end
+
+    render :json => Event.custom_json(events, current_user)
+  end
+
   def show
     search
     @event = Event.find(params[:id])
