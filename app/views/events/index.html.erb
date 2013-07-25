@@ -1,18 +1,50 @@
 <%= javascript_include_tag "events/events_manifest" %>
-<%= stylesheet_link_tag "events/manifest.css" %>
+<%= stylesheet_link_tag "events/index.css" %>
+
+<div class="topbnrwrap">
+  <div class="topbnr container">
+    <div class="bnrenclose">
+      <div class="bnrbg">
+        <img src="/assets/event-bnr-bg.png" alt="">
+      </div>
+      <div class="bnrtext light span12">
+          <h1>Events</h1>
+          <p>Find the latest events in your area. Connect with the event organizers and gain knowledge.</p>
+          </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="topsrchwrap">
+  <div class="topsrch container">
+    
+    <div class="ltext span4">
+      <h2 class='medium'>Search Events</h2>
+      <p>by keyword,zip or location</p>
+    </div>
+    <form action="" class=" srchfrm span">
+      <input type="text" id='search-events-input'>
+    </form>
+    
+  </div>
+</div>
+
+
 
 <div class='container'>
 
-  <div class='row'>
-    <div class='search-input text-center'>
-      <input type='text' id='search-events-input'>
-    </div>
-  </div>
-
-  <div class='result-events'>
+  <div class='events-container'>
     <div id='results'>
+      <div class='row search_please_wait text-center light'>
+          Please Wait While we search...
+      </div>
       <div class='search_header'>
-        Events Results
+        
+        <div class='search_summary'>
+          <span class='search_type'></span>
+          <span class='search_word'></span>
+        </div>
 
         <ul class='row events-filter custom-green-filters nav'>
           <li class='active'>
@@ -52,12 +84,18 @@
         </div>
       </div>
     </div>
+
+    <div id='recent-events-container'>
+    </div>
   </div>
 </div>
 
 
 <%= render :partial => 'events/templates/result_events' %>
 <%= render :partial => 'events/templates/result_event' %>
+
+<%= render :partial => 'events/templates/recent_events' %>
+<%= render :partial => 'events/templates/recent_event' %>
 
 <script type="text/javascript">
   
@@ -79,6 +117,12 @@
     app.by_date_events.reset(<%= raw Event.custom_json(@events_by_time, current_user) %>)
 
     $('#event-tab-by_date').html(by_date_events_view.render().el)
+
+    app.recent_events = new app.collections.result_events()
+    recent_events_view = new app.views.recent_events({ collection: app.recent_events, type: 'recent' })
+    app.recent_events.reset(<%= raw Event.custom_json(@recent_events, current_user) %>)
+
+    $('#recent-events-container').html(recent_events_view.render().el)
 
     app.params_used = <%= raw @params_used.to_json() %>
 

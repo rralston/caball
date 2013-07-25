@@ -13,7 +13,9 @@ describe Event do
     it { should have_many(:comments).dependent(:destroy) }
     it { should have_many(:other_important_dates).dependent(:destroy) }
     it { should have_many(:likes).dependent(:destroy) }
-    it { should have_many(:fans) }  
+    it { should have_many(:fans) }
+    it { should have_many(:up_votes).dependent(:destroy) }
+    it { should have_many(:down_votes).dependent(:destroy) }
 
     it { should have_one(:main_photo).class_name('Photo').dependent(:destroy) }
     it { should have_one(:start).class_name('ImportantDate').dependent(:destroy) }
@@ -114,4 +116,49 @@ describe Event do
     specify { Event.search_events_order_by_date('bangalore').should == [@event2, @event0, @event1]  }
     specify { Event.search_events_order_by_date('bangalore', 2, 1).should == [@event0]  }
   end
+
+  context "votes" do
+    before(:all){
+      @voted_event = FactoryGirl.create(:event)
+      @up_voter = FactoryGirl.create(:user)
+      @down_voter = FactoryGirl.create(:user)
+
+      @non_voter = FactoryGirl.create(:user)
+
+      @voted_event.up_vote(@up_voter)
+      @voted_event.down_vote(@down_voter)
+
+      @voted_event.save
+    }
+    subject { @voted_event }
+
+    its(:up_voters) { should =~ [@up_voter] }
+    its(:down_voters) { should =~ [@down_voter] }
+
+    specify { subject.voted_by_user?(@up_voter).should == true }
+    specify { subject.voted_by_user?(@non_voter).should == false }
+
+    specify { subject.voted_type_by_user(@up_voter).should == 'up' }
+    specify { subject.voted_type_by_user(@down_voter).should == 'down' }
+
+    specify { subject.voted_type_by_user(@non_voter).should == nil }
+    
+    context "vote up/down and vote the other way again" do
+      # upvoter can down vote the event and down voter can up vote the event.
+      before(:all){
+        @voted_event.down_vote(@up_voter)
+        @voted_event.up_vote(@down_voter)
+      }
+      
+      specify{ subject.reload.up_voters.should =~ [@down_voter] }
+      specify{ subject.reload.down_voters.should =~ [@up_voter] }
+
+
+      specify { subject.voted_type_by_user(@up_voter).should == 'down' }
+      specify { subject.voted_type_by_user(@down_voter).should == 'up' }
+    end
+
+  end
+
+
 end

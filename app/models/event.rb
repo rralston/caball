@@ -13,6 +13,14 @@ class Event < ActiveRecord::Base
   has_many :other_photos, :class_name => 'Photo', :as => :imageable,
            :dependent => :destroy, :conditions => { :is_main => false }
   
+  has_many :votes, :as => :votable, :dependent => :destroy
+
+  has_many :up_votes, :class_name => 'Vote', :as => :votable, :dependent => :destroy,
+            :conditions => { :is_up_vote => true }
+
+  has_many :down_votes, :class_name => 'Vote', :as => :votable, :dependent => :destroy,
+            :conditions => { :is_down_vote => true }
+
   has_many :videos, :as => :videoable, :dependent => :destroy
   has_many :comments, :as => :commentable, :dependent => :destroy
   
@@ -152,6 +160,47 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def self.recent_events(page = nil, per_page = 10)
+    if page.nil?
+      Event.order('created_at DESC')
+    else
+      Kaminari.paginate_array(Event.order('created_at DESC')).page(page).per(per_page)
+    end
+  end
+
+  def up_voters
+    up_votes.map(&:user)
+  end
+
+  def down_voters
+    down_votes.map(&:user)
+  end
+
+  def voted_by_user?(user)
+    (up_voters + down_voters).include?(user)
+  end
+
+  def voted_type_by_user(user)
+    if voted_by_user?(user)
+      vote = votes.where(:user_id => user.id).first
+      vote.is_up_vote ? 'up' : 'down'
+    end
+  end
+
+  def up_vote(user)
+    if voted_by_user?(user)
+      votes.where(:user_id => user.id).first.destroy
+    end
+    up_votes.create(:user => user, :is_up_vote => true)
+  end
+
+  def down_vote(user)
+    if voted_by_user?(user)
+      votes.where(:user_id => user.id).first.destroy
+    end
+    down_votes.create(:user => user, :is_down_vote => true)
+  end
+
   def as_json(options = {})
     json = super(options)
     if options[:check_user].present?
@@ -159,6 +208,11 @@ class Event < ActiveRecord::Base
       json[:user_attending] = self.attending?(options[:check_user])
     end
 
+    if options[:votes_data_for_user].present?
+      user = options[:votes_data_for_user]
+      json[:voted_by_user] = voted_by_user?(user)
+      json[:voted_type_by_user] = voted_type_by_user(user)
+    end
     json
   end
 
@@ -188,7 +242,12 @@ class Event < ActiveRecord::Base
                         }
                       }
                     ],
-                    :check_user => user
+                    :methods => [
+                      :attendees,
+                      :distance
+                    ],
+                    :check_user => user,
+                    :votes_data_for_user => user
                   )
   end
 

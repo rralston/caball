@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130723083707) do
+ActiveRecord::Schema.define(:version => 20130725090518) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -317,6 +317,16 @@ ActiveRecord::Schema.define(:version => 20130723083707) do
     t.text     "user_description"
     t.string   "imdb"
     t.boolean  "primary"
+  end
+
+  create_table "votes", :force => true do |t|
+    t.boolean  "is_up_vote",   :default => false
+    t.boolean  "is_down_vote", :default => false
+    t.integer  "user_id"
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
   end
 
   add_foreign_key "notifications", "conversations", :name => "notifications_on_conversation_id"

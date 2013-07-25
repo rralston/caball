@@ -1,15 +1,19 @@
 $grey-backdrop: #D2DEE7
+$divider-border: #c6d0db
 $grey-backdrop-text: #636a73
 
 ul
   list-style-type: none
 
 a:hover
+  color: white
   text-decoration: none
 
 .custom-green-filters
   .badge-custom-green
     background-color: #7ee0db
+  a 
+    margin-left: 20px
   a:hover
     background-color: #3bbbb5 !important
   li.active
@@ -44,7 +48,15 @@ a:hover
 .loading-icon
   min-width: 16px
   min-height: 16px
-  background: url(/assets/ajax-loader.gif) no-repeat 
+  background: url(/assets/ajax-loader.gif) no-repeat !important
+
+.page-header-secondary
+  padding: 20px
+  font-size: 20px
+  border-bottom: 1px solid $divider-border
+  margin-bottom: 10px
+  color: #969fab
+  border-top: 1px solid $divider-border
 
 .btn-custom
   padding: 5px 0px
@@ -100,6 +112,19 @@ a:hover
 .grey-top-line
   height: 8px
   background: url(/assets/grey-top-line.png) center no-repeat  
+
+.down-vote
+  width: 20px
+  height: 20px
+  background: url(/assets/down-vote-white-arrow.png) no-repeat
+.down-vote.active
+  background: url(/assets/down-vote-red-arrow.png) no-repeat
+.up-vote
+  width: 20px
+  height: 20px
+  background: url(/assets/up-vote-white-arrow.png) no-repeat
+.up-vote.active
+  background: url(/assets/up-vote-green-arrow.png) no-repeat
 
 .center-div
   margin-left: auto
@@ -223,6 +248,12 @@ ul.tagit span.ui-helper-hidden-accessible
 .bold
   font-weight: 700 !important 
 
+.ui-autocomplete a.ui-state-hover, .ui-autocomplete a.ui-state-focus
+  background-color: #c0d1e2
+  color: #555
+  border-color: #a6cef7
+
+
 
 /* These circles get displayed on multiple project pages. */
 .circle-measure-0
@@ -257,3 +288,117 @@ ul.tagit span.ui-helper-hidden-accessible
 
 .circle-measure-10
   display: none
+
+/* theme */
+
+
+/*banner starts-------=============== */
+.topbnrwrap
+  margin-top: 65px
+
+.topbnr
+  height: 283px
+  position: relative
+
+.bnrenclose
+  height: 283px
+  width: 100%
+  position: relative
+
+.bnrbg
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: inherit
+
+.bnrbg img
+  height: 100%
+
+.bnrptrn
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: 100%
+  background: url('/assets/bnrbg.png')
+
+.bnrtext
+  color: #edf1f7
+
+.bnrtext
+  position: absolute
+  top: 0
+  left: 40%
+  width: 70%
+  height: auto
+  margin-left: -25%
+
+.bnrtext h1
+  margin-top: 90px
+  font-size: 60px
+  font-weight: bold
+  text-align: center
+  text-transform: uppercase
+  text-shadow: 2px 2px 2px rgba(0,0,0,.6)
+
+.bnrtext p
+  text-align: center
+  font-size: 16px
+
+/*abnner ends-------=============== */
+
+/*topsrchwrap starts-------=============== */
+.topsrch
+  -webkit-box-shadow: inset -29px 62px 136px -98px rgba(0, 0, 0, 0.6)
+  box-shadow: inset -29px 62px 136px -98px rgba(0, 0, 0, 0.6)
+  height: 105px
+
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  -ms-box-sizing: border-box
+  box-sizing: border-box
+  padding-top: 30px
+  background: white
+  color: #4c4f5b
+
+.ltext
+  text-align: right
+
+.srchfrm
+  margin-left: 20px
+
+.ltext h2
+  margin-top: 0px
+  font-size: 20px
+  line-height: 22px
+  margin-bottom: 2px
+  font-weight: medium
+  border: none
+
+.ltext p
+  color: #969fab
+
+.topsrch form input[type="text"]
+  height: 45px
+
+  font-size: 18px
+  font-family: "brandon-grotesque", sans-serif
+  color: #969fab
+
+  -webkit-box-shadow: inset 3px 3px 3px rgba(0,0,0,.3)
+  box-shadow: inset 3px 3px 3px rgba(0,0,0,.3)
+
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  -ms-box-sizing: border-box
+  box-sizing: border-box
+  width: 400px
+  border: 0px
+  border-radius: 40px
+  padding-left: 20px
+  background: url('/assets/midsrch.png') no-repeat 98% center white
+
+/*topsrchwrap ends-------=============== */
+
+

@@ -1,14 +1,12 @@
-app.views.result_event = Backbone.View.extend
-  className: 'result_event clearfix'
+app.views.recent_event = Backbone.View.extend
+  className: 'recent_event pull-left'
   initialize: ()->
-    this.template = _.template($('#result_event_template').html())
+    this.template = _.template($('#recent_event_template').html())
     app.events.bind('change_event_model'+this.model.id, this.set_and_render, this)
 
   events: 
     'click .attend-event': 'attend'
     'click .unattend-event': 'unattend'
-    'click .up-vote': 'up_vote'
-    'click .down-vote': 'down_vote'
 
   render: ()->
     this.$el.html( this.template(this.model.toJSON()) )
@@ -17,31 +15,6 @@ app.views.result_event = Backbone.View.extend
   set_and_render: (event_data) ->
     this.model.set(event_data.attributes)
     this.render()
-
-  up_vote: (event)->
-    this.vote(event, 'up_vote')
-
-  down_vote: (event)->
-    this.vote(event, 'down_vote')
-
-  vote: (event, type) ->
-    btn = $(event.target)
-    _this = this
-    if app.current_user != null and !(btn.hasClass('active'))
-      btn.addClass('active')
-      $.ajax
-        url: '/events/'+type
-        type: "POST"
-        data:
-          id: _this.model.id
-        success: (resp)->
-          if resp != 'false'
-            _this.model.set(resp)
-            app.events.trigger('change_event_model'+_this.model.id, _this.model)
-          else
-            alert 'Something went wrong. Please try later'
-            btn.removeClass('active')
-
 
   attend: (event)->
     btn = $(event.target)

@@ -17,7 +17,7 @@ class EventsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html
+      format.html { @recent_events = Event.recent_events(1, EVENTS_PER_PAGE_IN_INDEX) }
       format.json { 
         response = {
           :new_events => @new_events,
@@ -51,6 +51,8 @@ class EventsController < ApplicationController
         Event.new_events(page, EVENTS_PER_PAGE_IN_INDEX)
       when 'date'
         Event.events_ordered_by_date(page, EVENTS_PER_PAGE_IN_INDEX)
+      when 'recent'
+        @recent_events = Event.recent_events(page, EVENTS_PER_PAGE_IN_INDEX)
       end
     end
 
@@ -118,6 +120,18 @@ class EventsController < ApplicationController
     subject = "Reg. Event - #{event.title}"
     current_user.send_message(event.user, message, subject)
     render :text => true
+  end
+
+  def up_vote
+    event = Event.find(params[:id])
+    event.up_vote(current_user)
+    render :json => Event.custom_json(event, current_user)
+  end
+
+  def down_vote
+    event = Event.find(params[:id])
+    event.down_vote(current_user)
+    render :json => Event.custom_json(event, current_user)
   end
 
 end

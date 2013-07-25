@@ -2,7 +2,7 @@ def clean!(tables=false)
   # add the table names here whose data has to cleaned. 
   tables ||=  %w{ users profiles characteristics comments friendships photos roles 
     talents videos projects role_applications activities conversations endorsements
-    important_dates events attends friendships}
+    important_dates events attends friendships votes}
   ActiveRecord::Base.connection.execute("SET FOREIGN_KEY_CHECKS=0;")
   tables.each do |table|
     ActiveRecord::Base.connection.execute("TRUNCATE #{table};")

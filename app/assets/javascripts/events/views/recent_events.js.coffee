@@ -1,7 +1,7 @@
-app.views.result_events = Backbone.View.extend
+app.views.recent_events = Backbone.View.extend
   initialize: (options)->
     this.type = options.type
-    this.template = _.template($('#result_events_template').html())
+    this.template = _.template($('#recent_events_template').html())
     this.collection.on('add', this.renderEach, this)
     this.collection.on('reset', this.render, this)
 
@@ -13,9 +13,9 @@ app.views.result_events = Backbone.View.extend
     this.collection.forEach(this.renderEach, this)
     this
 
-  renderEach: (result_event)->
-    result_event_view = new app.views.result_event({ model: result_event })
-    this.$el.find('.event_results').append(result_event_view.render().el)
+  renderEach: (recent_event)->
+    recent_event_view = new app.views.recent_event({ model: recent_event })
+    this.$el.find('#recent_projects').append(recent_event_view.render().el)
 
   load_more: (event)->
     _this = this
@@ -28,14 +28,13 @@ app.views.result_events = Backbone.View.extend
       data:
         page: page_number
         type: _this.type
-        search: app.params_used.search
       success: (resp)->
         if resp != 'false'
           if resp.length > 0
-            new_result_event_models = _.map(resp, (event_json)->
-              new app.models.result_event(event_json)
+            new_recent_event_models = _.map(resp, (event_json)->
+              new app.models.recent_event(event_json)
             )
-            _this.collection.add(new_result_event_models)
+            _this.collection.add(new_recent_event_models)
             # increment page number on the loadmore button
             $(event.target).attr('data-next-page', ++page_number)
           else
@@ -44,4 +43,3 @@ app.views.result_events = Backbone.View.extend
         else
           alert('Something went wrong, Please try again.')
         btn.html('Load More')
-
