@@ -1,6 +1,11 @@
 <script type="script/template" id='result_event_template'>
 
-  <%% var index = this.model.collection.models.indexOf(this.model) + 1 %>
+  <%% var index = 1 %>
+  
+  <%% if(typeof this.model.collection != 'undefined') 
+        var index = this.model.collection.models.indexOf(this.model) + 1 
+  %>
+
   <div class='event-index pull-left light'>
     <%%= index %>.
   </div>
