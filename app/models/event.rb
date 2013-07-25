@@ -55,8 +55,8 @@ class Event < ActiveRecord::Base
   end
 
   def self.upcoming_events
-    # TODO: change this to only > 
-    Event.joins(:start).where("important_dates.date_time > ? OR important_dates.date_time < ?", Time.now, Time.now)
+    # Event.joins(:start).where("important_dates.date_time > ? OR important_dates.date_time < ?", Time.now, Time.now)
+    Event.joins(:start).where("important_dates.date_time > ?", Time.now)
   end
 
   def attendees_emails
