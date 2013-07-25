@@ -228,7 +228,8 @@ class Event < ActiveRecord::Base
                           :methods => [
                             :day,
                             :month_year,
-                            :pretty_date
+                            :pretty_date,
+                            :formatted_time
                           ]
                         }
                       },
@@ -249,6 +250,10 @@ class Event < ActiveRecord::Base
                     :check_user => user,
                     :votes_data_for_user => user
                   )
+  end
+
+  def similar_events
+    self.nearbys.first(3)
   end
 
 end

@@ -186,6 +186,12 @@
 
           </div>
 
+          <div class='right-extra-div coming-div row' id='similar_events'>
+
+          </div>
+
+
+
         </div>
       </div>
 
@@ -197,6 +203,8 @@
 <%= render :partial => 'events/templates/comment' %>
 <%= render :partial => 'events/templates/attendees' %>
 <%= render :partial => 'events/templates/attendee' %>
+<%= render :partial => 'events/templates/similar_events' %>
+<%= render :partial => 'events/templates/similar_event' %>
 
 <%= render :partial => 'events/modals' %>
 
@@ -216,11 +224,22 @@ $(document).ready(function(){
 
   $('#comments_div').html(app.comments_view.render().el)
 
+
+// who is coming
   app.attendees = new app.collections.attendees()
   app.attendees.reset(<%= raw @event.attendees.to_json() %>)
   app.attendees_view = new app.views.attendees({ collection: app.attendees })
 
   $('#who_coming').html( app.attendees_view.render().el )
+
+
+// similar events
+  similar_events = new app.collections.similar_events()
+  similar_events.reset(<%= raw Event.custom_json(@event.similar_events, current_user) %>)
+  similar_events_view = new app.views.similar_events({ collection: similar_events })
+
+  $('#similar_events').html( similar_events_view.render().el )
+
 
   var LatLong = new google.maps.LatLng(<%= @event.latitude %>, <%= @event.longitude %>)
    var mapOptions = {
