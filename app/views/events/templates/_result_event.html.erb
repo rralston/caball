@@ -1,7 +1,8 @@
 <script type="script/template" id='result_event_template'>
 
+  <%% var index = this.model.collection.models.indexOf(this.model) + 1 %>
   <div class='event-index pull-left light'>
-    <%%= this.model.collection.models.indexOf(this.model) + 1 %>.
+    <%%= index %>.
   </div>
 
   <div class='event-left-empty pull-left'>
@@ -33,7 +34,7 @@
     </div>
   </div>
 
-  <div class='pull-left event-details'>
+  <div class='pull-left event-details <%% if((index%2) == 0) print("even") %>'>
     
     <div class='row'>
       <div class='event-title medium'>
@@ -66,7 +67,7 @@
 
   </div>
 
-  <div class='event-right-details pull-left text-center'>
+  <div class='event-right-details pull-left text-center <%% if((index%2) == 0) print("even") %>'>
 
     <%% if(user_attending){ %>
       <div class='unattend-event btn-custom btn-red'>
