@@ -6,3 +6,6 @@ RECOMMENDED_PROJECTS_PER_PAGE = 1
 
 # events index page
 EVENTS_PER_PAGE_IN_INDEX      = 2
+
+# projects index page
+PROJECTS_PER_PAGE_IN_INDEX    = 3

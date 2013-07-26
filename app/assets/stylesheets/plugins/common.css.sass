@@ -11,6 +11,10 @@ a:hover
   text-decoration: none
 
 
+.maincontain.container-fluid
+  min-width: 960px !important
+  max-width: 960px !important
+  margin: auto
 
 .custom-green-filters
   .badge-custom-green
@@ -172,10 +176,6 @@ ul.tagit input[type="text"]
   -webkit-box-shadow: none
   -moz-box-shadow: none
   box-shadow: one
-  -webkit-transition: none
-  -moz-transition: none
-  -o-transition: none
-  transition: none
 
 ul.tagit input[type="text"]:focus
   -webkit-box-shadow: none !important
@@ -421,6 +421,142 @@ ul.tagit span.ui-helper-hidden-accessible
       font-weight: 500
     .btn-show-all
       margin-top: 10px
+
+#mwrap
+  width: 740px
+
+/* Advanced Search Filters on the left hnad side of projects and people pages */ 
+
+.lside.span3
+  width: 220px
+
+.lside
+  padding: 0px
+  color: 4c4f5b
+  border-right: 1px solid #d4d9df
+  height: 100%
+  background: white
+  moz-box-sizing: border-box
+
+.psearch h2 
+  background: url('/assets/advance.png') no-repeat 95% center
+  height: 70px
+  line-height: 70px
+  margin-top: 0px
+  -moz-box-sizing: border-box
+  padding: 15px 0
+  font-size: 20px
+  border-top: 1px solid #d4d9df
+  
+  padding: 0 20px
+  border-bottom: 1px solid #d4d9df
+  moz-box-sizing: border-box
+
+  .psearch .srchbtn
+    margin-left: 30%
+    margin-top: 20px
+
+.srchsect
+  clear: both
+  overflow: hidden
+  position: relative
+  border-bottom: 1px solid #d4d9df
+  padding: 0 10px
+  padding-bottom: 20px
+  border-bottom: 1px solid #d4d9df
+  moz-box-sizing: border-box
+
+.srchsect h2
+  background: url('/assets/opth2.png') no-repeat 99% center
+  border: none
+  padding: 0
+  font-size: 16px
+  line-height: 45px
+  margin-bottom: 0px
+  height: 50px
+
+
+.chkboxwrap
+  clear: both
+  position: relative
+  display: block
+  float: left
+  margin-right: 5px
+  width: 26px
+  
+
+.chklabel
+  cursor: pointer
+  position: absolute
+  top: -1
+  left: -1
+  width: 26px
+  height: 26px
+  background: url('/assets/uncheck.png') center no-repeat
+
+.chkboxwrap input[type="checkbox"]:checked  + .chklabel
+  background: url('/assets/checked.png') center no-repeat
+
+input[type="checkbox"]
+  float: left
+  display: inline-block
+  margin-right: 15px
+  visibility: hidden
+  cursor: pointer
+
+.srchopts
+  max-height: 250px
+  overflow-y: scroll
+
+.srchopt
+  margin-top: 15px
+  clear: both
+  float: left
+  display: block
+.chktxt
+  float: left
+  display: block
+  margin-left: 5px
+  height: 25px
+  line-height: 25px
+  overflow: visible
+  width: 150px
+  white-space: nowrap
+
+/*radio button*/
+.rdboxwrap 
+  clear: both
+  position: relative
+  display: block
+  float: left
+  margin-right: 5px
+  width: 26px
+
+.rdlabel 
+  cursor: pointer
+  position: absolute
+  top: -1
+  left: -1
+  width: 26px
+  height: 26px
+  margin-right: 15px
+  margin-right: 10px
+
+  background: url('/assets/rduncheck.png') center no-repeat
+
+.rdboxwrap input[type="radio"]:checked + .rdlabel 
+  background: url('/assets/rdcheck.png') center no-repeat
+
+input[type="radio"] 
+  float: left
+  display: inline-block
+  margin-right: 15px
+  visibility: hidden
+  cursor: pointer
+
+/* Advanced Search Filters on the left hnad side of projects and people pages */ 
+
+
 
 
 /* Similar events widget on right hand side */ 

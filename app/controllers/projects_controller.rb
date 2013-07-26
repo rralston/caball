@@ -4,15 +4,22 @@ class ProjectsController < ApplicationController
   
   def index
     search(Project, "projects")
-    # @search.build_condition
-    project_fields
+
+    if params[:status].present? 
+      status = params[:status]
+      page = params[:page]
+      if status == 'index'
+        @projects = Project.recent_projects(params[:page], PROJECTS_PER_PAGE_IN_INDEX)
+      elsif status == 'search'
+        # project = Project.search_all_with_pagination(params[:query], page, PROJECTS_PER_PAGE_IN_INDEX)
+
+        projects = Project.search_with_roles(params[:roles], page, PROJECTS_PER_PAGE_IN_INDEX)
+      end
+    end
+
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => {
-                   :success => true, 
-                   :html => render_to_string(:partial => '/projects/project_search_results.html.erb', 
-                                             :layout => false, :locals => {} ) 
-                  } }
+      format.json { render :json => Project.custom_json(projects) }
     end
   end
   

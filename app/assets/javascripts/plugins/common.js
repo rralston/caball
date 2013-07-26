@@ -172,7 +172,72 @@ app.fn.distance_between_location = function(lat1, lon1, lat2, lon2){
   return d;
 }
 
+ app.fn.serializeJSON = function(form){
+    var json = {}
+    form.find('input, select').each(function(){
+      var val
+      if (!this.name) return;
+ 
+      if ('radio' === this.type) {
+        if (json[this.name]) { return; }
+ 
+        json[this.name] = this.checked ? this.value : '';
+      } else if ('checkbox' === this.type) {
+        val = json[this.name];
+ 
+        if (!this.checked) {
+          if (!val) { json[this.name] = ''; }
+        } else {
+          json[this.name] = 
+            typeof val === 'string' ? [val, this.value] :
+            $.isArray(val) ? $.merge(val, [this.value]) :
+            this.value;
+        }
+      } else {
+        json[this.name] = this.value;
+      }
+    })
+    return json;
+  }
+
+
+app.fn.initialize_cat_complete_search = function(selector, on_select_callback){
+  $.widget( "custom.catcomplete", $.ui.autocomplete, {
+      _renderMenu: function( ul, items ) {
+        var that = this,
+          currentCategory = "";
+        $.each( items, function( index, item ) {
+          if ( item.category != currentCategory ) {
+            ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+            currentCategory = item.category;
+          }
+          that._renderItemData( ul, item );
+        });
+      }
+    });
+
+   $(selector).catcomplete({
+    delay: 0,
+    source: function(request, response){
+      $.getJSON( "http://gd.geobytes.com/AutoCompleteCity?callback=?&q="+request.term, function(data){
+        data.push(request.term) // this will push the search string into location category also
+        custom_data =  _.map(data, function(item){
+          return { label: item, value: item, category: 'Search by Location', type: 'location' } 
+        });
+        custom_data.push({ category: 'Search for Keyword', label: request.term, value: request.term, type: 'keyword' })
+        response(custom_data)
+      });
+    },
+    select: function(event, ui){
+      on_select_callback(ui.item)
+    },
+    messages:{
+      noResult: '',
+      results: function(){}
+    }
+        
+   });
+}
 
   
 
-  
