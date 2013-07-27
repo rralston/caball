@@ -1,0 +1,36 @@
+<script type="script/template" id='blogs_template'>
+  
+  <div class='row add-comment'>
+    <div class='span8'>
+      <div class='row'>
+        <% if current_user %>
+          <img src='<%= current_user.profile_pic %>' class='img-circle user-profile-img'>
+        <% end %>
+
+        <%= form_for Blog.new, :remote => true do |c|  %>
+          <%= c.text_area :content, :placeholder => 'Add your event updates here'  %>
+          <%= c.fields_for :photo, Photo.new do |p| %>
+            <%= p.file_field :image %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class='row'>
+        <% if not current_user %>
+          <div class='span8' id='please_sign_in' style='disaplay:none;'>
+            <a href='/'>Sign in</a> to start discussing.
+          </div>  
+        <% end %>
+        <div class='span8' id='comment_please_wait' style='disaplay:none;'>
+          Please wait while we add your comment..
+        </div>
+      </div>
+    </div>
+    
+    
+
+  </div>
+
+  <div id='comments_display'>
+    
+  </div>
+</script>

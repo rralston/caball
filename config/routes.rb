@@ -13,6 +13,7 @@ Caball::Application.routes.draw do
   resources :projects do 
     resources :comments
   end
+  resources :blogs
   resources :comments
   resources :conversations
   match 'conversations/send-generic-message' => 'conversations#send_message_generic', :via => 'POST'

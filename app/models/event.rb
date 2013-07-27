@@ -168,6 +168,10 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def location_city
+    Geocoder.search("#{latitude},#{longitude}").first.try(:city) || location
+  end
+
   def up_voters
     up_votes.map(&:user)
   end

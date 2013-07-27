@@ -1,0 +1,4 @@
+$.event.trigger({
+  type: 'newBlog',
+  blog: <%= raw @blog.to_json(:include => [:user, :likes]) %>
+});

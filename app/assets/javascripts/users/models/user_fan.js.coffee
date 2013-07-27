@@ -1,0 +1,1 @@
+app.models.user_fan = Backbone.Model.extend()

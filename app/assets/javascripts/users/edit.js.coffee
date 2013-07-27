@@ -1,5 +1,4 @@
 $(document).ready ()-> 
-  $('#user_expertise').val().split(',')
   $('#expertise_tags').tagit
     sortable: true
     tagsChanged: (tagValue, action, element) ->

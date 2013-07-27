@@ -1,0 +1,8 @@
+app.views.user_project = Backbone.View.extend
+  className: 'project pull-left'
+  initialize: ()->
+    this.template = _.template($('#user_project_template').html())
+
+  render: ()->
+    this.$el.html( this.template(this.model.toJSON()) )
+    this

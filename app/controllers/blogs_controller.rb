@@ -3,12 +3,9 @@ class BlogsController < ApplicationController
   load_and_authorize_resource
   
   def create
-    @blog = current_user.blogs.build(params[:blog])
-    if @blog.save
-      redirect_to current_user, notice: "Blog was created."
-    else
-      render :new
-    end
+    @blog = Blog.create(params[:blog])
+    @blog.update_attributes(:user => current_user)
+    render 'blogs/blog_create_response'
   end
 
   def edit

@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :profile, :reject_if => :all_blank
   has_many :comments
+  
   has_many :blogs, :dependent => :destroy
 
   has_many :attends
