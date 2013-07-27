@@ -39,7 +39,7 @@
   <!--========= left sidebar starts======------>
     <aside class="lside span3">
       <form id='projects_search_form' class="psearch">
-        <h2>Advanced Search</h2>
+        <h2 class='regular'>Advanced Search</h2>
         <div class='srchopts'>
           <div class="srchsect">
             <div class="srchopt">
@@ -61,7 +61,7 @@
         </div>
 
         <div class="srchsect">
-          <h2>Roles</h2>
+          <h2 class='regular'>Roles</h2>
           <div class='srchopts'>
             <% User.types.keys.each do |role| %>
               <div class="srchopt">
@@ -77,7 +77,7 @@
         </div>
 
         <div class="srchsect">
-          <h2>Genre</h2>
+          <h2 class='regular'>Genre</h2>
           <div class='srchopts'>
             <% Project.genres.keys.each do |genre| %>
               <div class="srchopt">
@@ -93,7 +93,7 @@
         </div>
 
         <div class="srchsect">
-          <h2>Type</h2>
+          <h2 class='regular'>Type</h2>
           <div class='srchopts'>
             <% Project.types.keys.each do |type| %>
               <div class="srchopt">
@@ -108,9 +108,11 @@
           </div>
         </div>
 
-        <a id='btn-search_projects' class="srchbtn2 srchbtn btn-custom btn-red center-div text-center btn-search_projects">
-          Search
-        </a>
+        <div class='text-center'>
+          <a id='btn-search_projects' class="srchbtn2 srchbtn btn-custom btn-red center-div text-center btn-search_projects">
+            Search
+          </a>
+        </div>
 
       </form>
     </aside>
@@ -124,6 +126,7 @@
         <!--======Slider===-->
           
           <div class="mslider span12" id="mslider">
+            <div class='over-drop'></div>
             <div class="slider-wrapper">
 
               <% Project.sample_featured_projects.each do |project| %>
@@ -131,19 +134,21 @@
                   <div class="slbg span6" >
                     <img src="<%= project.photos.sample.image %>" alt="" />
                   </div>
+                  <div class='shadow-div'> </div>
                   <div class="slcontent span6">
-                    <h2><%= project.title %></h2>
-                    <% if project.description.length > 200 %>
-                      <p><%= project.description.scan(/.{200}/)[0] %> <a href="">Read more</a></p>
+                    <h2 class='medium'><%= project.title %></h2>
+                    <% if project.description.length > 70 %>
+                      <p><%= project.description.scan(/.{70}/)[0] %> <span class='read_more' data-content='<%= project.description %>'><i>Read more</i></span></p>
                     <% else %>
                       <p><%= project.description %> </p>
                     <% end %>
-                    <a href="/projects/<%= project.id %>" class="btn">view project</a>
+                    <a href="/projects/<%= project.id %>" class="btn">View Project</a>
                   </div>
                 </div>
               <% end %>
 
             </div>
+            <div class='over-drop'></div>
           </div>
           
         <!--======Slider===-->
@@ -153,7 +158,9 @@
           <div class="pdiv span12">
             <div class="row-fluid">
             
-              <h2>Popular Project</h2>
+              <div class="page-header-secondary">
+                Propular Projects
+              </div>
               
               <div id='popular_projects_container'>
                 <div class="project">
@@ -214,7 +221,9 @@
         
           <div class="pdiv span12">
             <div class="row-fluid">
-            <h2>Recent Projects</h2>
+              <div class="page-header-secondary">
+                Recent Projects
+              </div>
               <div id='recent_projects_container'>
 
               </div>

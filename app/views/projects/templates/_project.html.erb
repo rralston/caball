@@ -1,7 +1,10 @@
 <script type="script/template" id='project_template'>
   
   <div class="ptopimg">
-    <img src="/assets/pbg.png" alt="" />
+    <%% if(photos.length > 0){ %>
+      <img src="<%%= photos[0].image.url %>" alt="" />
+    <%% } %>
+    
     <div class="topcnt">
         <h3 class='medium'><a href='/project/<%%= id %>'><%%= title %></a></h3>
         <p><%%= description %></p>
