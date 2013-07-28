@@ -6,10 +6,10 @@
     <div class='span12'>
       
       <div class='row project-main-head'>
-        <div class='span5 project-image'>
+        <div class='span5 project-image' style='background: url("<%= @project.display_photo.image.url %>")'>
         </div>
 
-        <div class='span7'>
+        <div class='pull-left main-right'>
           <div class='row'>
             <div class='span7'>
 
@@ -30,7 +30,7 @@
           </div>
 
           <div class='row'>
-            <div class='span7'>
+            <div class='span7 title'>
               <h2><%= @project.title %></h2>
             </div>
             
@@ -232,7 +232,7 @@
 
         </div>
         
-        <div class='span4 project-right-divs'>
+        <div class='span4 project-right-divs right-container'>
           <div class='row imp-dates-div'>
             <div class='span4'>
               <div class='imp-date-head'>
@@ -267,6 +267,18 @@
               </div>
             </div>
           </div>
+
+          <div class='row right-extra-div' id='fans_div'>
+          </div>
+
+          <div class='row right-extra-div' id='similar_projects_div'>
+          </div>
+
+          <div class='right-extra-div coming-div row' id='similar_events'>
+
+          </div>
+
+
         </div>
 
 
@@ -618,6 +630,12 @@
 
 <%= render :partial => 'projects/templates/comments' %>
 <%= render :partial => 'projects/templates/comment' %>
+<%= render :partial => 'events/templates/similar_events' %>
+<%= render :partial => 'events/templates/similar_event' %>
+<%= render :partial => 'projects/templates/similar_projects' %>
+<%= render :partial => 'projects/templates/similar_project' %>
+<%= render :partial => 'projects/templates/fans' %>
+<%= render :partial => 'projects/templates/fan' %>
 
 <%= render :partial => 'projects/templates/role_applicant_template' %>
 
@@ -629,12 +647,30 @@ $(document).ready(function(){
   app.project_data = <%= raw @project.to_json() %>
 
   app.comments = new app.collections.comments()
-
   app.comments.reset(<%= raw @project.comments.to_json(:include => [:user, :likes]) %>)
-
   app.comments_view = new app.views.comments({ collection: app.comments })
-
   $('#comments_div').html(app.comments_view.render().el)
+
+
+
+  // similar events
+  similar_events = new app.collections.similar_events()
+  similar_events.reset(<%= raw Event.custom_json(@project.similar_events, current_user) %>)
+  similar_events_view = new app.views.similar_events({ collection: similar_events })
+  $('#similar_events').html( similar_events_view.render().el )
+
+  // similar projects
+  app.similar_projects = new app.collections.similar_projects()
+  app.similar_projects.reset(<%= raw @project.similar_projects.to_json(:include => [:comments, :likes, :photos]) %>)
+  app.similar_projects_view = new app.views.similar_projects({ collection: app.similar_projects })
+  $('#similar_projects_div').html(app.similar_projects_view.render().el)
+
+
+  // fans
+  app.fans = new app.collections.fans()
+  app.fans.reset(<%= raw @project.fans.to_json() %>)
+  app.fans_view = new app.views.fans({ collection: app.fans })
+  $('#fans_div').html(app.fans_view.render().el)
 
   $(document).on('newComment', function(event){
     

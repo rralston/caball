@@ -36,7 +36,7 @@ $(document).ready ()->
       url = '/likes/unlike.json'
 
     if app.current_user != null
-      $('.btn-like').find('.text').html('Please Wait..')
+      $('.btn-like').find('.text').html('Wait..')
       $.ajax
         url: url
         type: 'POST'

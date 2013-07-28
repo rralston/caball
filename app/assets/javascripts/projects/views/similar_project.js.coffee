@@ -1,4 +1,4 @@
-app.views.user_project = Backbone.View.extend
+app.views.similar_project = Backbone.View.extend
   className: 'project pull-left'
   initialize: ()->
     this.template = _.template($('#similar_project_template').html())

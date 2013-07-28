@@ -239,5 +239,25 @@ app.fn.initialize_cat_complete_search = function(selector, on_select_callback){
    });
 }
 
+app.fn.check_current_user = function(){
+  if(app.current_user)
+    return true;
+  else{
+    alert('Please login to continue with the action');
+    return false;
+  }
+    
+
+}
+
+app.fn.initialize_send_generic_message = function(){
+  $('body').on('click', '.send-generic-message', function(event){
+    if(app.fn.check_current_user())
+      app.fn.show_generic_message_modal(event);
+  });
+}
+  
+  
+
   
 

@@ -19,6 +19,7 @@ Caball::Application.routes.draw do
   match 'conversations/send-generic-message' => 'conversations#send_message_generic', :via => 'POST'
   resources :notifications
   resources :friendships
+  match 'friendships/destroy' => 'friendships#destroy', :via => 'POST'
   resources :likes
   match 'likes/unlike' => 'likes#unlike', :via => 'POST'
 

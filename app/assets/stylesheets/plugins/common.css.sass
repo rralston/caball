@@ -100,6 +100,7 @@ a:hover
 
 .btn-red
   background: url(/assets/btn-red-bg.png) repeat
+
   -webkit-box-shadow: 0px -21px 90px -41px black inset
   box-shadow: 0px -21px 90px -41px black inset
     -moz-box-shadow: 0px -21px 90px -41px black inset
@@ -230,6 +231,18 @@ ul.tagit span.ui-helper-hidden-accessible
   height: 14px
   width: 20px
   background: url(/assets/grey-thumbs.png) no-repeat
+
+.envelop-dark-icon
+  display: inline-block
+  height: 14px
+  width: 20px
+  background: url(/assets/envelop-dark-grey.png) no-repeat
+
+.envelop-light-icon
+  display: inline-block
+  height: 10px
+  width: 20px
+  background: url(/assets/msg.png) no-repeat
 
 .gear-grey
   display: inline-block
@@ -592,18 +605,19 @@ input[type="radio"]
 /* Similar events widget on right hand side */ 
 
 #similar_events
+  border-bottom: 0px
   .head
     color: #4c4f5b
     border-top: 1px solid $divider-border
     margin-bottom: 10px
   .events-filter
-    padding: 10px 0px
+    padding: 15px 0px
     border-top: 1px solid $divider-border
     border-bottom: 1px solid $divider-border
     margin-bottom: 0px
   .similar_event
     border-bottom: 1px solid $divider-border
-    height: 115px
+    height: 110px
     padding: 10px 0px 0px 10px
     position: relative
     .event-image 
@@ -616,9 +630,11 @@ input[type="radio"]
       .event-title
         max-height: 40px
         overflow: hidden
+        font-size: 17px
       .event-time
         color: #969fab
-        font-size: 11px
+        font-size: 13px
+        text-transform: uppercase
       .attendees-details
         .attendees
           color: #969fab
@@ -643,7 +659,7 @@ input[type="radio"]
         .month
           font-size: 12px
       .event-attend-status
-        margin-top: 65px
+        margin-top: 60px
         .attend-event.btn-red, .unattend-event.btn-red
           min-width: 50px
           border-radius: 3px
@@ -702,13 +718,16 @@ input[type="radio"]
           color: $light-grey-text
         .comment-content
           margin-top: 15px
+          font-size: 18px
         .comment-img
           img
+            margin-top: 10px
             max-width: 580px
             width: 580px
             margin-left: -30px
+            margin-bottom: -10px
       .comment-actions
-        padding: 15px
+        padding: 20px
         border-top: 2px solid $divider-border
         background: url(/assets/comment-actions-bg.png) repeat-x
         .like-comment
@@ -783,4 +802,17 @@ input[type="radio"]
       .likes
         margin-right: 20px
 
-  
+#fans_div
+  .grey-line-divider
+    margin-bottom: 0px
+
+.fans-tiles
+  .fan
+    width: 106px
+  .fans-extra-count
+    font-size: 25px
+    margin-top: 15px
+    margin-left: -5px
+    margin-bottom: 5px
+.grey-top-line
+  margin-top: 12px

@@ -11,14 +11,34 @@ $grey-backdrop-text: #636a73
 
 .event-main-head
   background: $very-light-blue
+  .event-title
+    font-size: 35px
+    line-height: 40px
+    margin-bottom: 15px
   .event-main-details
     width: 580px
     padding: 20px
     .event-date-time
+      font-size: 20px
+      margin-top: 12px
+      margin-bottom: 15px
       color: $grey-backdrop-text
   .event-actions
-    width: 165px
+    width: 200px
     margin: 20px auto
+    .btn-custom
+      border-radius: 4px
+    .btn-attend
+      font-size: 25px
+      padding: 11px 20px
+    .btn-like, .btn-invite-followers
+      width: 90px
+      min-width: 20px
+      margin-top: 0px
+      font-size: 15px
+    .btn-invite-followers
+      margin-left: 10px
+      padding: 5px
 
 #event-map
   height: 350px
@@ -34,11 +54,14 @@ $grey-backdrop-text: #636a73
     width: 215px
     margin-left: 10px
     min-height: 70px
+    font-size: 17px
+    font-style: italic
   .location-img-blue, .desc, .owner-row
     margin-left: 20px
 
   .event-links
     margin-top: 10px
+    font-size: 16px
     a
       color: $brick-red
   .desc
@@ -47,18 +70,21 @@ $grey-backdrop-text: #636a73
   .owner-img
     width: 40px
   .owner
-    font-size: 10px
+    font-size: 12px
     width: 140px
     margin-left: 10px
+    color: #82848d
+    font-style: italic
     .owner-name
       margin-top: 2px
       color: $brick-red
       font-size: 15px
+      font-style: normal
   .btn-message_organizer
-    padding-left: 10px
-    padding-right: 10px
+    padding-left: 8px
+    padding-right: 8px
     min-width: 60px
-    width: 60px !important
+    width: 70px !important
   .event-tags
     margin-left: 10px
     .badge
@@ -70,12 +96,133 @@ a:hover
 a
   color: $brick-red
 
-.fotorama__nav.fotorama__nav--thumbs
-  background: $grey-backdrop
+/*slider code*/
+.flexslider
+  _overflow: hidden
+
+.slides
+  height: 345px
+
+.slides li
+  height: 100%
+  background-repeat: no-repeat!important
+  background-size: cover!important
+
+
+.flexslider .flex-direction-nav
+  _display: none
+  height: 0px
+  width: 0px
+  list-style: none
+  padding: 0
+  margin: 0
+
+.flex-prev
+  display: block
+  font-size: 0
+  line-height: 0
+  background: url('/assets/slprev.png') no-repeat
+  width: 25px
+  height: 35px
+  text-indent: -9999999!important
+
+.flex-next
+  display: block
+  font-size: 0
+  line-height: 0
+  background: url('/assets/slnext.png') no-repeat
+  width: 25px
+  height: 35px
+  text-indent: -9999999
+
+#slider
+  position: relative
+  overflow: hidden
+  transition: all .4s
+
+.flexslider
+  cursor: pointer
+  transition: all .4s
+
+
+#slider .flex-prev
+  display: none
+  position: absolute
+  left: 10px
+  top: 30%
+
+#slider:hover .flex-prev
+  display: block
+
+
+#slider:hover .flex-next
+  display: none
+  position: absolute
+  right: 10px
+  top: 30%
+
+#slider:hover .flex-next
+  display: block
+
+#carousel
+  margin-left: 40px
+  width: 450px
+  position: relative
+
+#carousel .slides
+  height: 100px
+  margin-left: 0px
+
+#carousel .slides  li
+  width: 100px!important
+  margin-left: 10px
+  _opacity: .5
+  box-shadow: inset 100px 100px 100px rgba(69,75,107,.6)
+
+#carousel .slides  li.flex-active-slide
+  opacity: 1
+  box-shadow: none
+  border: 4px solid #269ed7
+  border-radius: 4px
+
+#carousel .flex-prev
+  position: absolute
+  left: -30px
+  top: 30%
+  
+
+#carousel .flex-next
+  position: absolute
+  right: -150px
+  top: 30%
+
+.addnew
+  background: black
+  width: 100px
+  height: 100px
+  float: left
+  margin-left: 10px
+  background: #585d7a
+  box-shadow: inset 5px 5px 5px rgba(0,0,0,.4), inset -5px -5px 5px rgba(0,0,0,.4)
+  color: white
+  padding-top: 10px
+
+.addnew span
+  display: block
+
+.hdrsliderwrap
+  overflow: hidden
+  background: #d2dee7
+
+.flex-disabled
+  display: none !important
+
+/*slider code*/
+
 
 .about-div
   .desc
-    margin-left: 10px
+    margin-left: 20px
     padding-bottom: 40px
 
 .coming-div

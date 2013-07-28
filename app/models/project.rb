@@ -254,4 +254,16 @@ class Project < ActiveRecord::Base
                     )
   end
 
+  def similar_events
+    Event.near(location).first(3)
+  end
+
+  def similar_projects
+    self.nearbys.first(4)
+  end
+
+  def display_photo
+    photos.first
+  end
+
 end

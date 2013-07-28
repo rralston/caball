@@ -1,4 +1,4 @@
-app.views.user_fans = Backbone.View.extend
+app.views.fans = Backbone.View.extend
   initialize: (options)->
     this.template = _.template($('#user_fans_template').html())
     this.collection.on('add', this.render, this)
@@ -10,7 +10,6 @@ app.views.user_fans = Backbone.View.extend
     return this
 
   renderEach: (user_fan)->
-    console.log user_fan
-    user_fan_view = new app.views.user_fan({ model: user_fan })
+    user_fan_view = new app.views.fan({ model: user_fan })
     this.$el.find('#user_fans_list').prepend( user_fan_view.render().el )
     return this

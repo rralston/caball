@@ -1,0 +1,1 @@
+app.models.similar_event = Backbone.Model.extend()

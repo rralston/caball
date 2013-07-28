@@ -1,7 +1,7 @@
 app.views.user_projects = Backbone.View.extend
   initialize: (options)->
     this.type = options.type
-    this.template = _.template($('#user_projects_template').html())
+    this.template = _.template($('#similar_projects_template').html())
 
   render: ()->
     this.$el.html(this.template)

@@ -102,12 +102,16 @@
   border-top: 1px solid white
 
 .msg
-  width: 105px
+  width: 100px
+  min-width: 30px
+  padding: 4px 0px
+  border-radius: 4px
+  font-size: 16px
   margin-bottom: 5px
   border: none
   color: white
-  font-weight: 500
   tex-shadow: none
+  text-shadow: none !important
 
   background: -webkit-linear-gradient(top,#9ca2a5,#5e6569)
   background: -moz-linear-gradient(top,#9ca2a5,#5e6569)
@@ -116,12 +120,16 @@
   background: linear-gradient(top,#9ca2a5,#5e6569)
 
 .msg:hover
-  width: 105px
+  width: 100px
+  padding: 4px 0px
+  min-width: 30px
+  border-radius: 4px
+  font-size: 16px
   margin-bottom: 5px
   border: none
   color: white
   font-weight: 500
-  tex-shadow: none
+  tex-shadow: none !important
 
   background: -webkit-linear-gradient(top,#9ca2a5,#5e6569)
   background: -moz-linear-gradient(top,#9ca2a5,#5e6569)
@@ -130,7 +138,10 @@
   background: linear-gradient(top,#9ca2a5,#5e6569)
 
 .flw
-  width: 105px
+  width: 100px
+  min-width: 30px
+  border-radius: 4px
+  font-size: 16px
 
   background: -webkit-linear-gradient(top,#cd0f13,#ad0809)
   background: -moz-linear-gradient(top,#cd0f13,#ad0809)
@@ -141,11 +152,13 @@
   margin-bottom: 5px
   border: none
   color: white
-  font-weight: 500
   tex-shadow: none
 
 .flw:hover
-  width: 105px
+  width: 100px
+  min-width: 30px
+  border-radius: 4px
+  font-size: 16px
 
   background: -webkit-linear-gradient(top,#cd0f13,#ad0809)
   background: -moz-linear-gradient(top,#cd0f13,#ad0809)
@@ -155,7 +168,6 @@
   margin-bottom: 5px
   border: none
   color: white
-  font-weight: 500
   tex-shadow: none
 
 .profpicwrap
@@ -244,6 +256,7 @@
 .skillexp li
   display: inline
   margin-left: 5px
+  margin-bottom: 5px
   color: white
   background: #3c454c
   padding-left: 10px !important
@@ -421,6 +434,7 @@
 
   .endorsement
     position: relative
+    width: 100%
     background: #269b89
     -webkit-box-shadow: 8px -100px 319px -180px black inset
     box-shadow: 8px -100px 319px -180px black inset
@@ -450,14 +464,3 @@
       position: absolute
       bottom: 5px
       right: 10px
-
-.fans-tiles
-  .fan
-    width: 106px
-  .fans-extra-count
-    font-size: 25px
-    margin-top: 15px
-    margin-left: -5px
-    margin-bottom: 5px
-.grey-top-line
-  margin-top: 12px

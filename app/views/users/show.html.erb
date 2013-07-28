@@ -26,10 +26,10 @@
                 <div class="profflwwrap row-fluid">
                   
                   <div class="proflwfbg"></div>
-                  <div class="profflw span6 offset5">
+                  <div class="profflw span7 offset5">
                     <div class="row-fluid">
                       <div class="flwrs span4">
-                        <strong class="regular"> 
+                        <strong class="regular count"> 
                           <%= @user.followers.count %>
                         </strong>
                         <span class="text light">
@@ -45,10 +45,16 @@
                         </span>
                       </div>
                       <div class="flwmsg span4">
-                      <% if current_user %>
-                        <a href="" class="flw btn">Follow</a>
+                        <% if current_user.friends.include?(@user) %>
+                          <a class="flw btn btn-follow btn-custom btn-red center-div text-center unfollow" data-friend-id='<%= @user.id %>'>
+                            Un Follow
+                          </a>
+                        <% else %>
+                          <a class="flw btn btn-custom btn-red center-div text-center regular btn-follow" data-friend-id='<%= @user.id %>'>
+                            Follow
+                          </a>
+                        <% end %>
                         <a class='msg btn medium send-generic-message' data-message-subject='' data-message-header='Message - <%= @user.name %>' data-message-recipients='<%= @user.email %>'>Message</a>
-                      <% end %>
                       </div>
                     </div>
                   </div>
@@ -67,7 +73,7 @@
                     <ul class="picos span4">
                       <li><a href=""><img src="/assets/horn.png" alt="" /></a></li>
                       <li><a href=""><img src="/assets/cut.png" alt="" /></a></li>
-                      <li><a href=""><img src="/assets/pencil.png" alt="" /></a></li>
+                      <li><a class='btn-endorse' data-can='<%= current_user.friends.include?(@user) %>' ><img src="/assets/pencil.png" alt="" /></a></li>
                     </ul>
                   </div>
                 </div>
@@ -83,7 +89,7 @@
                         
                         <ul class="inline libg span12">
                         SKILLS + EXPERTISE:
-                          <% @user.expertise.split(',').first(5).each do |skill| %>
+                          <% @user.expertise.split(',').each do |skill| %>
                             <li class="badge regular"><%= skill %></li>
                           <% end %>
                         </ul>
@@ -289,8 +295,7 @@
       <div class='row right-extra-div' id='user_projects_div'>
       </div>
 
-      <div class='row right-extra-div' id='
-      user_events_div'>
+      <div class='row right-extra-div' id='user_events_div'>
       </div>
 
       <div class='row right-extra-div' id='endorsements_div'>
@@ -303,8 +308,8 @@
 
 <%= render :partial => 'users/templates/blogs' %>
 <%= render :partial => 'users/templates/blog' %>
-<%= render :partial => 'users/templates/user_projects' %>
-<%= render :partial => 'users/templates/user_project' %>
+<%= render :partial => 'projects/templates/similar_projects' %>
+<%= render :partial => 'projects/templates/similar_project' %>
 <%= render :partial => 'users/templates/user_events' %>
 <%= render :partial => 'users/templates/user_event' %>
 <%= render :partial => 'users/templates/endorsements' %>
@@ -312,9 +317,13 @@
 <%= render :partial => 'users/templates/fans' %>
 <%= render :partial => 'users/templates/fan' %>
 
+<%= render :partial => 'users/endorsement_form_modal' %>
 <%= render :partial => 'conversations/send_new_message_modal' %>
 
 <script type="text/javascript">
+  
+  app.current_user = <%= raw current_user.to_json() %>
+
   app.blogs = new app.collections.blogs()
   app.blogs.reset(<%= raw @user.blogs.to_json(:include => [:user, :likes]) %>)
   app.blogs_view = new app.views.blogs({ collection: app.blogs })
