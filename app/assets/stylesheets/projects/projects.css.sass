@@ -11,14 +11,20 @@ $comment-text: #636a73
   margin-top: 20px
   width: 520px
 
-.project-genres
-  margin-top: 10px
-  ul
-    margin-left: 0px 
-  li
-    text-transform:  uppercase
-    float: left
-    margin-right: 20px
+.shadow-div
+  box-shadow: -26px 0px 79px 135px #eaedf1
+  -webkit-box-sizing: -26px 0px 79px 99px #eaedf1
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box 
+  -ms-box-sizing: border-box
+  box-sizing: border-box
+  position: absolute
+  left: 473px
+  height: 350px
+
+.project-created-by
+  color: #82848d
+
 
 .project-types
   margin-top: 10px
@@ -30,25 +36,77 @@ $comment-text: #636a73
     margin-right: 20px
 
 .project-main-head
-  -webkit-box-shadow: 0px 0px 12px 3px #cccccc
-  -moz-box-shadow: 0px 0px 12px 3px #cccccc
-  box-shadow: 0px 0px 12px 3px #cccccc
+  background: #eaedf0
+  position: relative
   .project-image
-    height: 358px
-    background-size: cover
+    height: 418px
+    background-size: cover !important
   .main-right
+    position: relative
     padding: 20px
     width: 520px
   .title
     width: 520px
+  .project-description
+    color: #82848d
+    font-style: italic
+    font-size: 17px
+  .read_more
+    color: #e8aaa7
+    cursor: pointer
+  .project-location
+    font-size: 18px
+    color: #82848d
+  .project-genres
+    margin-top: 10px
+    ul
+      color: #82848d
+      margin-left: 0px 
+      li
+        text-transform:  uppercase
+        float: left
+        margin-right: 5px
+
+      li:after
+        content: " \00b7"
+        font-size: 40px
+        position: relative
+        top: 5px
+        margin-left: 5px
+      li:last-child
+        position: relative
+        top: 8px
+      li:last-child:after
+        content: none
+
 
 .headline
+  position: relative
   background: url(/assets/project-healine-bg.png) repeat-x
   height: 100px
-  padding: 25px
-  color: $grey
-  font-size: 22px
+  padding: 35px 35px 25px 70px
+  color: #a5a8b1
+  font-size: 23px
   line-height: 25px
+
+  i:before
+    content: "\201C"
+    font-size: 60px
+    float: left
+    margin-right: 8px
+    font-weight: 800
+    position: relative
+    left: -30px
+    top: 18px
+    line-height: 0px
+  i:after
+    content: "\201D"
+    font-size: 60px
+    position: relative
+    top: 35px
+    margin-right: 8px
+    font-weight: 800
+    line-height: 0px
 
 .big-quotes
   font-size: 50px
@@ -60,7 +118,7 @@ $comment-text: #636a73
   height: auto
   background: url(/assets/grey-light-bg.png) repeat
   .imp-date-head
-    font-size: 20px
+    font-size: 15px
     text-align: center
     color: white
     letter-spacing: 6px
@@ -68,6 +126,10 @@ $comment-text: #636a73
     margin-top: 30px
     .imp-date
       margin-bottom: 15px
+      .month
+        font-size: 12px
+        width: 48px
+        margin-top: 2px
       .date
         text-transform: uppercase
         padding: 10px
@@ -75,14 +137,20 @@ $comment-text: #636a73
         color: $grey
         text-align: center
         .day
-          font-size: 22px
+          font-size: 28px
       .date-details
-        padding: 10px 10px 10px 20px
+        padding: 5px 10px 10px 15px
         color: $light-grey
+        font-size: 16px
+        line-height: 21px
 
 .project-wall
   .role-circle-container
     left: 0px
+.role-circles
+  a.circle-wrapper:hover
+    color: #0088cc
+
 
 .role-portfolio
   width: 100px
@@ -90,7 +158,8 @@ $comment-text: #636a73
   margin-top: 20px
   text-align: center
   .role-title
-    margin-bottom: 10px
+    width: 100px
+    text-transform: uppercase
   .role-cast-pic
     width: 60px
     border: 5px solid $role-circle-border
@@ -114,9 +183,12 @@ $comment-text: #636a73
 .role-filters
   margin-left: 20px
   text-align: center
+  margin-bottom: 15px
   .role-filter
     margin: 5px 5px 
 
+.roles-display-tabs
+  margin-bottom: 30px
 
 .project-comments-container
   background: #D6DFE8
@@ -160,7 +232,7 @@ $comment-text: #636a73
       text-align: center
       overflow: hidden
       text-overflow: ellipsis
-      font-size: 11px
+      font-size: 13px
     
     .circle-measure    
       top: 0
@@ -174,7 +246,7 @@ $comment-text: #636a73
       position: relative
       float: left
       top: 50px
-      width: 65px
+      width: 75px
       text-align: center
       font-size: 12px
 

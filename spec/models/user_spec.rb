@@ -261,6 +261,7 @@ describe User do
 
   context "popular_users" do
     before(:all){
+      clean!(%w{ friendships })
       @p_user_1 = FactoryGirl.create(:user, :name => "p_1")
       @p_user_2 = FactoryGirl.create(:user, :name => "p_2")
       @p_user_3 = FactoryGirl.create(:user, :name => "p_3")
