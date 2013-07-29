@@ -65,6 +65,14 @@ class User < ActiveRecord::Base
   geocoded_by :location   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
 
+
+  scope :popular,
+        select('users.*, count(friendships.id) AS fans_count').
+        joins("inner join friendships on friendships.friend_id = users.id").
+        group("users.id").
+        order("fans_count DESC")
+
+
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
       user.provider = auth.provider
@@ -174,7 +182,8 @@ class User < ActiveRecord::Base
     hash = super(options)
     extra_hash = {
       'profile_pic' => profile_pic,
-      'cover_photo' => cover_photo
+      'cover_photo' => cover_photo,
+      'talent_names' => talent_names
     }
     hash.merge!(extra_hash)
   end
@@ -182,5 +191,55 @@ class User < ActiveRecord::Base
   def attending_events
     attends.where(:attendable_type => 'Event').map(&:attendable)
   end
+
+  def self.popular_users
+    User.popular
+  end
+
+  def self.recently_updated(page = nil, per_page = nil)
+    Kaminari.paginate_array(User.order('updated_at DESC')).page(page).per(per_page)
+  end
+
+  def followed_by_user?(user)
+    followers.includes?(user)
+  end
+
+  def self.filter_all(users = nil, query = nil, location = nil, radius = 100,  talents = nil, page = nil, per_page = nil)
+
+    users = User if users.nil?
+
+    if query
+      users = users.where('users.name like ?', "%#{query}%")
+    end
+
+    if location
+      users = users.near(location, radius)
+    end
+
+    if talents and !talents.empty?
+      talents = [talents] if talents.class.name != 'Array'
+      users = users.joins(:talents).where('talents.name in (?)', talents).uniq
+
+      users = users.select{ |user|
+        user_talents = user.talents.map(&:name).uniq
+        (talents - user_talents).empty?
+      }
+    end
+
+    Kaminari.paginate_array(users).page(page).per(per_page)
+  end
+
+  def as_json(options = {})
+    json = super(options)
+    if options[:check_user].present?
+      # tells if user is following the user
+      json[:user_following] = self.followers.include?(options[:check_user])
+    end
+    # json['profile_pic'] = profile_pic
+    # json['cover_photo'] = cover_photo
+    # json['talent_names'] = talent_names
+    json
+  end
+
 
 end

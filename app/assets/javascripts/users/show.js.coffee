@@ -12,7 +12,7 @@ $(document).ready ->
     if app.fn.check_current_user()
       btn = $(event.target)
       btn.html('Follow')
-
+      console.log 'here'
       url = '/friendships'
 
       if btn.hasClass('unfollow')

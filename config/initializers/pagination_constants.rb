@@ -9,3 +9,6 @@ EVENTS_PER_PAGE_IN_INDEX      = 2
 
 # projects index page
 PROJECTS_PER_PAGE_IN_INDEX    = 3
+
+# users index page
+USERS_PER_PAGE_IN_INDEX    = 3

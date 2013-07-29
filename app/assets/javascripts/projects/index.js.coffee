@@ -117,5 +117,5 @@ $(document).ready ()->
             alert('No projects available')
         else
           alert('Something went wrong, Please try again later')
-        btn.html('Load More') 
+        btn.html('Search') 
 

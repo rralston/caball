@@ -3,9 +3,9 @@ class FriendshipsController < ApplicationController
   load_and_authorize_resource
 
   def create
-    @friendship = current_user.friendships.create!(:friend_id => params[:friend_id])
+    @friendship = current_user.friendships.create(:friend_id => params[:friend_id])
     render :json => { :created =>true,
-                      :follower => @current_user.to_json(),
+                      :follower => current_user.to_json(),
                       :followers_count => @friendship.friend.followers.count,
                       :notice => "You are now following #{User.find(@friendship.friend_id).name}"
                     }

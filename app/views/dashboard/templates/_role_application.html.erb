@@ -42,20 +42,22 @@
     </div>
 
     <div class='applicant-reputation pull-left'>
-      <div class='row text-center'>
-        <%%= user.lovers.length %>
-        <br/>
-        FANS
+
+      <div class="fans">
+        <div class="fans-count regular text-center">
+          <%%= user.lovers.length %>
+        </div>
+        <span>FANS</span>
       </div>
 
       <div class='row buttons text-center'>
-        <a class='btn-view-cover btn-custom btn-grey disabled bold'>
+
+        <div class='btn-view-cover btn-custom btn-cement medium flw'>
           View Cover
-        </a>
-        <br/>
-        <br/>
+        </div>
+
         <%% if(user.resume){ %>
-          <a href='<%%= user.resume.document.url %>' target='_black' class='btn-view-resume btn-custom btn-grey disabled bold'>
+          <a href='<%%= user.resume.document.url %>' target='_black' class='btn-view-resume msg btn-custom btn-cement medium'>
             View Resume
           </a>
         <%% } %>

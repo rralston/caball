@@ -26,5 +26,6 @@ $(document).ready ()->
           else
             alert 'Something went wrong, Please try again.'
           $('.search_please_wait').hide()
+          
   app.fn.initialize_cat_complete_search("#search-events-input", app.fn.search_event_handler)
   

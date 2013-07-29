@@ -1,0 +1,65 @@
+<script type="script/template" id='user_tile_template'>
+
+  <div class="row">
+      <div class="backdrop-cover"></div>
+      <%% if(cover_photo != null){ %>
+        <div class="user-cover-photo" style="background: url(<%%= cover_photo.image.url %>) no-repeat">
+        </div>
+      <%% }else{ %>
+        <div class="user-cover-photo" >
+        </div>
+      <%% } %>
+    </div>
+    <img src="<%%= profile_pic %>" class="img-circle user-photo">
+    <div class="row">
+      <div class="span3 user-details grey-backdrop text-center">
+        <div class="name bold">
+          <a href="/users/2" target="_blank"><%%= name %></a>
+        </div>
+
+        <div class="location light">
+          <div class="location-img-blue"></div>
+          <%%= location %>
+        </div>
+          <div class='user-roles medium'>
+            <%%= _.first(talent_names, 2).join('/ ') %>
+          </div>
+        </div>
+      </div>
+    
+
+    <div class="row white">
+      <div class="about-user pull-left">
+        <div class="about-text regular">
+          <%%= about %>
+        </div>
+      </div>
+
+      <div class="user-reputation pull-left">
+        <div class="fans">
+          <div class="fans-count regular text-center">
+            <%%= followers.length %>
+          </div>
+          <span>FANS</span>
+        </div>
+
+        <div class="row buttons text-center">
+          <%% if (user_following){ %>
+            <div class="btn-follow-user btn-custom btn-cement medium flw unfollow">
+              Following
+            </div>
+          <%% }else{ %>
+            <div class="btn-follow-user btn-custom btn-cement medium flw">
+              Follow
+            </div>
+          <%% } %>
+          <div class="btn-message msg btn-custom btn-cement medium send-generic-message" data-message-subject="Hey, wassup..!" data-message-header="Message user - <%%= name %>" data-message-recipients="<%%= email %>">
+            Message
+          </div>
+          
+        </div>
+        
+      </div>
+    </div>
+
+</script>

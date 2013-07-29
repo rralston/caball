@@ -5,13 +5,46 @@ class UsersController < ApplicationController
   
   def index
     @talents = User.types
+
+    # if page is present, it indicates that request is for load more
+    if params[:page].present?
+      page = params[:page]
+      type = params[:load_type]
+      
+      if type == 'recent'
+        @users = User.recently_updated(page, USERS_PER_PAGE_IN_INDEX)
+      
+      elsif type == 'search'
+
+        if params[:roles]
+          params[:roles].delete('')
+        end
+
+        roles    = params[:roles]
+        search   = params[:search]
+        location = params[:location]
+        distance = 100
+
+        if params[:distance].present?
+          distance = params[:distance]
+        end
+
+        to_be_filtered_users = nil
+
+        if params[:people].present?
+          # params[:people] contains followers or friends which are methods on user.
+          to_be_filtered_users = current_user.send(params[:people])
+        end
+
+        @users = User.filter_all(to_be_filtered_users, search, location, distance, roles, page, USERS_PER_PAGE_IN_INDEX)
+      end
+    else
+      @users = User.recently_updated
+    end
+
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => {
-                   :success => true,
-                   :html => render_to_string(:partial => '/users/user_search_results.html.erb', 
-                                             :layout => false, :formats => [:html], :locals => {} ) 
-                  } }
+      format.json { render :json => @users.to_a.to_json(:include => :followers, :check_user => current_user) }
     end
   end
   

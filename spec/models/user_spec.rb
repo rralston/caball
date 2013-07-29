@@ -259,4 +259,60 @@ describe User do
     specify { @attending_user.attending_events.should =~ [@event1, @event2] }
   end
 
+  context "popular_users" do
+    before(:all){
+      @p_user_1 = FactoryGirl.create(:user, :name => "p_1")
+      @p_user_2 = FactoryGirl.create(:user, :name => "p_2")
+      @p_user_3 = FactoryGirl.create(:user, :name => "p_3")
+
+      @follower_x = FactoryGirl.create(:user)
+
+      FactoryGirl.create(:friendship, :user => @follower_x, :friend => @p_user_1)
+      FactoryGirl.create(:friendship, :user => @follower_x, :friend => @p_user_1)
+      FactoryGirl.create(:friendship, :user => @follower_x, :friend => @p_user_1)
+      FactoryGirl.create(:friendship, :user => @follower_x, :friend => @p_user_1)
+      FactoryGirl.create(:friendship, :user => @follower_x, :friend => @p_user_1)
+      FactoryGirl.create(:friendship, :user => @follower_x, :friend => @p_user_1)
+
+      FactoryGirl.create(:friendship, :user => @follower_x, :friend => @p_user_2)
+      FactoryGirl.create(:friendship, :user => @follower_x, :friend => @p_user_2)
+      FactoryGirl.create(:friendship, :user => @follower_x, :friend => @p_user_2)
+      FactoryGirl.create(:friendship, :user => @follower_x, :friend => @p_user_2)
+
+      FactoryGirl.create(:friendship, :user => @follower_x, :friend => @p_user_3)
+      FactoryGirl.create(:friendship, :user => @follower_x, :friend => @p_user_3)
+    }
+
+    specify { User.popular_users.should == [@p_user_1, @p_user_2, @p_user_3] }
+    
+  end
+
+  context "search" do
+    before(:all){
+      @search_user1 = FactoryGirl.create(:user, :name => 'Search User', :location => 'Bangalore', :talents => [
+          FactoryGirl.create(:talent, :name => 'Actor'),
+          FactoryGirl.create(:talent, :name => 'Audio')
+        ])
+      @search_user2 = FactoryGirl.create(:user, :name => 'Search user 2', :location => 'Indira Nagar, Bangalore', :talents => [
+          FactoryGirl.create(:talent, :name => 'Actor'),
+          FactoryGirl.create(:talent, :name => 'Costumes'),
+          FactoryGirl.create(:talent, :name => 'Lighting')
+        ])
+      @search_user3 = FactoryGirl.create(:user, :location => 'Hyderabad, Andhra Pradesh', :talents => [
+          FactoryGirl.create(:talent, :name => 'Lighting'),
+          FactoryGirl.create(:talent, :name => 'Costumes')
+        ])
+    }
+
+    specify { User.filter_all(nil, 'search', nil, nil, ['Costumes', 'Lighting']).should == [@search_user2] }
+    specify { User.filter_all(nil, 'search', nil, nil, []).should =~ [@search_user2, @search_user1] }
+    specify { User.filter_all(nil, '', nil, nil, ['Costumes', 'Lighting']).should =~ [@search_user2, @search_user3] }
+
+    specify { User.filter_all(User.where(:id => [@search_user2.id, @search_user3.id]), '',nil, nil, ['Costumes', 'Lighting']).should =~ [@search_user2, @search_user3] }
+
+
+    specify { User.filter_all(nil, nil, 'Bangalore', 700, ['Costumes', 'Lighting']).should == [@search_user2, @search_user3] }
+  end
+
+
 end
