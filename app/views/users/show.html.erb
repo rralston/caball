@@ -325,7 +325,7 @@
   app.current_user = <%= raw current_user.to_json() %>
 
   app.blogs = new app.collections.blogs()
-  app.blogs.reset(<%= raw @user.blogs.to_json(:include => [:user, :likes]) %>)
+  app.blogs.reset(<%= raw @user.blogs.to_json(:include => [:user, :likes], :check_user => current_user) %>)
   app.blogs_view = new app.views.blogs({ collection: app.blogs })
   $('#comments_div').html(app.blogs_view.render().el)
 
@@ -368,6 +368,18 @@
     
     $('#comment_please_wait').hide()
     $('textarea#blog_content').attr('disabled', false).val('')
+    $('#blog_video_attributes_url').attr('disabled', false).val('')
+    $('#blog_photo_attributes_image').attr('disabled', false)
+  });
+
+
+  // listen to the blog error event event
+  $(document).on('blogError', function(event){
+    alert(event.message)
+    $('#comment_please_wait').hide()
+    $('textarea#blog_content').attr('disabled', false)
+    $('#blog_video_attributes_url').attr('disabled', false)
+    $('#blog_photo_attributes_image').attr('disabled', false)
   });
 
 

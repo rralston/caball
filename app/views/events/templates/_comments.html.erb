@@ -11,9 +11,36 @@
           <%= c.hidden_field :commentable_type, :value => 'Event' %>
           <%= c.hidden_field :commentable_id, :value => @event.id %>
           <%= c.text_area :content, :placeholder => 'Add your event updates here'  %>
-          <%= c.fields_for :photo, Photo.new do |p| %>
-            <%= p.file_field :image %>
-          <% end %>
+
+          <div class="writeico">
+            <ul class="wrtico">
+              <li>
+                <a href="#video_form_tab" data-toggle="tab">
+                  <img src="/assets/writev.png" alt="">
+                </a>
+              </li>
+              <li>
+                <a href="#image_form_tab" data-toggle="tab">
+                  <img src="/assets/writep.png" alt="">
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class='tab-content'>
+            <div class='tab-pane' id='image_form_tab'>
+              <%= c.fields_for :photo, Photo.new do |p| %>
+                <%= p.file_field :image %>
+              <% end %>
+            </div>
+
+            <div class='tab-pane' id='video_form_tab'>
+              <%= c.fields_for :video, Video.new do |v| %>
+                <%= v.text_field :url, :placeholder => 'Video URL' %>
+              <% end %>
+            </div>
+          </div>
+            
         <% end %>
       </div>
       <div class='row'>

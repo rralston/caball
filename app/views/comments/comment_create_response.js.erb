@@ -1,4 +1,15 @@
-$.event.trigger({
-  type: 'newComment',
-  comment: <%= raw @comment.to_json(:include => [:user, :likes]) %>
-});
+<% if @comment.nil? %>
+
+  $.event.trigger({
+    type: 'commentError',
+    message: "<%= @error %>"
+  });  
+
+<% else %>
+
+  $.event.trigger({
+    type: 'newComment',
+    comment: <%= raw @comment.to_json(:include => [:user, :likes]) %>
+  });
+
+<% end %>

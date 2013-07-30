@@ -20,8 +20,18 @@ class Comment < ActiveRecord::Base
       'commentable' => commentable,
       'likes_count' => likes.count,
       'liker_ids' => likers.uniq.map(&:id),
-      'photo' => photo.try(:image)
+      'photo' => photo.try(:image),
+      'video' => video
     }
     hash.merge!(extra_hash)
+  end
+
+  def as_json(options = {})
+    json = super(options)
+    if options[:check_user].present?
+      # tells if the user is attending particular event.
+      json[:user_following] = likers.uniq.map(&:id).include?(options[:check_user].id)
+    end
+    json
   end
 end

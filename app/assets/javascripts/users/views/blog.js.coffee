@@ -11,9 +11,9 @@ app.views.blog = Backbone.View.extend
 
   like_blog: (event) ->
     _this = this
-    if app.current_user != null
-      if app.fn.check_if_current_user_included(this.model.get('liker_ids'))
-        alert 'you have already liked this post'
+    if app.fn.check_current_user()
+      if _this.model.get('user_following')
+        _this.unlike_blog(event)
       else
         $.ajax
           url: '/likes.json'
@@ -27,4 +27,22 @@ app.views.blog = Backbone.View.extend
               _this.model.set(resp)
               _this.render()
             else
-              alert 'Something went wrong, Please try laters'
+              alert 'Something went wrong, Please try later'
+
+  unlike_blog: (event)->
+    _this = this
+    btn = $(event.target)
+    if app.fn.check_current_user()
+      $.ajax
+        url: '/likes/unlike'
+        type: 'POST'
+        data:
+          like:
+            loveable_id: _this.model.get('id')
+            loveable_type: 'Blog'
+        success: (resp) ->
+          if resp != 'false'
+            _this.model.set(resp)
+            _this.render()
+          else
+            alert 'Something went wrong, Please try later'
