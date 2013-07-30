@@ -5,21 +5,45 @@ class ProjectsController < ApplicationController
   def index
     search(Project, "projects")
 
-    if params[:status].present? 
-      status = params[:status]
+    # if page is present, it indicates that request is for load more
+    if params[:page].present?
       page = params[:page]
-      if status == 'index'
-        @projects = Project.recent_projects(params[:page], PROJECTS_PER_PAGE_IN_INDEX)
-      elsif status == 'search'
-        # project = Project.search_all_with_pagination(params[:query], page, PROJECTS_PER_PAGE_IN_INDEX)
+      type = params[:load_type]
 
-        projects = Project.search_with_roles(params[:roles], page, PROJECTS_PER_PAGE_IN_INDEX)
+      if type == 'recent'
+        @projects = Project.recent_projects(page, PROJECTS_PER_PAGE_IN_INDEX)
+      
+      elsif type == 'search'
+        
+        params[:roles].delete('') if params[:roles] # delete empty string that is appended in few cases
+        params[:genres].delete('') if params[:genres]
+        params[:types].delete('') if params[:types]
+
+        roles    = params[:roles]
+        types    = params[:types]
+        genres   = params[:genres]
+        search   = params[:search]
+        location = params[:location]
+        # default distance 100
+        distance = params[:distance].present? ? params[:distance] : 100
+
+        to_be_filtered_projects = nil
+
+        if params[:people].present?
+          # projects_by_friends / projects_by_followers are the possible cases.
+          to_be_filtered_projects = Project.send("projects_by_#{params[:people]}", current_user)
+        end
+
+        @projects = Project.search_all(to_be_filtered_projects, search, roles, genres, types, location, distance, page, 6)
+
+        # @projects = Project.search_all(nil, nil, nil, nil, nil, nil, nil, 1, PROJECTS_PER_PAGE_IN_INDEX)
       end
+
     end
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => Project.custom_json(projects) }
+      format.json { render :json => Project.custom_json(@projects, current_user) }
     end
   end
   
@@ -69,7 +93,6 @@ class ProjectsController < ApplicationController
   end
   
   def create
-    @project.genre   = params[:project][:genre].to_json()
 
     @project.user_id = current_user.id
     respond_to do |format|
@@ -90,8 +113,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    params[:project][:genre] = params[:project][:genre].to_json()
-
+    
     respond_to do |format|
       if @project.update_attributes(params[:project])
         format.html { redirect_to @project, :notice => @project.title + ' Project was successfully updated.' }

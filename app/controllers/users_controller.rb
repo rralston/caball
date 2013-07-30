@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       elsif type == 'search'
 
         if params[:roles]
-          params[:roles].delete('')
+          params[:roles].delete('') # delete empty string that is appended in few cases
         end
 
         roles    = params[:roles]

@@ -1,7 +1,8 @@
 class Comment < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller && controller.current_user }
-  attr_accessible :content, :user, :photo_attributes, :commentable_type, :commentable_id
+  attr_accessible :content, :user, :photo_attributes, :commentable_type, :commentable_id,
+                  :video_attributes
 
   has_many :likes, :as => :loveable
   has_many :likers, :through => :likes, :source => :user
@@ -9,8 +10,9 @@ class Comment < ActiveRecord::Base
   belongs_to :commentable, :polymorphic => true
 
   has_one :photo, :as => :imageable, :dependent => :destroy
+  has_one :video, :as => :videoable, :dependent => :destroy
 
-  accepts_nested_attributes_for :photo
+  accepts_nested_attributes_for :photo, :video
 
   def serializable_hash(options)
     hash = super(options)

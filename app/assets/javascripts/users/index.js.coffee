@@ -85,7 +85,7 @@ $(document).ready ()->
     btn.html('Please Wait..')
 
     $.ajax
-      url: 'users.json'
+      url: '/users.json'
       data: data
 
       success: (resp) ->

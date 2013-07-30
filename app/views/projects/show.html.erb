@@ -60,7 +60,7 @@
             
             <div class='span7 project-genres light'>
               <ul>
-                <% JSON.parse(@project.genre).each do |genre| %>
+                <% @project.genre.each do |genre| %>
                   <% if genre.present? %>
                     <li> <%= genre %> </li>
                   <% end %>
@@ -70,8 +70,10 @@
 
             <div class='span7 project-types'>
               <ul>
-                <% if @project.is_type.present? %>
-                  <li class='badge badge-custom-green'> <%= @project.is_type %> </li>
+                <% @project.is_type.each do |type| %>
+                  <% if type.present? %>
+                    <li class='badge badge-custom-green'> <%= type %> </li>
+                  <% end %>
                 <% end %>
               </ul>
             </div>

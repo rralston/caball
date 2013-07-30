@@ -40,7 +40,7 @@ class Ability
       blog.try(:user) == user
     end
 
-    can :create, Like do
+    can [:create, :unlike], Like do
       user.persisted?
     end
     can :destroy, Like do |like|

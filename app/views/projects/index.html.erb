@@ -27,8 +27,11 @@
     <form action="" class=" srchfrm span">
       <input type="text" id='search-projects-input'>
     </form>
-    
+    <div class="row search_please_wait text-center light" style="display: none;margin-top: 10px;">
+        Please Wait While we search...
+    </div>  
   </div>
+
 </div>
 
 <!--========= main content starts======------>
@@ -42,20 +45,23 @@
         <h2 class='regular'>Advanced Search</h2>
         <div class='srchopts'>
           <div class="srchsect">
+
             <div class="srchopt">
-              <div class="chkboxwrap">
-                <input type="checkbox" id="follows_you" name='people' value='followers' />
-                <label class="chklabel" for="follows_you"> </label>
+              <div class="rdboxwrap">
+                <input type="radio" name='people' value='followers' id='followers' />
+                <label class="rdlabel" for="followers"></label>
               </div>
               <span class="chktxt">Follows You</span>
               
             </div>
+
             <div class="srchopt">
-              <div class="chkboxwrap">
-                <input type="checkbox" id="you_follow" name='people' value='friends' />
-                <label class="chklabel" for="you_follow"></label>
+              <div class="rdboxwrap">
+                <input type="radio" name='people' value='friends' id='friends' />
+                <label class="rdlabel" for="friends"></label>
               </div>
-              <span class="chktxt">You Follow</span>
+              <span class="chktxt">You follow</span>
+              
             </div>
           </div>
         </div>
@@ -248,18 +254,23 @@
 </div>
 <!--========= main content ends======-->
 
-
+<%= render :partial => 'conversations/send_new_message_modal' %>
 <%= render :partial => 'projects/templates/project' %>
 
 <script type="text/javascript">
 $(document).ready(function(){
  
-  app.state = 'index' // used to know if the user is on index itself or if he started searching.
+  app.fn.initialize_send_generic_message()
+
+  app.status = 'index' // used to know if the user is on index itself or if he started searching.
+
+  app.current_user = <%= raw current_user.to_json() %>
+
 
   popular_projects = new app.collections.projects()
   popular_projects_view = new app.views.projects({ collection: popular_projects })
 
-  popular_projects.reset(<%= raw Project.custom_json(Project.sample_popular_projects) %>)
+  popular_projects.reset(<%= raw Project.custom_json(Project.sample_popular_projects, current_user) %>)
 
   $('#popular_projects_container').html(popular_projects_view.render().el)
 
@@ -267,7 +278,7 @@ $(document).ready(function(){
   app.recent_projects = new app.collections.projects()
   recent_projects_view = new app.views.projects({ collection: app.recent_projects })
 
-  app.recent_projects.reset(<%= raw Project.custom_json(Project.recent_projects(1, PROJECTS_PER_PAGE_IN_INDEX)) %>)
+  app.recent_projects.reset(<%= raw Project.custom_json(Project.recent_projects(1, PROJECTS_PER_PAGE_IN_INDEX), current_user) %>)
 
   $('#recent_projects_container').html(recent_projects_view.render().el)
 

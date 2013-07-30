@@ -18,7 +18,7 @@ class LikesController < ApplicationController
 	end
 
 	def unlike
-		@like = current_user.likes.where(loveable_id: params[:like][:loveable_id], loveable_type: params[:like][:loveable_type])
+		@like = current_user.likes.where(loveable_id: params[:like][:loveable_id], loveable_type: params[:like][:loveable_type]).first
 		@like.destroy
 		respond_to do |format|
 			format.json { render :text => true }

@@ -13,40 +13,69 @@ $(document).ready ()->
     prevText:' Prev'
     slideMargin: 5
 
+  app.fn.extend_params_data = (data)->
+    form = $('#projects_search_form')
+
+    form_data = app.fn.serializeJSON(form)
+    _.extend(data, form_data)
+
+    if data.distance != ''
+      data['location'] = app.current_user_location
+
+    # if something was searched in the search bar previously, preserve it and apply filters on it.
+    if app.params_used and app.params_used.search
+      data[app.params_used.type] = app.params_used.search
+
+    data
+
+  
+
   reset_results = (resp)->
     app.result_projects.reset(resp)
     $('#all_projects').html(app.result_projects_view.render().el)
     $('.btn-load_more').attr('data-next-page', 2)
 
+  
+
   # handler called when the user searches for a string in the search bar
   app.fn.search_event_handler = (search_object) ->
     if search_object.value != ''
       $('.search_please_wait').show()
+
+      type = search_object.type
+
+      if type == 'location'
+        data = {
+          location: search_object.value,
+          load_type: 'search',
+          page: 1
+        }
+      else
+        data = {
+          search: search_object.value,
+          load_type: 'search',
+          page: 1
+        }
+      $('.search_please_wait').show()
       $.ajax
         url: "/projects.json"
         type: 'GET'
-        data:
-          search: search_object.value
+        data: data
         success: (resp) ->
           if resp != 'false'
             
             if resp.length > 0
-              app.state = 'search'
+              app.status = 'search'
+              app.params_used = {}
               app.params_used.search = search_object.value
               app.params_used.type = search_object.type
               reset_results(resp)
+              $('#projects_search_form')[0].reset()
             else
               alert('No projects available')
-
-            # $('.search_word').html(search_object.value)
-
-            # if search_object.type == 'location'
-            #   $('.search_type').html('Events in: ')
-            # else
-            #   $('.search_type').html('Events wid keyword: ')
           else
             alert 'Something went wrong, Please try again.'
-          # $('.search_please_wait').hide()
+          $('.search_please_wait').hide()
 
 
   app.fn.initialize_cat_complete_search("#search-projects-input", app.fn.search_event_handler)
@@ -57,28 +86,37 @@ $(document).ready ()->
     btn = $(event.target)
     btn.html('Please Wait..')
     page_number = parseInt(btn.attr('data-next-page'))
+    
+    # initialize data
     data = {
-      status: app.state,
-      page: page_number 
+      status: app.status,
+      page: page_number,
+      load_type: 'recent'
     }
-    if app.state == 'search'
-      form_data = app.fn.serializeJSON(form)
-      _.extend(data, form_data)
+    
+    # if status is searching, then take the form elements and put in params.
+    if app.status == 'search'
+      data.load_type = 'search'
+      data = app.fn.extend_params_data(data)
 
     $.ajax
-      url: 'projects.json'
+      url: '/projects.json'
       data: data
 
       success: (resp) ->
+        console.log resp
         if resp != 'false'
           if resp.length > 0
             new_project_models = _.map(resp, (project_json)->
               new app.models.project(project_json)
             )
-            if app.state == 'index'
+            if app.status == 'index'
               app.recent_projects.add(new_project_models)
+              console.log 'added projects'
+              console.log new_project_models
             else
               app.result_projects.add(new_project_models)
+            
             # increment page number on the loadmore button
             btn.attr('data-next-page', ++page_number)
           else
@@ -90,23 +128,24 @@ $(document).ready ()->
       
 
   $('body').on 'click', '#btn-search_projects', ()->
-
+    $('.search_please_wait').show()
     form = $('#projects_search_form')
     btn = form.find('input[type=submit]')
-    app.state = 'search'
-    form_data = app.fn.serializeJSON(form)
+
+    app.status = 'search'
 
     data = {
-      status: app.state,
-      page: 1
+      page: 1,
+      load_type: 'search'
     }
-    _.extend(data, form_data)
+
+    data =  app.fn.extend_params_data(data)
 
     btn.attr('disabled', 'disabled')
     btn.html('Please Wait..')
 
     $.ajax
-      url: 'projects.json'
+      url: '/projects.json'
       data: data
 
       success: (resp) ->
@@ -118,4 +157,5 @@ $(document).ready ()->
         else
           alert('Something went wrong, Please try again later')
         btn.html('Search') 
+        $('.search_please_wait').hide()
 

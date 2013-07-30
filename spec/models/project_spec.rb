@@ -120,26 +120,129 @@ describe Project do
     specify { Project.order_by_popularity([@project2, @project1, @project3]).should == [@project1, @project3, @project2] }
   end
 
-  context "search project" do
-    let!(:roles) {
-      [
-        FactoryGirl.create(:role, :name => 'role1'),
-        FactoryGirl.create(:role, :name => 'role2'),
-        FactoryGirl.create(:role, :name => 'role3'),
-        FactoryGirl.create(:role, :name => 'role4'),
-        FactoryGirl.create(:role, :name => 'role5'),
-        FactoryGirl.create(:role, :name => 'role6'),
-        FactoryGirl.create(:role, :name => 'role7'),
-        FactoryGirl.create(:role, :name => 'role1'),
-        FactoryGirl.create(:role, :name => 'role2'),
-        FactoryGirl.create(:role, :name => 'role3')
+  context "popular projects" do
+    before(:all){
+      @pop_project1 = FactoryGirl.create(:project)
+      @pop_project2 = FactoryGirl.create(:project)
+      @pop_project3 = FactoryGirl.create(:project)
+
+      @likes = [
+        FactoryGirl.create(:like, :loveable_type => 'Project', :loveable_id => @pop_project2.id, :user => FactoryGirl.create(:user)),
+        FactoryGirl.create(:like, :loveable_type => 'Project', :loveable_id => @pop_project2.id, :user => FactoryGirl.create(:user)),
+        FactoryGirl.create(:like, :loveable_type => 'Project', :loveable_id => @pop_project2.id, :user => FactoryGirl.create(:user)),
+        FactoryGirl.create(:like, :loveable_type => 'Project', :loveable_id => @pop_project2.id, :user => FactoryGirl.create(:user)),
+        FactoryGirl.create(:like, :loveable_type => 'Project', :loveable_id => @pop_project2.id, :user => FactoryGirl.create(:user)),
+        FactoryGirl.create(:like, :loveable_type => 'Project', :loveable_id => @pop_project2.id, :user => FactoryGirl.create(:user)),
+        FactoryGirl.create(:like, :loveable_type => 'Project', :loveable_id => @pop_project2.id, :user => FactoryGirl.create(:user)),
+        
+        FactoryGirl.create(:like, :loveable_type => 'Project', :loveable_id => @pop_project1.id, :user => FactoryGirl.create(:user)),
+        FactoryGirl.create(:like, :loveable_type => 'Project', :loveable_id => @pop_project1.id, :user => FactoryGirl.create(:user)),
+        FactoryGirl.create(:like, :loveable_type => 'Project', :loveable_id => @pop_project1.id, :user => FactoryGirl.create(:user)),
+        FactoryGirl.create(:like, :loveable_type => 'Project', :loveable_id => @pop_project1.id, :user => FactoryGirl.create(:user)),
+        FactoryGirl.create(:like, :loveable_type => 'Project', :loveable_id => @pop_project1.id, :user => FactoryGirl.create(:user)),
+        
+        FactoryGirl.create(:like, :loveable_type => 'Project', :loveable_id => @pop_project3.id, :user => FactoryGirl.create(:user)),
+        FactoryGirl.create(:like, :loveable_type => 'Project', :loveable_id => @pop_project3.id, :user => FactoryGirl.create(:user)),
+        FactoryGirl.create(:like, :loveable_type => 'Project', :loveable_id => @pop_project3.id, :user => FactoryGirl.create(:user)),
+        FactoryGirl.create(:like, :loveable_type => 'Project', :loveable_id => @pop_project3.id, :user => FactoryGirl.create(:user))
       ]
     }
-    let!(:roles_project_1) { FactoryGirl.create(:project, :roles => roles ) }
-    let!(:roles_project_2) { FactoryGirl.create(:project, :roles => roles[7..9] ) }
 
-    specify { Project.search_with_roles(roles[0..6].map(&:name)).should == [roles_project_1] }
-    specify { roles_project_2.super_roles_needed.should =~ ['role1', 'role2', 'role3'] }
+    specify { Project.popular_projects.first(3).should == [@pop_project2, @pop_project1, @pop_project3] }
+  end
+
+  context "search project" do
+    before(:all){
+      @roles =
+        [
+          FactoryGirl.create(:role, :name => 'role1'),
+          FactoryGirl.create(:role, :name => 'role2'),
+          FactoryGirl.create(:role, :name => 'role3'),
+          FactoryGirl.create(:role, :name => 'role4'),
+          FactoryGirl.create(:role, :name => 'role5'),
+          FactoryGirl.create(:role, :name => 'role6'),
+          FactoryGirl.create(:role, :name => 'role7'),
+          FactoryGirl.create(:role, :name => 'role8'),
+          FactoryGirl.create(:role, :name => 'role9'),
+          FactoryGirl.create(:role, :name => 'role10')
+        ]
+      @roles_project_1 = FactoryGirl.create(:project, 
+                                :title => 'im project',
+                                :roles => [
+                                    FactoryGirl.create(:role, :name => 'role1'),
+                                    FactoryGirl.create(:role, :name => 'role2'),
+                                    FactoryGirl.create(:role, :name => 'role3'),
+                                    FactoryGirl.create(:role, :name => 'role4'),
+                                    FactoryGirl.create(:role, :name => 'role5'),
+                                    FactoryGirl.create(:role, :name => 'role6')
+                                  ],
+                                :location => 'Hyderabad' 
+                              )
+
+      @roles_project_2 = FactoryGirl.create(:project, 
+                                :title => 'search me again',
+                                :roles => [
+                                    FactoryGirl.create(:role, :name => 'role3'),
+                                    FactoryGirl.create(:role, :name => 'role4'),
+                                    FactoryGirl.create(:role, :name => 'role5'),
+                                    FactoryGirl.create(:role, :name => 'role6')
+                                  ],
+                                :location => 'Bangalore'
+                              )
+      @roles_project_2.genre_list = 'action, adventure, comedy'
+      @roles_project_2.is_type_list = 'romance, fiction'
+      @roles_project_2.save
+      @roles_project_3 = FactoryGirl.create(:project, 
+                                :title => 'search me',
+                                :roles => [
+                                    FactoryGirl.create(:role, :name => 'role5'),
+                                    FactoryGirl.create(:role, :name => 'role6')
+                                  ],
+                                :location => 'Bangalore'
+                              )
+      @roles_project_3.genre_list = 'action, adventure, thriller'
+      @roles_project_3.is_type_list = 'scifi, fiction'
+      @roles_project_3.save
+    }
+      
+
+    # specify { Project.search_with_roles(@roles[0..6].map(&:name)).should == [@roles_project_1] }
+    # specify { @roles_project_2.super_roles_needed.should =~ ['role1', 'role2', 'role3'] }
+
+    specify { 
+      Project.search_all(nil, nil, ['role5', 'role6'], ['action'], ['fiction'], 'bangalore', nil, 1, 3).
+        should =~ [@roles_project_2, @roles_project_3]
+    }
+
+    specify { 
+      Project.search_all(nil, nil, ['role5', 'role6'], nil, nil, 'bangalore', 800, 1, 3).
+        should =~ [@roles_project_1, @roles_project_2, @roles_project_3]
+    }
+
+    specify { 
+      Project.search_all(nil, 'search', nil, nil, nil, nil, nil, 1, 3).
+        should =~ [@roles_project_2, @roles_project_3]
+    }
+
+    specify { 
+      Project.search_all(nil, 'search', ['role5', 'role6'], nil, nil, nil, nil, 1, 3).
+        should =~ [@roles_project_2, @roles_project_3]
+    }
+
+    specify { 
+      Project.search_all(nil, 'search', ['role5', 'role6'], ['adventure', 'thriller'], nil, nil, nil, 1, 3).
+        should == [@roles_project_3]
+    }
+
+    specify { 
+      Project.search_all(nil, 'search', ['role5', 'role6'], ['adventure', 'action'], ['fiction', 'romance'], nil, nil, 1, 3).
+        should == [@roles_project_2]
+    }
+
+    specify { 
+      Project.search_all(nil, nil , ['role4', 'role5', 'role6'], nil, nil, nil, nil, 1, 3).
+        should =~ [@roles_project_1, @roles_project_2]
+    }
   end
 
   context "recent projects" do

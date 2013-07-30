@@ -235,9 +235,6 @@ class User < ActiveRecord::Base
       # tells if user is following the user
       json[:user_following] = self.followers.include?(options[:check_user])
     end
-    # json['profile_pic'] = profile_pic
-    # json['cover_photo'] = cover_photo
-    # json['talent_names'] = talent_names
     json
   end
 

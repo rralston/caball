@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130725090518) do
+ActiveRecord::Schema.define(:version => 20130730070830) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -190,8 +190,6 @@ ActiveRecord::Schema.define(:version => 20130725090518) do
     t.datetime "updated_at",   :null => false
     t.string   "status"
     t.boolean  "featured"
-    t.string   "is_type"
-    t.string   "genre"
     t.string   "location"
     t.float    "latitude"
     t.float    "longitude"

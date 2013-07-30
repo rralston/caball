@@ -1,6 +1,9 @@
 class Project < ActiveRecord::Base
   include PublicActivity::Model
   tracked
+
+  acts_as_taggable_on :genre, :is_type
+
   belongs_to :user
   has_many :likes, :as => :loveable, :dependent => :destroy
   has_many :roles, :dependent => :destroy
@@ -13,15 +16,22 @@ class Project < ActiveRecord::Base
 
 
   attr_accessible :title, :description, :start, :end, :featured, :roles_attributes,
-                  :photos_attributes, :videos_attributes, :status, :genre, :is_type,
+                  :photos_attributes, :videos_attributes, :status, :genre, :is_type, :genre_list, :is_type_list,
                   :thoughts, :compensation, :location, :headline, :project_dates_attributes, :union
-  accepts_nested_attributes_for :roles, :photos, :videos, :project_dates, :allow_destroy => true  
+  
+  accepts_nested_attributes_for :roles, :photos, :videos, :project_dates, :genre, :allow_destroy => true  
   validates_presence_of :title, :description, :message => "is required"
   validates :headline, :length => { :maximum => 300 }
   
   geocoded_by :location   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
   
+  scope :popular,
+    select('projects.*, count(likes.id) AS fans_count').
+    joins("inner join likes on likes.loveable_id = projects.id AND likes.loveable_type = 'Project' ").
+    group("projects.id").
+    order("fans_count DESC")
+
   def roles_percent
     if roles.size > 0
       ((filled_roles.size.to_f / roles.size.to_f) * 10).to_i
@@ -82,6 +92,10 @@ class Project < ActiveRecord::Base
     roles_to_return
   end
 
+  def liker_ids
+    fans.map(&:id)
+  end
+
   def roles_for_dashboard
     super_roles = self.roles.group_by(&:name).keys
     roles_to_return = []
@@ -123,20 +137,19 @@ class Project < ActiveRecord::Base
   end
 
   def self.projects_by_followers(user)
-    user.followers.map(&:projects).flatten
+    Project.where('projects.user_id in (?)', user.followers.pluck('friendships.user_id'))
   end
 
   def self.projects_by_friends(user)
-    user.friends.map(&:projects).flatten
+    Project.where('projects.user_id in (?)', user.friends.pluck('friendships.friend_id'))
   end
 
   def self.featured_projects
     Project.where(:featured => true)
   end
 
-  # TODO: Change this method to return popular projects
   def self.popular_projects
-    Project.where(:featured => true)
+    Project.popular
   end
 
   def self.recently_launched
@@ -144,11 +157,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.recent_projects(page = nil, per_page = 10)
-    if page.nil?
-      recently_launched
-    else
-      Kaminari.paginate_array(recently_launched).page(page).per(per_page)
-    end
+    Kaminari.paginate_array(recently_launched).page(page).per(per_page)
   end
 
   def self.order_by_new(projects)
@@ -167,29 +176,6 @@ class Project < ActiveRecord::Base
     }
   end
 
-  # TODO: Can try to optimize this
-  def self.search_with_roles(roles, page=nil, per_page = nil)
-    roles = [roles] if roles.class.name != 'Array'
-    
-    @projects_with_roles ||= Project.joins(:roles).includes(:roles).where(:roles => { :name => roles }).uniq
-    
-    @result_projects_by_roles ||= @projects_with_roles.select{ |project|
-      project_roles = project.roles.map(&:name).uniq
-      (roles - project_roles).empty?
-    }
-
-    Kaminari.paginate_array(@result_projects_by_roles).page(page).per(1)
-
-  end
-
-  def self.search_with_genres(genres)
-    projects = Project.joins(:roles).includes(:roles).where(:roles => { :name => roles }).uniq
-    result_projects = projects.select{ |project|
-      project_roles = project.roles.map(&:name).uniq
-      (roles - project_roles).empty?
-    }
-  end
-
   def self.sample_featured_projects
     featured_projects.first(4)
   end
@@ -202,18 +188,6 @@ class Project < ActiveRecord::Base
     roles.map(&:name).uniq
   end
 
-  def self.in_location(query)
-    Project.near(query)
-  end
-
-  def self.with_keyword(word)
-    Project.where("title like ?", "%#{word}%")
-  end
-
-  def self.search_all(query)
-    result = Project.in_location(query) + Project.with_keyword(query)
-    result
-  end
 
   def self.search_types(types)
     query = type.join('%')
@@ -225,22 +199,57 @@ class Project < ActiveRecord::Base
     Project.where('genre like ?', "%#{query}%")
   end
 
-  def self.search_all_with_pagination(query, roles, tags, types, page, per_page = nil)
-    
-    @projects ||= do_it
-    def do_it
-      projects = Project.search_all(query)
-      projects = projects & Project.search_roles(roles) if roles.present?
-      projects = projects & Project.search_types(types) if types.present?
-      projects = projects & Project.search_genres(genres) if genres.present?
+  def self.search_all(projects, query, roles, genres, types, location, radius, page, per_page = nil)
 
-    end 
+    projects = Project if (projects.nil? || projects.empty?)
+
+    if query.present?
+      projects = projects.where('projects.title like ?', "%#{query}%")
+    end
+
+    if roles.present?
+      roles = [roles].flatten
+      projects = projects.joins(:roles).where(:roles => {:name => roles}).group('projects.id').having("COUNT(DISTINCT roles.name) = #{roles.size}")
+    end
+
+    if genres.present?
+      # if in case genres is a string tis would help to convert it to array
+      # or if it is array, it wil flatten.
+      genres = [genres].flatten
+      projects = projects.tagged_with(genres, :on => :genre)
+    end
+
+    if types.present?
+      types = [types].flatten
+      projects = projects.tagged_with(types, :on => :is_type)
+    end
+
+    if location.present?
+      radius = 100 if radius.nil?
+      projects = projects.near(location, radius)
+    end
+
 
     Kaminari.paginate_array( projects ).page(page).per(per_page)
   end
 
+  def as_json(options = {})
+    json = super(options)
+    if options[:check_user].present?
+      # tells if the user is following particular project
+      json[:user_following] = self.liker_ids.include?(options[:check_user].id)
+    end
 
-  def self.custom_json(projects)
+    if options[:votes_data_for_user].present?
+      user = options[:votes_data_for_user]
+      json[:voted_by_user] = voted_by_user?(user)
+      json[:voted_type_by_user] = voted_type_by_user(user)
+    end
+    json
+  end
+
+
+  def self.custom_json(projects, user = nil)
     projects.to_json(:include => [
                         :fans,
                         :photos,
@@ -249,8 +258,10 @@ class Project < ActiveRecord::Base
                       :methods => [
                         :super_roles_needed,
                         :roles_percent,
-                        :open_roles
-                      ]
+                        :open_roles,
+                        :liker_ids
+                      ],
+                      :check_user => user
                     )
   end
 

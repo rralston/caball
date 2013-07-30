@@ -100,16 +100,16 @@
             </div>
           
             <div class="control-group">
-            <%= p.label :genre, :class => 'control-label' %>(select maximum 2)
+            <%= p.label :genre_list, :class => 'control-label' %>(select maximum 2)
               <div class="controls">
-                <%= p.select(:genre, options_for_select(@genres, @project.genre), {}, {:multiple => true, :size => 3 }) %>
+                <%= p.select(:genre_list, options_for_select(@genres, @project.genre), {}, {:multiple => true, :size => 3 }) %>
               </div>
             </div>
           
             <div class="control-group">
             <%= p.label 'Type', :class => 'control-label' %>
               <div class="controls">
-                <%= p.select(:is_type, options_for_select(@is_type, @project.is_type), {}) %>
+                <%= p.select(:is_type_list, options_for_select(@is_type, @project.is_type), {}) %>
               </div>
             </div>
 
