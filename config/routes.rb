@@ -7,9 +7,12 @@ Caball::Application.routes.draw do
   match 'users/recommended_people' => 'users#next_recommended_people'
   match 'users/recommended_events' => 'users#next_recommended_events'
 
+  match '/users/set_notification_check_time' => 'users#set_notification_check_time'
+
   resources :users do 
     resources :characteristics, :photos, :talents, :profile, :blogs
   end
+
   
   resources :projects do 
     resources :comments

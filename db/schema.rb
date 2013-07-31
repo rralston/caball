@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130730070830) do
+ActiveRecord::Schema.define(:version => 20130731142607) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -286,13 +286,14 @@ ActiveRecord::Schema.define(:version => 20130730070830) do
     t.string   "uid"
     t.string   "oauth_token"
     t.datetime "oauth_expires_at"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                                                 :null => false
+    t.datetime "updated_at",                                                 :null => false
     t.string   "gender"
     t.string   "imdb_url"
     t.text     "headline"
     t.boolean  "featured"
     t.string   "expertise"
+    t.datetime "notification_check_time", :default => '2013-07-31 14:32:36'
   end
 
   create_table "videos", :force => true do |t|

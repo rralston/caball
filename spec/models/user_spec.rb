@@ -316,4 +316,56 @@ describe User do
   end
 
 
+  context "notifications" do
+
+    before(:all){
+      @notif_user = FactoryGirl.create(:user, :name => 'Notif user')
+      @notif_project = FactoryGirl.create(:project, :user => @notif_user)
+      @notif_event = FactoryGirl.create(:event, :user => @notif_user)
+
+      @sender = FactoryGirl.create(:user, :name => 'sender')
+      
+      @p_comment1 = FactoryGirl.create(:comment, :commentable_type => 'Project', :commentable_id => @notif_project.id)
+      sleep 1
+      @p_comment2 = FactoryGirl.create(:comment, :commentable_type => 'Project', :commentable_id => @notif_project.id)
+      sleep 1
+      @p_comment3 = FactoryGirl.create(:comment, :commentable_type => 'Project', :commentable_id => @notif_project.id)
+      sleep 1
+      @p_comment4 = FactoryGirl.create(:comment, :commentable_type => 'Project', :commentable_id => @notif_project.id)
+      sleep 1
+      @p_comment5 = FactoryGirl.create(:comment, :commentable_type => 'Project', :commentable_id => @notif_project.id)
+      sleep 1
+      @p_comment6 = FactoryGirl.create(:comment, :commentable_type => 'Project', :commentable_id => @notif_project.id)
+      sleep 1
+      @p_comment7 = FactoryGirl.create(:comment, :commentable_type => 'Project', :commentable_id => @notif_project.id)
+      
+      @r1 = @sender.send_message(@notif_user, 'Test Body', 'Test Subject')
+      
+      check_time = Time.now()
+      sleep 1
+      @p_comment8 = FactoryGirl.create(:comment, :commentable_type => 'Project', :commentable_id => @notif_project.id)
+      sleep 1
+      
+      @e_comment = FactoryGirl.create(:comment, :commentable_type => 'Event', :commentable_id => @notif_event.id)
+
+      
+      sleep 1
+      @r2 = @sender.send_message(@notif_user, 'Test Body 2', 'Test Subject 2')
+
+      old_notifications = @notif_user.unread_notifications
+
+      # mark read until, @p_comment7
+      @notif_user.update_attributes(:notification_check_time => check_time)
+
+      notifications = @notif_user.unread_notifications
+
+      @comments = notifications.select{ |notif| notif.class.name == "Activity" }
+      @receipts = notifications.select{ |notif| notif.class.name == 'Receipt' }
+    }
+
+    specify { @comments.map(&:trackable).should == [@e_comment, @p_comment8] }
+    specify { @receipts.map(&:message).should == [@r2.message] }
+    
+  end
+
 end

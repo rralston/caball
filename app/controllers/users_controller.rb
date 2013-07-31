@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  load_and_authorize_resource :except => [:dashboard, :next_recommended_projects, :next_recommended_people, :next_recommended_events]
+  load_and_authorize_resource :except => [:dashboard, :next_recommended_projects, :next_recommended_people, :next_recommended_events, :set_notification_check_time]
   before_filter :search, only: [:index, :show, :new, :edit, :update, :dashboard]
   
   def index
@@ -146,6 +146,11 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.json { render :json => Event.custom_json(events, current_user) }
     end
+  end
+
+  def set_notification_check_time
+    current_user.update_attributes(:notification_check_time => Time.now())
+    render :text => 'true'
   end
 
 

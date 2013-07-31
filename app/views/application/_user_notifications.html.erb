@@ -1,0 +1,45 @@
+<% current_user.unread_notifications.each do |notification| %>
+  <% if notification.class.name == 'Activity' %>
+    <div class="notification">
+      <div class="usrimg img-circle" style='background: url(<%= notification.trackable.user.profile_pic %>)'>
+      <!--user prof images as cover bg-->
+      </div>
+      <div class="notefull">
+        <% model_object = notification.trackable.commentable %>
+        <div class="noteinfo">
+          <a href="/users/<%= notification.trackable.user.id %>">
+            <%= notification.trackable.user.name %>
+          </a> 
+          commented on your <%= model_object.class.name.downcase %> 
+          <a href="/<%= model_object.class.name.downcase%>s/<%= model_object.id %>">
+            <%= notification.trackable.commentable.title %>
+          </a>
+        </div>
+        
+        <div class="notemsg"><%= notification.trackable.content %></div>
+        
+        <div class="notetime light"><%= notification.trackable.created_at %></div>
+      </div>  
+
+    </div>
+  <% elsif notification.class.name == 'Receipt' %>
+
+    <div class="notification">
+      <div class="usrimg img-circle" style='background: url(<%= notification.message.sender.profile_pic %>)'>
+      <!--user prof images as cover bg-->
+      </div>
+      <div class="notefull">
+        
+        <div class="noteinfo">
+          <a href="/users/<%= notification.message.sender.id %>"><%= notification.message.sender.name %></a> send you a message.
+        </div>
+        
+        <div class="notemsg"><%= truncate(notification.message.body, :length => 30, :separator => ' ') %></div>
+        
+        <div class="notetime light"><%= notification.created_at %></div>
+      </div>  
+
+    </div>
+
+  <% end %>
+<% end %>

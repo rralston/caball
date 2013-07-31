@@ -28,23 +28,22 @@
                 <div class="loggedwrap">
 
                   <div class="notiwrap">
-                    <div class="notstarwrap">
+                    <% class_to_set = current_user.unread_notifications.empty? ? '' : 'set_time' %>
+                    <div class="notstarwrap <%= class_to_set %> ">
                     <div class="notico"></div>
-                    <div class="notno  medium img-circle text-center">3</div>
+                    <% if current_user.unread_notifications.present? %>
+                      <div class="notno  medium img-circle text-center">
+                        <%= current_user.unread_notifications.count %>
+                      </div>
+                    <% end %>
                     </div>
                     <div class="noticontentwrap">
                       <div class="noticontent">
                       <div class="notih1 medium text-center">NOTIFICATIONS</div>
-                      <div class="notification">
-                        <div class="usrimg img-circle">
-                        <!--user prof images as cover bg-->
-                        </div>
-                        <div class="notefull">
-                          <div class="noteinfo"><a href="">Kara Deiff</a> commented on your event <a href="">The Biggesst Event of the year</a></div>
-                          <div class="notemsg">Greate! this is awesome</div>
-                          <div class="notetime light">about 17min ago</div>
-                        </div>
-                      </div>
+                      
+
+                        <%= render :partial => 'user_notifications' %>
+                      
                     
                       <div class="noteclose img-circle medium text-center">x</div>
                       </div>
@@ -89,9 +88,6 @@
                   <a href="">Create  an Account</a>  
                 </div>
               <% end %>
-
-
-
             </div>
           </div>
       </nav>
@@ -104,6 +100,10 @@
 $(document).ready(function(){
   $('.notstarwrap').on('click',function(){
     $('.noticontentwrap').slideToggle(600);
+
+    if($('.notstarwrap').hasClass('set_time')){
+      app.fn.set_notification_check_time($('.notstarwrap'))
+    }
   });
 
   $('.noteclose').on('click',function(){

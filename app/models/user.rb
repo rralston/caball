@@ -29,6 +29,8 @@ class User < ActiveRecord::Base
   has_many :likes
   has_many :lovers, :class_name => 'Like', :as => :loveable
 
+  has_many :read_activities
+
   # friends are those whom this user is following.
   has_many :friends, through: :friendships
 
@@ -58,7 +60,7 @@ class User < ActiveRecord::Base
                   :imdb_url, :characteristics_attributes, :photos_attributes,
                   :talents_attributes, :photo, :videos_attributes, :projects_attributes,
                   :admin, :gender, :headline, :featured, :expertise, :cover_photo_attributes,
-                  :resume_attributes
+                  :resume_attributes, :notification_check_time
 
   validates_presence_of :name, :email, :message => "is required"
     
@@ -241,6 +243,27 @@ class User < ActiveRecord::Base
       json[:user_following] = self.followers.include?(options[:check_user])
     end
     json
+  end
+
+  def unread_notifications
+
+    # comments on all projects user own
+    project_comment_ids = Comment.where(:commentable_type => 'Project', :commentable_id => project_ids).pluck('comments.id')
+    # comments on all events user own
+    event_comment_ids = Comment.where(:commentable_type => 'Event', :commentable_id => event_ids).pluck('comments.id')
+
+    # get the comment ids of all 
+    comment_ids = project_comment_ids + event_comment_ids
+    
+    # get activities which belong to a comment among those comment ids.
+    notifications = Activity.order("created_at DESC").
+      where('created_at > ? AND trackable_type = "Comment" AND trackable_id in (?)', self.notification_check_time, comment_ids)
+
+
+    # mix notifications with receipts.
+    notifications = notifications + self.receipts.includes(:message).where('created_at > ? and receipts.is_read = false', self.notification_check_time)
+
+    notifications.sort_by(&:created_at).reverse  
   end
 
 

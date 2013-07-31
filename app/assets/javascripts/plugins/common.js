@@ -256,6 +256,17 @@ app.fn.initialize_send_generic_message = function(){
       app.fn.show_generic_message_modal(event);
   });
 }
+
+app.fn.set_notification_check_time = function(element){
+  $.ajax({
+    url: '/users/set_notification_check_time',
+    success: function(resp){
+      if(resp=='true'){
+        element.removeClass('set_time')
+      }
+    }
+  })
+}
   
   
 
