@@ -43,6 +43,15 @@
                   Load more
                 </button>
               </div>
+
+              <div class='row right-extra-div'>
+                <div id='recommended_events_div'>
+                </div>
+
+                <button class="load_more btn btn_warning" data-type="next_recommended_projects" data-next="2">
+                  Load more
+                </button>
+              </div>
                 
             </div>
 
@@ -72,6 +81,9 @@
 
 <%= render :partial => 'dashboard/templates/recommended_projects' %>
 <%= render :partial => 'projects/templates/similar_project' %>
+
+<%= render :partial => 'dashboard/templates/recommended_events' %>
+<%= render :partial => 'events/templates/similar_event' %>
 
 <!-- Projects -->
 <%= render :partial => 'dashboard/templates/user_projects' %>
@@ -119,6 +131,11 @@
   app.recommended_projects = new app.collections.recommended_projects(<%= raw Project.custom_json(current_user.recommended_projects.limit(RECOMMENDED_PROJECTS_PER_PAGE)) %>)
   app.recommended_projects_view = new app.views.recommended_projects({ collection: app.recommended_projects })
   $('#recommended_projects_div').html(app.recommended_projects_view.render().el)
+
+
+  app.recommended_events = new app.collections.recommended_events(<%= raw Event.custom_json(current_user.recommended_events.limit(RECOMMENDED_EVENTS_PER_PAGE)) %>)
+  app.recommended_events_view = new app.views.recommended_events({ collection: app.recommended_events })
+  $('#recommended_events_div').html(app.recommended_events_view.render().el)
 
 
 // PROJECTS

@@ -139,11 +139,15 @@ class User < ActiveRecord::Base
 
   def recommended_projects
     # pick all projects whose open roles match with the user's talent names
-    # Project.joins(:roles).
-    #           where(:roles => {:name => talent_names, :filled => false}).
-    #             where('project_id NOT IN (?)', self.project_ids).uniq
+    Project.joins(:roles).
+              where(:roles => {:name => talent_names, :filled => false}).
+                where('project_id NOT IN (?)', self.project_ids).uniq
+  end
 
-    projects
+  def recommended_events
+    # as of now taking events near users location
+    Event.near(self.location)
+    
   end
 
   def roles_required
