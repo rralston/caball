@@ -8,6 +8,8 @@ $(document).ready ->
 
   $('.load_more').on 'click', (event)->
     type = $(event.target).attr('data-type')
+    console.log 'in lisener'
+    console.log type
     app.events.trigger(type, event)
 
   $('body').on 'click', '.send-generic-message', (event)->

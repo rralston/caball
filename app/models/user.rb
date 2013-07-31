@@ -147,7 +147,6 @@ class User < ActiveRecord::Base
   def recommended_events
     # as of now taking events near users location
     Event.near(self.location)
-    
   end
 
   def roles_required

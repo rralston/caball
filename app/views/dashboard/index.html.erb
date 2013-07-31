@@ -48,7 +48,7 @@
                 <div id='recommended_events_div'>
                 </div>
 
-                <button class="load_more btn btn_warning" data-type="next_recommended_projects" data-next="2">
+                <button class="load_more btn btn_warning" data-type="next_recommended_events" data-next="2">
                   Load more
                 </button>
               </div>
@@ -133,7 +133,7 @@
   $('#recommended_projects_div').html(app.recommended_projects_view.render().el)
 
 
-  app.recommended_events = new app.collections.recommended_events(<%= raw Event.custom_json(current_user.recommended_events.limit(RECOMMENDED_EVENTS_PER_PAGE)) %>)
+  app.recommended_events = new app.collections.recommended_events(<%= raw Event.custom_json(current_user.recommended_events.limit(RECOMMENDED_EVENTS_PER_PAGE), current_user) %>)
   app.recommended_events_view = new app.views.recommended_events({ collection: app.recommended_events })
   $('#recommended_events_div').html(app.recommended_events_view.render().el)
 

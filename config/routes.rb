@@ -5,6 +5,7 @@ Caball::Application.routes.draw do
 
   match 'users/recommended_projects' => 'users#next_recommended_projects'
   match 'users/recommended_people' => 'users#next_recommended_people'
+  match 'users/recommended_events' => 'users#next_recommended_events'
 
   resources :users do 
     resources :characteristics, :photos, :talents, :profile, :blogs

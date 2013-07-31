@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  load_and_authorize_resource :except => [:dashboard, :next_recommended_projects, :next_recommended_people]
+  load_and_authorize_resource :except => [:dashboard, :next_recommended_projects, :next_recommended_people, :next_recommended_events]
   before_filter :search, only: [:index, :show, :new, :edit, :update, :dashboard]
   
   def index
@@ -137,6 +137,14 @@ class UsersController < ApplicationController
     people = current_user.recommended_people.paginate(:page => params[:page_number], :per_page => RECOMMENDED_PEOPLE_PER_PAGE)
     respond_to do |format|
       format.json { render :json => people.to_json() }
+    end
+  end
+  
+
+  def next_recommended_events
+    events = current_user.recommended_events.paginate(:page => params[:page_number], :per_page => RECOMMENDED_EVENTS_PER_PAGE)
+    respond_to do |format|
+      format.json { render :json => Event.custom_json(events, current_user) }
     end
   end
 
