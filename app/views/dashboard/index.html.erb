@@ -23,7 +23,7 @@
         </li>
       </ul>
     </div>
-    <div class='users-view span10'>
+    <div class='users-view span11'>
       
       
       
@@ -32,7 +32,7 @@
           <div class='tab-pane active' id='home'>
             <%= render :partial => 'dashboard/user_profile_summary' %>
             <%= render :partial => 'dashboard/user_home' %>
-            <div class='span3 dashboard_widgets'>
+            <div class='dashboard_widgets right-container pull-left'>
               <%= render :partial => 'dashboard/recommended_people' %>
               <%= render :partial => 'dashboard/recommended_projects' %>
             </div>
@@ -104,7 +104,7 @@
   $('.recommended_people_container').html(app.recommended_people_view.render().el)
 
 
-  app.recommended_projects = new app.collections.recommended_projects(<%= raw current_user.recommended_projects.limit(RECOMMENDED_PROJECTS_PER_PAGE).to_json() %>)
+  app.recommended_projects = new app.collections.recommended_projects(<%= raw Project.custom_json(current_user.recommended_projects.limit(RECOMMENDED_PROJECTS_PER_PAGE)) %>)
   app.recommended_projects_view = new app.views.recommended_projects({ collection: app.recommended_projects })
   $('.recommended_projects_container').html(app.recommended_projects_view.render().el)
 

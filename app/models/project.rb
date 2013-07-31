@@ -32,6 +32,16 @@ class Project < ActiveRecord::Base
     group("projects.id").
     order("fans_count DESC")
 
+
+  def display_photo
+    if photos.present? 
+      photos.first.image.url(:medium) 
+    else
+      "/assets/actor.png"
+    end
+  end
+
+
   def roles_percent
     if roles.size > 0
       ((filled_roles.size.to_f / roles.size.to_f) * 10).to_i
@@ -253,13 +263,15 @@ class Project < ActiveRecord::Base
     projects.to_json(:include => [
                         :fans,
                         :photos,
-                        :user
+                        :user,
+                        :comments
                       ],
                       :methods => [
                         :super_roles_needed,
                         :roles_percent,
                         :open_roles,
-                        :liker_ids
+                        :liker_ids,
+                        :display_photo
                       ],
                       :check_user => user
                     )
@@ -271,10 +283,6 @@ class Project < ActiveRecord::Base
 
   def similar_projects
     self.nearbys.first(4)
-  end
-
-  def display_photo
-    photos.first
   end
 
 end

@@ -7,10 +7,11 @@ $grey-backdrop-text: #636a73
   background: #eaedf0
   overflow: hidden
 .dashboard-tab-main-head
-  background: url(/assets/dashboard-section-bg.png) repeat
+  background: url(/assets/dashboard-section-bg.png) center repeat-x
   min-height: 130px
   padding: 40px
   color: white
+  background-size: auto 100%
   .dashboard-tab-name
     font-size: 40px
     margin: 20px 0px
@@ -36,10 +37,107 @@ $grey-backdrop-text: #636a73
 .dashboard-tab-heading.secondary
   border-top: 1px solid $divider-border
 
+
+.profpicwrap
+  height: 225px
+  width: 225px
+  border-radius: 300px
+  position: relative
+  border: 13px solid white
+  background: white
+  background-size: cover !important
+
+  -webkit-box-shadow: inset 0 0 4px 4px rgba(0,0,0,.4), 0 0 2px 2px rgba(0,0,0,.1)
+  box-shadow: inset 0 0 4px 4px rgba(0,0,0,.4), 0 0 2px 2px rgba(0,0,0,.1)
+  background: url('/assets/profpic.png')
+
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  background-size: cover
+  overflow: hidden
+  z-index: 8
+  margin: 10px 20px 15px 20px
+
+.tabs-nav-home
+  position: relative
+  top: -38px
+
+.user-profile-head
+  position: relative
+  a:hover
+    color: white
+  padding: 0px 0px 35px 0px
+
+  .edit-user-photo
+    position: absolute
+    bottom: 55
+    left: 25
+    padding-left: 5px
+    .black-pencil-icon
+      top: 0px
+
+  .summary
+    padding-top: 30px
+    margin-top: 25px
+    .welcome
+      font-size: 30px
+      margin-bottom: 20px
+    .btn-black
+      height: 30px
+      width: 210px
+      background-size: 100% 100%
+      padding: 5px 10px 0px 10px
+    .links
+      .link
+        margin-right: 10px
+      .black-pencil-icon
+        left: -5
+      .eye-open-icon
+        margin-left: -8px
+.user-home-tab-content
+  width: 560px
+
+
 .dashboard_widgets
+  width: 320px
   .widget
     width: 190px
     padding: 10px
+
+  .head-container
+    border-bottom: 1px solid #c6d0db
+    padding-bottom: 10px
+
+  .recommended_people
+    margin-left: 0px
+  .recommended_projects
+    margin-left: 0px
+  .recommended_person
+    padding: 20px
+    border-bottom: 1px solid #c6d0db
+    .person-img
+      margin-right: 10px
+      margin-top: 5px
+    .user-circle-image
+      height: 50px
+      width: 50px
+      background-size: cover !important
+    .name
+      color: #e44f65
+      height: 20px
+      overflow: hidden
+      font-size: 16px
+    .location
+      color: #969fab
+      height: 20px
+      overflow: hidden
+      font-size: 13px
+    .headline
+      color: #969fab
+      height: 20px
+      overflow: hidden
+      margin-top: -2px
+      width: 220px
 
 #isotope_container
   .item

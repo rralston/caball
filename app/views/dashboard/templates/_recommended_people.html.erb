@@ -1,6 +1,20 @@
 <script type="script/template" id='recommended_person_template'>
     
-    <i class='icon-user'></i> 
-    <a href='users/<%%= id %>'> <%%= name %> </a>
+    <div class='person-img pull-left'>
+      <div class='img-circle user-circle-image' style='background: url(<%%= profile_pic %>)'>
+      </div>
+    </div>
+
+    <div class='user-details medium'>
+      <div class='name'>
+        <a href='/users/<%%= id %>'><%%= name %></a>
+      </div>
+      <div class='location regular'>
+        <%%= location %>
+      </div>
+      <div class='headline light'>
+        &ldquo;<%%= headline.substring(0,35) %>&rdquo;
+      </div>
+    </div>
 
 </script>
