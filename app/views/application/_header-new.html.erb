@@ -65,16 +65,16 @@
                     </div>
                     <div class="userprflistwrap">
                       <ul class="proflist medium">
-                        <a href="">
+                        <a href="/users/<%= current_user.id %>">
                           <li class="profile">profile</li>
                         </a>
-                        <a href="" >
+                        <a href="/dashboard" >
                           <li class="dboard">Dashboard</li>
                         </a>
-                        <a href="">
+                        <a href="/users/<%= current_user.id %>/edit">
                           <li class="settings">Settings</li>
                         </a>
-                        <a href="">
+                        <a href="/signout">
                           <li class="lout">Logout</li>
                         </a>
                       </ul>
