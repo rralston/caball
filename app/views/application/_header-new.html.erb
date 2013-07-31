@@ -7,14 +7,20 @@
             <div class="navbar-inner ">
               <a href="#" class="brand"><img src="/assets/logo.png" alt="" /></a>
               <ul class="nav nav-tabs">
-                <li class="active"><a href="#" >Projects</a></li>
-                <li ><a href="#">People</a></li>
-                <li><a href="#">Events</a></li>
+
+                <% class_names={} %>
+                <% class_names['projects'] = 'active' if controller_name == 'projects' %>
+                <% class_names['users'] = 'active' if controller_name == 'users' %>
+                <% class_names['events'] = 'active' if controller_name == 'events' %>
+
+                <li class="<%= class_names['projects'] %>"><a href="/projects" >Projects</a></li>
+                <li class="<%= class_names['users'] %>" ><a href="/users">People</a></li>
+                <li class="<%= class_names['events'] %>"><a href="/events">Events</a></li>
                 <li><a href="#">Skills</a></li>
               </ul>
               <div class="hdrfrm">
                 <form action="">
-                  <input type="text" />
+                  <input type="text" class='search_header'/>
                 </form>
               </div>
 
