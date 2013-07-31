@@ -6,7 +6,7 @@
     <div class='span12'>
       
       <div class='row project-main-head'>
-        <div class='span5 project-image' style='background: url("<%= @project.display_photo.image.url %>")'>
+        <div class='span5 project-image' style='background: url("<%= @project.display_photo %>")'>
         </div>
         <div class="shadow-div"> </div>
         <div class='pull-left main-right'>
@@ -665,7 +665,7 @@ $(document).ready(function(){
 
   // similar projects
   app.similar_projects = new app.collections.similar_projects()
-  app.similar_projects.reset(<%= raw @project.similar_projects.to_json(:include => [:comments, :likes, :photos]) %>)
+  app.similar_projects.reset(<%= raw Project.custom_json(@project.similar_projects) %>)
   app.similar_projects_view = new app.views.similar_projects({ collection: app.similar_projects })
   $('#similar_projects_div').html(app.similar_projects_view.render().el)
 

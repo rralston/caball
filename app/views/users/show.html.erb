@@ -331,7 +331,7 @@
 
   // user projects
   app.user_projects = new app.collections.user_projects()
-  app.user_projects.reset(<%= raw @user.projects.to_json(:include => [:comments, :likes, :photos]) %>)
+  app.user_projects.reset(<%= raw Project.custom_json(@user.projects) %>)
   app.user_projects_view = new app.views.user_projects({ collection: app.user_projects })
   $('#user_projects_div').html(app.user_projects_view.render().el)
 

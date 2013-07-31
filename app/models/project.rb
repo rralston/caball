@@ -285,4 +285,12 @@ class Project < ActiveRecord::Base
     self.nearbys.first(4)
   end
 
+  def display_photo_big
+    if photos.present? 
+      photos.first.image.url
+    else
+      "/assets/actor.png"
+    end
+  end
+
 end
