@@ -104,6 +104,13 @@
 <%= render :partial => 'dashboard/templates/attending_events' %>
 <%= render :partial => 'dashboard/templates/attending_event' %>
 
+
+<!-- Messages -->
+<%= render :partial => 'dashboard/templates/conversations' %>
+<%= render :partial => 'dashboard/templates/conversation' %>
+<%= render :partial => 'dashboard/templates/messages' %>
+<%= render :partial => 'dashboard/templates/message' %>
+
 <%= render :partial => 'conversations/send_new_message_modal' %>
 
 <script type="text/javascript">
@@ -227,5 +234,23 @@
                                                                             :user
                                                                           ]) %>)
   $('#dashboard_events').find('#attending-events').html(app.attending_events_view.render().el)
+
+
+// MESSAGES
+
+  // inbox
+  app.inbox_conversations = new app.collections.conversations(<%= raw current_user.mailbox.inbox.to_json(:check_user => current_user) %>)
+  inbox_view = new app.views.conversations({ collection: app.inbox_conversations, mailbox_type: 'Inbox' })
+  $('#conversation-tab-inbox').html(inbox_view.render().el)
+
+  // sent
+  app.sent_conversations = new app.collections.conversations(<%= raw current_user.mailbox.sentbox.to_json(:check_user => current_user) %>)
+  sent_view = new app.views.conversations({ collection: app.sent_conversations, mailbox_type: 'Sent' })
+  $('#conversation-tab-sent').html(sent_view.render().el)
+
+  // trash
+  app.trash_conversations = new app.collections.conversations(<%= raw current_user.mailbox.trash.to_json(:check_user => current_user) %>)
+  trash_view = new app.views.conversations({ collection: app.trash_conversations, mailbox_type: 'Trash' })
+  $('#conversation-tab-trash').html(trash_view.render().el)
 
 </script>

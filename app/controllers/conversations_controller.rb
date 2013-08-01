@@ -6,6 +6,8 @@ class ConversationsController < ApplicationController
   helper_method :mailbox, :conversation
   
   def new
+
+    @friends = current_user.friends.pluck('email')
     @recipient = params[:recipient]
     @subject  = params[:subject] if params[:subject]
 
@@ -19,11 +21,11 @@ class ConversationsController < ApplicationController
   
   def create
     # Standard Part
-    recipient_emails = conversation_params(:recipients).split(',')
+    recipient_emails = params[:recipients].split(',')
+    # recipient_emails = conversation_params(:recipients).split(',')
     recipients = User.where(email: recipient_emails).all
-
-    conversation = current_user.
-      send_message(recipients, *conversation_params(:body, :subject)).conversation
+    
+    current_user.send_message(recipients, params[:message], params[:conversation][:subject])
 
     redirect_to conversations_url, :notice => 'Your Message was successfully sent.'
   end
@@ -46,18 +48,32 @@ class ConversationsController < ApplicationController
   end
   
   def reply
-    current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
-    redirect_to :conversation
+    receipt = current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
+    respond_to do |format|
+      format.html { redirect_to :conversation }
+      format.json { render :json => receipt.message.to_json(:include => [:sender]) }
+    end
   end
    
   def trash
     conversation.move_to_trash(current_user)
-    redirect_to :conversations
+    respond_to do |format|
+      format.html { redirect_to :conversation }
+      format.json { render :text => true }
+    end
   end
 
   def untrash
     conversation.untrash(current_user)
-    redirect_to :conversations
+    respond_to do |format|
+      format.html { redirect_to :conversation }
+      format.json { render :text => true }
+    end
+  end
+
+  def empty_trash
+    current_user.mailbox.trash.destroy_all
+    render :text => true
   end
   
   #Bring in Details from Documentation Here Also Add to Routes
@@ -68,7 +84,22 @@ class ConversationsController < ApplicationController
 
   def read
     conversation.mark_as_read(current_user)
-    redirect_to :conversations
+    respond_to do |format|
+      format.html { redirect_to :conversation }
+      format.json { render :text => true }
+    end
+  end
+
+  def get_messages
+    this_conversation = Conversation.find(params[:id])
+    messages = this_conversation.messages
+
+    # mark conversation read for this user, since he has requested to see messages
+    conversation.mark_as_read(current_user)
+    
+    respond_to do |format|
+      format.json { render :json => messages.to_json(:include => [:sender], :check_user => current_user) }
+    end
   end
   
   private

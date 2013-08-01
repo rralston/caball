@@ -1,15 +1,33 @@
 <script type="script/template" id='conversation_template'>
-  <div class='conv-sender'>
-    <div class="img-circle user-circle-image" style="background: url(/uploads/User/image/98/medium_Profile_Image.jpg)">
+  
+  <%% if(this.model.collection.mailbox_type != 'Trash'){%>
+    <div class='delete_conversation conv-action'>
+      
     </div>
+  <%% }else{ %>
+    <div class='undelete_conversation conv-action'>
+      <i class='icon-share-alt'></i>
+    </div>
+  <%% } %>
+
+  <div class='conv-sender pull-left'>
+    <div class="img-circle user-circle-image" style="background: url(<%%= originator.profile_pic %>)">
+    </div>
+    <%% if(!is_read){%>
+      <div class="notno  medium img-circle text-center">
+        <%%= unread_count %>
+      </div>
+    <%% } %>
   </div>
 
   <div class='conv-details pull-left'>
     <div class='user-name'>
-      Sample User
+      <a href='/users/<%%= originator.id %>'>
+        <%%= originator.name %>
+      </a>
     </div>
     <div class='msg-preview'>
-      Sample message for conv - <%%= id %>
+      <%%= last_message.body %>
     </div>
   </div>
   

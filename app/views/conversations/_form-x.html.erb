@@ -1,0 +1,18 @@
+
+	<%= simple_form_for :conversation, url: :conversations do |f| %>
+		<%= f.input :recipients, :as => :hidden, :input_html => { :value => @recipient } %>
+		<% if @subject.present? %>
+			<%= f.input :subject, :as => :hidden, :input_html => { :value => @subject } %>
+		<% else %>
+			<%= f.input :subject %>
+		<% end %>
+		<% if not @modal.nil? %>
+		  <%= f.input :body, :as => :text %>
+		<% else %>
+		  <%= f.input :body, :as => :text %>
+		<%end%>
+		<div id="form-actions">
+			<%= f.button :submit, class: 'btn-primary' %>
+			<%= submit_tag 'Cancel', type: :reset, class: 'btn btn-danger' %>
+			</div>
+<% end %>

@@ -662,3 +662,157 @@ $grey-backdrop-text: #636a73
         height: 24px
         margin-right: 7px
         margin-top: 4px
+
+/* Messages Sections */
+
+#messages
+  .messages-main
+    position: relative
+  .conversations-filter
+    position: absolute
+    top: 25px
+    z-index: 5
+    right: 0
+    width: 300px 
+
+.conversations_list
+  height: 600px
+  overflow-y: scroll
+  .conversation
+    cursor: pointer
+    position: relative
+    border-top: 1px solid $divider-border
+    padding: 17px 0px
+    .conv-sender
+      margin-left: 15px
+      margin-right: 10px
+    .notno
+      color: white
+      top: 12px
+      left: 50px
+    .msg-preview
+      width: 195px
+      overflow: hidden
+      white-space: nowrap
+      text-overflow: ellipsis
+      color: #737378
+
+  .conversation.active
+    background-color: #43464e
+    color: white
+
+  .conversation.un_read:not(.active)
+    background-color: #e3e8f8
+    /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#c2c6d4), to(#e3e8f8))
+
+    /* Safari 5.1, Chrome 10+ */
+    background: -webkit-linear-gradient(top, #e3e8f8, #c2c6d4)
+
+    /* Firefox 3.6+ */
+    background: -moz-linear-gradient(top, #e3e8f8, #c2c6d4)
+
+    /* IE 10 */
+    background: -ms-linear-gradient(top, #e3e8f8, #c2c6d4)
+
+    /* Opera 11.10+ */
+    background: -o-linear-gradient(top, #e3e8f8, #c2c6d4)
+  .conversation:not(.active)
+
+    background-color: #E6E6E6
+    /* Safari 4-5, Chrome 1-9 */
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E6E6E6), to(#FDFDFD))
+
+    /* Safari 5.1, Chrome 10+ */
+    background: -webkit-linear-gradient(top, #FDFDFD, #E6E6E6)
+
+    /* Firefox 3.6+ */
+    background: -moz-linear-gradient(top, #FDFDFD, #E6E6E6)
+
+    /* IE 10 */
+    background: -ms-linear-gradient(top, #FDFDFD, #E6E6E6)
+
+    /* Opera 11.10+ */
+    background: -o-linear-gradient(top, #FDFDFD, #E6E6E6)
+
+.empty_trash
+  font-size: 13px
+  cursor: pointer
+
+.conversations-summary
+  position: relative
+  z-index: 2
+  background: #EAEDEF
+  padding: 20px
+  font-size: 22px
+  color: #969fab
+
+.conv-action
+  position: absolute
+  top: 5px
+  left: 5px
+  i
+    color: #737378
+
+.delete_conversation
+  display: inline-block
+  height: 13px
+  width: 12px
+  background: url(/assets/grey-trash.png) no-repeat
+  background-size: 100% 100%
+
+.messages_container
+  height: 900px
+  background: white
+  padding-top: 20px
+  position: relative
+  color: #969fab
+  -webkit-box-shadow: 27px -50px 78px 10px black
+  -moz-box-shadow: 27px -50px 78px 10px black
+  -moz-box-shadow: 27px -50px 78px 10px black
+
+.conversation-summary
+  text-align: left
+  margin-left: 20px
+  font-size: 22px
+  color: #969fab
+
+.messages_list
+  max-height: 540px
+  position: relative
+  overflow: scroll
+  margin-top: 35px
+  .message
+    position: relative
+    margin-top: 15px
+    text-align: left
+  .message-sender
+    margin-left: 20px
+    margin-right: 20px
+  .msg-body
+    width: 450px
+    border-bottom: 1px solid $divider-border
+    padding-bottom: 20px
+    color: #737378
+.reply-div
+  margin-top: 30px
+  .reply-text
+    text-align: left
+    margin-left: 85px
+    font-size: 22px
+    color: #969fab
+  .message_please_wait
+    display: none
+  .reply-area
+    margin-top: 30px
+    .user-circle-image
+      margin-left: 20px
+      margin-right: 20px
+    #new_message
+      height: 90px !important
+      width: 450px
+      -moz-box-shadow: 0px 0px 12px -1px #c8d2de inset
+      -webkit-box-shadow: 0px 0px 12px -1px #c8d2de inset
+      box-shadow: 0px 0px 12px -1px #c8d2de inset
+      border: 1px solid #d0d7df
+      padding: 10px

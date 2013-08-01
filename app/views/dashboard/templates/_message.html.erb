@@ -1,0 +1,17 @@
+<script type="script/template" id='message_template'>
+
+  <div class='message-sender pull-left'>
+    <div class="img-circle user-circle-image" style="background: url(<%%= sender.profile_pic %>)">
+    </div>
+  </div>
+
+  <div class='message-details pull-left'>
+    <div class='user-name'>
+      <a href='/users/<%%= sender.id %>'><%%= sender.name %></a>
+    </div>
+    <div class='msg-body'>
+      <%%= body %>
+    </div>
+  </div>
+  
+</script>

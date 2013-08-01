@@ -51,7 +51,9 @@ class Ability
       user.persisted?
     end
 
-    can [:destroy,:reply,:read,:unread,:trash,:untrash,:index,:show], Conversation do |conversation|
+    can [:empty_trash], Conversation
+
+    can [:destroy,:reply,:read,:unread,:trash,:untrash,:index,:show, :get_messages], Conversation do |conversation|
       user.persisted? && user.mailbox.conversations.include?(conversation)
     end
 

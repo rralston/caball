@@ -19,8 +19,11 @@ Caball::Application.routes.draw do
   end
   resources :blogs
   resources :comments
+  match 'conversations/get_messages' => 'conversations#get_messages', :via => 'GET'
+  match '/conversations/empty_trash' => 'conversations#empty_trash', :via => 'POST'
   resources :conversations
   match 'conversations/send-generic-message' => 'conversations#send_message_generic', :via => 'POST'
+
   resources :notifications
   resources :friendships
   match 'friendships/destroy' => 'friendships#destroy', :via => 'POST'
