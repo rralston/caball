@@ -257,7 +257,7 @@ class User < ActiveRecord::Base
     
     # get activities which belong to a comment among those comment ids.
     notifications = Activity.order("created_at DESC").
-      where('created_at > ? AND trackable_type = "Comment" AND trackable_id in (?)', self.notification_check_time, comment_ids)
+      where('created_at > ? AND trackable_type = ? AND trackable_id in (?)', self.notification_check_time, 'Comment', comment_ids)
 
 
     # mix notifications with receipts.
