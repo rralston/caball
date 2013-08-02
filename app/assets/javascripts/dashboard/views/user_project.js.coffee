@@ -11,7 +11,6 @@ app.views.user_project = Backbone.View.extend
     return this
 
   show_project:()->
-    console.log 'here'
     manage_project_view = new app.views.manage_project({ model: this.model })
     $('#dashboard_projects').html(manage_project_view.render().el)
 

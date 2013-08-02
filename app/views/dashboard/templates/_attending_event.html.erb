@@ -29,7 +29,8 @@
       <div class='gradient clearfix'>
         <div class='event-owner pull-left'>
           <span class="pull-left owner-img">
-            <img src="<%%= user.profile_pic %>" class="img-circle">
+            <div class="img-circle user-circle-image" style="background: url(<%%= user.profile_pic %>)">
+            </div>
           </span>
 
           <span class="owner pull-left">
@@ -47,13 +48,14 @@
             ATTENDING: <br/>
 
             <%% _.first(attendees, 5).forEach(function(attendee){ %>
-              <img src='<%%= attendee.profile_pic %>' class='img-circle event-attendee-pic pull-left'>
+              <div class="img-circle event-attendee-pic user-circle-image pull-left" style="background: url(<%%= attendee.profile_pic %>)">
+              </div>
             <%% }) %>
 
           </div>
           <div class='pull-right attending-btn text-center'>
-            <a class='btn-unattend btn-custom pattern-grey-btn medium pull-left'>
-              <i class='icon-remove'></i> Not Attending
+            <a class='btn-unattend btn-custom pattern-grey-btn regular pull-left'>
+              <i class='icon-ok'></i>Attending
             </a>
           </div>
         </div>

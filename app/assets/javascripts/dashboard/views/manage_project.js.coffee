@@ -17,7 +17,6 @@ app.views.manage_project = Backbone.View.extend
     project_fans.reset(this.model.get('fans'))
 
     project_fans_view = new app.views.project_fans({ collection: project_fans })
-    console.log project_fans_view.render().el
 
     this.$el.find('#project-fans').html( project_fans_view.render().el )
 
@@ -43,11 +42,9 @@ app.views.manage_project = Backbone.View.extend
 
   mark_as_done: ()->
     _this = this
-    console.log 'here'
     this.model.set('status', 'Completed')
     this.model.save
       success: (model, response) ->
         if response
-            console.log response
             alert('Project marked as Done')
             _this.render()

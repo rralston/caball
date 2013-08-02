@@ -41,7 +41,8 @@
             ATTENDING: <br/>
 
             <%% _.first(attendees, 5).forEach(function(attendee){ %>
-              <img src='<%%= attendee.profile_pic %>' class='img-circle event-attendee-pic pull-left'>
+              <div class="img-circle event-attendee-pic user-circle-image pull-left" style="background: url(<%%= attendee.profile_pic %>)">
+              </div>
             <%% }) %>
 
           </div>

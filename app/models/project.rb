@@ -37,6 +37,7 @@ class Project < ActiveRecord::Base
     if photos.present? 
       photos.first.image.url(:medium) 
     else
+      # TODO: Change this to default project image.
       "/assets/actor.png"
     end
   end

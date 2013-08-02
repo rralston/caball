@@ -3,11 +3,60 @@ $divider-border: #c6d0db
 $grey-backdrop-text: #636a73
 
 .dashboard-main-nav
-  background: #2d3456
   ul.nav
+    background: #2d3456
+    position: relative
+    left: -40px
+    width: 120px
+    -moz-border-radius: 0px
+    -webkit-border-radius: 0px 0px 0px 7px
+    border-radius: 0px 0px 0px 7px
+
+    li.active > a
+      background-color: #eeeeee
     li
       margin: 10px 0px 10px 10px
-      height: 50px
+      a
+        -moz-border-radius: 0px
+        -webkit-border-radius: 7px 0px 0px 7px
+        border-radius: 7px 0px 0px 7px
+
+        margin: 0px
+        height: 55px
+        height: 110px
+        .nav-icon
+          width: 40px
+          height: 35px
+          padding: 20px 20px
+        .nav-icon.home
+          background: url(/assets/home-white-big.png) center no-repeat
+        .nav-icon.messages
+          background: url(/assets/envelop-white-big.png) center no-repeat
+        .nav-icon.projects
+          background: url(/assets/clip-white-big.png) center no-repeat
+        .nav-icon.events
+          background: url(/assets/calendar-white-big.png) center no-repeat
+        .nav-icon.settings
+          background: url(/assets/gear-white-big.png) center no-repeat
+        .nav-text
+          text-align: center
+          color: white
+    li a:hover, li.active > a
+      .nav-icon.home
+        background: url(/assets/home-blue-big.png) center no-repeat
+      .nav-icon.messages
+        background: url(/assets/envelop-blue-big.png) center no-repeat
+      .nav-icon.projects
+        background: url(/assets/clip-blue-big.png) center no-repeat
+      .nav-icon.events
+        background: url(/assets/calendar-blue-big.png) center no-repeat
+      .nav-icon.settings
+        background: url(/assets/gear-blue-big.png) center no-repeat
+      .nav-text
+        text-align: center
+        color: #2d3456
+
+
 
 .dashboard-tabs
   .tab-pane
@@ -652,7 +701,7 @@ $grey-backdrop-text: #636a73
         font-size: 13px
         width: 140px
         color: #82848d
-        margin-left: 10px
+        margin-left: 15px
       .owner-name
         margin-top: 2px
         a, a:hover
@@ -661,8 +710,10 @@ $grey-backdrop-text: #636a73
       .btn-unattend
         min-width: 40px
         width: 90px
-        font-size: 12px
+        font-size: 14px
         color: white
+        a:hover
+          color: white
 
       .event-attendee-pic
         width: 24px
