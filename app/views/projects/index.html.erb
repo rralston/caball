@@ -144,7 +144,9 @@
                   <div class="slcontent span6">
                     <h2 class='medium'><%= project.title %></h2>
                     <% if project.description.length > 70 %>
-                      <p><%= project.description.scan(/.{70}/)[0] %> <span class='read_more' data-content='<%= project.description %>'><i>Read more</i></span></p>
+                      <p>
+                        <%= truncate(project.description, :length => 70, :separator => ' ') %> <span class='read_more_btn' data-content='<%= project.description %>' data-header='Project description - <%= project.title %>' >Read more</span>
+                      </p>
                     <% else %>
                       <p><%= project.description %> </p>
                     <% end %>
@@ -257,10 +259,14 @@
 <%= render :partial => 'conversations/send_new_message_modal' %>
 <%= render :partial => 'projects/templates/project' %>
 
+<%= render :partial => 'application/read_more_modal' %>
+
 <script type="text/javascript">
 $(document).ready(function(){
  
   app.fn.initialize_send_generic_message()
+  // bind read more btn click event
+  app.fn.bind_read_more_show()
 
   app.status = 'index' // used to know if the user is on index itself or if he started searching.
 

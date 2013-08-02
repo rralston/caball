@@ -152,6 +152,24 @@ app.fn.show_generic_message_modal = function(event){
 
 }
 
+app.fn.show_read_more_modal = function(event){
+  modal = $('#read_more_modal')
+  btn = $(event.target)
+
+  modal.find('.header-text').html(btn.attr('data-header'))
+
+  modal.find('.modal-body').html(btn.attr('data-content'))
+
+  modal.modal('show')
+}
+
+app.fn.bind_read_more_show = function(){
+  $('body').on('click', '.read_more_btn', function(event){
+    console.log('in click event')
+    app.fn.show_read_more_modal(event)
+  });
+}
+
 function deg2rad(deg) {
   return deg * (Math.PI/180)
 }

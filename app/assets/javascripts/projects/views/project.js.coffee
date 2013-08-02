@@ -31,7 +31,7 @@ app.views.project = Backbone.View.extend
               _this.model.set('user_following', true)
               count = _this.$el.find('.fans-count').html()
               _this.$el.find('.fans-count').html(parseInt(count) + 1)
-              btn.html('Following')
+              btn.html('Un Like')
             else
               alert 'Something went wrong, Please try laters'
 
@@ -51,6 +51,6 @@ app.views.project = Backbone.View.extend
             count = _this.$el.find('.fans-count').html()
             _this.model.set('user_following', false)
             _this.$el.find('.fans-count').html(parseInt(count) - 1)
-            btn.html('Follow')
+            btn.html('Like')
           else
             alert 'Something went wrong, Please try laters'

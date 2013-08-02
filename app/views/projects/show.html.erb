@@ -41,7 +41,7 @@
 
             <div class='span7 project-description light'>
               <% if @project.description.length > 200 %>
-                <%= @project.description.scan(/.{200}/)[0] %> <span class='read_more' data-content='<%= @project.description %>'><i>Read more</i></span>
+                <%= truncate(@project.description, :length => 200, :separator => ' ') %> <a class='read_more_btn' data-content='<%= @project.description %>' data-header='Project description - <%= @project.title %>' >Read more</a>
               <% else %>
                 <%= @project.description %> 
               <% end %>
@@ -643,9 +643,15 @@
 
 <%= render :partial => 'projects/templates/role_applicant_template' %>
 
+<%= render :partial => 'application/read_more_modal' %>
+
 <script type="text/javascript">
 
 $(document).ready(function(){
+
+  // bind read more btn click event
+  app.fn.bind_read_more_show()
+
   app.current_user = <%= raw current_user.to_json(:only => [:name, :id]) %>
 
   app.project_data = <%= raw @project.to_json() %>
