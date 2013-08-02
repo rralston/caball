@@ -142,6 +142,8 @@ describe Event do
     specify { subject.voted_type_by_user(@down_voter).should == 'down' }
 
     specify { subject.voted_type_by_user(@non_voter).should == nil }
+
+    specify { subject.votes_count.should == 0 }
     
     context "vote up/down and vote the other way again" do
       # upvoter can down vote the event and down voter can up vote the event.

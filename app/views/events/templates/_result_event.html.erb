@@ -17,6 +17,10 @@
 
       </div>
 
+      <div class='votes-count'>
+        <%%= votes_count %>
+      </div>
+
       <div class='vote-action down-vote <%% if(voted_type_by_user == "down") print("active") %> '>
 
       </div>
@@ -54,7 +58,8 @@
 
       <div class="event-owner pull-left">
         <span class="pull-left owner-img">
-          <img src="<%%= user.profile_pic %>" class="img-circle">
+          <div class="img-circle user-circle-image" style="background: url(<%%= user.profile_pic %>)">
+          </div>
         </span>
 
         <span class="owner pull-left">

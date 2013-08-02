@@ -220,6 +220,11 @@ class Event < ActiveRecord::Base
     json
   end
 
+  # cummulative of up and down votes
+  def votes_count
+    up_votes.count - down_votes.count
+  end
+
   def self.custom_json(events, user = nil)
     # user is passed to include if he is attending the event.
     events.to_json(:include => [
@@ -249,7 +254,8 @@ class Event < ActiveRecord::Base
                     ],
                     :methods => [
                       :attendees,
-                      :distance
+                      :distance,
+                      :votes_count
                     ],
                     :check_user => user,
                     :votes_data_for_user => user
