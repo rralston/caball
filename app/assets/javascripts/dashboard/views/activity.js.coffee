@@ -7,6 +7,8 @@ app.views.activity = Backbone.View.extend
     this.roleapplication_activity_template = _.template($('#roleapplication_activity_template').html())
     this.endorsement_activity_template = _.template($('#endorsement_activity_template').html())
 
+    this.$el.addClass( this.model.get('trackable_type').toLowerCase() )
+
   render: ()->
     trackable_type = this.model.get('trackable_type').toLowerCase()
     # render the template based on the trackable type

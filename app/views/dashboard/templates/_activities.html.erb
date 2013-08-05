@@ -9,6 +9,19 @@
     <%% } %>
   </div>
 
+  <%% if (trackable.photo != null) { %>
+    <div class='comment-img'>
+      <div class='img-container' style='background:url(<%%= trackable.photo.image.url %>)'>
+      </div>
+    </div>
+  <%% } %>
+
+  <%% if (trackable.video != null && trackable.video.provider != null) { %>
+    <div class='comment-video'>
+      <%%= trackable.video.embed_code %>
+    </div>
+  <%% } %>
+  
   <%%= trackable.content %>
 
 </script>
@@ -27,7 +40,22 @@
     <br/>
   </div>
 
+  <%% if (trackable.photo != null) { %>
+    <div class='comment-img'>
+      <div class='img-container' style='background:url(<%%= trackable.photo.image.url %>)'>
+      </div>
+    </div>
+  <%% } %>
+
+  <%% if (trackable.video != null && trackable.video.provider != null) { %>
+    <div class='comment-video'>
+      <%%= trackable.video.embed_code %>
+    </div>
+  <%% } %>
+
   <%%= trackable.content %>
+
+
 
 </script>
 

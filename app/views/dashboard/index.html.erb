@@ -187,6 +187,15 @@
 
   $('#activities_container').html(app.activities_view.render().el)
 
+  $('#isotope_container').isotope({
+    itemSelector: '.item',
+    animationOptions:{
+      duration: 750,
+      easing: 'linear',
+      queue: false
+    }
+  });
+
   app.recommended_people = new app.collections.recommended_people(<%= raw current_user.recommended_people.limit(RECOMMENDED_PEOPLE_PER_PAGE).to_json() %>)
   app.recommended_people_view = new app.views.recommended_people({ collection: app.recommended_people })
   $('.recommended_people_container').html(app.recommended_people_view.render().el)

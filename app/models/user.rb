@@ -41,11 +41,11 @@ class User < ActiveRecord::Base
   has_many :followers, through: :follows, source: :user, foreign_key: "friend_id"
 
   # accepts_nested_attributes_for :profile, :reject_if => :all_blank
-  has_many :comments
+  has_many :comments, :dependent => :destroy
   
   has_many :blogs, :dependent => :destroy
 
-  has_many :attends
+  has_many :attends, :dependent => :destroy
 
   has_many :sent_endorsements, :class_name => 'Endorsement', :foreign_key => 'sender_id', :dependent => :destroy
   has_many :received_endorsements, :class_name => 'Endorsement', :foreign_key => 'receiver_id', :dependent => :destroy
