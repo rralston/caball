@@ -2,7 +2,7 @@
   
   <div class="profpicwrap img-circle pull-left" style="background: url('<%= @user.profile_pic %>') no-repeat"></div>
   <a class='btn-custom btn-dark-grey pull-left edit-user-photo' >
-    <div class='black-pencil-icon pull-left'></div>
+    <div class='black-pencil-icon pull-left' data-toggle='modal' data-target='#profile_update_modal'></div>
   </a>
   <div class='summary pull-left'>
     <div class='welcome regular'>
@@ -12,7 +12,10 @@
     <div class='notifications-summary'>
       <div href="#notifications_tab" data-toggle='tab' class='btn-custom btn-notification'>
         <div class='blue-star-icon pull-left light'></div> 
-        You have <%= pluralize(2, 'new notification') %>!
+        You have <%= pluralize(current_user.unread_notifications.count, 'new notification') %>!
+        <div class='ignore-btn'>
+          <button class="close">&times;</button>
+        </div>
       </div>
     </div>
     

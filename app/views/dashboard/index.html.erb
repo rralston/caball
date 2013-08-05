@@ -105,6 +105,33 @@
   </div>
 </div>
 
+<!-- Update user photo Modal -->
+<div id="profile_update_modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Update Profile Photo</span></h3>
+  </div>
+  <div class="modal-body">
+    <%= form_for @user do |f| %>
+      <%= f.fields_for :profile do |p|  %>
+        <div class="control-group">
+          <p>
+            Please Upload a Profile Image
+          </p>
+          <div class="controls">
+            <%= p.file_field :image %>
+          </div>
+        </div>
+      <% end %>
+      <%= f.submit 'Update', :class => 'btn btn-primary', :id => 'submit-user-form' %>
+    <% end %>
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Cancel</button>
+  </div>
+</div>
+<!-- Update user photo Modal -->
+
 <%= render :partial => 'dashboard/templates/activities' %>
 <%= render :partial => 'dashboard/templates/recommended_people' %>
 

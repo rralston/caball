@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
   # followers are the users who follow this user
   has_many :followers, through: :follows, source: :user, foreign_key: "friend_id"
 
-  accepts_nested_attributes_for :profile, :reject_if => :all_blank
+  # accepts_nested_attributes_for :profile, :reject_if => :all_blank
   has_many :comments
   
   has_many :blogs, :dependent => :destroy
@@ -51,12 +51,12 @@ class User < ActiveRecord::Base
   has_many :received_endorsements, :class_name => 'Endorsement', :foreign_key => 'receiver_id', :dependent => :destroy
 
 
-  accepts_nested_attributes_for :characteristics, :photos, :videos, :projects, :talents, :cover_photo, :resume, :allow_destroy => true
+  accepts_nested_attributes_for :characteristics, :profile, :photos, :videos, :projects, :talents, :cover_photo, :resume, :allow_destroy => true
 
 
 
   has_many :role_applications, :dependent => :destroy
-  attr_accessible :name, :email, :location, :about, :profile, :profile_attributes,
+  attr_accessible :name, :email, :location, :about, :profile_attributes,
                   :imdb_url, :characteristics_attributes, :photos_attributes,
                   :talents_attributes, :photo, :videos_attributes, :projects_attributes,
                   :admin, :gender, :headline, :featured, :expertise, :cover_photo_attributes,

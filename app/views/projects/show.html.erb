@@ -23,7 +23,7 @@
                 </div>
               <% end %>
               
-              <div class='btn-custom pull-right btn-message btn-grey send-generic-message' data-message-subject='Regarding project - <%%= @project.title %>' data-message-header='Message Project Owner - <%%= @project.title %>' data-message-recipients='<%%= @project.user.email %>'>
+              <div class='btn-custom pull-right btn-message btn-grey send-generic-message' data-message-subject='Regarding project - <%= @project.title %>' data-message-header='Message Project Owner - <%= @project.title %>' data-message-recipients='<%= @project.user.email %>'>
                 Message
               </div>
             </div>

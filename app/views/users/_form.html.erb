@@ -80,43 +80,41 @@
               </div>
             </div>
 
-            <div class='control-grip'>
+            <h4>Profile Picture</h4>
+            <%= f.fields_for :profile, @user.profile || @user.build_profile  do |profile|  %>
+              <div class="control-group">
+                <%= profile.label "Profile Photo", :class => 'control-label' %>
+                
+                <% if @user.profile.image.present? %>
+                  <div class="controls">
+                    <%= image_tag @user.profile.image.url(:medium), {:class => "img-polaroid"} %>
+                  </div>
+                <% end %>
+                  
+                <div class="controls">
+                  <%= profile.file_field :image %>
+                </div>
+
+              </div>
+            <%end%>
+
+            <div class='control-group'>
               <label class='control-label'>Experience & Skills</label>
 
               <div class='controls'>
                 <%= f.hidden_field :expertise, :class => 'text_field' %>
                 <!-- data name attr will create a select box with name as provided..! -->
-                <% if @user.expertise.present? %>
+                
                   <ul id="expertise_tags" class='tagit ui-sortable'>
-                    <%= @user.expertise.split(',').each do |exp_tag| %>
-                      <li data-value="<%= exp_tag %>"><%= exp_tag %> </li>
+                    <% if @user.expertise.present? %>
+                      <%= @user.expertise.split(',').each do |exp_tag| %>
+                        <li data-value="<%= exp_tag %>"><%= exp_tag %> </li>
+                      <% end %>
                     <% end %>
                   </ul>
-                <% end %>
+                
               </div>    
             </div>
-            
-
-            <%= f.fields_for :profile do |p|  %>
-              <% if @user.profile.image.present? %>
-                <div class="control-group">
-                  <%= p.label "Profile Photo", :class => 'control-label' %>
-                  <div class="controls">
-                    <%= image_tag @user.profile.image.url(:medium), {:class => "img-polaroid"} %>
-                    <%= p.check_box :_destroy %> Click Here to Delete
-                  </div>
-                </div>
-              <%else%>
-                <div class="control-group">
-                  <p>
-                    Please Upload a Profile Image
-                  </p>
-                  <div class="controls">
-                    <%= p.file_field :image %>
-                  </div>
-                </div>
-              <%end%>
-            <%end%>
           </div>
         </fieldset>
 

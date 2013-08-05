@@ -70,19 +70,30 @@
                         </ul>
                         </div>
                       <div class="row-fluid">
-                        <div id="carousel" class="flexslider span11">
-                            <ul class="slides">
-                              <% @event.other_photos.each do |photo|  %>
-                                <li style="background:url(<%= photo.image %>);"></li>
-                              <% end %>
-                            </ul>
-                        </div>
-                        <div class="addnew text-center">
-                          <span class="medium">+</span>
-                          <span class="medium">ADD</span>
-                          <span class="normal">Event</span>
-                          <span class="normal">Photo</span>
-                        </div>
+                        <% if @event.user == current_user %>
+                          <div id="carousel" class="flexslider span11">
+                              <ul class="slides">
+                                <% @event.other_photos.each do |photo|  %>
+                                  <li style="background:url(<%= photo.image %>);"></li>
+                                <% end %>
+                              </ul>
+                          </div>
+                          <div class="addnew text-center" data-toggle='modal' data-target='#add_event_photos_modal'>
+                            <span class="light plus">+</span>
+                            <span class="meduim add">ADD</span>
+                            <span class="light">EVENT</span>
+                            <span class="light">PHOTO</span>
+                          </div>
+                        <% else %>
+                          <div id="carousel" class="flexslider span11 not_owner">
+                              <ul class="slides">
+                                <% @event.other_photos.each do |photo|  %>
+                                  <li style="background:url(<%= photo.image %>);"></li>
+                                <% end %>
+                              </ul>
+                          </div>
+                        <% end %>                        
+                        
                       </div>
                     </div>    
                 </div>
@@ -218,6 +229,60 @@
     </div>
   </div>
 </div>
+
+
+<!-- Add more event photos modal -->
+<div id="add_event_photos_modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Add Event Photos</span></h3>
+  </div>
+  <%= form_for @event, :validate => true do |event| %>
+
+    <div class="modal-body">
+      <div id='fields-for-event_photos-list' class='numerous'>
+        <%= event.fields_for :other_photos, Photo.new, :child_index => 'replace_this' do |photo| %>
+          <div class='row'>
+            <div class='span3'>
+              <div class="control-group">
+                <label class="control-label">Event Image</label>
+                <div class="controls">
+                  <%= photo.file_field :image %>
+                </div>
+              </div>
+            </div>
+
+            <div class='span3'>
+              <div class="control-group">
+                <label class="control-label">Image Description</label>
+                <div class="controls">
+                  <%= photo.text_field :description %>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <%= link_to 'Remove', '#', :class => 'numerous-remove pull-right' %>
+          
+        <% end %>
+      </div>
+
+      <div id='event_photos-list'></div>
+
+      <%= link_to 'Add one more Photo', '#', :id => 'add-to-event_photos-list' %>
+    </div>
+
+    <div class='modal-footer'>
+      <%= event.submit 'Save Photos', :class => 'btn btn-primary' %>
+      <button class='btn' data-dismiss="modal">Cancel</button>
+    </div>
+
+  <% end %>
+</div>
+<!-- Add more event photos modal -->
+
+
+
 
 <%= render :partial => 'events/templates/comments' %>
 <%= render :partial => 'events/templates/comment' %>
