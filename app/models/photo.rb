@@ -6,6 +6,8 @@ class Photo < ActiveRecord::Base
   validates_presence_of :image, :message => 'is required', :if => :image_present?
 
   def image_present?
-    image.try(:file).nil?
+    image.try(:file).nil? and is_cover == false
+    # no need to validate presence of image if that is a cover photo.
+    # cover photo is optional for user.
   end
 end

@@ -75,7 +75,7 @@ class UsersController < ApplicationController
     @talents = User.types
     @experience = User.experience
     @videos = @user.videos
-    @user.talents.present? || [@user.talents.build]
+    @user.talents.present? || @user.talents.build
   end
    
   def create

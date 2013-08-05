@@ -10,6 +10,8 @@ class RoleApplicationsController < ApplicationController
   end
   
   def create
+
+    debugger
     role_application = current_user.role_applications.create(params[:role_application])
 
     project_owner = role_application.project.user

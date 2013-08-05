@@ -279,5 +279,9 @@ class User < ActiveRecord::Base
     User.where('name like ?', "%#{query}%")
   end
 
+  def can_apply_for?(role)
+    self.talents.map(&:name).include?(role.name)
+  end
+
 
 end

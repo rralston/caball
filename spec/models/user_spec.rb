@@ -368,4 +368,18 @@ describe User do
     
   end
 
+  context "eligibility to apply for a role" do
+    before(:all){
+      @roled_user = FactoryGirl.create(:user, :talents => [FactoryGirl.create(:talent, :name => 'Actor'), FactoryGirl.create(:talent, :name => 'Costumes')])
+
+
+      @eligible_role = FactoryGirl.create(:role, :name => 'Actor')
+      @uneligible_role = FactoryGirl.create(:role, :name => 'Hair')
+      
+    }
+
+    specify { @roled_user.can_apply_for?(@eligible_role).should == true }
+    specify { @roled_user.can_apply_for?(@uneligible_role).should == false }
+  end
+
 end
