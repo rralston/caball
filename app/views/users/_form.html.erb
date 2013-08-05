@@ -135,6 +135,7 @@
                 <%= f.text_area :about, :class => 'text_area' %>
               </div>
             </div>
+
             <% @user.talents.each_with_index do |talent, index| %>
               <%= f.fields_for :talents, talent, :child_index => index do |talent_field| %>
                 <div class="control-group">
@@ -168,18 +169,76 @@
         <fieldset class="step roles-content">
           <div class="span12">
             <h2>Your Roles</h2>
+              
+            <%= f.fields_for :talents do |talent|   %>
+              <div class='user-talent'>
+                <h4>Role</h4>
+                <div class="control-group">
+                  <%= talent.label :name, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= talent.select :name, @talents%>
+                   </div>
+                </div>
 
-            <% @user.talents.each_with_index do |talent, index| %>
-            <%= f.fields_for :talents, talent, :child_index => index do |talent_field|   %>
-            <div class="control-group">
-              <h3 class="talent-label" data-index="<%= index %>"><%= talent_field.object.name %></h3>
-              <%= talent_field.label :description, :class => 'control-label' %>
-              <div class="controls">
-                <%= talent_field.text_area :description, :class => 'textarea', :rows => "10" %>
+
+                <div class="control-group">
+                  <%= talent.label "Experience", :class => 'control-label' %>
+                  <div class="controls">
+                    <%= talent.select :experience, @experience %>
+                  </div>
+                </div>
+              
+                <div class="control-group">
+                <%= talent.label :description, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= talent.text_area :description, :class => 'textarea', :rows => "5" %>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <div class="controls">
+                    <%= talent.check_box :_destroy %> Click Here to Delete
+                  </div>    
+                </div>
               </div>
-            </div>
             <% end %>
+
+            <!-- don't allow user to add more than 3 talents -->
+            <% if @user.talents.count < 3 %>
+              <div id="fields-for-talents-list" class="numerous">
+                <%= f.fields_for :talents, Talent.new, :child_index => 'replace_this' do |talent| %>
+                  <div class="control-group">
+                    <%= talent.label :name, :class => 'control-label' %>
+                    <div class="controls">
+                      <%= talent.select(:name, options_for_select(@talents)) %>
+                    </div>
+                  </div>
+                  
+
+                  <div class="control-group">
+                    <%= talent.label "Experience", :class => 'control-label' %>
+                    <div class="controls">
+                      <%= talent.select :experience, @experience %>
+                    </div>
+                  </div>
+                
+                  <div class="control-group">
+                    <%= talent.label :description, :class => 'control-label' %>
+                    <div class="controls">
+                      <%= talent.text_area :description, :class => 'textarea', :rows => "5" %>  
+                    </div>
+                  </div>
+                
+                  <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+                <% end %>
+              </div>
+
+              <div id="talents-list"></div>
+              
+              <%= link_to 'Add More Talent', '#', :id => 'add-to-talents-list' %>
             <% end %>
+
+            
 
             <%= f.fields_for :characteristics_attributes do |c|   %>
 

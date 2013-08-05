@@ -81,27 +81,55 @@ var Users = {
         'photos-list' : {
           'add' : function(form){
             var current = $('#steps').data('index');
-            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
+            var stepHeight = $('#steps .step:eq(' + (current - 1) + ')').height();
             $('#steps').height(stepHeight);
           },
   
           'remove' : function(form){
             var current = $('#steps').data('index');
-            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
+            var stepHeight = $('#steps .step:eq(' + (current - 1) + ')').height();
             $('#steps').height(stepHeight);
           }
         },
         'videos-list' : {
           'add' : function(form){
             var current = $('#steps').data('index');
-            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
+            var stepHeight = $('#steps .step:eq(' + (current - 1) + ')').height();
             $('#steps').height(stepHeight);
           },
   
           'remove' : function(form){
             var current = $('#steps').data('index');
-            var stepHeight = $('#steps .step :eq(' + (current - 1) + ')').height();
+            var stepHeight = $('#steps .step:eq(' + (current - 1) + ')').height();
             $('#steps').height(stepHeight);
+          }
+        },
+        'talents-list': {
+          'add': function(form){
+            var current = $('#steps').data('index');
+            var stepHeight = $('#steps .step:eq(' + (current - 1) + ')').height();
+            $('#steps').height(stepHeight);
+
+            added_talents = $('.user-talent').length
+            new_talents = Numerous.count(['talents-list'])
+
+            // if total talents are above 3 hide the add more option
+            if ((added_talents + new_talents) >= 3){
+              $('a#add-to-talents-list').hide()
+            }
+          },
+          'remove': function(event){
+            var current = $('#steps').data('index');
+            var stepHeight = $('#steps .step:eq(' + (current - 1) + ')').height();
+            $('#steps').height(stepHeight);
+
+            added_talents = $('.user-talent').length
+            new_talents = Numerous.count(['talents-list'])
+
+            // if total telents is less than 3 show option to add more talent
+            if ((added_talents + new_talents) < 3){
+              $('a#add-to-talents-list').show()
+            }
           }
         }
       });
