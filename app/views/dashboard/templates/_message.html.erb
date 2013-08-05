@@ -1,5 +1,9 @@
 <script type="script/template" id='message_template'>
 
+  <span class="message-time">
+    <%%= app.fn.format_date(created_at) %>
+  </span>
+
   <div class='message-sender pull-left'>
     <div class="img-circle user-circle-image" style="background: url(<%%= sender.profile_pic %>)">
     </div>

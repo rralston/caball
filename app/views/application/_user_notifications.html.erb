@@ -17,8 +17,11 @@
         </div>
         
         <div class="notemsg"><%= notification.trackable.content %></div>
+
+        <div class='notetime light'>
+          <span class="timeago" title="<%= notification.trackable.created_at.to_json() %>"><%= notification.trackable.created_at.to_json() %></span>
+        </div>
         
-        <div class="notetime light"><%= notification.trackable.created_at %></div>
       </div>  
 
     </div>

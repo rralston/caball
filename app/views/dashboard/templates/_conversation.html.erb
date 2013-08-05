@@ -10,6 +10,11 @@
     </div>
   <%% } %>
 
+  
+  <span class="conv-time">
+    <%%= app.fn.format_date(last_message.created_at) %>
+  </span>
+
   <div class='conv-sender pull-left'>
     <div class="img-circle user-circle-image" style="background: url(<%%= originator.profile_pic %>)">
     </div>

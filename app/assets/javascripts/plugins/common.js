@@ -285,6 +285,20 @@ app.fn.set_notification_check_time = function(element){
     }
   })
 }
+
+app.fn.format_date = function(datetime){
+  input = new Date(datetime)
+  date = input.toLocaleDateString();
+  time = input.toLocaleTimeString().replace(/([\d]+:[\d]{2})(:[\d]{2})(.*)/, "$1$3");
+  todaysDate = new Date();
+
+  // compare with todays date. if today return only tine
+  if(input.setHours(0,0,0,0) == todaysDate.setHours(0,0,0,0)){
+    return time
+  }else{
+    return date + '  ' + time
+  }
+}
   
   
 
