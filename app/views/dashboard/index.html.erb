@@ -1,35 +1,90 @@
 <%= stylesheet_link_tag "dashboard/dashboard" %>
 <%= javascript_include_tag "dashboard/dashboard_manifest" %>
+<%= javascript_include_tag "users/users" %>
 
 <div class='container'>
   <div class='row'>
-    <div class='span2'>
+    <div class='span1 dashboard-main-nav'>
       <ul class='nav nav-pills nav-stacked'>
         <li>
-          <a href='#home' data-toggle='tab' class='active'> Home </a>
+          <a href='#home' data-toggle='tab' class='active'>
+            <div class='nav-icon home'>
+            </div>
+            <div class='nav-text'>
+              HOME
+            </div>
+          </a>
         </li>
         <li>
-          <a href='#messages' data-toggle='tab'> Messages </a>
+          <a href='#messages' data-toggle='tab'>
+            <div class='nav-icon messages'>
+            </div>
+            <div class='nav-text'>
+              MESSAGES
+            </div>
+          </a>
         </li>
         <li>
-          <a href='#projects' data-toggle='tab'> Projects </a>
+          <a href='#projects' data-toggle='tab'>
+            <div class='nav-icon projects'>
+            </div>
+            <div class='nav-text'>
+              PROJECTS
+            </div>
+          </a>
         </li>
         <li>
-          <a href='#events' data-toggle='tab'> Events </a>
+          <a href='#events' data-toggle='tab'>
+            <div class='nav-icon events'>
+            </div>
+            <div class='nav-text'>
+              EVENTS
+            </div>
+          </a>
         </li>
         <li>
-          <a href='#settings' data-toggle='tab'> Settings </a>
+          <a href='#settings' data-toggle='tab'>
+            <div class='nav-icon settings'>
+            </div>
+            <div class='nav-text'>
+              SETTINGS
+            </div>
+          </a>
         </li>
       </ul>
     </div>
-    <div class='users-view span10'>
+    <div class='users-view span11'>
       
-      <%= render :partial => 'dashboard/user_profile_summary' %>
+      
       
       <div class='row'>
-        <div class='tab-content span7'>
+        <div class='dashboard-tabs tab-content span11'>
           <div class='tab-pane active' id='home'>
+            <%= render :partial => 'dashboard/user_profile_summary' %>
             <%= render :partial => 'dashboard/user_home' %>
+            <div class='dashboard_widgets right-container pull-left'>
+              <%= render :partial => 'dashboard/recommended_people' %>
+
+              <div class='row right-extra-div'>
+                <div id='recommended_projects_div'>
+                </div>
+
+                <button class="load_more btn btn_warning" data-type="next_recommended_projects" data-next="2">
+                  Load more
+                </button>
+              </div>
+
+              <div class='row right-extra-div'>
+                <div id='recommended_events_div'>
+                </div>
+
+                <button class="load_more btn btn_warning" data-type="next_recommended_events" data-next="2">
+                  Load more
+                </button>
+              </div>
+                
+            </div>
+
           </div>
           <div class='tab-pane' id='messages'>
             <%= render :partial => 'dashboard/messages' %>
@@ -38,29 +93,86 @@
             <%= render :partial => 'dashboard/projects' %>
           </div>
           <div class='tab-pane' id='events'>
-            Your events
+            <%= render :partial => 'dashboard/events' %>
           </div>
           <div class='tab-pane' id='settings'>
             Your settings
           </div>
         </div>
-
-        <div class='span3 dashboard_widgets'>
-          <%= render :partial => 'dashboard/recommended_people' %>
-          <%= render :partial => 'dashboard/recommended_projects' %>
-        </div>
       </div>
     </div>
-    
-    
+  
   </div>
 </div>
 
+<!-- Update user photo Modal -->
+<div id="profile_update_modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Update Profile Photo</span></h3>
+  </div>
+  <div class="modal-body">
+    <%= form_for @user do |f| %>
+      <%= f.fields_for :profile do |p|  %>
+        <div class="control-group">
+          <p>
+            Please Upload a Profile Image
+          </p>
+          <div class="controls">
+            <%= p.file_field :image %>
+          </div>
+        </div>
+      <% end %>
+      <%= f.submit 'Update', :class => 'btn btn-primary', :id => 'submit-user-form' %>
+    <% end %>
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Cancel</button>
+  </div>
+</div>
+<!-- Update user photo Modal -->
+
 <%= render :partial => 'dashboard/templates/activities' %>
 <%= render :partial => 'dashboard/templates/recommended_people' %>
-<%= render :partial => 'dashboard/templates/recommended_project' %>
+
+
+<%= render :partial => 'dashboard/templates/recommended_projects' %>
+<%= render :partial => 'projects/templates/similar_project' %>
+
+<%= render :partial => 'dashboard/templates/recommended_events' %>
+<%= render :partial => 'events/templates/similar_event' %>
+
+<!-- Projects -->
+<%= render :partial => 'dashboard/templates/user_projects' %>
+<%= render :partial => 'dashboard/templates/user_project' %>
+<%= render :partial => 'dashboard/templates/applied_project' %>
+<%= render :partial => 'dashboard/templates/manage_project' %>
+<%= render :partial => 'dashboard/templates/project_fans' %>
+<%= render :partial => 'dashboard/templates/project_fan' %>
+<%= render :partial => 'dashboard/templates/super_role_templates' %>
+<%= render :partial => 'dashboard/templates/sub_role_templates' %>
+<%= render :partial => 'dashboard/templates/role_application' %>
+
+<%= render :partial => 'dashboard/modals' %>
+
+<!-- events -->
+<%= render :partial => 'dashboard/templates/user_events' %>
+<%= render :partial => 'dashboard/templates/user_event' %>
+<%= render :partial => 'dashboard/templates/attending_events' %>
+<%= render :partial => 'dashboard/templates/attending_event' %>
+
+
+<!-- Messages -->
+<%= render :partial => 'dashboard/templates/conversations' %>
+<%= render :partial => 'dashboard/templates/conversation' %>
+<%= render :partial => 'dashboard/templates/messages' %>
+<%= render :partial => 'dashboard/templates/message' %>
+
+<%= render :partial => 'conversations/send_new_message_modal' %>
 
 <script type="text/javascript">
+
+  app.current_user = <%= raw current_user.to_json() %>
 
   app.activities = new app.collections.activities()
 
@@ -79,8 +191,123 @@
   app.recommended_people_view = new app.views.recommended_people({ collection: app.recommended_people })
   $('.recommended_people_container').html(app.recommended_people_view.render().el)
 
-  app.recommended_projects = new app.collections.recommended_projects(<%= raw current_user.recommended_projects.limit(RECOMMENDED_PROJECTS_PER_PAGE).to_json() %>)
+
+  app.recommended_projects = new app.collections.recommended_projects(<%= raw Project.custom_json(current_user.recommended_projects.limit(RECOMMENDED_PROJECTS_PER_PAGE)) %>)
   app.recommended_projects_view = new app.views.recommended_projects({ collection: app.recommended_projects })
-  $('.recommended_projects_container').html(app.recommended_projects_view.render().el)
+  $('#recommended_projects_div').html(app.recommended_projects_view.render().el)
+
+
+  app.recommended_events = new app.collections.recommended_events(<%= raw Event.custom_json(current_user.recommended_events.limit(RECOMMENDED_EVENTS_PER_PAGE), current_user) %>)
+  app.recommended_events_view = new app.views.recommended_events({ collection: app.recommended_events })
+  $('#recommended_events_div').html(app.recommended_events_view.render().el)
+
+
+// PROJECTS
+// user projects
+  user_projects = new app.collections.user_projects()
+  app.user_projects_view = new app.views.user_projects({ collection: user_projects })
+  user_projects.reset(<%= raw current_user.projects.to_json(:include => [
+                                                              :open_roles,
+                                                              :filled_roles,
+                                                              :roles,
+                                                              :photos,
+                                                              :fans
+                                                            ],
+                                                            :methods => [
+                                                              :pending_applications,
+                                                              :participant_mails,
+                                                              :roles_json,
+                                                              :roles_for_dashboard,
+                                                              :roles_percent
+                                                            ]) %>)
+// Applied projects
+  applied_projects = new app.collections.applied_projects()
+  app.applied_projects_view = new app.views.applied_projects({ collection: applied_projects })
+  applied_projects.reset(<%= raw current_user.applied_projects.to_json(:include => [
+                                                              :open_roles,
+                                                              :filled_roles,
+                                                              :roles,
+                                                              :photos,
+                                                              :user
+                                                            ]) 
+                          %>)
+
+
+  // EVENTS
+  // user created event
+  app.user_events = new app.collections.user_events()
+  app.user_events_view = new app.views.user_events({ collection: app.user_events })
+  app.user_events.reset(<%= raw current_user.events.to_json(:include => [
+                                                          :attendees,
+                                                          { 
+                                                            :start => {
+                                                              :methods => [
+                                                                :day,
+                                                                :month_year
+                                                              ]
+                                                            }
+                                                          },
+                                                          {
+                                                            :end => {
+                                                              :methods => [
+                                                                :day,
+                                                                :month_year
+                                                              ]
+                                                            } 
+                                                          },
+                                                          :comments,
+                                                          :likes,
+                                                          :main_photo
+                                                        ],
+                                                        :methods => [
+                                                          :attendees_emails
+                                                        ]) %>)
+  $('#dashboard_events').html(app.user_events_view.render().el)
+
+  // user attending events
+  app.attending_events = new app.collections.attending_events()
+  app.attending_events_view = new app.views.attending_events({ collection: app.attending_events })
+  app.attending_events.reset(<%= raw current_user.attending_events.to_json(:include => [
+                                                                            :attendees,
+                                                                            { 
+                                                                              :start => {
+                                                                                :methods => [
+                                                                                  :day,
+                                                                                  :month_year
+                                                                                ]
+                                                                              }
+                                                                            },
+                                                                            {
+                                                                              :end => {
+                                                                                :methods => [
+                                                                                  :day,
+                                                                                  :month_year
+                                                                                ]
+                                                                              } 
+                                                                            },
+                                                                            :comments,
+                                                                            :likes,
+                                                                            :main_photo,
+                                                                            :user
+                                                                          ]) %>)
+  $('#dashboard_events').find('#attending-events').html(app.attending_events_view.render().el)
+
+
+// MESSAGES
+
+  // inbox
+  app.inbox_conversations = new app.collections.conversations(<%= raw current_user.mailbox.inbox.to_json(:check_user => current_user) %>)
+  inbox_view = new app.views.conversations({ collection: app.inbox_conversations, mailbox_type: 'Inbox' })
+  $('#conversation-tab-inbox').html(inbox_view.render().el)
+
+  // sent
+  app.sent_conversations = new app.collections.conversations(<%= raw current_user.mailbox.sentbox.to_json(:check_user => current_user) %>)
+  sent_view = new app.views.conversations({ collection: app.sent_conversations, mailbox_type: 'Sent' })
+  $('#conversation-tab-sent').html(sent_view.render().el)
+
+  // trash
+  app.trash_conversations = new app.collections.conversations(<%= raw current_user.mailbox.trash.to_json(:check_user => current_user) %>)
+  trash_view = new app.views.conversations({ collection: app.trash_conversations, mailbox_type: 'Trash' })
+  $('#conversation-tab-trash').html(trash_view.render().el)
 
 </script>

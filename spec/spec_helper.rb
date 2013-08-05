@@ -37,7 +37,7 @@ Spork.prefork do
     # order dependency and want to debug it, you can fix the order by providing
     # the seed, which is printed after each run.
     #     --seed 1234
-    config.order = "random"
+    # config.order = "random"
 
     OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:facebook] =  OmniAuth::AuthHash.new({

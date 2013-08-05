@@ -8,6 +8,7 @@ gem 'rails', '3.2.8'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
+gem 'pg'
 
 # Ok lets try out the heroku business
 gem 'heroku'
@@ -22,15 +23,14 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
-
-  # Twitter Boostrap and Upgrade dependencies
-  gem 'therubyracer'
-  gem 'less-rails'
-  gem 'twitter-bootstrap-rails'
-  
 end
 
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
+# Twitter Boostrap and Upgrade dependencies
+gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -110,8 +110,17 @@ gem 'public_activity'
 gem "asset_sync"
 
 # Carrier Wave link to AWS S#
-gem 'fog'
+gem 'fog', '~> 1.12.1'
 gem 'cancan'
 
 # client side validtions
 gem 'client_side_validations'
+
+# tagging
+gem 'acts-as-taggable-on'
+
+# remote file uploads
+gem "remotipart", "~> 1.2.1"
+
+# social sharing
+gem 'social-share-button'

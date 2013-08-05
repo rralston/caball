@@ -1,0 +1,368 @@
+$grey: #a5a8b1
+$light-grey: #d4d6dc
+$divider-border: #c6d0db
+$role-circle-border: #1691de
+$comments-left-border: #c8d2de
+$brick-red: #e44f65
+$light-grey-text: #a0a8b1
+$comment-text: #636a73
+
+.project-description
+  margin-top: 20px
+  width: 520px
+
+.shadow-div
+  box-shadow: -26px 0px 79px 135px #eaedf1
+  -webkit-box-sizing: -26px 0px 79px 99px #eaedf1
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box 
+  -ms-box-sizing: border-box
+  box-sizing: border-box
+  position: absolute
+  left: 473px
+  height: 350px
+
+.project-created-by
+  color: #82848d
+
+
+.project-types
+  margin-top: 10px
+  ul
+    margin-left: 0px
+  li
+    text-transform:  uppercase
+    float: left
+    margin-right: 20px
+
+.project-main-head
+  background: #eaedf0
+  position: relative
+  margin-top: 65px
+  .project-image
+    height: 418px
+    background-size: cover !important
+  .main-right
+    position: relative
+    padding: 20px
+    width: 520px
+    .btn-message
+      padding: 7px 1px
+      margin-top: 8px
+  .title
+    width: 520px
+  .project-description
+    color: #82848d
+    font-style: italic
+    font-size: 17px
+  .read_more
+    color: #e8aaa7
+    cursor: pointer
+  .project-location
+    font-size: 18px
+    color: #82848d
+  .project-genres
+    margin-top: 10px
+    ul
+      color: #82848d
+      margin-left: 0px 
+      li
+        text-transform:  uppercase
+        float: left
+        margin-right: 5px
+
+      li:after
+        content: " \00b7"
+        font-size: 40px
+        position: relative
+        top: 5px
+        margin-left: 5px
+      li:last-child
+        position: relative
+        top: 8px
+      li:last-child:after
+        content: none
+
+
+.headline
+  position: relative
+  background: url(/assets/project-healine-bg.png) repeat-x
+  height: 100px
+  padding: 35px 35px 25px 70px
+  color: #a5a8b1
+  font-size: 23px
+  line-height: 25px
+
+  i:before
+    content: "\201C"
+    font-size: 60px
+    float: left
+    margin-right: 8px
+    font-weight: 800
+    position: relative
+    left: -30px
+    top: 18px
+    line-height: 0px
+  i:after
+    content: "\201D"
+    font-size: 60px
+    position: relative
+    top: 35px
+    margin-right: 8px
+    font-weight: 800
+    line-height: 0px
+
+.big-quotes
+  font-size: 50px
+  position: relative
+  top: 15px
+
+.imp-dates-div
+  padding-top: 20px
+  height: auto
+  background: url(/assets/grey-light-bg.png) repeat
+  .imp-date-head
+    font-size: 15px
+    text-align: center
+    color: white
+    letter-spacing: 6px
+  .imp-dates
+    margin-top: 30px
+    .imp-date
+      margin-bottom: 15px
+      .month
+        font-size: 12px
+        width: 48px
+        margin-top: 2px
+      .date
+        text-transform: uppercase
+        padding: 10px
+        background: black
+        color: $grey
+        text-align: center
+        .day
+          font-size: 28px
+      .date-details
+        padding: 5px 10px 10px 15px
+        color: $light-grey
+        font-size: 16px
+        line-height: 21px
+
+.project-wall
+  .role-circle-container
+    left: 0px
+.role-circles
+  a.circle-wrapper:hover
+    color: #0088cc
+
+
+.role-portfolio
+  width: 100px
+  margin-left: 20px
+  margin-top: 20px
+  text-align: center
+  .role-title
+    width: 100px
+    text-transform: uppercase
+  .role-cast-pic
+    width: 60px
+    border: 5px solid $role-circle-border
+  .default-role-pic
+    display: block
+    margin: 0px auto
+  .role-apply-btn, .show_applicants
+    min-width: 30px
+    margin: 10px auto 0px auto
+    width: 68px
+    height: 12px
+    padding-top: 2px
+    padding-bottom: 10px
+  .show_applicants
+    width: 80px !important
+    font-size: 10px
+  .role-filled-sumary
+    margin-top: 10px
+    margin-left: -10px
+
+.role-filters
+  margin-left: 20px
+  text-align: center
+  margin-bottom: 15px
+  .role-filter
+    margin: 5px 5px 
+
+.roles-display-tabs
+  margin-bottom: 30px
+
+.project-comments-container
+  background: #D6DFE8
+  .updates-head
+    padding: 20px 0px 20px 50px
+    font-size: 30px
+    border-bottom: 1px solid $divider-border
+
+
+
+// role circles
+.roles-div
+  background: #EAEDF0
+  .available-roles-head
+    padding: 20px 0px 20px 50px
+    font-size: 30px
+    border-bottom: 1px solid $divider-border
+
+.role-circles  
+  margin-left: 0px
+  text-align: left
+  padding-left: 30px
+  margin-top: 20px
+  
+  .circle-wrapper
+    margin: 20px 0px 0px 5px
+  .role-circle-container
+    display: inline-block
+    position: relative
+    margin: 10px 20px
+    width: 65px
+    height: 110px
+    
+    .role-title
+      position: relative
+      float: left
+      top: -20px
+      width: 65px
+      z-index: 10
+      white-space: nowrap
+      text-align: center
+      overflow: hidden
+      text-overflow: ellipsis
+      font-size: 13px
+    
+    .circle-measure    
+      top: 0
+      width: 60px
+      z-index: 8
+      background-color: #EAEDF0
+      position: absolute
+      left: 8px
+    
+    .role-count
+      position: relative
+      float: left
+      top: 50px
+      width: 75px
+      text-align: center
+      font-size: 12px
+
+    
+    .role-circle
+      border: 3px solid $role-circle-border
+      background-color: transparent
+      border-radius: 45px
+      width: 60px
+      height: 60px
+      z-index: 9
+      position: absolute
+    
+    .circle-fill
+      border: 3px solid #EAEDF0
+      background-color: $role-circle-border
+      border-radius: 45px
+      width: 50px
+      height: 50px
+      position: absolute
+      top: 5px
+      left: 5px
+      z-index: 7
+      box-shadow: 17px -35px 50px -42px black inset
+      -moz-box-shadow: 17px -35px 50px -42px black inset
+      -webkit-box-shadow: 17px -35px 50px -42px black inset
+
+#comments_div
+  border-left: 5px solid $comments-left-border
+  width: 595px
+  position: relative
+  #comment_please_wait
+    display: none
+    margin-left: 30PX
+  #please_sign_in
+    margin-left: 30PX
+  .add-comment
+    img.user-profile-img
+      width: 40px
+      position: absolute
+      left: -28px
+      top: 20px
+      -moz-box-shadow: 0px 0px 10px -1px black
+      -webkit-box-shadow: 0px 0px 10px -1px black
+      box-shadow: 0px 0px 10px -1px black
+      border: 1px solid #D0D7Df
+  
+  #comments_display
+    color: $comment-text
+    .comment
+      position: relative
+      background: white
+      margin: 50px 0px
+      width: 580px
+
+      img.user-profile-img
+        width: 40px
+        position: absolute
+        left: -28px
+        top: -20px
+        -moz-box-shadow: 0px 0px 10px -1px black
+        -webkit-box-shadow: 0px 0px 10px -1px black
+        box-shadow: 0px 0px 10px -1px black
+        border: 1px solid #D0D7Df
+      .comment-details
+        padding: 15px 10px 10px 30px
+        .commentor-name
+          color: $brick-red
+          font-size: 20px
+          margin-bottom: 5px
+        .commentor-location
+          color: $light-grey-text
+        .comment-content
+          margin-top: 15px
+        .comment-img
+          img
+            max-width: 580px
+            width: 580px
+            margin-left: -30px
+      .comment-actions
+        padding: 15px
+        border-top: 2px solid $divider-border
+        background: url(/assets/comment-actions-bg.png) repeat-x
+        .like-comment
+          padding-right: 20px
+          .heart-blue
+            margin-right: 10px
+
+
+
+  textarea#comment_content
+    margin-left: 30px
+    margin-top: 20px
+    height: 70px
+    width: 530px
+    -moz-box-shadow: 0px 0px 12px -1px #c8d2de inset
+    -webkit-box-shadow: 0px 0px 12px -1px #c8d2de inset
+    box-shadow: 0px 0px 12px -1px #c8d2de inset
+    border: 1px solid #D0D7Df
+    padding: 10px
+
+.share_area
+  margin-bottom: 40px
+  .social-share-button
+    a
+      width: 50px
+      height: 50px
+      margin-right: 10px
+      background-size: 100% 100% !important
+  .social-share-button-facebook
+    background: url("/assets/fb-link.png") no-repeat !important
+  .social-share-button-twitter
+    background: url("/assets/twitter-link.png") no-repeat !important
+  .social-share-button-google_plus
+    background: url("/assets/g-link.png") no-repeat !important

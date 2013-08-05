@@ -51,3 +51,40 @@ $(document).ready ()->
         else
           alert 'Error processing application'
 
+  $('body').on 'click', '.btn-like-project', (event)->
+    btn = $(event.target)
+    if app.fn.check_current_user()
+      btn.html('Please wait..')
+      if btn.hasClass('liked')
+        $.ajax
+          url: '/likes/unlike'
+          type: 'POST'
+          data:
+            like:
+              loveable_id: btn.attr('data-projectId')
+              loveable_type: 'Project'
+          success: (resp) ->
+            if resp != 'false'
+              btn.removeClass('liked')
+              fan = new app.models.fan(app.current_user)
+              app.fans.remove(fan)
+              btn.html('Like This')
+            else
+              alert 'Something went wrong, Please try laters'
+      else
+        $.ajax
+          url: '/likes.json'
+          type: 'POST'
+          data:
+            like:
+              loveable_id: btn.attr('data-projectId')
+              loveable_type: 'Project'
+          success: (resp) ->
+            if resp != 'false'
+              btn.addClass('liked')
+              fan = new app.models.fan(app.current_user)
+              app.fans.add(fan)
+              btn.html('Un Like This')
+            else
+              alert 'Something went wrong, Please try laters'
+

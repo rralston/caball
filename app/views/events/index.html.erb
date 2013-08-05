@@ -1,0 +1,131 @@
+<%= javascript_include_tag "events/events_manifest" %>
+<%= stylesheet_link_tag "events/index.css" %>
+
+<div class="topbnrwrap">
+  <div class="topbnr container">
+    <div class="bnrenclose">
+      <div class="bnrbg">
+        <img src="/assets/event-bnr-bg.png" alt="">
+      </div>
+      <div class="bnrtext light span12">
+          <h1>Events</h1>
+          <p class='light'>Find the latest events in your area. Connect with the event organizers and gain more experience.</p>
+          </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="topsrchwrap">
+  <div class="topsrch container">
+    
+    <div class="ltext span4">
+      <h2 class='medium'>Search Events</h2>
+      <p>by keyword,zip or location</p>
+    </div>
+    <form action="" class=" srchfrm span">
+      <input type="text" id='search-events-input'>
+    </form>
+    
+  </div>
+</div>
+
+
+
+<div class='container'>
+
+  <div class='events-container'>
+    <div id='results'>
+      <div class='row search_please_wait text-center light'>
+          Please Wait While we search...
+      </div>
+      <div class='search_header'>
+        
+        <div class='search_summary'>
+          <span class='search_type'></span>
+          <span class='search_word'></span>
+        </div>
+
+        <ul class='row events-filter custom-green-filters nav'>
+          <li class='active'>
+              <a href="#event-tab-popular" data-toggle='tab' class='badge badge-custom-green pull-left project-filter active'>
+                POPULAR
+              </a>
+          </li>
+
+          <li>
+              <a href="#event-tab-new" data-toggle='tab' class='badge badge-custom-green pull-left project-filter'>
+                NEW
+              </a>
+          </li>
+
+          <li>
+              <a href="#event-tab-by_date" data-toggle='tab' class='badge badge-custom-green pull-left project-filter'>
+                DATE
+              </a>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class='row'>
+        <div class='tab-content events-display-tabs'>
+          <div class='tab-pane active' id='event-tab-popular'>
+            
+          </div>
+
+          <div class='tab-pane' id='event-tab-new'>
+            
+          </div>
+
+          <div class='tab-pane' id='event-tab-by_date'>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id='recent-events-container'>
+    </div>
+  </div>
+</div>
+
+
+<%= render :partial => 'events/templates/result_events' %>
+<%= render :partial => 'events/templates/result_event' %>
+
+<%= render :partial => 'events/templates/recent_events' %>
+<%= render :partial => 'events/templates/recent_event' %>
+
+<script type="text/javascript">
+  
+  $(document).ready(function(){
+
+    app.popular_events = new app.collections.result_events()
+    popular_events_view = new app.views.result_events({ collection: app.popular_events, type: 'popular' })
+    app.popular_events.reset(<%= raw Event.custom_json(@popular_events, current_user  ) %>)
+    $('#event-tab-popular').html(popular_events_view.render().el)
+
+
+    app.new_events = new app.collections.result_events()
+    new_events_view = new app.views.result_events({ collection: app.new_events, type: 'new' })
+    app.new_events.reset(<%= raw Event.custom_json(@new_events, current_user) %>)
+    $('#event-tab-new').html(new_events_view.render().el)
+
+    app.by_date_events = new app.collections.result_events()
+    by_date_events_view = new app.views.result_events({ collection: app.by_date_events, type: 'date' })
+    app.by_date_events.reset(<%= raw Event.custom_json(@events_by_time, current_user) %>)
+
+    $('#event-tab-by_date').html(by_date_events_view.render().el)
+
+    app.recent_events = new app.collections.result_events()
+    recent_events_view = new app.views.recent_events({ collection: app.recent_events, type: 'recent' })
+    app.recent_events.reset(<%= raw Event.custom_json(@recent_events, current_user) %>)
+
+    $('#recent-events-container').html(recent_events_view.render().el)
+
+    app.params_used = <%= raw @params_used.to_json() %>
+
+  });  
+
+</script>

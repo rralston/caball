@@ -18,11 +18,11 @@
   <div class='activity_summary'>
     <a href='users/'<%%= owner.id %>> <%%= owner.name %> </a>
     <%% if(key == 'comment.create'){ %>
-      posted a Project update to
-      <a href='project/<%%= trackable.project.id %>'> <%%= trackable.project.title %> </a>
+      posted a <%%= trackable.commentable_type %> update to
+      <a href='<%%= trackable.commentable_type.toLowerCase() %>/<%%= trackable.commentable.id %>'> <%%= trackable.commentable.title %> </a>
     <%% }else if(key == 'comment.update'){ %>
-      edited a Project update to
-      <a href='project/<%%= trackable.project.id %>'> <%%= trackable.project.title %> </a>
+      edited a <%%= trackable.commentable_type %> update to
+      <a href='<%%= trackable.commentable_type.toLowerCase() %>/<%%= trackable.commentable.id %>'> <%%= trackable.commentable.title %> </a>
     <%% } %>
     <br/>
   </div>
@@ -54,6 +54,22 @@
     
     <%% if(key == 'role_application.create'){ %>
       has applied for the <%%= trackable.role.name %> (<%%= trackable.role.subrole %>) role in <a href='project/<%%= trackable.role.project.id %>'> <%%= trackable.role.project.title %> </a>
+    <%% } %>
+
+  </div>
+
+  <a href='project/<%%= trackable.id %>'> <%%= trackable.title %> </a>
+
+</script>
+
+
+<script type="script/template" id='endorsement_activity_template'>
+
+  <div class=''>
+    <a href='users/'<%%= owner.id %>> <%%= owner.name %> </a>
+    <%% console.log(this) %>
+    <%% if(key == 'endorsement.create'){ %>
+      has endrosed <a href='users/<%%= trackable.receiver.id %>'> <%%= trackable.receiver.name %> </a>
     <%% } %>
 
   </div>

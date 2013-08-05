@@ -1,0 +1,41 @@
+<div id='event_map_modal' class="modal hide fade span9">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 class='modal-header-name'> <%= @event.title %> </h3>
+  </div>
+  
+  <div class="modal-body">
+    <div id='event-map'>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <a href="#" class="btn" data-dismiss='modal'>Close</a>
+  </div>
+</div>
+
+<div id='message_event_organizer_modal' class="modal hide fade span9">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3 class='modal-header-name'> Message Organizer - <%= @event.title %> </h3>
+  </div>
+  
+
+    <div class="modal-body center-text">
+     
+      <div class="input text required conversation_body">
+        <label class="text required" for="conversation_body">
+          Message
+        </label>
+        <textarea cols="40" id="conversation_body" required="required" rows="10"></textarea>
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-primary btn-send-message" data-event-id='<%= @event.id %>'>
+        Send Message
+      </button>
+      <a href="#" class="btn" data-dismiss="modal">Close</a>
+    </div>
+</div>

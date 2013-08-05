@@ -3,18 +3,32 @@ app.views.recommended_projects = Backbone.View.extend
   className: 'recommended_projects'
   initialize: ()->
     app.events.on('next_recommended_projects', this.next_projects)
-    this.collection.on('add', this.renderEach, this)
+    this.collection.on('add', this.render, this)
+    this.template = _.template($('#recommended_projects_template').html())
 
   render: ()->
-    this.collection.forEach(this.renderEach, this)
+    this.$el.html(this.template)
+    this.collection.all_projects().forEach(this.renderEachAll, this)
+    this.collection.current_projects().forEach(this.renderEachCurrent, this)
+    this.collection.past_projects().forEach(this.renderEachPast, this)
     return this
 
-  renderEach: (project_object)->
-    project_view = new app.views.recommended_project({ model: project_object })
-    this.$el.append(project_view.render().el)
+  renderElem: (project)->
+    recommended_project_view = new app.views.recommended_project({ model: project })
+    recommended_project_view.render()
+
+  renderEachAll: (project) ->
+    this.$el.find('#recommended-project-tab-all').append( this.renderElem(project).el )
+
+  renderEachCurrent: (project) ->
+    this.$el.find('#recommended-project-tab-current').append( this.renderElem(project).el )
+
+  renderEachPast: (project) ->
+    this.$el.find('#recommended-project-tab-past').append( this.renderElem(project).el )
 
   next_projects: (event)->
     page_number = parseInt($(event.target).attr('data-next'))
+    console.log 'here'
     $.ajax
       url: 'users/recommended_projects'
       data: 

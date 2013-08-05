@@ -1,188 +1,250 @@
-<!-- Main Content -->
-<section id="user-header" class="section alt user-header">
-  <div class="container">
+<%= javascript_include_tag "users/users_manifest" %>
+<%= stylesheet_link_tag "users/show" %>
+
+<!--========= content wrapper======------>
+<div class="contentwrap">
+  <div class="container-fluid maincontain">
     <div class="row">
-      <div class="row-fluid header-bubble">
-        <div class="span8">
+  <!--========= Main starts======------>
+      <div class="mainwrap span8" >
+        <div class="main">
           <div class="row-fluid">
-            <div class="span5">
-              <% if @user.profile.present? %> 
-                <a href="#">
-                  <div class="profile-pic">  
-                  <%= image_tag @user.profile.image, :"data-toggle" => "modal", :"data-target" => "#photos-modal", :"data-keyboard"=>"true" %>
+          <!--========= Header ends======------>
+              <div class="profhdr span12">
+                  
+                  <div class="blurbgcover">
+                    <div class="blurbg">
+                      <img src="<%= @user.cover_photo.image %>" alt="" />
+                    </div>
                   </div>
-                </a>
-                <!-- Photos Modal -->
-                <div id="photos-modal" class="modal hide fade photos-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-body">
-                    <div id="photoCarousel" class="carousel slide" data-interval="false">
-                      <div class="carousel-inner">
-                        <div class="active item"><div class="item-container"><%= image_tag @user.profile.image %></div></div>
-                        <% @user.photos.each_with_index do |photo, counter| %>
-                          <div class="item">
-                            <div class="item-container"><%= image_tag photo.image %>
-                            <div class="row-fluid"><%= photo.description %></div></div>
-                          </div> 
-                        <% end %>
+                  
+                  <div class="proftagwrap row-fluid">
+                    <div class="proftag regular span7 offset5">
+                      <p> <%= @user.headline %></p>
+                    </div>
+                  </div>
+                <div class="profflwwrap row-fluid">
+                  
+                  <div class="proflwfbg"></div>
+                  <div class="profflw span7 offset5">
+                    <div class="row-fluid">
+                      <div class="flwrs span4">
+                        <strong class="regular count"> 
+                          <%= @user.followers.count %>
+                        </strong>
+                        <span class="text light">
+                          FOLLOWERS
+                        </span>
                       </div>
-                      <!-- Carousel nav -->
-                      <a class="carousel-control left" href="#photoCarousel" data-slide="prev">&lsaquo;</a>
-                      <a class="carousel-control right" href="#photoCarousel" data-slide="next">&rsaquo;</a>
+                      <div class="flwrs span4">
+                        <strong class='regular'>
+                          <%= @user.friends.count %>
+                        </strong>
+                        <span class='text light'>
+                          FOLLOWING
+                        </span>
+                      </div>
+                      <div class="flwmsg span4">
+                        <% if current_user.friends.include?(@user) %>
+                          <a class="flw btn btn-follow btn-custom btn-red center-div text-center unfollow" data-friend-id='<%= @user.id %>'>
+                            Un Follow
+                          </a>
+                        <% else %>
+                          <a class="flw btn btn-custom btn-red center-div text-center regular btn-follow" data-friend-id='<%= @user.id %>'>
+                            Follow
+                          </a>
+                        <% end %>
+                        <a class='msg btn medium send-generic-message' data-message-subject='' data-message-header='Message - <%= @user.name %>' data-message-recipients='<%= @user.email %>'>Message</a>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <!-- End Photos Modal --> 
-              <% end %>
-            </div>
-            <div class="span7 centered-text details">
-              <h3><% if @user.name.present?%><%= @user.name %><% end %><% if @user.imdb_url.present? %><%= link_to @user.imdb_url, :class => 'btn btn-mini btn-warning' do %>
-							<i class="icon-star icon-white"> IMDB</i><% end %><% end %></h3>
-              <% if @user.location.present? %>
-                <span data-toggle="modal" data-target="#location-modal" data-keyboard="true" class="location-modal-button">
-                   <%= @user.location %>
-                </span>
-                <!-- Location Modal -->
-                <div id="location-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-header left-aligned">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3><span><%= @user.name.split[0..0].join(" ") %></span></h3>
-                   <% if @user.location.present? %><p><span><%= @user.location %></span></p> <%end %>
-                  </div>
-                  <div class="modal-body">
-                    <img src="http://maps.googleapis.com/maps/api/staticmap?center=<%= @user.location %>&zoom=11&size=400x300&sensor=false">
+                
+                <div class="profpicwrap img-circle" style="background: url('<%= @user.profile_pic %>') no-repeat">
+                  <!---this is the div whose bg is the profile pic -->
+                  
+                </div>
+              </div>
+          <!--========= Header ends======------>
+          <!--========= Profile name starts======------>
+              <div class="profname">
+                <div class="row-fluid">
+                  <div class="profico">
+                    <ul class="picos span4">
+                      <li><a href="#"><img src="/assets/horn.png" alt="" /></a></li>
+                      <li><a href="#"><img src="/assets/cut.png" alt="" /></a></li>
+                      <li><a class='btn-endorse' data-can='<%= current_user.friends.include?(@user) %>' ><img src="/assets/pencil.png" alt="" /></a></li>
+                    </ul>
                   </div>
                 </div>
-                <!-- End Location Modal --> 
-              <%end %>
-              <span class="row-fluid talents">
-                  <% if @user.talents.first.present? %>
-                    <%= @user.talents.first.name %>
-                    (<%= @user.talents.first.experience %>)
-                  <% end %>
-                  <% if @user.talents.second.present? %> 
-                  / <%= @user.talents.second.name %> 
-                    (<%= @user.talents.first.experience %>)
-                  <% end%>
-              </span>
-              
-              
-            </div>
-          </div>
-        </div>
-        <div class="span3 offset1 right-content">
-          <div class="row-fluid left-aligned headline">
-            <% if @user.headline.present? %>
-               
-              <%= shorten :text => @user.headline, :length => 150, :partial => "more_headline" %>
-              <!-- Headline Modal -->
-                <div id="headline-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-header left-aligned">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3><span><%= @user.name.split[0..0].join(" ") %></span></h3>
-                  </div>
-                  <div class="modal-body">
-                    <%= simple_format @user.headline %>  
+                <div class="row-fluid">
+                  <div class="profnm">
+                    <div class="profnmh1"><%= @user.name %></div>
+                    <div class="profnmh2"><%= @user.location %></div>
                   </div>
                 </div>
-                <!-- End Headline Modal --> 
-            <% end %>
-          </div>
-          <div class="row-fluid message-row">
-            <% if current_user!=@user %>
-            <div class="span7 offset8 message-span">
-              <a data-toggle="modal" data-target="#message-modal" 
-                    data-remote ="<%= new_conversation_path(:recipient => @user.email, :modal => true)%>"
-                    data-keyboard="true" class="message-button"><%= image_tag('mail_icon.png') %> Message</a>
-              <!-- Message Modal -->
-                <div id="message-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3><span>Message <%= @user.name.split[0..0].join(" ") %></span></h3>
-                  </div>
-                  <div class="modal-body">
-                  </div>
+              </div>
+              <div class="skillexp">
+                <div class="row-fluid">
+                        
+                        <ul class="inline libg span12">
+                        SKILLS + EXPERTISE:
+                          <% @user.expertise.split(',').each do |skill| %>
+                            <li class="badge regular"><%= skill %></li>
+                          <% end %>
+                        </ul>
                 </div>
-              <!-- Message Modal --> 
-            </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+              </div>
+          <!--========= Profile name ends======------>
 
-<section id = "user-body" class="user-body" data-id="<%=@user.id%>">
-  <div class="container">
-    <div class="row">
-      <div class="row-fluid">
-        <div class="span3 follow-container">
-          <% if current_user.id != @user.id %>
-            <div class="user-love" id='User-<%= @user.id %>'>
-              <%= render :partial => "application/love_form.html.erb", :locals => { :id =>@user.id, :type => 'User' } %>
-            </div>
-          <% end %>
-          <% if current_user %>
-          <div class="follow-button">
-            <%= render :partial => 'follow_button', :locals => {:user => @user} %>
-          </div>
-          <% end %>
-          <div class="follow-images">
-            <% @followers_following.first(12).each_with_index do |user, index| %>
-              <% if user.profile.present? %>
-                <%= link_to user do%> <%= image_tag user.profile.image.url(:tiny) %> <% end %>
-              <% end %>
-            <% end %>
-            <div class="clearfix"></div>
-          </div>
-          <div class="follow-counts">
-            <div class="row-fluid">
-              <div class="numbers"><span class="fan-count" data-user-id="<%= @user.id %>"><%= Friendship.where( :friend_id => @user.id).count %></span> Fans</div>
-              <div class="numbers"><%= @user.friendships.all.count %> Following</div>
-            </div>
-          </div>
-        </div>
-        <div class="span9 about-container">
-          <div class="about-title">
-            About me:
-          </div>  
-          <div class="about-content">
-            <div><%= shorten :text => @user.about, :length => 300, :partial => "more_about" %></div>
-            <!-- About Modal -->
-            <div id="about-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-              <div class="modal-header left-aligned">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3><span><%= @user.name.split[0..0].join(" ") %></span></h3>
+
+            <div class='row-fluid'>
+
+              <div class="sortico clearfix">
+                      
+                <ul class="picos span5">
+                  <li>SORT UPDATES: </li>
+                  <li><span class='action-div' id='sort_by_video'><img src="/assets/sortv.png" alt="" /></span></li>
+                  <li><span class='action-div' id='sort_by_photo'><img src="/assets/sortp.png" alt="" /></span></li>
+                  <li><span class='action-div' id='sort_by_text'><img src="/assets/sortw.png" alt="" /></span></li>
+                </ul>
               </div>
-              <div class="modal-body">
-                <%= simple_format @user.about %>  
+
+              <div class='pull-right' id='comments_div'>
+
               </div>
             </div>
-            <!-- End Headline Modal --> 
-            <%= if not @user.photos.first.nil? then image_tag @user.photos.first.image, :class => "first-pic" end %>
-            <%= if not @user.photos.second.nil? then image_tag @user.photos.second.image, :class => "second-pic" end %>
           </div>
         </div>
       </div>
-      <div class="row-fluid">
-        <div class="span12 links-container">
-          <span class="user-menu active" data-link="updates">Updates</span>            
-          <span class="user-menu" data-link="reel">Reel</span>            
-          <% if @user.talents.first.present? %>
-          <span class="user-menu" data-link="first_role"><%= @user.talents.first.name.capitalize %></span>
-          <% end %>
-          <% if @user.talents.second.present? %>
-          <span class="user-menu" data-link="second_role"><%= @user.talents.second.name.capitalize %></span>
-          <% end %>
-          
-          <span class="user-menu" data-link="resume">Resume</span>
+  <!--========= Main starts=====-->
+  <!--========= Sidebar starts======-->
+    <div class="rside span4 right-container">
+
+      <div class='row right-extra-div' id='user_fans_div'>
+      </div>
+
+      <div class="row about-div right-extra-div">
+        <div class="span4 shrink-div head">
+          <span class="pull-left">
+            <h3>About</h3>
+          </span>
+          <span class="btn-show-all pull-right"></span>
+
+        </div>
+
+        <div class="span4">
+          <div class="row clearfix">
+            <div class="grey-line-divider"></div>
+          </div>
+        </div>
+
+        <div class="span4 shrink-div desc">
+          Cras aliquet lorem eu elit dictum egestas. Donec tellus lectus, ullamcorper quis vehicula sed, iaculis et tellus. Fusce lacus mauris, porta ut turpis ut, accumsan 
         </div>
       </div>
-      <div class="row-fluid">
-        <div class="span12 body-content-container ">
-          
-        </div>
+
+      <div class='row right-extra-div' id='user_projects_div'>
       </div>
-    </div>
+
+      <div class='row right-extra-div' id='user_events_div'>
+      </div>
+
+      <div class='row right-extra-div' id='endorsements_div'>
+      </div>
+
   </div>
-</section>
+  <!--=========Sidebar ends======------>
+  </div><!--rowfluid-->
+</div><!--container fluid-->
+
+<%= render :partial => 'users/templates/blogs' %>
+<%= render :partial => 'users/templates/blog' %>
+<%= render :partial => 'projects/templates/similar_projects' %>
+<%= render :partial => 'projects/templates/similar_project' %>
+<%= render :partial => 'users/templates/user_events' %>
+<%= render :partial => 'users/templates/user_event' %>
+<%= render :partial => 'users/templates/endorsements' %>
+<%= render :partial => 'users/templates/endorsement' %>
+<%= render :partial => 'users/templates/fans' %>
+<%= render :partial => 'users/templates/fan' %>
+
+<%= render :partial => 'users/endorsement_form_modal' %>
+<%= render :partial => 'conversations/send_new_message_modal' %>
+
+<script type="text/javascript">
+  
+  app.current_user = <%= raw current_user.to_json() %>
+
+  app.blogs = new app.collections.blogs()
+  app.blogs.reset(<%= raw @user.blogs.to_json(:include => [:user, :likes], :check_user => current_user) %>)
+  app.blogs_view = new app.views.blogs({ collection: app.blogs })
+  $('#comments_div').html(app.blogs_view.render().el)
+
+  $('body').on('click', '#sort_by_video', function(event){
+    app.blogs_view.render_video_sorted()
+  });
+
+  $('body').on('click', '#sort_by_photo', function(event){
+    app.blogs_view.render_photo_sorted()
+  });
+
+  $('body').on('click', '#sort_by_text', function(event){
+    app.blogs_view.render_text_sorted()
+  });
+
+  // user projects
+  app.user_projects = new app.collections.user_projects()
+  app.user_projects.reset(<%= raw Project.custom_json(@user.projects) %>)
+  app.user_projects_view = new app.views.user_projects({ collection: app.user_projects })
+  $('#user_projects_div').html(app.user_projects_view.render().el)
+
+  // user events
+  app.user_events = new app.collections.user_events()
+  app.user_events.reset(<%= raw @user.events.to_json(:include => 
+      [
+        :main_photo, 
+        :start => { :methods => [:pretty_date, :formatted_time] }
+      ],
+      :methods => [:location_city]) %>)
+  app.user_events_view = new app.views.user_events({ collection: app.user_events })
+  $('#user_events_div').html(app.user_events_view.render().el)
+
+
+  // endorsements
+  app.endorsements = new app.collections.endorsements()
+  app.endorsements.reset(<%= raw @user.received_endorsements.to_json(:include =>:sender) %>)
+  app.endorsements_view = new app.views.endorsements({ collection: app.endorsements })
+  $('#endorsements_div').html(app.endorsements_view.render().el)
+
+  // fans
+  app.user_fans = new app.collections.user_fans()
+  app.user_fans.reset(<%= raw @user.followers.to_json() %>)
+  app.user_fans_view = new app.views.user_fans({ collection: app.user_fans })
+  $('#user_fans_div').html(app.user_fans_view.render().el)
+
+  // listen to the new blog creation event
+  $(document).on('newBlog', function(event){
+    
+    blog = new app.models.blog(event.blog)
+
+    app.blogs.add(blog)
+    
+    $('#comment_please_wait').hide()
+    $('textarea#blog_content').attr('disabled', false).val('')
+    $('#blog_video_attributes_url').attr('disabled', false).val('')
+    $('#blog_photo_attributes_image').attr('disabled', false)
+  });
+
+
+  // listen to the blog error event event
+  $(document).on('blogError', function(event){
+    alert(event.message)
+    $('#comment_please_wait').hide()
+    $('textarea#blog_content').attr('disabled', false)
+    $('#blog_video_attributes_url').attr('disabled', false)
+    $('#blog_photo_attributes_image').attr('disabled', false)
+  });
+
+
+</script>

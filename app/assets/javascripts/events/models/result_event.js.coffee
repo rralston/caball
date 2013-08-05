@@ -1,0 +1,1 @@
+app.models.result_event = Backbone.Model.extend()

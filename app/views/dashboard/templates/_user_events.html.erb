@@ -1,0 +1,78 @@
+<script type="script/template" id='user_events_template'> 
+  <div class='row'>
+    <div class='span11 dashboard-tab-main-head'>
+      <div class='row'>
+        <div class='span7 details'>
+          <div class='dashboard-tab-name regular'>
+            Events
+          </div>
+          <div class='dashboard-tab-desc light'>
+            Create, manage and view your events and happenings
+          </div>
+        </div>
+
+        <div class='span4 text-center'>
+          <a href="/events/new" class='regular btn-custom btn-dark-grey medium action-div new-event'>
+            <i class='icon-plus' style='color: black'></i>&nbsp;&nbsp;Start New Event
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='span11 dashboard-tab-heading'>
+      Events I Created
+    </div>
+  </div>
+
+  <ul class='row events-filter custom-green-filters nav'>
+    <li class='active'>
+      <a href="#event-tab-upcoming" data-toggle='tab' class='badge badge-custom-green pull-left event-filter'>
+        UPCOMING
+      </a>
+    </li>
+
+    <li>
+      <a href="#event-tab-popular" data-toggle='tab' class='badge badge-custom-green pull-left event-filter'>
+        POPULAR
+      </a>
+    </li>
+
+    <li>
+      <a href="#event-tab-past" data-toggle='tab' class='badge badge-custom-green pull-left event-filter'>
+        PAST
+      </a>
+    </li>
+  </ul>
+
+  <div class='row'>
+    <div class='tab-content events-display-tabs'>
+      <div class='tab-pane active' id='event-tab-upcoming'>
+        
+      </div>
+
+      <div class='tab-pane' id='event-tab-popular'>
+        
+      </div>
+
+      <div class='tab-pane' id='event-tab-past'>
+
+      </div>
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='span11 dashboard-tab-heading secondary'>
+      Events I`m Attending
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='span11' id='attending-events'>
+      
+    </div>
+  </div>
+
+</script>

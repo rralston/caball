@@ -1,5 +1,3 @@
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-
 <% @user.errors.full_messages.each do |error| %>
 <div class="alert alert-error">
   <button type="button" class="close" data-dismiss="alert">
@@ -82,28 +80,41 @@
               </div>
             </div>
 
-            <%= f.fields_for :profile do |p|  %>
-
-            <% if @user.profile.image.present? %>
-            <div class="control-group">
-              <%= p.label "Profile Photo", :class => 'control-label' %>
-              <div class="controls">
-                <%= image_tag @user.profile.image.url(:medium), {:class => "img-polaroid"} %>
-                <%= p.check_box :_destroy %> Click Here to Delete
+            <h4>Profile Picture</h4>
+            <%= f.fields_for :profile, @user.profile || @user.build_profile  do |profile|  %>
+              <div class="control-group">
+                <%= profile.label "Profile Photo", :class => 'control-label' %>
+                
+                <% if @user.profile.image.present? %>
+                  <div class="controls">
+                    <%= image_tag @user.profile.image.url(:medium), {:class => "img-polaroid"} %>
+                  </div>
+                <% end %>
+                  
+                <div class="controls">
+                  <%= profile.file_field :image %>
+                </div>
 
               </div>
-            </div>
-            <%else%>
-            <div class="control-group">
-              <p>
-                Please Upload a Profile Image
-              </p>
-              <div class="controls">
-                <%= p.file_field :image %>
-              </div>
-            </div>
             <%end%>
-            <%end%>
+
+            <div class='control-group'>
+              <label class='control-label'>Experience & Skills</label>
+
+              <div class='controls'>
+                <%= f.hidden_field :expertise, :class => 'text_field' %>
+                <!-- data name attr will create a select box with name as provided..! -->
+                
+                  <ul id="expertise_tags" class='tagit ui-sortable'>
+                    <% if @user.expertise.present? %>
+                      <%= @user.expertise.split(',').each do |exp_tag| %>
+                        <li data-value="<%= exp_tag %>"><%= exp_tag %> </li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                
+              </div>    
+            </div>
           </div>
         </fieldset>
 
@@ -140,6 +151,16 @@
                   </div>
                 </div>
               <% end %>
+            <% end %>
+
+            <h3>Upload Your Resume</h3>
+            <%= f.fields_for :resume, @user.resume || Resume.new do |r|  %>
+              <div class="control-group">
+                <%= r.label "Resume", :class => 'control-label' %>
+                <div class="controls">
+                  <%= r.file_field :document %>
+                </div>
+              </div>
             <% end %>
           </div>
         </fieldset>
@@ -244,43 +265,74 @@
         </fieldset>
 
         <fieldset class="step more-photos">
+
+          <h2>Cover Photo</h2>
+          <%= f.fields_for :cover_photo, (@user.cover_photo || Photo.new) do |user_cover_photo|  %>
+
+            <div class='row'>
+              <div class='span3'>
+                <div class="control-group">
+                  <!-- if image exits, allow to change it -->
+                  <% if user_cover_photo.object.image.present? %>
+                    <img src=<%= user_cover_photo.object.image.url(:medium) %> class="img-rounded" >
+                  <% end %>
+
+                  <div class="controls">
+                    <%= user_cover_photo.file_field :image, :validate => true %>
+                  </div>
+                  <input type='hidden' value='1' name='user[cover_photo_attributes][is_cover]'>
+                </div>
+              </div>
+
+              <div class='span3'>
+                <div class="control-group">
+                  <label class="control-label">Image Description</label>
+                  <div class="controls">
+                    <%= user_cover_photo.text_field :description %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+
           <h2>More Photos</h2>
 
           <%= f.fields_for :photos do |p|  %>
-          <% if @user.photos.exists? %>
-          <div class="control-group">
-            <%= p.label "Photo", :class => 'control-label' %>
-            <div class="controls">
-              <%= image_tag p.object.image.url(:medium), {:class => "img-polaroid"} %>
-              <%= p.file_field :image %>
-              <%= p.check_box :_destroy %> Click Here to Destroy
-            </div>
-          </div>
+            <% if @user.photos.exists? %>
+              <div class="control-group">
+                <%= p.label "Photo", :class => 'control-label' %>
+                <div class="controls">
+                  <%= image_tag p.object.image.url(:medium), {:class => "img-polaroid"} %>
+                  <%= p.file_field :image %>
+                  <%= p.check_box :_destroy %> Click Here to Destroy
+                </div>
+              </div>
 
-          <div class="control-group">
-            <%= p.label "Description", :class => 'control-label' %>
-            <div class="controls">
-              <%= p.text_area :description, :class => 'textarea', :rows => "5"%>
-            </div>
-          </div>
-          <% else %>
+              <div class="control-group">
+                <%= p.label "Description", :class => 'control-label' %>
+                <div class="controls">
+                  <%= p.text_area :description, :class => 'textarea', :rows => "5"%>
+                </div>
+              </div>
+            <% else %>
 
-          <div class="control-group">
-            <%= p.label :description, :class => 'control-label' %>
-            <div class="controls">
-              <%= p.text_field :description, :class => 'text_field' %>
-            </div>
-          </div>
-          <div class="control-group">
-            <p>
-              Please Upload Additional Images
-            </p>
-            <div class="controls">
-              <%= p.file_field :image %>
-            </div>
-          </div>
+              <div class="control-group">
+                <%= p.label :description, :class => 'control-label' %>
+                <div class="controls">
+                  <%= p.text_field :description, :class => 'text_field' %>
+                </div>
+              </div>
+              <div class="control-group">
+                <p>
+                  Please Upload Additional Images
+                </p>
+                <div class="controls">
+                  <%= p.file_field :image %>
+                </div>
+              </div>
 
-          <% end %>
+            <% end %>
           <% end %>
 
           <% comment= "Allowing for multiple photos here..." %>

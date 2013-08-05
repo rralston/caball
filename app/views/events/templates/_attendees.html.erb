@@ -1,0 +1,25 @@
+<script type="script/template" id='attendees_template'>
+  <div class="span4 shrink-div head">
+    <span class="pull-left">
+      <h3>Whos Coming?</h3>
+      <i class="attending-summary">
+        <%%= this.collection.length %> attending
+      </i>
+    </span>
+    <span class="btn-show-all pull-right"></span>
+  </div>
+
+  <div class="span4 attenders-tiles" id='attendees_list'>
+    
+    <%% if(this.collection.length > 8) { %>
+      <div class="attender-img empty-grey-tile pull-left text-center">
+        <div class='row grey-top-line'>
+        </div>
+        <div class='attendees-extra-count'>
+          +<%%= this.collection.length - 8 %>
+        </div>
+        MORE
+      </div>
+    <%% } %>
+  </div>
+</script>

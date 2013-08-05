@@ -1,46 +1,297 @@
-<section class='projects-search'>
-  <div class='container'>
-    <div class='row'>
-      <!-- Left Column for Search Terms-->
-      <div class='span3 search-column'>
-        <div class="projects-search-title">
-          <h3>PROJECTS</h3>
+<%= javascript_include_tag "projects/projects_manifest" %>
+<%= stylesheet_link_tag "projects/index.css" %>
+
+
+<div class="topbnrwrap">
+  <div class="topbnr container">
+    <div class="bnrenclose">
+      <div class="bnrbg">
+        <img src="/assets/event-bnr-bg.png" alt="">
+      </div>
+      <div class="bnrtext light span12">
+          <h1>PROJECTS</h1>
+          <p class='light'>Browse, search and discover the best projects here on Filmzu. Lorem euismod, sem non lobortis blandit, elit sem imperd.</p>
+          </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="topsrchwrap">
+  <div class="topsrch container">
+    
+    <div class="ltext span4">
+      <h2 class='medium'>Search Projects</h2>
+      <p>by keyword or location</p>
+    </div>
+    <form action="" class=" srchfrm span">
+      <input type="text" id='search-projects-input'>
+    </form>
+    <div class="row search_please_wait text-center light" style="display: none;margin-top: 10px;">
+        Please Wait While we search...
+    </div>  
+  </div>
+
+</div>
+
+<!--========= main content starts======------>
+<div class="mainwrap" >
+  <div class="maincontain container-fluid">
+  <div class="row-fluid">
+  
+  <!--========= left sidebar starts======------>
+    <aside class="lside span3">
+      <form id='projects_search_form' class="psearch">
+        <h2 class='regular'>Advanced Search</h2>
+        <div class='srchopts'>
+          <div class="srchsect">
+
+            <div class="srchopt">
+              <div class="rdboxwrap">
+                <input type="radio" name='people' value='followers' id='followers' />
+                <label class="rdlabel" for="followers"></label>
+              </div>
+              <span class="chktxt">Follows You</span>
+              
+            </div>
+
+            <div class="srchopt">
+              <div class="rdboxwrap">
+                <input type="radio" name='people' value='friends' id='friends' />
+                <label class="rdlabel" for="friends"></label>
+              </div>
+              <span class="chktxt">You follow</span>
+              
+            </div>
+          </div>
         </div>
-        <div class="projects-search-content">
-          <%= search_form_for @search do |f| %>
-          <div class="field project-title">
-            <%= f.text_field :title_cont, :placeholder => 'Find a Project...', :class => 'project-title-input' %>
-            <i class="icon-search"></i>
+
+        <div class="srchsect">
+          <h2 class='regular'>Roles</h2>
+          <div class='srchopts'>
+            <% User.types.keys.each do |role| %>
+              <div class="srchopt">
+                <div class="chkboxwrap">
+                  <input type="checkbox" name='roles' value='<%= role %>' id='<%= role %>' />
+                  <label class="chklabel" for="<%= role %>"></label>
+                </div>
+                <span class="chktxt"><%= role %></span>
+                
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="srchsect">
+          <h2 class='regular'>Genre</h2>
+          <div class='srchopts'>
+            <% Project.genres.keys.each do |genre| %>
+              <div class="srchopt">
+                <div class="chkboxwrap">
+                  <input type="checkbox" name='genres' value='<%= genre %>' id='<%= genre %>' />
+                  <label class="chklabel" for="<%= genre %>"></label>
+                </div>
+                <span class="chktxt"><%= genre %></span>
+                
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="srchsect">
+          <h2 class='regular'>Type</h2>
+          <div class='srchopts'>
+            <% Project.types.keys.each do |type| %>
+              <div class="srchopt">
+                <div class="chkboxwrap">
+                  <input type="checkbox" name='types' value='<%= type %>' id='<%= type %>' />
+                  <label class="chklabel" for="<%= type %>"></label>
+                </div>
+                <span class="chktxt"><%= type %></span>
+                
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class='text-center'>
+          <a id='btn-search_projects' class="srchbtn2 srchbtn btn-custom btn-red center-div text-center btn-search_projects">
+            Search
+          </a>
+        </div>
+
+      </form>
+    </aside>
+  <!--========= left sodebar ends======-->
+
+
+  <!--========= main content starts======-->
+    <div class="main-wrap span9" id="mwrap">
+      <div class="row-fluid">
+      <div class="main span12 pdiv" id='all_projects'>
+        <!--======Slider===-->
+          
+          <div class="mslider span12" id="mslider">
+            <div class='over-drop'></div>
+            <div class="slider-wrapper">
+
+              <% Project.sample_featured_projects.each do |project| %>
+                <div class="slide" class="item">
+                  <div class="slbg span6" >
+                    <img src="<%= project.photos.sample.image %>" alt="" />
+                  </div>
+                  <div class='shadow-div'> </div>
+                  <div class="slcontent span6">
+                    <h2 class='medium'><%= project.title %></h2>
+                    <% if project.description.length > 70 %>
+                      <p>
+                        <%= truncate(project.description, :length => 70, :separator => ' ') %> <span class='read_more_btn' data-content='<%= project.description %>' data-header='Project description - <%= project.title %>' >Read more</span>
+                      </p>
+                    <% else %>
+                      <p><%= project.description %> </p>
+                    <% end %>
+                    <a href="/projects/<%= project.id %>" class="btn">View Project</a>
+                  </div>
+                </div>
+              <% end %>
+
+            </div>
+            <div class='over-drop'></div>
           </div>
           
-          <div class="field genre">
-            <h3>Genre</h3>
-            <%= f.select(:genre_cont, options_for_select(@genres), {}, {:multiple=> true, :size => 5, :class => 'genres-input' }) 
-            %>
+        <!--======Slider===-->
+
+        <!--======Projects div===-->
+        
+          <div class="pdiv span12">
+            <div class="row-fluid">
+            
+              <div class="page-header-secondary">
+                Propular Projects
+              </div>
+              
+              <div id='popular_projects_container'>
+                <div class="project">
+                  <div class="ptopimg">
+                    <img src="/assets/pbg.png" alt="" />
+                    <div class="topcnt">
+                        <h3>Sed Eleifend  Tristique Diam Alre</h3>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesettin</p>
+                      </div>
+                    
+                  </div>
+                  <div class="pinfo">
+                    <ul class="plist">
+                      <li class='badge badge-custom-green'>Procuder</li>
+                      <li class='badge badge-custom-green'>Editor</li>
+                      <li class='badge badge-custom-green'>Lighting</li>
+                      <li class='badge badge-custom-green'>Sound</li>
+                      <li class='badge badge-custom-green'>Management</li>
+                    </ul>
+                  </div>
+                  
+                  <div class="proindi"> 
+                    <div class="fans">
+                      <strong>1344</strong>
+                      <span>Fans</span>
+                    </div>
+                    <div class="follow">
+                      <a href="" class="flw btn">Follow</a>
+                      <a href="" class="msg btn">Message</a>
+                    </div>
+                  </div>
+                  <div class="progcircle">
+                    <div class="role-circle-container">
+
+                      <div class="role-circle"> </div>
+                  
+                      <div class="circle-fill"> </div>
+                  
+                  
+                      <div class="circle-measure circle-measure-5"> </div>
+                  
+                      <span class="role-count medium">
+                  
+                        1 Open Roles
+                  
+                      </span>
+                  
+                    </div>
+
+                    </div>
+                </div>
+
+              </div>
+            </div>
           </div>
-          <div class="field location">
-            <h3>Location</h3>
-            <%= f.text_field :location_cont, :placeholder => 'Location' , :class => 'location-input' 
-            %>
+        <!--======Projects div===-->
+        <!--======Projects div===-->
+        
+          <div class="pdiv span12">
+            <div class="row-fluid">
+              <div class="page-header-secondary">
+                Recent Projects
+              </div>
+              <div id='recent_projects_container'>
+
+              </div>
+            </div>
           </div>
-          <div class="field type">
-            <h3>Type</h3>
-            <%= f.select(:is_type_cont, options_for_select(@is_type), {}, {:multiple=> true, :size => @is_type.length, :class => 'is-type-input' })
-            %>
-          </div>
-          <div class="field roles">
-            <h3>Open Roles</h3>
-            <%= f.select(:roles_name_cont, options_for_select(@talents), {}, {:multiple=> true, :size => 5, :class => 'roles-input' })
-            %>
-          </div>
-          <% end %>
-        </div>
-      </div>
-      
-      <!-- Right Column for displaying users-->
-      <div class='span9 search-results'>
-        <%= render :partial => 'project_search_results' %>
+        <!--======Projects div===-->
       </div>
 
+      <div class='load_more_div clearfix text-center'>
+        <a class="btn-custom btn-red center-div text-center btn-load_more" data-next-page="2">
+          Load More
+        </a>
+      </div>
+
+      </div>
+    </div>
+  <!--========= main content ends======-->
+    
+
   </div>
-</section>
+  </div>
+</div>
+<!--========= main content ends======-->
+
+<%= render :partial => 'conversations/send_new_message_modal' %>
+<%= render :partial => 'projects/templates/project' %>
+
+<%= render :partial => 'application/read_more_modal' %>
+
+<script type="text/javascript">
+$(document).ready(function(){
+ 
+  app.fn.initialize_send_generic_message()
+  // bind read more btn click event
+  app.fn.bind_read_more_show()
+
+  app.status = 'index' // used to know if the user is on index itself or if he started searching.
+
+  app.current_user = <%= raw current_user.to_json() %>
+
+
+  popular_projects = new app.collections.projects()
+  popular_projects_view = new app.views.projects({ collection: popular_projects })
+
+  popular_projects.reset(<%= raw Project.custom_json(Project.sample_popular_projects, current_user) %>)
+
+  $('#popular_projects_container').html(popular_projects_view.render().el)
+
+
+  app.recent_projects = new app.collections.projects()
+  recent_projects_view = new app.views.projects({ collection: app.recent_projects })
+
+  app.recent_projects.reset(<%= raw Project.custom_json(Project.recent_projects(1, PROJECTS_PER_PAGE_IN_INDEX), current_user) %>)
+
+  $('#recent_projects_container').html(recent_projects_view.render().el)
+
+  // instantiating the collection and view pbject for result project for user when search is made
+  app.result_projects = new app.collections.projects()
+  app.result_projects_view = new app.views.projects({ collection: app.result_projects })
+
+});
+
+</script>

@@ -40,18 +40,20 @@ class Ability
       blog.try(:user) == user
     end
 
-    can :create, Like do
+    can [:create, :unlike], Like do
       user.persisted?
     end
     can :destroy, Like do |like|
       like.try(:user) == user
     end
 
-    can [:new, :create], Conversation do
+    can [:new, :create, :send_message_generic], Conversation do
       user.persisted?
     end
 
-    can [:destroy,:reply,:read,:unread,:trash,:untrash,:index,:show], Conversation do |conversation|
+    can [:empty_trash], Conversation
+
+    can [:destroy,:reply,:read,:unread,:trash,:untrash,:index,:show, :get_messages], Conversation do |conversation|
       user.persisted? && user.mailbox.conversations.include?(conversation)
     end
 
@@ -68,5 +70,25 @@ class Ability
     can [:approve, :un_approve], RoleApplication do |application|
       user.persisted? && application.role.project.user_id == user.id
     end
+
+    can :create, Endorsement do |endorsement|
+      user.persisted? &&
+        user.friend_ids.include?(endorsement.receiver_id)
+    end
+
+    can [:index, :new, :create, :show, :invite_followers, :send_message_to_organizer, :load_more, :up_vote, :down_vote], Event
+
+    can [:edit, :update], Event do |event|
+      event.user == user
+    end
+
+    can [:attend], Event do |event|
+      !event.attends.map(&:user).include?(user)
+    end
+
+    can [:unattend], Event do |event|
+      event.attends.map(&:user).include?(user)
+    end
+
   end
 end

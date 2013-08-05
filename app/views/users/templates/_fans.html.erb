@@ -1,0 +1,25 @@
+<script type="script/template" id='user_fans_template'>
+
+  <div class="span4 fans-tiles" id='user_fans_list'>
+    <%% count = this.collection.length %>
+    <%% if(count > 8) { %>
+      <div class="fan-img empty-grey-tile pull-left text-center">
+        <div class='row grey-top-line'>
+        </div>
+        <div class='fans-extra-count'>
+          +<%%= count - 8 %>
+        </div>
+        <%% (count - 8) == 1 ? print('FAN') : print('FANS') %>
+      </div>
+    <%% }else{ %>
+      <div class="fan-img empty-grey-tile pull-left text-center">
+        <div class='row grey-top-line'>
+        </div>
+        <div class='fans-extra-count'>
+          <%%= count %>
+        </div>
+        <%% count == 1 ? print('FAN') : print('FANS') %>
+      </div>
+    <%% } %>
+  </div>
+</script>

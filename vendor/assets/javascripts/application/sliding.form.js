@@ -27,6 +27,16 @@ $(function() {
 	*/
 	$('#navigation').show();
 
+
+	// For Project form - if there are errors don't allow the user to submit
+	$('.submit-form').bind('click',function(){
+    validateSteps()
+    if($('#formElem').data('errors')){
+      Alert.newAlert('error', 'Please go back and correct any errors.');
+      return false;
+    } 
+  });
+
 	/*
 	when clicking on a navigation link 
 	the form slides to the corresponding fieldset
@@ -54,7 +64,6 @@ $(function() {
         $('#steps').stop().animate({
             marginLeft: '-' + widths[current-1] + 'px'
         },500,function(){
-			if(prev == 1)
 				validateStep(prev);
 			$('#formElem').children(':nth-child('+ parseInt(current) +')').find(':input:first').focus();	
 		});
@@ -108,8 +117,8 @@ $(function() {
 		}
 		//console.log($('fieldset div .genre-select').val().length);
 
-		if($('fieldset div .genre-select').length){
-			if(Projects.validateGenre()){
+		if($('fieldset div #project_genre').length){
+			if(Projects.validateGenre() || Projects.validateType() ){
 				hasError = true;
 				$this.addClass('input-error');
 			}

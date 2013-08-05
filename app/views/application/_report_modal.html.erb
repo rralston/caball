@@ -1,0 +1,23 @@
+<script type="text/javascript">
+  app.fn.bind_report_event()
+</script>
+
+<a data-toggle="modal" data-target="#report-modal" data-keyboard="true" class="message-button">
+  Report <%= entity.class.name.camelize %>
+</a>
+
+<!-- Report Modal -->
+<div id="report-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Report <%= entity.class.name.camelize %></span></h3>
+  </div>
+  <div class="modal-body">
+    Are you sure the you want to report ? 
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Cancel</button>
+    <a class='btn btn-primary report-btn' data-id='<%= entity.id %>' data-entity='<%= entity.class.name.camelize %>'> Report</a>
+  </div>
+</div>
+<!-- Report Modal -->

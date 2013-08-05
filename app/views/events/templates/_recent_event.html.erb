@@ -1,0 +1,73 @@
+<script type="script/template" id='recent_event_template'>
+
+  <div class='event-head'>
+      <div class='event-backdrop'  style='background: url(<%%= main_photo.image.url %>) no-repeat'>
+      </div>
+      <div class='backdrop-cover'></div>
+
+      <div class='event-title'>
+        <a href='/events/<%%= id %>'><%%= title %></a>
+      </div>
+      <div class='event-location light'>
+        <div class="location-img-blue pull-left"></div>
+        <%%= location %>
+      </div>
+      <div class='event-headline light'> 
+        <%%= description %>
+      </div>
+
+      <div class="date pull-left medium">
+        <div class="day">
+          <%%= start.day %>
+        </div>
+        <div class="month regular">
+          <%%= start.month_year %>
+        </div>
+      </div>
+    </div>
+    
+    <div class='event-summary'>
+      <div class='gradient clearfix'>
+
+        <div class='event-owner pull-left'>
+          <span class="pull-left owner-img">
+            <div class="img-circle user-circle-image" style="background: url(<%%= user.profile_pic %>)">
+            </div>
+          </span>
+
+          <span class="owner pull-left">
+                  <span class='light'>created by</span>
+                  <br>
+            <span class="owner-name">
+              <a href='users/<%%= user.id %>' target='_blank'><%%= user.name %></a>
+            </span>
+          </span>
+
+        </div>
+
+        <div class='attendees-details pull-left'>
+          <div class='attendees pull-left light'>
+            ATTENDING: <br/>
+
+            <%% _.first(attendees, 5).forEach(function(attendee){ %>
+              <a href='users/<%%= attendee.id %>' target='_blank'>
+                <img src='<%%= attendee.profile_pic %>' class='img-circle event-attendee-pic pull-left'>
+              </a>
+            <%% }) %>
+
+          </div>
+          <div class='pull-right attending-actions text-center'>
+            <%% if(user_attending){ %>
+              <div class='unattend-event btn-custom btn-red'>
+                Attending
+              </div>
+            <%% }else{ %>
+              <div class='attend-event btn-custom btn-red'>
+                Attend
+              </div>
+            <%% } %>
+          </div>
+        </div>
+      </div>
+    </div> 
+</script>

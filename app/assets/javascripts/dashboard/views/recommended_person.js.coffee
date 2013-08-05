@@ -1,5 +1,5 @@
 app.views.recommended_person = Backbone.View.extend
-  className: '.recommended_person'
+  className: 'recommended_person'
   tagName: 'li'
   initialize: ()->
     this.recommended_person_template = _.template($('#recommended_person_template').html())

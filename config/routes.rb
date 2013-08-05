@@ -5,25 +5,48 @@ Caball::Application.routes.draw do
 
   match 'users/recommended_projects' => 'users#next_recommended_projects'
   match 'users/recommended_people' => 'users#next_recommended_people'
+  match 'users/recommended_events' => 'users#next_recommended_events'
+
+  match '/users/set_notification_check_time' => 'users#set_notification_check_time'
 
   resources :users do 
     resources :characteristics, :photos, :talents, :profile, :blogs
   end
+
   
   resources :projects do 
     resources :comments
   end
-  
+  resources :blogs
+  resources :comments
+  match 'conversations/get_messages' => 'conversations#get_messages', :via => 'GET'
+  match '/conversations/empty_trash' => 'conversations#empty_trash', :via => 'POST'
   resources :conversations
+  match 'conversations/send-generic-message' => 'conversations#send_message_generic', :via => 'POST'
+
   resources :notifications
   resources :friendships
+  match 'friendships/destroy' => 'friendships#destroy', :via => 'POST'
   resources :likes
+  match 'likes/unlike' => 'likes#unlike', :via => 'POST'
+
+  resources :endorsements
+ 
+  resources :events
+  match 'events/up_vote' => 'events#up_vote', :via => 'POST'
+  match 'events/down_vote' => 'events#down_vote', :via => 'POST'
+  match 'events/load_more' => 'events#load_more', :via => 'POST'
+  match 'events/message_organizer' => 'events#send_message_to_organizer', :via => 'POST'
+  match 'events/attend' => 'events#attend', :via => 'POST'
+  match 'events/unattend' => 'events#unattend', :via => 'POST'
+  match 'events/invite_followers' => 'events#invite_followers', :via => 'POST'
 
   resources :role_applications
   match 'roles_applicants' => 'roles#applicants_list', :via => 'POST'
   match 'role_applications/approve' => 'role_applications#approve', :via => 'POST'
   match 'role_applications/un_approve' => 'role_applications#un_approve', :via => 'POST'
 
+  match 'report' => 'application#report'
   
   # News feed
   match 'activities/load_more' => 'activities#next_activities'

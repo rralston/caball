@@ -1,16 +1,23 @@
 class CommentsController < ApplicationController
 
   load_and_authorize_resource
-  before_filter :load_project
+  # before_filter :load_project, :except => [:add_comment]
   
   def create
-    @comment = @project.comments.build(params[:comment])
-    @comment.user = current_user
-    if @comment.save
-      redirect_to @project, notice: "Comment was created."
-    else
-      render :new
+    params[:comment][:user] = current_user
+    @comment = Comment.create(params[:comment])
+
+    # if the user tried to add a video, check if its valid or not.
+    if params[:comment][:video_attributes][:url].present?
+      if @comment.video.provider.nil?
+        # delete the activity created for this creation and update
+        Activity.where(:trackable_type => 'Comment', :trackable_id => @comment.id).destroy_all
+        @comment.destroy
+        @comment = nil
+        @error = 'Video not found. Please try different url'
+      end
     end
+    render 'comments/comment_create_response'
   end
 
   def edit

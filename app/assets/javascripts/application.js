@@ -21,4 +21,6 @@
 //= require rails.validations
 //= require_directory .
 //= require init
+//= require jquery.remotipart
 //= require plugins/manifest.js
+//= require social-share-button

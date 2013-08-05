@@ -1,36 +1,194 @@
-<section class="users-search">
-  <div class="container">
-    <div class="row">
-      <!-- Left Column for Search Terms-->
-      <div class='span3 search-column'>
-        <div class="users-search-title">
-          <h3>USERS</h3>
-        </div>
-        <div class="users-search-content">
-          <%= search_form_for @search do |f| %>
-          <div class="field project-title">
-            <%= f.text_field :name_cont, :placeholder => 'Find a User...', :class => 'user-title-input' %>
-            <i class="icon-search"></i>
-          </div>
-          <div class="field location">
-            <h3>Location</h3>
-            <%= f.text_field :location_cont, :placeholder => 'Location' , :class => 'location-input' %>
-          </div>
-          <div class="field roles">
-            <h3>Roles</h3>
-            <div class="roles-bounding-box">
-              <%= f.select(:talents_name_cont, options_for_select(@talents), {}, {:multiple=> true, :size => @talents.length, :class => 'talents-input' }) %>
-            </div>
-          </div>
-          <% end %>
-        </div>
+<%= javascript_include_tag "users/users_manifest" %>
+<%= stylesheet_link_tag "users/index.css" %>
+
+<div class="topbnrwrap">
+  <div class="topbnr container">
+    <div class="bnrenclose">
+      <div class="bnrbg">
+        <img src="/assets/event-bnr-bg.png" alt="">
       </div>
-      
-      <!-- Right Column for displaying users-->
-      <div class='span9 search-results'>
-        <%= render :partial => 'user_search_results' %>
-      </div>
-      
+      <div class="bnrtext light span12">
+          <h1>PEOPLE</h1>
+          <p class='light'>Discover the best projects here on Filmu and find the right people for your prohect od, sem non lobortis blandit, elit sem imperd.</p>
+          </div>
     </div>
   </div>
-</section>
+</div>
+
+<!--========= main content starts======------>
+<div class="mainwrap" >
+  <div class="maincontain container-fluid" >
+  <div class="row-fluid">
+  
+  <!--========= left sidebar starts======------>
+    <aside class="lside span3">
+      <form action="" class=" srchfrm span">
+        <input type="text" id='search-users-input'>
+        <div class='search_please_wait'>
+          Please wait while we search
+        </div>
+      </form>
+      <form id='users_search_form' class="psearch">
+        <h2 class='regular'>Advanced Search</h2>
+        <div class='srchopts'>
+          <div class="srchsect">
+
+            <div class="srchopt">
+              <div class="rdboxwrap">
+                <input type="radio" name='people' value='followers' id='followers' />
+                <label class="rdlabel" for="followers"></label>
+              </div>
+              <span class="chktxt">Follows You</span>
+              
+            </div>
+
+            <div class="srchopt">
+              <div class="rdboxwrap">
+                <input type="radio" name='people' value='friends' id='friends' />
+                <label class="rdlabel" for="friends"></label>
+              </div>
+              <span class="chktxt">You follow</span>
+              
+            </div>
+          </div>
+        </div>
+
+        <div class="srchsect">
+          <h2 class='regular'>Roles</h2>
+          <div class='srchopts'>
+            <% User.types.keys.each do |role| %>
+              <div class="srchopt">
+                <div class="chkboxwrap">
+                  <input type="checkbox" name='roles' value='<%= role %>' id='<%= role %>' />
+                  <label class="chklabel" for="<%= role %>"></label>
+                </div>
+                <span class="chktxt"><%= role %></span>
+                
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="srchsect">
+          <h2 class='regular'>Distance</h2>
+          <div class='srchopts'>
+            <% [10, 15, 50, 100, 200].each do |distance| %>
+              <div class="srchopt">
+                <div class="rdboxwrap">
+                  <input type="radio" name='distance' value='<%= distance %>' id='<%= distance %>'>
+                  <label class="rdlabel" for="<%= distance %>"></label>
+                </div>
+                <span class="chktxt"><%= distance %> miles</span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class='text-center'>
+          <a id='btn-search_users' class="srchbtn2 srchbtn btn-custom btn-red center-div text-center btn-search_projects">
+            Search
+          </a>
+        </div>
+
+      </form>
+    </aside>
+  <!--========= left sodebar ends======-->
+
+
+  <!--========= main content starts======-->
+    <div class="main-wrap span9" id="mwrap">
+      <div class="row-fluid">
+      <div class="main span12 pdiv" id='all_users'>
+
+        <!--======Popular people div===-->
+        
+          <div class="pdiv span12">
+            <div class="row-fluid">
+            
+              <div class="page-header-secondary">
+                Popular on Filmzu
+              </div>
+              
+              <div id='popular_users_container'>
+
+              </div>
+            </div>
+          </div>
+        <!--======Popular people div===-->
+        <!--======Recently updated div===-->
+        
+          <div class="pdiv span12">
+            <div class="row-fluid">
+              <div class="page-header-secondary">
+                Recently updated
+              </div>
+              <div id='recent_users_container'>
+
+              </div>
+            </div>
+          </div>
+        <!--======Recently updated div===-->
+      </div>
+
+      <div class='load_more_div clearfix text-center'>
+        <a class="btn-custom btn-red center-div text-center btn-load_more" data-next-page="2">
+          Load More
+        </a>
+      </div>
+
+      </div>
+    </div>
+  <!--========= main content ends======-->
+    
+
+  </div>
+  </div>
+</div>
+<!--========= main content ends======-->
+
+<%= render :partial => 'users/templates/user_tile' %>
+<%= render :partial => 'conversations/send_new_message_modal' %>
+
+<script type="text/javascript">
+
+app.status = 'index'
+
+app.current_user = <%= raw current_user.to_json() %>
+
+app.current_user_location = '<%= current_user.location %>'
+app.recent_users = new app.collections.users()
+recent_users_view = new app.views.users({ collection: app.recent_users })
+
+app.recent_users.reset(<%= raw User.recently_updated(1, USERS_PER_PAGE_IN_INDEX).to_json(:include => [:followers], :check_user => current_user) %>)
+
+$('#recent_users_container').html(recent_users_view.render().el)
+
+
+app.popular_users = new app.collections.users()
+popular_users_view = new app.views.users({ collection: app.popular_users })
+
+app.popular_users.reset(<%= raw User.popular_users.first(3).to_json(:include => [:followers], :check_user => current_user) %>)
+
+$('#popular_users_container').html(popular_users_view.render().el)
+
+
+// initializing the result users view and collection
+app.result_users = new app.collections.users()
+app.result_users_view = new app.views.users({ collection: app.result_users })
+
+
+if(navigator.geolocation){
+  navigator.geolocation.getCurrentPosition(function(position){
+    var latlng = new google.maps.LatLng(
+                      position.coords.latitude,
+                      position.coords.longitude);
+
+    var geoCoder = new google.maps.Geocoder();
+
+    geoCoder.geocode({ location: latlng }, function(results, status){
+      app.current_user_location = results[3].formatted_address;
+    });
+  });
+}
+
+</script>

@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
   #Notification System  
   def notification
     if @current_user
-      notification = @current_user.receipts.where(:receiver_id => :user_id).is_unread.count
+      notification = @current_user.receipts.is_unread.count
       notification if notification > 0
     end
   end
@@ -78,5 +78,12 @@ class ApplicationController < ActionController::Base
     if !current_user
       redirect_to new_user_url, :error => 'You need to sign in for access to this page.'
     end
+  end
+
+  def report
+    entity_class = params[:entity].camelize.constantize
+    entity = entity_class.find(params[:id])
+    UserMailer.report_entity_mail(current_user, entity).deliver
+    render :text => true
   end
 end

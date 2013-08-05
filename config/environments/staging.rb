@@ -2,15 +2,15 @@ Caball::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # Authenitaction for staging environment
-  config.middleware.insert_after(::Rack::Lock, "::Rack::Auth::Basic", "staging") do |u, p|
-    [u, p] == ['admin', 'Caball666']
-  end
+  # config.middleware.insert_after(::Rack::Lock, "::Rack::Auth::Basic", "staging") do |u, p|
+  #   [u, p] == ['admin', 'Caball666']
+  # end
 
   # Code is not reloaded between requests
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
@@ -69,4 +69,17 @@ Caball::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
+  config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+                     :address        => "smtp.gmail.com",
+                     :port           => 587,
+                     :authentication => :plain,
+                     :user_name      => "notifications@filmzu.com",
+                     :password       => "Filmzuexperiences",
+                     :openssl_verify_mode  => 'none'
+   }
+  
+  # Change when Push to the Website or will Error out
+  config.action_mailer.default_url_options = { :host => 'mysterious-brook-4528.herokuapp.com' }
 end

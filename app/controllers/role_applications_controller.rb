@@ -11,7 +11,6 @@ class RoleApplicationsController < ApplicationController
   
   def create
     role_application = current_user.role_applications.create(params[:role_application])
-    # debugger
 
     project_owner = role_application.project.user
     
@@ -47,6 +46,18 @@ class RoleApplicationsController < ApplicationController
     role_application.update_attributes(:approved => false)  
     role.update_attributes(:filled => false)
     render :json => role_application.to_json()
+  end
+
+  def message_applicant
+    role_application = RoleApplication.find(params[:application_id])
+    message = params[:message]
+    role = role_application.role
+    applicant = role_application.user
+    # send message and email to the project owner
+    subject = "Reg. Role Application - #{role_application.role.name} (#{role_application.role.subrole})"
+
+    current_user.send_message(applicant, message, subject)
+
   end
 
 end

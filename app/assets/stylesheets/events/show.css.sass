@@ -1,0 +1,285 @@
+$grey: #a5a8b1
+$light-grey: #d4d6dc
+$grey-backdrop: #d2dee7
+$divider-border: #c6d0db
+$comments-left-border: #c8d2de
+$brick-red: #e44f65
+$light-grey-text: #a0a8b1
+$comment-text: #636a73
+$very-light-blue: #edf1f7
+$grey-backdrop-text: #636a73
+
+.event-main-head
+  background: $very-light-blue
+  .event-title
+    font-size: 35px
+    line-height: 40px
+    margin-bottom: 15px
+  .event-main-details
+    width: 580px
+    padding: 20px
+    .event-date-time
+      font-size: 20px
+      margin-top: 12px
+      margin-bottom: 15px
+      color: $grey-backdrop-text
+  .event-actions
+    width: 200px
+    margin: 20px auto
+    .btn-custom
+      border-radius: 4px
+    .btn-attend
+      font-size: 25px
+      padding: 11px 20px
+    .btn-like, .btn-invite-followers
+      width: 90px
+      min-width: 20px
+      margin-top: 0px
+      font-size: 15px
+    .btn-invite-followers
+      margin-left: 10px
+      padding: 5px
+
+#event-map
+  height: 350px
+
+.details-right
+  min-height: 315px
+  padding: 20px 0px 10px 0px
+  -moz-box-shadow: 3px 17px 30px -23px black inset
+  -webkit-box-shadow: 3px 17px 30px -23px black inset
+  box-shadow: 3px 17px 30px -23px black inset
+  
+  .location-address
+    width: 215px
+    margin-left: 10px
+    min-height: 70px
+    font-size: 17px
+    font-style: italic
+  .location-img-blue, .desc, .owner-row
+    margin-left: 20px
+
+  .event-links
+    margin-top: 10px
+    font-size: 16px
+    a
+      color: $brick-red
+  .desc
+    margin-top: 20px
+    
+  .owner-img
+    width: 40px
+  .owner
+    font-size: 12px
+    width: 140px
+    margin-left: 10px
+    color: #82848d
+    font-style: italic
+    .owner-name
+      margin-top: 2px
+      color: $brick-red
+      font-size: 15px
+      font-style: normal
+  .btn-message_organizer
+    padding-left: 8px
+    padding-right: 8px
+    min-width: 60px
+    width: 70px !important
+  .event-tags
+    margin-left: 10px
+    .badge
+      margin-top: 10px
+
+a:hover
+  text-decoration: none
+  color: $brick-red
+a
+  color: $brick-red
+
+/*slider code*/
+.flexslider
+  _overflow: hidden
+
+.slides
+  height: 345px
+
+.slides li
+  height: 100%
+  background-repeat: no-repeat!important
+  background-size: cover!important
+
+
+.flexslider .flex-direction-nav
+  _display: none
+  height: 0px
+  width: 0px
+  list-style: none
+  padding: 0
+  margin: 0
+
+.flex-prev
+  display: block
+  font-size: 0
+  line-height: 0
+  background: url('/assets/slprev.png') no-repeat
+  width: 25px
+  height: 35px
+  text-indent: -9999999!important
+
+.flex-next
+  display: block
+  font-size: 0
+  line-height: 0
+  background: url('/assets/slnext.png') no-repeat
+  width: 25px
+  height: 35px
+  text-indent: -9999999
+
+#slider
+  position: relative
+  overflow: hidden
+  transition: all .4s
+
+.flexslider
+  cursor: pointer
+  transition: all .4s
+
+
+#slider .flex-prev
+  display: none
+  position: absolute
+  left: 10px
+  top: 40%
+
+#slider:hover .flex-prev
+  display: block
+
+
+#slider:hover .flex-next
+  display: none
+  position: absolute
+  right: 10px
+  top: 40%
+
+#slider:hover .flex-next
+  display: block
+
+#carousel
+  margin-left: 40px
+  width: 450px
+  position: relative
+  margin-top: 15px
+
+#carousel.not_owner
+  width: 550px
+  .flex-next
+    right: -45px
+
+#carousel .slides
+  height: 90px
+  margin-left: 0px
+
+#carousel .slides  li
+  width: 90px !important
+  margin-left: 20px
+  _opacity: .5
+  box-shadow: inset 100px 100px 100px rgba(69,75,107,.6)
+
+#carousel .slides  li.flex-active-slide
+  opacity: 1
+  box-shadow: none
+  border: 4px solid #269ed7
+  border-radius: 4px
+
+#carousel .flex-prev
+  position: absolute
+  left: -30px
+  top: 30%
+  
+
+#carousel .flex-next
+  position: absolute
+  right: -150px
+  top: 30%
+
+.addnew
+  cursor: pointer
+  background: black
+  width: 90px
+  height: 90px
+  float: left
+  margin-left: 10px
+  background: url(/assets/grey-tile-bg.png) repeat-x
+  box-shadow: inset 2px 2px 30px rgba(0,0,0,.4), inset -2px -2px 30px rgba(0,0,0,.4)
+  color: white
+  margin-top: 15px
+  .plus
+    font-size: 23px
+    margin-top: 7px
+  .add
+    font-size: 17px
+  span
+    margin-top: -2px
+
+.addnew span
+  display: block
+
+.hdrsliderwrap
+  overflow: hidden
+  background: #d2dee7
+
+.flex-disabled
+  display: none !important
+
+/*slider code*/
+
+
+.about-div
+  .desc
+    margin-left: 20px
+    padding-bottom: 40px
+
+.coming-div
+  background: white
+  .head
+    margin-left: 10px
+    h3
+      margin-bottom: 0px
+    .attending-summary
+      font-size: 12px
+      color: #8e97a2
+  .attenders-tiles
+    .attender-img
+      width: 106px
+    .attendees-extra-count
+      font-size: 25px
+      margin-top: 15px
+      margin-left: -5px
+      margin-bottom: 5px
+  .grey-top-line
+    margin-top: 12px
+
+.event-photos
+  background: black
+  .photos-container
+    text-align: center
+  img
+    height: 302px
+
+#conversation_body
+  width: 400px
+
+.share_area
+  .social-share-button
+    a
+      width: 30px
+      height: 30px
+      margin-right: 10px
+      background-size: 100% 100% !important
+  .social-share-button-facebook
+    background: url("/assets/fb-link.png") no-repeat !important
+  .social-share-button-twitter
+    background: url("/assets/twitter-link.png") no-repeat !important
+  .social-share-button-google_plus
+    background: url("/assets/g-link.png") no-repeat !important
+  

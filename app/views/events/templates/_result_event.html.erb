@@ -1,0 +1,120 @@
+<script type="script/template" id='result_event_template'>
+
+  <%% var index = 1 %>
+  
+  <%% if(typeof this.model.collection != 'undefined') 
+        var index = this.model.collection.models.indexOf(this.model) + 1 
+  %>
+
+  <div class='event-index pull-left light'>
+    <%%= index %>.
+  </div>
+
+  <div class='event-left-empty pull-left'>
+    <div class='event-vote-div'>
+
+      <div class='vote-action up-vote <%% if(voted_type_by_user == "up") print("active") %> '>
+
+      </div>
+
+      <div class='votes-count'>
+        <%%= votes_count %>
+      </div>
+
+      <div class='vote-action down-vote <%% if(voted_type_by_user == "down") print("active") %> '>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class='event-image pull-left'>
+    <div class='event-backdrop'  style='background: url(<%%= main_photo.image.url %>) no-repeat'>
+    </div>
+    <div class='backdrop-cover'></div>
+
+    <div class="date pull-left medium">
+      <div class="day">
+        <%%= start.day %>
+      </div>
+      <div class="month regular">
+        <%%= start.month_year %>
+      </div>
+    </div>
+  </div>
+
+  <div class='pull-left event-details <%% if((index%2) == 0) print("even") %>'>
+    
+    <div class='row'>
+      <div class='event-title medium'>
+        <a href='/events/<%%= id %>'><%%= title %></a>
+      </div>
+      <div class='event-dates'>
+        <%%= start.pretty_date %> - <%%= end.pretty_date %>
+      </div>
+    </div>
+
+    <div class='row owner'>
+
+      <div class="event-owner pull-left">
+        <span class="pull-left owner-img">
+          <div class="img-circle user-circle-image" style="background: url(<%%= user.profile_pic %>)">
+          </div>
+        </span>
+
+        <span class="owner pull-left">
+          <span class='light'>created by</span>
+          <br>
+          <span class="owner-name">
+            <a href="users/<%%= user.id %>" target="_blank">
+              <%%= user.name %>
+            </a>
+          </span>
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class='event-right-details pull-left text-center <%% if((index%2) == 0) print("even") %>'>
+
+    <%% if(user_attending){ %>
+      <div class='unattend-event btn-custom btn-red'>
+        Attending
+      </div>
+    <%% }else{ %>
+      <div class='attend-event btn-custom btn-red'>
+        Attend
+      </div>
+    <%% } %>
+
+    <%% if(typeof distance != 'undefined'){ %>
+      <div class='distance'>
+        <div class="location-img-blue pull-left"></div>
+        <div class='pull-left'><%%= Math.round(distance * 100) / 100 %> miles</div>
+      </div>
+    <%% } %>
+
+    <div class="row event-popularity clearfix">
+      <div class='center-div clearfix text-center'>
+        
+        <span class="likes icon pull-right">
+          <div class="pull-right count">
+            <%%= likes.length %>
+          </div>
+          <div class="heart-blue icon pull-right"> </div>
+        </span>
+  
+        <span class="comments pull-left">
+          <div class="pull-right count">
+            <%%= comments.length %>
+          </div>
+          <div class="comment-blue icon pull-right"> </div>
+        </span>
+
+      </div>
+    </div>
+
+  </div>
+</script>
