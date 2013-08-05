@@ -242,6 +242,15 @@ class User < ActiveRecord::Base
       # tells if user is following the user
       json[:user_following] = self.followers.include?(options[:check_user])
     end
+
+    if options[:for_search].present? and options[:for_search] == true
+      json[:thumbnail] = profile_pic
+      json[:label] = name
+      json[:value] = name
+      json[:category]= 'People'
+      json[:url] = "/users/#{id}"
+    end
+
     json
   end
 
@@ -264,6 +273,10 @@ class User < ActiveRecord::Base
     notifications = notifications + self.receipts.includes(:message).where('created_at > ? and receipts.is_read = false', self.notification_check_time)
 
     notifications.sort_by(&:created_at).reverse  
+  end
+
+  def self.search_users(query)
+    User.where('name like ?', "%#{query}%")
   end
 
 

@@ -206,6 +206,7 @@ class Event < ActiveRecord::Base
   end
 
   def as_json(options = {})
+
     json = super(options)
     if options[:check_user].present?
       # tells if the user is attending particular event.
@@ -217,6 +218,15 @@ class Event < ActiveRecord::Base
       json[:voted_by_user] = voted_by_user?(user)
       json[:voted_type_by_user] = voted_type_by_user(user)
     end
+
+    if options[:for_search].present? and options[:for_search] == true
+      json[:thumbnail] = main_photo.image.url(:medium)
+      json[:label] = title
+      json[:value] = title
+      json[:category]= 'Events'
+      json[:url] = "/events/#{id}"
+    end
+
     json
   end
 
@@ -264,6 +274,10 @@ class Event < ActiveRecord::Base
 
   def similar_events
     self.nearbys.first(3)
+  end
+
+  def self.search_events(query)
+    Event.where('title like ? or description like ?', "%#{query}%", "%#{query}%")
   end
 
 end

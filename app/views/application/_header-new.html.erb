@@ -20,7 +20,7 @@
               </ul>
               <div class="hdrfrm">
                 <form action="">
-                  <input type="text" class='search_header'/>
+                  <input type="text" class='search_header' id='main_header_search'/>
                 </form>
               </div>
 
@@ -96,27 +96,6 @@
   </header>
 </div>
 
-<script type="text/javascript">
-$(document).ready(function(){
-  $('.notstarwrap').on('click',function(){
-    $('.noticontentwrap').slideToggle(600);
-
-    if($('.notstarwrap').hasClass('set_time')){
-      app.fn.set_notification_check_time($('.notstarwrap'))
-    }
-  });
-
-  $('.noteclose').on('click',function(){
-    $('.noticontentwrap').slideUp(600);
-  });
-
-  $('.usrprev').on('click',function(){
-    $('.userprflistwrap').slideToggle(600);
-  });
-});
-  
-</script>
-
 <% if flash[:notice] %>
   <div class="alert alert-success">
     <button type="button" class="close" data-dismiss="alert">
@@ -154,3 +133,81 @@ $(document).ready(function(){
 <% end %>
 
 <div id="bootstrap-alert-placeholder" class="js-alert"></div>
+
+<script type="script/template" id='search_results_li_tempalte'>
+  
+  <a class='full-li'>
+    <img src='<%%= thumbnail %>'>
+    <span>
+      <%%= label %>
+    </span>
+  </a>
+
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.notstarwrap').on('click',function(){
+    $('.noticontentwrap').slideToggle(600);
+
+    if($('.notstarwrap').hasClass('set_time')){
+      app.fn.set_notification_check_time($('.notstarwrap'))
+    }
+  });
+
+  $('.noteclose').on('click',function(){
+    $('.noticontentwrap').slideUp(600);
+  });
+
+  $('.usrprev').on('click',function(){
+    $('.userprflistwrap').slideToggle(600);
+  });
+
+
+  // for search
+  $.widget( "custom.catcomplete", $.ui.autocomplete, {
+      _renderMenu: function( ul, items ) {
+        var that = this,
+          currentCategory = "";
+        $.each( items, function( index, item ) {
+          if ( item.category != currentCategory ) {
+            ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+            currentCategory = item.category;
+          }
+          that._renderItem( ul, item );
+        });
+      }
+    });
+
+
+  var on_select_callback = function(item){
+    // similar behavior as an HTTP redirect
+    window.location.replace(item.url);
+  }
+
+  var this_template = _.template( $('#search_results_li_tempalte').html())
+
+  $("#main_header_search").catcomplete({
+    delay: 0,
+    source: function(request, response){
+      $.getJSON( "/main_search?q="+request.term, function(data){
+        response(data)
+      });
+    },
+    select: function(event, ui){
+      on_select_callback(ui.item)
+    },
+    messages:{
+      noResult: '',
+      results: function(){}
+    },  
+   }).data("custom-catcomplete")._renderItem = function(ul, item){
+      return $( "<li>" ).addClass('custom-ui-item clearfix')
+            .data( "ui-autocomplete-item", item )
+            .append( this_template(item) )
+            .appendTo( ul );
+    };
+});
+  
+</script>

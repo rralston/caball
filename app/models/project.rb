@@ -256,6 +256,15 @@ class Project < ActiveRecord::Base
       json[:voted_by_user] = voted_by_user?(user)
       json[:voted_type_by_user] = voted_type_by_user(user)
     end
+
+    if options[:for_search].present? and options[:for_search] == true
+      json[:thumbnail] = display_photo
+      json[:label] = title
+      json[:value] = "/projects/#{id}"
+      json[:category]= 'Projects'
+      json[:url] = "/projects/#{id}"
+    end
+
     json
   end
 
@@ -292,6 +301,10 @@ class Project < ActiveRecord::Base
     else
       "/assets/actor.png"
     end
+  end
+
+  def self.search_projects(query)
+    Project.where('title like ? or description like ?', "%#{query}%", "%#{query}%")
   end
 
 end
