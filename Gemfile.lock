@@ -301,6 +301,7 @@ GEM
       actionpack (~> 3.0)
       activemodel (~> 3.0)
     slop (3.4.5)
+    social-share-button (0.1.4)
     spork (1.0.0rc3)
     spork-rails (3.2.1)
       rails (>= 3.0.0, < 3.3.0)
@@ -386,6 +387,7 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers
   simple_form
+  social-share-button
   spork-rails
   therubyracer
   twitter-bootstrap-rails

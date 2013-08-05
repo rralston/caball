@@ -121,3 +121,6 @@ gem 'acts-as-taggable-on'
 
 # remote file uploads
 gem "remotipart", "~> 1.2.1"
+
+# social sharing
+gem 'social-share-button'
