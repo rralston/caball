@@ -14,6 +14,21 @@ app.views.blogs = Backbone.View.extend
     blog_view = new app.views.blog({ model: blog })
     this.$el.find('#comments_display').prepend(blog_view.render().el)
 
+  render_video_sorted: ()->
+    this.$el.find('#comments_display').html('')
+    this.collection.video_sorted().forEach(this.renderEach, this)
+    this
+
+  render_photo_sorted: ()->
+    this.$el.find('#comments_display').html('')
+    this.collection.photo_sorted().forEach(this.renderEach, this)
+    this
+
+  render_text_sorted: ()->
+    this.$el.find('#comments_display').html('')
+    this.collection.text_sorted().forEach(this.renderEach, this)
+    this
+
   check_keypress: (event)->
     # check if enter is pressed.
     if event.which == app.constants.enter_key_code

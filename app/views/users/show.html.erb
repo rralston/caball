@@ -71,8 +71,8 @@
                 <div class="row-fluid">
                   <div class="profico">
                     <ul class="picos span4">
-                      <li><a href=""><img src="/assets/horn.png" alt="" /></a></li>
-                      <li><a href=""><img src="/assets/cut.png" alt="" /></a></li>
+                      <li><a href="#"><img src="/assets/horn.png" alt="" /></a></li>
+                      <li><a href="#"><img src="/assets/cut.png" alt="" /></a></li>
                       <li><a class='btn-endorse' data-can='<%= current_user.friends.include?(@user) %>' ><img src="/assets/pencil.png" alt="" /></a></li>
                     </ul>
                   </div>
@@ -99,169 +99,21 @@
 
 
             <div class='row-fluid'>
+
+              <div class="sortico clearfix">
+                      
+                <ul class="picos span5">
+                  <li>SORT UPDATES: </li>
+                  <li><span class='action-div' id='sort_by_video'><img src="/assets/sortv.png" alt="" /></span></li>
+                  <li><span class='action-div' id='sort_by_photo'><img src="/assets/sortp.png" alt="" /></span></li>
+                  <li><span class='action-div' id='sort_by_text'><img src="/assets/sortw.png" alt="" /></span></li>
+                </ul>
+              </div>
+
               <div class='pull-right' id='comments_div'>
 
               </div>
             </div>
-
-          <!--========= ProfilePost starts======------>
-              <div class="postwrap">
-                <div class="sortpostwrap">
-                  <div class="row-fluid">
-                    <div class="sortico">
-                      
-                      <ul class="picos span5">
-                      <li>Sort Updates:</li>
-                      <li><a href=""><img src="/assets/sortv.png" alt="" /></a></li>
-                      <li><a href=""><img src="/assets/sortp.png" alt="" /></a></li>
-                      <li><a href=""><img src="/assets/sortw.png" alt="" /></a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="row-fluid">
-                <div class="postenclose span11 offset1">
-                  
-                  <div class="row-fluid">
-                  <div class="writepost span11 offset1">
-                    <div class="sideico"><img src="/assets/writeico.png" alt="" /></div>
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
-                    <div class="writeico">
-                      <ul class="wrtico">
-                        <li><img src="/assets/writev.png" alt="" /></li>
-                            <li><img src="/assets/writep.png" alt="" /></li>
-                      </ul>
-                    </div>
-                  </div>
-                  </div>
-                  
-                  <div class="row-fluid">
-                  <div class="written post">
-                    <div class="sideico"><img src="/assets/written.png" alt="" /></div>
-                    <div class="publiished postcnt">
-                      <div class="postcnth2"><a href="" class=="medium">Stephen Santorum</a> posted a photo <a href="">Stephen Santorum</a></div>
-                      <div class="publishedpost postmatter">
-                        <p>this is sample post</p>
-                      </div>
-                      
-                      <div class="postftr">
-                        <div class="row-fluid">
-                          <ul class="pstflw  span3 offset9">
-                            <a href="">
-                              <li class="cmnt">6</li>
-                            </a>
-                            <a href="like">
-                              <li class="like">51</li>
-                            </a>
-                          </ul>
-                        </div>
-                      </div>
-                      
-                    </div>
-                  </div>
-                  </div>
-                  
-                  
-                  <div class="row-fluid">
-                  <div class="post">
-                    <div class="sideico"><img src="/assets/gpost.png" alt="" /></div>
-                    <div class="postcnt">
-                      <div class="postcnth2"><a href="" class=="medium">Stephen Santorum</a> posted a photo </div>
-                      <div class="postmatter">
-                        <img src="/assets/postimg.png" alt="" />
-                      </div>
-                      
-                      <div class="postftr">
-                        <div class="row-fluid">
-                          <ul class="pstflw  span3 offset9">
-                            <a href="">
-                              <li class="cmnt">6</li>
-                            </a>
-                            <a href="like">
-                              <li class="like">51</li>
-                            </a>
-                          </ul>
-                        </div>
-                      </div>
-                      
-                    </div>
-                  </div>
-                  </div>
-                  <div class="endorse post">
-                    <div class="sideico"><img src="/assets/endorse.png" alt="" /></div>
-                    <div class="rcvendrs postcnt">
-                      <div class="postcnth2"><a href="" class=="medium">Stephen Santorum</a> posted a photo <a href="">Stephen Santorum</a></div>
-                      <div class="endrstxt">
-                        <p><blockquote>This guy is a pleasure to work with. In aliquam porttitor metus quis bibendum. Nam convallis vestibulum diam vel adipiscing</blockquote></p>
-                      
-                      </div>
-                      <div class="postftr">
-                        <div class="row-fluid">
-                          <ul class="pstflw  span3 offset9">
-                            <a href="">
-                              <li class="cmnt">6</li>
-                            </a>
-                            <a href="like">
-                              <li class="like">51</li>
-                            </a>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="post">
-                    <div class="sideico"><img src="/assets/gpost.png" alt="" /></div>
-                    <div class="postcnt">
-                      <div class="postcnth2"><a href="" class=="medium">Stephen Santorum</a> posted a photo </div>
-                      <div class="pomatter">
-                          <!---vimeo-->
-                          <iframe src="http://player.vimeo.com/video/53749030" width="100%" height="330" frameborder="0" ></iframe> <p><a href="http://vimeo.com/53749030">Mia Maestro - Blue Eyed Sailor</a> from <a href="http://vimeo.com/miamaestro">mia maestro</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-                      </div>
-                                                    <div class="postftr">
-                        <div class="postftr">
-                        <div class="row-fluid">
-                          <ul class="pstflw  span3 offset9">
-                            <a href="">
-                              <li class="cmnt">6</li>
-                            </a>
-                            <a href="like">
-                              <li class="like">51</li>
-                            </a>
-                          </ul>
-                        </div>
-                      </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="post">
-                    <div class="sideico"><img src="/assets/gpost.png" alt="" /></div>
-                    <div class="postcnt">
-                      <div class="postcnth2"><a href="" class=="medium">Stephen Santorum</a> posted a photo </div>
-                      <div class="pomatter">
-                          <!-----vimeo-->
-                          <iframe src="http://player.vimeo.com/video/53749030" width="100%" height="330" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> <p><a href="http://vimeo.com/53749030">Mia Maestro - Blue Eyed Sailor</a> from <a href="http://vimeo.com/miamaestro">mia maestro</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-                      </div>
-                                                    <div class="postftr">
-                        <div class="postftr">
-                        <div class="row-fluid">
-                          <ul class="pstflw  span3 offset9">
-                            <a href="">
-                              <li class="cmnt">6</li>
-                            </a>
-                            <a href="like">
-                              <li class="like">51</li>
-                            </a>
-                          </ul>
-                        </div>
-                      </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                </div>
-              </div>
-              
-          <!--========= ProfilePost starts======-->
           </div>
         </div>
       </div>
@@ -328,6 +180,18 @@
   app.blogs.reset(<%= raw @user.blogs.to_json(:include => [:user, :likes], :check_user => current_user) %>)
   app.blogs_view = new app.views.blogs({ collection: app.blogs })
   $('#comments_div').html(app.blogs_view.render().el)
+
+  $('body').on('click', '#sort_by_video', function(event){
+    app.blogs_view.render_video_sorted()
+  });
+
+  $('body').on('click', '#sort_by_photo', function(event){
+    app.blogs_view.render_photo_sorted()
+  });
+
+  $('body').on('click', '#sort_by_text', function(event){
+    app.blogs_view.render_text_sorted()
+  });
 
   // user projects
   app.user_projects = new app.collections.user_projects()
