@@ -39,7 +39,6 @@ $(document).ready ()->
       data: data
 
       success: (resp) ->
-        console.log resp
         if resp != 'false'
           if resp.length > 0
             new_user_models = _.map(resp, (user_json)->
@@ -61,7 +60,6 @@ $(document).ready ()->
 
 
   reset_results = (resp)->
-    console.log resp
     app.result_users.reset(resp)
     $('#all_users').html(app.result_users_view.render().el)
     $('.btn-load_more').attr('data-next-page', 2)

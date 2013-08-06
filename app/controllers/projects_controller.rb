@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
         roles    = params[:roles]
         types    = params[:types]
         genres   = params[:genres]
-        search   = params[:search]
+        search   = params[:search] || params[:keyword]
         location = params[:location]
         order_by = params[:order_by]
         # default distance 100

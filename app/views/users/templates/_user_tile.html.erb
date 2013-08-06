@@ -44,7 +44,7 @@
         </div>
 
         <div class="row buttons text-center">
-          <%% if (user_following){ %>
+          <%% if (typeof user_following != 'undefined' &&  user_following){ %>
             <div class="btn-follow-user btn-custom btn-cement medium flw unfollow">
               Following
             </div>

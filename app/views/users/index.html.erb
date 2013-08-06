@@ -155,7 +155,10 @@ app.status = 'index'
 
 app.current_user = <%= raw current_user.to_json() %>
 
-app.current_user_location = '<%= current_user.location %>'
+<% if current_user %>
+  app.current_user_location = '<%= current_user.location %>'
+<% end %>
+
 app.recent_users = new app.collections.users()
 recent_users_view = new app.views.users({ collection: app.recent_users })
 

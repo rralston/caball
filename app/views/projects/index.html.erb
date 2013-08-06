@@ -320,7 +320,10 @@ $(document).ready(function(){
 
   app.current_user = <%= raw current_user.to_json() %>
 
-
+  <% if current_user %>
+    app.current_user_location = '<%= current_user.location %>'
+  <% end %>
+  
   popular_projects = new app.collections.projects()
   popular_projects_view = new app.views.projects({ collection: popular_projects })
 

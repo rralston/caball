@@ -21,7 +21,7 @@ class UsersController < ApplicationController
         end
 
         roles    = params[:roles]
-        search   = params[:search]
+        search   = params[:search] || params[:keyword]
         location = params[:location]
         distance = 100
 
