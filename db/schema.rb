@@ -109,6 +109,16 @@ ActiveRecord::Schema.define(:version => 20130731142607) do
 
   add_index "events", ["user_id"], :name => "index_events_on_user_id"
 
+  create_table "follows", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "follow_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "follows", ["follow_id"], :name => "index_follows_on_follow_id"
+  add_index "follows", ["user_id"], :name => "index_follows_on_user_id"
+
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "friend_id"
@@ -245,6 +255,13 @@ ActiveRecord::Schema.define(:version => 20130731142607) do
     t.string   "subrole"
   end
 
+  create_table "search_suggestions", :force => true do |t|
+    t.string   "term"
+    t.integer  "popularity"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -272,6 +289,17 @@ ActiveRecord::Schema.define(:version => 20130731142607) do
     t.string   "experience"
   end
 
+  create_table "updates", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "updates", ["project_id"], :name => "index_updates_on_project_id"
+  add_index "updates", ["user_id"], :name => "index_updates_on_user_id"
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -293,7 +321,7 @@ ActiveRecord::Schema.define(:version => 20130731142607) do
     t.text     "headline"
     t.boolean  "featured"
     t.string   "expertise"
-    t.datetime "notification_check_time", :default => '2013-07-31 14:32:36'
+    t.datetime "notification_check_time", :default => '2013-08-06 22:13:33'
   end
 
   create_table "videos", :force => true do |t|
