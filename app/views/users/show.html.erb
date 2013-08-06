@@ -153,6 +153,33 @@
       <div class='row right-extra-div' id='endorsements_div'>
       </div>
 
+      <% if @user.resume.present? and @user.resume.document.present? %>
+        <div class='row right-extra-div' id='resume_div'>
+          <div class='span4 shrink-div head'>
+            <span class="pull-left">
+              <h3>Resume</h3>
+            </span>
+            
+            <a class='btn-endorse btn-show-all pull-right action-div' data-can='<%= current_user.friends.include?(@user) %>'>
+            </a> 
+            
+            <div class='clearfix'></div>
+          </div>
+
+          <div class="span4">
+            <div class="row clearfix">
+              <div class="grey-line-divider"></div>
+            </div>
+          </div>
+
+          <div class='row text-center link'>
+            <a href='<%= @user.resume.document.url %>' class='badge badge-custom-green'>
+              DOWNLOAD
+            </a>
+          </div>
+        </div>
+      <% end %>
+
   </div>
   <!--=========Sidebar ends======------>
   </div><!--rowfluid-->
