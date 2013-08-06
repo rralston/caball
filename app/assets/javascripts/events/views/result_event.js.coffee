@@ -9,6 +9,7 @@ app.views.result_event = Backbone.View.extend
     'click .unattend-event': 'unattend'
     'click .up-vote': 'up_vote'
     'click .down-vote': 'down_vote'
+    'click .like-event': 'like_event'
 
   render: ()->
     this.$el.html( this.template(this.model.toJSON()) )
@@ -80,3 +81,44 @@ app.views.result_event = Backbone.View.extend
           else
             alert 'Something went wrong. Please try later'
             btn.html('Attending')
+
+  like_event: (event) ->
+    _this = this
+    if app.fn.check_current_user()
+      if _this.model.get('user_liked')
+        _this.unlike_event(event)
+      else
+        $.ajax
+          url: '/likes.json'
+          type: 'POST'
+          data:
+            like:
+              loveable_id: _this.model.get('id')
+              loveable_type: 'Event'
+          success: (resp) ->
+            if resp != 'false'
+              _this.model.set('user_liked', true)
+              likes_count = _this.$el.find('.likes .count').html()
+              _this.$el.find('.likes .count').html(parseInt(likes_count) + 1)
+              # _this.render()
+            else
+              alert 'Something went wrong, Please try laters'
+
+  unlike_event: (event)->
+    _this = this
+    btn = $(event.target)
+    if app.fn.check_current_user()
+      $.ajax
+        url: '/likes/unlike'
+        type: 'POST'
+        data:
+          like:
+            loveable_id: _this.model.get('id')
+            loveable_type: 'Event'
+        success: (resp) ->
+          if resp != 'false'
+            _this.model.set('user_liked', false)
+            likes_count = _this.$el.find('.likes .count').html()
+            _this.$el.find('.likes .count').html(parseInt(likes_count) - 1)
+          else
+            alert 'Something went wrong, Please try later'

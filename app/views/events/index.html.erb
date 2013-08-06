@@ -101,6 +101,8 @@
   
   $(document).ready(function(){
 
+    app.current_user = <%= raw current_user.to_json(:only => [:name, :id]) %>
+
     app.popular_events = new app.collections.result_events()
     popular_events_view = new app.views.result_events({ collection: app.popular_events, type: 'popular' })
     app.popular_events.reset(<%= raw Event.custom_json(@popular_events, current_user  ) %>)

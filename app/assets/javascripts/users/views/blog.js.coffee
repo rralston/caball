@@ -24,8 +24,10 @@ app.views.blog = Backbone.View.extend
               loveable_type: 'Blog'
           success: (resp) ->
             if resp != 'false'
-              _this.model.set(resp)
-              _this.render()
+              _this.model.set('user_following', true)
+              count_div = _this.$el.find('.like-comment .likes-count')
+              likes_count = count_div.html()
+              count_div.html(parseInt(likes_count) + 1)
             else
               alert 'Something went wrong, Please try later'
 
@@ -42,7 +44,9 @@ app.views.blog = Backbone.View.extend
             loveable_type: 'Blog'
         success: (resp) ->
           if resp != 'false'
-            _this.model.set(resp)
-            _this.render()
+            _this.model.set('user_following', false)
+            count_div = _this.$el.find('.like-comment .likes-count')
+            likes_count = count_div.html()
+            count_div.html(parseInt(likes_count) - 1)
           else
             alert 'Something went wrong, Please try later'

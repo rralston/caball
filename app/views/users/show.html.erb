@@ -14,7 +14,7 @@
                   
                   <div class="blurbgcover">
                     <div class="blurbg">
-                      <img src="<%= @user.cover_photo.image %>" alt="" />
+                      <img src="<%= @user.cover_photo.try('image') %>" alt="" />
                     </div>
                   </div>
                   

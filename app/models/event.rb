@@ -239,6 +239,7 @@ class Event < ActiveRecord::Base
     if options[:check_user].present?
       # tells if the user is attending particular event.
       json[:user_attending] = self.attending?(options[:check_user])
+      json[:user_liked] = self.likes.pluck("user_id").include?(options[:check_user].id)
     end
 
     if options[:votes_data_for_user].present?
