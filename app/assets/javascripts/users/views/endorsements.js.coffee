@@ -5,7 +5,7 @@ app.views.endorsements = Backbone.View.extend
     this.collection.on('add', this.render, this)
   render: ()->
     this.$el.html(this.template)
-    this.collection.last(4).forEach(this.renderEach, this)
+    this.collection.forEach(this.renderEach, this)
     return this
 
   renderEach: (endorsement)->

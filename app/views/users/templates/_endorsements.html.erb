@@ -4,7 +4,10 @@
     <span class="pull-left">
       <h3>Endorsements</h3>
     </span>
-    <span class="btn-show-all pull-right"></span>
+    
+    <a class='btn-endorse btn-show-all pull-right action-div' data-can='<%= current_user.friends.include?(@user) %>'>
+    </a> 
+    
     <div class='clearfix'></div>
   </div>
 

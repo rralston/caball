@@ -311,11 +311,11 @@ class Project < ActiveRecord::Base
   end
 
   def similar_events
-    Event.near(location).first(3)
+    Event.near(location) + self.user.events
   end
 
   def similar_projects
-    self.nearbys.first(4)
+    self.nearbys
   end
 
   def display_photo_big

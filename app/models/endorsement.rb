@@ -1,6 +1,6 @@
 class Endorsement < ActiveRecord::Base
   
-  attr_accessible :message, :receiver_id, :sender_id
+  attr_accessible :message, :receiver_id, :sender_id, :expertise
 
   include PublicActivity::Model
   tracked except: :destroy

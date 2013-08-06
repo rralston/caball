@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130731142607) do
+ActiveRecord::Schema.define(:version => 20130806101820) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20130731142607) do
     t.text     "message"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "expertise"
   end
 
   add_index "endorsements", ["receiver_id", "sender_id"], :name => "index_endorsements_on_receiver_id_and_sender_id"

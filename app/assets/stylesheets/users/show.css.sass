@@ -447,6 +447,8 @@
       font-size: 18px
       .name
         color: white
+        a, a:hover
+          color: white !important
     .message
       color: #d7daed
       margin-left: 20px
@@ -454,6 +456,18 @@
       line-height: 20px
       font-style: italic
       margin-bottom: 30px
+      .expertise
+        margin-top: 10px
+        font-size: 11px
+        width: 260px
+        .badge
+          font-style: normal
+          background: #d7daed
+          color: #269b89
+          margin-bottom: 5px
+          font-size: 10px
+          padding: 1px 8px
+          margin-left: 4px
     .quo-right, .quo-left
       font-size: 48px
       font-weight: 800
@@ -468,3 +482,11 @@
       right: 10px
 .picos
   margin: 25px 0px
+
+
+/* hide the autocomplete category in the endorsement modal for autocomplete of the skills and expertise */
+
+#endorse_tags
+  width: 490px
+  .ui-autocomplete-category
+    display: none
