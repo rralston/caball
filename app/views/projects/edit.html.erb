@@ -11,24 +11,3 @@
 		<%= render :partial => 'form' %>
 	</div>
 </section>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    app.project_genres = <%=raw Project.genres.keys %>
-
-    $('#project_genre').tagit({
-      sortable: true,
-      tagSource: ['munna','vishnu'],
-      allowNewTags: false,
-      triggerKeys: ['comma', 'tab', 'space', 'enter'],
-      tagsChanged: function(tagValue, action, element){
-        tag_value_array = _.map($('#project_genre').tagit('tags'), function(tag){
-            tag.value  
-        })  
-        $('#project_genre_list').val(tag_value_array.toString())
-      }
-    });
-  
-      
-  })
-</script>

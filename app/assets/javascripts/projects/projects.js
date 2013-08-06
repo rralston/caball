@@ -44,6 +44,7 @@ var Projects = {
         'roles-list' : {
           'add' : function(form){
             app.fn.resize_form()
+            // app.fn.bind_change_event()
           },
   
           'remove' : function(form){

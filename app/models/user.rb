@@ -117,6 +117,38 @@ class User < ActiveRecord::Base
     'Stuntman' => 'Stuntman', 'Talent Agent / Literary Agent' => 'Talent Agent / Literary Agent', 'Talent Manager' => 'Talent Manager', 
     'Visual Effects' => 'Visual Effects', 'Writer' => 'Writer'}
   end
+
+  def self.types_costs
+    # add the cost for each role 
+    {
+      'Actor / Actress' => 0.10,
+      'Animators' => 90,
+      'Art' => 25,
+      'Audio' => 67,
+      'Casting Director' => 67,
+      'Cinematographer / DP' => 67,
+      'Composer' => 67,
+      'Costumes' => 67,
+      'Director' => 67,
+      'Distribution Professional' => 67,
+      'Editor' => 67,
+      'Executive Producer' => 67,
+      'Hairstylist / Makeup Artist' => 67,
+      'Lighting / Electrical' => 67,
+      'Other' => 67,
+      'Personal Assistant' => 67,
+      'Producer' => 67,
+      'Production Staff' => 67,
+      'Props' => 67,
+      'Set Design' => 67,
+      'Sound' => 67,
+      'Stuntman' => 67,
+      'Talent Agent / Literary Agent' => 67,
+      'Talent Manager' => 67,
+      'Visual Effects' => 67,
+      'Writer' => 67
+    }
+  end
   
   def profile_pic
     if profile.present? 

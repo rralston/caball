@@ -194,9 +194,12 @@
               <%= p.fields_for :roles do |role|   %>
                 <div class="control-group">
                   <%= role.label :name, :class => 'control-label' %>
-                  <div class="controls">
+                  <div class="controls talent-select">
                     <%= role.select :name, @talents%>
-                   </div>
+                    <span class='talent_cost'>
+                      Standard pay rate for this role - <span class='cost'><%= User.types_costs[role.object.name] %></span>
+                    </span>
+                  </div>
                 </div>
               
                 <div class="control-group">
@@ -224,8 +227,11 @@
               <%= p.fields_for :roles, Role.new, :child_index => 'replace_this' do |role| %>
                 <div class="control-group">
                   <%= role.label :name, :class => 'control-label' %>
-                  <div class="controls">
-                    <%= role.select(:name, options_for_select(@talents)) %>
+                  <div class="controls talent-select">
+                    <%= role.select :name, @talents %>
+                     <span class='talent_cost'>
+                      Standard pay rate for this role - <span class='cost'><%= User.types_costs['Actor / Actress'] %></span>
+                    </span>
                   </div>
                 </div>
                 
@@ -306,3 +312,33 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    app.project_genres = <%=raw Project.genres.keys %>
+
+    $('#project_genre').tagit({
+      sortable: true,
+      tagSource: ['munna','vishnu'],
+      allowNewTags: false,
+      triggerKeys: ['comma', 'tab', 'space', 'enter'],
+      tagsChanged: function(tagValue, action, element){
+        tag_value_array = _.map($('#project_genre').tagit('tags'), function(tag){
+            tag.value  
+        })  
+        $('#project_genre_list').val(tag_value_array.toString())
+      }
+    });
+
+    app.types_costs = <%= raw User.types_costs.to_json() %>
+
+    // update the pay rate summary for the role when the select box value is changed.
+    $('body').on('change', '.talent-select select', function(event){
+      selected_talent = $(event.target).val()
+      cost = app.types_costs[selected_talent]
+      $(event.target).parent().find('.cost').html(cost)
+    });  
+    
+      
+  })
+</script>
