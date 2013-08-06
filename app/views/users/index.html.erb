@@ -177,6 +177,7 @@ app.result_users = new app.collections.users()
 app.result_users_view = new app.views.users({ collection: app.result_users })
 
 
+// get user current location to search
 if(navigator.geolocation){
   navigator.geolocation.getCurrentPosition(function(position){
     var latlng = new google.maps.LatLng(

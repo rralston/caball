@@ -210,7 +210,7 @@ class Project < ActiveRecord::Base
     Project.where('genre like ?', "%#{query}%")
   end
 
-  def self.search_all(projects, query, roles, genres, types, location, radius, page, per_page = nil)
+  def self.search_all(projects, query, roles, genres, types, location, radius, order_by, page, per_page = nil)
 
     projects = Project if (projects.nil? || projects.empty?)
 
@@ -225,7 +225,7 @@ class Project < ActiveRecord::Base
 
     if genres.present?
       # if in case genres is a string tis would help to convert it to array
-      # or if it is array, it wil flatten.
+      # or if it is array, it will flatten.
       genres = [genres].flatten
       projects = projects.tagged_with(genres, :on => :genre)
     end
@@ -240,8 +240,31 @@ class Project < ActiveRecord::Base
       projects = projects.near(location, radius)
     end
 
+    if order_by.present?
+      case order_by
+      when 'recent'
+        projects = projects.order('created_at DESC')
+      when 'featured'
+        projects = projects.order('featured DESC')
+      when 'popular'
+        projects =  projects.joins("left outer join likes on likes.loveable_id = projects.id AND likes.loveable_type = 'Project' ").
+                    group("projects.id").
+                    select('projects.*, count(likes.id) AS likes_count').
+                    order("count(likes.id) DESC")
+      end
+    end
+
+
 
     Kaminari.paginate_array( projects ).page(page).per(per_page)
+  end
+
+  def self.tested
+    projects = Project.where('projects.id > 0')
+    projects.joins("left outer join likes on likes.loveable_id = projects.id AND likes.loveable_type = 'Project' ").
+                    group("projects.id").
+                    select('projects.*, count(likes.id) AS likes_count').
+                    order("count(likes.id) DESC")
   end
 
   def as_json(options = {})

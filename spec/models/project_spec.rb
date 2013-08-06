@@ -178,7 +178,7 @@ describe Project do
                                   ],
                                 :location => 'Hyderabad' 
                               )
-
+      sleep 1
       @roles_project_2 = FactoryGirl.create(:project, 
                                 :title => 'search me again',
                                 :roles => [
@@ -187,18 +187,34 @@ describe Project do
                                     FactoryGirl.create(:role, :name => 'role5'),
                                     FactoryGirl.create(:role, :name => 'role6')
                                   ],
-                                :location => 'Bangalore'
+                                :location => 'Bangalore',
+                                :featured => true,
+                                :likes => [
+                                  FactoryGirl.create(:like),
+                                  FactoryGirl.create(:like),
+                                  FactoryGirl.create(:like),
+                                  FactoryGirl.create(:like),
+                                  FactoryGirl.create(:like),
+                                  FactoryGirl.create(:like)
+                                ]
                               )
       @roles_project_2.genre_list = 'action, adventure, comedy'
       @roles_project_2.is_type_list = 'romance, fiction'
       @roles_project_2.save
+      sleep 1
       @roles_project_3 = FactoryGirl.create(:project, 
                                 :title => 'search me',
                                 :roles => [
                                     FactoryGirl.create(:role, :name => 'role5'),
                                     FactoryGirl.create(:role, :name => 'role6')
                                   ],
-                                :location => 'Bangalore'
+                                :location => 'Bangalore',
+                                :likes => [
+                                  FactoryGirl.create(:like),
+                                  FactoryGirl.create(:like),
+                                  FactoryGirl.create(:like),
+                                  FactoryGirl.create(:like)
+                                ]
                               )
       @roles_project_3.genre_list = 'action, adventure, thriller'
       @roles_project_3.is_type_list = 'scifi, fiction'
@@ -210,38 +226,53 @@ describe Project do
     # specify { @roles_project_2.super_roles_needed.should =~ ['role1', 'role2', 'role3'] }
 
     specify { 
-      Project.search_all(nil, nil, ['role5', 'role6'], ['action'], ['fiction'], 'bangalore', nil, 1, 3).
+      Project.search_all(nil, nil, ['role5', 'role6'], ['action'], ['fiction'], 'bangalore', nil, nil, 1, 3).
         should =~ [@roles_project_2, @roles_project_3]
     }
 
     specify { 
-      Project.search_all(nil, nil, ['role5', 'role6'], nil, nil, 'bangalore', 800, 1, 3).
+      Project.search_all(nil, nil, ['role5', 'role6'], nil, nil, 'bangalore', 800, nil, 1, 3).
         should =~ [@roles_project_1, @roles_project_2, @roles_project_3]
     }
 
     specify { 
-      Project.search_all(nil, 'search', nil, nil, nil, nil, nil, 1, 3).
+      Project.search_all(nil, 'search', nil, nil, nil, nil, nil, nil, 1, 3).
         should =~ [@roles_project_2, @roles_project_3]
     }
 
     specify { 
-      Project.search_all(nil, 'search', ['role5', 'role6'], nil, nil, nil, nil, 1, 3).
+      Project.search_all(nil, 'search', ['role5', 'role6'], nil, nil, nil, nil, nil, 1, 3).
         should =~ [@roles_project_2, @roles_project_3]
     }
 
     specify { 
-      Project.search_all(nil, 'search', ['role5', 'role6'], ['adventure', 'thriller'], nil, nil, nil, 1, 3).
+      Project.search_all(nil, 'search', ['role5', 'role6'], ['adventure', 'thriller'], nil, nil, nil, nil, 1, 3).
         should == [@roles_project_3]
     }
 
     specify { 
-      Project.search_all(nil, 'search', ['role5', 'role6'], ['adventure', 'action'], ['fiction', 'romance'], nil, nil, 1, 3).
+      Project.search_all(nil, 'search', ['role5', 'role6'], ['adventure', 'action'], ['fiction', 'romance'], nil, nil, nil, 1, 3).
         should == [@roles_project_2]
     }
 
     specify { 
-      Project.search_all(nil, nil , ['role4', 'role5', 'role6'], nil, nil, nil, nil, 1, 3).
+      Project.search_all(nil, nil , ['role4', 'role5', 'role6'], nil, nil, nil, nil, nil, 1, 3).
         should =~ [@roles_project_1, @roles_project_2]
+    }
+
+    specify { 
+      Project.search_all(nil, nil, ['role5', 'role6'], ['action'], ['fiction'], 'bangalore', nil, 'recent', 1, 3).
+        should == [@roles_project_3, @roles_project_2]
+    }
+
+    specify { 
+      Project.search_all(nil, nil, ['role5', 'role6'], ['action'], ['fiction'], 'bangalore', nil, 'featured', 1, 3).
+        should == [@roles_project_2, @roles_project_3]
+    }
+
+    specify { 
+      Project.search_all(nil, nil, ['role5', 'role6'], ['action'], ['fiction'], 'bangalore', nil, 'popular', 1, 3).
+        should == [@roles_project_2, @roles_project_3]
     }
   end
 

@@ -67,6 +67,37 @@
         </div>
 
         <div class="srchsect">
+          <h2 class='regular'>Sort</h2>
+          <div class='srchopts'>
+            
+            <div class="srchopt">
+              <div class="rdboxwrap">
+                <input type="radio" name='order_by' value='popular' id='popular'>
+                <label class="rdlabel" for="popular"></label>
+              </div>
+              <span class="chktxt">Popular</span>
+            </div>
+
+            <div class="srchopt">
+              <div class="rdboxwrap">
+                <input type="radio" name='order_by' value='recent' id='recent'>
+                <label class="rdlabel" for="recent"></label>
+              </div>
+              <span class="chktxt">Recently Launched</span>
+            </div>
+
+            <div class="srchopt">
+              <div class="rdboxwrap">
+                <input type="radio" name='order_by' value='featured' id='featured'>
+                <label class="rdlabel" for="featured"></label>
+              </div>
+              <span class="chktxt">Featured</span>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="srchsect">
           <h2 class='regular'>Roles</h2>
           <div class='srchopts'>
             <% User.types.keys.each do |role| %>
@@ -77,6 +108,21 @@
                 </div>
                 <span class="chktxt"><%= role %></span>
                 
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="srchsect">
+          <h2 class='regular'>Distance</h2>
+          <div class='srchopts'>
+            <% [10, 15, 50, 100, 200].each do |distance| %>
+              <div class="srchopt">
+                <div class="rdboxwrap">
+                  <input type="radio" name='distance' value='<%= distance %>' id='<%= distance %>'>
+                  <label class="rdlabel" for="<%= distance %>"></label>
+                </div>
+                <span class="chktxt"><%= distance %> miles</span>
               </div>
             <% end %>
           </div>
@@ -121,6 +167,8 @@
         </div>
 
       </form>
+
+      <div class='clearfix'></div>
     </aside>
   <!--========= left sodebar ends======-->
 
@@ -291,6 +339,22 @@ $(document).ready(function(){
   // instantiating the collection and view pbject for result project for user when search is made
   app.result_projects = new app.collections.projects()
   app.result_projects_view = new app.views.projects({ collection: app.result_projects })
+
+
+  // get user current location to search
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(position){
+      var latlng = new google.maps.LatLng(
+                        position.coords.latitude,
+                        position.coords.longitude);
+
+      var geoCoder = new google.maps.Geocoder();
+
+      geoCoder.geocode({ location: latlng }, function(results, status){
+        app.current_user_location = results[3].formatted_address;
+      });
+    });
+  }
 
 });
 
