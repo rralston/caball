@@ -69,6 +69,15 @@ class Event < ActiveRecord::Base
     group('events.id').
     order('created_at DESC')
 
+
+  # date ordered on start date
+  scope :date_ordered,
+    select('events.*, important_dates.date_time AS start_date ').
+    joins("inner join important_dates ON important_dates.important_dateable_id = events.id AND important_dates.is_start_date = 1 AND important_dates.important_dateable_type = 'Event'").
+    where("important_dates.date_time > ?", Time.now).
+    group('events.id').
+    order('start_date ASC')
+
   def attendees
     attends.order('created_at').map(&:user)
   end
@@ -173,9 +182,9 @@ class Event < ActiveRecord::Base
 
   def self.events_ordered_by_date(page = nil, per_page = 10)
     if page.nil?
-      Event.order_by_start_date(Event.upcoming_events)
+      Event.date_ordered
     else
-      Kaminari.paginate_array(Event.order_by_start_date(Event.upcoming_events)).page(page).per(per_page)
+      Kaminari.paginate_array(Event.date_ordered).page(page).per(per_page)
     end
   end
 
