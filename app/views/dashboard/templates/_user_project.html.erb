@@ -1,7 +1,13 @@
 <script type="script/template" id='user_project_template'>
     <div class='project-head'>
-      <div class='project-backdrop'  style='background: url(<%%= photos[0].image.url %>) no-repeat'>
-      </div>
+      <%% if(typeof photos[0] != 'undefined' ){ %>
+        <div class='project-backdrop'  style='background: url(<%%= photos[0].image.url %>) no-repeat'>
+        </div>
+      <%% }else{ %>
+        <div class='project-backdrop'>
+        </div>
+      <%% } %>
+
       <div class='backdrop-cover'></div>
       <div class='project-title'>
         <a href='/projects/<%%= id %>'><%%= title %></a>

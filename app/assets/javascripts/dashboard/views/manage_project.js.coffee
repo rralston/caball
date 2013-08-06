@@ -40,11 +40,16 @@ app.views.manage_project = Backbone.View.extend
     super_role_tabs_view = new app.views.super_role_tabs({ collection: this.super_roles_collection })
     this.$el.find('#project-roles-tabs').html( super_role_tabs_view.render().el )
 
-  mark_as_done: ()->
+  mark_as_done: (event)->
     _this = this
-    this.model.set('status', 'Completed')
-    this.model.save
+    $(event.target).html('Please wait..')
+    this.model.save {
+      status: 'Completed'
+    }, {
       success: (model, response) ->
+        console.log response
         if response
+            _this.model.set('status', 'Completed')
             alert('Project marked as Done')
             _this.render()
+    }
