@@ -104,7 +104,6 @@ $(document).ready ()->
       data: data
 
       success: (resp) ->
-        console.log resp
         if resp != 'false'
           if resp.length > 0
             new_project_models = _.map(resp, (project_json)->
@@ -112,8 +111,6 @@ $(document).ready ()->
             )
             if app.status == 'index'
               app.recent_projects.add(new_project_models)
-              console.log 'added projects'
-              console.log new_project_models
             else
               app.result_projects.add(new_project_models)
             
