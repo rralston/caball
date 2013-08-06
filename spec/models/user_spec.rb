@@ -382,4 +382,17 @@ describe User do
     specify { @roled_user.can_apply_for?(@uneligible_role).should == false }
   end
 
+  context "valid videos" do
+    before(:all){
+      @video_user = FactoryGirl.create(:user, :videos => [
+          FactoryGirl.create(:video, :url => 'http://www.youtube.com/watch?v=08cmmA22l0Y'),
+          FactoryGirl.create(:video),
+          FactoryGirl.create(:video)
+        ])
+    }
+
+    specify { @video_user.valid_videos.should == [@video_user.videos.first] }
+      
+  end
+
 end

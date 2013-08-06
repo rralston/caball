@@ -13,7 +13,7 @@
   <div class='event-left-empty pull-left'>
     <div class='event-vote-div'>
 
-      <div class='vote-action up-vote <%% if(voted_type_by_user == "up") print("active") %> '>
+      <div class='vote-action up-vote <%% if(typeof voted_type_by_user != "undefined" && voted_type_by_user == "up") print("active") %> '>
 
       </div>
 
@@ -21,7 +21,7 @@
         <%%= votes_count %>
       </div>
 
-      <div class='vote-action down-vote <%% if(voted_type_by_user == "down") print("active") %> '>
+      <div class='vote-action down-vote <%% if(typeof voted_type_by_user != "undefined" && voted_type_by_user == "down") print("active") %> '>
 
       </div>
 
@@ -79,7 +79,7 @@
 
   <div class='event-right-details pull-left text-center <%% if((index%2) == 0) print("even") %>'>
 
-    <%% if(user_attending){ %>
+    <%% if(typeof user_attending != 'undefined' && user_attending){ %>
       <div class='unattend-event btn-custom btn-red'>
         Attending
       </div>

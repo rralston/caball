@@ -311,8 +311,13 @@ class User < ActiveRecord::Base
     User.where('name like ?', "%#{query}%")
   end
 
+  # checks if the user can apply for the specified role.
   def can_apply_for?(role)
     self.talents.map(&:name).include?(role.name)
+  end
+
+  def valid_videos
+    videos.where('provider IS NOT NULL')
   end
 
 

@@ -123,6 +123,13 @@
 
       <div class='row right-extra-div' id='user_fans_div'>
       </div>
+      
+      <% if @user.valid_videos.present? %>
+        <div class='row right-extra-div' id='user_video'>
+          <%= raw @user.valid_videos.first.embed_code %>
+        </div>
+      <% end %>
+
 
       <div class="row about-div right-extra-div">
         <div class="span4 shrink-div head">

@@ -276,6 +276,12 @@
           <div class='row right-extra-div' id='fans_div'>
           </div>
 
+          <% if @project.valid_videos.present? %>
+            <div class='row right-extra-div' id='project_video'>
+              <%= raw @project.valid_videos.first.embed_code %>
+            </div>
+          <% end %>
+
           <div class='row right-extra-div' id='similar_projects_div'>
           </div>
 

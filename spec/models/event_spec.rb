@@ -162,5 +162,18 @@ describe Event do
 
   end
 
+  context "valid videos" do
+    before(:all){
+      @video_event = FactoryGirl.create(:event, :videos => [
+          FactoryGirl.create(:video, :url => 'http://www.youtube.com/watch?v=08cmmA22l0Y'),
+          FactoryGirl.create(:video),
+          FactoryGirl.create(:video)
+        ])
+    }
+
+    specify { @video_event.valid_videos.should == [@video_event.videos.first] }
+      
+  end
+
 
 end

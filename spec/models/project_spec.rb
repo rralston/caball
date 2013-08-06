@@ -291,4 +291,17 @@ describe Project do
     
   end
 
+  context "valid videos" do
+    before(:all){
+      @video_project = FactoryGirl.create(:project, :videos => [
+          FactoryGirl.create(:video, :url => 'http://www.youtube.com/watch?v=08cmmA22l0Y'),
+          FactoryGirl.create(:video),
+          FactoryGirl.create(:video)
+        ])
+    }
+
+    specify { @video_project.valid_videos.should == [@video_project.videos.first] }
+      
+  end
+
 end

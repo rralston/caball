@@ -330,4 +330,8 @@ class Project < ActiveRecord::Base
     Project.where('title like ? or description like ?', "%#{query}%", "%#{query}%")
   end
 
+  def valid_videos
+    videos.where('provider IS NOT NULL')
+  end
+
 end

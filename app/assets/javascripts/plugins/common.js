@@ -258,6 +258,7 @@ app.fn.initialize_cat_complete_search = function(selector, on_select_callback){
 }
 
 app.fn.check_current_user = function(){
+  // need app.current_user to be set..!
   if(app.current_user)
     return true;
   else{
