@@ -50,6 +50,25 @@ class Event < ActiveRecord::Base
   geocoded_by :location   # can also be an IP address
   after_validation :geocode, :if => :location_changed?  # auto-fetch coordinates
 
+
+  # popular are those having more number of attendees and are upcoming...
+  scope :popular,
+    select('events.*, count(attends.id) AS attends_size').
+    joins("inner join attends on (attends.attendable_id = events.id) ").
+    joins("inner join important_dates ON important_dates.important_dateable_id = events.id AND important_dates.is_start_date = 1 AND important_dates.important_dateable_type = 'Event'").
+    where("important_dates.date_time > ?", Time.now).
+    where("attends.attendable_type = 'Event'").
+    group('events.id').
+    order('attends_size DESC')
+
+  # newly added upcoming events.
+  scope :newly_added,
+    select('events.*').
+    joins("inner join important_dates ON important_dates.important_dateable_id = events.id AND important_dates.is_start_date = 1 AND important_dates.important_dateable_type = 'Event'").
+    where("important_dates.date_time > ?", Time.now).
+    group('events.id').
+    order('created_at DESC')
+
   def attendees
     attends.order('created_at').map(&:user)
   end
@@ -91,7 +110,7 @@ class Event < ActiveRecord::Base
 
   def self.search_new_events(query, page = nil, per_page = 10)
     search_result = Event.search_all(query)
-    ordered = Event.order_by_new(search_result)
+    ordered = Event.order_by_new(search_result).reverse
     if page.present?
       Kaminari.paginate_array( ordered ).page(page).per(per_page) 
     else
@@ -138,17 +157,17 @@ class Event < ActiveRecord::Base
 
   def self.new_events(page = nil, per_page = 10)
     if page.nil?
-      Event.order_by_new(Event.upcoming_events)
+      Event.newly_added
     else
-      Kaminari.paginate_array(Event.order_by_new(Event.upcoming_events)).page(page).per(per_page)
+      Kaminari.paginate_array(Event.newly_added).page(page).per(per_page)
     end
   end
 
   def self.popular_events(page = nil, per_page = 10)
     if page.nil?
-      Event.order_by_popularity(Event.upcoming_events)
+      Event.popular
     else
-      Kaminari.paginate_array(Event.order_by_popularity(Event.upcoming_events)).page(page).per(per_page)
+      Kaminari.paginate_array(Event.popular).page(page).per(per_page)
     end
   end
 
