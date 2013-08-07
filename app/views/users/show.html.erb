@@ -59,7 +59,7 @@
                   </div>
                 </div>
                 
-                <div class="profpicwrap img-circle" style="background: url('<%= @user.profile_pic %>') no-repeat">
+                <div class="profpicwrap img-circle action-div" data-toggle='modal' data-target='#media-modal' style="background: url('<%= @user.profile_pic %>') no-repeat">
                   <!---this is the div whose bg is the profile pic -->
                   
                 </div>
@@ -240,6 +240,8 @@
 
 <%= render :partial => 'users/endorsement_form_modal' %>
 <%= render :partial => 'conversations/send_new_message_modal' %>
+
+<%= render :partial => 'users/media_modal' %>
 
 <%= render :partial => 'application/report_modal', :locals => { :entity => @user } %>
 

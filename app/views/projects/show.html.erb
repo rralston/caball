@@ -6,7 +6,7 @@
     <div class='span12'>
       
       <div class='row project-main-head'>
-        <div class='span5 project-image' style='background: url("<%= @project.display_photo %>")'>
+        <div class='span5 project-image action-div' data-toggle='modal' data-target='#media-modal'  style='background: url("<%= @project.display_photo %>")'>
         </div>
         <div class="shadow-div"> </div>
         <div class='pull-left main-right'>
@@ -352,6 +352,7 @@
 <%= render :partial => 'projects/templates/role_applicant_template' %>
 
 <%= render :partial => 'application/read_more_modal' %>
+<%= render :partial => 'projects/media_modal' %>
 
 <%= render :partial => 'application/report_modal', :locals => { :entity => @project } %>
 
