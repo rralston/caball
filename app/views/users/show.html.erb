@@ -50,7 +50,7 @@
                         </span>
                       </div>
                       <div class="flwmsg span4">
-                        <% if current_user.friends.include?(@user) %>
+                        <% if current_user and current_user.friends.include?(@user) %>
                           <a class="flw btn btn-follow btn-custom btn-red center-div text-center unfollow" data-friend-id='<%= @user.id %>'>
                             Un Follow
                           </a>
@@ -208,8 +208,7 @@
               <h3>Resume</h3>
             </span>
             
-            <a class='btn-endorse btn-show-all pull-right action-div' data-can='<%= current_user.friends.include?(@user) %>'>
-            </a> 
+            <span class="btn-show-all pull-right"></span> 
             
             <div class='clearfix'></div>
           </div>
@@ -244,7 +243,10 @@
 <%= render :partial => 'users/templates/fans' %>
 <%= render :partial => 'users/templates/fan' %>
 
-<%= render :partial => 'users/endorsement_form_modal' %>
+
+<% if current_user %>
+  <%= render :partial => 'users/endorsement_form_modal' %>
+<% end %>
 
 <% if current_user == @user %>
   <%= render :partial => 'users/edit_headline_modal' %>

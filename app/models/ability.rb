@@ -5,10 +5,9 @@ class Ability
     user ||= User.new
 
     can :create, User
-    can :read, User do
-      user.persisted?
-    end
     
+    # can read user and project event without logging in.
+    can :read, User
     can :read, Project
 
     can [:update, :destroy], User do |user_under_action|

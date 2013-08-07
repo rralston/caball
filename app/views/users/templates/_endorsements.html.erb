@@ -5,8 +5,10 @@
       <h3>Endorsements</h3>
     </span>
     
-    <a class='btn-endorse btn-show-all pull-right action-div' data-can='<%= current_user.friends.include?(@user) %>'>
-    </a> 
+    <% if current_user %>
+      <a class='btn-endorse btn-show-all pull-right action-div' data-can='<%= current_user.friends.include?(@user) %>'>
+      </a> 
+    <% end %>
     
     <div class='clearfix'></div>
   </div>
