@@ -45,7 +45,7 @@
     </div>
 
     <div class='event-attend-status'>
-      <%% if(user_attending){ %>
+      <%% if(typeof user_attending != 'undefined' && user_attending){ %>
         <div class='unattend-event btn-custom btn-red'>
           Attending
         </div>

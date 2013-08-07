@@ -19,7 +19,7 @@ app.views.similar_event = Backbone.View.extend
   vote: (event, type) ->
     btn = $(event.target)
     _this = this
-    if app.current_user != null and !(btn.hasClass('active'))
+    if app.fn.check_current_user() and !(btn.hasClass('active'))
       btn.addClass('active')
       $.ajax
         url: '/events/'+type
@@ -38,7 +38,7 @@ app.views.similar_event = Backbone.View.extend
   attend: (event)->
     btn = $(event.target)
     _this = this
-    if app.current_user != null
+    if app.fn.check_current_user()
       btn.html('Please Wait..')
       $.ajax
         url: '/events/attend'

@@ -72,11 +72,11 @@ class Event < ActiveRecord::Base
 
   # date ordered on start date
   scope :date_ordered,
-    select('events.*, important_dates.date_time AS start_date ').
+    select('events.*').
     joins("inner join important_dates ON important_dates.important_dateable_id = events.id AND important_dates.is_start_date = true AND important_dates.important_dateable_type = 'Event'").
     where("important_dates.date_time > ?", Time.now).
     group('events.id').
-    order('start_date ASC')
+    order('important_dates.date_time ASC')
 
   def attendees
     attends.order('created_at').map(&:user)

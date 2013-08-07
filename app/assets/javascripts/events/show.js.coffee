@@ -6,7 +6,7 @@ $(document).ready ()->
     if btn.hasClass('unattend')
       request = 'unattend'
 
-    if app.current_user != null
+    if app.fn.check_current_user()
       btn.html('Please Wait..')
       $.ajax
         url: '/events/'+request
@@ -35,7 +35,7 @@ $(document).ready ()->
       request = 'unlike'
       url = '/likes/unlike.json'
 
-    if app.current_user != null
+    if app.fn.check_current_user()
       $('.btn-like').find('.text').html('Wait..')
       $.ajax
         url: url
@@ -57,7 +57,7 @@ $(document).ready ()->
     btn = $(event.target)
     message = $('#conversation_body').val()
     if message != ''
-      if app.current_user != null
+      if app.fn.check_current_user()
         btn.html('Please Wait..')
         $.ajax
           url: '/events/message_organizer'
@@ -78,7 +78,7 @@ $(document).ready ()->
 
   $('body').on 'click', '.btn-invite-followers', (event) ->
     btn = $(event.target)
-    if app.current_user != null
+    if app.fn.check_current_user()
       btn.html('Please Wait..')
       $.ajax
         url: '/events/invite_followers'
