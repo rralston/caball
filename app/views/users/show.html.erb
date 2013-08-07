@@ -19,8 +19,14 @@
                   </div>
                   <div class="proftagwrap row-fluid">
                     <div class="proftag regular span7 offset5">
-                      <p> <%= @user.headline %></p>
+                      <p>
+                        <% if current_user == @user %>
+                          <i class='icon-pencil action-div' data-toggle='modal' data-target='#edit_headline_modal' ></i>
+                        <% end %>
+                        <%= @user.headline %>
+                      </p>
                     </div>
+
                   </div>
                 <div class="profflwwrap row-fluid">
                   
@@ -239,6 +245,11 @@
 <%= render :partial => 'users/templates/fan' %>
 
 <%= render :partial => 'users/endorsement_form_modal' %>
+
+<% if current_user == @user %>
+  <%= render :partial => 'users/edit_headline_modal' %>
+<% end %>
+
 <%= render :partial => 'conversations/send_new_message_modal' %>
 
 <%= render :partial => 'users/media_modal' %>
