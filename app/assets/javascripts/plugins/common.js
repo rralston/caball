@@ -168,7 +168,6 @@ app.fn.show_read_more_modal = function(event){
 
 app.fn.bind_read_more_show = function(){
   $('body').on('click', '.read_more_btn', function(event){
-    console.log('in click event')
     app.fn.show_read_more_modal(event)
   });
 }

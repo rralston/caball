@@ -34,6 +34,8 @@ app.views.role_application = Backbone.View.extend
           alert 'Applicant added to the role'
           _this.model.set('approved', true)
           _this.render()
+          app.fn.add_receipient('.project_selected_applicants', _this.model.get('user').email)
+          app.fn.remove_receipient('.project_other_applicants', _this.model.get('user').email)
         else
           alert 'Error approving application. May be you approved a appilcation for this role already. Please check'    
 
@@ -59,6 +61,8 @@ app.views.role_application = Backbone.View.extend
           alert 'Applicant un approved to the role'
           _this.model.set('approved', false)
           _this.render()
+          app.fn.remove_receipient('.project_selected_applicants', _this.model.get('user').email)
+          app.fn.add_receipient('.project_other_applicants', _this.model.get('user').email)
         else
           alert 'Error processing application. Please try later'
 

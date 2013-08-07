@@ -32,6 +32,7 @@ class ConversationsController < ApplicationController
 
   def send_message_generic
     recipient_emails = params[:recipients].split(',')
+    recipient_emails.delete('') # deleting empty email if any..
     recipients = User.where(email: recipient_emails).all
     subject = params[:subject]
     message = params[:message]

@@ -16,4 +16,5 @@ class RoleApplication < ActiveRecord::Base
     }
     hash.merge!(extra_hash)
   end
+  
 end

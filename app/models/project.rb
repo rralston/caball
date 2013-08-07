@@ -143,6 +143,14 @@ class Project < ActiveRecord::Base
     applications.map(&:user).map(&:email).join(', ')
   end
 
+  def selected_applicants_mails
+    applications.joins(:user).where("role_applications.approved  = true").pluck('users.email').uniq
+  end
+
+  def non_selected_applicants_mails
+    applications.joins(:user).where("role_applications.approved  = false").pluck('users.email').uniq
+  end
+
   def pending_applications
     applications.where(:role_applications => { :approved => false }, :roles => { :filled => false })
   end
@@ -290,7 +298,6 @@ class Project < ActiveRecord::Base
 
     json
   end
-
 
   def self.custom_json(projects, user = nil)
     projects.to_json(:include => [

@@ -39,8 +39,25 @@
         </div> 
       </div>
 
-      <div class='btn-custom message-participants btn-dark-grey medium action-div' data-message-subject='Regarding Your role appliations - <%%= title %>' data-message-recipients='<%%= participant_mails %>' data-message-header='Message Participants - <%%= title %>'>
-        <div class='pencil-black'></div> Message Participants
+      <div class='dropdown message-participants btn-custom btn-dark-grey medium action-div'>
+        <div class='dropdown-toggle' data-toggle='dropdown' data-target='#message_options'>
+          <div class='pencil-black'></div> Message Participants
+        </div>
+        <ul class='dropdown-menu' role='menu' aria-label='message_options' id='mesasge_options'>
+          
+          <li role='presentation'>
+            <a href='#' class='send-generic-message project_selected_applicants'  data-message-subject='Regarding Your role appliations - <%%= title %>' data-message-recipients='<%%= selected_applicants_mails.join(",") %>' data-message-header='Message Selected Participants - <%%= title %>'>
+              Selected Applicants
+            </a>
+          </li>
+          
+          <li role='presentation'>
+            <a href='#' class='send-generic-message project_other_applicants' data-message-subject='Regarding Your role appliations - <%%= title %>' data-message-recipients='<%%= non_selected_applicants_mails.join(",") %>' data-message-header='Message Non Selected Participants - <%%= title %>'>
+              Other Applicants
+            </a>
+          </li>
+
+        </ul>
       </div>
     </div>
 

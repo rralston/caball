@@ -10,8 +10,6 @@ class RoleApplicationsController < ApplicationController
   end
   
   def create
-
-    debugger
     role_application = current_user.role_applications.create(params[:role_application])
 
     project_owner = role_application.project.user
@@ -34,7 +32,7 @@ class RoleApplicationsController < ApplicationController
     if not role.filled
       role_application.update_attributes(:approved => true)  
       role.update_attributes(:filled => true)
-      role.send_role_filled_messages
+      # role.send_role_filled_messages
 
       render :json => role_application.to_json()
     else
