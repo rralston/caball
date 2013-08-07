@@ -320,5 +320,23 @@ class User < ActiveRecord::Base
     videos.where('provider IS NOT NULL')
   end
 
+  def completeness
+
+    check_array = ["location", "about", "gender", "headline", "expertise", "imdb_url", "resume",
+      "profile", "photos", "cover_photo", "talents", "videos"]
+
+    present_sum = check_array.map { |prop|
+      self.send(prop).present? ? 1 : 0
+    }.reduce(:+)
+
+    if characteristics.present?
+      present_sum = present_sum + characteristics.completeness_sum
+    end
+
+    total_props = check_array.size + 12 # plus 12 for characteristics size
+
+    ((present_sum.to_f/total_props.to_f) * 100).to_i
+  end
+
 
 end

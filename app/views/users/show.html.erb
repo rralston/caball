@@ -17,7 +17,6 @@
                       <img src="<%= @user.cover_photo.try('image') %>" alt="" />
                     </div>
                   </div>
-                  
                   <div class="proftagwrap row-fluid">
                     <div class="proftag regular span7 offset5">
                       <p> <%= @user.headline %></p>
@@ -130,6 +129,41 @@
         </div>
       <% end %>
 
+      <% if current_user == @user  %>
+        <div class="row about-div right-extra-div">
+          <div class="span4 shrink-div head">
+            <span class="pull-left">
+              <h3>Profile Completeness</h3>
+            </span>
+            <span class="btn-show-all pull-right"></span>
+
+          </div>
+
+          <div class="span4">
+            <div class="row clearfix">
+              <div class="grey-line-divider"></div>
+            </div>
+          </div>
+
+
+          <div class="span4 shrink-div" style='margin-left: 20px'>
+            <div class='row'>
+              <div class='edit text-center'>
+                <a href='/users/<%= @user.id %>/edit'>Edit Profile</a>
+              </div>
+              <div class="progress">
+                <div class="bar" style="width: <%= @user.completeness %>%;">
+                  <%= @user.completeness %>%
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+        </div>
+
+      <% end %>
+
 
       <div class="row about-div right-extra-div">
         <div class="span4 shrink-div head">
@@ -207,6 +241,8 @@
 <%= render :partial => 'conversations/send_new_message_modal' %>
 
 <script type="text/javascript">
+
+$(document).ready(function(){
   
   app.current_user = <%= raw current_user.to_json() %>
 
@@ -280,5 +316,5 @@
     $('#blog_photo_attributes_image').attr('disabled', false)
   });
 
-
+});
 </script>

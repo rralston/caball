@@ -395,4 +395,20 @@ describe User do
       
   end
 
+
+  context "completeness" do
+    before(:all){
+      @com_user1 = FactoryGirl.create(:user, :location => 'bangalore',
+                                      :about => "nothing much",
+                                      :gender => "male",
+                                      :headline => 'headline',
+                                      :expertise => 'skils',
+                                      :imdb_url => 'http://something')
+      @com_user2 = FactoryGirl.create(:user)
+    }
+
+    specify { @com_user1.completeness.should == 25 }
+    specify { @com_user2.completeness.should == 0 }
+  end
+
 end
