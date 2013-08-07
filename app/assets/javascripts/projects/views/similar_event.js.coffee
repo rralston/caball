@@ -16,29 +16,10 @@ app.views.similar_event = Backbone.View.extend
     this.model.set(event_data.attributes)
     this.render()
 
-  vote: (event, type) ->
-    btn = $(event.target)
-    _this = this
-    if app.current_user != null and !(btn.hasClass('active'))
-      btn.addClass('active')
-      $.ajax
-        url: '/events/'+type
-        type: "POST"
-        data:
-          id: _this.model.id
-        success: (resp)->
-          if resp != 'false'
-            _this.model.set(resp)
-            app.events.trigger('change_event_model'+_this.model.id, _this.model)
-          else
-            alert 'Something went wrong. Please try later'
-            btn.removeClass('active')
-
-
   attend: (event)->
     btn = $(event.target)
     _this = this
-    if app.current_user != null
+    if app.fn.check_current_user()
       btn.html('Please Wait..')
       $.ajax
         url: '/events/attend'
@@ -57,7 +38,7 @@ app.views.similar_event = Backbone.View.extend
   unattend: (event)->
     btn = $(event.target)
     _this = this
-    if app.current_user != null
+    if app.fn.check_current_user()
       btn.html('Please Wait..')
       $.ajax
         url: '/events/unattend'

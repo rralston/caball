@@ -13,7 +13,7 @@
           <div class='row'>
             <div class='span6'>
 
-              <% if @project.liker_ids.include?(current_user.id) %>
+              <% if current_user and @project.liker_ids.include?(current_user.id) %>
                 <div class='btn-custom pull-right btn-red btn-like-project liked' data-projectId='<%= @project.id %>'>
                   Un Like This
                 </div>

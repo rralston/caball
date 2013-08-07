@@ -8,7 +8,9 @@ class Ability
     can :read, User do
       user.persisted?
     end
+    
     can :read, Project
+
     can [:update, :destroy], User do |user_under_action|
       user_under_action == user
     end
