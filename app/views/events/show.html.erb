@@ -181,7 +181,7 @@
           <div class='row about-div right-extra-div'>
             <div class='span4 shrink-div head'>
               <span class='pull-left'>
-                <h3>About</h3>
+                <h3>About <i class='report_entity icon-exclamation-sign action-div show_tooltip' data-toggle='modal' data-target='#report-modal' title='Report Event'></i></h3>
               </span>
               <span class='btn-show-all pull-right'></span>
 
@@ -288,6 +288,8 @@
 
 <%= render :partial => 'events/modals' %>
 
+<%= render :partial => 'application/report_modal', :locals => { :entity => @event } %>
+
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -311,6 +313,7 @@ $(document).ready(function(){
     sync: "#carousel"
   });
 
+  $('.show_tooltip').tooltip()
 
   app.current_user = <%= raw current_user.to_json(:only => [:name, :id]) %>
 

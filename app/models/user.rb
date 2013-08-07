@@ -338,5 +338,8 @@ class User < ActiveRecord::Base
     ((present_sum.to_f/total_props.to_f) * 100).to_i
   end
 
+  def self.admin_emails
+    User.where(:admin => true).map(&:email)
+  end
 
 end

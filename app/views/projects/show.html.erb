@@ -37,6 +37,7 @@
             <div class='span7 project-created-by light'>
               <i>created by </i>
               <%= link_to @project.user.name, "users/#{@project.user.id}", :class => 'medium' %>
+              &nbsp; &nbsp;<i class='report_entity icon-exclamation-sign action-div show_tooltip' data-toggle='modal'  data-target='#report-modal' title='Report Project'></i>
             </div>
 
             <div class='span7 project-description light'>
@@ -352,6 +353,8 @@
 
 <%= render :partial => 'application/read_more_modal' %>
 
+<%= render :partial => 'application/report_modal', :locals => { :entity => @project } %>
+
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -360,6 +363,7 @@ $(document).ready(function(){
   app.fn.bind_read_more_show()
   app.fn.initialize_send_generic_message()
 
+  $('.show_tooltip').tooltip()
 
   app.current_user = <%= raw current_user.to_json() %>
 

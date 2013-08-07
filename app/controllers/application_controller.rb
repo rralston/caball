@@ -93,7 +93,8 @@ class ApplicationController < ActionController::Base
   def report
     entity_class = params[:entity].camelize.constantize
     entity = entity_class.find(params[:id])
-    UserMailer.report_entity_mail(current_user, entity).deliver
+    message = params[:reason]
+    UserMailer.report_entity_mail(current_user, entity, message).deliver
     render :text => true
   end
 end

@@ -130,7 +130,7 @@
       <% end %>
 
       <% if current_user == @user  %>
-        <div class="row about-div right-extra-div">
+        <div class="row right-extra-div">
           <div class="span4 shrink-div head">
             <span class="pull-left">
               <h3>Profile Completeness</h3>
@@ -168,7 +168,8 @@
       <div class="row about-div right-extra-div">
         <div class="span4 shrink-div head">
           <span class="pull-left">
-            <h3>About</h3>
+            <h3>About <i class='report_entity icon-exclamation-sign action-div show_tooltip' data-toggle='modal' data-target='#report-modal' title='Report User'></i></h3>
+            
           </span>
           <span class="btn-show-all pull-right"></span>
 
@@ -240,11 +241,15 @@
 <%= render :partial => 'users/endorsement_form_modal' %>
 <%= render :partial => 'conversations/send_new_message_modal' %>
 
+<%= render :partial => 'application/report_modal', :locals => { :entity => @user } %>
+
 <script type="text/javascript">
 
 $(document).ready(function(){
   
   app.current_user = <%= raw current_user.to_json() %>
+
+  $('.show_tooltip').tooltip()
 
   app.blogs = new app.collections.blogs()
   app.blogs.reset(<%= raw @user.blogs.to_json(:include => [:user, :likes], :check_user => current_user) %>)
