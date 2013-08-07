@@ -8,11 +8,12 @@ class Ability
     can :read, User do
       user.persisted?
     end
+    can :read, Project
     can [:update, :destroy], User do |user_under_action|
       user_under_action == user
     end
 
-    can [:create, :read], Project do
+    can [:create], Project do
       user.persisted?
     end
     can [:update, :destroy], Project do |project|

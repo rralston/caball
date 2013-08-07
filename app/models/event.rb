@@ -75,7 +75,7 @@ class Event < ActiveRecord::Base
     select('events.*').
     joins("inner join important_dates ON important_dates.important_dateable_id = events.id AND important_dates.is_start_date = true AND important_dates.important_dateable_type = 'Event'").
     where("important_dates.date_time > ?", Time.now).
-    group('important_dates.date_time').
+    group('events.id').
     order("important_dates.date_time ASC")
 
   def attendees
