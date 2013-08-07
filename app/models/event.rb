@@ -55,7 +55,7 @@ class Event < ActiveRecord::Base
   scope :popular,
     select('events.*, count(attends.id) AS attends_size').
     joins("inner join attends on (attends.attendable_id = events.id) ").
-    joins("inner join important_dates ON important_dates.important_dateable_id = events.id AND important_dates.is_start_date = 1 AND important_dates.important_dateable_type = 'Event'").
+    joins("inner join important_dates ON important_dates.important_dateable_id = events.id AND important_dates.is_start_date = true AND important_dates.important_dateable_type = 'Event'").
     where("important_dates.date_time > ?", Time.now).
     where("attends.attendable_type = 'Event'").
     group('events.id').
@@ -64,7 +64,7 @@ class Event < ActiveRecord::Base
   # newly added upcoming events.
   scope :newly_added,
     select('events.*').
-    joins("inner join important_dates ON important_dates.important_dateable_id = events.id AND important_dates.is_start_date = 1 AND important_dates.important_dateable_type = 'Event'").
+    joins("inner join important_dates ON important_dates.important_dateable_id = events.id AND important_dates.is_start_date = true AND important_dates.important_dateable_type = 'Event'").
     where("important_dates.date_time > ?", Time.now).
     group('events.id').
     order('created_at DESC')
@@ -73,7 +73,7 @@ class Event < ActiveRecord::Base
   # date ordered on start date
   scope :date_ordered,
     select('events.*, important_dates.date_time AS start_date ').
-    joins("inner join important_dates ON important_dates.important_dateable_id = events.id AND important_dates.is_start_date = 1 AND important_dates.important_dateable_type = 'Event'").
+    joins("inner join important_dates ON important_dates.important_dateable_id = events.id AND important_dates.is_start_date = true AND important_dates.important_dateable_type = 'Event'").
     where("important_dates.date_time > ?", Time.now).
     group('events.id').
     order('start_date ASC')
