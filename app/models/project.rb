@@ -341,4 +341,8 @@ class Project < ActiveRecord::Base
     videos.where('provider IS NOT NULL')
   end
 
+  def display_dates
+    project_dates.order("important_dates.date_time ASC")
+  end
+
 end
