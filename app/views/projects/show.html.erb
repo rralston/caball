@@ -156,9 +156,14 @@
                         <div class="role-title medium">
                           <%= role.subrole %>
                         </div>  
-                        <a href='/users/<%= role.approved_user.id %>'>
-                          <%= image_tag role.approved_user.profile_pic, :class => 'img-circle role-cast-pic' %>
-                        </a>
+
+                        <% if role.approved_user.present? %>
+                          <a href='/users/<%= role.approved_user.id %>'>
+                            <%= image_tag role.approved_user.profile_pic, :class => 'img-circle role-cast-pic' %>
+                          </a>
+                        <% else %>
+                          <%= image_tag 'role-male-default.png', :class => 'default-role-pic' %>
+                        <% end %>
 
                         <div class='role-filled-sumary'>
                           <i class='icon-ok'></i> Filled
