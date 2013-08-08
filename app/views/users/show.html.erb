@@ -103,16 +103,16 @@
               <div class="skillexp">
                 <div class="row-fluid">
                         
-                        <ul class="inline libg span12">
-                        SKILLS + EXPERTISE:
-                          <% @user.expertise.split(',').each do |skill| %>
-                            <li class="badge regular"><%= skill %></li>
-                          <% end %>
+                  <ul class="inline libg span12">
+                  SKILLS + EXPERTISE:
+                    <% @user.expertise.split(',').each do |skill| %>
+                      <li class="badge regular"><%= skill %></li>
+                    <% end %>
 
-                          <% if @user.experience.present? %>
-                            <li class="badge regular"><%= @user.experience %></li>
-                          <% end %>
-                        </ul>
+                    <% if @user.experience.present? %>
+                      <li class="badge regular"><%= @user.experience %></li>
+                    <% end %>
+                  </ul>
                 </div>
               </div>
           <!--========= Profile name ends======------>
@@ -203,7 +203,13 @@
         </div>
 
         <div class="span4 shrink-div desc">
-          <%= @user.about %>
+
+          <% if @user.about.length > 200 %>
+            <%= truncate(@user.about, :length => 200, :separator => ' ') %> <a class='read_more_btn' data-content='<%= @user.about %>' data-header='About - <%= @user.name %>' >Read more</a>
+          <% else %>
+            <%= @user.about %> 
+          <% end %>
+
         </div>
       </div>
 
@@ -258,6 +264,7 @@
 <%= render :partial => 'users/templates/fans' %>
 <%= render :partial => 'users/templates/fan' %>
 
+<%= render :partial => 'application/read_more_modal' %>
 
 <% if current_user %>
   <%= render :partial => 'users/endorsement_form_modal' %>
@@ -277,6 +284,9 @@
 
 $(document).ready(function(){
   
+  // bind read more btn click event
+  app.fn.bind_read_more_show()
+
   app.current_user = <%= raw current_user.to_json() %>
 
   $('.show_tooltip').tooltip()
