@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
   include PublicActivity::Model
-  tracked
+  tracked owner: ->(controller, model) { controller && controller.current_user }
 
   acts_as_taggable_on :genre, :is_type
 

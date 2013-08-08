@@ -116,7 +116,31 @@ $grey-backdrop-text: #636a73
 
 .tabs-nav-home
   position: relative
-  top: -38px
+  margin-left: 15px
+  top: -33px
+  .nav-tabs
+    border-bottom: 0px
+  li
+    margin-right: 5px
+    margin-bottom: 0px
+    a
+      width: 180px
+      background: #212429
+      color: white
+      font-size: 17px
+      text-align: center
+      height: 17px
+      box-shadow: 0px 34px 66px -52px black inset
+      border: 0px
+    a:hover
+      background: #EAEDF0
+      color: #212429
+  li.active
+    a, a:hover
+      background: #EAEDF0
+      color: #212429
+      border: 0px
+
 
 .user-profile-head
   position: relative
@@ -135,6 +159,9 @@ $grey-backdrop-text: #636a73
   .summary
     padding-top: 30px
     margin-top: 25px
+    .notifications-summary
+      position: relative
+      width: 300px
     .welcome
       font-size: 30px
       margin-bottom: 20px
@@ -148,6 +175,13 @@ $grey-backdrop-text: #636a73
       .blue-star-icon
         margin-left: 5px
         margin-top: 1px
+    .ignore-btn
+      width: 20px
+      position: absolute
+      top: 5
+      right: 3
+      font-size: 15px
+      color: #6b6f7b
 
     .links
       .link
@@ -158,6 +192,7 @@ $grey-backdrop-text: #636a73
         margin-left: -8px
 .user-home-tab-content
   width: 560px
+  margin-top: 40px
 
 
 .dashboard_widgets
@@ -200,6 +235,60 @@ $grey-backdrop-text: #636a73
       overflow: hidden
       margin-top: -2px
       width: 220px
+
+.activities_container
+  .activity
+    padding: 0px
+    width: 510px
+    position: relative
+    margin-bottom: 30px
+    margin-left: 50px
+    background: white
+    border-top: 2px solid #c6d0db
+    border-bottom: 2px solid #c6d0db
+    .activity_owner
+      position: absolute
+      top: 5px
+      left: -35px
+    .activity_summary
+      padding: 20px
+      margin-left: 15px
+      color: #a0a8b1
+      font-size: 15px
+    .activity_main
+      padding: 0px 20px 20px 20px
+      font-size: 16px
+      color: #82848d
+      line-height: 25px
+    .comment-img
+      height: 250px
+      width: 100%
+      .img-container
+        height: 100%
+        width: 100%
+        background-size: cover !important
+    .comment-video
+      iframe
+        height: 250px
+        width: 100%
+    .comment-actions, .project-actions, .event-actions
+      padding: 15px
+      background: url(/assets/comment-actions-bg.png) repeat-x
+      .like-comment, .like-project, .like-event
+        padding-right: 20px
+        .heart-blue
+          margin-right: 10px
+
+  .activity.endorsement
+    .expertise
+      margin-top: 10px
+      font-size: 12px
+      .badge
+        font-style: normal
+        background: #d7daed
+        color: #82848d
+        margin-bottom: 5px
+        margin-left: 4px
 
 #isotope_container
   .item
