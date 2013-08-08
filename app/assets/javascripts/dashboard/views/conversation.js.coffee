@@ -19,6 +19,13 @@ app.views.conversation = Backbone.View.extend
     this.fetch_messages()
     $('.conversation.active').removeClass('active')
     this.$el.addClass('active')
+    # remove the unread class if it has.
+    if this.$el.hasClass('un_read')
+      this.$el.removeClass('un_read')
+      this.$el.find('.notno').hide()
+      # update the total unread count of mesages
+      tot_unread_count = $('.convos_unread_count').html()
+      $('.convos_unread_count').html( parseInt(tot_unread_count) - parseInt(this.model.get('unread_count')) )
 
   fetch_messages: ()->
     _this = this

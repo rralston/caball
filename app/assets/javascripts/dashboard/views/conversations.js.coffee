@@ -13,8 +13,11 @@ app.views.conversations = Backbone.View.extend
     return this
 
   renderEach: (conversation)->
-    conversation_view = new app.views.conversation({ model: conversation })
-    this.$el.find('.conversations_list').append(conversation_view.render().el)
+    # this check is to prevent the not render the conversation of those users who are deleted or not present in the database.
+    # this is actually a fail safe when other user in a conversation is no more present in the database
+    if conversation.get('originator') != null && conversation.get('other_user_names').length > 0 
+      conversation_view = new app.views.conversation({ model: conversation })
+      this.$el.find('.conversations_list').append(conversation_view.render().el)
 
   empty_trash: (event) ->
     _this = this

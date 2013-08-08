@@ -81,6 +81,7 @@ class Conversation < ActiveRecord::Base
   def other_participants(user)
     all = recipients
     all.delete(user)
+    all.delete(nil) # nil will appear when any of the user in the coversation is deleted later.
     all
   end
 
@@ -162,7 +163,6 @@ class Conversation < ActiveRecord::Base
       })
 
     json = super(options)
-
     if options[:check_user].present?
       json['is_read'] = self.is_read?(options[:check_user])
       json['unread_count'] = self.unread_count(options[:check_user])
