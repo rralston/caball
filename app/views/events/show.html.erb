@@ -194,7 +194,11 @@
             </div>
 
             <div class='span4 shrink-div desc'>
-              <%= @event.description %>
+              <% if @event.description.length > 200 %>
+                <%= truncate(@event.description, :length => 200, :separator => ' ') %> <a class='read_more_btn' data-content='<%= @event.description %>' data-header='Event Description - <%= @event.title %>' >Read more</a>
+              <% else %>
+                <%= @event.description %> 
+              <% end %>
             </div>
           </div>
 
@@ -286,6 +290,8 @@
 <%= render :partial => 'events/templates/similar_events' %>
 <%= render :partial => 'events/templates/similar_event' %>
 
+<%= render :partial => 'application/read_more_modal' %>
+
 <%= render :partial => 'events/modals' %>
 
 <%= render :partial => 'application/report_modal', :locals => { :entity => @event } %>
@@ -293,6 +299,9 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
+
+  // bind read more btn click event
+  app.fn.bind_read_more_show()
 
   // The slider being synced must be initialized first
   $('#carousel').flexslider({
