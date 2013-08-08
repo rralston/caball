@@ -114,6 +114,13 @@ class UsersController < ApplicationController
     end
   end
 
+  # custom update for handling ajax updates
+  def custom_update
+    user = User.find(params[:id])
+    user.update_attributes(params[:user])
+    render :text => true
+  end
+
   def destroy
     @user.destroy
     respond_to do |format|

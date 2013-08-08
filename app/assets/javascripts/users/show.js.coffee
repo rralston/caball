@@ -58,3 +58,38 @@ $(document).ready ->
         alert('You need to follow the user in order to endorse him')
       else
         $('#endorsement_modal').modal('show')
+
+  $('body').on 'click', '.edit_headline', (event)->
+    $('.user_headline_text').hide()
+    $('.edit_headline_input').show()
+
+  $('body').on 'click', '.edit_headline_input .icon-remove-sign', (event)->
+    $('.user_headline_text').show()
+    $('.edit_headline_input').hide()
+
+  $('body').on 'keypress', '#edit_headline', (event)->
+    # check if enter is pressed.
+    if event.which == app.constants.enter_key_code
+      $(event.target).attr('disabled', 'disabled')
+
+      $.ajax
+        url: '/users/update'
+        type: 'POST'
+        data:
+          id: app.current_user.id
+          user:
+            headline: $(event.target).val()
+        success: (resp) ->
+          if resp != 'false'
+            $('.user_headline_text').show()
+            $('.edit_headline_input').hide()
+            $('.headline_content').html($(event.target).val())
+          else
+            alert('Something went wrong, Please try again later')
+          $(event.target).attr('disabled', false)
+          
+          
+
+
+
+    

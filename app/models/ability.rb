@@ -10,7 +10,7 @@ class Ability
     can :read, User
     can :read, Project
 
-    can [:update, :destroy], User do |user_under_action|
+    can [:update, :destroy, :custom_update], User do |user_under_action|
       user_under_action == user
     end
 

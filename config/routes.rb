@@ -12,6 +12,7 @@ Caball::Application.routes.draw do
 
   match '/users/set_notification_check_time' => 'users#set_notification_check_time'
 
+  match '/users/update' => 'users#custom_update', :via => 'POST'
   resources :users do 
     resources :characteristics, :photos, :talents, :profile, :blogs
   end

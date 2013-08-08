@@ -21,9 +21,20 @@
                     <div class="proftag regular span7 offset5">
                       <p>
                         <% if current_user == @user %>
-                          <i class='icon-pencil action-div' data-toggle='modal' data-target='#edit_headline_modal' ></i>
+                          
+                          <div class='edit_headline_input'>
+                            <textarea id='edit_headline'><%= @user.headline %></textarea>
+                            <i class='icon-remove-sign action-div'></i>
+                          </div>
+
                         <% end %>
-                        <%= @user.headline %>
+                        <span class='user_headline_text'>
+                          <% if current_user == @user %>
+                            <i class='icon-pencil action-div edit_headline'></i>
+                          <% end %>
+                          <span class='headline_content'><%= @user.headline %></span>
+                        </span>
+
                       </p>
                     </div>
 
