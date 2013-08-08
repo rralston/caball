@@ -1,72 +1,287 @@
-<section id="home" class="section home-section">
-  <div class="container-fluid lunchbox-container">
-    <div class="home-header">
-      <h1>FILM <span class="white-text">BEGINS</span> HERE</h1>
-      <%= link_to "/auth/facebook", id: "sign_in" do %>
-				<span class="start-creating">Start Creating, Free!</span>
-			<% end %>
-      <div class="lunchbox-caption">
-        Filmaking requires a lot of people with different talents. Filmzu takes the headache out of searching for them,
-        and brings them all to one place. See how easy Filmzu makes creating premium video content.
+<%= stylesheet_link_tag "home_page.css" %>
+<%= stylesheet_link_tag "projects/index.css" %>
+
+<!--========= Attract top starts======------>
+<div class="attractwrap">
+  <div class="attractshadow">
+  <div class="attract maincontain container-fluid">
+    <div class="row">
+      <div class="toptext span10 offset1 medium text-center">Freedom for filmmakers.</div>
+      <div class='midtext text-center'>
+        <div class='center-it light'>
+          Filmaking requires a lot of people with different talents.<br/>Filmzu takes the headache out of searching for them and, bring them all to one place. See hoe easy Filmzu makes creating video content.
+        </div>
       </div>
-      <div class="row blurb-list">
-        <div class="span4">
-          Staff your new project with talented people that want to be a part of your film.
-        </div>
-        <div class="span4">
-          Search for talented film and video professionals in your area!
-        </div>
-        <div class="span4">
-          Digital library with current how-to articles, videos, and interview to help hone your skill and learn new ones too!
+      
+      <div class="startbutton span6 offset3 text-center">
+        <div class="strtbtn btn regular text-left"><div class="strtbtntext">Free, Start Creating</div></div>
+      </div>
+      <div class="wtchvideo offset4 text-center">
+        <div class="wtchvideobtn btn">
+          <div class="playpic">
+            <img src="/assets/wtchbtn.png" alt="" />
+          </div>
+          <div class="wtchtext text-left">
+            <div class="wtchh1 medium">Watch the Video</div>
+            <div class="wtchexp light">To see how Filmzu gives you the tools to create the film you imagined</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="container home-content">
-    <div class="content-header">
-      Take a look how Filmzu is the key to creating great film and video
-    </div>
-    <div class="row">
-      <div class="span6 roles-image sample-image">
-        <%= image_tag 'roles_sample.png'%>
-      </div>
-      <div class="span6 roles-text content-text">
-        The first platform with an active application process. 
-        Film and video professionals can look through projects to find ones they are interested in,
-        based on genre, location, schedule and more! 
-        Producers review only the individuals that want to work on the project!
-      </div>
-    </div>
-    <div class="row">
-      <div class="span6 profiles-text content-text">
-        Search for film and video professionals in your area. Whether you want to start a new project, or find
-        someone to work on an existing one, Filmzu is the destination spot to find wrtiers, actors, editors, and everything in between!
-      </div>
-      <div class="span6 profiles-image sample-image">
-        <%= image_tag 'profiles_sample.png'%>
-      </div>
-    </div>
-    <div class="row">
-      <div class="span6 how-to-image sample-image">
-        <%= image_tag 'homepage_3d_icon.png'%>
-      </div>
-      <div class="span6 how-to-text content-text">
-        Read through information and How-To videos. 
-        From DIY videos to make your own dolly, and other tips to help you save money. 
-        We also review the latest products and talk about all these ways you can spend your money!
-      </div>
-    </div>
-    <div class="row featured-projects featured-stuff">
-      <div class="featured-projects-bubble featured-bubble"><span>Featured Projects</span></div>
-      <%= render :partial => 'featured_projects' %>
-    </div>
-    <div class="row featured-users featured-stuff">
-      <div class="featured-users-bubble featured-bubble"><span>Featured Users</span></div>
-      <%= render :partial => 'featured_users' %>
+  </div>
+</div>
+<!--========= Attract top end======------>
+<!--========= attract info starts======------>
+<div class="attractinfowrap">
+  <div class="attractinfo maincontain container-fluid text-center">
+    <div class="row-fluid">
+    
+      <article class="span4">
+        <div class="atrctinfoimg">
+          <img src="/assets/ppl.png" alt="" />
+        </div>
+        <div class="light head">Donec vulputate Fermentum nisi</div>
+        <div class="infocnt regular">
+          <p>Staff your ne project with the talented people that want to be part of your film</p>
+        </div>
+      </article >
+      
+      <article class="span4">
+        <div class="atrctinfoimg">
+          <img src="/assets/infopp.png" alt="" />
+        </div>
+        <div class="light head">Find the Talent You Need Nearby</div>
+        <div class="infocnt regular">
+          <p>Search for talented film and video professuibal in your area. </p>
+        </div>
+      </article>
+
+      <article class="span4">
+        <div class="atrctinfoimg">
+          <img src="/assets/book.png" alt="" />
+        </div>
+        <div class="light head">Search and Explore Our Digital Library</div>
+        <div class="infocnt regular">
+          <p>With current how to articles,videos,  interviews to hone your skill & learn new ones too!</p>
+        </div>
+      </article>
     </div>
   </div>
-</section>
+</div>
+<!--========= attract info ends======------>
+<!--========= detailed info start======------>
+<div class="detailinfowrap">
+  <div class="detailinfo maincontain container-fluid">
+    <div class="row-fluid">
+    <div class="dtlh1 span12 text-center regular">Discover how Filmzu is the key to creating great film and video</div>
+    
+
+    <div class='discover clearfix'>
+      <div class='left-div pull-left'>
+        <img src="/assets/firstdtl.png" alt="" />
+      </div>
+
+      <div class='right-div pull-left'>
+        <div class="info verylight">
+          Advanced Search Makes Ipsum Don Proin Pellentesque id
+        </div>
+
+        <div class="dtlinfotext light">
+          The first platform with an active application process. Film and video professionals can look through projects to find ones they are interested in, based on genre, location, schedule and more! Producers review only the individuals that want to work on the project!
+        </div>
+
+      </div>
+    </div>
+
+    <div class='discover clearfix'>
+      <div class='left-div pull-left'>
+        
+        <div class="info verylight">
+          Rate Events & Articles a Mi Ipsum Vivamus Duis
+        </div>
+
+        <div class="dtlinfotext light">
+          Read through information articles and How-To videos. From DIY videos to make your own dolly, and other tips to help you save money. We also review the latest products and talk about all these ways you can spend your money!
+        </div>
+      </div>
+
+      <div class='right-div pull-left'>
+        <img src="/assets/firstdtl.png" alt="" />
+      </div>
+    </div>
+
+    <div class='discover clearfix'>
+      <div class='left-div pull-left'>
+        <img src="/assets/dtlthrid.png" alt="" />
+      </div>
+
+      <div class='right-div pull-left'>
+        <div class="info verylight">
+          Advanced Search Makes Ipsum Don Proin Pellentesque id 
+        </div>
+
+        <div class="dtlinfotext light">
+          Search for film and video professionals in your area. Where you want start a new project, or find someone to work on an existing one, Filmzu is the best destination spot to find writers, actors, editors, and everything in between!
+        </div>
+
+      </div>
+    </div>
+
+
+    </div>
+    </div>
+</div>
+<!--========= detailed info ends======------>
+
+<!--=========  featured projects starts======-->
+<div class="featurewrap">
+  <div class="featured maincontain container-fluid">
+    <div class="row" style='width: 960px'>
+    <div class="featureh text-center">
+      Featured Projects
+    </div>
+    <div class="featuretext text-center light" style='margin: 0px auto; width: 600px;'> 
+      The hottest projects on Filmzu lorem porttitor purus vel congue sagittis. Nullam viverra lacus nec consectetur pharetra.
+    </div>
+    
+    <div class="featuredslider span12">
+      <!--======Projects div===-->
+      <div class="row">
+        <div class="pdiv span10" id="pdiv">
+          
+          <% Project.sample_featured_projects.each do |project|  %>
+
+          <div class="project">
+            <div class="ptopimg">
+              
+                <img src="<%= project.display_photo %>" alt="">
+              
+              
+              <div class="topcnt">
+                  <h3 class="medium">
+                    <a href="/projects/<%= project.id %>">
+                      <%= project.title %>
+                    </a>
+                  </h3>
+                  <p>
+                    <%= project.description %>
+                  </p>
+                </div>
+              
+            </div>
+            <div class="pinfo">
+              
+              <ul class="plist">
+                <% project.roles.first(4).each do |role| %> 
+                  <li class="badge badge-custom-green">
+                    <%= role.name %>
+                  </li>
+                <% end %>
+                <% if project.roles.count > 4 %>
+                  <li class="badge badge-custom-green">
+                      +<%= project.roles.count - 4 %>MORE
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+            
+            <div class="proindi"> 
+              <div class="fans">
+                <div class="fans-count regular text-center">
+                  <%= project.likes.count %>
+                </div>
+                <span>FANS</span>
+              </div>
+              <div class="follow">
+                <div class="btn-follow btn-custom btn-cement medium flw">
+                  
+                    Like
+                  
+                </div>
+
+                <div class="btn-message msg btn-custom btn-cement medium send-generic-message" data-message-subject="<%= project.title %>" data-message-header="Message Project Owner - <%= project.user.name %>" data-message-recipients="<%= project.user.email %>">
+                    Message
+                </div>
+              </div>
+            </div>
+
+            <div class="progcircle">
+              <div class="role-circle-container">
+
+                <div class="role-circle"> </div>
+            
+                <div class="circle-fill"> </div>
+            
+            
+                <div class="circle-measure circle-measure-<%= project.roles_percent %>"> </div>
+            
+                <span class="role-count medium">
+            
+                  <%= project.open_roles.count %> Open Roles
+            
+                </span>
+            
+              </div>
+
+            </div>
+          </div>
+
+          <% end %>
+          
+        </div>
+      <!--======Projects div===-->
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+<!--========= featured projects ends======-->
  
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#pdiv').bxSlider({
+      auto:false,
+      useCss:false,
+      infiniteLoop:false,
+      pause:4000,
+      adaptiveHeight: false,
+      mode: 'horizontal',
+      speed: 1000,
+      autoHover:true,
+      pager:false,
+      nextText:'Prev',
+      prevText:' Prev',
+      slideWidth:230,
+      slideMargin:10,
+      minSlides:4,
+      maxSlides:4,
+      moveSlides:1
+      
+    });
+    
+    $('#pdiv2').bxSlider({
+      auto:false,
+      useCss:false,
+      infiniteLoop:true,
+      pause:4000,
+      adaptiveHeight: false,
+      mode: 'horizontal',
+      speed: 1000,
+      autoHover:true,
+      pager:false,
+      nextText:'Prev',
+      prevText:' Prev',
+      slideWidth:256,
+      slideMargin:10,
+      minSlides:3,
+      maxSlides:3,
+      moveSlides:1
+      
+    });
+  });
+</script>
 
 								
          
