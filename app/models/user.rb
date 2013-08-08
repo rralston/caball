@@ -248,7 +248,7 @@ class User < ActiveRecord::Base
     users = User if users.nil?
 
     if query
-      users = users.where('users.name like ?', "%#{query}%")
+      users = users.where('lower(users.name) like lower(?)', "%#{query}%")
     end
 
     if location
@@ -308,7 +308,7 @@ class User < ActiveRecord::Base
   end
 
   def self.search_users(query)
-    User.where('name like ?', "%#{query}%")
+    User.where('lower(name) like lower(?)', "%#{query}%")
   end
 
   # checks if the user can apply for the specified role.

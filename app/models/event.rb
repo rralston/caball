@@ -104,7 +104,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.with_keyword(word)
-    Event.upcoming_events.where("title like ?", "%#{word}%")
+    Event.upcoming_events.where("lower(title) like lower(?)", "%#{word}%")
   end
 
   def self.search_all(query)
@@ -305,7 +305,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.search_events(query)
-    Event.where('title like ? or description like ?', "%#{query}%", "%#{query}%")
+    Event.where('lower(title) like lower(?) or lower(description) like lower(?)', "%#{query}%", "%#{query}%")
   end
 
   def valid_videos

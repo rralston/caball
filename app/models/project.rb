@@ -208,22 +208,12 @@ class Project < ActiveRecord::Base
   end
 
 
-  def self.search_types(types)
-    query = type.join('%')
-    Project.where('type like ?', "%#{query}%")
-  end
-
-  def self.search_types(genres)
-    query = genre.join('%')
-    Project.where('genre like ?', "%#{query}%")
-  end
-
   def self.search_all(projects, query, roles, genres, types, location, radius, order_by, page, per_page = nil)
 
     projects = Project if (projects.nil? || projects.empty?)
 
     if query.present?
-      projects = projects.where('projects.title like ?', "%#{query}%")
+      projects = projects.where('lower(projects.title) like lower(?)', "%#{query}%")
     end
 
     if roles.present?
@@ -334,7 +324,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.search_projects(query)
-    Project.where('title like ? or description like ?', "%#{query}%", "%#{query}%")
+    Project.where('lower(title) like lower(?) or lower(description) like lower(?)', "%#{query}%", "%#{query}%")
   end
 
   def valid_videos

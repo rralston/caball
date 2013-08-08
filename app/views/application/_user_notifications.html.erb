@@ -41,7 +41,7 @@
           <a href="/users/<%= notification.message.sender.id %>"><%= notification.message.sender.name %></a> sent you a message.
         </div>
         
-        <div class="notemsg"><%= truncate(notification.message.body, :length => 30, :separator => ' ') %></div>
+        <div class="notemsg"><%= truncate(notification.message.body, :length => 60, :separator => ' ') %></div>
         
         <div class='notetime light'>
           <span class="timeago" title="<%= notification.created_at.to_json() %>"><%= notification.created_at.to_json() %></span>
