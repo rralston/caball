@@ -24,6 +24,10 @@
         
       </div>  
 
+      <div class='hide-me action-div' style='display: none;'>
+        <i class='icon-remove-sign'> </i>
+      </div>
+
     </div>
   <% elsif notification.class.name == 'Receipt' %>
 
@@ -34,14 +38,19 @@
       <div class="notefull">
         
         <div class="noteinfo">
-          <a href="/users/<%= notification.message.sender.id %>"><%= notification.message.sender.name %></a> send you a message.
+          <a href="/users/<%= notification.message.sender.id %>"><%= notification.message.sender.name %></a> sent you a message.
         </div>
         
         <div class="notemsg"><%= truncate(notification.message.body, :length => 30, :separator => ' ') %></div>
         
-        <div class="notetime light"><%= notification.created_at %></div>
+        <div class='notetime light'>
+          <span class="timeago" title="<%= notification.created_at.to_json() %>"><%= notification.created_at.to_json() %></span>
+        </div>
       </div>  
 
+      <div class='hide-me action-div' style='display: none;'>
+        <i class='icon-remove-sign'> </i>
+      </div>
     </div>
 
   <% end %>

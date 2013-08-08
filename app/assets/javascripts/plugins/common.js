@@ -285,7 +285,10 @@ app.fn.set_notification_check_time = function(element){
     url: '/users/set_notification_check_time',
     success: function(resp){
       if(resp=='true'){
-        element.removeClass('set_time')
+        // remove set_time class on all those that have set_time class.
+        $('.set_time').removeClass('set_time')
+        // hide the notifications count displayed on the header
+        $('.notstarwrap .notno').hide()
       }
     }
   })

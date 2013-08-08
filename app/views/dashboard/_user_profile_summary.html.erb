@@ -10,12 +10,17 @@
     </div>
     
     <div class='notifications-summary'>
-      <div href="#notifications_tab" data-toggle='tab' class='btn-custom btn-notification'>
+      <div class='btn-custom btn-notification'>
         <div class='blue-star-icon pull-left light'></div> 
-        You have <%= pluralize(current_user.unread_notifications.count, 'new notification') %>!
-        <div class='ignore-btn'>
+        You have <span class='count'><%= current_user.unread_notifications.count %></span> new <%= "notification".pluralize(current_user.unread_notifications.count) %>!
+        
+        <% class_to_set = current_user.unread_notifications.empty? ? '' : 'set_time' %>
+
+        <div class='ignore-btn <%= class_to_set %>'>
            <i class='icon-remove-sign'> </i>
         </div>
+
+
       </div>
     </div>
     
