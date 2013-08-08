@@ -114,6 +114,14 @@
                 
               </div>    
             </div>
+
+            <div class="control-group">
+              <%= f.label "Experience", :class => 'control-label' %>
+              <div class="controls">
+                <%= f.select(:experience, options_for_select(User.experience)) %>
+              </div>
+            </div>
+
           </div>
         </fieldset>
 
@@ -161,14 +169,6 @@
                     <%= talent.select(:name, options_for_select(User.types)) %>
                    </div>
                 </div>
-
-
-                <div class="control-group">
-                  <%= talent.label "Experience", :class => 'control-label' %>
-                  <div class="controls">
-                    <%= talent.select(:experience, options_for_select(User.experience)) %>
-                  </div>
-                </div>
               
                 <div class="control-group">
                 <%= talent.label :description, :class => 'control-label' %>
@@ -193,14 +193,6 @@
                     <%= talent.label :name, :class => 'control-label' %>
                     <div class="controls">
                       <%= talent.select(:name, options_for_select(User.types)) %>
-                    </div>
-                  </div>
-                  
-
-                  <div class="control-group">
-                    <%= talent.label "Experience", :class => 'control-label' %>
-                    <div class="controls">
-                      <%= talent.select(:experience, options_for_select(User.experience)) %>
                     </div>
                   </div>
                 

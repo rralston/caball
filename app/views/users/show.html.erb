@@ -108,6 +108,10 @@
                           <% @user.expertise.split(',').each do |skill| %>
                             <li class="badge regular"><%= skill %></li>
                           <% end %>
+
+                          <% if @user.experience.present? %>
+                            <li class="badge regular"><%= @user.experience %></li>
+                          <% end %>
                         </ul>
                 </div>
               </div>

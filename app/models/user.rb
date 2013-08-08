@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
                   :imdb_url, :characteristics_attributes, :photos_attributes,
                   :talents_attributes, :photo, :videos_attributes, :projects_attributes,
                   :admin, :gender, :headline, :featured, :expertise, :cover_photo_attributes,
-                  :resume_attributes, :notification_check_time
+                  :resume_attributes, :notification_check_time, :experience
 
   validates_presence_of :name, :email, :message => "is required"
     
@@ -91,10 +91,10 @@ class User < ActiveRecord::Base
   def self.experience
     #Experience of the user in hash
     {
-      '0-2 year(s)' => '0 to 2 year(s)',
-      '3-5 years' => '3 to 5 years',
-      '6-10 years' => '6 to 10 years',
-      '10+ years' => 'above 10 years',
+      '0-2 year(s)' => '0 - 2 years',
+      '3-5 years' => '3 - 5 years',
+      '6-10 years' => '6 - 10 years',
+      '10+ years' => '10+ years',
     }
   end
 
@@ -323,7 +323,7 @@ class User < ActiveRecord::Base
   def completeness
 
     check_array = ["location", "about", "gender", "headline", "expertise", "imdb_url", "resume",
-      "profile", "photos", "cover_photo", "talents", "videos"]
+      "profile", "photos", "cover_photo", "talents", "videos", "experience"]
 
     present_sum = check_array.map { |prop|
       self.send(prop).present? ? 1 : 0
