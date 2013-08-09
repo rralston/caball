@@ -27,7 +27,7 @@ class ConversationsController < ApplicationController
     
     current_user.send_message(recipients, params[:message], params[:conversation][:subject])
 
-    redirect_to conversations_url, :notice => 'Your Message was successfully sent.'
+    redirect_to "/dashboard", :notice => 'Your Message was successfully sent.'
   end
 
   def send_message_generic

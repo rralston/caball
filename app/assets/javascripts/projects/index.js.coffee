@@ -1,7 +1,7 @@
 $(document).ready ()->
   $('.slider-wrapper').bxSlider
     auto: false
-    useCss: false
+    useCss: true
     infiniteLoop: true
     pause: 4000
     adaptiveHeight: false
