@@ -288,7 +288,7 @@ class Project < ActiveRecord::Base
     if options[:for_search].present? and options[:for_search] == true
       json[:thumbnail] = display_photo
       json[:label] = title
-      json[:value] = "/projects/#{id}"
+      json[:value] = title
       json[:category]= 'Projects'
       json[:url] = "/projects/#{id}"
     end
