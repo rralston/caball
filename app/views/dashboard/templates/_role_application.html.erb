@@ -1,20 +1,24 @@
 <script type="script/template" id='role_application_template'>  
   
-  <div class='row'>
-    <div class='backdrop-cover'></div>
-    <%% if(user.cover_photo != null && typeof user.cover_photo != 'undefined' ){ %>
-      <div class='user-cover-photo'  style='background: url(<%%= user.cover_photo.image.url %>) no-repeat'>
-      </div>
-    <%% }else{ %>
-      <div class='user-cover-photo' >
-      </div>
-    <%% } %>
-  </div>
-  <img src='<%%= user.profile_pic %>' class='img-circle applicant-photo'>
+  <a href='/users/<%%= user.id %>' target='_blank'>
+    <div class='row'>
+      <div class='backdrop-cover'></div>
+      <%% if(user.cover_photo != null && typeof user.cover_photo != 'undefined' ){ %>
+        <div class='user-cover-photo'  style='background: url(<%%= user.cover_photo.image.url %>) no-repeat'>
+        </div>
+      <%% }else{ %>
+        <div class='user-cover-photo' >
+        </div>
+      <%% } %>
+    </div>
+
+    <img src='<%%= user.profile_pic %>' class='img-circle applicant-photo'>
+  </a>
+
   <div class='row'>
     <div class='span3 applicant-details grey-backdrop text-center'>
       <div class='name bold'>
-        <a href='/users/<%%= user.id %>' target='_blank'><%%= user.name %></a>
+        <%%= user.name %>
       </div>
 
       <div class='location'>

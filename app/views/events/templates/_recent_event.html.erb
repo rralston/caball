@@ -1,12 +1,12 @@
 <script type="script/template" id='recent_event_template'>
-
-  <div class='event-head'>
+  <a href='/events/<%%= id %>'>
+    <div class='event-head'>
       <div class='event-backdrop'  style='background: url(<%%= main_photo.image.url %>) no-repeat'>
       </div>
       <div class='backdrop-cover'></div>
 
       <div class='event-title'>
-        <a href='/events/<%%= id %>'><%%= title %></a>
+        <%%= title %>
       </div>
       <div class='event-location light'>
         <div class="location-img-blue pull-left"></div>
@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    
+  </a>
     <div class='event-summary'>
       <div class='gradient clearfix'>
 

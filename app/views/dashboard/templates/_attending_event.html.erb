@@ -1,29 +1,31 @@
 <script type="script/template" id='attending_event_template'>
-    <div class='event-head'>
-      <div class='event-backdrop'  style='background: url(<%%= main_photo.image.url %>) no-repeat'>
-      </div>
-      <div class='backdrop-cover'></div>
-
-      <div class='event-title'>
-        <%%= title %>
-      </div>
-      <div class='event-location light'>
-        <div class="location-img-blue pull-left"></div>
-        <%%= location %>
-      </div>
-      <div class='event-headline light'> 
-        <%%= description %>
-      </div>
-
-      <div class="date pull-left medium">
-        <div class="day">
-          <%%= start.day %>
+    <a href='/events/<%%= id %>'>
+      <div class='event-head'>
+        <div class='event-backdrop'  style='background: url(<%%= main_photo.image.url %>) no-repeat'>
         </div>
-        <div class="month regular">
-          <%%= start.month_year %>
+        <div class='backdrop-cover'></div>
+
+        <div class='event-title'>
+          <%%= title %>
+        </div>
+        <div class='event-location light'>
+          <div class="location-img-blue pull-left"></div>
+          <%%= location %>
+        </div>
+        <div class='event-headline light'> 
+          <%%= description %>
+        </div>
+
+        <div class="date pull-left medium">
+          <div class="day">
+            <%%= start.day %>
+          </div>
+          <div class="month regular">
+            <%%= start.month_year %>
+          </div>
         </div>
       </div>
-    </div>
+    </a>
     
     <div class='event-summary'>
       <div class='gradient clearfix'>

@@ -1,15 +1,17 @@
 <script type="script/template" id='applied_project_template'>
-    <div class='project-head'>
-      <div class='project-backdrop'  style='background: url(<%%= photos[0].image.url %>) no-repeat'>
+    <a href='/projects/<%%= id %>'>
+      <div class='project-head'>
+        <div class='project-backdrop'  style='background: url(<%%= photos[0].image.url %>) no-repeat'>
+        </div>
+        <div class='backdrop-cover'></div>
+        <div class='project-title'>
+          <%%= title %>
+        </div>
+        <div class='project-headline'> 
+          <%%= headline %>
+        </div>
       </div>
-      <div class='backdrop-cover'></div>
-      <div class='project-title'>
-        <%%= title %>
-      </div>
-      <div class='project-headline'> 
-        <%%= headline %>
-      </div>
-    </div>
+    </a>
     
     <div class='project-summary'>
       <div class='message pull-left'>

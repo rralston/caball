@@ -16,36 +16,39 @@ $grey-backdrop-text: #636a73
     -webkit-border-radius: 0px 0px 0px 7px
     border-radius: 0px 0px 0px 7px
 
-    li.active > a
+    li.active > a, li.active:hover > a
       background-color: #eeeeee
-    li
+    
+    li, li.active:hover
       margin: 10px 0px
       border-bottom: 1px solid #2d3456
-      a
-        -moz-border-radius: 0px
-        -webkit-border-radius: 7px 0px 0px 7px
-        border-radius: 7px 0px 0px 7px
+      box-shadow: none
+      
+    li a
+      -moz-border-radius: 0px
+      -webkit-border-radius: 7px 0px 0px 7px
+      border-radius: 7px 0px 0px 7px
 
-        margin: 0px 0px 0px 10px
-        height: 55px
-        height: 110px
-        .nav-icon
-          width: 40px
-          height: 35px
-          padding: 20px 20px
-        .nav-icon.home
-          background: url(/assets/home-white-big.png) center no-repeat
-        .nav-icon.messages
-          background: url(/assets/envelop-white-big.png) center no-repeat
-        .nav-icon.projects
-          background: url(/assets/clip-white-big.png) center no-repeat
-        .nav-icon.events
-          background: url(/assets/calendar-white-big.png) center no-repeat
-        .nav-icon.settings
-          background: url(/assets/gear-white-big.png) center no-repeat
-        .nav-text
-          text-align: center
-          color: white
+      margin: 0px 0px 0px 10px
+      height: 55px
+      height: 110px
+      .nav-icon
+        width: 40px
+        height: 35px
+        padding: 20px 20px
+      .nav-icon.home
+        background: url(/assets/home-white-big.png) center no-repeat
+      .nav-icon.messages
+        background: url(/assets/envelop-white-big.png) center no-repeat
+      .nav-icon.projects
+        background: url(/assets/clip-white-big.png) center no-repeat
+      .nav-icon.events
+        background: url(/assets/calendar-white-big.png) center no-repeat
+      .nav-icon.settings
+        background: url(/assets/gear-white-big.png) center no-repeat
+      .nav-text
+        text-align: center
+        color: white
     li.active > a
       background: #edf1f7
       .nav-icon.home

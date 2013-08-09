@@ -1,21 +1,23 @@
 <script type="script/template" id='user_project_template'>
-    <div class='project-head'>
-      <%% if(typeof photos[0] != 'undefined' ){ %>
-        <div class='project-backdrop'  style='background: url(<%%= photos[0].image.url %>) no-repeat'>
-        </div>
-      <%% }else{ %>
-        <div class='project-backdrop'>
-        </div>
-      <%% } %>
+    <a href='/projects/<%%= id %>'>
+      <div class='project-head'>
+        <%% if(typeof photos[0] != 'undefined' ){ %>
+          <div class='project-backdrop'  style='background: url(<%%= photos[0].image.url %>) no-repeat'>
+          </div>
+        <%% }else{ %>
+          <div class='project-backdrop'>
+          </div>
+        <%% } %>
 
-      <div class='backdrop-cover'></div>
-      <div class='project-title'>
-        <a href='/projects/<%%= id %>'><%%= title %></a>
+        <div class='backdrop-cover'></div>
+        <div class='project-title'>
+          <%%= title %>
+        </div>
+        <div class='project-headline'> 
+          <%%= headline %>
+        </div>
       </div>
-      <div class='project-headline'> 
-        <%%= headline %>
-      </div>
-    </div>
+    </a>
     
     <div class='project-summary'>
       <div class='message pull-left'>

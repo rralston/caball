@@ -1,4 +1,6 @@
 app.views.super_role_filters = Backbone.View.extend
+  tagName: 'ul'
+  className: 'clearfix custom-green-filters nav'
   render: ()->
     this.collection.forEach(this.renderEach, this)
     return this
