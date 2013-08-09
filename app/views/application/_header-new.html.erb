@@ -1,11 +1,13 @@
 <!--========= Header starts======------>
 <div class="headerwrap">
+
   <header class="container-fluid">
-    <div class="row-fluid">
+    <a href="/" class="brand"><img src="/assets/logo.png" alt="" /></a>
+    <div class="row container" style='display: inline-block'>
       <nav>
           <div class="hnav navbar light">
             <div class="navbar-inner ">
-              <a href="/" class="brand"><img src="/assets/logo.png" alt="" /></a>
+              
               <ul class="nav nav-tabs">
 
                 <% class_names={} %>
@@ -84,7 +86,7 @@
 
               <% else %>
                 <div class='user-section'>
-                  <a href="" class="signin-btn">Sing In</a>
+                  <a href="/auth/facebook" class="signin-btn">Sing In</a>
                   <a href="">Create  an Account</a>  
                 </div>
               <% end %>

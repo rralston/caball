@@ -221,7 +221,7 @@ class User < ActiveRecord::Base
     hash = super(options)
     extra_hash = {
       'profile_pic' => profile_pic,
-      'cover_photo' => cover_photo,
+      'cover_photo' => display_cover,
       'talent_names' => talent_names
     }
     hash.merge!(extra_hash)
@@ -340,6 +340,19 @@ class User < ActiveRecord::Base
 
   def self.admin_emails
     User.where(:admin => true).map(&:email)
+  end
+
+  def self.featured_people
+    #  TODO: Change this to true
+    User.where(:featured => nil)
+  end
+
+  def display_cover
+    if cover_photo
+      cover_photo.image
+    else
+      nil
+    end
   end
 
 end

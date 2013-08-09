@@ -10,6 +10,13 @@ $very-light-blue: #edf1f7
 $grey-backdrop-text: #636a73
       
 
+header
+  box-shadow: none !important
+  .brand
+    position: relative
+    top: -30px
+    left: 3%
+
 ul
   list-style-type: none
 
@@ -898,12 +905,17 @@ ul.tagit span.ui-helper-hidden-accessible
   -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,.5)
   box-shadow: 4px 4px 4px rgba(0,0,0,.5)
 
+.hnav.navbar
+  width: 960px
+
 /*top-nav bar*/
 .hnav .navbar-inner 
-  background: url('/assets/hbg.png') repeat #279f8d
-  border: none
+  background: none
+  border: none 
   border-radius: 0px
-  border-bottom: 1px solid #7a7c7f
+  box-shadow: none
+  width: 860px
+  margin: 0px auto
 
 .hnav .navbar-inner .nav 
   height: 65px

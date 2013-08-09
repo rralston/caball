@@ -1,5 +1,6 @@
 <%= stylesheet_link_tag "home_page.css" %>
 <%= stylesheet_link_tag "projects/index.css" %>
+<%= stylesheet_link_tag "users/index.css" %>
 
 <!--========= Attract top starts======------>
 <div class="attractwrap">
@@ -7,16 +8,20 @@
   <div class="attract maincontain container-fluid">
     <div class="row">
       <div class="toptext span10 offset1 medium text-center">Freedom for filmmakers.</div>
+      
       <div class='midtext text-center'>
         <div class='center-it light'>
           Filmaking requires a lot of people with different talents.<br/>Filmzu takes the headache out of searching for them and, bring them all to one place. See hoe easy Filmzu makes creating video content.
         </div>
       </div>
       
-      <div class="startbutton span6 offset3 text-center">
-        <div class="strtbtn btn regular text-left"><div class="strtbtntext">Free, Start Creating</div></div>
+      <div class="startbutton text-center">
+        <a href="/auth/facebook" class="strtbtn btn regular text-left">
+          <div class="strtbtntext">Free, Start Creating</div>
+        </a>
       </div>
-      <div class="wtchvideo offset4 text-center">
+
+      <div class="wtchvideo offset4 text-center" data-toggle='modal' data-target='#video-modal'>
         <div class="wtchvideobtn btn">
           <div class="playpic">
             <img src="/assets/wtchbtn.png" alt="" />
@@ -138,7 +143,7 @@
 <div class="featurewrap">
   <div class="featured maincontain container-fluid">
     <div class="row" style='width: 960px'>
-    <div class="featureh text-center">
+    <div class="featureh light text-center">
       Featured Projects
     </div>
     <div class="featuretext text-center light" style='margin: 0px auto; width: 600px;'> 
@@ -237,7 +242,109 @@
   </div>
 </div>
 <!--========= featured projects ends======-->
+
+
+<div class="featurewrap" id="featuredpeople">
+  <div class="featured maincontain container-fluid">
+    <div class="row" style='width: 960px'>
+    <div class="featureh light text-center">
+      Featured People
+    </div>
+    <div class="featuretext text-center light" style='margin: 0px auto; width: 600px;'> 
+      The hottest projects on Filmzu lorem porttitor purus vel congue sagittis. Nullam viverra lacus nec consectetur pharetra.
+    </div>
+    
+    <div class="featuredslider span12">
+      <!--======Projects div===-->
+      <div class="row-fluid">
+        <div class="pdiv span10" id="pdiv2">
+          
+          <% User.featured_people.each do |user| %>
+            <div class="user_tile pull-left">
+              <div class="row">
+                  <div class="backdrop-cover"></div>
+                  
+                    <div class="user-cover-photo" style="background: url(<%= user.display_cover %>) no-repeat">
+                    </div>
+                  
+                </div>
+                <img src="<%= user.profile_pic %>" class="img-circle user-photo">
+                <div class="row">
+                  <div class="span3 user-details grey-backdrop text-center">
+                    <div class="name bold">
+                      <a href="/users/1" target="_blank"><%= user.name %></a>
+                    </div>
+
+                    <div class="location light">
+                      <div class="location-img-blue"></div>
+                      <%= user.location %>
+                    </div>
+                      <div class="user-roles medium">
+                        <%= user.talent_names.join('/ ') %>
+                      </div>
+                    </div>
+                  </div>
+                
+
+                <div class="row white">
+                  <div class="about-user pull-left">
+                    <div class="about-text regular">
+                      <%= user.about %>
+
+                    </div>
+                  </div>
+
+                  <div class="user-reputation pull-left">
+                    <div class="fans">
+                      <div class="fans-count regular text-center">
+                        <%= user.followers.count %>
+                      </div>
+                      <span>FANS</span>
+                    </div>
+
+                    <div class="row buttons text-center">
+                      
+                        <div class="btn-follow-user btn-custom btn-cement medium flw">
+                          Follow
+                        </div>
+                      
+                      <div class="btn-message msg btn-custom btn-cement medium send-generic-message" data-message-subject="Hey, wassup..!" data-message-header="Message user - <%= user.name %>" data-message-recipients="<%= user.email %>">
+                        Message
+                      </div>
+                      
+                    </div>
+                    
+                  </div>
+                </div>
+
+            </div>
+
+          <% end %>
+          
+        </div>
+      <!--======Projects div===-->
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
  
+<!-- Filmzu video modal -->
+<div id="video-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Filmzu</span></h3>
+  </div>
+  <div class="modal-body">
+    <iframe width="530" height="315" src="//www.youtube.com/embed/hoRyaVKE2vE" frameborder="0" allowfullscreen></iframe>
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Close</button>
+  </div>
+</div>
+<!-- Filmzu video modal -->
+
+
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -264,7 +371,7 @@
     $('#pdiv2').bxSlider({
       auto:false,
       useCss:false,
-      infiniteLoop:true,
+      infiniteLoop:false,
       pause:4000,
       adaptiveHeight: false,
       mode: 'horizontal',
@@ -273,7 +380,7 @@
       pager:false,
       nextText:'Prev',
       prevText:' Prev',
-      slideWidth:256,
+      slideWidth:230,
       slideMargin:10,
       minSlides:3,
       maxSlides:3,
