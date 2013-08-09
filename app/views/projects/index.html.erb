@@ -186,7 +186,7 @@
               <% Project.sample_featured_projects.each do |project| %>
                 <div class="slide" class="item">
                   <div class="slbg span6" >
-                    <div class='img' style='background: url(<%= project.photos.sample.image.url %>) no-repeat'>
+                    <div class='img' style='background: url(<%= image_path(project.photos.sample.image) %>) no-repeat'>
                     </div>
                   </div>
                   <div class='shadow-div'> </div>
@@ -359,6 +359,24 @@ $(document).ready(function(){
       });
     });
   }
+
+  $('.slider-wrapper').bxSlider({
+    auto:false,
+    useCss:false,
+    infiniteLoop:false,
+    pause:4000,
+    adaptiveHeight: false,
+    mode: 'horizontal',
+    speed: 1000,
+    autoHover:true,
+    pager:false,
+    nextText:'Prev',
+    prevText:' Prev',
+    minSlides:1,
+    maxSlides:1,
+    moveSlides:1
+  })
+    
 
 });
 
