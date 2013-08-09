@@ -2,34 +2,8 @@
 <div class="headerwrap">
 
   <header>
-    <a href="/" class="brand pull-left"><img src="/assets/emboss-logo.png" alt="" /></a>
-    
-
-    <div class="pull-left" style='display: inline-block'>
-      <nav>
-          <div class="hnav navbar light">
-            <div class="navbar-inner ">
-              
-              <ul class="nav nav-tabs">
-
-                <% class_names={} %>
-                <% class_names['projects'] = 'active' if controller_name == 'projects' %>
-                <% class_names['users'] = 'active' if controller_name == 'users' %>
-                <% class_names['events'] = 'active' if controller_name == 'events' %>
-
-                <li class="<%= class_names['projects'] %>"><a href="/projects" >Projects</a></li>
-                <li class="<%= class_names['users'] %>" ><a href="/users">People</a></li>
-                <li class="<%= class_names['events'] %>"><a href="/events">Events</a></li>
-                <li><a href="#">Skills</a></li>
-              </ul>
-              <div class="hdrfrm">
-                <form action="">
-                  <input type="text" class='search_header' id='main_header_search'/>
-                </form>
-              </div>
-            </div>
-          </div>
-      </nav>
+    <div class='logo pull-left'>
+      <a href="/" class="brand pull-right"><img src="/assets/emboss-logo.png" alt="" /></a>
     </div>
 
 
@@ -97,6 +71,32 @@
         <a href="">Create  an Account</a>  
       </div>
     <% end %>
+
+    <div class="container" style='width: 800px'>
+      <div class="hnav navbar light pull-left">
+        <div class="navbar-inner ">
+          
+          <ul class="nav nav-tabs">
+
+            <% class_names={} %>
+            <% class_names['projects'] = 'active' if controller_name == 'projects' %>
+            <% class_names['users'] = 'active' if controller_name == 'users' %>
+            <% class_names['events'] = 'active' if controller_name == 'events' %>
+
+            <li class="<%= class_names['projects'] %>"><a href="/projects" >Projects</a></li>
+            <li class="<%= class_names['users'] %>" ><a href="/users">People</a></li>
+            <li class="<%= class_names['events'] %>"><a href="/events">Events</a></li>
+            <li><a href="#">Skills</a></li>
+          </ul>
+          
+        </div>
+      </div>
+      <div class="hdrfrm pull-left">
+        <form action="">
+          <input type="text" class='search_header' id='main_header_search'/>
+        </form>
+      </div>
+    </div>
       
     
   </header>

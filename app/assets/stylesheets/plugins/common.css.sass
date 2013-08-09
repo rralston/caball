@@ -905,7 +905,7 @@ ul.tagit span.ui-helper-hidden-accessible
 
 /*header starts-------=============== */
 .headerwrap 
-  position: fixed
+  position: absolute
   top: 0
   left: 0
   min-width: 1280px !important
@@ -917,12 +917,12 @@ ul.tagit span.ui-helper-hidden-accessible
   -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,.5)
   box-shadow: 4px 4px 4px rgba(0,0,0,.5)
 
-.header
-  min-width: 1280px
-  width: 100%
+header
+  .logo
+    width: 200px
 
 .hnav.navbar
-  width: 960px
+  
 
 /*top-nav bar*/
 .hnav .navbar-inner 
@@ -930,7 +930,6 @@ ul.tagit span.ui-helper-hidden-accessible
   border: none 
   border-radius: 0px
   box-shadow: none
-  width: 800px
   margin: 0px auto
 
 .hnav .navbar-inner .nav 
@@ -1030,6 +1029,7 @@ ul.tagit span.ui-helper-hidden-accessible
   display: block
   margin-left: 0px
   height: 65px
+  display: inline-block
 
 .hdrfrm input[type="text"] 
   border-radius: 40px
@@ -1101,8 +1101,7 @@ ul.tagit span.ui-helper-hidden-accessible
   display: inline-block
   color: white
   margin-top: 20px
-  position: absolute
-  right: 25px
+  position: relative
 
 a 
   text-decoration: none
@@ -1120,7 +1119,6 @@ a:hover
 .notiwrap 
   display: block
   float: left
-  position: relative
 
 .notetime 
   font-size: 14px
@@ -1143,7 +1141,7 @@ a:hover
   display: none
   width: 360px
   color: #737378
-  padding-top: 26px
+  padding-top: 10px
   background: url('/assets/infotip.png') no-repeat center 5%
 
 .noticontent 
@@ -1359,6 +1357,7 @@ li.custom-ui-item
   background: url('/assets/footerbg.png') #373841
   height: 230px
   margin-top: 70px
+  min-width: 960px
 .footer 
   background: #373841
   padding: 20px 0px
