@@ -82,7 +82,14 @@ class Project < ActiveRecord::Base
   end
 
   def self.unions
-    {'Union' => 'Union', 'Non-union' => 'Non-union'}
+    {
+      'Non-union' => 'Non-union',
+      'SAG-AFTRA' => 'SAG-AFTRA',
+      'WGA'       => 'WGA',
+      'IATSE'     => 'IATSE',
+      'PGA'       => 'PGA',
+      'DGA'       => 'DGA'
+    }
   end
 
   def roles_json

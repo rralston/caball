@@ -1,9 +1,11 @@
 <!--========= Header starts======------>
 <div class="headerwrap">
 
-  <header class="container-fluid">
-    <a href="/" class="brand"><img src="/assets/logo.png" alt="" /></a>
-    <div class="row container" style='display: inline-block'>
+  <header>
+    <a href="/" class="brand pull-left"><img src="/assets/emboss-logo.png" alt="" /></a>
+    
+
+    <div class="pull-left" style='display: inline-block'>
       <nav>
           <div class="hnav navbar light">
             <div class="navbar-inner ">
@@ -25,76 +27,78 @@
                   <input type="text" class='search_header' id='main_header_search'/>
                 </form>
               </div>
-
-              <% if current_user %>
-                <div class="loggedwrap">
-
-                  <div class="notiwrap">
-                    <% class_to_set = current_user.unread_notifications.empty? ? '' : 'set_time' %>
-                    <div class="notstarwrap <%= class_to_set %> ">
-                    <div class="notico"></div>
-                    <% if current_user.unread_notifications.present? %>
-                      <div class="notno  medium img-circle text-center">
-                        <%= current_user.unread_notifications.count %>
-                      </div>
-                    <% end %>
-                    </div>
-                    <div class="noticontentwrap">
-                      <div class="noticontent">
-                      <div class="notih1 medium text-center">NOTIFICATIONS</div>
-                      
-
-                        <%= render :partial => 'user_notifications' %>
-                      
-                    
-                      <div class="noteclose img-circle medium text-center">x</div>
-                      </div>
-                    </div>
-                    
-                  </div>
-                  
-                  <div class="userprofwrap">
-                    <div class="usrprev">
-                      <div class="usrimg img-circle" style='background: url(<%= current_user.profile_pic %>)'>
-                        <!--user prof images as cover bg-->
-                      </div>
-                      
-                      <div class="username">
-                        <%= current_user.name %>
-                      </div>
-                    
-                    </div>
-                    <div class="userprflistwrap">
-                      <ul class="proflist medium">
-                        <a href="/users/<%= current_user.id %>">
-                          <li class="profile">profile</li>
-                        </a>
-                        <a href="/dashboard" >
-                          <li class="dboard">Dashboard</li>
-                        </a>
-                        <a href="/users/<%= current_user.id %>/edit">
-                          <li class="settings">Settings</li>
-                        </a>
-                        <a href="/signout">
-                          <li class="lout">Logout</li>
-                        </a>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-
-
-              <% else %>
-                <div class='user-section'>
-                  <a href="/auth/facebook" class="signin-btn">Sing In</a>
-                  <a href="">Create  an Account</a>  
-                </div>
-              <% end %>
             </div>
           </div>
       </nav>
-      
     </div>
+
+
+    <% if current_user %>
+      <div class="loggedwrap pull-right">
+
+        <div class="notiwrap">
+          <% class_to_set = current_user.unread_notifications.empty? ? '' : 'set_time' %>
+          <div class="notstarwrap <%= class_to_set %> ">
+          <div class="notico"></div>
+          <% if current_user.unread_notifications.present? %>
+            <div class="notno  medium img-circle text-center">
+              <%= current_user.unread_notifications.count %>
+            </div>
+          <% end %>
+          </div>
+          <div class="noticontentwrap">
+            <div class="noticontent">
+            <div class="notih1 medium text-center">NOTIFICATIONS</div>
+            
+
+              <%= render :partial => 'user_notifications' %>
+            
+          
+            <div class="noteclose img-circle medium text-center">x</div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="userprofwrap">
+          <div class="usrprev">
+            <div class="usrimg img-circle" style='background: url(<%= current_user.profile_pic %>)'>
+              <!--user prof images as cover bg-->
+            </div>
+            
+            <div class="username">
+              <%= current_user.name %>
+            </div>
+          
+          </div>
+          <div class="userprflistwrap">
+            <ul class="proflist medium">
+              <a href="/users/<%= current_user.id %>">
+                <li class="profile">profile</li>
+              </a>
+              <a href="/dashboard" >
+                <li class="dboard">Dashboard</li>
+              </a>
+              <a href="/users/<%= current_user.id %>/edit">
+                <li class="settings">Settings</li>
+              </a>
+              <a href="/signout">
+                <li class="lout">Logout</li>
+              </a>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+    <% else %>
+      <div class='user-section pull-right'>
+        <a href="/auth/facebook" class="signin-btn">Sign In</a>
+        <a href="">Create  an Account</a>  
+      </div>
+    <% end %>
+      
+    
   </header>
 </div>
 

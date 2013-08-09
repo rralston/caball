@@ -186,7 +186,8 @@
               <% Project.sample_featured_projects.each do |project| %>
                 <div class="slide" class="item">
                   <div class="slbg span6" >
-                    <img src="<%= project.photos.sample.image.url %>" alt="" />
+                    <div class='img' style='background: url(<%= project.photos.sample.image.url %>) no-repeat'>
+                    </div>
                   </div>
                   <div class='shadow-div'> </div>
                   <div class="slcontent span6">

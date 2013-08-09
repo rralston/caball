@@ -66,6 +66,11 @@
                     <li> <%= genre %> </li>
                   <% end %>
                 <% end %>
+
+                <% if @project.union.present? %>
+                  <li> <%= @project.union %> </li>
+                <% end %>
+                
               </ul>
             </div>
 
@@ -131,16 +136,18 @@
 
             <% accordion_counter = 0 %>
             <% modal_counter = 0 %>
-            
-            <div class='span8 role-filters'>
+           
+             <ul class="span7 role-filters clearfix custom-green-filters nav">
               <% @project.roles_json.each do |name, super_role_details| %>
+                <li>
                   <a href="#role-tab-<%= accordion_counter %>" data-toggle='tab' class='badge badge-custom-green pull-left role-filter'>
                     <%= name %>
                   </a>
                 <% accordion_counter += 1 %>
+                </li>
               <% end %>
-              </ul>
-            </div>
+            </ul>
+           
 
             <% accordion_counter = 0 %>
             <% modal_counter = 0 %>
@@ -288,12 +295,14 @@
             </div>
           <% end %>
 
-          <div class='row right-extra-div' id='similar_projects_div'>
-          </div>
-
           <div class='right-extra-div coming-div row' id='similar_events'>
 
           </div>
+
+          <div class='row right-extra-div' id='similar_projects_div'>
+          </div>
+
+          
 
           <div class='right-extra-div coming-div row'>
             <div class="span4 shrink-div head">

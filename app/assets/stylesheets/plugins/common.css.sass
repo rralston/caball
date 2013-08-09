@@ -9,6 +9,9 @@ $comment-text: #636a73
 $very-light-blue: #edf1f7
 $grey-backdrop-text: #636a73
 
+body
+  background: url('/assets/bg.png') repeat
+
 .main-content
   padding-bottom: 0px !important
   /* this will keep it close to footer */
@@ -17,7 +20,7 @@ header
   box-shadow: none !important
   .brand
     position: relative
-    top: -30px
+    top: 10px
     left: 3%
 
 ul
@@ -385,6 +388,7 @@ ul.tagit span.ui-helper-hidden-accessible
   height: 283px
   width: 100%
   position: relative
+  box-shadow: 0px 9px 35px -15px black
 
 .bnrbg
   position: absolute
@@ -468,8 +472,8 @@ ul.tagit span.ui-helper-hidden-accessible
   font-family: "brandon-grotesque", sans-serif
   color: #969fab
 
-  -webkit-box-shadow: inset 3px 3px 3px rgba(0,0,0,.3)
-  box-shadow: inset 3px 3px 3px rgba(0,0,0,.3)
+  -webkit-box-shadow: inset 3px 3px 8px 1px rgba(0, 0, 0, 0.3)
+  box-shadow: inset 3px 3px 8px 1px rgba(0, 0, 0, 0.3)
 
   -webkit-box-sizing: border-box
   -moz-box-sizing: border-box
@@ -740,7 +744,7 @@ ul.tagit span.ui-helper-hidden-accessible
     img.user-profile-img, .comment-circle-image
       width: 40px
       position: absolute
-      left: -28px
+      left: -24px
       top: 20px
       -moz-box-shadow: 0px 0px 10px -1px black
       -webkit-box-shadow: 0px 0px 10px -1px black
@@ -762,11 +766,12 @@ ul.tagit span.ui-helper-hidden-accessible
       background: white
       margin: 50px 0px
       width: 580px
+      border-top: 2px solid #c6d0db
 
       img.user-profile-img
         width: 40px
         position: absolute
-        left: -28px
+        left: -24px
         top: -20px
         -moz-box-shadow: 0px 0px 10px -1px black
         -webkit-box-shadow: 0px 0px 10px -1px black
@@ -806,6 +811,7 @@ ul.tagit span.ui-helper-hidden-accessible
         background: url(/assets/comment-actions-bg.png) repeat-x
         .like-comment
           padding-right: 20px
+          font-size: 16px
           .heart-blue
             margin-right: 10px
 
@@ -813,13 +819,15 @@ ul.tagit span.ui-helper-hidden-accessible
   textarea#comment_content, textarea#blog_content
     margin-left: 30px
     margin-top: 20px
-    height: 70px !important
+    height: 95px !important
     width: 530px
-    -moz-box-shadow: 0px 0px 12px -1px #c8d2de inset
-    -webkit-box-shadow: 0px 0px 12px -1px #c8d2de inset
-    box-shadow: 0px 0px 12px -1px #c8d2de inset
+    padding-right: 75px !important
+    -moz-box-shadow: 0px 0px 5px 1px #c8d2de inset
+    -webkit-box-shadow: 0px 0px 5px 1px #c8d2de inset
+    box-shadow: 0px 0px 5px 1px #c8d2de inset
     border: 1px solid #D0D7Df
     padding: 10px
+    resize: none
   #image_form_tab, #video_form_tab
     margin-left: 30px
 
@@ -900,6 +908,7 @@ ul.tagit span.ui-helper-hidden-accessible
   position: fixed
   top: 0
   left: 0
+  min-width: 1280px !important
   width: 100%
   z-index: 1000
   height: 65px
@@ -907,6 +916,10 @@ ul.tagit span.ui-helper-hidden-accessible
 
   -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,.5)
   box-shadow: 4px 4px 4px rgba(0,0,0,.5)
+
+.header
+  min-width: 1280px
+  width: 100%
 
 .hnav.navbar
   width: 960px
@@ -917,7 +930,7 @@ ul.tagit span.ui-helper-hidden-accessible
   border: none 
   border-radius: 0px
   box-shadow: none
-  width: 860px
+  width: 800px
   margin: 0px auto
 
 .hnav .navbar-inner .nav 
@@ -926,7 +939,7 @@ ul.tagit span.ui-helper-hidden-accessible
 .hnav .nav-tabs > li > a 
   border-radius: 0
   border: none
-
+  margin: 0px
   -webkit-box-shadow: none
   box-shadow: none
   height: 65px
@@ -1010,9 +1023,6 @@ ul.tagit span.ui-helper-hidden-accessible
 .hnav 
   margin-bottom: 0px
 
-.hnav .nav 
-  margin-left: 80px
-
 /*top nav bar*/
 /*hdrfrm start*/
 .hdrfrm 
@@ -1024,10 +1034,10 @@ ul.tagit span.ui-helper-hidden-accessible
 .hdrfrm input[type="text"] 
   border-radius: 40px
   height: 27px
-  width: 175px
+  width: 200px
   border: 0px
-  -webkit-box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.3)
-  box-shadow: inset 3px 3px 3px rgba(0, 0, 0, 0.3)
+ 
+  box-shadow: inset 3px 3px 10px rgba(0, 0, 0, 0.3)
 
   -webkit-box-sizing: border-box
   -moz-box-sizing: border-box
@@ -1209,11 +1219,11 @@ a:hover
 
 .usrimg 
   float: left
-  width: 40px
-  height: 40px
-
+  width: 35px
+  height: 35px
   background-size: 100% 100% !important
-  margin-top: -10px
+  margin-top: -8px
+  box-shadow: 2px 3px 8px -2px black inset
 
 .username 
   margin-left: 10px
@@ -1292,6 +1302,7 @@ a:hover
   height: 50px
   width: 50px
   background-size: cover !important
+  box-shadow: 2px 3px 8px -2px black inset
 
 .ui-autocomplete.ui-front.ui-menu.ui-widget.ui-widget-content.ui-corner-all
   z-index: 99999
@@ -1343,6 +1354,7 @@ li.custom-ui-item
   background: #373841
   background: url('/assets/footerbg.png') #373841
   height: 230px
+  margin-top: 70px
 .footer 
   background: #373841
   padding: 20px 0px

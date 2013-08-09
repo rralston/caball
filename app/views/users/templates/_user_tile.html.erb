@@ -1,6 +1,7 @@
 <script type="script/template" id='user_tile_template'>
 
   <div class="row">
+    <a href="/users/<%%= id %>">
       <div class="backdrop-cover"></div>
       <%% if(cover_photo != null){ %>
         <div class="user-cover-photo" style="background: url(<%%= cover_photo.image.url %>) no-repeat">
@@ -10,11 +11,11 @@
         </div>
       <%% } %>
     </div>
-    <img src="<%%= profile_pic %>" class="img-circle user-photo">
+    <div class='img-circle user-photo' style='background: url(<%%= profile_pic %>) no-repeat;'></div>
     <div class="row">
       <div class="span3 user-details grey-backdrop text-center">
         <div class="name bold">
-          <a href="/users/<%%= id %>" target="_blank"><%%= name %></a>
+          <%%= name %></a>
         </div>
 
         <div class="location light">
@@ -26,7 +27,7 @@
           </div>
         </div>
       </div>
-    
+    </a>
 
     <div class="row white">
       <div class="about-user pull-left">

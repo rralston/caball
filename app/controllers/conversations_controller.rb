@@ -7,7 +7,16 @@ class ConversationsController < ApplicationController
   
   def new
 
-    @friends = current_user.friends.pluck('email')
+    # @friends = current_user.friends.pluck('email')
+
+    @friends = current_user.friends.select("users.*, users.name AS label").map{|user| 
+      {
+        "label" => user.label,
+        "value" => user.email,
+        "desc" => user.email
+      }
+    }
+
     @recipient = params[:recipient]
     @subject  = params[:subject] if params[:subject]
 

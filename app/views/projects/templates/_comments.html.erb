@@ -10,7 +10,7 @@
         <%= form_for Comment.new, :remote => true do |c|  %>
           <%= c.hidden_field :commentable_type, :value => 'Project' %>
           <%= c.hidden_field :commentable_id, :value => @project.id %>
-          <%= c.text_area :content, :placeholder => 'Add your project updates here'  %>
+          <%= c.text_area :content, :placeholder => 'Write a post...'  %>
           
           <div class="writeico">
             <ul class="wrtico">

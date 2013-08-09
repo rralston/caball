@@ -117,6 +117,10 @@
             <%= p.label 'Union / Non-union', :class => 'control-label' %>
               <div class="controls">
                 <%= p.select(:union, options_for_select(@unions, @project.union), {}) %>
+
+                <span id='wga_terms' style='display: none;'>
+                  If you select this you must adhere to the WGA guild rates
+                </span>
               </div>
             </div>
 

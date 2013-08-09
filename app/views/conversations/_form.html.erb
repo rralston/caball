@@ -1,13 +1,17 @@
   
-<div class='container'>
+<div class=' container'>
   <%= simple_form_for :conversation, url: :conversations do |f| %>
-
+      <h3>New Conversation</h3>
       <div class="input string required recipients">
         <label class="string required" for="recipients"><abbr title="required">*</abbr>
           Recipients
         </label>
-        <%= text_field_tag 'recipients' %>
+
+        <%= hidden_field_tag 'recipients' %>
       </div>
+
+      <ul type='text' id='tag_users' style='margin-left: 0px;width: 400px;'>
+      </ul>
 
       <% if @subject.present? %>
         <%= f.input :subject, :as => :hidden, :input_html => { :value => @subject } %>
@@ -30,58 +34,3 @@
   <% end %>
 </div>
 
-<script type="text/javascript">
-
-$(document).ready(function(){
-
-  var availableTags = <%= raw @friends %>;
-
-  function split( val ) {
-    return val.split( /,\s*/ );
-  }
-  function extractLast( term ) {
-    return split( term ).pop();
-  }
-
-  $( "#recipients" )
-    // don't navigate away from the field on tab when selecting an item
-    .bind( "keydown", function( event ) {
-      if ( event.keyCode === $.ui.keyCode.TAB &&
-          $( this ).data( "ui-autocomplete" ).menu.active ) {
-        event.preventDefault();
-      }
-    })
-    .autocomplete({
-      minLength: 0,
-      source: function( request, response ) {
-        // delegate back to autocomplete, but extract the last term
-        response( $.ui.autocomplete.filter(
-          availableTags, extractLast( request.term ) ) );
-      },
-      focus: function() {
-        // prevent value inserted on focus
-        return false;
-      },
-      select: function( event, ui ) {
-        var terms = split( this.value );
-        // remove the current input
-        terms.pop();
-        // add the selected item
-        terms.push( ui.item.value );
-        // add placeholder to get the comma-and-space at the end
-        terms.push( "" );
-        this.value = terms.join( ", " );
-        return false;
-      },
-      messages: {
-        noResult: '',
-        results: function(){
-          return null
-        }
-      }
-    });
-
-});  
-  
-
-</script>

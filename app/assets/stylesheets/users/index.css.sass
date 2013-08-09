@@ -8,9 +8,7 @@
   font-size: 18px
   font-family: "brandon-grotesque", sans-serif
   color: #969fab
-
-  -webkit-box-shadow: inset 3px 3px 3px rgba(0,0,0,.3)
-  box-shadow: inset 3px 3px 3px rgba(0,0,0,.3)
+  box-shadow: inset 3px 3px 13px -4px rgba(0, 0, 0, 0.3)
 
   -webkit-box-sizing: border-box
   -moz-box-sizing: border-box
@@ -68,7 +66,7 @@
 .user_tile
   margin-left: 10px
   margin-bottom: 10px
-  margin-top: 15px
+  margin-top: 5px
   width: 235px
   position: relative
   -webkit-box-shadow: 0px 0px 19px -7px black
@@ -83,14 +81,17 @@
     width: 235px
     position: absolute
     background: black
-    opacity: 0.5
-    filter: alpha(opacity=50)
-  img.user-photo
+    opacity: 0.1
+    filter: alpha(opacity=10)
+  .user-photo
     width: 95px
     border: 6px solid white
     position: absolute
     top: 27px
     left: 67px
+    height: 95px
+    background-size: cover !important
+    box-shadow: 0px 0px 6px 0px black inset
   .user-details 
     padding-top: 30px
     width: 100%
