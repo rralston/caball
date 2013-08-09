@@ -2,12 +2,16 @@ $role-circle-border: #1691de
 $divider-border: #c6d0db
 $grey-backdrop-text: #636a73
 
+#users-dashboard
+  margin-top: 45px !important
+
 .dashboard-main-nav
   ul.nav
-    background: #2d3456
+    background: url('/assets/dash-nav-bg.png') repeat
     position: relative
     left: -40px
     width: 120px
+    height: 850px
     -moz-border-radius: 0px
     -webkit-border-radius: 0px 0px 0px 7px
     border-radius: 0px 0px 0px 7px
@@ -15,13 +19,14 @@ $grey-backdrop-text: #636a73
     li.active > a
       background-color: #eeeeee
     li
-      margin: 10px 0px 10px 10px
+      margin: 10px 0px
+      border-bottom: 1px solid #2d3456
       a
         -moz-border-radius: 0px
         -webkit-border-radius: 7px 0px 0px 7px
         border-radius: 7px 0px 0px 7px
 
-        margin: 0px
+        margin: 0px 0px 0px 10px
         height: 55px
         height: 110px
         .nav-icon
@@ -41,7 +46,8 @@ $grey-backdrop-text: #636a73
         .nav-text
           text-align: center
           color: white
-    li a:hover, li.active > a
+    li.active > a
+      background: #edf1f7
       .nav-icon.home
         background: url(/assets/home-blue-big.png) center no-repeat
       .nav-icon.messages
@@ -55,6 +61,10 @@ $grey-backdrop-text: #636a73
       .nav-text
         text-align: center
         color: #2d3456
+    li a:hover
+      background: none    
+    li:hover
+      box-shadow: inset 0 0 4px 4px rgba(0,0,0,.4), 0 0
 
 
 
