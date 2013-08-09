@@ -158,23 +158,20 @@
           <% Project.sample_featured_projects.each do |project|  %>
 
           <div class="project">
-            <div class="ptopimg">
-              
-                <img src="<%= project.display_photo %>" alt="">
-              
-              
-              <div class="topcnt">
-                  <h3 class="medium">
-                    <a href="/projects/<%= project.id %>">
-                      <%= project.title %>
-                    </a>
-                  </h3>
-                  <p>
-                    <%= project.description %>
-                  </p>
-                </div>
-              
-            </div>
+            <a href="/projects/<%= project.id %>">
+              <div class="ptopimg">
+                  <img src="<%= image_path(project.display_photo) %>" alt="">
+                <div class="topcnt">
+                    <h3 class="medium">
+                        <%= project.title %>
+                    </h3>
+                    <p>
+                      <%= project.description %>
+                    </p>
+                  </div>
+                
+              </div>
+            </a>
             <div class="pinfo">
               
               <ul class="plist">
@@ -261,18 +258,19 @@
           
           <% User.featured_people.each do |user| %>
             <div class="user_tile pull-left">
-              <div class="row">
+              <a href="/users/<%= user.id %>">
+                <div class="row">
                   <div class="backdrop-cover"></div>
                   
-                    <div class="user-cover-photo" style="background: url(<%= user.display_cover %>) no-repeat">
+                    <div class="user-cover-photo" style="background: url(<%= image_path(user.display_cover) %>) no-repeat">
                     </div>
                   
                 </div>
-                <img src="<%= user.profile_pic %>" class="img-circle user-photo">
+                <img src="<%= image_path(user.profile_pic) %>" class="img-circle user-photo">
                 <div class="row">
                   <div class="span3 user-details grey-backdrop text-center">
                     <div class="name bold">
-                      <a href="/users/1" target="_blank"><%= user.name %></a>
+                      <%= user.name %>
                     </div>
 
                     <div class="location light">
@@ -284,7 +282,7 @@
                       </div>
                     </div>
                   </div>
-                
+              </a>
 
                 <div class="row white">
                   <div class="about-user pull-left">
