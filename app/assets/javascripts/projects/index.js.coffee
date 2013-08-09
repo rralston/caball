@@ -1,17 +1,17 @@
 $(document).ready ()->
-  $('.slider-wrapper').bxSlider
-    auto: false
-    useCss: true
-    infiniteLoop: true
-    pause: 4000
-    adaptiveHeight: false
-    mode: 'horizontal'
-    speed: 1000
-    autoHover: true
-    pager: false
-    nextText:'Prev'
-    prevText:' Prev'
-    slideMargin: 5
+  # $('.slider-wrapper').bxSlider
+  #   auto: false
+  #   useCss: true
+  #   infiniteLoop: true
+  #   pause: 4000
+  #   adaptiveHeight: false
+  #   mode: 'horizontal'
+  #   speed: 1000
+  #   autoHover: true
+  #   pager: false
+  #   nextText:'Prev'
+  #   prevText:' Prev'
+  #   slideMargin: 5
 
   app.fn.extend_params_data = (data)->
     form = $('#projects_search_form')
