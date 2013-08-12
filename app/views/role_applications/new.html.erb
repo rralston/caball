@@ -21,7 +21,7 @@
 
       <%= role_application.submit 'Submit Application', :class => 'btn btn-success' %>
     <% end %>
-  <% elsif %>  
+  <% elsif current_user.has_applied?(@role) %>  
     <div class='text-center' style='margin-top: 40px;'>
       <h4>You have already applied for this role.</h4>
     </div>
