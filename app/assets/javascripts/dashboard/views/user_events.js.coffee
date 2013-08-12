@@ -4,6 +4,7 @@ app.views.user_events = Backbone.View.extend
   
   render: ()->
     this.$el.html(this.template)
+    
     # this.collection.forEach(this.renderEach, this)
     this.collection.popular_events().forEach(this.renderEachPopular, this)
     this.collection.upcoming_events().forEach(this.renderEachUpcoming, this)
