@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag "home_page.css" %>
 <%= stylesheet_link_tag "projects/index.css" %>
 <%= stylesheet_link_tag "users/index.css" %>
-
+<!-- We love people who view source. If you're looking for more details please visit our Facebook page on http://www.facebook.com/Filmzu or Twitter @TheFilmzu.  -->
 <!--========= Attract top starts======------>
 <div class="attractwrap">
   <div class="attractshadow">
@@ -11,15 +11,32 @@
       
       <div class='midtext text-center'>
         <div class='center-it light'>
-          Filmaking requires a lot of people with different talents.<br/>Filmzu takes the headache out of searching for them and, bring them all to one place. See hoe easy Filmzu makes creating video content.
+          Filmaking requires a lot of people with different talents.<br/>Filmzu takes the headache out of searching for Film Professionals by bringing them all to one place. See how easy Filmzu makes creating video content.
         </div>
       </div>
       
-      <div class="startbutton text-center">
+							<!-- Begin Signup Form -->	
+							<div class="text-center">							
+							<form action="http://filmzu.us6.list-manage.com/subscribe/post?u=f7f6702bd4e503b98fda073a0&amp;id=c0f4907d41" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+
+							<br>
+							<div class="input-append">
+							<input type="email" value="" name="EMAIL" class="span6 email" id="mce-EMAIL" placeholder="Email Address" required>
+							<input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="btn">
+							</div>
+								<label for="mce-EMAIL">We are currently in closed Alpha testing, please sign-up and we will let you know when we launch</label>
+							</form>
+							</div>
+							<!--End Signup Form -->
+											
+							<% if false %><!--========= Exclusion starts======------>
+      <!-- <div class="startbutton text-center">
         <a href="/auth/facebook" class="strtbtn btn regular text-left">
           <div class="strtbtntext">Free, Start Creating</div>
+
         </a>
-      </div>
+      </div> -->
+	    <% end %><!--========= Exclusion Ends======------>
 
       <div class="wtchvideo offset4 text-center" data-toggle='modal' data-target='#video-modal'>
         <div class="wtchvideobtn btn">
@@ -138,7 +155,7 @@
     </div>
 </div>
 <!--========= detailed info ends======------>
-
+<% if false %><!--========= Exclusion starts======------>
 <!--=========  featured projects starts======-->
 <div class="featurewrap">
   <div class="featured maincontain container">
@@ -240,7 +257,6 @@
 </div>
 <!--========= featured projects ends======-->
 
-
 <div class="featurewrap" id="featuredpeople">
   <div class="featured maincontain container">
     <div class="row" style='width: 960px'>
@@ -321,6 +337,7 @@
           
         </div>
       <!--======Projects div===-->
+	    <% end %><!--========= Exclusion Ends======------>
     </div>
     </div>
     </div>
@@ -334,7 +351,7 @@
     <h3><span>Filmzu</span></h3>
   </div>
   <div class="modal-body">
-    <iframe width="530" height="315" src="//www.youtube.com/embed/hoRyaVKE2vE" frameborder="0" allowfullscreen></iframe>
+    <iframe width="530" height="315" src="//www.youtube.com/embed/o3uKEofAjgA" frameborder="0" allowfullscreen></iframe>
   </div>
   <div class='modal-footer'>
     <button class='btn' data-dismiss="modal">Close</button>
