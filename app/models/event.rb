@@ -51,15 +51,14 @@ class Event < ActiveRecord::Base
   after_validation :geocode, :if => :location_changed?  # auto-fetch coordinates
 
 
-  # popular are those having more number of attendees and are upcoming...
+  # popular are those having more number of total votes...
+  # total_votes is (sum of upvotes) - (sum of down votes)
+  # vote.value is 1 for upvote, -1 for downvote.
   scope :popular,
-    select('events.*, count(attends.id) AS attends_size').
-    joins("inner join attends on (attends.attendable_id = events.id) ").
-    joins("inner join important_dates ON important_dates.important_dateable_id = events.id AND important_dates.is_start_date = true AND important_dates.important_dateable_type = 'Event'").
-    where("important_dates.date_time > ?", Time.now).
-    where("attends.attendable_type = 'Event'").
+    select('events.*, SUM(votes.value) AS votes_total').
+    joins('inner join votes on (votes.votable_id = events.id) and (votes.votable_type = "Event")').
     group('events.id').
-    order('attends_size DESC')
+    order('votes_total DESC')
 
   # newly added upcoming events.
   scope :newly_added,
@@ -83,7 +82,6 @@ class Event < ActiveRecord::Base
   end
 
   def self.upcoming_events
-    # Event.joins(:start).where("important_dates.date_time > ? OR important_dates.date_time < ?", Time.now, Time.now)
     Event.joins(:start).where("important_dates.date_time > ?", Time.now)
   end
 
@@ -260,7 +258,9 @@ class Event < ActiveRecord::Base
 
   # cummulative of up and down votes
   def votes_count
-    up_votes.count - down_votes.count
+    Vote.select('SUM(votes.value) AS total').
+          where("votes.votable_id = ? AND votes.votable_type = ? ", self.id, 'Event').
+          first.total.to_i
   end
 
   def self.custom_json(events, user = nil)

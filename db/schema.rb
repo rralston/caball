@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130808102742) do
+ActiveRecord::Schema.define(:version => 20130812082718) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -327,6 +327,7 @@ ActiveRecord::Schema.define(:version => 20130808102742) do
     t.string   "votable_type"
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
+    t.integer  "value",        :default => 0
   end
 
   add_foreign_key "notifications", "conversations", :name => "notifications_on_conversation_id"
