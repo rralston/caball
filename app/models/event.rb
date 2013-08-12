@@ -56,7 +56,7 @@ class Event < ActiveRecord::Base
   # vote.value is 1 for upvote, -1 for downvote.
   scope :popular,
     select('events.*, SUM(votes.value) AS votes_total').
-    joins('inner join votes on (votes.votable_id = events.id) and (votes.votable_type = "Event")').
+    joins("inner join votes on votes.votable_id = events.id and votes.votable_type = 'Event' ").
     group('events.id').
     order('votes_total DESC')
 
