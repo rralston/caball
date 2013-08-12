@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require users/bootstrap-lightbox.js
+
 //= require projects/numerous-2.1.1.js
 //= require projects/slider.js
 //= require application/sliding.form.js
