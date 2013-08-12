@@ -36,7 +36,7 @@
             
             <div class='span7 project-created-by light'>
               <i>created by </i>
-              <%= link_to @project.user.name, "users/#{@project.user.id}", :class => 'medium' %>
+              <%= link_to @project.user.name, "/users/#{@project.user.id}", :class => 'medium' %>
               &nbsp; &nbsp;<i class='report_entity icon-exclamation-sign action-div show_tooltip' data-toggle='modal'  data-target='#report-modal' title='Report Project'></i>
             </div>
 

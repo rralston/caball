@@ -313,7 +313,12 @@ class User < ActiveRecord::Base
 
   # checks if the user can apply for the specified role.
   def can_apply_for?(role)
-    self.talents.map(&:name).include?(role.name)
+     self.has_applied?(role) == false and self.talents.map(&:name).include?(role.name)
+  end
+
+  # tells if user has already applied to this role.
+  def has_applied?(role)
+    self.role_applications.where(:role_id => role.id).present?
   end
 
   def valid_videos

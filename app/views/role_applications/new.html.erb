@@ -1,4 +1,4 @@
-<div class='well'>
+<div class='container'>
   
 
   <% if current_user.can_apply_for?(@role) %>
@@ -21,9 +21,13 @@
 
       <%= role_application.submit 'Submit Application', :class => 'btn btn-success' %>
     <% end %>
+  <% elsif %>  
+    <div class='text-center' style='margin-top: 40px;'>
+      <h4>You have already applied for this role.</h4>
+    </div>
   <% else %>
     <div class='text-center' style='margin-top: 40px;'>
-      You are not eligible to apply for this role as your talents doesn't include the particular role - "<%= @role.name %>"
+      <h4>You are not eligible to apply for this role as your talents doesn't include the particular role - "<%= @role.name %>"</h4>
     </div>
 
   <% end %>

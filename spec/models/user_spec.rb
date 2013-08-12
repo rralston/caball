@@ -63,14 +63,6 @@ describe User do
     specify { subject.mailboxer_email(nil).should eql(subject.email) }
   end
 
-  context "experience" do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:talent) { FactoryGirl.create(:talent, :experience => User.experience['0-2 year(s)']) }
-    before { user.talents.push(talent) }
-
-    it { user.talents.first.experience.should == User.experience['0-2 year(s)'] }
-  end
-
   context "Profile Pic" do
     context "When a profile pic exists, it shoudl return the medium version of it" do
       before(:all){
@@ -382,6 +374,20 @@ describe User do
     specify { @roled_user.can_apply_for?(@uneligible_role).should == false }
   end
 
+  context "should tell if the user applied for the role" do
+    before(:all){
+      @roled_user = FactoryGirl.create(:user, :talents => [FactoryGirl.create(:talent, :name => 'Actor'), FactoryGirl.create(:talent, :name => 'Costumes')])
+
+      @eligible_role = FactoryGirl.create(:role, :name => 'Actor')
+      @uneligible_role = FactoryGirl.create(:role, :name => 'Hair')
+
+      @roled_user.role_applications.create(:role_id => @eligible_role.id)
+    }
+    specify { @roled_user.has_applied?(@eligible_role).should == true }
+    specify { @roled_user.can_apply_for?(@eligible_role).should == false }
+    specify { @roled_user.can_apply_for?(@uneligible_role).should == false }
+  end
+
   context "valid videos" do
     before(:all){
       @video_user = FactoryGirl.create(:user, :videos => [
@@ -407,7 +413,7 @@ describe User do
       @com_user2 = FactoryGirl.create(:user)
     }
 
-    specify { @com_user1.completeness.should == 25 }
+    specify { @com_user1.completeness.should == 24 }
     specify { @com_user2.completeness.should == 0 }
   end
 

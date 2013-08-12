@@ -16,6 +16,12 @@ body
   padding-bottom: 0px !important
   /* this will keep it close to footer */
 
+.leave_margin
+  margin-top: 70px
+
+.contentwrap
+  margin-top: 65px
+
 header
   box-shadow: none !important
   .brand
@@ -487,7 +493,7 @@ ul.tagit span.ui-helper-hidden-accessible
 
 /*topsrchwrap ends-------=============== */
 
-/* Commons is events, projects and people show pages */
+/* `ons is events, projects and people show pages */
 
 .right-container
   .shrink-div
@@ -735,24 +741,25 @@ ul.tagit span.ui-helper-hidden-accessible
   border-left: 5px solid $comments-left-border
   width: 595px
   position: relative
+  margin-top: 20px
   #comment_please_wait
     display: none
     margin-left: 30PX
   #please_sign_in
     margin-left: 30PX
   .add-comment
-    img.user-profile-img, .comment-circle-image
+    .user-profile-img, .comment-circle-image
+      display: block
       width: 40px
+      height: 40px
       position: absolute
       left: -24px
-      top: 20px
-      -moz-box-shadow: 0px 0px 10px -1px black
-      -webkit-box-shadow: 0px 0px 10px -1px black
-      box-shadow: 0px 0px 10px -1px black
+      top: 0px
+      box-shadow: 2px 3px 6px -3px black inset
       border: 1px solid #D0D7Df
   .writeico
     position: absolute
-    top: 25px
+    top: 10px
     right: 45px
   .wrtico li
     display: inline
@@ -768,14 +775,14 @@ ul.tagit span.ui-helper-hidden-accessible
       width: 580px
       border-top: 2px solid #c6d0db
 
-      img.user-profile-img
+      .user-profile-img
+        display: block
         width: 40px
+        height: 40px
         position: absolute
         left: -24px
-        top: -20px
-        -moz-box-shadow: 0px 0px 10px -1px black
-        -webkit-box-shadow: 0px 0px 10px -1px black
-        box-shadow: 0px 0px 10px -1px black
+        top: -15px
+        box-shadow: 2px 3px 6px -3px black inset
         border: 1px solid #D0D7Df
       .comment-details
         padding: 15px 10px 10px 30px
@@ -818,9 +825,9 @@ ul.tagit span.ui-helper-hidden-accessible
 
   textarea#comment_content, textarea#blog_content
     margin-left: 30px
-    margin-top: 20px
+    margin-top: 0px
     height: 95px !important
-    width: 530px
+    width: 445px
     padding-right: 75px !important
     -moz-box-shadow: 0px 0px 5px 1px #c8d2de inset
     -webkit-box-shadow: 0px 0px 5px 1px #c8d2de inset
@@ -914,8 +921,8 @@ ul.tagit span.ui-helper-hidden-accessible
   height: 65px
   background: url('/assets/hbg.png') repeat #279f8d
 
-  -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,.5)
-  box-shadow: 4px 4px 4px rgba(0,0,0,.5)
+  -webkit-box-shadow: 0px 4px 4px rgba(0,0,0,.5)
+  box-shadow: 0px 4px 4px rgba(0,0,0,.5)
 
 header
   .logo
