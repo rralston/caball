@@ -42,7 +42,7 @@ module ApplicationHelper
   def google_analytics_js(id = nil)
  
     content_tag(:script, :type => 'text/javascript') do
-        "var _gaq = _gaq || [];
+      raw "var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-38653918-1']);
         _gaq.push(['_trackPageview']);
 
