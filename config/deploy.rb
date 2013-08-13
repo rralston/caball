@@ -25,6 +25,15 @@ namespace :deploy do
     end
   end
 
+  desc "tail production log files" 
+  task :tail_logs, :roles => :app do
+    run "tail -f #{shared_path}/log/production.log" do |channel, stream, data|
+      puts  # for an extra line break before the host name
+      puts "#{channel[:host]}: #{data}" 
+      break if stream == :err    
+    end
+  end
+  
   task :setup_config, roles: :app do
     sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
