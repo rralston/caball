@@ -11,7 +11,7 @@ $(document).ready ->
     btn = $(event.target)
     friendId = parseInt(btn.attr('data-friend-id'))
     
-    if app.fn.check_current_user() and app.fn.check_not_same_user(friendId, "you can't follow yourself.")
+    if app.fn.check_current_user() and app.fn.check_not_same_user(friendId, "You can't follow yourself.")
       btn.html('Please wait..')
       url = '/friendships'
 

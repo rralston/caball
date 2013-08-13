@@ -14,7 +14,7 @@ app.views.project = Backbone.View.extend
   follow_project: (event)->
     _this = this
     btn = $(event.target)
-    if app.fn.check_current_user()
+    if app.fn.check_current_user() and app.fn.check_not_same_user(_this.model.get('user').id, "You can't like your own project.")
       btn.html('Please wait..')
       if _this.model.get('user_following')
         _this.un_follow_project(event)

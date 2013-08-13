@@ -25,11 +25,11 @@ class ApplicationController < ActionController::Base
   def main_search
     query = params[:q]
 
-    events = Event.search_events(query)
+    events   = Event.search_events(query)
     projects = Project.search_projects(query)
-    users = User.search_users(query)
+    users    = User.search_users(query)
 
-    render :json => JSON.parse(events.to_json(:for_search => true)) + JSON.parse(projects.to_json(:for_search => true)) + JSON.parse(users.to_json(:for_search => true))
+    render :json => JSON.parse(users.to_json(:for_search => true)) + JSON.parse(projects.to_json(:for_search => true)) + JSON.parse(events.to_json(:for_search => true))
   end
 
 

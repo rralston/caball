@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  load_and_authorize_resource :except => [:dashboard, :next_recommended_projects, :next_recommended_people, :next_recommended_events, :set_notification_check_time]
+  load_and_authorize_resource :except => [:next_recommended_projects, :next_recommended_people, :next_recommended_events, :set_notification_check_time]
   before_filter :search, only: [:index, :show, :new, :edit, :update, :dashboard]
   
   def index
@@ -131,6 +131,87 @@ class UsersController < ApplicationController
   def dashboard
     @user = current_user
     render :template => 'dashboard/index'
+  end
+
+  def dashboard_projects
+    resp = {}
+    resp['user_projects'] = current_user.projects
+    resp['applied_projects'] = current_user.applied_projects
+    respond_to do |format|
+      format.html { redirect_to root_url }
+      format.json {
+        render :json => resp.to_json(:include => 
+                                      [
+                                        :open_roles,
+                                        :filled_roles,
+                                        :roles,
+                                        :photos,
+                                        :fans,
+                                        :user
+                                      ],
+                                      :methods => [
+                                        :pending_applications,
+                                        :participant_mails,
+                                        :roles_json,
+                                        :roles_for_dashboard,
+                                        :roles_percent,
+                                        :non_selected_applicants_mails,
+                                        :selected_applicants_mails
+                                      ])
+      }
+    end
+  end
+
+
+  def dashboard_events
+    resp = {}
+    resp['user_events'] = current_user.events
+    resp['attending_events'] = current_user.attending_events
+    respond_to do |format|
+      format.html { redirect_to root_url }
+      format.json {
+        render :json => resp.to_json(:include => [
+                                                  :attendees,
+                                                  { 
+                                                    :start => {
+                                                      :methods => [
+                                                        :day,
+                                                        :month_year
+                                                      ]
+                                                    }
+                                                  },
+                                                  {
+                                                    :end => {
+                                                      :methods => [
+                                                        :day,
+                                                        :month_year
+                                                      ]
+                                                    } 
+                                                  },
+                                                  :comments,
+                                                  :likes,
+                                                  :main_photo,
+                                                  :user
+                                                ],
+                                                :methods => [
+                                                  :attendees_emails
+                                                ])
+      }
+    end
+  end
+
+  def dashboard_conversations
+    resp = {}
+    resp['inbox_conversations'] = current_user.mailbox.inbox
+    resp['sent_conversations'] = current_user.mailbox.sentbox
+    resp['trash_conversations'] = current_user.mailbox.trash
+
+    respond_to do |format|
+      format.html { redirect_to root_url }
+      format.json {
+        render :json => resp.to_json(:check_user => current_user)
+      }
+    end
   end
 
   def next_recommended_projects

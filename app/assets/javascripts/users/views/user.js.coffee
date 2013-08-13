@@ -12,7 +12,7 @@ app.views.user = Backbone.View.extend
 
   follow_click: (event)->
     _this = this
-    if app.fn.check_current_user()
+    if app.fn.check_current_user() and app.fn.check_not_same_user(_this.model.id, "You can't follow yourself")
       btn = $(event.target)
       btn.html('Please wait..')
 

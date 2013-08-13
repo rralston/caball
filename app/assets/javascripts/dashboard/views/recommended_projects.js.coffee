@@ -28,7 +28,6 @@ app.views.recommended_projects = Backbone.View.extend
 
   next_projects: (event)->
     page_number = parseInt($(event.target).attr('data-next'))
-    console.log 'here'
     $.ajax
       url: 'users/recommended_projects'
       data: 

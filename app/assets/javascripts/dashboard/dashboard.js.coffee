@@ -11,8 +11,70 @@ $(document).ready ->
     app.fn.show_generic_message_modal(event)
 
   $('body').on 'click', 'a[href=#projects]', (event)->
-    $('#dashboard_projects').html(app.user_projects_view.render().el)
-    $('#dashboard_projects').find('#applied-projects').html(app.applied_projects_view.render().el)
+    if app.projects_loaded == false
+      # fetch and render the user projects
+      $.ajax
+        url: '/dashboard/projects.json'
+        type: 'GET'
+        success: (resp)->
+          if resp != 'false'
+            # user projects
+            app.user_projects.reset(resp.user_projects)
+            app.applied_projects.reset(resp.applied_projects)
+
+            # render and add views to DOM
+            $('#dashboard_projects').html(app.user_projects_view.render().el)
+            $('#dashboard_projects').find('#applied-projects').html(app.applied_projects_view.render().el)
+
+            # set projects loaded as true
+            app.projects_loaded = true
+          else
+            alert('Something went wrong, Please try again')
+
+  
+  $('body').on 'click', 'a[href=#events]', (event)->
+    if app.events_loaded == false
+      # fetch and render the user events
+      $.ajax
+        url: '/dashboard/events.json'
+        type: 'GET'
+        success: (resp)->
+          if resp != 'false'
+            # user events
+            app.user_events.reset(resp.user_events)
+            app.attending_events.reset(resp.attending_events)
+
+            # render and add views to DOM
+            $('#dashboard_events').html(app.user_events_view.render().el)
+            $('#dashboard_events').find('#attending-events').html(app.attending_events_view.render().el)
+
+            # set events loaded as true
+            app.events_loaded = true
+          else
+            alert('Something went wrong, Please try again')
+
+  $('body').on 'click', 'a[href=#messages]', (event)->
+    if app.messages_loaded == false
+      # fetch and render the user events
+      $.ajax
+        url: '/dashboard/conversations.json'
+        type: 'GET'
+        success: (resp)->
+          if resp != 'false'
+            # user conversations
+            app.inbox_conversations.reset(resp.inbox_conversations)
+            app.sent_conversations.reset(resp.sent_conversations)
+            app.trash_conversations.reset(resp.trash_conversations)
+
+            # render and add views to DOM
+            $('#conversation-tab-inbox').html(inbox_view.render().el)
+            $('#conversation-tab-sent').html(sent_view.render().el)
+            $('#conversation-tab-trash').html(trash_view.render().el)
+
+            # set conversations loaded as true
+            app.messages_loaded = true
+          else
+            alert('Something went wrong, Please try again')
 
 
   app.fn.add_receipient = (selector, email)->

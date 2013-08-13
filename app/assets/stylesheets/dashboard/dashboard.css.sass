@@ -72,9 +72,14 @@ $grey-backdrop-text: #636a73
 
 
 .dashboard-tabs
-  .tab-pane
-  background: #eaedf0
-  overflow: hidden
+  .tab-pane.main
+    background: #eaedf0
+    overflow: hidden
+    min-height: 900px
+    .dashboard_section_loading
+      margin: 300px 0px
+    .message_for_empty
+      margin: 10px 0px 30px 0px
 .dashboard-tab-main-head
   background: url(/assets/dashboard-section-bg.png) center repeat-x
   min-height: 130px
@@ -105,6 +110,11 @@ $grey-backdrop-text: #636a73
   color: #969fab
 .dashboard-tab-heading.secondary
   border-top: 1px solid $divider-border
+
+
+.conversations-display-tabs
+  .dashboard_section_loading
+    margin-top: 100px !important
 
 
 .profpicwrap

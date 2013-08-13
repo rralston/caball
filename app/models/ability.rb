@@ -10,6 +10,10 @@ class Ability
     can :read, User
     can :read, Project
 
+    can [:dashboard, :dashboard_projects, :dashboard_events, :dashboard_conversations], User do
+      user.persisted?
+    end
+
     can [:update, :destroy, :custom_update], User do |user_under_action|
       user_under_action == user
     end
