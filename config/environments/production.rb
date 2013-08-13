@@ -81,5 +81,5 @@ Caball::Application.configure do
    }
   
   # Change when Push to the Website or will Error out
-  config.action_mailer.default_url_options = { :host => 'mysterious-brook-4528.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'obscure-temple-3104.herokuapp.com' }
 end
