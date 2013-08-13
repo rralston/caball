@@ -76,7 +76,7 @@
               <div class="srchopt">
                 <div class="rdboxwrap">
                   <input type="radio" name='distance' value='<%= distance %>' id='<%= distance %>'>
-                  <label class="rdlabel" for="<%= distance %>"></label>
+                  <label class="rdlabel distance_radio" for="<%= distance %>"></label>
                 </div>
                 <span class="chktxt"><%= distance %> miles</span>
               </div>
@@ -179,20 +179,33 @@ $('#popular_users_container').html(popular_users_view.render().el)
 app.result_users = new app.collections.users()
 app.result_users_view = new app.views.users({ collection: app.result_users })
 
+// default initial state
+app.geolocation_tried = false
 
-// get user current location to search
-if(navigator.geolocation){
-  navigator.geolocation.getCurrentPosition(function(position){
-    var latlng = new google.maps.LatLng(
-                      position.coords.latitude,
-                      position.coords.longitude);
+$('body').on('click', '.distance_radio', function(event){
+  // if the geolocation is not yet tried
+  if(app.geolocation_tried == false){
+    // get user current location to search
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(function(position){
+        var latlng = new google.maps.LatLng(
+                          position.coords.latitude,
+                          position.coords.longitude);
 
-    var geoCoder = new google.maps.Geocoder();
+        var geoCoder = new google.maps.Geocoder();
 
-    geoCoder.geocode({ location: latlng }, function(results, status){
-      app.current_user_location = results[3].formatted_address;
-    });
-  });
-}
+        geoCoder.geocode({ location: latlng }, function(results, status){
+          app.current_user_location = results[3].formatted_address;
+        });
+      });
+    }
+
+    // set geo_location tried status to true
+    app.geolocation_tried = true
+
+  }
+});
+
+
 
 </script>

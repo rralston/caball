@@ -57,6 +57,8 @@ class Event < ActiveRecord::Base
   scope :popular,
     select('events.*, SUM(votes.value) AS votes_total').
     joins("inner join votes on votes.votable_id = events.id and votes.votable_type = 'Event' ").
+    joins("inner join important_dates ON important_dates.important_dateable_id = events.id AND important_dates.is_start_date = true AND important_dates.important_dateable_type = 'Event'").
+    where("important_dates.date_time > ?", Time.now).
     group('events.id').
     order('votes_total DESC')
 
@@ -66,7 +68,7 @@ class Event < ActiveRecord::Base
     joins("inner join important_dates ON important_dates.important_dateable_id = events.id AND important_dates.is_start_date = true AND important_dates.important_dateable_type = 'Event'").
     where("important_dates.date_time > ?", Time.now).
     group('events.id').
-    order('created_at DESC')
+    order('eventcreated_at DESC')
 
 
   # date ordered on start date

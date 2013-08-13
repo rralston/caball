@@ -36,7 +36,6 @@ $(document).ready ()->
 
   $('body').on 'click', '.remove_applicant', (event)->
     btn = $(event.target)
-    console.log btn
     role_id = btn.data('roleid')
     application_id = btn.data('applicationid')
     $.ajax
@@ -53,7 +52,8 @@ $(document).ready ()->
 
   $('body').on 'click', '.btn-like-project', (event)->
     btn = $(event.target)
-    if app.fn.check_current_user()
+    owner_id = btn.attr('data-ownerId')
+    if app.fn.check_current_user() and app.fn.check_not_same_user(owner_id, "you can't like your own project.")
       btn.html('Please wait..')
       if btn.hasClass('liked')
         $.ajax

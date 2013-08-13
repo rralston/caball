@@ -8,11 +8,11 @@ $(document).ready ->
   app.fn.initialize_send_generic_message()
 
   $('body').on 'click', '.btn-follow', (event) ->
-
-    if app.fn.check_current_user()
-      btn = $(event.target)
+    btn = $(event.target)
+    friendId = parseInt(btn.attr('data-friend-id'))
+    
+    if app.fn.check_current_user() and app.fn.check_not_same_user(friendId, "you can't follow yourself.")
       btn.html('Please wait..')
-
       url = '/friendships'
 
       if btn.hasClass('unfollow')
@@ -22,7 +22,7 @@ $(document).ready ->
         url: url
         type: 'POST'
         data:
-          friend_id: btn.attr('data-friend-id')
+          friend_id: friendId
         success: (resp)->
           if resp != 'false'
             
@@ -47,7 +47,6 @@ $(document).ready ->
 
           else
             alert('Something went wrong, Please try again.')
-
 
   $('body').on 'click', '.btn-endorse', (event)->
     if app.fn.check_current_user

@@ -261,6 +261,20 @@ app.fn.initialize_cat_complete_search = function(selector, on_select_callback){
    });
 }
 
+app.fn.check_not_same_user = function(id, message){
+  // returns true if current user id if different from passed id
+  if(parseInt(app.current_user.id) == parseInt(id)){
+    if(typeof message == 'undefined')
+      message = "You can't continue with this action.";
+
+    alert(message);
+    return false;
+  }else{
+    return true;
+  }
+
+}
+
 app.fn.check_current_user = function(){
   // need app.current_user to be set..!
   if(app.current_user)
@@ -269,9 +283,9 @@ app.fn.check_current_user = function(){
     alert('Please login to continue with the action');
     return false;
   }
-    
-
 }
+
+
 
 app.fn.initialize_send_generic_message = function(){
   $('body').on('click', '.send-generic-message', function(event){

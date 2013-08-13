@@ -25,7 +25,7 @@ app.views.blog = Backbone.View.extend
           success: (resp) ->
             if resp != 'false'
               _this.model.set('user_following', true)
-              count_div = _this.$el.find('.like-comment .likes-count')
+              count_div = _this.$el.find('.like-blog .likes-count')
               likes_count = count_div.html()
               count_div.html(parseInt(likes_count) + 1)
             else
@@ -45,7 +45,7 @@ app.views.blog = Backbone.View.extend
         success: (resp) ->
           if resp != 'false'
             _this.model.set('user_following', false)
-            count_div = _this.$el.find('.like-comment .likes-count')
+            count_div = _this.$el.find('.like-blog .likes-count')
             likes_count = count_div.html()
             count_div.html(parseInt(likes_count) - 1)
           else

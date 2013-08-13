@@ -1,61 +1,56 @@
 <script type="script/template" id='blogs_template'>
 
-  <div class='row add-comment'>
-    <div class='span8'>
-      <div class='row'>
-        <% if current_user %>
-          <div class="usrimg img-circle user-profile-img" style='background: url(<%= current_user.profile_pic %>)'> </div>
-        <% end %>
-
-        <%= form_for Blog.new, :remote => true do |c|  %>
-          <%= c.text_area :content, :placeholder => 'Write a post...'  %>
-
+  <% if current_user == @user %>
+    <div class='row add-comment'>
+      <div class='span8'>
+        <div class='row'>
           
-          <div class="writeico">
-            <ul class="wrtico">
-              <li>
-                <a href="#video_form_tab" data-toggle="tab">
-                  <img src="/assets/writev.png" alt="">
-                </a>
-              </li>
-              <li>
-                <a href="#image_form_tab" data-toggle="tab">
-                  <img src="/assets/writep.png" alt="">
-                </a>
-              </li>
-            </ul>
-          </div>
+            <div class="usrimg img-circle user-profile-img" style='background: url(<%= current_user.profile_pic %>)'> </div>
+          
+            <%= form_for Blog.new, :remote => true do |c|  %>
+              <%= c.text_area :content, :placeholder => 'Write a post...'  %>
 
-          <div class='tab-content'>
-            <div class='tab-pane' id='image_form_tab'>
-              <%= c.fields_for :photo, Photo.new do |p| %>
-                <%= p.file_field :image %>
-              <% end %>
-            </div>
+              
+              <div class="writeico">
+                <ul class="wrtico">
+                  <li>
+                    <a href="#video_form_tab" data-toggle="tab">
+                      <img src="/assets/writev.png" alt="">
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#image_form_tab" data-toggle="tab">
+                      <img src="/assets/writep.png" alt="">
+                    </a>
+                  </li>
+                </ul>
+              </div>
 
-            <div class='tab-pane' id='video_form_tab'>
-              <%= c.fields_for :video, Video.new do |v| %>
-                <%= v.text_field :url, :placeholder => 'Video URL' %>
-              <% end %>
-            </div>
+              <div class='tab-content'>
+                <div class='tab-pane' id='image_form_tab'>
+                  <%= c.fields_for :photo, Photo.new do |p| %>
+                    <%= p.file_field :image %>
+                  <% end %>
+                </div>
+
+                <div class='tab-pane' id='video_form_tab'>
+                  <%= c.fields_for :video, Video.new do |v| %>
+                    <%= v.text_field :url, :placeholder => 'Video URL' %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          
+        </div>
+        <div class='row'>
+          <div class='span8' id='comment_please_wait' style='disaplay:none;'>
+            Please wait while we add your comment..
           </div>
-        <% end %>
-      </div>
-      <div class='row'>
-        <% if not current_user %>
-          <div class='span8' id='please_sign_in' style='disaplay:none;'>
-            <a href='/'>Sign in</a> to start discussing.
-          </div>  
-        <% end %>
-        <div class='span8' id='comment_please_wait' style='disaplay:none;'>
-          Please wait while we add your comment..
         </div>
       </div>
-    </div>
-    
-    
 
-  </div>
+    </div>
+  <% end %>
 
   <div id='comments_display'>
     

@@ -228,7 +228,7 @@ class User < ActiveRecord::Base
   end
 
   def attending_events
-    attends.where(:attendable_type => 'Event').map(&:attendable)
+    attends.includes(:attendable).where(:attendable_type => 'Event').map(&:attendable)
   end
 
   def self.popular_users

@@ -212,6 +212,15 @@
                     <%= role.text_area :subrole, :class => 'textarea', :rows => "1" %>  
                   </div>
                 </div>
+
+                <div class="control-group">
+                  <div class="controls gender">
+                    <%= role.radio_button('gender', 'male') %>
+                    <%= label :gender, 'Male' %>
+                    <%= role.radio_button('gender', 'female') %>
+                    <%= label :gender, 'Female' %>
+                  </div>
+                </div>
               
                 <div class="control-group">
                 <%= role.label :description, :class => 'control-label' %>
@@ -243,6 +252,15 @@
                   <%= role.label :subrole, :class => 'control-label' %>
                   <div class="controls">
                     <%= role.text_area :subrole, :class => 'textarea', :rows => "1" %>  
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <div class="controls gender">
+                    <%= role.radio_button('gender', 'male') %>
+                    <%= label :gender, 'Male' %>
+                    <%= role.radio_button('gender', 'female') %>
+                    <%= label :gender, 'Female' %>
                   </div>
                 </div>
               
