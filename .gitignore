@@ -21,3 +21,4 @@
 Snippets.txt
 
 # Ignore Public Assets
+/public/assets/manifest.yml
