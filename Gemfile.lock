@@ -47,9 +47,6 @@ GEM
       rails (~> 3.0)
     addressable (2.3.5)
     arel (3.0.2)
-    asset_sync (0.5.4)
-      activemodel
-      fog
     awesome_print (1.1.0)
     builder (3.0.4)
     cancan (1.6.10)
@@ -341,7 +338,6 @@ PLATFORMS
 
 DEPENDENCIES
   acts-as-taggable-on
-  asset_sync
   awesome_print
   cancan
   cap_bootstrap!
