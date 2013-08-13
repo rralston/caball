@@ -1,6 +1,6 @@
 AssetSync.configure do |config|
   config.fog_provider = 'AWS'
-  config.fog_directory = 'filmzu'
+  config.fog_directory = 'filmzusplash'
   config.aws_access_key_id = 'AKIAJHIBHMAKIHAHLSJQ'
   config.aws_secret_access_key = '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'
 
