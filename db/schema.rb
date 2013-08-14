@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130814091259) do
+ActiveRecord::Schema.define(:version => 20130814101836) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -298,6 +298,8 @@ ActiveRecord::Schema.define(:version => 20130814091259) do
     t.string   "experience"
     t.boolean  "agent_present",           :default => false
     t.string   "agent_name"
+    t.string   "guild"
+    t.boolean  "guild_present",           :default => false
   end
 
   create_table "videos", :force => true do |t|

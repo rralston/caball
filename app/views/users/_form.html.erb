@@ -118,7 +118,7 @@
             <div class="control-group">
               <%= f.label "Experience", :class => 'control-label' %>
               <div class="controls">
-                <%= f.select(:experience, options_for_select(User.experience)) %>
+                <%= f.select(:experience, options_for_select(User.experience, @user.experience)) %>
               </div>
             </div>
 
@@ -127,10 +127,7 @@
 
               <%= f.label 'Do you have an agent?' %>
               
-
-              
               <div class='controls'>
-                
                 <%= f.radio_button 'agent_present', 'true', :class => 'toggler_radio', 'data-target' => '#user_agent_name'  %>
                 <%= label :agent_present, 'Yes', :class=>'radio_label' %>
                 <%= f.radio_button 'agent_present', 'false', :class => 'toggler_radio', 'data-target' => '#user_agent_name' %>
@@ -141,6 +138,26 @@
                 <% else %>
                   <%= f.text_field :agent_name, :class => 'text_field', :style => 'display: none;' %>
                 <% end %>
+              </div>
+            </div>
+
+            <div class='control-group'>
+
+              <%= f.label 'Are You a part of any professional guilds' %>
+              
+              <div class='controls'>
+                
+                <%= f.radio_button 'guild_present', 'true', :class => 'toggler_radio', 'data-target' => '#user_guild'  %>
+                <%= label :guild_present, 'Yes', :class=>'radio_label' %>
+                <%= f.radio_button 'guild_present', 'false', :class => 'toggler_radio', 'data-target' => '#user_guild' %>
+                <%= label :guild_present, 'No', :class=>'radio_label' %>
+
+                <% if @user.guild.present? %>
+                  <%= f.select(:guild, options_for_select(User.guilds, @user.guild)) %>
+                <% else %>
+                  <%= f.select(:guild, options_for_select(User.guilds), {}, {:style => 'display: none;'}) %>
+                <% end %>
+
               </div>
             </div>
 

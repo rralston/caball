@@ -60,7 +60,8 @@ class User < ActiveRecord::Base
                   :imdb_url, :characteristics_attributes, :photos_attributes,
                   :talents_attributes, :photo, :videos_attributes, :projects_attributes,
                   :admin, :gender, :headline, :featured, :expertise, :cover_photo_attributes,
-                  :resume_attributes, :notification_check_time, :experience, :agent_name, :agent_present
+                  :resume_attributes, :notification_check_time, :experience, :agent_name,
+                  :agent_present, :guild_present, :guild
 
   validates_presence_of :name, :email, :message => "is required"
     
@@ -95,6 +96,18 @@ class User < ActiveRecord::Base
       '3-5 years' => '3 - 5 years',
       '6-10 years' => '6 - 10 years',
       '10+ years' => '10+ years',
+    }
+  end
+
+  def self.guilds
+    #Experience of the user in hash
+    {
+      'SAG/AFTRA' => 'SAG/AFTRA',
+      'IATSE' => 'IATSE',
+      'WGA' => 'WGA',
+      'DGA' => 'DGA',
+      'PGA' => 'PGA',
+      'Other' => 'Other'
     }
   end
 
