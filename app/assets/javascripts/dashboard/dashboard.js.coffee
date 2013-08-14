@@ -30,6 +30,11 @@ $(document).ready ->
             app.projects_loaded = true
           else
             alert('Something went wrong, Please try again')
+    else
+      # rerender and add views to DOM, this is required to go back when user in the 
+      # manage project view
+      $('#dashboard_projects').html(app.user_projects_view.render().el)
+      $('#dashboard_projects').find('#applied-projects').html(app.applied_projects_view.render().el)  
 
   
   $('body').on 'click', 'a[href=#events]', (event)->

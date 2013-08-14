@@ -68,7 +68,7 @@ class Event < ActiveRecord::Base
     joins("inner join important_dates ON important_dates.important_dateable_id = events.id AND important_dates.is_start_date = true AND important_dates.important_dateable_type = 'Event'").
     where("important_dates.date_time > ?", Time.now).
     group('events.id').
-    order('eventcreated_at DESC')
+    order('events.created_at DESC')
 
 
   # date ordered on start date
