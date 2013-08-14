@@ -122,6 +122,28 @@
               </div>
             </div>
 
+
+            <div class='control-group'>
+
+              <%= f.label 'Do you have an agent?' %>
+              
+
+              
+              <div class='controls'>
+                
+                <%= f.radio_button 'agent_present', 'true', :class => 'toggler_radio', 'data-target' => '#user_agent_name'  %>
+                <%= label :agent_present, 'Yes', :class=>'radio_label' %>
+                <%= f.radio_button 'agent_present', 'false', :class => 'toggler_radio', 'data-target' => '#user_agent_name' %>
+                <%= label :agent_present, 'No', :class=>'radio_label' %>
+
+                <% if @user.agent_name.present? %>
+                  <%= f.text_field :agent_name, :class => 'text_field' %>
+                <% else %>
+                  <%= f.text_field :agent_name, :class => 'text_field', :style => 'display: none;' %>
+                <% end %>
+              </div>
+            </div>
+
           </div>
         </fieldset>
 

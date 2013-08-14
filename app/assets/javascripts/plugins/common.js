@@ -322,6 +322,24 @@ app.fn.format_date = function(datetime){
   }
 }
   
+
+// function that will listen for event of radion button which will help in showiing and hiding respective fields
+// the target that has to be toggled should be given as data-target attribute.
+app.fn.initialize_radio_toggler = function(){
+  $('body').on('click', '.toggler_radio', function(event){
+
+    btn = $(event.target)
+    console.log(btn)
+    target = btn.attr('data-target')
+    if(btn.is(":checked")){
+      if(btn.attr('value')=='true'){
+        $(target).show()
+      }else if(btn.attr('value') == 'false'){
+        $(target).hide()
+      }
+    }
+  });
+}
   
 
   

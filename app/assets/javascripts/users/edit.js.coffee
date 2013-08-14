@@ -15,3 +15,5 @@ $(document).ready ()->
         tag.value
       )
       $('#user_characteristics_attributes_description_tag_list').val(tags_array.toString())
+
+  app.fn.initialize_radio_toggler()

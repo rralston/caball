@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130813080015) do
+ActiveRecord::Schema.define(:version => 20130814091259) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -296,6 +296,8 @@ ActiveRecord::Schema.define(:version => 20130813080015) do
     t.string   "expertise"
     t.datetime "notification_check_time", :default => '2013-07-31 14:32:36'
     t.string   "experience"
+    t.boolean  "agent_present",           :default => false
+    t.string   "agent_name"
   end
 
   create_table "videos", :force => true do |t|
