@@ -1,6 +1,14 @@
 class Characteristics < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :age, :height, :weight, :ethnicity, :bodytype, :skin_color, :eye_color, :hair_color, :chest, :waist, :hips, :dress_size
+
+  acts_as_taggable_on :description_tag
+  
+  attr_accessible :age, :height, :weight, :ethnicity, :bodytype, :skin_color,
+                  :eye_color, :hair_color, :chest, :waist, :hips, :dress_size,
+                  :description_tag_list
+
+
+  
 
 
   # tells if the characteristics are completely provided

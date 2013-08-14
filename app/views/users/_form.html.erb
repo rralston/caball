@@ -198,6 +198,7 @@
                 
                   <div class="control-group">
                     <%= talent.label :description, :class => 'control-label' %>
+
                     <div class="controls">
                       <%= talent.text_area :description, :class => 'textarea', :rows => "5" %>  
                     </div>
@@ -214,7 +215,7 @@
 
             
 
-            <%= f.fields_for :characteristics_attributes do |c|   %>
+            <%= f.fields_for :characteristics_attributes, @user.characteristics || Characteristics.new do |c|   %>
 
 						
             <div class="row-fluid actor-characteristics">
@@ -287,6 +288,26 @@
                   <%= c.label :dress_size, :class => 'control-label' %>
                   <div class="controls">
                     <%= c.text_field :dress_size, :class => 'text_field' %>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <%= c.label :description_tag_list, :class => 'control-label' %>
+                  
+                  <div class='controls'>
+
+                      <ul id="user_description_tags" class='tagit ui-sortable'>
+                        <% if @user.characteristics.present? and @user.characteristics.description_tag_list.present? %>
+                          <% @user.characteristics.description_tag_list.each do |desc| %>
+                            <li data-value="<%= desc %>"><%= desc %> </li>
+                          <% end %>
+                        <% end %>
+                      </ul>
+
+                  </div>  
+
+                  <div class="controls">
+                    <%= c.hidden_field :description_tag_list, :class => 'text_field' %>
                   </div>
                 </div>
               </div>
