@@ -252,6 +252,11 @@
               <%= link_to 'Add More Talent', '#', :id => 'add-to-talents-list' %>
             <% end %>
 
+
+            <div id='talents_append_div'>
+              
+            </div>
+
             
 
             <%= f.fields_for :characteristics_attributes, @user.characteristics || Characteristics.new do |c|   %>
