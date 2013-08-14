@@ -1,0 +1,56 @@
+
+<%= form_for current_user, :url => '/users/step_2', :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'user_edit_form_step_2'} do |f| %>
+  <div class="span12">
+
+    You said you are a <%= current_user.talent_names.join(' and ') %>
+
+    <%= f.fields_for :talents do |talent|   %>
+      <div class='user-talent'>
+        <h4>Role</h4>
+        
+        <div class="control-group">
+        <%= talent.label :description, :class => 'control-label' %>
+          <div class="controls">
+            <%= talent.text_area :description, :class => 'textarea', :rows => "5" %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="controls">
+            <%= talent.check_box :_destroy %> Click Here to Delete
+          </div>    
+        </div>
+      </div>
+    <% end %>
+
+
+    <h2>About You</h2>
+
+    <div class="control-group">
+      <%= f.label :headline, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :headline, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :about, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_area :about, :class => 'text_area' %>
+      </div>
+    </div>
+
+
+    <h3>Upload Your Resume</h3>
+    <%= f.fields_for :resume, current_user.resume || Resume.new do |r|  %>
+      <div class="control-group">
+        <%= r.label "Resume", :class => 'control-label' %>
+        <div class="controls">
+          <%= r.file_field :document %>
+        </div>
+      </div>
+    <% end %>
+    </div>
+
+    <%= f.submit "Next Step" %>
+<% end %>

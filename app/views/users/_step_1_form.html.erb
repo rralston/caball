@@ -1,0 +1,185 @@
+<% @user.errors.full_messages.each do |error| %>
+<div class="alert alert-error">
+  <button type="button" class="close" data-dismiss="alert">
+    ×
+  </button>
+  <p>
+    <%= error %>
+  </p>
+</div>
+<% end %>
+
+<%= form_for @user, :url => '/users/step_1', :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'user_edit_form'} do |f| %>
+  <div class="span12">
+    <h2>General Info</h2>
+    <div class="control-group">
+      <%= f.label :name, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :name, :class => 'text_field required' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :email, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :email, :class => 'text_field required email' %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :location, :class => 'control-label' %>
+      <div class="controls location">
+        <%= f.text_field :location, :class => 'text_field required' %>
+        <div class="clearfix"></div>
+        <%= image_tag("locate_me.png", :align => "left", :height => "30", :id => "locate") %>
+        <i>Click icon for your location</i>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls gender">
+        <%= radio_button("user", "gender", "male", {:checked => (!@user.gender.nil? && (@user.gender == "male" && 'checked')) || "false"}) %>
+        <%= label :gender_male, 'Male' %>
+        <%= radio_button("user", "gender", "female", {:checked => (!@user.gender.nil? && (@user.gender == "female" && 'checked')) || "false"}) %>
+        <%= label :gender_male, 'Female' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :imdb_url, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :imdb_url, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <h4>Profile Picture</h4>
+    <%= f.fields_for :profile, @user.profile || @user.build_profile  do |profile|  %>
+      <div class="control-group">
+        <%= profile.label "Profile Photo", :class => 'control-label' %>
+        
+        <% if @user.profile.image.present? %>
+          <div class="controls">
+            <%= image_tag @user.profile.image.url(:medium), {:class => "img-polaroid"} %>
+          </div>
+        <% end %>
+          
+        <div class="controls">
+          <%= profile.file_field :image %>
+        </div>
+
+        <div class='controls upload_progress'>
+          Upload Progress:
+          <div class='progress'>
+            <div class='bar' style='width: 0%'></div>
+          </div>
+        </div>
+
+      </div>
+    <%end%>
+
+    <div class='control-group'>
+      <label class='control-label'>Experience & Skills</label>
+
+      <div class='controls'>
+        <%= f.hidden_field :expertise, :class => 'text_field' %>
+        
+          <ul id="expertise_tags" class='tagit ui-sortable'>
+            <% if @user.expertise.present? %>
+              <%= @user.expertise.split(',').each do |exp_tag| %>
+                <li data-value="<%= exp_tag %>"><%= exp_tag %> </li>
+              <% end %>
+            <% end %>
+          </ul>
+        
+      </div>    
+    </div>
+
+    <div class="control-group">
+      <%= f.label "Experience", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select(:experience, options_for_select(User.experience, @user.experience)) %>
+      </div>
+    </div>
+
+
+    <div class='control-group'>
+
+      <%= f.label 'Do you have an agent?' %>
+      
+      <div class='controls'>
+        <%= f.radio_button 'agent_present', 'true', :class => 'toggler_radio', 'data-target' => '#user_agent_name'  %>
+        <%= label :agent_present, 'Yes', :class=>'radio_label' %>
+        <%= f.radio_button 'agent_present', 'false', :class => 'toggler_radio', 'data-target' => '#user_agent_name' %>
+        <%= label :agent_present, 'No', :class=>'radio_label' %>
+
+        <% if @user.agent_name.present? %>
+          <%= f.text_field :agent_name, :class => 'text_field' %>
+        <% else %>
+          <%= f.text_field :agent_name, :class => 'text_field', :style => 'display: none;' %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='control-group'>
+
+      <%= f.label 'Are You a part of any professional guilds' %>
+      
+      <div class='controls'>
+        
+        <%= f.radio_button 'guild_present', 'true', :class => 'toggler_radio', 'data-target' => '#user_guild'  %>
+        <%= label :guild_present, 'Yes', :class=>'radio_label' %>
+        <%= f.radio_button 'guild_present', 'false', :class => 'toggler_radio', 'data-target' => '#user_guild' %>
+        <%= label :guild_present, 'No', :class=>'radio_label' %>
+
+        <% if @user.guild.present? %>
+          <%= f.select(:guild, options_for_select(User.guilds, @user.guild)) %>
+        <% else %>
+          <%= f.select(:guild, options_for_select(User.guilds), {}, {:style => 'display: none;'}) %>
+        <% end %>
+
+      </div>
+    </div>
+
+    <h2>Your Roles</h2>
+              
+    <%= f.fields_for :talents do |talent|   %>
+      <div class='user-talent'>
+        <h4>Roles</h4>
+        <div class="control-group">
+          <%= talent.label :name, :class => 'control-label' %>
+          <div class="controls">
+            <%= talent.select(:name, options_for_select(User.types, talent.object.name)) %>
+           </div>
+        </div>
+
+        <div class="control-group">
+          <div class="controls">
+            <%= talent.check_box :_destroy, :class=>'destroy_checkbox' %> Click Here to Delete
+          </div>    
+        </div>
+      </div>
+    <% end %>
+
+    <!-- don't allow user to add more than 3 talents -->
+    <% if @user.talents.count < 2 %>
+      <div id="fields-for-talents-list" class="numerous">
+        <%= f.fields_for :talents, Talent.new, :child_index => 'replace_this' do |talent| %>
+          <div class="control-group">
+            <%= talent.label :name, :class => 'control-label' %>
+            <div class="controls">
+              <%= talent.select(:name, options_for_select(User.types)) %>
+            </div>
+          </div>
+        
+        
+          <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+        <% end %>
+      </div>
+
+      <div id="talents-list"></div>
+      
+      <%= link_to 'Add More Talent', '#', :id => 'add-to-talents-list' %>
+    <% end %>
+
+    <%= f.submit "Next Step" %>
+
+  </div>
+<% end %>

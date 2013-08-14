@@ -14,6 +14,10 @@ class Ability
       user.persisted?
     end
 
+    can [:step_1, :step_2, :files_upload], User do
+      user.persisted?
+    end
+
     can [:update, :destroy, :custom_update], User do |user_under_action|
       user_under_action == user
     end

@@ -329,7 +329,6 @@ app.fn.initialize_radio_toggler = function(){
   $('body').on('click', '.toggler_radio', function(event){
 
     btn = $(event.target)
-    console.log(btn)
     target = btn.attr('data-target')
     if(btn.is(":checked")){
       if(btn.attr('value')=='true'){

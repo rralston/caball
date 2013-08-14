@@ -114,6 +114,32 @@ class UsersController < ApplicationController
     end
   end
 
+  def step_1
+    if current_user.update_attributes(params[:user])
+      render 'users/step_2_form', :layout => false
+    else
+    
+    end
+  end
+
+  def step_2
+    if current_user.update_attributes(params[:user])
+      render 'users/step_2_form', :layout => false
+    else
+    
+    end
+  end
+
+  def files_upload
+    
+    if params['user']['profile_attributes'].present? and params['user']['profile_attributes']['image'].present?
+      current_user.profile.update_attributes(params['user']['profile_attributes'])
+    end
+    
+    render :text => true
+
+  end
+
   # custom update for handling ajax updates
   def custom_update
     user = User.find(params[:id])

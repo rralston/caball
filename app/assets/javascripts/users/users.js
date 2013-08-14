@@ -113,8 +113,8 @@ var Users = {
             added_talents = $('.user-talent').length
             new_talents = Numerous.count(['talents-list'])
 
-            // if total talents are above 3 hide the add more option
-            if ((added_talents + new_talents) >= 3){
+            // if total talents are above 2 hide the add more option
+            if ((added_talents + new_talents) >= 2){
               $('a#add-to-talents-list').hide()
             }
           },
