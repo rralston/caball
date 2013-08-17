@@ -15,6 +15,7 @@ Caball::Application.routes.draw do
   match '/users/update' => 'users#custom_update', :via => 'POST'
   match '/users/step_1' => 'users#step_1'
   match '/users/step_2' => 'users#step_2'
+  match '/users/step_3' => 'users#step_3'
   match '/users/files_upload' => 'users#files_upload'
   match '/users/agent_names' => 'users#agent_names'
   

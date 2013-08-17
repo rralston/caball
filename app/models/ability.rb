@@ -14,7 +14,7 @@ class Ability
       user.persisted?
     end
 
-    can [:step_1, :step_2, :files_upload], User do
+    can [:step_1, :step_2, :step_3, :files_upload], User do
       user.persisted?
     end
 

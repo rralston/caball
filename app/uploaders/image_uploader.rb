@@ -75,11 +75,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
    def filename
-      if model.class.name != 'Profile' and model.imageable.class.name != 'User'
-        original_filename
-      else
-        "Profile_Image.jpg"   
-      end
+      original_filename
    end
   
   # process :resize_to_fill => [400, 400]

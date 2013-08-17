@@ -2,7 +2,9 @@
 <%= form_for current_user, :url => '/users/step_2', :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'user_edit_form_step_2'} do |f| %>
   <div class="span12">
 
-    You said you are a <%= current_user.talent_names.join(' and ') %>
+    <div class="controls">
+      You said you are a <%= current_user.talent_names.join(' and ') %>
+    </div>
 
     <%= f.fields_for :talents do |talent|   %>
 
@@ -10,6 +12,29 @@
         <%= render :partial => 'characteristics_form', :locals => { :f => f, :talent => talent} %>
       <% elsif talent.object.name == 'Writer' %>
         <%= render :partial => 'writer_form', :locals => { :f => f, :talent => talent} %>
+      <% else %>
+        <div class='user-talent'>
+          <div class="controls">
+            <h5><%= talent.object.name.camelize %></h5>
+          </div>
+          
+          <div class="control-group">
+            <div class="controls">
+              <%= talent.text_area :description, :class => 'textarea', :rows => "5", :placeholder => "Tell us about your experience as a #{talent.object.name}" %>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="controls">
+
+              <%= talent.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+
+              <a href='#' class='remove_entity' data-toRemove='.user-talent'>Remove this role</a>
+
+            </div>    
+          </div>
+        </div>
+
       <% end %>
 
     <% end %>
@@ -17,53 +42,87 @@
 
     <div class='control-group'>
 
-      <%= f.label 'Do you have an agent?' %>
-      
       <div class='controls'>
-        <%= f.radio_button 'agent_present', 'true', :class => 'toggler_radio', 'data-target' => '#user_agent_name'  %>
-        <%= label :agent_present, 'Yes', :class=>'radio_label' %>
-        <%= f.radio_button 'agent_present', 'false', :class => 'toggler_radio', 'data-target' => '#user_agent_name' %>
-        <%= label :agent_present, 'No', :class=>'radio_label' %>
+        <%= f.label 'Are You a part of any professional guilds' %>
+      </div>
 
+      <div class='controls radios'>
+        <div class='option'>
+          <%= f.radio_button 'guild_present', 'true', :class => 'toggler_radio', 'data-target' => '#user_guild_container'  %>
+          <%= label :guild_present, 'Yes', :class=>'radio_label' %>
+        </div>
+
+        <div class='option'>
+          <%= f.radio_button 'guild_present', 'false', :class => 'toggler_radio', 'data-target' => '#user_guild_container' %>
+          <%= label :guild_present, 'No', :class=>'radio_label' %>
+        </div>
+
+      </div>
+
+      <% if current_user.guild_present %>
+        <div class='controls clearfix'>
+          <div id='user_guild_container'>
+            Which one?<br/>
+            <%= f.select(:guild, options_for_select(User.guilds, current_user.guild)) %>
+          </div>
+        </div>
+      <% else %>
+        <div class='controls'>
+          <div id='user_guild_container' style='display: none;'>
+            Which one?<br/>
+            <%= f.select(:guild, options_for_select(User.guilds)) %>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+
+    <div class='control-group'>
+
+      <div class='controls'>
+        <%= f.label 'Do you have an agent?' %>
+      </div>
+      
+      <div class='controls radios'>
+        <div class='option'>
+          <%= f.radio_button 'agent_present', 'true', :class => 'toggler_radio', 'data-target' => '#user_agent_name'  %>
+          <%= label :agent_present, 'Yes', :class=>'radio_label' %>
+        </div>
+
+        <div class='option'>
+          <%= f.radio_button 'agent_present', 'false', :class => 'toggler_radio', 'data-target' => '#user_agent_name' %>
+          <%= label :agent_present, 'No', :class=>'radio_label' %>
+        </div>
+      </div>
+
+      <div class='controls clearfix'>
         <%= f.fields_for :agentship, current_user.agentship || Agentship.new  do |agentship| %>
 
           <%= agentship.hidden_field :agent_id %>
 
-          <% if agentship.object.agent_id.present? %>
+          <% if current_user.agent_present %>
             <input type='text' id='user_agent_name' placeholder='Enter your agents name' value='<%= agentship.object.agent.name %>'>
           <% else %>
             <input type='text' id='user_agent_name' placeholder='Enter your agents name'>
           <% end %>
 
-        <% end %>
-      </div>
-    </div>
-
-    <div class='control-group'>
-
-      <%= f.label 'Are You a part of any professional guilds' %>
-      
-      <div class='controls'>
-        
-        <%= f.radio_button 'guild_present', 'true', :class => 'toggler_radio', 'data-target' => '#user_guild'  %>
-        <%= label :guild_present, 'Yes', :class=>'radio_label' %>
-        <%= f.radio_button 'guild_present', 'false', :class => 'toggler_radio', 'data-target' => '#user_guild' %>
-        <%= label :guild_present, 'No', :class=>'radio_label' %>
-
-        <% if @user.guild.present? %>
-          <%= f.select(:guild, options_for_select(User.guilds, @user.guild)) %>
-        <% else %>
-          <%= f.select(:guild, options_for_select(User.guilds), {}, {:style => 'display: none;'}) %>
+          <div class='div_hint'>
+            if you're agent doesn't have a Filmzu profile, be sure to tell them to create one to help both of you get attention
+          </div>
         <% end %>
 
       </div>
     </div>
 
-
-    <h3>Upload Your Resume</h3>
+    
     <%= f.fields_for :resume, current_user.resume || current_user.build_resume do |r|  %>
 
       <div class="control-group">
+
+        <div class='controls clearfix'>
+          <%= r.label "Resume:", :class => 'control-label', :style=>'text-align: left;' %>
+        </div>
+
         <% if current_user.resume.present? and current_user.resume.document.present? %>
           <div class='controls'>
             <a class='upload_doc_preview' href="<%= current_user.resume.document.url %>" target='_black'>Check your previous doc.</a>
@@ -75,8 +134,6 @@
           </div>
         <% end %>
 
-
-        <%= r.label "Resume", :class => 'control-label' %>
         <div class="controls">
           <%= r.file_field :document %>
         </div>
@@ -92,5 +149,14 @@
     <% end %>
     </div>
 
-    <%= f.submit "Next Step" %>
+    <div class='span12'>
+      <div class='text-center form_footer'>
+        <div class='links'>
+          <%= f.submit "One More Step" %>
+        </div>
+        
+        Your almost done! Go to the next page to enter your pics and demo reel! Or you can check out your profile now and enter the rest of the stuff later
+      </div>
+    </div>
+
 <% end %>

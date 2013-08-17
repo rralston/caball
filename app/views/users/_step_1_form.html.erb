@@ -39,7 +39,7 @@
 
     <div class="control-group">
       <%= f.label :gender, :class => 'control-label' %>
-      <div class="controls gender">
+      <div class="controls gender radios">
         <div class='option text-center pull-left'>
           <%= radio_button("user", "gender", "male", {:checked => (!@user.gender.nil? && (@user.gender == "male" && 'checked')) || "false"}) %>
           <%= label :gender_male, 'Male' %>

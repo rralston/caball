@@ -2,12 +2,13 @@
 
             
   <div class='user-talent'>
-    <h4>Writer</h4>
+    <div class="controls">
+      <h5>Writer</h5>
+    </div>
     
     <div class="control-group">
-      <%= talent.label :description, :class => 'control-label' %>
       <div class="controls">
-        <%= talent.text_area :description, :class => 'textarea', :rows => "5", :placeholder => 'Tell us about your experience asa writer, what have you written, what types of films do you like write? comedies, features, shorts, romance?' %>
+        <%= talent.text_area :description, :class => 'textarea', :rows => "5", :placeholder => 'Tell us about your experience as a writer, what have you written, what types of films do you like write? comedies, features, shorts, romance?' %>
       </div>
     </div>
 

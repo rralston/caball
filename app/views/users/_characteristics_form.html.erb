@@ -1,9 +1,11 @@
 <%= f.fields_for :characteristics_attributes, current_user.characteristics || Characteristics.new do |c|   %>
   <div class='user-talent'>
-    <h4>Actor</h4>
     
+    <div class="controls">
+      <h5>Actor</h5>
+    </div>
+
     <div class="control-group">
-    <%= talent.label :description, :class => 'control-label' %>
       <div class="controls">
         <%= talent.text_area :description, :class => 'textarea', :rows => "5", :placeholder => 'Tell us about your experience as an actor, what type of roles have you played? What are your strengths? Do you have a look that stands out?' %>
       </div>

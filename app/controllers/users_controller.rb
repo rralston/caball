@@ -124,7 +124,15 @@ class UsersController < ApplicationController
 
   def step_2
     if current_user.update_attributes(params[:user])
-      render 'users/step_2_form', :layout => false
+      render 'users/step_3_form', :layout => false
+    else
+    
+    end
+  end
+
+  def step_3
+    if current_user.update_attributes(params[:user])
+      render :text => true
     else
     
     end
@@ -167,6 +175,35 @@ class UsersController < ApplicationController
       current_user.resume.update_attributes(params['user']['resume_attributes'])
       file_url = current_user.resume.document.url
     end
+
+  
+    # cover photo uploader.
+    if params['user']['cover_photo_attributes'].present? and params['user']['cover_photo_attributes']['image'].present?
+      # build cover photo if cover photo doesn't exists.
+      current_user.cover_photo = Photo.new if current_user.cover_photo.nil?
+      current_user.cover_photo.update_attributes(params['user']['cover_photo_attributes'])
+      file_url = current_user.cover_photo.image.url(:medium)
+    end
+
+    if params['user']['photos_attributes'].present?
+      attributes = params['user']['photos_attributes']
+      indexes_with_image = attributes.map do |index, attribute|
+        if attribute.include?('image')
+          index
+        end
+      end
+
+      indexes_with_image.delete(nil)
+
+      # only one image is submitted once anyway.
+      index = indexes_with_image.first
+        
+      current_user.photos[index.to_i].update_attributes(:image => params['user']['photos_attributes'][index]['image'])
+
+      file_url = current_user.photos[index.to_i].image.url(:medium)
+    end
+
+    debugger
 
     render :json => file_url.to_json()
 

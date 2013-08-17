@@ -17,100 +17,33 @@ $(document).ready ()->
         )
         $('#user_characteristics_attributes_description_tag_list').val(tags_array.toString())
 
-  # this will toggle textboxes based on radio choice,
-  # example: do you have an agent.? if yes, show text box.
-  app.fn.initialize_radio_toggler()
-
-  app.fn.init_form_elem_hints('.hinted')
-
-  $('body').on 'click', '.remove_entity', (event)->
-    event.stopPropagation()
-    target = $(event.target)
-    check_box = target.parent().find('.destroy_checkbox')
-    check_box.attr('checked', true)
-    to_remove = target.attr('data-toRemove')
-    target.closest(to_remove).hide()
-    target.closest(to_remove).removeClass(to_remove.substring(1, to_remove.length)) # to_remove is a class selector, we don't need dot(.) infront of it
-      # show the link to add more talents
-    $('a#add-to-talents-list').show()
-    return false
-
-  # auto complete for user agent
-  $("#user_agent_name").autocomplete
-    delay: 0
-    source: (request, response) ->
-      $.getJSON "/users/agent_names?q="+request.term, (data)->
-        if data.length > 0
-          final_data = _.map(data, (user)->
-            {
-              "label": user.name,
-              "value": user.name,
-              "id": user.id
-            }
-          )
-        response(final_data)
-    select: (event, ui)->
-      # update the actual field with the id
-      $('#user_agentship_attributes_agent_id').val(ui.item.id)
-    messages:
-      noResult: ''
-      results: ()->
-
-  # step 1 submit handler
-  $('body').on 'submit', '#user_edit_form', (event)->
-    btn = $(event.target)
-    btn.val('Please wait..')
-    $.ajax
+  app.fn.init_image_file_uploader  = (form_selector) ->
+    # file upload handler for step 1 form and step 3 form containing image files.
+    $(form_selector).fileupload
+      url: '/users/files_upload'
       type: 'POST'
-      url: '/users/step_1'
-      data: $('#user_edit_form').serialize()
-      success: (data)->
-        $('#step_2').html(data)
-        $('a.step_2_nav').trigger('click')
-        app.fn.description_tag_list_init()
-        app.fn.init_step_2_fileupload()
+      add: (e, data)->
+        # e.target gives the form.
+        types = /(\.|\/)(gif|jpe?g|png)$/i
+        file = data.files[0]
+        # file type verification.
+        if types.test(file.type) || types.test(file.name)
+          data.progress_div = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.upload_progress')
+          data.progress_div.show()
 
-    return false
-
-  # step 2 submit handler
-  $('body').on 'submit', '#user_edit_form_step_2', (event)->
-    $.ajax
-      type: 'POST'
-      url: '/users/step_2'
-      data: $('#user_edit_form_step_2').serialize()
-      success: (data)->
+          data.image_container = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.image_preview_container')
+          data.image_container.attr('src', '')
+          data.submit()
+        else
+          alert('The file you selected is not a gif, jpeg or png image file')
+      progress: (e, data)->
+        progress = parseInt(data.loaded / data.total * 100, 10)
+        data.progress_div.find('.bar').css('width', progress + '%')
+      done: (e, data)->
         console.log data
-        # $('#step_2').html(data)
-        # $('a[href=#step_2]').trigger('click')
-
-    return false
-
-
-  # file upload handler for step 1 form.
-  $('#user_edit_form').fileupload
-    url: '/users/files_upload'
-    type: 'POST'
-    add: (e, data)->
-      # e.target gives the form.
-      types = /(\.|\/)(gif|jpe?g|png)$/i
-      file = data.files[0]
-      # file type verification.
-      if types.test(file.type) || types.test(file.name)
-        data.progress_div = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.upload_progress')
-        data.progress_div.show()
-
-        data.image_container = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.image_preview_container')
-        data.submit()
-      else
-        alert('The file you selected is not a gif, jpeg or png image file')
-    progress: (e, data)->
-      progress = parseInt(data.loaded / data.total * 100, 10)
-      data.progress_div.find('.bar').css('width', progress + '%')
-    done: (e, data)->
-      console.log data
-      data.image_container.attr('src', data.result)
-      data.image_container.show()
-      # data.progress_div.hide()
+        data.image_container.attr('src', data.result)
+        data.image_container.show()
+        # data.progress_div.hide()
 
   app.fn.init_step_2_fileupload = () ->
     # file upload handler for step 2 form.
@@ -145,3 +78,100 @@ $(document).ready ()->
         data.preview_container.attr('href', data.result)
         data.preview_container.show()
         # data.progress_div.hide()
+
+  # this will toggle textboxes based on radio choice,
+  # example: do you have an agent.? if yes, show text box.
+  app.fn.initialize_radio_toggler()
+
+  app.fn.init_form_elem_hints('.hinted')
+
+  # initialize step_1_form image files uplaoder.
+  app.fn.init_image_file_uploader('#user_edit_form')
+
+
+  # handler to remove talents, photos and videos dynamically.!
+  $('body').on 'click', '.remove_entity', (event)->
+    event.stopPropagation()
+    target = $(event.target)
+
+    # find the desctroy checkbox and make it checked.
+    check_box = target.parent().find('.destroy_checkbox')
+    check_box.attr('checked', true)
+
+    to_remove = target.attr('data-toRemove')
+    target.closest(to_remove).hide()
+    target.closest(to_remove).removeClass(to_remove.substring(1, to_remove.length)) # to_remove is a class selector, we don't need dot(.) infront of it
+      # show the link to add more talents
+    $('a#add-to-talents-list').show()
+    return false
+
+
+  # auto complete for user agent
+  app.fn.init_agent_name_autocomplete = ()->
+    $("#user_agent_name").autocomplete
+      delay: 0
+      source: (request, response) ->
+        $.getJSON "/users/agent_names?q="+request.term, (data)->
+          if data.length > 0
+            final_data = _.map(data, (user)->
+              {
+                "label": user.name,
+                "value": user.name,
+                "id": user.id
+              }
+            )
+          response(final_data)
+      select: (event, ui)->
+        # update the actual field with the id
+        $('#user_agentship_attributes_agent_id').val(ui.item.id)
+      messages:
+        noResult: ''
+        results: ()->
+
+  # step 1 submit handler
+  $('body').on 'submit', '#user_edit_form', (event)->
+    btn = $(event.target)
+    btn.val('Please wait..')
+    $.ajax
+      type: 'POST'
+      url: '/users/step_1'
+      data: $('#user_edit_form').serialize()
+      success: (data)->
+        $('#step_2').html(data)
+        $('a.step_2_nav').trigger('click')
+        app.fn.description_tag_list_init()
+        app.fn.init_step_2_fileupload()
+        app.fn.init_agent_name_autocomplete()
+
+    return false
+
+  # step 2 submit handler
+  $('body').on 'submit', '#user_edit_form_step_2', (event)->
+    $.ajax
+      type: 'POST'
+      url: '/users/step_2'
+      data: $('#user_edit_form_step_2').serialize()
+      success: (data)->
+        console.log data
+        $('#step_3').html(data)
+        $('a.step_3_nav').trigger('click')
+        Numerous.init()
+        # initialize step_3 images file uploader.
+        app.fn.init_image_file_uploader('#user_edit_form_step_3')
+
+    return false
+
+  # step 3 submit handler
+  $('body').on 'submit', '#user_edit_form_step_3', (event)->
+    $.ajax
+      type: 'POST'
+      url: '/users/step_3'
+      data: $('#user_edit_form_step_3').serialize()
+      success: (data)->
+        console.log data
+        # $('#step_3').html(data)
+        # $('a.step_3_nav').trigger('click')
+        # initialize step_3 images file uploader.
+        # app.fn.init_image_file_uploader('#user_edit_form_step_3')
+
+    return false
