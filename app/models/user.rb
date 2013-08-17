@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   has_one :characteristics, :dependent => :destroy
   has_one :profile, :dependent => :destroy
   has_many :photos, :as => :imageable, :dependent => :destroy, :conditions => { :is_cover => false }
-  has_one :resume, :as => :documentable, :dependent => :destroy
+  has_one :resume, :class_name => 'UploadedDocument', :as => :documentable, :dependent => :destroy
   has_one :cover_photo, :class_name =>'Photo' , :as => :imageable, :dependent => :destroy, :conditions => { :is_cover => true }
   has_many :videos, :as => :videoable, :dependent => :destroy
   has_many :projects, :dependent => :destroy
@@ -30,6 +30,9 @@ class User < ActiveRecord::Base
   has_many :lovers, :class_name => 'Like', :as => :loveable
 
   has_many :read_activities
+
+  has_one :agentship
+  has_one :agent, :through => :agentship
 
   # friends are those whom this user is following.
   has_many :friends, through: :friendships
@@ -51,9 +54,9 @@ class User < ActiveRecord::Base
   has_many :received_endorsements, :class_name => 'Endorsement', :foreign_key => 'receiver_id', :dependent => :destroy
 
 
-  accepts_nested_attributes_for :characteristics, :profile, :photos, :videos, :projects, :talents, :cover_photo, :resume, :allow_destroy => true
-
-
+  accepts_nested_attributes_for :characteristics, :profile, :photos, :videos,
+                                :projects, :talents, :cover_photo, :resume,
+                                :agentship, :allow_destroy => true
 
   has_many :role_applications, :dependent => :destroy
   attr_accessible :name, :email, :location, :about, :profile_attributes,
@@ -61,7 +64,7 @@ class User < ActiveRecord::Base
                   :talents_attributes, :photo, :videos_attributes, :projects_attributes,
                   :admin, :gender, :headline, :featured, :expertise, :cover_photo_attributes,
                   :resume_attributes, :notification_check_time, :experience, :agent_name,
-                  :agent_present, :guild_present, :guild
+                  :agent_present, :guild_present, :guild, :agentship_attributes
 
   validates_presence_of :name, :email, :message => "is required"
     
@@ -75,6 +78,10 @@ class User < ActiveRecord::Base
         group("users.id").
         order("fans_count DESC")
 
+  scope :agents,
+        select('users.*').
+        joins("inner join talents on talents.user_id = users.id").
+        where("talents.name = ? ", 'Writer')
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
@@ -93,9 +100,9 @@ class User < ActiveRecord::Base
     #Experience of the user in hash
     {
       '0-2 year(s)' => '0 - 2 years',
-      '3-5 years' => '3 - 5 years',
-      '6-10 years' => '6 - 10 years',
-      '10+ years' => '10+ years',
+      '3-5 years'   => '3 - 5 years',
+      '6-10 years'  => '6 - 10 years',
+      '10+ years'   => '10+ years',
     }
   end
 
@@ -103,63 +110,79 @@ class User < ActiveRecord::Base
     #Experience of the user in hash
     {
       'SAG/AFTRA' => 'SAG/AFTRA',
-      'IATSE' => 'IATSE',
-      'WGA' => 'WGA',
-      'DGA' => 'DGA',
-      'PGA' => 'PGA',
-      'Other' => 'Other'
+      'IATSE'     => 'IATSE',
+      'WGA'       => 'WGA',
+      'DGA'       => 'DGA',
+      'PGA'       => 'PGA',
+      'Other'     => 'Other'
     }
   end
 
   def self.types
-    # {
-    #   'Actor' => 'Actor', 
-    #   'Producer' => 'Producer', 
-    #   'Director' => 'Director', 
-    #   'Technical' => 'Technical', 
-    #   'Stuntmen' => 'Stuntmen', 
-    #   'Fan' => 'Fan', 
-    #   'Talent Manager' => 'Talent Manager'
-    # }
-    {'Actor / Actress' => 'Actor / Actress', 'Animators' => 'Animators', 'Art' => 'Art', 'Audio' => 'Audio', 
-    'Casting Director' => 'Casting Director', 'Cinematographer / DP' => 'Cinematographer / DP', 'Composer' => 'Composer', 
-    'Costumes' => 'Costumes', 'Director' => 'Director', 'Distribution Professional' => 'Distribution Professional', 
-    'Editor' => 'Editor', 'Executive Producer' => 'Executive Producer', 'Hairstylist / Makeup Artist' => 'Hairstylist / Makeup Artist', 
-    'Lighting / Electrical' => 'Lighting / Electrical', 'Other' => 'Other', 'Personal Assistant' => 'Personal Assistant', 'Producer' => 'Producer', 
-    'Production Staff' => 'Production Staff', 'Props' => 'Props', 'Set Design' => 'Set Design', 'Sound' => 'Sound',
-    'Stuntman' => 'Stuntman', 'Talent Agent / Literary Agent' => 'Talent Agent / Literary Agent', 'Talent Manager' => 'Talent Manager', 
-    'Visual Effects' => 'Visual Effects', 'Writer' => 'Writer'}
+    {
+      'Cast'           => 'Cast', 
+      'Crew'           => 'Crew', 
+      'Set'            => 'Set', 
+      'Production'     => 'Production', 
+      'Post-Pro'       => 'Post-Pro', 
+      'Business'       => 'Business', 
+      'Writer'         => 'Writer', 
+      'Pre Production' => 'Pre Production', 
+      'Director'       => 'Director',
+      'Agent'          => 'Agent',
+      'Other'          => 'Other'
+    }
+  end
+
+  def self.sub_types
+    {
+      'Cast'           => {},
+      'Crew'           => {
+                            'Camera' => 'Camera',
+                            'Light'  => 'Light',
+                            'Sound'  => 'Sound'
+                          }, 
+      'Set'            => {}, 
+      'Production'     => {}, 
+      'Post-Pro'       => {}, 
+      'Business'       => {}, 
+      'Writer'         => {}, 
+      'Pre Production' => {}, 
+      'Director'       => {},
+      'Agent'          => {},
+      'Other'          => {}
+    }
   end
 
   def self.types_costs
     # add the cost for each role 
     {
-      'Actor / Actress' => 0.10,
-      'Animators' => 90,
-      'Art' => 25,
-      'Audio' => 67,
-      'Casting Director' => 67,
-      'Cinematographer / DP' => 67,
-      'Composer' => 67,
-      'Costumes' => 67,
-      'Director' => 67,
-      'Distribution Professional' => 67,
-      'Editor' => 67,
-      'Executive Producer' => 67,
-      'Hairstylist / Makeup Artist' => 67,
-      'Lighting / Electrical' => 67,
-      'Other' => 67,
-      'Personal Assistant' => 67,
-      'Producer' => 67,
-      'Production Staff' => 67,
-      'Props' => 67,
-      'Set Design' => 67,
-      'Sound' => 67,
-      'Stuntman' => 67,
+      'Actor / Actress'               => 0.10,
+      'Animators'                     => 90,
+      'Art'                           => 25,
+      'Audio'                         => 67,
+      'Casting Director'              => 67,
+      'Cinematographer / DP'          => 67,
+      'Composer'                      => 67,
+      'Costumes'                      => 67,
+      'Director'                      => 67,
+      'Distribution Professional'     => 67,
+      'Editor'                        => 67,
+      'Executive Producer'            => 67,
+      'Hairstylist / Makeup Artist'   => 67,
+      'Lighting / Electrical'         => 67,
+      'Other'                         => 67,
+      'Personal Assistant'            => 67,
+      'Producer'                      => 67,
+      'Production Staff'              => 67,
+      'Props'                         => 67,
+      'Set Design'                    => 67,
+      'Sound'                         => 67,
+      'Stuntman'                      => 67,
       'Talent Agent / Literary Agent' => 67,
-      'Talent Manager' => 67,
-      'Visual Effects' => 67,
-      'Writer' => 67
+      'Talent Manager'                => 67,
+      'Visual Effects'                => 67,
+      'Writer'                        => 67
     }
   end
   

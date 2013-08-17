@@ -10,7 +10,7 @@ class Ability
     can :read, User
     can :read, Project
 
-    can [:dashboard, :dashboard_projects, :dashboard_events, :dashboard_conversations], User do
+    can [:dashboard, :dashboard_projects, :dashboard_events, :dashboard_conversations, :agent_names], User do
       user.persisted?
     end
 

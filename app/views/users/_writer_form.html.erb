@@ -1,0 +1,67 @@
+<%= f.fields_for :characteristics_attributes, current_user.characteristics || Characteristics.new do |c|   %>
+
+            
+  <div class='user-talent'>
+    <h4>Writer</h4>
+    
+    <div class="control-group">
+      <%= talent.label :description, :class => 'control-label' %>
+      <div class="controls">
+        <%= talent.text_area :description, :class => 'textarea', :rows => "5", :placeholder => 'Tell us about your experience asa writer, what have you written, what types of films do you like write? comedies, features, shorts, romance?' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= talent.check_box :_destroy %> Click Here to Delete
+      </div>    
+    </div>
+
+    <%= talent.fields_for :script_document, talent.object.script_document || UploadedDocument.new do |script_document| %>
+      <div class="control-group">
+        <%= script_document.label :document, :class => 'control-label' %>
+
+        <% if talent.object.script_document.present? %>
+          <div class='controls'>
+            <a class='upload_doc_preview' href="<%= talent.object.script_document.document %>" target='_black'>Check your uploaded doc.</a>
+          </div>
+        <% else %>
+          <!-- hide initially, but when a file uploaded show the preview -->
+          <div class='controls'>
+            <a class='upload_doc_preview' href="" target='_black' style='display: none;'>Check your uploaded doc.</a>
+          </div>
+        <% end %>
+
+        <div class="controls">
+          <%= script_document.file_field :document, :class => 'script_document' %>
+        </div>
+
+        <div class='controls upload_progress'>
+          Upload Progress:
+          <div class='progress'>
+            <div class='bar' style='width: 0%'></div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+
+    <% if talent.object.script_document.present? or talent.object.synopsis.present? %>
+      <div class="control-group script_synopsis">
+        <%= talent.label :synopsis, :class => 'control-label' %>
+        <div class="controls">
+          <%= talent.text_area :synopsis, :class => 'textarea', :rows => "5", :placeholder => 'Briefly describe what the film is about on the scene you just uploaded' %>
+        </div>
+      </div>
+    <% else %>
+      <div class="control-group script_synopsis" style='display: none;'>
+        <%= talent.label :synopsis, :class => 'control-label' %>
+        <div class="controls">
+          <%= talent.text_area :synopsis, :class => 'textarea', :rows => "5", :placeholder => 'Briefly describe what the film is about on the scene you just uploaded' %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+
+<% end %>

@@ -16,6 +16,7 @@ Caball::Application.routes.draw do
   match '/users/step_1' => 'users#step_1'
   match '/users/step_2' => 'users#step_2'
   match '/users/files_upload' => 'users#files_upload'
+  match '/users/agent_names' => 'users#agent_names'
   
   resources :users do 
     resources :characteristics, :photos, :talents, :profile, :blogs

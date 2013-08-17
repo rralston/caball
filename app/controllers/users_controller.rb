@@ -130,13 +130,45 @@ class UsersController < ApplicationController
     end
   end
 
-  def files_upload
-    
+  def files_upload    
+    # TODO: try to send only required parameters from client side if possible.
+
     if params['user']['profile_attributes'].present? and params['user']['profile_attributes']['image'].present?
       current_user.profile.update_attributes(params['user']['profile_attributes'])
+      file_url = current_user.profile.image.url(:medium)
     end
-    
-    render :text => true
+
+    # check if the talents scrip_document is sent.
+    if params['user']['talents_attributes'].present? and (params['user']['talents_attributes']["0"].present?)
+      
+      # if first talent has the script document.
+      if params['user']['talents_attributes']["0"]['script_document_attributes'].present?
+        # build docuemnt if its not present
+        current_user.talents.last.script_document = UploadedDocument.new if current_user.talents.last.script_document.nil?
+
+        current_user.talents.first.script_document.update_attributes(:document => params['user']['talents_attributes']["0"]["script_document_attributes"]["document"])
+        file_url = current_user.talents.first.reload.script_document.document.url
+      
+      # if second talent has the script document.
+      elsif params['user']['talents_attributes']["1"].present? and params['user']['talents_attributes']["1"]['script_document_attributes'].present?
+        # build docuemnt if its not present
+        current_user.talents.last.script_document = UploadedDocument.new if current_user.talents.last.script_document.nil?
+
+        current_user.talents.last.script_document.update_attributes(:document => params['user']['talents_attributes']["1"]["script_document_attributes"]["document"])
+        file_url = current_user.talents.last.reload.script_document.document.url
+      end
+    end
+
+    # check if resume attribtues are present    
+    if params['user']['resume_attributes'].present? and params['user']['resume_attributes']["document"].present?
+      # build resume if its not present
+      current_user.resume = UploadedDocument.new if current_user.resume.nil?
+
+      current_user.resume.update_attributes(params['user']['resume_attributes'])
+      file_url = current_user.resume.document.url
+    end
+
+    render :json => file_url.to_json()
 
   end
 
@@ -265,6 +297,11 @@ class UsersController < ApplicationController
   def set_notification_check_time
     current_user.update_attributes(:notification_check_time => Time.now())
     render :text => 'true'
+  end
+
+  def agent_names
+    agents = User.where('lower(users.name) LIKE lower(?)', "%#{params[:q]}%")
+    render :json => agents.to_json(:only => [:name, :id])
   end
 
 

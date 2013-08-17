@@ -1,0 +1,122 @@
+<%= f.fields_for :characteristics_attributes, current_user.characteristics || Characteristics.new do |c|   %>
+  <div class='user-talent'>
+    <h4>Actor</h4>
+    
+    <div class="control-group">
+    <%= talent.label :description, :class => 'control-label' %>
+      <div class="controls">
+        <%= talent.text_area :description, :class => 'textarea', :rows => "5", :placeholder => 'Tell us about your experience as an actor, what type of roles have you played? What are your strengths? Do you have a look that stands out?' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= talent.check_box :_destroy %> Click Here to Delete
+      </div>    
+    </div>
+  </div>
+            
+  <div class="row-fluid actor-characteristics">
+  
+    <h3>Physical Characteristics</h3>
+    <div class="span4">
+      <div class="control-group">
+        <%= c.label :age, :class => 'control-label' %>
+        <div class="controls">
+          <%= c.text_field :age, :class => 'text_field' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= c.label :height, :class => 'control-label' %>
+        <div class="controls">
+          <%= c.text_field :height, :class => 'text_field' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= c.label :ethnicity, :class => 'control-label' %>
+        <div class="controls">
+          <%= c.text_field :ethnicity, :class => 'text_field' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= c.label :bodytype, :class => 'control-label' %>
+        <div class="controls">
+          <%= c.text_field :bodytype, :class => 'text_field' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= c.label :skin_color, :class => 'control-label' %>
+        <div class="controls">
+          <%= c.text_field :skin_color, :class => 'text_field' %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= c.label :eye_color, :class => 'control-label' %>
+        <div class="controls">
+          <%= c.text_field :eye_color, :class => 'text_field' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="span4">
+      <div class="control-group">
+        <%= c.label :hair_color, :class => 'control-label' %>
+        <div class="controls">
+          <%= c.text_field :hair_color, :class => 'text_field' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= c.label :chest, :class => 'control-label' %>
+        <div class="controls">
+          <%= c.text_field :chest, :class => 'text_field' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= c.label :waist, :class => 'control-label' %>
+        <div class="controls">
+          <%= c.text_field :waist, :class => 'text_field' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= c.label :hips, :class => 'control-label' %>
+        <div class="controls">
+          <%= c.text_field :hips, :class => 'text_field' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= c.label :dress_size, :class => 'control-label' %>
+        <div class="controls">
+          <%= c.text_field :dress_size, :class => 'text_field' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= c.label :description_tag_list, :class => 'control-label' %>
+        
+        <div class='controls'>
+
+            <ul id="user_description_tags" class='tagit ui-sortable'>
+              <% if current_user.characteristics.present? and current_user.characteristics.description_tag_list.present? %>
+                <% current_user.characteristics.description_tag_list.each do |desc| %>
+                  <li data-value="<%= desc %>"><%= desc %> </li>
+                <% end %>
+              <% end %>
+            </ul>
+
+        </div>  
+
+        <div class="controls">
+          <%= c.hidden_field :description_tag_list, :class => 'text_field' %>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+<% end %>

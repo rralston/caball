@@ -339,7 +339,60 @@ app.fn.initialize_radio_toggler = function(){
     }
   });
 }
-  
 
+
+app.fn.init_form_elem_hints = function(selector){
+  $('body').on('focus', selector, function(event) {
+    var div;
+    div = $(event.target);
+    msg = div.attr('data-hint');
+    app.hint_div = $('<div>').html(msg).addClass('hint_msg');
+    app.hint_div.insertAfter(div);
+  });
+
+  $('body').on('focusout', selector, function(event) {
+    app.hint_div.remove();
+  });
+}
+  
+app.fn.init_super_roles_select_handler = function(super_role_selector_class, sub_roles){
+
+  $('body').on('change', $('.'+super_role_selector_class), function(event){
+
+    // if case is to prevent the function to be called when the chil select are chaged and event propagates.
+    app.selected = $(event.target)
+    if($(event.target).hasClass(super_role_selector_class)){
+      selected_val = $(event.target).val();
+      sub_role_container = $(event.target).closest('.control-group').find('.sub_role_container');
+
+      sub_role_select = sub_role_container.find('select');
+      // initially hide the select and empty options
+      sub_role_container.hide();
+      sub_role_select.html('');
+      sub_role_select.val('');
+      // check if the role has sub roles.
+      if(_.size(sub_roles[selected_val]) > 0){
+
+        // build options
+        options = '';
+        _.each(sub_roles[selected_val], function(sub_role){
+          options += '<option value="' + sub_role + '">' + sub_role + '</option>';
+        });
+
+        sub_role_select.html(options);
+
+        sub_role_container.show();
+
+        app.fn.adjust_slider_height();
+      }
+    }
+  });
+}
+
+app.fn.adjust_slider_height = function(){
+  var current = $('#steps').data('index');
+  var stepHeight = $('#steps .step:eq(' + (current - 1) + ')').height();
+  $('#steps').height(stepHeight);
+}
   
 

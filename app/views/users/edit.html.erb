@@ -4,29 +4,49 @@
 <%- model_class = @user.class -%>
 <section class='section'>
   <div class='container user-form'>
+    <div class="row">
+      <div class="span12 edit-user">
+        <div id="wrapper" class="row-fluid">
+          <div id="navigation" style="display:none;">
+            <ul>
+              <li class="selected">
+                <a href="#" class='step_1_nav'>General Info</a>
+              </li>
+              <li>
+                <a href="#" class='step_2_nav'>Roles</a>
+              </li>
+              <li>
+                <a href="#" class='step_3_nav'>Media</a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div id='steps'>
+            <fieldset class="step info">
+              <%= render :partial => 'step_1_form' %>
+            </fieldset> 
 
-    <ul class='nav nav-tabs'>
-      <li class='active'>
-        <a href="#step_1" data-toggle='tab'>Info</a>
-      </li>
-      <li>
-        <a href="#step_2" data-toggle='tab'>Roles</a>
-      </li>
-      <li>
-        <a href="#step_3" data-toggle='tab'>Media</a>
-      </li>
-    </ul>
-
-    <div>
-      <div class='tab-content'>
-        <div class='tab-pane active' id='step_1'>
-          <%= render :partial => 'step_1_form' %>
-        </div>
-        <div class='tab-pane' id='step_2'>
-
-        </div>
+            <fieldset class="step info">
+              <h2>Roles</h2>
+              <div id='step_2'>
+                Please Complete Step 1 to come here..!
+              </div>
+            </fieldset> 
+          </div>
       </div>
     </div>
 
+          
+
+
 	</div>
 </section>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  app.sub_talents = <%= raw User.sub_types.to_json() %>
+  // super roles select change event listener and showsub roles
+  app.fn.init_super_roles_select_handler('super_role_select', app.sub_talents)
+});
+
+</script>

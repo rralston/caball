@@ -5,50 +5,90 @@
     You said you are a <%= current_user.talent_names.join(' and ') %>
 
     <%= f.fields_for :talents do |talent|   %>
-      <div class='user-talent'>
-        <h4>Role</h4>
-        
-        <div class="control-group">
-        <%= talent.label :description, :class => 'control-label' %>
-          <div class="controls">
-            <%= talent.text_area :description, :class => 'textarea', :rows => "5" %>
-          </div>
-        </div>
 
-        <div class="control-group">
-          <div class="controls">
-            <%= talent.check_box :_destroy %> Click Here to Delete
-          </div>    
-        </div>
-      </div>
+      <% if talent.object.name == 'Cast' %>
+        <%= render :partial => 'characteristics_form', :locals => { :f => f, :talent => talent} %>
+      <% elsif talent.object.name == 'Writer' %>
+        <%= render :partial => 'writer_form', :locals => { :f => f, :talent => talent} %>
+      <% end %>
+
     <% end %>
 
 
-    <h2>About You</h2>
+    <div class='control-group'>
 
-    <div class="control-group">
-      <%= f.label :headline, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :headline, :class => 'text_field' %>
+      <%= f.label 'Do you have an agent?' %>
+      
+      <div class='controls'>
+        <%= f.radio_button 'agent_present', 'true', :class => 'toggler_radio', 'data-target' => '#user_agent_name'  %>
+        <%= label :agent_present, 'Yes', :class=>'radio_label' %>
+        <%= f.radio_button 'agent_present', 'false', :class => 'toggler_radio', 'data-target' => '#user_agent_name' %>
+        <%= label :agent_present, 'No', :class=>'radio_label' %>
+
+        <%= f.fields_for :agentship, current_user.agentship || Agentship.new  do |agentship| %>
+
+          <%= agentship.hidden_field :agent_id %>
+
+          <% if agentship.object.agent_id.present? %>
+            <input type='text' id='user_agent_name' placeholder='Enter your agents name' value='<%= agentship.object.agent.name %>'>
+          <% else %>
+            <input type='text' id='user_agent_name' placeholder='Enter your agents name'>
+          <% end %>
+
+        <% end %>
       </div>
     </div>
 
-    <div class="control-group">
-      <%= f.label :about, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_area :about, :class => 'text_area' %>
+    <div class='control-group'>
+
+      <%= f.label 'Are You a part of any professional guilds' %>
+      
+      <div class='controls'>
+        
+        <%= f.radio_button 'guild_present', 'true', :class => 'toggler_radio', 'data-target' => '#user_guild'  %>
+        <%= label :guild_present, 'Yes', :class=>'radio_label' %>
+        <%= f.radio_button 'guild_present', 'false', :class => 'toggler_radio', 'data-target' => '#user_guild' %>
+        <%= label :guild_present, 'No', :class=>'radio_label' %>
+
+        <% if @user.guild.present? %>
+          <%= f.select(:guild, options_for_select(User.guilds, @user.guild)) %>
+        <% else %>
+          <%= f.select(:guild, options_for_select(User.guilds), {}, {:style => 'display: none;'}) %>
+        <% end %>
+
       </div>
     </div>
 
 
     <h3>Upload Your Resume</h3>
-    <%= f.fields_for :resume, current_user.resume || Resume.new do |r|  %>
+    <%= f.fields_for :resume, current_user.resume || current_user.build_resume do |r|  %>
+
       <div class="control-group">
+        <% if current_user.resume.present? and current_user.resume.document.present? %>
+          <div class='controls'>
+            <a class='upload_doc_preview' href="<%= current_user.resume.document.url %>" target='_black'>Check your previous doc.</a>
+          </div>
+        <% else %>
+          <!-- hide initially, but when a file uploaded show the preview -->
+          <div class='controls'>
+            <a class='upload_doc_preview' href="#" target='_black' style='display: none;'>Check your uploaded doc.</a>
+          </div>
+        <% end %>
+
+
         <%= r.label "Resume", :class => 'control-label' %>
         <div class="controls">
           <%= r.file_field :document %>
         </div>
+
+        <div class='controls upload_progress'>
+          Upload Progress:
+          <div class='progress'>
+            <div class='bar' style='width: 0%'></div>
+          </div>
+        </div>
       </div>
+
     <% end %>
     </div>
 

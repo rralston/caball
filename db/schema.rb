@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130814101836) do
+ActiveRecord::Schema.define(:version => 20130817070742) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -29,6 +29,16 @@ ActiveRecord::Schema.define(:version => 20130814101836) do
   add_index "activities", ["owner_id", "owner_type"], :name => "index_activities_on_owner_id_and_owner_type"
   add_index "activities", ["recipient_id", "recipient_type"], :name => "index_activities_on_recipient_id_and_recipient_type"
   add_index "activities", ["trackable_id", "trackable_type"], :name => "index_activities_on_trackable_id_and_trackable_type"
+
+  create_table "agentships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "agent_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "agentships", ["agent_id"], :name => "index_agentships_on_agent_id"
+  add_index "agentships", ["user_id"], :name => "index_agentships_on_user_id"
 
   create_table "attends", :force => true do |t|
     t.integer  "attendable_id"
@@ -214,17 +224,6 @@ ActiveRecord::Schema.define(:version => 20130814101836) do
 
   add_index "receipts", ["notification_id"], :name => "index_receipts_on_notification_id"
 
-  create_table "resumes", :force => true do |t|
-    t.string   "document"
-    t.string   "description"
-    t.string   "content_type"
-    t.integer  "file_size"
-    t.datetime "updated_at",        :null => false
-    t.integer  "documentable_id"
-    t.string   "documentable_type"
-    t.datetime "created_at",        :null => false
-  end
-
   create_table "role_applications", :force => true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
@@ -268,9 +267,21 @@ ActiveRecord::Schema.define(:version => 20130814101836) do
     t.string   "name"
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.text     "description2"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.text     "synopsis"
+    t.string   "sub_talent"
+  end
+
+  create_table "uploaded_documents", :force => true do |t|
+    t.string   "document"
+    t.string   "description"
+    t.string   "content_type"
+    t.integer  "file_size"
+    t.datetime "updated_at",        :null => false
+    t.integer  "documentable_id"
+    t.string   "documentable_type"
+    t.datetime "created_at",        :null => false
   end
 
   create_table "users", :force => true do |t|
