@@ -17,9 +17,9 @@ $(document).ready ()->
         )
         $('#user_characteristics_attributes_description_tag_list').val(tags_array.toString())
 
-  app.fn.init_image_file_uploader  = (form_selector) ->
+  app.fn.init_image_file_uploader  = (element) ->
     # file upload handler for step 1 form and step 3 form containing image files.
-    $(form_selector).fileupload
+    element.fileupload
       url: '/users/files_upload'
       type: 'POST'
       add: (e, data)->
@@ -31,7 +31,9 @@ $(document).ready ()->
           data.progress_div = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.upload_progress')
           data.progress_div.show()
 
-          data.image_container = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.image_preview_container')
+          data.control_group_div =  $('#' + data.fileInput.attr('id')).closest('.control-group')
+
+          data.image_container = data.control_group_div.find('.image_preview_container')
           data.image_container.attr('src', '')
           data.submit()
         else
@@ -41,9 +43,27 @@ $(document).ready ()->
         data.progress_div.find('.bar').css('width', progress + '%')
       done: (e, data)->
         console.log data
-        data.image_container.attr('src', data.result)
+        app.data= data
+        if typeof data.result == 'object' && _.size(data.result) > 1
+          # > 1 when a hash is returned with id of the newly created object.
+          image_url = data.result['url']
+          id = data.result['id']
+
+          # update the id value to the value returned by the server.
+          data.id_div = data.control_group_div.find('.photo_id_div')
+          data.id_div.val(id)
+
+          # remove the numerous-remove link and show object destroy link
+          data.control_group_div.find('.numerous-remove').hide()
+          data.control_group_div.find('.saved_object_remove_actions').show()
+
+        else
+          image_url = data.result
+
+        data.image_container.attr('src', image_url)
         data.image_container.show()
-        # data.progress_div.hide()
+        app.fn.adjust_slider_height()
+        data.progress_div.hide()
 
   app.fn.init_step_2_fileupload = () ->
     # file upload handler for step 2 form.
@@ -77,7 +97,8 @@ $(document).ready ()->
         console.log data
         data.preview_container.attr('href', data.result)
         data.preview_container.show()
-        # data.progress_div.hide()
+        data.progress_div.hide()
+        app.fn.adjust_slider_height()
 
   # this will toggle textboxes based on radio choice,
   # example: do you have an agent.? if yes, show text box.
@@ -86,7 +107,7 @@ $(document).ready ()->
   app.fn.init_form_elem_hints('.hinted')
 
   # initialize step_1_form image files uplaoder.
-  app.fn.init_image_file_uploader('#user_edit_form')
+  app.fn.init_image_file_uploader($('#user_edit_form'))
 
 
   # handler to remove talents, photos and videos dynamically.!
@@ -101,7 +122,8 @@ $(document).ready ()->
     to_remove = target.attr('data-toRemove')
     target.closest(to_remove).hide()
     target.closest(to_remove).removeClass(to_remove.substring(1, to_remove.length)) # to_remove is a class selector, we don't need dot(.) infront of it
-      # show the link to add more talents
+
+    # show the link to add more talents
     $('a#add-to-talents-list').show()
     return false
 
@@ -142,6 +164,7 @@ $(document).ready ()->
         app.fn.description_tag_list_init()
         app.fn.init_step_2_fileupload()
         app.fn.init_agent_name_autocomplete()
+        app.fn.description_tag_list_init()
 
     return false
 
@@ -155,23 +178,26 @@ $(document).ready ()->
         console.log data
         $('#step_3').html(data)
         $('a.step_3_nav').trigger('click')
-        Numerous.init()
+        # initialize numerous js
+        Users.Edit.init_numerous()
         # initialize step_3 images file uploader.
-        app.fn.init_image_file_uploader('#user_edit_form_step_3')
+        app.fn.init_image_file_uploader($('#user_edit_form_step_3'))
+        app.fn.adjust_slider_height()
+        
 
     return false
 
-  # step 3 submit handler
-  $('body').on 'submit', '#user_edit_form_step_3', (event)->
-    $.ajax
-      type: 'POST'
-      url: '/users/step_3'
-      data: $('#user_edit_form_step_3').serialize()
-      success: (data)->
-        console.log data
-        # $('#step_3').html(data)
-        # $('a.step_3_nav').trigger('click')
-        # initialize step_3 images file uploader.
-        # app.fn.init_image_file_uploader('#user_edit_form_step_3')
+  # # step 3 submit handler
+  # $('body').on 'submit', '#user_edit_form_step_3', (event)->
+  #   $.ajax
+  #     type: 'POST'
+  #     url: '/users/step_3'
+  #     data: $('#user_edit_form_step_3').serialize()
+  #     success: (data)->
+  #       console.log data
+  #       # $('#step_3').html(data)
+  #       # $('a.step_3_nav').trigger('click')
+  #       # initialize step_3 images file uploader.
+  #       # app.fn.init_image_file_uploader('#user_edit_form_step_3')
 
-    return false
+  #   return false

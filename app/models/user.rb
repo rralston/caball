@@ -21,7 +21,8 @@ class User < ActiveRecord::Base
   has_many :photos, :as => :imageable, :dependent => :destroy, :conditions => { :is_cover => false }
   has_one :resume, :class_name => 'UploadedDocument', :as => :documentable, :dependent => :destroy
   has_one :cover_photo, :class_name =>'Photo' , :as => :imageable, :dependent => :destroy, :conditions => { :is_cover => true }
-  has_many :videos, :as => :videoable, :dependent => :destroy
+  has_one :demo_reel, :class_name => 'Video', :as => :videoable, :dependent => :destroy, :conditions => { :is_demo_reel => true }
+  has_many :other_videos, :class_name => 'Video', :as => :videoable, :dependent => :destroy, :conditions => { :is_demo_reel => false }
   has_many :projects, :dependent => :destroy
   has_many :events, :dependent => :destroy
   has_many :talents, :dependent => :destroy
@@ -54,17 +55,17 @@ class User < ActiveRecord::Base
   has_many :received_endorsements, :class_name => 'Endorsement', :foreign_key => 'receiver_id', :dependent => :destroy
 
 
-  accepts_nested_attributes_for :characteristics, :profile, :photos, :videos,
+  accepts_nested_attributes_for :characteristics, :profile, :photos, :other_videos, :demo_reel,
                                 :projects, :talents, :cover_photo, :resume,
                                 :agentship, :allow_destroy => true
 
   has_many :role_applications, :dependent => :destroy
   attr_accessible :name, :email, :location, :about, :profile_attributes,
                   :imdb_url, :characteristics_attributes, :photos_attributes,
-                  :talents_attributes, :photo, :videos_attributes, :projects_attributes,
+                  :talents_attributes, :photo, :other_videos_attributes, :projects_attributes,
                   :admin, :gender, :headline, :featured, :expertise, :cover_photo_attributes,
                   :resume_attributes, :notification_check_time, :experience, :agent_name,
-                  :agent_present, :guild_present, :guild, :agentship_attributes
+                  :agent_present, :guild_present, :guild, :agentship_attributes, :demo_reel_attributes
 
   validates_presence_of :name, :email, :message => "is required"
     

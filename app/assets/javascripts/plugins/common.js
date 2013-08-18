@@ -344,7 +344,7 @@ app.fn.initialize_radio_toggler = function(){
 app.fn.init_form_elem_hints = function(selector){
   $('body').on('focus', selector, function(event) {
     var div;
-    div = $(event.target);
+    div = $(event.target).closest('.hinted');
     msg = div.attr('data-hint');
     app.hint_div = $('<div>').html(msg).addClass('hint_msg');
     app.hint_div.insertAfter(div);

@@ -467,29 +467,29 @@
             <h3>Video <%= videos_counter%></h3>
             <% if @user.videos.exists? %>
             
-            <% if video.object.thumbnail_small.present? %>
-            <div class="control-group">
-              <label class="control-label">Video Preview</label>
-              <div class="controls">
-                <img src=<%= video.object.thumbnail_small %> class="img-polaroid" >
-                <%= video.check_box :_destroy %> Click Here to Delete
-              </div>
-            </div>
-            <% end %>
+              <% if video.object.thumbnail_small.present? %>
+                <div class="control-group">
+                  <label class="control-label">Video Preview</label>
+                  <div class="controls">
+                    <img src=<%= video.object.thumbnail_small %> class="img-polaroid" >
+                    <%= video.check_box :_destroy %> Click Here to Delete
+                  </div>
+                </div>
+              <% end %>
             
-            <div class="control-group">
-              <%= video.label :url, :class => 'control-label' %>
-              <div class="controls">
-                <%= video.text_field(:url) %>
+              <div class="control-group">
+                <%= video.label :url, :class => 'control-label' %>
+                <div class="controls">
+                  <%= video.text_field(:url) %>
+                </div>
               </div>
-            </div>
             <% else %>
-            <div class="control-group">
-              <label class="control-label">Youtube URL</label>
-              <div class="controls">
-                <%= video.text_field(:url) %>
+              <div class="control-group">
+                <label class="control-label">Youtube URL</label>
+                <div class="controls">
+                  <%= video.text_field(:url) %>
+                </div>
               </div>
-            </div>
             <% end %>
             
             <div class="control-group">

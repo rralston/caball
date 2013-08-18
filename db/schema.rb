@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130817070742) do
+ActiveRecord::Schema.define(:version => 20130818095447) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -328,11 +328,12 @@ ActiveRecord::Schema.define(:version => 20130817070742) do
     t.datetime "video_updated_at"
     t.integer  "videoable_id"
     t.string   "videoable_type"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.text     "user_description"
     t.string   "imdb"
     t.boolean  "primary"
+    t.boolean  "is_demo_reel",     :default => false
   end
 
   create_table "votes", :force => true do |t|

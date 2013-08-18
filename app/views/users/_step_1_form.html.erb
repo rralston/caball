@@ -1,4 +1,4 @@
-<% @user.errors.full_messages.each do |error| %>
+<% current_user.errors.full_messages.each do |error| %>
 <div class="alert alert-error">
   <button type="button" class="close" data-dismiss="alert">
     ×
@@ -9,7 +9,7 @@
 </div>
 <% end %>
 
-<%= form_for @user, :url => '/users/step_1', :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'user_edit_form'} do |f| %>
+<%= form_for current_user, :url => '/users/step_1', :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'user_edit_form'} do |f| %>
   <div class="span12">
     <h2>General Info</h2>
     
@@ -41,11 +41,11 @@
       <%= f.label :gender, :class => 'control-label' %>
       <div class="controls gender radios">
         <div class='option text-center pull-left'>
-          <%= radio_button("user", "gender", "male", {:checked => (!@user.gender.nil? && (@user.gender == "male" && 'checked')) || "false"}) %>
+          <%= radio_button("user", "gender", "male", {:checked => (!current_user.gender.nil? && (current_user.gender == "male" && 'checked')) || "false"}) %>
           <%= label :gender_male, 'Male' %>
         </div>
         <div class='option text-center pull-left'>
-          <%= radio_button("user", "gender", "female", {:checked => (!@user.gender.nil? && (@user.gender == "female" && 'checked')) || "false"}) %>
+          <%= radio_button("user", "gender", "female", {:checked => (!current_user.gender.nil? && (current_user.gender == "female" && 'checked')) || "false"}) %>
           <%= label :gender_male, 'Female' %>
         </div>
       </div>
@@ -58,7 +58,7 @@
       </div>
     </div>
 
-    <%= f.fields_for :profile, @user.profile || @user.build_profile  do |profile|  %>
+    <%= f.fields_for :profile, current_user.profile || current_user.build_profile  do |profile|  %>
       <div class="control-group">
         <%= profile.label "Profile Picture", :class => 'control-label' %>
 
@@ -66,9 +66,9 @@
           
         </div>
         
-        <% if @user.profile.image.present? %>
+        <% if current_user.profile.image.present? %>
           <div class="controls">
-            <%= image_tag @user.profile.image.url(:medium), {:class => "image_preview_container img-polaroid"} %>
+            <%= image_tag current_user.profile.image.url(:medium), {:class => "image_preview_container img-polaroid"} %>
           </div>
         <% else %>
           <!-- just keep the container there in case to preview if user uploads an image. -->
@@ -159,7 +159,7 @@
     <div class='control-group'>
       <div class='controls'>
         <!-- don't allow user to add more than 3 talents -->
-        <% if @user.talents.count < 2 %>
+        <% if current_user.talents.count < 2 %>
           <%= link_to 'Add another role', '#', :id => 'add-to-talents-list' %>
         <% else %>
           <%= link_to 'Add another role', '#', :id => 'add-to-talents-list', :style => 'display:none;' %>
@@ -190,19 +190,19 @@
     <div class="control-group">
       <%= f.label "Experience", :class => 'control-label' %>
       <div class="controls">
-        <%= f.select(:experience, options_for_select(User.experience, @user.experience), {}, :class=>'hinted', "data-hint" => 'Tell us how long you have been working in the film industry. Be honest, otherwise you might lose a position you really wanted!') %>
+        <%= f.select(:experience, options_for_select(User.experience, current_user.experience), {}, :class=>'hinted', "data-hint" => 'Tell us how long you have been working in the film industry. Be honest, otherwise you might lose a position you really wanted!') %>
       </div>
     </div>
 
-    <div class='control-group'>
+    <div class='control-group hinted' data-hint='testing this.!'>
       <label class='control-label'>Skills</label>
 
       <div class='controls'>
         <%= f.hidden_field :expertise, :class => 'text_field' %>
         
           <ul id="expertise_tags" class='tagit ui-sortable'>
-            <% if @user.expertise.present? %>
-              <%= @user.expertise.split(',').each do |exp_tag| %>
+            <% if current_user.expertise.present? %>
+              <%= current_user.expertise.split(',').each do |exp_tag| %>
                 <li data-value="<%= exp_tag %>"><%= exp_tag %> </li>
               <% end %>
             <% end %>

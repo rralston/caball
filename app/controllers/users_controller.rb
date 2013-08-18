@@ -74,7 +74,6 @@ class UsersController < ApplicationController
   def edit
     @talents = User.types
     @experience = User.experience
-    @videos = @user.videos
     @user.talents.present? || @user.talents.build
   end
    
@@ -132,9 +131,9 @@ class UsersController < ApplicationController
 
   def step_3
     if current_user.update_attributes(params[:user])
-      render :text => true
+      redirect_to edit_user_path(current_user), :success => true, :notice => 'User info saved'
     else
-    
+      redirect_to edit_user_path(current_user), :success => false, :notice => 'User info not saved'
     end
   end
 
@@ -142,6 +141,8 @@ class UsersController < ApplicationController
     # TODO: try to send only required parameters from client side if possible.
 
     if params['user']['profile_attributes'].present? and params['user']['profile_attributes']['image'].present?
+      current_user.profile = Profile.new if current_user.profile.nil?
+
       current_user.profile.update_attributes(params['user']['profile_attributes'])
       file_url = current_user.profile.image.url(:medium)
     end
@@ -187,6 +188,8 @@ class UsersController < ApplicationController
 
     if params['user']['photos_attributes'].present?
       attributes = params['user']['photos_attributes']
+
+      # get the index of the parameters with image attribute present
       indexes_with_image = attributes.map do |index, attribute|
         if attribute.include?('image')
           index
@@ -198,12 +201,23 @@ class UsersController < ApplicationController
       # only one image is submitted once anyway.
       index = indexes_with_image.first
         
-      current_user.photos[index.to_i].update_attributes(:image => params['user']['photos_attributes'][index]['image'])
+      if index.present?
+        # if id is present, that is a photo object that is already existing and being updated.
+        if params['user']['photos_attributes'][index]['id'].present?
+          photo_object = current_user.photos.find(params['user']['photos_attributes'][index]['id'].to_i)
+        else
+          # id won't be present for those photos that are dynamically added by Numerous.js
+          photo_object = current_user.photos.new
+        end
 
-      file_url = current_user.photos[index.to_i].image.url(:medium)
+        photo_object.update_attributes(:image => params['user']['photos_attributes'][index]['image'])
+
+        file_url = {
+          :url => photo_object.image.url(:medium),
+          :id => photo_object.reload.id
+        }
+      end
     end
-
-    debugger
 
     render :json => file_url.to_json()
 

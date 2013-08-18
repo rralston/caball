@@ -2,60 +2,116 @@
 <%= form_for current_user, :url => '/users/step_3', :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'user_edit_form_step_3'} do |f| %>
   <div class="span12">
 
-    <h2>More Photos</h2>
+    <%= f.fields_for :demo_reel, (current_user.demo_reel || Video.new) do |video|  %>
+      
+      <div class="control-group">
 
-    <%= f.fields_for :photos do |p|  %>
-      <% if current_user.photos.exists? %>
-        <div class="control-group">
-          <%= p.label "Photo", :class => 'control-label' %>
-          <div class="controls">
-            <%= image_tag p.object.image.url(:medium), {:class => "img-polaroid image_preview_container"} %>
-            <%= p.file_field :image %>
-            <%= p.check_box :_destroy %> Click Here to Destroy
-          </div>
+        <div class="controls">
+          <%= video.label :url, "Demo Reel:" %>
+          <%= video.text_field(:url, :placeholder => 'YouTube, Vimeo URL', :class => 'hinted', "data-hint" => "Why can't I upload my clip directly? We know you probably already have your reel online somewhere, but we are in the process of making it so you can simply upload your video directly. Thanks for understanding!") %>
         </div>
 
-        <div class="control-group">
-          <%= p.label "Description", :class => 'control-label' %>
+        <% if video.object.embed_code.present? %>
           <div class="controls">
-            <%= p.text_area :description, :class => 'textarea', :rows => "5"%>
+            <%= raw video.object.embed_code %>
+            <%= video.check_box :_destroy %> Click Here to Delete
           </div>
+        <% end %>
+
+        <div class="controls">
+          <label>Your Participation</label>
+          <%= video.text_area :user_description, :class => 'text_field', :rows => 5 %>
         </div>
-      <% end %>
+
+        <input type='hidden' value='1' name='user[demo_reel_attributes][is_demo_reel]'>
+
+      </div>
+
     <% end %>
 
-    <div id="fields-for-photos-list" class="numerous">
-      <%= f.fields_for :photos, Photo.new, :child_index => 'replace_this' do |photo| %>
-        <div class="control-group">
 
-          <!-- just keep the container there in case to preview if user uploads an image. -->
-          <img class='image_preview_container img-polaroid' src="">
-
-          <div class="controls">
-            <%= photo.file_field :image %>
-          </div>
-
-          <%= photo.label :description, :class => 'control-label' %>
-          <div class="controls">
-            <%= photo.text_area :description, :class => 'textarea', :rows => "5" %>
-          </div>
-        </div>
-
-        <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
-      <% end %>
+    <div class="controls">
+      <h4>More Videos</h4>
     </div>
 
-  <div id="photos-list"></div>
+    <%= f.fields_for :other_videos do |video|  %>
+      <% if current_user.other_videos.exists? %>
+              
+        <% if video.object.embed_code.present? %>
+          <div class="control-group">
 
-  <%= link_to 'Add Another Photo', '#', :id => 'add-to-photos-list' %>
+            <div class="controls">
+              <%= video.label :url %>
+              <%= video.text_field(:url, :placeholder => 'YouTube, Vimeo URL') %>
+            </div>
 
 
-    <h2>Cover Photo</h2>
-      <%= f.fields_for :cover_photo, (current_user.cover_photo || Photo.new) do |user_cover_photo|  %>
+            <div class="controls">
+              <%= raw video.object.embed_code %>
+              <%= video.check_box :_destroy %> Click Here to Delete
+            </div>
 
-        <div class='row'>
-          <div class='span3'>
-            <div class="control-group">
+          </div>
+        <% end %>
+
+      <% else %>
+        <div class="control-group">
+          
+          <div class="controls">
+            <%= video.text_field(:url, :placeholder => 'YouTube, Vimeo URL') %>
+          </div>
+        </div>
+      <% end %>
+        
+      <div class="control-group">
+        
+        <div class="controls">
+          <label>Your Participation</label>
+          <%= video.text_area :user_description, :class => 'text_field', :rows => 5 %>
+        </div>
+      </div>
+
+    <% end %>
+
+    <div id="fields-for-videos-list" class="numerous">
+      <%= f.fields_for :other_videos, Video.new, :child_index => 'replace_this' do |video| %>
+        
+        <div class="control-group">
+          <h3>Video</h3>      
+          
+          <div class="controls">
+            <label>Url</label>
+            <%= video.text_field(:url, :placeholder => 'YouTube, Vimeo URL') %>
+          </div>
+          
+          <div class="controls">
+            <label>Your Participation</label>
+            <%= video.text_area :user_description, :class => 'text_field', :rows => 5 %>
+          </div>
+
+        </div>
+        <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+
+      <% end %>
+    </div>
+    
+    <div id="videos-list"></div>
+    
+    <div class='controls'>
+      <%= link_to 'Add Another Video', '#', :id => 'add-to-videos-list' %>
+    </div>
+
+
+    <div class="controls">
+      <h4>Cover Photo</h4>
+    </div>
+    <%= f.fields_for :cover_photo, (current_user.cover_photo || Photo.new) do |user_cover_photo|  %>
+
+      <div class='row'>
+        <div class='span3'>
+          <div class="control-group">
+
+            <div class="controls">
               <!-- if image exits, allow to change it -->
               <% if user_cover_photo.object.image.present? %>
                 <img src=<%= user_cover_photo.object.image.url(:medium) %> class="image_preview_container img-polaroid" >
@@ -63,34 +119,121 @@
                 <!-- just keep the container there in case to preview if user uploads an image. -->
                 <img class='image_preview_container img-polaroid' src="">
               <% end %>
+            </div>
 
-              <div class="controls">
-                <%= user_cover_photo.file_field :image, :validate => true %>
+            <div class='controls upload_progress'>
+              Upload Progress:
+              <div class='progress'>
+                <div class='bar' style='width: 0%'></div>
               </div>
+            </div>
 
-              <div class='controls upload_progress'>
-                Upload Progress:
-                <div class='progress'>
-                  <div class='bar' style='width: 0%'></div>
-                </div>
-              </div>
+            <div class="controls">
+              <%= user_cover_photo.file_field :image, :validate => true %>
+            </div>
 
-              <input type='hidden' value='1' name='user[cover_photo_attributes][is_cover]'>
+            <div class="controls">
+              <label>Description:</label>
+              <%= user_cover_photo.text_field :description %>
+            </div>
 
+            <input type='hidden' value='1' name='user[cover_photo_attributes][is_cover]'>
+
+          </div>
+        </div>
+
+      </div>
+    <% end %>
+
+
+    <h3></h3>
+
+    <div class="controls">
+      <h4>More Photos</h4>
+    </div>
+
+    <%= f.fields_for :photos do |p|  %>
+      <% if current_user.photos.exists? %>
+        <div class="control-group user-extra-photo">
+          
+          <%= p.label "Photo", :class => 'control-label' %>
+          
+          <div class="controls">
+            <%= image_tag p.object.image.url(:medium), {:class => "img-polaroid image_preview_container"} %>
+          </div>
+
+          <div class="controls">
+            <%= p.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+
+            <a href='#' class='remove_entity' data-toRemove='.user-extra-photo'>Remove this photo</a>
+          </div>
+
+          <div class='controls upload_progress'>
+            Upload Progress:
+            <div class='progress'>
+              <div class='bar' style='width: 0%'></div>
             </div>
           </div>
 
-          <div class='span3'>
-            <div class="control-group">
-              <label class="control-label">Image Description</label>
-              <div class="controls">
-                <%= user_cover_photo.text_field :description %>
-              </div>
-            </div>
+
+          <div class="controls">
+            <%= p.file_field :image %>
           </div>
+
+        
+          <div class='controls'>
+            <%= p.label "Description:" %>
+            <%= p.text_field :description, :class => 'text_field' %>
+          </div>
+
 
         </div>
+
       <% end %>
+    <% end %>
+
+    <div id="fields-for-photos-list" class="numerous">
+      <%= f.fields_for :photos, Photo.new, :child_index => 'replace_this' do |photo| %>
+        <div class="control-group user-extra-photo">
+
+          <label class='control-label'>Photo</label>
+
+          <!-- just keep the container there in case to preview if user uploads an image. -->
+          <div class="controls">
+            <img class='image_preview_container img-polaroid' src="" style='display: none;'>
+          </div>
+
+          <div class='controls upload_progress'>
+            Upload Progress:
+            <div class='progress'>
+              <div class='bar' style='width: 0%'></div>
+            </div>
+          </div>
+
+          <div class="controls">
+            <%= photo.file_field :image %>
+          </div>
+
+          <div class="controls">
+
+            <!-- id is updated when the image is created and uploaded  -->
+            <%= photo.hidden_field :id, :class => 'photo_id_div' %>
+
+            <%= photo.label :description %>
+
+            <%= photo.text_field :description, :class => 'text_field', :rows => "5" %>
+          </div>   
+        </div>
+
+        <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+      <% end %>
+    </div>
+
+    <div id="photos-list"></div>
+    
+    <div class="controls">
+      <%= link_to 'Add Another Photo', '#', :id => 'add-to-photos-list' %>
+    </div>
 
 
       <div class='span12'>
@@ -103,6 +246,8 @@
           By clicking Finish, you are agree to abide by Filmzu's Terms and Conditions
         </div>
       </div>
+
+      <div class='clearfix'></div>
 
   </div>
 

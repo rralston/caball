@@ -75,14 +75,20 @@ var Users = {
         }
       });
       
-      /* Add handler for numerous.js if we're adding additional entries to form so that it resizes 
+      Users.Edit.init_numerous();
+    },
+
+    init_numerous: function() {
+    /* Add handler for numerous.js if we're adding additional entries to form so that it resizes 
          div height */
       Numerous.init({
         'photos-list' : {
-          'add' : function(form){
+          'add' : function(added_form_element){
             var current = $('#steps').data('index');
             var stepHeight = $('#steps .step:eq(' + (current - 1) + ')').height();
             $('#steps').height(stepHeight);
+
+            app.fn.init_image_file_uploader(added_form_element.find('input[type=file]'))
           },
   
           'remove' : function(form){
@@ -127,15 +133,17 @@ var Users = {
             new_talents = Numerous.count(['talents-list'])
 
             // if total telents is less than 3 show option to add more talent
-            if ((added_talents + new_talents) < 3){
+            if ((added_talents + new_talents) < 2){
               $('a#add-to-talents-list').show()
             }
           }
         }
       });
-    },
+  }
     
   },
+
+
   
   Show: {
     init: function () {
