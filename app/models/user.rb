@@ -21,8 +21,12 @@ class User < ActiveRecord::Base
   has_many :photos, :as => :imageable, :dependent => :destroy, :conditions => { :is_cover => false }
   has_one :resume, :class_name => 'UploadedDocument', :as => :documentable, :dependent => :destroy
   has_one :cover_photo, :class_name =>'Photo' , :as => :imageable, :dependent => :destroy, :conditions => { :is_cover => true }
+  
   has_one :demo_reel, :class_name => 'Video', :as => :videoable, :dependent => :destroy, :conditions => { :is_demo_reel => true }
   has_many :other_videos, :class_name => 'Video', :as => :videoable, :dependent => :destroy, :conditions => { :is_demo_reel => false }
+  # this gives all videos incluing demo reel and other videos
+  has_many :videos, :as => :videoable, :dependent => :destroy
+
   has_many :projects, :dependent => :destroy
   has_many :events, :dependent => :destroy
   has_many :talents, :dependent => :destroy

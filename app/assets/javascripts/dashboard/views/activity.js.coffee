@@ -40,6 +40,7 @@ app.views.activity = Backbone.View.extend
             if resp != 'false'
               _this.model.get('trackable').user_liked = true
               count = _this.$el.find('.likes-count').html()
+              _this.$el.find('.heart-blue').addClass('active')
               _this.$el.find('.likes-count').html(parseInt(count) + 1)
             else
               alert 'Something went wrong, Please try laters'
@@ -59,6 +60,7 @@ app.views.activity = Backbone.View.extend
           if resp != 'false'
             _this.model.get('trackable').user_liked = false
             count = _this.$el.find('.likes-count').html()
+            _this.$el.find('.heart-blue').removeClass('active')
             _this.$el.find('.likes-count').html(parseInt(count) - 1)
           else
             alert 'Something went wrong, Please try laters'

@@ -64,11 +64,11 @@
       </div>
       <div class='event-popularity clearfix'>
         
-        <div class='likes pull-right'>
-          <div class='pull-right'>
+        <div class="likes action-div like-event icon pull-right">
+          <div class='pull-right count'>
             <%%= likes.length %>
           </div>
-          <div class="heart-blue icon pull-right"> </div>
+          <div class="heart-blue <%% if(user_liked) print('active') %> icon pull-right"> </div>
         </div>
 
         <div class='comments pull-right'>

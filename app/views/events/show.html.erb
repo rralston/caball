@@ -327,7 +327,7 @@ $(document).ready(function(){
   
   app.comments = new app.collections.comments()
 
-  app.comments.reset(<%= raw @event.comments.to_json(:include => [:user, :likes]) %>)
+  app.comments.reset(<%= raw @event.comments.to_json(:include => [:user, :likes], :check_user => current_user) %>)
 
   app.comments_view = new app.views.comments({ collection: app.comments })
 

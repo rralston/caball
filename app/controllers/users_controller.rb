@@ -280,31 +280,33 @@ class UsersController < ApplicationController
       format.html { redirect_to root_url }
       format.json {
         render :json => resp.to_json(:include => [
-                                                  :attendees,
-                                                  { 
-                                                    :start => {
-                                                      :methods => [
-                                                        :day,
-                                                        :month_year
-                                                      ]
-                                                    }
-                                                  },
-                                                  {
-                                                    :end => {
-                                                      :methods => [
-                                                        :day,
-                                                        :month_year
-                                                      ]
-                                                    } 
-                                                  },
-                                                  :comments,
-                                                  :likes,
-                                                  :main_photo,
-                                                  :user
-                                                ],
-                                                :methods => [
-                                                  :attendees_emails
-                                                ])
+                                                    :attendees,
+                                                    { 
+                                                      :start => {
+                                                        :methods => [
+                                                          :day,
+                                                          :month_year
+                                                        ]
+                                                      }
+                                                    },
+                                                    {
+                                                      :end => {
+                                                        :methods => [
+                                                          :day,
+                                                          :month_year
+                                                        ]
+                                                      } 
+                                                    },
+                                                    :comments,
+                                                    :likes,
+                                                    :main_photo,
+                                                    :user
+                                                  ],
+                                                  :methods => [
+                                                    :attendees_emails
+                                                  ],
+                                                  :check_user => current_user
+                                                )
       }
     end
   end
@@ -326,7 +328,7 @@ class UsersController < ApplicationController
   def next_recommended_projects
     projects = current_user.recommended_projects.paginate(:page => params[:page_number], :per_page => RECOMMENDED_PROJECTS_PER_PAGE)
     respond_to do |format|
-      format.json { render :json => Project.custom_json(projects) }
+      format.json { render :json => Project.custom_json(projects, current_user) }
     end
   end
 

@@ -99,6 +99,7 @@ app.views.result_event = Backbone.View.extend
             if resp != 'false'
               _this.model.set('user_liked', true)
               likes_count = _this.$el.find('.likes .count').html()
+              _this.$el.find('.heart-blue').addClass('active')
               _this.$el.find('.likes .count').html(parseInt(likes_count) + 1)
               # _this.render()
             else
@@ -119,6 +120,7 @@ app.views.result_event = Backbone.View.extend
           if resp != 'false'
             _this.model.set('user_liked', false)
             likes_count = _this.$el.find('.likes .count').html()
+            _this.$el.find('.heart-blue').removeClass('active')
             _this.$el.find('.likes .count').html(parseInt(likes_count) - 1)
           else
             alert 'Something went wrong, Please try later'

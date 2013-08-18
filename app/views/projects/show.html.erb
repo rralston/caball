@@ -385,7 +385,7 @@ $(document).ready(function(){
   app.project_data = <%= raw @project.to_json() %>
 
   app.comments = new app.collections.comments()
-  app.comments.reset(<%= raw @project.comments.to_json(:include => [:user, :likes]) %>)
+  app.comments.reset(<%= raw @project.comments.to_json(:include => [:user, :likes], :check_user => current_user) %>)
   app.comments_view = new app.views.comments({ collection: app.comments })
   $('#comments_div').html(app.comments_view.render().el)
 

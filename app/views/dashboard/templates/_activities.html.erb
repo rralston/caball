@@ -34,7 +34,7 @@
   <div class="row comment-actions">
     <div class="pull-right like-comment likes action-div">
       <div class="pull-right likes-count"><%%= trackable.likes_count %></div>
-      <div class="heart-blue pull-right"> </div>        
+      <div class="heart-blue <%% if(trackable.user_liked) print('active') %> pull-right"> </div>        
     </div>
   </div>
 
@@ -80,7 +80,7 @@
   <div class="row comment-actions">
     <div class="pull-right like-comment likes action-div">
       <div class="pull-right likes-count"><%%= trackable.likes_count %></div>
-      <div class="heart-blue pull-right"> </div>        
+      <div class="heart-blue <%% if(trackable.user_liked) print('active') %> pull-right"> </div>        
     </div>
   </div>
 
@@ -115,7 +115,7 @@
   <div class="row project-actions">
     <div class="pull-right like-project likes action-div">
       <div class="pull-right likes-count"><%%= trackable.likes_count %></div>
-      <div class="heart-blue pull-right"> </div>        
+      <div class="heart-blue <%% if(trackable.user_liked) print('active') %> pull-right"> </div>        
     </div>
   </div>
   
@@ -151,7 +151,7 @@
   <div class="row event-actions">
     <div class="pull-right like-event likes action-div">
       <div class="pull-right likes-count"><%%= trackable.likes_count %></div>
-      <div class="heart-blue pull-right"> </div>        
+      <div class="heart-blue <%% if(trackable.user_liked) print('active') %> pull-right"> </div>        
     </div>
   </div>
   

@@ -277,8 +277,8 @@ class Project < ActiveRecord::Base
     if options[:check_user].present?
       # tells if the user is following particular project
       json[:user_following] = self.liker_ids.include?(options[:check_user].id)
+      json[:user_liked] = json[:user_following]
     end
-
     if options[:votes_data_for_user].present?
       user = options[:votes_data_for_user]
       json[:voted_by_user] = voted_by_user?(user)
