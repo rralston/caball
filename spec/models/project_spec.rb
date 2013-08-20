@@ -304,4 +304,16 @@ describe Project do
       
   end
 
+  context "url name" do
+    before(:all){
+      @project1 = FactoryGirl.create(:project, :title => 'Project With Name')
+      @project2 = FactoryGirl.create(:project, :title => 'Project With Name')
+      ap @project1.url_name
+      ap @project2.url_name
+    }
+
+    specify { @project1.url_name.should == 'project-with-name' }
+    specify { @project2.url_name.should == 'project-with-name' + "-2" }
+  end
+
 end

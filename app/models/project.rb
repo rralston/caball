@@ -17,7 +17,7 @@ class Project < ActiveRecord::Base
 
   attr_accessible :title, :description, :start, :end, :featured, :roles_attributes,
                   :photos_attributes, :videos_attributes, :status, :genre, :is_type, :genre_list, :is_type_list,
-                  :thoughts, :compensation, :location, :headline, :project_dates_attributes, :union
+                  :thoughts, :compensation, :location, :headline, :project_dates_attributes, :union, :url_name
   
   accepts_nested_attributes_for :roles, :photos, :videos, :project_dates, :genre, :allow_destroy => true  
   validates_presence_of :title, :description, :message => "is required"
@@ -26,6 +26,24 @@ class Project < ActiveRecord::Base
   geocoded_by :location   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
   
+  before_save :update_url_name
+
+  # this is will happen only when udate_attributes is used.
+  # won't be called for project.save
+  def update_url_name
+    if self.title_changed?
+      # if the name is changed, convert to the url name
+      self.url_name = self.title.gsub(/\s/,'-').downcase
+
+      # check  and get size of if any other projects having the same url_name
+      same_named_count = Project.where("lower(title) = lower(?)", self.title).size
+      if same_named_count > 0
+        # append the count + 1 after the url_name.
+        self.url_name = self.url_name + "-#{same_named_count.to_i + 1}"
+      end
+    end
+  end
+
   scope :popular,
     select('projects.*, count(likes.id) AS fans_count').
     joins("inner join likes on likes.loveable_id = projects.id AND likes.loveable_type = 'Project' ").

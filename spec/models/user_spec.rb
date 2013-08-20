@@ -417,4 +417,16 @@ describe User do
     specify { @com_user2.completeness.should == 0 }
   end
 
+  context "url name" do
+    before(:all){
+      @user1 = FactoryGirl.create(:user, :name => 'Munna Vishnu')
+      @user2 = FactoryGirl.create(:user, :name => 'Munna Vishnu')
+      ap @user1.url_name
+      ap @user2.url_name
+    }
+
+    specify { @user1.url_name.should == 'munna-vishnu' }
+    specify { @user2.url_name.should == 'munna-vishnu' + "-2" }
+  end
+
 end

@@ -51,6 +51,24 @@ class Event < ActiveRecord::Base
   after_validation :geocode, :if => :location_changed?  # auto-fetch coordinates
 
 
+  before_save :update_url_name
+
+  # this is will happen only when udate_attributes is used.
+  # won't be called for event.save
+  def update_url_name
+    if self.title_changed?
+      # if the name is changed, convert to the url name
+      self.url_name = self.title.gsub(/\s/,'-').downcase
+
+      # check  and get size of if any other events having the same url_name
+      same_named_count = Event.where("lower(title) = lower(?)", self.title).size
+      if same_named_count > 0
+        # append the count + 1 after the url_name.
+        self.url_name = self.url_name + "-#{same_named_count.to_i + 1}"
+      end
+    end
+  end
+
   # popular are those having more number of total votes...
   # total_votes is (sum of upvotes) - (sum of down votes)
   # vote.value is 1 for upvote, -1 for downvote.

@@ -68,7 +68,7 @@ class User < ActiveRecord::Base
                   :imdb_url, :characteristics_attributes, :photos_attributes,
                   :talents_attributes, :photo, :other_videos_attributes, :projects_attributes,
                   :admin, :gender, :headline, :featured, :expertise, :cover_photo_attributes,
-                  :resume_attributes, :notification_check_time, :experience, :agent_name,
+                  :resume_attributes, :notification_check_time, :experience, :agent_name, :url_name,
                   :agent_present, :guild_present, :guild, :agentship_attributes, :demo_reel_attributes
 
   validates_presence_of :name, :email, :message => "is required"
@@ -76,6 +76,24 @@ class User < ActiveRecord::Base
   geocoded_by :location   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
 
+
+  before_save :update_url_name
+
+  # this is will happen only when udate_attributes is used.
+  # won't be called for user.save
+  def update_url_name
+    if self.name_changed?
+      # if the name is changed, convert to the url name
+      self.url_name = self.name.gsub(/\s/,'-').downcase
+
+      # check  and get size of if any other users having the same url_name
+      same_named_count = User.where("lower(name) = lower(?)", self.name).size
+      if same_named_count > 0
+        # append the count + 1 after the url_name.
+        self.url_name = self.url_name + "-#{same_named_count.to_i + 1}"
+      end
+    end
+  end
 
   scope :popular,
         select('users.*, count(friendships.id) AS fans_count').

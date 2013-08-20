@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130818095447) do
+ActiveRecord::Schema.define(:version => 20130819101756) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20130818095447) do
     t.float    "longitude"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "url_name"
   end
 
   add_index "events", ["user_id"], :name => "index_events_on_user_id"
@@ -208,6 +209,7 @@ ActiveRecord::Schema.define(:version => 20130818095447) do
     t.string   "compensation"
     t.text     "headline"
     t.string   "union"
+    t.string   "url_name"
   end
 
   create_table "receipts", :force => true do |t|
@@ -311,6 +313,7 @@ ActiveRecord::Schema.define(:version => 20130818095447) do
     t.string   "agent_name"
     t.string   "guild"
     t.boolean  "guild_present",           :default => false
+    t.string   "url_name"
   end
 
   create_table "videos", :force => true do |t|

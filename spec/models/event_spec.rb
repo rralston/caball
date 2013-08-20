@@ -175,5 +175,17 @@ describe Event do
       
   end
 
+  context "url name" do
+    before(:all){
+      @event1 = FactoryGirl.create(:event, :title => 'Event With Name')
+      @event2 = FactoryGirl.create(:event, :title => 'Event With Name')
+      ap @event1.url_name
+      ap @event2.url_name
+    }
+
+    specify { @event1.url_name.should == 'event-with-name' }
+    specify { @event2.url_name.should == 'event-with-name' + "-2" }
+  end
+
 
 end

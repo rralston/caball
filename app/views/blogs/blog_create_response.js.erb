@@ -9,7 +9,7 @@
 
   $.event.trigger({
     type: 'newBlog',
-    blog: <%= raw @blog.to_json(:include => [:user, :likes]) %>
+    blog: <%= raw @blog.to_json(:include => [:user, :likes], :check_user => current_user) %>
   });
 
 <% end %>

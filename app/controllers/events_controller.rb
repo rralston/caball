@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:show]
 
   def index
     search
@@ -61,7 +61,7 @@ class EventsController < ApplicationController
 
   def show
     search
-    @event = Event.find(params[:id])
+    @event = Event.where("id = ? OR url_name = ? ", params[:id], params[:id]).first
   end
 
   def new

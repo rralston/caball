@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  load_and_authorize_resource :except => [:next_recommended_projects, :next_recommended_people, :next_recommended_events, :set_notification_check_time]
+  load_and_authorize_resource :except => [:show, :next_recommended_projects, :next_recommended_people, :next_recommended_events, :set_notification_check_time]
   before_filter :search, only: [:index, :show, :new, :edit, :update, :dashboard]
   
   def index
@@ -49,6 +49,7 @@ class UsersController < ApplicationController
   end
   
   def show
+    @user = User.where("id = ? OR url_name = ? ", params[:id], params[:id]).first
     @blog = Blog.new
     @real_videos = @user.videos.real
     @followers_following = (@user.friends + @user.followers).uniq

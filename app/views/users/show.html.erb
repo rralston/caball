@@ -76,12 +76,14 @@
                   </div>
                 </div>
                 
-                <div class="profpicwrap img-circle action-div" data-toggle='modal' data-target='#media-modal' style="background: url('<%= @user.profile_pic %>') no-repeat">
-                  <!---this is the div whose bg is the profile pic -->
-                  <div class='profwrapoverlay'>
-                    Click to view <%= @user.photos.size %> more pictures
+                
+                  <div class="profpicwrap img-circle action-div" data-toggle='modal' data-target='#media-modal' style="background: url('<%= @user.profile_pic %>') no-repeat">
+                    <!---this is the div whose bg is the profile pic -->
+                    <div class='profwrapoverlay'>
+                      Click to view <%= @user.photos.size %> more pictures
+                    </div>
                   </div>
-                </div>
+                
               </div>
           <!--========= Header ends======------>
           <!--========= Profile name starts======------>
@@ -146,11 +148,47 @@
       <div class='row right-extra-div' id='user_fans_div'>
       </div>
       
-      <% if @user.valid_videos.present? %>
-        <div class='row right-extra-div' id='user_video'>
-          <%= raw @user.valid_videos.first.embed_code %>
+      <div class='row right-extra-div' id='user_video'>
+        <% if @user.valid_videos.size > 0 %>
+
+        <div id="user_side_bar_videos" class="carousel slide" data-interval='false'>
+          <!-- Carousel items -->
+          <div class="carousel-inner">
+            <% @user.valid_videos.each_with_index do |video, index| %>
+              
+              <% if index == 0 %>
+                <!-- make the first one as active. -->
+                <div class="item active text-center">
+                  <%= raw video.embed_code %>
+                </div>
+              
+              <% else %>
+                <div class="item text-center">
+                  <%= raw video.embed_code %>
+                </div>
+              <% end %>
+            
+            <% end %>
+          </div>
+          
+          <% if @user.valid_videos.size > 1 %>
+
+            <ol class="carousel-indicators">
+              <% @user.valid_videos.each_with_index do |video, index| %>
+                
+                <% if index == 0 %>
+                  <!-- make the first one as active. -->
+                  <li data-target="#user_side_bar_videos" data-slide-to="<%= index %>" class="active"></li>
+                <% else %>
+                  <li data-target="#user_side_bar_videos" data-slide-to="<%= index %>"></li>
+                <% end %>
+              <% end %>
+            </ol>
+
+          <% end %>
         </div>
-      <% end %>
+        <% end %>
+      </div>
 
       <% if current_user == @user  %>
         <div class="row right-extra-div">

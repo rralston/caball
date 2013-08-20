@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
 
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:show]
   
   def index
     search(Project, "projects")
@@ -50,6 +50,7 @@ class ProjectsController < ApplicationController
   
   def show
     search(Project, "projects")
+    @project = Project.where("id = ? OR url_name = ? ", params[:id], params[:id]).first
     @comment = Comment.new
     @producer = @project.user
     @real_videos = @project.videos.real
