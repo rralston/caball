@@ -51,6 +51,7 @@ GEM
       activemodel
       fog
     awesome_print (1.1.0)
+    bcrypt-ruby (3.1.1)
     builder (3.0.4)
     cancan (1.6.10)
     capistrano (2.15.5)
@@ -76,7 +77,7 @@ GEM
       ffi (~> 1.0, >= 1.0.11)
     ci_reporter (1.9.0)
       builder (>= 2.1.2)
-    client_side_validations (3.2.1)
+    client_side_validations (3.2.6)
     coderay (1.0.9)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -94,6 +95,13 @@ GEM
       debugger-ruby_core_source (~> 1.2.3)
     debugger-linecache (1.2.0)
     debugger-ruby_core_source (1.2.3)
+    devise (2.2.7)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (~> 3.1)
+      warden (~> 1.2.1)
+    devise-async (0.7.0)
+      devise (>= 2.2)
     diff-lcs (1.2.4)
     erubis (2.7.0)
     excon (0.23.0)
@@ -215,6 +223,7 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
+    orm_adapter (0.4.0)
     pg (0.15.1)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
@@ -337,6 +346,8 @@ GEM
     video_info (1.4.0)
       addressable
       multi_json
+    warden (1.2.3)
+      rack (>= 1.0)
     websocket (1.0.7)
     will_paginate (3.0.4)
     xpath (2.0.0)
@@ -360,6 +371,8 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   database_cleaner
   debugger
+  devise (~> 2.2.3)
+  devise-async
   factory_girl_rails (~> 4.0)
   fog (~> 1.12.1)
   fuubar
@@ -377,6 +390,7 @@ DEPENDENCIES
   mailboxer!
   mysql2
   newrelic_rpm
+  omniauth
   omniauth-facebook
   pg
   possessive

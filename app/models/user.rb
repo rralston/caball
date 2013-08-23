@@ -1,4 +1,13 @@
 class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable, :confirmable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
+         :omniauth_providers => [:facebook]
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :fb_token
   
   include Mailboxer::Models::Messageable
   acts_as_messageable
@@ -69,10 +78,12 @@ class User < ActiveRecord::Base
                   :talents_attributes, :photo, :other_videos_attributes, :projects_attributes,
                   :admin, :gender, :headline, :featured, :expertise, :cover_photo_attributes,
                   :resume_attributes, :notification_check_time, :experience, :agent_name, :url_name,
-                  :agent_present, :guild_present, :guild, :agentship_attributes, :demo_reel_attributes
+                  :agent_present, :guild_present, :guild, :agentship_attributes, :demo_reel_attributes, :terms_of_service
 
   validates_presence_of :name, :email, :message => "is required"
-    
+  
+  validates :terms_of_service, acceptance: true
+
   geocoded_by :location   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
 
@@ -116,6 +127,30 @@ class User < ActiveRecord::Base
       user.email = auth.info.email
       # user.location = auth.info.user_hometown
       user.save!
+    end
+  end
+
+  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+    ## debugger
+    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+    if user.nil?
+      user = User.create(name:auth.extra.raw_info.name,
+                           provider:auth.provider,
+                           uid:auth.uid,
+                           email:auth.info.email,
+                           password:Devise.friendly_token[0,20].camelize + '_123',
+                           fb_token: auth.credentials.token)
+    else
+      user.update_attributes(fb_token: auth.credentials.token)
+    end
+    user
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
     end
   end
 

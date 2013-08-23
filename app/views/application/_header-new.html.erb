@@ -56,9 +56,8 @@
               <a href="/users/<%= current_user.id %>/edit">
                 <li class="settings">Settings</li>
               </a>
-              <a href="/signout">
-                <li class="lout">Logout</li>
-              </a>
+              <%= link_to '<li class="lout">Logout</li>'.html_safe, {:controller=> "users/sessions", :action=> "destroy"}, :method => :delete %>
+              
             </ul>
           </div>
         </div>

@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
 
   load_and_authorize_resource :except => [:show, :next_recommended_projects, :next_recommended_people, :next_recommended_events, :set_notification_check_time]
-  before_filter :search, only: [:index, :show, :new, :edit, :update, :dashboard]
   
+  before_filter :search, only: [:index, :show, :new, :edit, :update, :dashboard]
+  before_filter :authenticate_user!, only: [:dashboard]
+
   def index
     @talents = User.types
 

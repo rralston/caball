@@ -125,3 +125,7 @@ gem "remotipart", "~> 1.2.1"
 
 # social sharing
 gem 'social-share-button'
+
+gem 'devise', "~> 2.2.3"
+gem 'omniauth'
+gem 'devise-async'

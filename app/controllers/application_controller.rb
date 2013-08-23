@@ -1,11 +1,12 @@
 class ApplicationController < ActionController::Base
   #News Feed
   include PublicActivity::StoreController
+  include RedirectHelper
   protect_from_forgery
   
   before_filter :subdomain_view_path
-  helper_method :current_user
-  hide_action :current_user
+  # helper_method :current_user
+  # hide_action :current_user
   helper_method :notification  
   helper_method :activities
   # Security & Authentication
@@ -22,6 +23,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+
+  def after_sign_up_path_for(user)
+    edit_user_path(user)
+  end
+
+  def after_sign_in_path_for(user)
+    '/dashboard'
+  end
+
   def main_search
     query = params[:q]
 
@@ -33,10 +43,10 @@ class ApplicationController < ActionController::Base
   end
 
 
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
-  end
-  helper_method :current_user
+  # def current_user
+  #   @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  # end
+  # helper_method :current_user
   
 
   def subdomain_view_path
