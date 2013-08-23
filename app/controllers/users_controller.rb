@@ -133,6 +133,7 @@ class UsersController < ApplicationController
   end
 
   def step_3
+    debugger
     if current_user.update_attributes(params[:user])
       redirect_to edit_user_path(current_user), :success => true, :notice => 'User info saved'
     else

@@ -94,11 +94,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def authenticate_user!
-    if !current_user
-      redirect_to new_user_url, :error => 'You need to sign in for access to this page.'
-    end
-  end
+  # def authenticate_user!
+  #   if !current_user
+  #     redirect_to new_user_url, :error => 'You need to sign in for access to this page.'
+  #   end
+  # end
 
   def report
     entity_class = params[:entity].camelize.constantize

@@ -2,6 +2,8 @@ class EventsController < ApplicationController
 
   load_and_authorize_resource :except => [:show]
 
+  after_filter :clear_temp_photo_objects, :only => [:update, :create]
+
   def index
     search
     @params_used = params
@@ -83,10 +85,12 @@ class EventsController < ApplicationController
     search
     @user = current_user
     @event = Event.find(params[:id])
+    # session[:current_event] = @event
   end
 
   def update
     @event = current_user.events.find(params[:id])
+
     if @event.update_attributes(params[:event])
       redirect_to @event, notice: "Event was updated."
     else
@@ -133,6 +137,67 @@ class EventsController < ApplicationController
     event = Event.find(params[:id])
     event.down_vote(current_user)
     render :json => Event.custom_json(event, current_user)
+  end
+
+
+  def files_upload
+
+    if params['event']['main_photo_attributes'].present? and params['event']['main_photo_attributes']['image'].present?
+      # if id is present, that is a photo object that is already existing and being updated.
+      if params['event']['main_photo_attributes']['id'].present?
+        photo_object = Photo.find(params['event']['main_photo_attributes']['id'].to_i)
+      else
+        # id won't be present for those photos that are dynamically added by Numerous.js
+        photo_object = Photo.new
+      end
+
+      photo_object.update_attributes(:image => params['event']['main_photo_attributes']['image'])
+
+      file_url = {
+        :url => request.env["HTTP_ORIGIN"] + photo_object.image.url,
+        :id => photo_object.reload.id
+      }
+
+    end
+    
+    if params['event']['other_photos_attributes'].present?
+      attributes = params['event']['other_photos_attributes']
+
+      # get the index of the parameters with image attribute present
+      indexes_with_image = attributes.map do |index, attribute|
+        if attribute.include?('image')
+          index
+        end
+      end
+
+      indexes_with_image.delete(nil)
+
+      # only one image is submitted once anyway.
+      index = indexes_with_image.first
+
+      if index.present?
+        # if id is present, that is a photo object that is already existing and being updated.
+        if params['event']['other_photos_attributes'][index]['id'].present?
+          photo_object = Photo.find(params['event']['other_photos_attributes'][index]['id'].to_i)
+        else
+          # id won't be present for those photos that are dynamically added by Numerous.js
+          photo_object = Photo.new
+        end
+
+        photo_object.update_attributes(:image => params['event']['other_photos_attributes'][index]['image'])
+
+        file_url = {
+          :url => request.env["HTTP_ORIGIN"] + photo_object.image.url,
+          :id => photo_object.reload.id
+        }
+      end
+
+    end
+    render :json => file_url.to_json()
+  end
+
+  def clear_temp_photo_objects
+    Photo.where(:imageable_type => nil).destroy_all
   end
 
 end

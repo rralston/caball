@@ -321,7 +321,7 @@ class Event < ActiveRecord::Base
   end
 
   def similar_events
-    self.nearbys.first(3)
+    self.nearbys.first(3) rescue []
   end
 
   def self.search_events(query)

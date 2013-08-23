@@ -1,6 +1,6 @@
 class Photo < ActiveRecord::Base
   belongs_to :imageable, :polymorphic => true
-  attr_accessible :image, :description, :content_type, :file_size, :updated_at, :is_main, :is_cover
+  attr_accessible :image, :description, :content_type, :file_size, :updated_at, :is_main, :is_cover, :remote_image_url
   mount_uploader :image, ImageUploader
 
   validates_presence_of :image, :message => 'is required', :if => :image_present?
