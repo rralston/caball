@@ -1,15 +1,25 @@
-<h2>Sign in</h2>
+<%= stylesheet_link_tag "signin" %>
 
-<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div class="form-inputs">
-    <%= f.input :email, :required => false, :autofocus => true %>
-    <%= f.input :password, :required => false %>
-    <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
+<div class='signin_form'>
+  <div class='email_signin pull-left'>
+    <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <%= f.email_field :email, :autofocus => true %>
+      <%= f.password_field :password %>
+      <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
+      <a href="/users/password/new">Forgot your password?</a>
+      <br>
+      <%= f.button :submit, "Sign in" %>
+    <% end %>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Sign in" %>
+  <div id='or'>
+    or
   </div>
-<% end %>
+  
+  <div class='social_signin pull-left'>
+    <a href="/users/auth/facebook" id="fb_auth">Sign in with Facebook</a>
+  </div>
 
-<%= render "devise/shared/links" %>
+  <div class='clearfix'></div>
+
+</div>

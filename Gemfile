@@ -81,7 +81,7 @@ gem 'video_info'
 gem 'hpricot'
 
 #Authenitcation
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '1.4.0'
 
 #Messaging
 gem 'mailboxer', github: 'rralston/mailboxer'

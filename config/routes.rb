@@ -80,7 +80,7 @@ Caball::Application.routes.draw do
   match 'dashboard/conversations' => 'users#dashboard_conversations', :via => 'GET'
 
   match 'projects/show' => 'projects#show'
-  match 'auth/:provider/callback', to: 'sessions#create'
+  # match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
   root :to => 'home#index'
