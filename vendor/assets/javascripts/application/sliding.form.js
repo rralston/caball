@@ -44,6 +44,19 @@ $(function() {
     $('#navigation a').bind('click',function(e){
 		var $this	= $(this);
 		var prev	= current;
+
+		// check it forward sliding is enabled to the new level.
+		// if not continue as required.
+		if(app.allow_forward_sliding_till){
+			if(parseInt($(e.target).closest('li').find('a').attr('data-stepIndex')) > app.allow_forward_sliding_till){
+				e.preventDefault();
+				return false;
+			}else{
+				// 
+				app.allow_forward_sliding_till = $this.parent().index() + 1;
+			}
+		}
+
 		$this.closest('ul').find('li').removeClass('selected');
         $this.parent().addClass('selected');
 		/*
@@ -51,6 +64,9 @@ $(function() {
 		in the current variable	
 		*/
 		current = $this.parent().index() + 1;
+
+
+		
 		/*
 		animate / slide to the next or to the corresponding
 		fieldset. The order of the links in the navigation
@@ -127,6 +143,7 @@ $(function() {
 	  }
 
 		var $link = $('#navigation li:nth-child(' + parseInt(step) + ') a');
+
 		$link.parent().find('.error,.checked').remove();
 		
 		var valclass = 'checked';
@@ -134,9 +151,13 @@ $(function() {
 			error = -1;
 			valclass = 'error';
 		}
-    $('#formElem').data('errors',hasError); 
+    $('#formElem').data('errors',hasError);
     
 		$('<span class="'+valclass+'"></span>').insertAfter($link);
+
+		// update the step li by adding it a class done.
+		var current_li = $('#navigation li:nth-child(' + parseInt(step) + ')');
+		current_li.addClass('done')
 		
 		return error;
 	}

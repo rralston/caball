@@ -160,6 +160,7 @@ $(document).ready ()->
       data: $('#user_edit_form').serialize()
       success: (data)->
         $('#step_2').html(data)
+        app.allow_forward_sliding_till = 2
         $('a.step_2_nav').trigger('click')
         app.fn.description_tag_list_init()
         app.fn.init_step_2_fileupload()
@@ -177,6 +178,7 @@ $(document).ready ()->
       success: (data)->
         console.log data
         $('#step_3').html(data)
+        app.allow_forward_sliding_till = 3
         $('a.step_3_nav').trigger('click')
         # initialize numerous js
         Users.Edit.init_numerous()
@@ -201,3 +203,20 @@ $(document).ready ()->
   #       # app.fn.init_image_file_uploader('#user_edit_form_step_3')
 
   #   return false
+
+  app.fn.slide_form = (current)->
+    $('#steps').stop().animate { marginLeft: '-' + widths[current-1] + 'px'}, 500, () ->
+      $('#formElem').children(':nth-child('+ parseInt(current) +')').find(':input:first').focus();  
+
+  # steps navigation click handler.
+  # $('body').on 'click', '#navigation a', (event) ->
+  #   event.stopPropagation()
+  #   current = $('#steps').data('index')
+  #   clicked = $(event.target).attr('data-stepIndex')
+  #   console.log 'here'
+  #   console.log current
+  #   console.log clicked
+  #   if parseInt(clicked) <= parseInt(current)
+  #     return true
+  #   else
+  #     return false

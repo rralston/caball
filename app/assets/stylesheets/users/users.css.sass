@@ -3,8 +3,67 @@ $light-grey: #d4d6dc
 $divider-border: #c6d0db
 
 
+fieldset
+  position: relative
 
 .edit-user
+  .step_progress
+    width: 400px
+    position: absolute
+    right: 20px
+    top: 50px
+    text-align: center
+    .progress
+      width: 200px
+      margin-left: auto
+      margin-right: auto
+      margin-bottom: 0px
+
+  #navigation
+    background: none
+    ul
+      li
+        .checked
+          display: none !important
+        border: none
+        margin: 5px 2px 5px -10px
+
+        .step_count
+          font-size: 30px
+          padding-right: 10px
+          color: #A3A3A3
+          border-right: 1px solid #A3A3A3
+        .step_text
+          font-size: 20px
+          font-weight: 400
+          position: relative
+          top: -3px
+          color: white
+          margin-left: 10px
+        
+      li.first_step.selected a
+        background: url('/assets/step-1-active.png') no-repeat !important
+        background-size: 100% 100% !important
+
+      li.first_step.done a
+        background: url('/assets/step-1-done.png') no-repeat !important
+        background-size: 100% 100% !important
+
+      li a
+        background: url('/assets/step-yet.png') no-repeat !important
+        border: none !important
+        background-size: 100% 100% !important
+        min-width: 150px
+
+      li.selected a
+        background: url('/assets/step-current.png') no-repeat !important
+        background-size: 100% 100% !important
+
+      li.done a
+        background: url('/assets/step-done.png') no-repeat !important
+        background-size: 100% 100% !important
+
+
   form
     input[type="text"], input[type="email"]
       width:  300px

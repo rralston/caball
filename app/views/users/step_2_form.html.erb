@@ -1,4 +1,13 @@
 
+<div class='step_progress'>
+  Make your profile beautiful and complete it! you're almost done!
+  <br>
+  Step 2 of 3
+  <div class="progress">
+    <div class="bar" style="width: 60%;"></div>
+  </div>
+</div>
+
 <%= form_for current_user, :url => '/users/step_2', :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'user_edit_form_step_2'} do |f| %>
   <div class="span12">
 
@@ -6,7 +15,7 @@
       You said you are a <%= current_user.talent_names.join(' and ') %>
     </div>
 
-    <%= f.fields_for :talents do |talent|   %>
+    <%= f.fields_for :talents do |talent| %>
 
       <% if talent.object.name == 'Cast' %>
         <%= render :partial => 'characteristics_form', :locals => { :f => f, :talent => talent} %>

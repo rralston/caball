@@ -21,104 +21,65 @@
   <div class="row-fluid actor-characteristics">
   
     <h3>Physical Characteristics</h3>
-    <div class="span4">
-      <div class="control-group">
-        <%= c.label :age, :class => 'control-label' %>
-        <div class="controls">
-          <%= c.text_field :age, :class => 'text_field' %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= c.label :height, :class => 'control-label' %>
-        <div class="controls">
-          <%= c.text_field :height, :class => 'text_field' %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= c.label :ethnicity, :class => 'control-label' %>
-        <div class="controls">
-          <%= c.text_field :ethnicity, :class => 'text_field' %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= c.label :bodytype, :class => 'control-label' %>
-        <div class="controls">
-          <%= c.text_field :bodytype, :class => 'text_field' %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= c.label :skin_color, :class => 'control-label' %>
-        <div class="controls">
-          <%= c.text_field :skin_color, :class => 'text_field' %>
-        </div>
-      </div>
-      <div class="control-group">
-        <%= c.label :eye_color, :class => 'control-label' %>
-        <div class="controls">
-          <%= c.text_field :eye_color, :class => 'text_field' %>
-        </div>
+    
+    <div class="control-group">
+      <div class="controls">
+        <%= c.label "Height" %>
+        <%= c.select(:height, options_for_select(Characteristics.heights, c.object.height)) %>
       </div>
     </div>
 
-    <div class="span4">
-      <div class="control-group">
-        <%= c.label :hair_color, :class => 'control-label' %>
-        <div class="controls">
-          <%= c.text_field :hair_color, :class => 'text_field' %>
-        </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= c.label "Ethnicity" %>
+        <%= c.select(:ethnicity, options_for_select(Characteristics.enthnicities, c.object.ethnicity)) %>
       </div>
+    </div>
 
-      <div class="control-group">
-        <%= c.label :chest, :class => 'control-label' %>
-        <div class="controls">
-          <%= c.text_field :chest, :class => 'text_field' %>
-        </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= c.label "Build" %>
+        <%= c.select(:bodytype, options_for_select(Characteristics.bodytypes, c.object.bodytype)) %>
       </div>
+    </div>
 
-      <div class="control-group">
-        <%= c.label :waist, :class => 'control-label' %>
-        <div class="controls">
-          <%= c.text_field :waist, :class => 'text_field' %>
-        </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= c.label "Hair Color" %>
+        <%= c.select(:hair_color, options_for_select(Characteristics.hair_colors, c.object.hair_color)) %>
       </div>
+    </div>
 
-      <div class="control-group">
-        <%= c.label :hips, :class => 'control-label' %>
-        <div class="controls">
-          <%= c.text_field :hips, :class => 'text_field' %>
-        </div>
+    <div class="control-group">
+      <div class="controls">
+        <%= c.label "Languages" %>
+        <%= c.select(:language, options_for_select(Characteristics.languages, c.object.language)) %>
       </div>
+    </div>
 
-      <div class="control-group">
-        <%= c.label :dress_size, :class => 'control-label' %>
-        <div class="controls">
-          <%= c.text_field :dress_size, :class => 'text_field' %>
-        </div>
-      </div>
 
-      <div class="control-group">
-        <%= c.label :description_tag_list, :class => 'control-label' %>
-        
-        <div class='controls'>
+    <div class="control-group">
+      
+      
+      <div class='controls'>
+        <%= c.label :description_tag_list %>
 
-            <ul id="user_description_tags" class='tagit ui-sortable'>
-              <% if current_user.characteristics.present? and current_user.characteristics.description_tag_list.present? %>
-                <% current_user.characteristics.description_tag_list.each do |desc| %>
-                  <li data-value="<%= desc %>"><%= desc %> </li>
-                <% end %>
+          <ul id="user_description_tags" class='tagit ui-sortable' style='width: 300px;'>
+            <% if current_user.characteristics.present? and current_user.characteristics.description_tag_list.present? %>
+              <% current_user.characteristics.description_tag_list.each do |desc| %>
+                <li data-value="<%= desc %>"><%= desc %> </li>
               <% end %>
-            </ul>
+            <% end %>
+          </ul>
 
-        </div>  
+      </div>  
 
-        <div class="controls">
-          <%= c.hidden_field :description_tag_list, :class => 'text_field' %>
-        </div>
-
+      <div class="controls">
+        <%= c.hidden_field :description_tag_list, :class => 'text_field' %>
       </div>
 
-
     </div>
+
   </div>
 
 <% end %>

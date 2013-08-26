@@ -20,7 +20,7 @@
 
     <%= talent.fields_for :script_document, talent.object.script_document || UploadedDocument.new do |script_document| %>
       <div class="control-group">
-        <%= script_document.label :document, :class => 'control-label' %>
+        
 
         <% if talent.object.script_document.present? %>
           <div class='controls'>
@@ -34,7 +34,11 @@
         <% end %>
 
         <div class="controls">
+          <%= script_document.label :document %>
           <%= script_document.file_field :document, :class => 'script_document' %>
+          <div class='div_hint'>
+            Uploading just your best scene is the best way to get noticed!
+          </div>
         </div>
 
         <div class='controls upload_progress'>
@@ -43,22 +47,30 @@
             <div class='bar' style='width: 0%'></div>
           </div>
         </div>
+
       </div>
     <% end %>
 
 
     <% if talent.object.script_document.present? or talent.object.synopsis.present? %>
       <div class="control-group script_synopsis">
-        <%= talent.label :synopsis, :class => 'control-label' %>
         <div class="controls">
+          <%= talent.label :synopsis %>
           <%= talent.text_area :synopsis, :class => 'textarea', :rows => "5", :placeholder => 'Briefly describe what the film is about on the scene you just uploaded' %>
+          <div class='div_hint'>
+            Save your fingures, a sentence or 2 is all you need.
+          </div>
         </div>
       </div>
     <% else %>
       <div class="control-group script_synopsis" style='display: none;'>
-        <%= talent.label :synopsis, :class => 'control-label' %>
+        
         <div class="controls">
+          <%= talent.label :synopsis, :class => 'control-label' %>
           <%= talent.text_area :synopsis, :class => 'textarea', :rows => "5", :placeholder => 'Briefly describe what the film is about on the scene you just uploaded' %>
+          <div class='div_hint'>
+            Save your fingures, a sentence or 2 is all you need.
+          </div>
         </div>
       </div>
     <% end %>

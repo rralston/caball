@@ -9,6 +9,13 @@
 </div>
 <% end %>
 
+<div class='step_progress'>
+  <div class="progress">
+    <div class="bar" style="width: 30%;"></div>
+  </div>
+  <div class='progress_summary'>Step 1 of 3</div>
+</div>
+
 <%= form_for current_user, :url => '/users/step_1', :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'user_edit_form'} do |f| %>
   <div class="span12">
     <h2>General Info</h2>

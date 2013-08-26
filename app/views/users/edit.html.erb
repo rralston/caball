@@ -9,14 +9,23 @@
         <div id="wrapper" class="row-fluid">
           <div id="navigation" style="display:none;">
             <ul>
-              <li class="selected">
-                <a href="#" class='step_1_nav'>General Info</a>
+              <li class="selected first_step">
+                <a href="#" class='step_1_nav' data-stepIndex="1">
+                  <span class='step_count light'>01</span>
+                  <span class='step_text'>General Info</span>
+                </a>
               </li>
               <li>
-                <a href="#" class='step_2_nav'>Roles</a>
+                <a href="#" class='step_2_nav' data-stepIndex="2">
+                  <span class='step_count light'>02</span>
+                  <span class='step_text'>Roles</span>
+                </a>
               </li>
               <li>
-                <a href="#" class='step_3_nav'>Media</a>
+                <a href="#" class='step_3_nav' data-stepIndex="3">
+                  <span class='step_count light'>03</span>
+                  <span class='step_text'>Media</span>
+                </a>
               </li>
             </ul>
             <div class="clearfix"></div>
@@ -55,6 +64,9 @@ $(document).ready(function(){
   app.sub_talents = <%= raw User.sub_types.to_json() %>
   // super roles select change event listener and showsub roles
   app.fn.init_super_roles_select_handler('super_role_select', app.sub_talents)
+
+  // prevent forward sliding for the form.
+  app.allow_forward_sliding_till = 1
 });
 
 </script>
