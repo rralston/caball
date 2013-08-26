@@ -62,9 +62,17 @@ $(document).ready ->
     $('.user_headline_text').hide()
     $('.edit_headline_input').show()
 
+  $('body').on 'click', '.edit_about', (event)->
+    $('.user_about_text').hide()
+    $('.edit_about_text').show()
+
   $('body').on 'click', '.edit_headline_input .icon-remove-sign', (event)->
     $('.user_headline_text').show()
     $('.edit_headline_input').hide()
+
+  $('body').on 'click', '.edit_about_text .icon-remove-sign', (event)->
+    $('.user_about_text').show()
+    $('.edit_about_text').hide()
 
   $('body').on 'keypress', '#edit_headline', (event)->
     # check if enter is pressed.
@@ -87,5 +95,23 @@ $(document).ready ->
             alert('Something went wrong, Please try again later')
           $(event.target).attr('disabled', false)
 
+  $('body').on 'keypress', 'textarea#edit_about', (event)->
+    # check if enter is pressed.
+    if event.which == app.constants.enter_key_code
+      $(event.target).attr('disabled', 'disabled')
 
-    
+      $.ajax
+        url: '/users/update'
+        type: 'POST'
+        data:
+          id: app.current_user.id
+          user:
+            about: $(event.target).val()
+        success: (resp) ->
+          if resp != 'false'
+            $('.user_about_text').show()
+            $('.edit_about_text').hide()
+            $('.about-content').html($(event.target).val())
+          else
+            alert('Something went wrong, Please try again later')
+          $(event.target).attr('disabled', false)

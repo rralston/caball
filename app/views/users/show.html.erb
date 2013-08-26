@@ -246,12 +246,26 @@
         </div>
 
         <div class="span4 shrink-div desc">
+          <% if current_user == @user %>
+                          
+            <div class='edit_about_text'>
+              <textarea id='edit_about'><%= @user.about %></textarea>
+              <i class='icon-remove-sign action-div'></i>
+            </div>
 
-          <% if @user.about.length > 200 %>
-            <%= truncate(@user.about, :length => 200, :separator => ' ') %> <a class='read_more_btn' data-content='<%= @user.about %>' data-header='About - <%= @user.name %>' >Read more</a>
-          <% else %>
-            <%= @user.about %> 
           <% end %>
+          <div class="user_about_text">
+            <% if current_user == @user %>
+              <i class='icon-pencil action-div edit_about'></i>
+            <% end %>
+            <div class="about-content">
+              <% if @user.about.length > 200 %>
+                <%= truncate(@user.about, :length => 200, :separator => ' ') %> <a class='read_more_btn' data-content='<%= @user.about %>' data-header='About - <%= @user.name %>' >Read more</a>
+              <% else %>
+                <%= @user.about %> 
+              <% end %>
+            </div>
+          </div>
 
         </div>
       </div>
