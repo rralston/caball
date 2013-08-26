@@ -162,30 +162,96 @@
             <h4>Photos</h4>
             <!-- Begin Photos -->
             <%= p.fields_for :photos do |p|  %>
-            <% if p.object.image.present? %>
-              <div class="control-group">
-                <div class="controls">
-                  <img src=<%= p.object.image.url(:medium) %> class="img-polaroid" >
-                  <%= p.check_box :_destroy %> Delete Image               
-                </div>
-              </div>
-              <div class="control-group">
-                <label class="control-label">Description</label>
-                <div class="controls">
-                  <%= p.text_field :description, :class => 'text_field' %>
-                </div>
-              </div>
 
-            <% else %>
-              <div class="control-group">
-                <label class="control-label">Project Images</label>
-                <div class="controls">
-                  <%= p.file_field :image %>
+              <% if p.object.image.present? %>
+                <div class='control-group row'>
+                  <div class='span3'>
+                    <div class="span3">
+                      <div class='controls upload_progress'>
+                        Upload Progress:
+                        <div class='progress'>
+                          <div class='bar' style='width: 0%'></div>
+                        </div>
+                      </div>
+
+                      <div class="controls">
+                        <img src=<%= p.object.image.url(:medium) %> class="image_preview_container img-rounded" >
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class='span3'>
+                    <div>
+                      
+                      <div class="controls">
+                        <label>Description</label>
+                        <%= p.text_field :description, :class => 'text_field' %>
+                        <br/>
+                        <%= p.check_box :_destroy %> Delete Image
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
-              </div>
+              <% end %>
+            
             <% end %>
 
-            <% end %>
+            <div id='fields-for-project_photos-list' class='numerous'>
+              <%= p.fields_for :photos, Photo.new, :child_index => 'replace_this' do |photo| %>
+                <div class='control-group '>
+                  <div class='row'>
+                    <div class="span3">
+                      <div class='controls upload_progress'>
+                        Upload Progress:
+                        <div class='progress'>
+                          <div class='bar' style='width: 0%'></div>
+                        </div>
+                      </div>
+
+                      <div class="controls">
+                        <img src='' class="image_preview_container img-rounded" >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class='row'>
+                    <div class='span3'>
+                      <label class="control-label">Project Image</label>
+                      <div class="controls">
+                        <%= photo.file_field :image %>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class='row'>
+                    <div class='span3'>
+                      
+                      <div class="controls">
+                        <label>Description</label>
+                        <%= photo.text_field :description %>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- url is updated when the image is created and uploaded  -->
+                  <%= photo.hidden_field :remote_image_url, :class => 'photo_url_div' %>
+
+                </div>
+                
+                <%= link_to 'Remove', '#', :class => 'numerous-remove pull-left' %>
+                
+              <% end %>
+
+            </div>
+
+            <div id='project_photos-list'></div>
+            <br/>
+            <%= link_to 'Add one more Photo', '#', :id => 'add-to-project_photos-list' %>
+
+
+
           </div>
         </fieldset>
         

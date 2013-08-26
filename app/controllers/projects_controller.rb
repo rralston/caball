@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
 
   load_and_authorize_resource :except => [:show]
+
+  after_filter :clear_temp_photo_objects, :only => [:update, :create]
   
   def index
     search(Project, "projects")
@@ -139,6 +141,44 @@ class ProjectsController < ApplicationController
      format.html { redirect_to root_url, :notice => @project.title + ' Project was deleted.' }
     end
   end
+
+  def files_upload
+    
+    if params['project']['photos_attributes'].present?
+      attributes = params['project']['photos_attributes']
+
+      # get the index of the parameters with image attribute present
+      indexes_with_image = attributes.map do |index, attribute|
+        if attribute.include?('image')
+          index
+        end
+      end
+
+      indexes_with_image.delete(nil)
+
+      # only one image is submitted once anyway.
+      index = indexes_with_image.first
+
+      if index.present?
+        # if id is present, that is a photo object that is already existing and being updated.
+        if params['project']['photos_attributes'][index]['id'].present?
+          photo_object = Photo.find(params['project']['photos_attributes'][index]['id'].to_i)
+        else
+          # id won't be present for those photos that are dynamically added by Numerous.js
+          photo_object = Photo.new
+        end
+
+        photo_object.update_attributes(:image => params['project']['photos_attributes'][index]['image'])
+
+        file_url = {
+          :url => request.env["HTTP_ORIGIN"] + photo_object.image.url,
+          :id => photo_object.reload.id
+        }
+      end
+
+    end
+    render :json => file_url.to_json()
+  end
     
   def project_fields
     @talents = User.types
@@ -148,4 +188,9 @@ class ProjectsController < ApplicationController
     @status = Project.status_stages
     @compensation = Project.compensation_stages
   end
+
+  def clear_temp_photo_objects
+    Photo.where(:imageable_type => nil).destroy_all
+  end
+
 end

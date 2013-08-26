@@ -60,6 +60,16 @@ var Projects = {
           'remove' : function(form){
             app.fn.resize_form()
           }
+        },
+        'project_photos-list': {
+          'add' : function(added_form_element){
+            app.fn.resize_form()
+            app.fn.init_image_file_uploader(added_form_element.find('input[type=file]'))
+          },
+  
+          'remove' : function(form){
+            app.fn.resize_form()
+          }
         }
       });
     }
