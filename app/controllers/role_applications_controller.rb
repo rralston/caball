@@ -60,4 +60,10 @@ class RoleApplicationsController < ApplicationController
 
   end
 
+  def already_approved
+    application = RoleApplication.find(params[:role_application_id])
+    res = application.project.approved_user_applications.include? application.user
+    render :text => res
+  end
+
 end

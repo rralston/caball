@@ -23,21 +23,27 @@ app.views.role_application = Backbone.View.extend
     _this = this
     btn = $(event.target)
     btn.addClass('loading-icon').removeClass('accept')
+
     $.ajax
-      url: '/role_applications/approve'
-      data:
-        application_id: _this.model.get('id')
-      type: 'POST'
-      success: (resp)->
-        btn.removeClass('loading-icon').addClass('accept')
-        if resp != 'false'
-          alert 'Applicant added to the role'
-          _this.model.set('approved', true)
-          _this.render()
-          app.fn.add_receipient('.project_selected_applicants', _this.model.get('user').email)
-          app.fn.remove_receipient('.project_other_applicants', _this.model.get('user').email)
-        else
-          alert 'Error approving application. May be you approved a appilcation for this role already. Please check'    
+      url: '/role_applications/'+_this.model.get('id')+'/already_approved'
+      type: 'GET'
+      success: (data) ->
+        if data && confirm "Already Approved for a different role. Are you sure?"
+          $.ajax
+            url: '/role_applications/approve'
+            data:
+              application_id: _this.model.get('id')
+            type: 'POST'
+            success: (resp)->
+              btn.removeClass('loading-icon').addClass('accept')
+              if resp != 'false'
+                alert 'Applicant added to the role'
+                _this.model.set('approved', true)
+                _this.render()
+                app.fn.add_receipient('.project_selected_applicants', _this.model.get('user').email)
+                app.fn.remove_receipient('.project_other_applicants', _this.model.get('user').email)
+              else
+                alert 'Error approving application. May be you approved a appilcation for this role already. Please check'
 
   cancel_action: (event)->
     # if the application is already approved, then un approve, if not reject application

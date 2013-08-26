@@ -44,12 +44,16 @@ class Project < ActiveRecord::Base
     end
   end
 
+
   scope :popular,
     select('projects.*, count(likes.id) AS fans_count').
     joins("inner join likes on likes.loveable_id = projects.id AND likes.loveable_type = 'Project' ").
     group("projects.id").
     order("fans_count DESC")
 
+  def approved_user_applications
+    applications.where(approved: true).map { |application| application.user }
+  end
 
   def display_photo
     if photos.present? 

@@ -77,7 +77,7 @@ class Ability
       user.persisted? && role.project.user_id == user.id
     end
 
-    can [:approve, :un_approve], RoleApplication do |application|
+    can [:approve, :un_approve, :already_approved], RoleApplication do |application|
       user.persisted? && application.role.project.user_id == user.id
     end
 
