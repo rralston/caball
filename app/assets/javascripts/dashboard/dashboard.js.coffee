@@ -1,5 +1,32 @@
 $(document).ready ->
 
+  $('.change_email_form').on 'submit', (event) ->
+    errorhtml = "<div class='alert alert-error'><button type='button' class='close' data-dismiss='alert'>&times;</button>\n"
+    errormessage = ""
+    error_flag = false
+    $(this).find('.require').each (input) ->
+      if this.value.length == 0
+        error_flag = true
+        errormessage += "Please fill out "+ this.name + "<br/>"
+    if error_flag
+      error_display = errorhtml + errormessage + "</div>"
+      $('.change_email_form .errors').html(error_display)
+      false
+
+  $('.change_password_form').on 'submit', (event) ->
+    errorhtml = "<div class='alert alert-error'><button type='button' class='close' data-dismiss='alert'>&times;</button>\n"
+    errormessage = ""
+    error_flag = false
+    $(this).find('.require').each (input) ->
+      if this.value.length == 0
+        error_flag = true
+        errormessage += "Please fill out "+ this.name + "<br/>"
+    if error_flag
+      error_display = errorhtml + errormessage + "</div>"
+      $('.change_password_form .errors').html(error_display)
+      false
+
+
   $('.load_more').on 'click', (event)->
     type = $(event.target).attr('data-type')
     app.events.trigger(type, event)

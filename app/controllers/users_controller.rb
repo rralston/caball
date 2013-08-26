@@ -380,5 +380,23 @@ class UsersController < ApplicationController
     render :json => agents.to_json(:only => [:name, :id])
   end
 
+  def change_password
+    if !current_user.valid_password? params[:currentPassword]
+      @errors = "Invalid password."
+    else
+      if !current_user.reset_password!(params[:password], params[:confirmPassword])
+        @errors = "Passwords do not Match."
+      end
+    end
+    respond_to do |format|
+      format.js #change_password.js.erb
+    end
+  end
 
+  def change_email
+    current_user.update_attributes email: params[:newEmail]
+    respond_to do |format|
+      format.js #change_email.js.erb
+    end
+  end
 end

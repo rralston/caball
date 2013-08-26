@@ -23,6 +23,8 @@ Caball::Application.routes.draw do
   match '/users/files_upload' => 'users#files_upload'
   match '/users/agent_names' => 'users#agent_names'
   match '/users/profile' => 'users#profile'
+  match '/users/change_password' => 'users#change_password'
+  match '/users/change_email' => 'users#change_email'
   
 
   match '/events/files_upload' => 'events#files_upload'
