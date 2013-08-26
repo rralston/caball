@@ -120,7 +120,7 @@ class UsersController < ApplicationController
     if current_user.update_attributes(params[:user])
       render 'users/step_2_form', :layout => false
     else
-    
+      render :json => false
     end
   end
 
@@ -128,12 +128,11 @@ class UsersController < ApplicationController
     if current_user.update_attributes(params[:user])
       render 'users/step_3_form', :layout => false
     else
-    
+      render :json => false
     end
   end
 
   def step_3
-    debugger
     if current_user.update_attributes(params[:user])
       redirect_to edit_user_path(current_user), :success => true, :notice => 'User info saved'
     else
@@ -239,6 +238,10 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to root_url, :notice => 'Sorry to see you leave :-(' }
     end
+  end
+
+  def profile
+    redirect_to user_path(current_user)
   end
 
   def dashboard

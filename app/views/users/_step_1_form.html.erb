@@ -16,7 +16,7 @@
   <div class='progress_summary'>Step 1 of 3</div>
 </div>
 
-<%= form_for current_user, :url => '/users/step_1', :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'user_edit_form'} do |f| %>
+<%= form_for current_user, :url => '/users/step_1', :validate => true, :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'user_edit_form'} do |f| %>
   <div class="span12">
     <h2>General Info</h2>
     
@@ -30,7 +30,10 @@
     <div class="control-group">
       <%= f.label :email, :class => 'control-label' %>
       <div class="controls">
-        <%= f.text_field :email, :class => 'text_field required email' %>
+        <%= f.text_field :email, :class => 'text_field required email', :placeholder => 'This where we notify you of the new opportunities' %>
+        <div class='div_hint'>
+          We will NEVER, EVER spam or sell your email address
+        </div>
       </div>
     </div>
 
@@ -201,13 +204,13 @@
       </div>
     </div>
 
-    <div class='control-group hinted' data-hint='testing this.!'>
+    <div class='control-group' >
       <label class='control-label'>Skills</label>
 
       <div class='controls'>
         <%= f.hidden_field :expertise, :class => 'text_field' %>
         
-          <ul id="expertise_tags" class='tagit ui-sortable'>
+          <ul id="expertise_tags" class='tagit ui-sortable hinted' data-hint='This is a great wat to show case your strengths, some good suggestions: <br/>action sports <br/>weddings<br/>comedy<br/>Horror'>
             <% if current_user.expertise.present? %>
               <%= current_user.expertise.split(',').each do |exp_tag| %>
                 <li data-value="<%= exp_tag %>"><%= exp_tag %> </li>
@@ -222,7 +225,8 @@
     <div class='span12'>
       <div class='text-center form_footer'>
         <div class='links'>
-          <%= f.submit "Next Step" %>
+          <%= f.submit "Next Step", :class=>'step_1_submit' %>
+          <%= f.submit "Finish! Go to my profile", :class=>'skip step_1_submit' %>
         </div>
         
         You are almost done! Go to the next page to enter the fun stuff! Or you can check out profile and enter the rest of the stuff later

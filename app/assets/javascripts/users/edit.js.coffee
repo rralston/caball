@@ -150,41 +150,50 @@ $(document).ready ()->
         noResult: ''
         results: ()->
 
-  # step 1 submit handler
-  $('body').on 'submit', '#user_edit_form', (event)->
+  $('body').on 'click', '.step_1_submit', (event)->
     btn = $(event.target)
-    btn.val('Please wait..')
     $.ajax
       type: 'POST'
       url: '/users/step_1'
       data: $('#user_edit_form').serialize()
       success: (data)->
-        $('#step_2').html(data)
-        app.allow_forward_sliding_till = 2
-        $('a.step_2_nav').trigger('click')
-        app.fn.description_tag_list_init()
-        app.fn.init_step_2_fileupload()
-        app.fn.init_agent_name_autocomplete()
-        app.fn.description_tag_list_init()
+        if data != false
+          if btn.hasClass('skip')
+            window.location = "/users/profile"
+          else
+            $('#step_2').html(data)
+            app.allow_forward_sliding_till = 2
+            $('a.step_2_nav').trigger('click')
+            app.fn.description_tag_list_init()
+            app.fn.init_step_2_fileupload()
+            app.fn.init_agent_name_autocomplete()
+            app.fn.description_tag_list_init()
+        else
+          alert('Please correct form errors')
 
     return false
 
-  # step 2 submit handler
-  $('body').on 'submit', '#user_edit_form_step_2', (event)->
+  $('body').on 'click', '.step_2_submit', (event)->
+    btn = $(event.target)
     $.ajax
       type: 'POST'
       url: '/users/step_2'
       data: $('#user_edit_form_step_2').serialize()
       success: (data)->
-        console.log data
-        $('#step_3').html(data)
-        app.allow_forward_sliding_till = 3
-        $('a.step_3_nav').trigger('click')
-        # initialize numerous js
-        Users.Edit.init_numerous()
-        # initialize step_3 images file uploader.
-        app.fn.init_image_file_uploader($('#user_edit_form_step_3'))
-        app.fn.adjust_slider_height()
+        if data != false
+          if btn.hasClass('skip')
+            window.location = "/users/profile"
+          else
+            $('#step_3').html(data)
+            app.allow_forward_sliding_till = 3
+            $('a.step_3_nav').trigger('click')
+            # initialize numerous js
+            Users.Edit.init_numerous()
+            # initialize step_3 images file uploader.
+            app.fn.init_image_file_uploader($('#user_edit_form_step_3'))
+            app.fn.adjust_slider_height()
+        else
+          alert('Please correct form errors')
         
 
     return false
@@ -208,15 +217,3 @@ $(document).ready ()->
     $('#steps').stop().animate { marginLeft: '-' + widths[current-1] + 'px'}, 500, () ->
       $('#formElem').children(':nth-child('+ parseInt(current) +')').find(':input:first').focus();  
 
-  # steps navigation click handler.
-  # $('body').on 'click', '#navigation a', (event) ->
-  #   event.stopPropagation()
-  #   current = $('#steps').data('index')
-  #   clicked = $(event.target).attr('data-stepIndex')
-  #   console.log 'here'
-  #   console.log current
-  #   console.log clicked
-  #   if parseInt(clicked) <= parseInt(current)
-  #     return true
-  #   else
-  #     return false
