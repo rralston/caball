@@ -437,6 +437,5 @@ app.fn.init_comment_image_file_uploader = function(element, url) {
     }
   });
 };
-
   
 

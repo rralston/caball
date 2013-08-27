@@ -45,8 +45,9 @@ class BlogsController < ApplicationController
   end
 
   def destroy
-    @blog.destroy
-    redirect_to current_user, notice: "Blog was destroyed."
+    blog = Blog.find(params[:id])
+    blog.destroy
+    render :json => blog.to_json()
   end
 
    def files_upload

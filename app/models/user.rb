@@ -78,7 +78,8 @@ class User < ActiveRecord::Base
                   :talents_attributes, :photo, :other_videos_attributes, :projects_attributes,
                   :admin, :gender, :headline, :featured, :expertise, :cover_photo_attributes,
                   :resume_attributes, :notification_check_time, :experience, :agent_name, :url_name,
-                  :agent_present, :guild_present, :guild, :agentship_attributes, :demo_reel_attributes, :terms_of_service
+                  :agent_present, :guild_present, :guild, :agentship_attributes, :demo_reel_attributes,
+                  :terms_of_service, :provider, :uid
 
   validates_presence_of :name, :email, :message => "is required"
   

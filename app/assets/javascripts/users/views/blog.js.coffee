@@ -29,7 +29,7 @@ app.views.blog = Backbone.View.extend
 
   update_content: ()->
     _this = this
-
+    this.$el.find(".comment-edit-textarea textarea").attr('disabled', 'disabled')
     new_content = $.trim(this.$el.find(".comment-edit-textarea textarea").val())
 
     if new_content != ''
@@ -44,6 +44,7 @@ app.views.blog = Backbone.View.extend
           _this.render()
           _this.$el.find('.comment-edit-textarea').hide()
           _this.$el.find('.comment-content').show()
+          _this.$el.find(".comment-edit-textarea textarea").attr('disabled', false)
 
   destroy_blog: ()->
     _this = this
