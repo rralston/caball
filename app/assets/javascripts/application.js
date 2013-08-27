@@ -27,3 +27,6 @@
 //= require jquery-fileupload/basic
 
 $( document ).tooltip();
+jQuery(document).ready(function() {
+  jQuery("abbr.timeago").timeago();
+});
