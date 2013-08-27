@@ -25,7 +25,16 @@ class UsersController < ApplicationController
         roles    = params[:roles]
         search   = params[:search] || params[:keyword]
         location = params[:location]
+        cast_hash = {
+          :height => params[:height],
+          :ethinicity => params[:ethinicity],
+          :bodytype => params[:bodytype],
+          :hair_color => params[:hair_color],
+          :language => params[:language]
+        }
         distance = 100
+
+        Characteristics.clear_empty cast_hash
 
         if params[:distance].present?
           distance = params[:distance]
@@ -38,7 +47,7 @@ class UsersController < ApplicationController
           to_be_filtered_users = current_user.send(params[:people])
         end
 
-        @users = User.filter_all(to_be_filtered_users, search, location, distance, roles, page, USERS_PER_PAGE_IN_INDEX)
+        @users = User.filter_all(to_be_filtered_users, search, location, distance, roles, cast_hash, page, USERS_PER_PAGE_IN_INDEX)
       end
     else
       @users = User.recently_updated

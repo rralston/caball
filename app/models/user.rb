@@ -338,7 +338,7 @@ class User < ActiveRecord::Base
     followers.includes?(user)
   end
 
-  def self.filter_all(users = nil, query = nil, location = nil, radius = 100,  talents = nil, page = nil, per_page = nil)
+  def self.filter_all(users = nil, query = nil, location = nil, radius = 100,  talents = nil, cast_hash = nil, page = nil, per_page = nil)
 
     users = User if users.nil?
 
@@ -350,17 +350,52 @@ class User < ActiveRecord::Base
       users = users.near(location, radius)
     end
 
+    if !nil_hash?(cast_hash)
+      cast_hash = delete_empty_values(cast_hash)
+
+      height = cast_hash[:height].kind_of?(Array) ? cast_hash[:height] : [cast_hash[:height]]
+      bodytype = cast_hash[:bodytype].kind_of?(Array) ? cast_hash[:bodytype] : [cast_hash[:bodytype]]
+      ethinicity = cast_hash[:ethinicity].kind_of?(Array) ? cast_hash[:ethinicity] : [cast_hash[:ethinicity]]
+      hair_color = cast_hash[:hair_color].kind_of?(Array) ? cast_hash[:hair_color] : [cast_hash[:hair_color]]
+      language = cast_hash[:language].kind_of?(Array) ? cast_hash[:language] : [cast_hash[:language]]
+
+      users = users.joins(:characteristics).where('characteristics.height in (?)', height).uniq if height.first.present?
+      users = users.joins(:characteristics).where('characteristics.bodytype in (?)', bodytype).uniq if bodytype.first.present?
+      users = users.joins(:characteristics).where('characteristics.ethnicity in (?)', ethinicity).uniq if ethinicity.first.present?
+      users = users.joins(:characteristics).where('characteristics.hair_color in (?)', hair_color).uniq if hair_color.first.present?
+      users = users.joins(:characteristics).where('characteristics.language in (?)', language).uniq if language.first.present?
+    end
+
     if talents and !talents.empty?
-      talents = [talents] if talents.class.name != 'Array'
+      talents = [talents] if !talents.kind_of?(Array)
       users = users.joins(:talents).where('talents.name in (?)', talents).uniq
 
-      users = users.select{ |user|
-        user_talents = user.talents.map(&:name).uniq
-        (talents - user_talents).empty?
-      }
+      #users = users.select{ |user|
+      #  user_talents = user.talents.map(&:name).uniq
+      #  (talents - user_talents).empty?
+      #}
     end
 
     Kaminari.paginate_array(users).page(page).per(per_page)
+  end
+
+  def self.delete_empty_values hash
+    hash.each do |key,value|
+      if value.empty?
+        hash.delete(key)
+      end
+    end
+    hash
+  end
+
+  def self.nil_hash? hash
+    empty_flag = true
+    hash.each do |key,value|
+      if !value.empty?
+        empty_flag = false
+      end
+    end
+    empty_flag
   end
 
   def as_json(options = {})

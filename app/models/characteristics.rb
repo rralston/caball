@@ -25,6 +25,24 @@ class Characteristics < ActiveRecord::Base
     present_sum
   end
 
+  def self.clear_empty cast_hash
+    if cast_hash[:height].kind_of?(Array)
+      cast_hash[:height].delete('')
+    end
+    if cast_hash[:bodytype].kind_of?(Array)
+      cast_hash[:bodytype].delete('')
+    end
+    if cast_hash[:ethinicity].kind_of?(Array)
+      cast_hash[:ethinicity].delete('')
+    end
+    if cast_hash[:hair_color].kind_of?(Array)
+      cast_hash[:hair_color].delete('')
+    end
+    if cast_hash[:language].kind_of?(Array)
+      cast_hash[:language].delete('')
+    end
+  end
+
   def self.heights
     {
       "4'0 - 4'04\""   => "4'0 - 4'04\"",

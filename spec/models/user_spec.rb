@@ -281,30 +281,46 @@ describe User do
   end
 
   context "search" do
+    cast_hash = {
+      :height => "",
+      :ethinicity => "",
+      :bodytype => "",
+      :hair_color => "",
+      :language => ""
+    }
+    asian_cast_hash = {
+      :height => "",
+      :ethinicity => "Asian",
+      :bodytype => "",
+      :hair_color => "",
+      :language => ""
+    }
     before(:all){
       @search_user1 = FactoryGirl.create(:user, :name => 'Search User', :location => 'Bangalore', :talents => [
-          FactoryGirl.create(:talent, :name => 'Actor'),
-          FactoryGirl.create(:talent, :name => 'Audio')
+          FactoryGirl.create(:talent, :name => 'Director'),
+          FactoryGirl.create(:talent, :name => 'Writer')
         ])
       @search_user2 = FactoryGirl.create(:user, :name => 'Search user 2', :location => 'Indira Nagar, Bangalore', :talents => [
-          FactoryGirl.create(:talent, :name => 'Actor'),
-          FactoryGirl.create(:talent, :name => 'Costumes'),
-          FactoryGirl.create(:talent, :name => 'Lighting')
-        ])
+                                                                                                      FactoryGirl.create(:talent, :name => 'Director'),
+                                                                                                      FactoryGirl.create(:talent, :name => 'Production'),
+                                                                                                      FactoryGirl.create(:talent, :name => 'Cast')
+                                                                                                    ])
+      characteristics = FactoryGirl.create :characteristics, user: @search_user2
       @search_user3 = FactoryGirl.create(:user, :location => 'Hyderabad, Andhra Pradesh', :talents => [
-          FactoryGirl.create(:talent, :name => 'Lighting'),
-          FactoryGirl.create(:talent, :name => 'Costumes')
+          FactoryGirl.create(:talent, :name => 'Cast'),
+          FactoryGirl.create(:talent, :name => 'Production')
         ])
     }
 
-    specify { User.filter_all(nil, 'search', nil, nil, ['Costumes', 'Lighting']).should == [@search_user2] }
-    specify { User.filter_all(nil, 'search', nil, nil, []).should =~ [@search_user2, @search_user1] }
-    specify { User.filter_all(nil, '', nil, nil, ['Costumes', 'Lighting']).should =~ [@search_user2, @search_user3] }
+    specify { User.filter_all(nil, 'search', nil, nil, ['Cast', 'Director'], cast_hash, 1, 10).should == [@search_user1,@search_user2] }
+    specify { User.filter_all(nil, 'search', nil, nil, [], cast_hash).should =~ [@search_user2, @search_user1] }
+    specify { User.filter_all(nil, '', nil, nil, ['Cast', 'Production'], cast_hash).should =~ [@search_user2, @search_user3] }
 
-    specify { User.filter_all(User.where(:id => [@search_user2.id, @search_user3.id]), '',nil, nil, ['Costumes', 'Lighting']).should =~ [@search_user2, @search_user3] }
+    specify { User.filter_all(User.where(:id => [@search_user2.id, @search_user3.id]), '',nil, nil, ['Cast', 'Production'], cast_hash).should =~ [@search_user2, @search_user3] }
 
+    specify { User.filter_all(nil, nil, 'Bangalore', 700, ['Cast', 'Production'], cast_hash).should == [@search_user2, @search_user3] }
 
-    specify { User.filter_all(nil, nil, 'Bangalore', 700, ['Costumes', 'Lighting']).should == [@search_user2, @search_user3] }
+    specify { User.filter_all(nil, '', nil, nil, ['Cast', 'Production'], asian_cast_hash).should =~ [@search_user2] }
   end
 
 

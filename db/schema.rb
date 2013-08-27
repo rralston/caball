@@ -308,7 +308,7 @@ ActiveRecord::Schema.define(:version => 20130826051004) do
     t.text     "headline"
     t.boolean  "featured"
     t.string   "expertise"
-    t.datetime "notification_check_time", :default => '2013-07-31 14:32:36'
+    t.datetime "notification_check_time", :default => '2013-08-26 04:17:48'
     t.string   "experience"
     t.boolean  "agent_present",           :default => false
     t.string   "agent_name"
