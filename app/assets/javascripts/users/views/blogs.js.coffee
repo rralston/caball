@@ -4,6 +4,8 @@ app.views.blogs = Backbone.View.extend
     this.collection.on('add', this.renderEach, this)
   events: 
     'keypress textarea#blog_content': 'check_keypress'
+    'keyup textarea#blog_content': 'check_postbutton'
+    'click button.post_update': 'add_blog'
 
   render: ()->
     this.$el.html( this.template() )
@@ -29,6 +31,13 @@ app.views.blogs = Backbone.View.extend
     this.collection.text_sorted().forEach(this.renderEach, this)
     this
 
+  check_postbutton: (event) ->
+    # toggle post button based on the value in the input
+    if $(event.target).val()
+      this.$el.find('button.post_update').show()
+    else
+      this.$el.find('button.post_update').hide()
+
   check_keypress: (event)->
     # check if enter is pressed.
     if event.which == app.constants.enter_key_code
@@ -44,3 +53,5 @@ app.views.blogs = Backbone.View.extend
       element.attr('disabled', 'disabled')
       $('#blog_video_attributes_url').attr('disabled', 'disabled')
       $('#blog_photo_attributes_image').attr('disabled', 'disabled')
+      $('button.post_update').attr('disabled', 'disabled')
+      

@@ -4,6 +4,8 @@ app.views.comments = Backbone.View.extend
     this.collection.on('add', this.renderEach, this)
   events: 
     'keypress textarea#comment_content': 'check_keypress'
+    'keyup textarea#comment_content': 'check_postbutton'
+    'click button.post_update': 'add_comment'
 
   render: ()->
     this.$el.html( this.template() )
@@ -19,6 +21,13 @@ app.views.comments = Backbone.View.extend
     if event.which == app.constants.enter_key_code
       this.add_comment(event)
 
+  check_postbutton: (event) ->
+    # toggle post button based on the value in the input
+    if $(event.target).val()
+      this.$el.find('button.post_update').show()
+    else
+      this.$el.find('button.post_update').hide()
+
   add_comment: (event)->
     _this = this
     element = $(event.target)
@@ -29,4 +38,5 @@ app.views.comments = Backbone.View.extend
       element.attr('disabled', 'disabled')
       $('#comment_video_attributes_url').attr('disabled', 'disabled')
       $('#comment_photo_attributes_image').attr('disabled', 'disabled')
+      $('button.post_update').attr('disabled', 'disabled')
       
