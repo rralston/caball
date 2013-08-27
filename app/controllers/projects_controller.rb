@@ -189,8 +189,4 @@ class ProjectsController < ApplicationController
     @compensation = Project.compensation_stages
   end
 
-  def clear_temp_photo_objects
-    Photo.where(:imageable_type => nil).destroy_all
-  end
-
 end

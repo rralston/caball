@@ -27,6 +27,8 @@ Caball::Application.routes.draw do
 
   match '/events/files_upload' => 'events#files_upload'
   match '/projects/files_upload' => 'projects#files_upload'
+  match '/comments/files_upload' => 'comments#files_upload'
+  match '/blogs/files_upload' => 'blogs#files_upload'
 
   resources :users do 
     resources :characteristics, :photos, :talents, :profile, :blogs

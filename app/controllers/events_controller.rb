@@ -196,8 +196,4 @@ class EventsController < ApplicationController
     render :json => file_url.to_json()
   end
 
-  def clear_temp_photo_objects
-    Photo.where(:imageable_type => nil).destroy_all
-  end
-
 end

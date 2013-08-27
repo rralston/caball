@@ -42,8 +42,7 @@ $(document).ready ()->
         progress = parseInt(data.loaded / data.total * 100, 10)
         data.progress_div.find('.bar').css('width', progress + '%')
       done: (e, data)->
-        console.log data
-        app.data= data
+        
         if typeof data.result == 'object' && _.size(data.result) > 1
           # > 1 when a hash is returned with id of the newly created object.
           image_url = data.result['url']

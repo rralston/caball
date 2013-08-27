@@ -36,14 +36,14 @@ class Ability
       friendship.user == user
     end
 
-    can [:create, :read], Comment do
+    can [:create, :read, :files_upload], Comment do
       user.persisted?
     end
     can [:update, :destroy], Comment do |comment|
       comment.user == user
     end
 
-    can [:create, :read], Blog do
+    can [:create, :read, :files_upload], Blog do
       user.persisted?
     end
     can [:edit, :destroy, :update], Blog do |blog|

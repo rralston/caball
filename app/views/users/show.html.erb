@@ -335,6 +335,7 @@ $(document).ready(function(){
   app.blogs.reset(<%= raw @user.blogs.to_json(:include => [:user, :likes], :check_user => current_user) %>)
   app.blogs_view = new app.views.blogs({ collection: app.blogs })
   $('#comments_div').html(app.blogs_view.render().el)
+  app.fn.init_comment_image_file_uploader($('#blog_photo_attributes_image'), '/blogs/files_upload')
 
   $('body').on('click', '#sort_by_video', function(event){
     app.blogs_view.render_video_sorted()
@@ -390,6 +391,9 @@ $(document).ready(function(){
     $('#blog_video_attributes_url').attr('disabled', false).val('')
     $('#blog_photo_attributes_image').attr('disabled', false)
     $('button.post_update').attr('disabled', false).hide()
+    // remove the image preview if a photo was uploaded and clear the hidden url value
+    $('.image_preview_container').hide()
+    $('.photo_url_div').val('')
   });
 
 
@@ -401,6 +405,9 @@ $(document).ready(function(){
     $('#blog_video_attributes_url').attr('disabled', false)
     $('#blog_photo_attributes_image').attr('disabled', false)
     $('button.post_update').attr('disabled', false).hide()
+    // remove the image preview if a photo was uploaded and clear the hidden url value
+    $('.image_preview_container').hide()
+    $('.photo_url_div').val('')
   });
 
 });

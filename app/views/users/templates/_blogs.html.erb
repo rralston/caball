@@ -29,7 +29,16 @@
               <div class='tab-content'>
                 <div class='tab-pane' id='image_form_tab'>
                   <%= c.fields_for :photo, Photo.new do |p| %>
+                    <img class='image_preview_container img-polaroid' src="">
                     <%= p.file_field :image %>
+                    <%= p.hidden_field :remote_image_url, :class => 'photo_url_div' %>
+                    
+                    <div class='controls upload_progress'>
+                      Upload Progress:
+                      <div class='progress'>
+                        <div class='bar' style='width: 0%'></div>
+                      </div>
+                    </div>
                   <% end %>
                 </div>
 

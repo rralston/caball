@@ -1,9 +1,18 @@
 class BlogsController < ApplicationController
 
   load_and_authorize_resource
+  after_filter :clear_temp_photo_objects, :only => [:update, :create]
   
   def create
+
+    # if the remote image url is empty delete the attributes from params hash
+    # if not deleted, it will fail to create as validation fails since image is not present
+    if params[:blog][:photo_attributes][:remote_image_url].empty?
+      params[:blog].delete(:photo_attributes)
+    end
+
     @blog = Blog.create(params[:blog])
+
     @blog.update_attributes(:user => current_user)
 
     # if the user tried to add a video, check if its valid or not.
@@ -38,5 +47,23 @@ class BlogsController < ApplicationController
   def destroy
     @blog.destroy
     redirect_to current_user, notice: "Blog was destroyed."
+  end
+
+   def files_upload
+    
+    if params['blog']['photo_attributes'].present? and params['blog']['photo_attributes']['image'].present?
+      
+      photo_object = Photo.new
+
+      photo_object.update_attributes(:image => params['blog']['photo_attributes']['image'])
+
+      file_url = {
+        :url => request.env["HTTP_ORIGIN"] + photo_object.image.url,
+        :id => photo_object.reload.id
+      }
+
+    end
+
+    render :json => file_url.to_json()
   end
 end

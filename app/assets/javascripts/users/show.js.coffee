@@ -86,9 +86,6 @@ $(document).ready ->
           else
             alert('Something went wrong, Please try again later')
           $(event.target).attr('disabled', false)
-          
-          
-
 
 
     

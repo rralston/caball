@@ -107,4 +107,8 @@ class ApplicationController < ActionController::Base
     UserMailer.report_entity_mail(current_user, entity, message).deliver
     render :text => true
   end
+
+  def clear_temp_photo_objects
+    Photo.where(:imageable_type => nil).destroy_all
+  end
 end

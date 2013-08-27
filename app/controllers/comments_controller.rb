@@ -2,9 +2,17 @@ class CommentsController < ApplicationController
 
   load_and_authorize_resource
   # before_filter :load_project, :except => [:add_comment]
-  
+  after_filter :clear_temp_photo_objects, :only => [:update, :create]
+
   def create
     params[:comment][:user] = current_user
+    
+    # if the remote image url is empty delete the attributes from params hash
+    # if not deleted, it will fail to create as validation fails since image is not present
+    if params[:comment][:photo_attributes][:remote_image_url].empty?
+      params[:comment].delete(:photo_attributes)
+    end
+
     @comment = Comment.create(params[:comment])
 
     # if the user tried to add a video, check if its valid or not.
@@ -35,6 +43,24 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     redirect_to @project, notice: "Comment was destroyed."
+  end
+
+  def files_upload
+    
+    if params['comment']['photo_attributes'].present? and params['comment']['photo_attributes']['image'].present?
+      
+      photo_object = Photo.new
+
+      photo_object.update_attributes(:image => params['comment']['photo_attributes']['image'])
+
+      file_url = {
+        :url => request.env["HTTP_ORIGIN"] + photo_object.image.url,
+        :id => photo_object.reload.id
+      }
+
+    end
+
+    render :json => file_url.to_json()
   end
 
   private

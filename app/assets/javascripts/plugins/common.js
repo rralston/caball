@@ -394,5 +394,49 @@ app.fn.adjust_slider_height = function(){
   var stepHeight = $('#steps .step:eq(' + (current - 1) + ')').height();
   $('#steps').height(stepHeight);
 }
+
+
+
+app.fn.init_comment_image_file_uploader = function(element, url) {
+  element.fileupload({
+    url: url,
+    type: 'POST',
+    add: function(e, data) {
+      var file, types;
+      types = /(\.|\/)(gif|jpe?g|png)$/i;
+      file = data.files[0];
+      if (types.test(file.type) || types.test(file.name)) {
+        data.progress_div = $('#' + data.fileInput.attr('id')).closest('.tab-pane').find('.upload_progress');
+        data.progress_div.show();
+        
+        data.control_group_div = $('#' + data.fileInput.attr('id')).closest('.tab-pane');
+        data.image_container = data.control_group_div.find('.image_preview_container');
+        
+        data.image_container.attr('src', '');
+        data.submit();
+      } else {
+        alert('The file you selected is not a gif, jpeg or png image file');
+      }
+    },
+    progress: function(e, data) {
+      var progress;
+      progress = parseInt(data.loaded / data.total * 100, 10);
+      data.progress_div.find('.bar').css('width', progress + '%');
+    },
+    done: function(e, data) {
+      var image_url;
+      image_url = data.result['url'];
+      
+      data.url_field = data.control_group_div.find('.photo_url_div');
+      data.url_field.val(image_url);
+      
+      data.image_container.attr('src', image_url);
+      data.image_container.show();
+      
+      data.progress_div.hide();
+    }
+  });
+};
+
   
 
