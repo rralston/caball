@@ -36,11 +36,11 @@ class BlogsController < ApplicationController
   end
 
   def update
-    @blog = current_user.blogs.find(params[:id])
-    if @blog.update_attributes(params[:blog])
-      redirect_to current_user, notice: "Blog was updated."
+    blog = Blog.find(params[:id])
+    if blog.update_attributes(params[:blog])
+      render :json => blog.to_json()
     else
-      render :edit
+      render :text => false
     end
   end
 

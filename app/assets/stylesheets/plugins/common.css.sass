@@ -810,6 +810,11 @@ ul.tagit span.ui-helper-hidden-accessible
         .comment-content
           margin-top: 15px
           font-size: 18px
+        .comment-edit-textarea
+          margin-top: 10px
+          display: none
+          textarea
+            width: 510px
         .comment-img
           img
             margin-top: 10px
@@ -836,6 +841,14 @@ ul.tagit span.ui-helper-hidden-accessible
           font-size: 16px
           .heart-blue
             margin-right: 10px
+      .comment_edit
+        display: none
+        position: absolute
+        top: 5px
+        right: 10px
+    .comment:hover
+      .comment_edit
+        display: block
 
 
   textarea#comment_content, textarea#blog_content

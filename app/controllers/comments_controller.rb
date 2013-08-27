@@ -33,16 +33,17 @@ class CommentsController < ApplicationController
   end
 
   def update
-    if @comment.update_attributes(params[:comment])
-      redirect_to @project, notice: "Comment was updated."
+    comment = Comment.find(params[:id])
+    if comment.update_attributes(params[:comment])
+      render :json => comment.to_json()
     else
-      render :edit
+      render :text => false
     end
   end
 
   def destroy
     @comment.destroy
-    redirect_to @project, notice: "Comment was destroyed."
+    render :json => @comment.to_json()
   end
 
   def files_upload

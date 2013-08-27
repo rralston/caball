@@ -38,7 +38,11 @@ Caball::Application.routes.draw do
   resources :projects do 
     resources :comments
   end
+
+  match '/blogs/:id' => 'blogs#update', :via => 'POST'
   resources :blogs
+  # post request to handle comment handle
+  match '/comments/:id' => 'comments#update', :via => 'POST'
   resources :comments
   match 'conversations/get_messages' => 'conversations#get_messages', :via => 'GET'
   match '/conversations/empty_trash' => 'conversations#empty_trash', :via => 'POST'

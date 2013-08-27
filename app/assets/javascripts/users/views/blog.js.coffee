@@ -4,6 +4,52 @@ app.views.blog = Backbone.View.extend
 
   events: 
     'click .like-blog': 'like_blog'
+    'click .destroy_blog': 'destroy_blog'
+    'click .update': 'update_content'
+    'click .edit_blog': 'show_edit_div'
+    'click .hide_edit': 'hide_edit_div'
+    'keypress textarea.edit_comment_area': 'check_keypress'
+
+  check_keypress: (event)->
+    # check if enter is pressed.
+    if event.which == app.constants.enter_key_code
+      this.update_content()
+
+  render: ()->
+    this.$el.html( this.template(this.model.toJSON()) )
+    this
+
+  show_edit_div: ()->
+    this.$el.find('.comment-content').hide()
+    this.$el.find('.comment-edit-textarea').show()
+
+  hide_edit_div: ()->
+    this.$el.find('.comment-edit-textarea').hide()
+    this.$el.find('.comment-content').show()
+
+  update_content: ()->
+    _this = this
+
+    new_content = $.trim(this.$el.find(".comment-edit-textarea textarea").val())
+
+    if new_content != ''
+      $.ajax
+        url: '/blogs/'+_this.model.id
+        type: 'POST'
+        data: 
+          blog:
+            content: new_content
+        success: (resp)->
+          _this.model.set('content', new_content)
+          _this.render()
+          _this.$el.find('.comment-edit-textarea').hide()
+          _this.$el.find('.comment-content').show()
+
+  destroy_blog: ()->
+    _this = this
+    this.model.destroy
+      success: (model, resp) ->
+        _this.remove()
 
   render: ()->
     this.$el.html( this.template(this.model.toJSON()) )
