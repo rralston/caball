@@ -25,3 +25,5 @@
 //= require plugins/manifest.js
 //= require social-share-button
 //= require jquery-fileupload/basic
+
+$( document ).tooltip();
