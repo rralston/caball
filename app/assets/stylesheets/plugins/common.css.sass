@@ -569,7 +569,7 @@ ul.tagit span.ui-helper-hidden-accessible
   border-top: 1px solid #d4d9df
   padding: 0 10px
   color: #515961
-  padding-bottom: 20px
+  //padding-bottom: 20px
   moz-box-sizing: border-box
 
 .srchsect h2
@@ -619,6 +619,7 @@ ul.tagit span.ui-helper-hidden-accessible
 
 .srchopts
   height: 0px
+  max-height: 250px
   overflow-y: scroll
 
 .srchopt
@@ -634,8 +635,10 @@ ul.tagit span.ui-helper-hidden-accessible
   color: #515961
   height: 25px
   line-height: 25px
-  overflow: visible
-  width: 150px
+  max-width: 130px
+  text-overflow: ellipsis
+  overflow-x: hidden
+  width: auto
   white-space: nowrap
 
 /*radio button*/
