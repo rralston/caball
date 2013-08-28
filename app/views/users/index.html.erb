@@ -105,15 +105,15 @@
 
         <div class="srchsect">
           <span class="shrink-anim shrinked"><img src="/assets/opth2.png"></span>
-          <h2 class='regular'>Ethinicity</h2>
+          <h2 class='regular'>Ethnicity</h2>
           <div class='srchopts'>
-            <% Characteristics.enthnicities.keys.each do |ethinicity| %>
+            <% Characteristics.enthnicities.keys.each do |ethnicity| %>
               <div class="srchopt">
                 <div class="chkboxwrap">
-                  <input type="checkbox" name='ethinicity' value='<%= ethinicity %>' id='<%= ethinicity %>' />
-                  <label class="chklabel" for="<%= ethinicity %>"></label>
+                  <input type="checkbox" name='ethnicity' value='<%= ethnicity %>' id='<%= ethnicity %>' />
+                  <label class="chklabel" for="<%= ethnicity %>"></label>
                 </div>
-                <span class="chktxt"><%= ethinicity %></span>
+                <span class="chktxt"><%= ethnicity %></span>
               </div>
             <% end %>
           </div>

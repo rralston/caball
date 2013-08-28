@@ -3,6 +3,26 @@
 #
 # CoffeeScript for Users Controller
 
+app.fn.ajax_update = (event, data) ->
+  $(event.target).attr('disabled', 'disabled')
+  hash = {}
+  hash[data] = $(event.target).val()
+  $.ajax
+      url: '/users/update'
+      type: 'POST'
+      data:
+        id: app.current_user.id
+        user: hash
+      success: (resp) ->
+        if resp != 'false'
+          $('.user_'+data+'_text').show()
+          $('.edit_'+data+'_input').hide()
+          $('.'+data+'_content').html($(event.target).val())
+        else
+          alert('Something went wrong, Please try again later')
+        $(event.target).attr('disabled', false)
+
+
 $(document).ready ->
 
   app.fn.initialize_send_generic_message()
@@ -64,54 +84,22 @@ $(document).ready ->
 
   $('body').on 'click', '.edit_about', (event)->
     $('.user_about_text').hide()
-    $('.edit_about_text').show()
+    $('.edit_about_input').show()
 
   $('body').on 'click', '.edit_headline_input .icon-remove-sign', (event)->
     $('.user_headline_text').show()
     $('.edit_headline_input').hide()
 
-  $('body').on 'click', '.edit_about_text .icon-remove-sign', (event)->
+  $('body').on 'click', '.edit_about_input .icon-remove-sign', (event)->
     $('.user_about_text').show()
-    $('.edit_about_text').hide()
+    $('.edit_about_input').hide()
 
   $('body').on 'keypress', '#edit_headline', (event)->
     # check if enter is pressed.
     if event.which == app.constants.enter_key_code
-      $(event.target).attr('disabled', 'disabled')
-
-      $.ajax
-        url: '/users/update'
-        type: 'POST'
-        data:
-          id: app.current_user.id
-          user:
-            headline: $(event.target).val()
-        success: (resp) ->
-          if resp != 'false'
-            $('.user_headline_text').show()
-            $('.edit_headline_input').hide()
-            $('.headline_content').html($(event.target).val())
-          else
-            alert('Something went wrong, Please try again later')
-          $(event.target).attr('disabled', false)
+      app.fn.ajax_update(event, "headline")
 
   $('body').on 'keypress', 'textarea#edit_about', (event)->
     # check if enter is pressed.
     if event.which == app.constants.enter_key_code
-      $(event.target).attr('disabled', 'disabled')
-
-      $.ajax
-        url: '/users/update'
-        type: 'POST'
-        data:
-          id: app.current_user.id
-          user:
-            about: $(event.target).val()
-        success: (resp) ->
-          if resp != 'false'
-            $('.user_about_text').show()
-            $('.edit_about_text').hide()
-            $('.about-content').html($(event.target).val())
-          else
-            alert('Something went wrong, Please try again later')
-          $(event.target).attr('disabled', false)
+      app.fn.ajax_update(event, "about")

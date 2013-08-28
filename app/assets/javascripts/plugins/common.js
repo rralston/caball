@@ -194,6 +194,23 @@ app.fn.distance_between_location = function(lat1, lon1, lat2, lon2){
   return d;
 }
 
+app.fn.jquerySerailize = function(form)
+{
+   var o = {};
+   var a = form.serializeArray();
+   $.each(a, function() {
+       if (o[this.name]) {
+           if (!o[this.name].push) {
+               o[this.name] = [o[this.name]];
+           }
+           o[this.name].push(this.value || '');
+       } else {
+           o[this.name] = this.value || '';
+       }
+   });
+   return o;
+};
+
  app.fn.serializeJSON = function(form){
     var json = {}
     form.find('input, select').each(function(){

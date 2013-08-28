@@ -353,17 +353,11 @@ class User < ActiveRecord::Base
     if !nil_hash?(cast_hash)
       cast_hash = delete_empty_values(cast_hash)
 
-      height = cast_hash[:height].kind_of?(Array) ? cast_hash[:height] : [cast_hash[:height]]
-      bodytype = cast_hash[:bodytype].kind_of?(Array) ? cast_hash[:bodytype] : [cast_hash[:bodytype]]
-      ethinicity = cast_hash[:ethinicity].kind_of?(Array) ? cast_hash[:ethinicity] : [cast_hash[:ethinicity]]
-      hair_color = cast_hash[:hair_color].kind_of?(Array) ? cast_hash[:hair_color] : [cast_hash[:hair_color]]
-      language = cast_hash[:language].kind_of?(Array) ? cast_hash[:language] : [cast_hash[:language]]
+      cast_hash.each do |key, value|
+        val = value.kind_of?(Array) ? value : [value]
+        users = users.joins(:characteristics).where('characteristics.'+key.to_s+' in (?)', val)
+      end
 
-      users = users.joins(:characteristics).where('characteristics.height in (?)', height).uniq if height.first.present?
-      users = users.joins(:characteristics).where('characteristics.bodytype in (?)', bodytype).uniq if bodytype.first.present?
-      users = users.joins(:characteristics).where('characteristics.ethnicity in (?)', ethinicity).uniq if ethinicity.first.present?
-      users = users.joins(:characteristics).where('characteristics.hair_color in (?)', hair_color).uniq if hair_color.first.present?
-      users = users.joins(:characteristics).where('characteristics.language in (?)', language).uniq if language.first.present?
     end
 
     if talents and !talents.empty?
@@ -381,7 +375,7 @@ class User < ActiveRecord::Base
 
   def self.delete_empty_values hash
     hash.each do |key,value|
-      if value.empty?
+      if !value.present?
         hash.delete(key)
       end
     end
@@ -391,7 +385,7 @@ class User < ActiveRecord::Base
   def self.nil_hash? hash
     empty_flag = true
     hash.each do |key,value|
-      if !value.empty?
+      if value.present?
         empty_flag = false
       end
     end

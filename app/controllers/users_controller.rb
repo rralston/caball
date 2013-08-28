@@ -27,7 +27,7 @@ class UsersController < ApplicationController
         location = params[:location]
         cast_hash = {
           :height => params[:height],
-          :ethinicity => params[:ethinicity],
+          :ethnicity => params[:ethnicity],
           :bodytype => params[:bodytype],
           :hair_color => params[:hair_color],
           :language => params[:language]
