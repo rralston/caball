@@ -23,6 +23,8 @@ Caball::Application.routes.draw do
   match '/users/files_upload' => 'users#files_upload'
   match '/users/agent_names' => 'users#agent_names'
   match '/users/profile' => 'users#profile'
+  match '/users/change_password' => 'users#change_password'
+  match '/users/change_email' => 'users#change_email'
   
 
   match '/events/files_upload' => 'events#files_upload'
@@ -66,7 +68,9 @@ Caball::Application.routes.draw do
   match 'events/unattend' => 'events#unattend', :via => 'POST'
   match 'events/invite_followers' => 'events#invite_followers', :via => 'POST'
 
-  resources :role_applications
+  resources :role_applications do
+    get :already_approved
+  end
   match 'roles_applicants' => 'roles#applicants_list', :via => 'POST'
   match 'role_applications/approve' => 'role_applications#approve', :via => 'POST'
   match 'role_applications/un_approve' => 'role_applications#un_approve', :via => 'POST'

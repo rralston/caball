@@ -545,7 +545,7 @@ ul.tagit span.ui-helper-hidden-accessible
   moz-box-sizing: border-box
 
 .psearch h2 
-  background: url('/assets/advance.png') no-repeat 95% center
+  //background: url('/assets/advance.png') no-repeat 95% center
   height: 70px
   line-height: 70px
   margin-top: 0px
@@ -569,11 +569,11 @@ ul.tagit span.ui-helper-hidden-accessible
   border-top: 1px solid #d4d9df
   padding: 0 10px
   color: #515961
-  padding-bottom: 20px
+  //padding-bottom: 20px
   moz-box-sizing: border-box
 
 .srchsect h2
-  background: url('/assets/opth2.png') no-repeat 99% center
+  //background: url('/assets/opth2.png') no-repeat 99% center
   border: none
   padding: 0
   font-size: 22px
@@ -582,6 +582,11 @@ ul.tagit span.ui-helper-hidden-accessible
   height: 50px
   margin-left: 10px
   margin-top: 5px
+
+.srchsect .shrink-anim
+  float: right
+  cursor: pointer
+  margin-top: 10px
 
 
 .chkboxwrap
@@ -613,6 +618,7 @@ ul.tagit span.ui-helper-hidden-accessible
   cursor: pointer
 
 .srchopts
+  height: 0px
   max-height: 250px
   overflow-y: scroll
 
@@ -629,8 +635,10 @@ ul.tagit span.ui-helper-hidden-accessible
   color: #515961
   height: 25px
   line-height: 25px
-  overflow: visible
-  width: 150px
+  max-width: 130px
+  text-overflow: ellipsis
+  overflow-x: hidden
+  width: auto
   white-space: nowrap
 
 /*radio button*/
@@ -836,6 +844,11 @@ ul.tagit span.ui-helper-hidden-accessible
         padding: 20px
         border-top: 2px solid $divider-border
         background: url(/assets/comment-actions-bg.png) repeat-x
+        .time-ago
+          font-size: 12px
+          font-style: italic
+          color: #a0a8b1
+          padding-left: 10px
         .like-comment
           padding-right: 20px
           font-size: 16px

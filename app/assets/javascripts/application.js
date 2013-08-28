@@ -25,3 +25,8 @@
 //= require plugins/manifest.js
 //= require social-share-button
 //= require jquery-fileupload/basic
+
+$( document ).tooltip();
+jQuery(document).ready(function() {
+  jQuery("abbr.timeago").timeago();
+});

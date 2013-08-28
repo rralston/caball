@@ -3,7 +3,8 @@ $(document).ready ()->
   app.fn.extend_params_data = (data)->
     form = $('#users_search_form')
 
-    form_data = app.fn.serializeJSON(form)
+    form_data = app.fn.jquerySerailize(form)
+    #form_data = app.fn.serializeJSON(form)
     _.extend(data, form_data)
 
     if data.distance != ''
@@ -68,6 +69,7 @@ $(document).ready ()->
   # when advanced search is clicked.
   $('body').on 'click', '#btn-search_users', ()->
     form = $('#users_search_form')
+    
     btn = $('#btn-search_users')
 
     app.status = 'search'

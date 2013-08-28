@@ -338,7 +338,7 @@ class User < ActiveRecord::Base
     followers.includes?(user)
   end
 
-  def self.filter_all(users = nil, query = nil, location = nil, radius = 100,  talents = nil, page = nil, per_page = nil)
+  def self.filter_all(users = nil, query = nil, location = nil, radius = 100,  talents = nil, cast_hash = nil, page = nil, per_page = nil)
 
     users = User if users.nil?
 
@@ -350,17 +350,46 @@ class User < ActiveRecord::Base
       users = users.near(location, radius)
     end
 
+    if !nil_hash?(cast_hash)
+      cast_hash = delete_empty_values(cast_hash)
+
+      cast_hash.each do |key, value|
+        val = value.kind_of?(Array) ? value : [value]
+        users = users.joins(:characteristics).where('characteristics.'+key.to_s+' in (?)', val)
+      end
+
+    end
+
     if talents and !talents.empty?
-      talents = [talents] if talents.class.name != 'Array'
+      talents = [talents] if !talents.kind_of?(Array)
       users = users.joins(:talents).where('talents.name in (?)', talents).uniq
 
-      users = users.select{ |user|
-        user_talents = user.talents.map(&:name).uniq
-        (talents - user_talents).empty?
-      }
+      #users = users.select{ |user|
+      #  user_talents = user.talents.map(&:name).uniq
+      #  (talents - user_talents).empty?
+      #}
     end
 
     Kaminari.paginate_array(users).page(page).per(per_page)
+  end
+
+  def self.delete_empty_values hash
+    hash.each do |key,value|
+      if !value.present?
+        hash.delete(key)
+      end
+    end
+    hash
+  end
+
+  def self.nil_hash? hash
+    empty_flag = true
+    hash.each do |key,value|
+      if value.present?
+        empty_flag = false
+      end
+    end
+    empty_flag
   end
 
   def as_json(options = {})

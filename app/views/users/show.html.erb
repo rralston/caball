@@ -90,10 +90,13 @@
               <div class="profname">
                 <div class="row-fluid">
                   <div class="profico">
-                    <ul class="picos span4">
-                      <li><a href="#"><img src="/assets/horn.png" alt="" /></a></li>
-                      <li><a href="#"><img src="/assets/cut.png" alt="" /></a></li>
-                      <li><a href='#' ><img src="/assets/pencil.png" alt="" /></a></li>
+                    <ul class="picos span3">
+                      <% @user.talents.each do |talent| %>
+                        <% image_name = talent.sub_talent.nil? ? talent.name : talent.sub_talent %>
+                        <li><a href="#"><img src="/assets/role_icons/<%= image_name %>.png" alt="<%= talent.name %>" width="45" height="45" /></a></li>
+                      <% end %>
+                      <!--<li><a href="#"><img src="/assets/cut.png" alt="" /></a></li>
+                      <li><a href='#' ><img src="/assets/pencil.png" alt="" /></a></li>-->
                     </ul>
                   </div>
                 </div>
@@ -243,12 +246,26 @@
         </div>
 
         <div class="span4 shrink-div desc">
+          <% if current_user == @user %>
+                          
+            <div class='edit_about_input'>
+              <textarea id='edit_about'><%= @user.about %></textarea>
+              <i class='icon-remove-sign action-div'></i>
+            </div>
 
-          <% if @user.about.length > 200 %>
-            <%= truncate(@user.about, :length => 200, :separator => ' ') %> <a class='read_more_btn' data-content='<%= @user.about %>' data-header='About - <%= @user.name %>' >Read more</a>
-          <% else %>
-            <%= @user.about %> 
           <% end %>
+          <div class="user_about_text">
+            <% if current_user == @user %>
+              <i class='icon-pencil action-div edit_about'></i>
+            <% end %>
+            <div class="about_content">
+              <% if @user.about.length > 200 %>
+                <%= truncate(@user.about, :length => 200, :separator => ' ') %> <a class='read_more_btn' data-content='<%= @user.about %>' data-header='About - <%= @user.name %>' >Read more</a>
+              <% else %>
+                <%= @user.about %> 
+              <% end %>
+            </div>
+          </div>
 
         </div>
       </div>

@@ -44,6 +44,9 @@
       
     
     <div class='row comment-actions action-div'>
+      <div class='pull-left time-ago'>
+        <%%= jQuery.timeago(created_at) %>
+      </div>
       <div class='pull-right like-comment'>
         <div class='pull-right likes-count'><%%= likes_count %></div>
         <div class='heart-blue <%% if(typeof user_following != "undefined" && user_following) print("active") %> pull-right'> </div>        

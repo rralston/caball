@@ -10,7 +10,7 @@ class Ability
     can :read, User
     can :read, Project
 
-    can [:dashboard, :profile, :dashboard_projects, :dashboard_events, :dashboard_conversations, :agent_names], User do
+    can [:dashboard, :profile, :dashboard_projects, :dashboard_events, :dashboard_conversations, :agent_names, :change_password, :change_email], User do
       user.persisted?
     end
 
@@ -77,7 +77,7 @@ class Ability
       user.persisted? && role.project.user_id == user.id
     end
 
-    can [:approve, :un_approve], RoleApplication do |application|
+    can [:approve, :un_approve, :already_approved], RoleApplication do |application|
       user.persisted? && application.role.project.user_id == user.id
     end
 

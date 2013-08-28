@@ -25,6 +25,14 @@ class Characteristics < ActiveRecord::Base
     present_sum
   end
 
+  def self.clear_empty cast_hash
+    cast_hash.each do |key, value|
+      if value.kind_of?(Array)
+        cast_hash[key].delete('')
+      end
+    end
+  end
+
   def self.heights
     {
       "4'0 - 4'04\""   => "4'0 - 4'04\"",

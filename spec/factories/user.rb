@@ -14,6 +14,8 @@ FactoryGirl.define do
     name { FactoryGirl.generate(:user_name) }
     uid '1234567789'
     provider 'facebook'
+    password 'pass1234'
+    #password_confirmation 'pass1234'
   end
 
 end
