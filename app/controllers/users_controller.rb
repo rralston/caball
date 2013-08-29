@@ -382,7 +382,7 @@ class UsersController < ApplicationController
   end
 
   def agent_names
-    agents = User.where('lower(users.name) LIKE lower(?)', "%#{params[:q]}%")
+    agents = User.agents.where('lower(users.name) LIKE lower(?)', "%#{params[:q]}%")
     render :json => agents.to_json(:only => [:name, :id])
   end
 
