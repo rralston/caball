@@ -270,6 +270,108 @@
         </div>
       </div>
 
+      <% if @user.talent_names.include?('Cast') %>
+        <div class='row right-extra-div' id='cast_profile'>
+          <div class='span4 shrink-div head'>
+            <span class="pull-left">
+              <h3>Cast Profile</h3>
+            </span>
+            
+            <span class="btn-show-all pull-right"></span> 
+            
+            <div class='clearfix'></div>
+          </div>
+
+          <div class="span4">
+            <div class="row clearfix">
+              <div class="grey-line-divider"></div>
+            </div>
+          </div>
+
+          <div class='content light'>
+
+            <% if @user.guild_present and @user.guild.present? %>
+              Guild: <%=  @user.guild %><br/>
+            <% end %>
+
+            <% if @user.gender.present? %>
+              Sex: <%=  @user.gender.camelize %><br/>
+            <% end %>
+
+            <% if @user.characteristics.present? %>
+              
+              <% if @user.characteristics.height.present? %>
+                Height: <%=  @user.characteristics.height.camelize %><br/>
+              <% end %>
+
+              <% if @user.characteristics.ethnicity.present? %>
+                Ethnicity: <%=  @user.characteristics.ethnicity.camelize %><br/>
+              <% end %>
+
+              <% if @user.characteristics.bodytype.present? %>
+                Build: <%=  @user.characteristics.bodytype %><br/>
+              <% end %>
+
+              <% if @user.characteristics.hair_color.present? %>
+                Hair Color: <%=  @user.characteristics.hair_color.camelize %><br/>
+              <% end %>
+
+              <% if @user.characteristics.language.present? %>
+                Language: <%=  @user.characteristics.language.camelize %><br/>
+              <% end %>
+
+            <% end %>
+
+            <% if @user.agent.present? %>
+              Representation:
+              <div class='representation'>
+                <span class="pull-left agent-img">
+                  <img src="<%= @user.agent.profile_pic %>" class="img-circle">
+                </span>
+                <span class="agent pull-left">
+                  <a href='<%= user_path(@user.agent) %>'><%= @user.agent.name %></a>
+                  <br>
+                  <span class="agent-company medium">
+                    <%= @user.agent.managing_company %>Codebrahma
+                  </span>
+                </span>
+              </div>
+            <% end %>
+          </div>
+
+        </div>
+      <% end %>
+
+      <% if @user.talent_names.include?('Agent') %>
+        <div class='row right-extra-div' id='agent_profile'>
+          <div class='span4 shrink-div head'>
+            <span class="pull-left">
+              <h3>Agent Profile</h3>
+            </span>
+            
+            <span class="btn-show-all pull-right"></span> 
+            
+            <div class='clearfix'></div>
+          </div>
+
+          <div class="span4">
+            <div class="row clearfix">
+              <div class="grey-line-divider"></div>
+            </div>
+          </div>
+
+          <div class='content light'>
+            <% if @user.agent.present? %>
+              Managing Comany:
+              <div class='company'>
+                  <%= @user.managing_company %>
+              </div>
+            <% end %>
+          </div>
+
+        </div>
+      <% end %>
+
       <div class='row right-extra-div' id='user_projects_div'>
       </div>
 

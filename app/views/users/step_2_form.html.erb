@@ -96,12 +96,12 @@
       
       <div class='controls radios'>
         <div class='option'>
-          <%= f.radio_button 'agent_present', 'true', :class => 'toggler_radio', 'data-target' => '#user_agent_name'  %>
+          <%= f.radio_button 'agent_present', 'true', :class => 'toggler_radio', 'data-target' => '#user_agent_name_container'  %>
           <%= label :agent_present, 'Yes', :class=>'radio_label' %>
         </div>
 
         <div class='option'>
-          <%= f.radio_button 'agent_present', 'false', :class => 'toggler_radio', 'data-target' => '#user_agent_name' %>
+          <%= f.radio_button 'agent_present', 'false', :class => 'toggler_radio', 'data-target' => '#user_agent_name_container' %>
           <%= label :agent_present, 'No', :class=>'radio_label' %>
         </div>
       </div>
@@ -111,14 +111,16 @@
 
           <%= agentship.hidden_field :agent_id %>
 
-          <% if current_user.agent_present %>
-            <input type='text' id='user_agent_name' placeholder='Enter your agents name' value='<%= agentship.object.agent.name %>'>
-          <% else %>
-            <input type='text' id='user_agent_name' placeholder='Enter your agents name'>
-          <% end %>
+          <div id='user_agent_name_container'>
+            <% if current_user.agent_present %>
+              <input type='text' id='user_agent_name' placeholder='Enter your agents name' value='<%= agentship.object.agent.name %>'>
+            <% else %>
+              <input type='text' id='user_agent_name' placeholder='Enter your agents name'>
+            <% end %>
 
-          <div class='div_hint'>
-            if you're agent doesn't have a Filmzu profile, be sure to tell them to create one to help both of you get attention
+            <div class='div_hint'>
+              if you're agent doesn't have a Filmzu profile, be sure to tell them to create one to help both of you get attention
+            </div>
           </div>
         <% end %>
 

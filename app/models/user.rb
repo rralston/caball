@@ -255,6 +255,16 @@ class User < ActiveRecord::Base
     end
   end
 
+  def profile_thumb
+    if profile.present? 
+      profile.image.url(:thumb)
+    elsif photos.present?
+      photos.first.image.url(:thumb)
+    else
+      "/assets/actor.png"
+    end
+  end
+
   def details_complete?
     self.location.present?
   end
