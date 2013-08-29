@@ -51,11 +51,17 @@ class UsersController < ApplicationController
       end
     else
       @users = User.recently_updated
+
     end
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @users.to_a.to_json(:include => :followers, :check_user => current_user) }
+      format.json { 
+        if current_user.present?
+          @users = @users - [current_user]
+        end
+        render :json => @users.to_a.to_json(:include => :followers, :check_user => current_user) 
+      }
     end
   end
   
