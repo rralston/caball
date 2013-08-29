@@ -562,6 +562,12 @@ ul.tagit span.ui-helper-hidden-accessible
     margin-left: 30%
     margin-top: 20px
 
+.search_filters
+  margin: 10px
+  div
+    margin-right: 5px
+    text-transform: capitalize
+
 .srchsect
   clear: both
   overflow: hidden
@@ -571,6 +577,8 @@ ul.tagit span.ui-helper-hidden-accessible
   color: #515961
   //padding-bottom: 20px
   moz-box-sizing: border-box
+  .expand
+    cursor: pointer
 
 .srchsect h2
   //background: url('/assets/opth2.png') no-repeat 99% center
@@ -585,7 +593,6 @@ ul.tagit span.ui-helper-hidden-accessible
 
 .srchsect .shrink-anim
   float: right
-  cursor: pointer
   margin-top: 10px
 
 
@@ -1382,6 +1389,50 @@ li.custom-ui-item
   
 .report_entity
   color: $brick-red
+
+.message_for_empty
+  color: #d4d6dc
+  font-style: italic
+
+.arrow
+  width: 70px
+  height: 16px
+  overflow: hidden
+  position: absolute
+  left: 50%
+  margin-left: -35px
+  bottom: -16px
+
+.arrow.top
+  top: -16px
+  bottom: auto
+
+.arrow.left
+  left: 20%
+
+.arrow
+  &:after
+    content: ""
+    position: absolute
+    left: 20px
+    top: -20px
+    width: 25px
+    height: 25px
+    box-shadow: 6px 5px 9px -9px black
+    -webkit-transform: rotate(45deg)
+    -moz-transform: rotate(45deg)
+    -ms-transform: rotate(45deg)
+    -o-transform: rotate(45deg)
+    tranform: rotate(45deg)
+
+.arrow.top
+  &:after
+    bottom: -20px
+    top: auto
+
+.arrow
+  &:after
+    background: black
 
 .ui-tooltip
   background: black

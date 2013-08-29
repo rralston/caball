@@ -92,12 +92,21 @@ $(document).ready ()->
         if resp != 'false'
           if resp.length > 0
             reset_results(resp)
+            app.fn.add_filters(data)
           else
             alert('No users found matching the selection')
         else
           alert('Something went wrong, Please try again later')
         btn.html('Search') 
 
+  # Add search filters after the search was succesful
+  app.fn.add_filters = (data_hash) ->
+    delete data_hash["page"]
+    delete data_hash["load_type"]
+    $('.search_filters').html("")
+    for key,val of data_hash
+      if val
+        $('.search_filters').append('<div class="badge badge-custom-green">'+key+': '+val+'</div>');
 
   # handler called when the user searches for a string in the search bar
   app.fn.search_event_handler = (search_object) ->
@@ -133,6 +142,10 @@ $(document).ready ()->
               app.params_used.type   = search_object.type
               reset_results(resp)
               $('#users_search_form')[0].reset()
+              if type == 'location'
+                $('.search_filters').html('<div class="badge badge-custom-green">location: '+search_object.value+'</div>');
+              else
+                $('.search_filters').html('<div class="badge badge-custom-green">keyword: '+search_object.value+'</div>');
             else
               alert('No users found')
           else

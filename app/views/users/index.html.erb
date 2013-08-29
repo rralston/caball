@@ -25,6 +25,9 @@
     <aside class="lside span3">
       <form action="" class=" srchfrm span">
         <input type="text" id='search-users-input'>
+        <div class="search_filters">
+          
+        </div>
         <div class='search_please_wait'>
           Please wait while we search
         </div>
@@ -55,8 +58,8 @@
         </div>
 
         <div class="srchsect">
-          <span class="shrink-anim shrinked"><img src="/assets/opth2.png"></span>
-          <h2 class='regular'>Roles</h2>
+          <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+          <h2 class='regular expand shrinked'>Roles</h2>
           <div class='srchopts'>
             <% User.types.keys.each do |role| %>
               <div class="srchopt">
@@ -72,8 +75,8 @@
         </div>
 
         <div class="srchsect">
-          <span class="shrink-anim shrinked"><img src="/assets/opth2.png"></span>
-          <h2 class='regular'>Distance</h2>
+          <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+          <h2 class='regular expand shrinked'>Distance</h2>
           <div class='srchopts'>
             <% [10, 15, 50, 100, 200].each do |distance| %>
               <div class="srchopt">
@@ -88,8 +91,8 @@
         </div>
 
         <div class="srchsect">
-          <span class="shrink-anim shrinked"><img src="/assets/opth2.png"></span>
-          <h2 class='regular'>Height</h2>
+          <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+          <h2 class='regular expand shrinked'>Height</h2>
           <div class='srchopts'>
             <% Characteristics.heights.keys.each do |height| %>
               <div class="srchopt">
@@ -104,8 +107,8 @@
         </div>
 
         <div class="srchsect">
-          <span class="shrink-anim shrinked"><img src="/assets/opth2.png"></span>
-          <h2 class='regular'>Ethnicity</h2>
+          <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+          <h2 class='regular expand shrinked'>Ethnicity</h2>
           <div class='srchopts'>
             <% Characteristics.enthnicities.keys.each do |ethnicity| %>
               <div class="srchopt">
@@ -120,8 +123,8 @@
         </div>
 
         <div class="srchsect">
-          <span class="shrink-anim shrinked"><img src="/assets/opth2.png"></span>
-          <h2 class='regular'>Build</h2>
+          <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+          <h2 class='regular expand shrinked'>Build</h2>
           <div class='srchopts'>
             <% Characteristics.bodytypes.keys.each do |bodytype| %>
               <div class="srchopt">
@@ -136,8 +139,8 @@
         </div>
 
         <div class="srchsect">
-          <span class="shrink-anim shrinked"><img src="/assets/opth2.png"></span>
-          <h2 class='regular'>Hair Color</h2>
+          <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+          <h2 class='regular expand shrinked'>Hair Color</h2>
           <div class='srchopts'>
             <% Characteristics.hair_colors.keys.each do |hair_color| %>
               <div class="srchopt">
@@ -152,8 +155,8 @@
         </div>
 
         <div class="srchsect">
-          <span class="shrink-anim shrinked"><img src="/assets/opth2.png"></span>
-          <h2 class='regular'>Languages</h2>
+          <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+          <h2 class='regular expand shrinked'>Languages</h2>
           <div class='srchopts'>
             <% Characteristics.languages.keys.each do |language| %>
               <div class="srchopt">
@@ -239,7 +242,7 @@ app.status = 'index'
 app.current_user = <%= raw current_user.to_json() %>
 
 <% if current_user %>
-  app.current_user_location = '<%= current_user.location %>'
+  app.logged_in_user_location = '<%= current_user.location %>'
 <% end %>
 
 app.recent_users = new app.collections.users()
@@ -279,6 +282,8 @@ app.result_users_view = new app.views.users({ collection: app.result_users })
 app.geolocation_tried = false
 
 $('body').on('click', '.distance_radio', function(event){
+
+  app.current_user_location = app.logged_in_user_location
   // if the geolocation is not yet tried
   if(app.geolocation_tried == false){
     // get user current location to search
