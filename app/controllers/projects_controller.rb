@@ -52,7 +52,13 @@ class ProjectsController < ApplicationController
   
   def show
     search(Project, "projects")
-    @project = Project.where("id = ? OR url_name = ? ", params[:id], params[:id]).first
+
+    if params[:id].to_i > 0 #to_i will return 0 if the id is a string
+      @project = Project.find(params[:id])
+    else
+      @project = Project.find_by_url_name(params[:id])
+    end
+
     @comment = Comment.new
     @producer = @project.user
     @real_videos = @project.videos.real

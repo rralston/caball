@@ -63,7 +63,13 @@ class EventsController < ApplicationController
 
   def show
     search
-    @event = Event.where("id = ? OR url_name = ? ", params[:id], params[:id]).first
+
+    if params[:id].to_i > 0 #to_i will return 0 if the id is a string
+      @event = Event.find(params[:id])
+    else
+      @event = Event.find_by_url_name(params[:id])
+    end
+
   end
 
   def new

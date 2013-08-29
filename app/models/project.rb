@@ -1,5 +1,7 @@
 class Project < ActiveRecord::Base
   include PublicActivity::Model
+  include ActionView::Helpers
+  
   tracked owner: ->(controller, model) { controller && controller.current_user }
 
   acts_as_taggable_on :genre, :is_type
@@ -32,11 +34,13 @@ class Project < ActiveRecord::Base
   # won't be called for project.save
   def update_url_name
     if self.title_changed?
+
+      new_title = truncate(self.title, :length => 20, :separator => ' ', :omission => '')
       # if the name is changed, convert to the url name
-      self.url_name = self.title.gsub(/\s/,'-').downcase
+      self.url_name = new_title.gsub(/\s/,'-').downcase
 
       # check  and get size of if any other projects having the same url_name
-      same_named_count = Project.where("lower(title) = lower(?)", self.title).size
+      same_named_count = Project.where("lower(url_name) = lower(?)", self.url_name).size
       if same_named_count > 0
         # append the count + 1 after the url_name.
         self.url_name = self.url_name + "-#{same_named_count.to_i + 1}"
