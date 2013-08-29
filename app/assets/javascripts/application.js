@@ -26,7 +26,7 @@
 //= require social-share-button
 //= require jquery-fileupload/basic
 
-$( document ).tooltip();
+$( document ).tooltip({hide: false});
 jQuery(document).ready(function() {
   jQuery("abbr.timeago").timeago();
 });
