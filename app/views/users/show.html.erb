@@ -511,9 +511,11 @@ $(document).ready(function(){
     $('#blog_photo_attributes_image').attr('disabled', false)
     $('button.post_update').attr('disabled', false)
     $('.post_comment_btn').hide()
+    app.post_button_shown = false
     // remove the image preview if a photo was uploaded and clear the hidden url value
     $('.image_preview_container').hide()
     $('.photo_url_div').val('')
+    
   });
 
 
@@ -526,10 +528,14 @@ $(document).ready(function(){
     $('#blog_photo_attributes_image').attr('disabled', false)
     $('button.post_update').attr('disabled', false)
     $('.post_comment_btn').hide()
+    app.post_button_shown = false
     // remove the image preview if a photo was uploaded and clear the hidden url value
     $('.image_preview_container').hide()
     $('.photo_url_div').val('')
+
   });
+
+  app.fn.init_show_post_button_handler()
 
 });
 </script>

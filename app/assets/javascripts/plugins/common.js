@@ -454,5 +454,13 @@ app.fn.init_comment_image_file_uploader = function(element, url) {
     }
   });
 };
+
+app.fn.init_show_post_button_handler = function(){
+  app.post_button_shown = false
+  $('body').on('click', '.writeico a', function(event){
+    app.post_button_shown = true
+    $(event.target).closest('form').find('.post_comment_btn').show()
+  });
+}
   
 

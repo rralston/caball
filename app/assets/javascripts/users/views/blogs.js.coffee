@@ -33,7 +33,7 @@ app.views.blogs = Backbone.View.extend
 
   check_postbutton: (event) ->
     # toggle post button based on the value in the input
-    if $(event.target).val()
+    if $(event.target).val() || app.post_button_shown
       this.$el.find('.post_comment_btn').show()
     else
       this.$el.find('.post_comment_btn').hide()
