@@ -12,3 +12,4 @@ app.views.user_projects = Backbone.View.extend
     this.$el.find('#project-tab-'+user_project.get('status').toLowerCase()).find('.message_for_empty').hide()
     # append it to the particular division
     this.$el.find('#project-tab-'+user_project.get('status').toLowerCase()).append(user_project_view.render().el)
+
