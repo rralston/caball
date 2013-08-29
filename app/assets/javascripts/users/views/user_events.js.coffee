@@ -15,10 +15,13 @@ app.views.user_events = Backbone.View.extend
     user_event_view.render()
 
   renderEachAll: (user_event) ->
+    this.$el.find('#user-event-tab-all .message_for_empty').hide()
     this.$el.find('#user-event-tab-all').append( this.renderElem(user_event).el )
 
   renderEachCurrent: (user_event) ->
+    this.$el.find('#user-event-tab-current .message_for_empty').hide()
     this.$el.find('#user-event-tab-current').append( this.renderElem(user_event).el )
 
   renderEachPast: (user_event) ->
+    this.$el.find('#user-event-tab-past .message_for_empty').hide()
     this.$el.find('#user-event-tab-past').append( this.renderElem(user_event).el )
