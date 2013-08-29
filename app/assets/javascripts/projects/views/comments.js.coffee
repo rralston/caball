@@ -24,9 +24,9 @@ app.views.comments = Backbone.View.extend
   check_postbutton: (event) ->
     # toggle post button based on the value in the input
     if $(event.target).val()
-      this.$el.find('button.post_update').show()
+      this.$el.find('.post_comment_btn').show()
     else
-      this.$el.find('button.post_update').hide()
+      this.$el.find('.post_comment_btn').hide()
 
   add_comment: (event)->
     _this = this

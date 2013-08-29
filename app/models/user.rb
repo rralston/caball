@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
                   :admin, :gender, :headline, :featured, :expertise, :cover_photo_attributes,
                   :resume_attributes, :notification_check_time, :experience, :agent_name, :url_name,
                   :agent_present, :guild_present, :guild, :agentship_attributes, :demo_reel_attributes,
-                  :terms_of_service, :provider, :uid
+                  :terms_of_service, :provider, :uid, :managing_company
 
   validates_presence_of :name, :email, :message => "is required"
   

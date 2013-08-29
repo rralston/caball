@@ -21,6 +21,8 @@
         <%= render :partial => 'characteristics_form', :locals => { :f => f, :talent => talent} %>
       <% elsif talent.object.name == 'Writer' %>
         <%= render :partial => 'writer_form', :locals => { :f => f, :talent => talent} %>
+      <% elsif talent.object.name == 'Agent' %>
+        <%= render :partial => 'agent_form', :locals => { :f => f, :talent => talent} %>
       <% else %>
         <div class='user-talent'>
           <div class="controls">
