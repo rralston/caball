@@ -29,7 +29,12 @@
 
   <ul class='row projects-filter custom-green-filters nav'>
     <li class='active'>
-        <a href="#project-tab-draft" data-toggle='tab' class='badge badge-custom-green pull-left project-filter active'>
+        <a href="#project-tab-all" data-toggle='tab' class='badge badge-custom-green pull-left project-filter active'>
+          ALL
+        </a>
+    </li>
+    <li>
+        <a href="#project-tab-draft" data-toggle='tab' class='badge badge-custom-green pull-left project-filter'>
           DRAFT
         </a>
     </li>
@@ -62,7 +67,13 @@
 
   <div class='row'>
     <div class='tab-content projects-display-tabs'>
-      <div class='tab-pane active' id='project-tab-draft'>
+      <div class='tab-pane active' id='project-tab-all'>
+        <div class='message_for_empty text-center'>
+          No Projects found
+        </div>
+      </div>
+
+      <div class='tab-pane' id='project-tab-draft'>
         <div class='message_for_empty text-center'>
           No Projects found
         </div>
