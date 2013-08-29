@@ -4,7 +4,7 @@ class BlogsController < ApplicationController
   after_filter :clear_temp_photo_objects, :only => [:update, :create]
   
   def create
-
+    params[:blog][:user] = current_user
     # if the remote image url is empty delete the attributes from params hash
     # if not deleted, it will fail to create as validation fails since image is not present
     if params[:blog][:photo_attributes][:remote_image_url].empty?
@@ -12,8 +12,6 @@ class BlogsController < ApplicationController
     end
 
     @blog = Blog.create(params[:blog])
-
-    @blog.update_attributes(:user => current_user)
 
     # if the user tried to add a video, check if its valid or not.
     if params[:blog][:video_attributes][:url].present?
