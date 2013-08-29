@@ -60,7 +60,11 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.where("id = ? OR url_name = ? ", params[:id], params[:id]).first
+    if params[:id].is_a? Integer
+      @user = User.where(:id => params[:id])
+    elsif params[:id].is_a? String
+      @user = User.where(:url_name => params[:id])
+    end
     @blog = Blog.new
     @real_videos = @user.videos.real
     @followers_following = (@user.friends + @user.followers).uniq

@@ -12,7 +12,7 @@
   <div class="span12">
 
     <div class="controls">
-      You said you are a <%= current_user.talent_names.join(' and ') %>
+      You said your roles are <%= current_user.talent_names.join(' and ') %>
     </div>
 
     <%= f.fields_for :talents do |talent| %>

@@ -21,11 +21,15 @@
           <%%= content %>
         </div>
 
-        <div class='comment-edit-textarea'>
-          <textarea class='edit_comment_area'><%%= content %></textarea>
-          <div class='action-div update icon-ok'></div>
-          <div class='action-div icon-remove-sign hide_edit'></div>
-        </div>
+        <%% if(typeof can_edit != 'undefined' && can_edit) { %>
+
+          <div class='comment-edit-textarea'>
+            <textarea class='edit_comment_area'><%%= content %></textarea>
+            <div class='action-div update icon-ok'></div>
+            <div class='action-div icon-remove-sign hide_edit'></div>
+          </div>
+
+        <%% } %>
 
         <%% if (photo != null) { %>
           <div class='comment-img'>
@@ -53,10 +57,11 @@
       </div>
     </div>
 
-    <div class='comment_edit'>
-      <i class='edit_blog icon-pencil action-div'></i>
-      <i class='destroy_blog icon-remove action-div'></i>
-    </div>
-
+    <%% if(typeof can_edit != 'undefined' && can_edit) { %>
+      <div class='comment_edit'>
+        <i class='edit_blog icon-pencil action-div'></i>
+        <i class='destroy_blog icon-remove action-div'></i>
+      </div>
+    <%% } %>
   </div>
 </script>
