@@ -26,7 +26,19 @@
 //= require social-share-button
 //= require jquery-fileupload/basic
 
-$( document ).tooltip({hide: false});
+$( document ).tooltip({ 
+		hide: false, 
+		position: {
+	        my: "center bottom-20",
+	        at: "center top",
+	        using: function( position, feedback ) {
+	          $( this ).css( position );
+	          $( "<div>" )
+	            .addClass( "arrow" )
+	            .addClass( feedback.vertical )
+	            .addClass( feedback.horizontal )
+	            .appendTo( this );
+        }}});
 jQuery(document).ready(function() {
   jQuery("abbr.timeago").timeago();
 });
