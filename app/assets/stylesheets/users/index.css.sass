@@ -72,10 +72,18 @@
   -webkit-box-shadow: 0px 0px 19px -7px black
   box-shadow: 0px 0px 19px -7px black
   -moz-box-shadow: 0px 0px 19px -7px black
+  .cover_bg
+    overflow: hidden
   .user-cover-photo
     height: 110px
-    width: 235px
+    width: 237px
     background-size: cover !important
+    filter: blur(2px)
+    -webkit-filter: blur(2px)
+    -moz-filter: blur(2px)
+    -o-filter: blur(2px)
+    -ms-filter: blur(2px)
+    filter: url("/assets/filter.svg#blur")
   .backdrop-cover
     height: 110px
     width: 235px

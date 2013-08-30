@@ -41,4 +41,5 @@ $( document ).tooltip({
         }}});
 jQuery(document).ready(function() {
   jQuery("abbr.timeago").timeago();
+  jQuery(".timeago").timeago();
 });

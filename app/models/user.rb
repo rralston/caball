@@ -185,7 +185,8 @@ class User < ActiveRecord::Base
       'Production'     => 'Production', 
       'Post-Pro'       => 'Post-Pro', 
       'Business'       => 'Business', 
-      'Writer'         => 'Writer', 
+      'Writer'         => 'Writer',
+      'Fan'            => 'Fan',
       'Pre Production' => 'Pre Production', 
       'Director'       => 'Director',
       'Agent'          => 'Agent',
@@ -423,16 +424,16 @@ class User < ActiveRecord::Base
   def unread_notifications
 
     # comments on all projects user own
-    project_comment_ids = Comment.where(:commentable_type => 'Project', :commentable_id => project_ids).pluck('comments.id')
+    project_comment_ids = Comment.where(:commentable_type => 'Project', :commentable_id => project_ids).where('user_id <> ?', self.id).pluck('comments.id')
     # comments on all events user own
-    event_comment_ids = Comment.where(:commentable_type => 'Event', :commentable_id => event_ids).pluck('comments.id')
+    event_comment_ids = Comment.where(:commentable_type => 'Event', :commentable_id => event_ids).where('user_id <> ?', self.id).pluck('comments.id')
 
     # get the comment ids of all 
     comment_ids = project_comment_ids + event_comment_ids
     
     # get activities which belong to a comment among those comment ids.
     notifications = Activity.order("created_at DESC").
-      where('created_at > ? AND trackable_type = ? AND trackable_id in (?)', self.notification_check_time, 'Comment', comment_ids)
+      where('created_at < ? AND trackable_type = ? AND trackable_id in (?)', self.notification_check_time, 'Comment', comment_ids)
 
 
     # mix notifications with receipts.

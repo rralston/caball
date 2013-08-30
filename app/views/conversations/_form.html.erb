@@ -28,8 +28,9 @@
 
     
       <div id="form-actions">
-        <%= f.button :submit, class: 'btn-primary' %>
-        <%= submit_tag 'Cancel', type: :reset, class: 'btn btn-danger' %>
+        <%= f.button :submit, 'Send Message', class: 'btn-primary' %>
+        <%= submit_tag 'Reset', type: :reset, class: 'btn btn-danger' %>
+        <a href='/dashboard#messages' class='btn btn-warning'>Cancel</a>
       </div>
   <% end %>
 </div>

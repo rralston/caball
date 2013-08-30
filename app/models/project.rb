@@ -205,7 +205,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.recently_launched
-    Project.order('created_at DESC')
+    Project.where('status <> ?', 'Draft').order('created_at DESC')
   end
 
   def self.recent_projects(page = nil, per_page = 10)
@@ -233,7 +233,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.sample_popular_projects
-    popular_projects.first(4)
+    popular_projects.where('status <> ?', 'Draft').first(4)
   end
 
   def super_roles_needed
@@ -243,7 +243,7 @@ class Project < ActiveRecord::Base
 
   def self.search_all(projects, query, roles, genres, types, location, radius, order_by, page, per_page = nil)
 
-    projects = Project if (projects.nil? || projects.empty?)
+    projects = Project.where('status <> ?', 'Draft') if (projects.nil? || projects.empty?)
 
     if query.present?
       projects = projects.where('lower(projects.title) like lower(?)', "%#{query}%")

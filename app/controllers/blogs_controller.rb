@@ -56,8 +56,14 @@ class BlogsController < ApplicationController
 
       photo_object.update_attributes(:image => params['blog']['photo_attributes']['image'])
 
+      if  Rails.env == 'development'
+        url = request.env["HTTP_ORIGIN"] + photo_object.image.url
+      else
+        url = photo_object.image.url
+      end
+      
       file_url = {
-        :url => request.env["HTTP_ORIGIN"] + photo_object.image.url,
+        :url => url,
         :id => photo_object.reload.id
       }
 

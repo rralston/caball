@@ -19,7 +19,7 @@
         <div class="notemsg"><%= notification.trackable.content %></div>
 
         <div class='notetime light'>
-          <span class="timeago" title="<%= notification.trackable.created_at.to_json() %>"><%= notification.trackable.created_at.to_json() %></span>
+          <span class="timeago" title="<%= notification.trackable.created_at.to_json() %>"><%= time_ago_in_words(notification.trackable.created_at) %> ago</span>
         </div>
         
       </div>  
@@ -46,7 +46,7 @@
           <div class="notemsg"><%= truncate(notification.message.body, :length => 60, :separator => ' ') %></div>
           
           <div class='notetime light'>
-            <span class="timeago" title="<%= notification.created_at.to_json() %>"><%= notification.created_at.to_json() %></span>
+            <span class="timeago" title="<%= notification.created_at.to_json() %>"><%= time_ago_in_words(notification.created_at) %> ago</span>
           </div>
         </div>  
 

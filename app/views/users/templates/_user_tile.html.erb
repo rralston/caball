@@ -3,13 +3,15 @@
   <div class="row">
     <a href="/users/<%%= id %>">
       <div class="backdrop-cover"></div>
-      <%% if(cover_photo != null){ %>
-        <div class="user-cover-photo" style="background: url(<%%= cover_photo.image.url %>) no-repeat">
-        </div>
-      <%% }else{ %>
-        <div class="user-cover-photo" >
-        </div>
-      <%% } %>
+      <div class='cover_bg'>
+        <%% if(cover_photo != null){ %>
+          <div class="user-cover-photo" style="background: url(<%%= cover_photo.image.url %>) no-repeat">
+          </div>
+        <%% }else{ %>
+          <div class="user-cover-photo" >
+          </div>
+        <%% } %>
+      </div>
     </div>
     <div class='img-circle user-photo' style='background: url(<%%= profile_pic %>) no-repeat;'></div>
     <div class="row">
