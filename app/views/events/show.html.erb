@@ -29,17 +29,19 @@
               <% end %>
             </div>
 
-            <div class='row text-center'>
-              <% if @event.liked_by?(current_user) %>
-                <span class='span2 pull-left btn-custom btn-light-grey center-div text-center btn-like unlike' data-event-id='<%= @event.id %>' >
-                  <span class='like-thumb-icon'></span>
-                  <span class='text'>Un Like</span>
-                </span>
-              <% else %>
-                <span class='span2 btn-custom btn-light-grey center-div text-center btn-like' data-event-id='<%= @event.id %>' >
-                  <span class='like-thumb-icon'></span>
-                  <span class='text'>Like this</span>
-                </span>
+            <% if current_user != @event.user %>
+              <div class='row text-center'>
+                <% if @event.liked_by?(current_user) %>
+                  <span class='span2 pull-left btn-custom btn-light-grey center-div text-center btn-like unlike' data-event-id='<%= @event.id %>' >
+                    <span class='like-thumb-icon'></span>
+                    <span class='text'>Un Like</span>
+                  </span>
+                <% else %>
+                  <span class='span2 btn-custom btn-light-grey center-div text-center btn-like' data-event-id='<%= @event.id %>' >
+                    <span class='like-thumb-icon'></span>
+                    <span class='text'>Like this</span>
+                  </span>
+                <% end %>
               <% end %>
 
               <span class='span2 pull-left btn-custom btn-light-grey center-div text-center btn-invite-followers' data-event-id='<%= @event.id %>' >
@@ -142,7 +144,7 @@
                   </span>
                 </span>
                 
-                <% if current_user %>
+                <% if current_user && current_user != @event.user %>
                   <span class='btn-custom btn-light-grey text-center btn-message_organizer pull-right' data-event-id='<%= @event.id %>' data-toggle='modal' data-target='#message_event_organizer_modal'>
                     <span class='envelop-light-icon'></span>
                     Message

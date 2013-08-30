@@ -60,18 +60,20 @@
                           FOLLOWING
                         </span>
                       </div>
-                      <div class="flwmsg span4">
-                        <% if current_user and current_user.friends.include?(@user) %>
-                          <a class="flw btn btn-follow btn-custom btn-red center-div text-center unfollow" data-friend-id='<%= @user.id %>'>
-                            Un Follow
-                          </a>
-                        <% else %>
-                          <a class="flw btn btn-custom btn-red center-div text-center regular btn-follow" data-friend-id='<%= @user.id %>'>
-                            Follow
-                          </a>
-                        <% end %>
-                        <a class='msg btn medium send-generic-message' data-message-subject='' data-message-header='Message - <%= @user.name %>' data-message-recipients='<%= @user.email %>'>Message</a>
-                      </div>
+                      <% if @user != current_user %>
+                        <div class="flwmsg span4">
+                          <% if current_user and current_user.friends.include?(@user) %>
+                            <a class="flw btn btn-follow btn-custom btn-red center-div text-center unfollow" data-friend-id='<%= @user.id %>'>
+                              Un Follow
+                            </a>
+                          <% else %>
+                            <a class="flw btn btn-custom btn-red center-div text-center regular btn-follow" data-friend-id='<%= @user.id %>'>
+                              Follow
+                            </a>
+                          <% end %>
+                          <a class='msg btn medium send-generic-message' data-message-subject='' data-message-header='Message - <%= @user.name %>' data-message-recipients='<%= @user.email %>'>Message</a>
+                        </div>
+                      <% end %>
                     </div>
                   </div>
                 </div>

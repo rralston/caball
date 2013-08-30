@@ -10,25 +10,26 @@
         </div>
         <div class="shadow-div"> </div>
         <div class='pull-left main-right'>
-          <div class='row'>
-            <div class='span6'>
+          <% if current_user != @project.user %>
+            <div class='row'>
+              <div class='span6'>
 
-              <% if current_user and @project.liker_ids.include?(current_user.id) %>
-                <div class='btn-custom pull-right btn-red btn-like-project liked' data-projectId='<%= @project.id %>' data-ownerId='<%= @project.user.id %>'>
-                  Un Like This
+                <% if current_user and @project.liker_ids.include?(current_user.id) %>
+                  <div class='btn-custom pull-right btn-red btn-like-project liked' data-projectId='<%= @project.id %>' data-ownerId='<%= @project.user.id %>'>
+                    Un Like This
+                  </div>
+                <% else %>
+                  <div class='btn-custom pull-right btn-red btn-like-project' data-projectId='<%= @project.id %>' data-ownerId='<%= @project.user.id %>'>
+                    Like This
+                  </div>
+                <% end %>
+                
+                <div class='btn-custom pull-right btn-message btn-grey send-generic-message' data-message-subject='Regarding project - <%= @project.title %>' data-message-header='Message Project Owner - <%= @project.title %>' data-message-recipients='<%= @project.user.email %>'>
+                  Message
                 </div>
-              <% else %>
-                <div class='btn-custom pull-right btn-red btn-like-project' data-projectId='<%= @project.id %>' data-ownerId='<%= @project.user.id %>'>
-                  Like This
-                </div>
-              <% end %>
-              
-              <div class='btn-custom pull-right btn-message btn-grey send-generic-message' data-message-subject='Regarding project - <%= @project.title %>' data-message-header='Message Project Owner - <%= @project.title %>' data-message-recipients='<%= @project.user.email %>'>
-                Message
               </div>
             </div>
-          </div>
-
+          <% end %>
           <div class='row'>
             <div class='span7 title'>
               <h2><%= @project.title %></h2>
