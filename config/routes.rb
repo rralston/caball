@@ -5,6 +5,8 @@ Caball::Application.routes.draw do
 
   get "activities/index"
 
+  match '/our_story' => 'static_pages#our_story'
+
   match "/skills(/*path)" => redirect{ |env, req| "http://skills.filmzu.com" + (req.path ? "#{req.path}" : '/')}
 
 
