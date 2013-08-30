@@ -13,3 +13,11 @@ $ ->
 			el.addClass("shrinked")
 		event.stopPropagation()
 		event.preventDefault()
+
+	$('#Cast').unbind('click').click (event) ->
+		if $(this).is(':checked')
+			$(".cast-extn").show(1000)
+		else
+			$(".cast-extn").find(':checked').each () ->
+				$(this).removeAttr('checked')
+			$(".cast-extn").hide(1000)
