@@ -147,6 +147,16 @@ class User < ActiveRecord::Base
     user
   end
 
+  def get_cover
+    if cover_photo.nil?
+      return "/images/fallback/User_default.png"
+    elsif cover_photo.image.url == "/images/fallback/User_default.png" && !talents.empty?
+      return "../assets/default_cover/#{talents.first.name}.jpg"
+    else
+      return cover_photo.try("image")
+    end
+  end
+
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]

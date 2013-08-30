@@ -157,6 +157,7 @@ $(document).ready ()->
       data: $('#user_edit_form').serialize()
       success: (data)->
         if data != false
+          $("html, body").animate({ scrollTop: 0 }, "slow");
           if btn.hasClass('skip')
             window.location = "/users/profile"
           else
@@ -180,6 +181,7 @@ $(document).ready ()->
       data: $('#user_edit_form_step_2').serialize()
       success: (data)->
         if data != false
+          $("html, body").animate({ scrollTop: 0 }, "slow");
           if btn.hasClass('skip')
             window.location = "/users/profile"
           else

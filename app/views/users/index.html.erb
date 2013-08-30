@@ -90,84 +90,88 @@
           </div>
         </div>
 
-        <div class="srchsect">
-          <span class="shrink-anim"><img src="/assets/opth2.png"></span>
-          <h2 class='regular expand shrinked'>Height</h2>
-          <div class='srchopts'>
-            <% Characteristics.heights.keys.each do |height| %>
-              <div class="srchopt">
-                <div class="chkboxwrap">
-                  <input type="checkbox" name='height' value='<%= height %>' id='<%= height %>' />
-                  <label class="chklabel" for="<%= height %>"></label>
-                </div>
-                <span class="chktxt"><%= height %></span>
-              </div>
-            <% end %>
-          </div>
-        </div>
+        <div class="cast-extn">
 
-        <div class="srchsect">
-          <span class="shrink-anim"><img src="/assets/opth2.png"></span>
-          <h2 class='regular expand shrinked'>Ethnicity</h2>
-          <div class='srchopts'>
-            <% Characteristics.enthnicities.keys.each do |ethnicity| %>
-              <div class="srchopt">
-                <div class="chkboxwrap">
-                  <input type="checkbox" name='ethnicity' value='<%= ethnicity %>' id='<%= ethnicity %>' />
-                  <label class="chklabel" for="<%= ethnicity %>"></label>
+          <div class="srchsect">
+            <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+            <h2 class='regular expand shrinked'>Height</h2>
+            <div class='srchopts'>
+              <% Characteristics.heights.keys.each do |height| %>
+                <div class="srchopt">
+                  <div class="chkboxwrap">
+                    <input type="checkbox" name='height' value='<%= height %>' id='<%= height %>' />
+                    <label class="chklabel" for="<%= height %>"></label>
+                  </div>
+                  <span class="chktxt"><%= height %></span>
                 </div>
-                <span class="chktxt"><%= ethnicity %></span>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
           </div>
-        </div>
 
-        <div class="srchsect">
-          <span class="shrink-anim"><img src="/assets/opth2.png"></span>
-          <h2 class='regular expand shrinked'>Build</h2>
-          <div class='srchopts'>
-            <% Characteristics.bodytypes.keys.each do |bodytype| %>
-              <div class="srchopt">
-                <div class="chkboxwrap">
-                  <input type="checkbox" name='bodytype' value='<%= bodytype %>' id='<%= bodytype %>' />
-                  <label class="chklabel" for="<%= bodytype %>"></label>
+          <div class="srchsect">
+            <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+            <h2 class='regular expand shrinked'>Ethnicity</h2>
+            <div class='srchopts'>
+              <% Characteristics.enthnicities.keys.each do |ethnicity| %>
+                <div class="srchopt">
+                  <div class="chkboxwrap">
+                    <input type="checkbox" name='ethnicity' value='<%= ethnicity %>' id='<%= ethnicity %>' />
+                    <label class="chklabel" for="<%= ethnicity %>"></label>
+                  </div>
+                  <span class="chktxt"><%= ethnicity %></span>
                 </div>
-                <span class="chktxt"><%= bodytype %></span>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
           </div>
-        </div>
 
-        <div class="srchsect">
-          <span class="shrink-anim"><img src="/assets/opth2.png"></span>
-          <h2 class='regular expand shrinked'>Hair Color</h2>
-          <div class='srchopts'>
-            <% Characteristics.hair_colors.keys.each do |hair_color| %>
-              <div class="srchopt">
-                <div class="chkboxwrap">
-                  <input type="checkbox" name='hair_color' value='<%= hair_color %>' id='<%= hair_color %>' />
-                  <label class="chklabel" for="<%= hair_color %>"></label>
+          <div class="srchsect">
+            <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+            <h2 class='regular expand shrinked'>Build</h2>
+            <div class='srchopts'>
+              <% Characteristics.bodytypes.keys.each do |bodytype| %>
+                <div class="srchopt">
+                  <div class="chkboxwrap">
+                    <input type="checkbox" name='bodytype' value='<%= bodytype %>' id='<%= bodytype %>' />
+                    <label class="chklabel" for="<%= bodytype %>"></label>
+                  </div>
+                  <span class="chktxt"><%= bodytype %></span>
                 </div>
-                <span class="chktxt"><%= hair_color %></span>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
           </div>
-        </div>
 
-        <div class="srchsect">
-          <span class="shrink-anim"><img src="/assets/opth2.png"></span>
-          <h2 class='regular expand shrinked'>Languages</h2>
-          <div class='srchopts'>
-            <% Characteristics.languages.keys.each do |language| %>
-              <div class="srchopt">
-                <div class="chkboxwrap">
-                  <input type="checkbox" name='language' value='<%= language %>' id='<%= language %>' />
-                  <label class="chklabel" for="<%= language %>"></label>
+          <div class="srchsect">
+            <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+            <h2 class='regular expand shrinked'>Hair Color</h2>
+            <div class='srchopts'>
+              <% Characteristics.hair_colors.keys.each do |hair_color| %>
+                <div class="srchopt">
+                  <div class="chkboxwrap">
+                    <input type="checkbox" name='hair_color' value='<%= hair_color %>' id='<%= hair_color %>' />
+                    <label class="chklabel" for="<%= hair_color %>"></label>
+                  </div>
+                  <span class="chktxt"><%= hair_color %></span>
                 </div>
-                <span class="chktxt"><%= language %></span>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
           </div>
+
+          <div class="srchsect">
+            <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+            <h2 class='regular expand shrinked'>Languages</h2>
+            <div class='srchopts'>
+              <% Characteristics.languages.keys.each do |language| %>
+                <div class="srchopt">
+                  <div class="chkboxwrap">
+                    <input type="checkbox" name='language' value='<%= language %>' id='<%= language %>' />
+                    <label class="chklabel" for="<%= language %>"></label>
+                  </div>
+                  <span class="chktxt"><%= language %></span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
         </div>
 
         <div class='text-center'>

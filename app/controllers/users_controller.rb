@@ -397,7 +397,9 @@ class UsersController < ApplicationController
       @errors = "Invalid password."
     else
       if !current_user.reset_password!(params[:password], params[:confirmPassword])
-        @errors = "Passwords do not Match."
+        @errors = current_user.errors.full_messages
+      else
+        sign_in(current_user, :bypass => true)
       end
     end
     respond_to do |format|
