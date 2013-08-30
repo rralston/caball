@@ -79,7 +79,7 @@
 
             <% class_names={} %>
             <% class_names['projects'] = 'active' if controller_name == 'projects' %>
-            <% class_names['users'] = 'active' if controller_name == 'users' %>
+            <% class_names['users'] = 'active' if controller_name == 'users' and action_name != 'dashboard' %>
             <% class_names['events'] = 'active' if controller_name == 'events' %>
 
             <li class="<%= class_names['projects'] %>"><a href="/projects" >Projects</a></li>

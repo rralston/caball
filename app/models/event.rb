@@ -1,5 +1,6 @@
 class Event < ActiveRecord::Base
   include PublicActivity::Model
+  include ActionView::Helpers
   tracked owner: ->(controller, model) { controller && controller.current_user }
 
   acts_as_taggable

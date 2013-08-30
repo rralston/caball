@@ -159,8 +159,14 @@ class EventsController < ApplicationController
 
       photo_object.update_attributes(:image => params['event']['main_photo_attributes']['image'])
 
+      if  Rails.env == 'development'
+        url = request.env["HTTP_ORIGIN"] + photo_object.image.url
+      else
+        url = photo_object.image.url
+      end
+
       file_url = {
-        :url => request.env["HTTP_ORIGIN"] + photo_object.image.url,
+        :url => url,
         :id => photo_object.reload.id
       }
 
@@ -192,10 +198,17 @@ class EventsController < ApplicationController
 
         photo_object.update_attributes(:image => params['event']['other_photos_attributes'][index]['image'])
 
+        if  Rails.env == 'development'
+          url = request.env["HTTP_ORIGIN"] + photo_object.image.url
+        else
+          url = photo_object.image.url
+        end
+        
         file_url = {
-          :url => request.env["HTTP_ORIGIN"] + photo_object.image.url,
+          :url => url,
           :id => photo_object.reload.id
         }
+        
       end
 
     end

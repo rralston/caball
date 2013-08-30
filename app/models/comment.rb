@@ -32,6 +32,7 @@ class Comment < ActiveRecord::Base
       # tells if the user is attending particular event.
       json[:user_following] = likers.uniq.map(&:id).include?(options[:check_user].id)
       json[:can_edit] = self.user == options[:check_user]
+      json[:can_delete] = self.commentable.user == options[:check_user]
     end
     json
   end

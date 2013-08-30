@@ -40,7 +40,7 @@ class Ability
       user.persisted?
     end
     can [:update, :destroy], Comment do |comment|
-      comment.user == user
+      comment.user == user || comment.commentable.user == user
     end
 
     can [:create, :read, :files_upload], Blog do

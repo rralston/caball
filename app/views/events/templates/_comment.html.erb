@@ -28,7 +28,6 @@
             <div class='action-div update icon-ok'></div>
             <div class='action-div icon-remove-sign hide_edit'></div>
           </div>
-
         <%% } %>
 
         <%% if (photo != null) { %>
@@ -56,12 +55,16 @@
         <div class='heart-blue <%% if(typeof user_following != "undefined" && user_following) print("active") %> pull-right'> </div>        
       </div>
     </div>
-
-    <%% if(typeof can_edit != 'undefined' && can_edit) { %>
+    
+    <%% if(typeof can_edit != 'undefined' && can_edit) { %> 
       <div class='comment_edit'>
         <i class='edit_comment icon-pencil action-div'></i>
         <i class='destroy_comment icon-remove action-div'></i>
       </div>
+    <%% } else if(typeof can_delete != 'undefined' && can_delete) { %>
+        <div class='comment_edit'>
+          <i class='destroy_comment icon-remove action-div'></i>
+        </div>
     <%% } %>
 
   </div>
