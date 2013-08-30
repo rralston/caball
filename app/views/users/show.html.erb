@@ -14,7 +14,7 @@
                   
                   <div class="blurbgcover">
                     <div class="blurbg">
-                      <img src="<%= @user.cover_photo.try('image') %>" alt="" />
+                      <div class="cover" style='background-image: url(<%= @user.get_cover %>)'></div>
                     </div>
                   </div>
                   <div class="proftagwrap row-fluid">
