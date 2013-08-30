@@ -256,6 +256,16 @@ class User < ActiveRecord::Base
     end
   end
 
+  def profile_pic_large
+    if profile.present? 
+      profile.image.url(:large)
+    elsif photos.present?
+      photos.first.image.url(:large)
+    else
+      "/assets/actor.png"
+    end
+  end
+
   def profile_thumb
     if profile.present? 
       profile.image.url(:thumb)
@@ -433,7 +443,7 @@ class User < ActiveRecord::Base
     
     # get activities which belong to a comment among those comment ids.
     notifications = Activity.order("created_at DESC").
-      where('created_at < ? AND trackable_type = ? AND trackable_id in (?)', self.notification_check_time, 'Comment', comment_ids)
+      where('created_at > ? AND trackable_type = ? AND trackable_id in (?)', self.notification_check_time, 'Comment', comment_ids)
 
 
     # mix notifications with receipts.
