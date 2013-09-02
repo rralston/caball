@@ -100,7 +100,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.status_stages
-    { 'Draft' => 'Draft', 'Pre-Production' => 'Pre-Production', 'Greenlight' => 'Greenlight', 'Post-Production' => 'Post-Production', 'Completed' => 'Completed'}
+    { 'Draft' => 'Draft', 'Development' => 'Development', 'Pre-Production' => 'Pre-Production', 'Production' => 'Production', 'Post-Production' => 'Post-Production', 'Completed' => 'Completed'}
   end
 
   def self.compensation_stages
