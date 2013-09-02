@@ -24,7 +24,7 @@ $(document).ready ()->
       type: 'POST'
       add: (e, data)->
         # e.target gives the form.
-        types = /(\.|\/)(gif|jpe?g|png)$/i
+        types = /(\.|\/)(jpe?g|png)$/i
         file = data.files[0]
         # file type verification.
         if types.test(file.type) || types.test(file.name)
@@ -37,7 +37,7 @@ $(document).ready ()->
           data.image_container.attr('src', '')
           data.submit()
         else
-          alert('The file you selected is not a gif, jpeg or png image file')
+          alert('The file you selected is not a jpeg or png image file')
       progress: (e, data)->
         progress = parseInt(data.loaded / data.total * 100, 10)
         data.progress_div.find('.bar').css('width', progress + '%')

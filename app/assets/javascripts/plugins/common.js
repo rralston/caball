@@ -420,7 +420,7 @@ app.fn.init_comment_image_file_uploader = function(element, url) {
     type: 'POST',
     add: function(e, data) {
       var file, types;
-      types = /(\.|\/)(gif|jpe?g|png)$/i;
+      types = /(\.|\/)(jpe?g|png)$/i;
       file = data.files[0];
       if (types.test(file.type) || types.test(file.name)) {
         data.progress_div = $('#' + data.fileInput.attr('id')).closest('.tab-pane').find('.upload_progress');
@@ -432,7 +432,7 @@ app.fn.init_comment_image_file_uploader = function(element, url) {
         data.image_container.attr('src', '');
         data.submit();
       } else {
-        alert('The file you selected is not a gif, jpeg or png image file');
+        alert('The file you selected is not a jpeg or png image file');
       }
     },
     progress: function(e, data) {
