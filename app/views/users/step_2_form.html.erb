@@ -12,7 +12,7 @@
   <div class="span12">
 
     <div class="controls">
-      You said your roles are <%= current_user.talent_names.join(' and ') %>
+      You said you're <%= current_user.talent_names.join(' and ') %>
     </div>
 
     <%= f.fields_for :talents do |talent| %>
@@ -28,7 +28,7 @@
           <div class="controls">
             <h5><%= talent.object.name.camelize %></h5>
           </div>
-          
+          <% if false %> <!-- Exclude Fields -->
           <div class="control-group">
             <div class="controls">
               <%= talent.text_area :description, :class => 'textarea', :rows => "5", :placeholder => "Tell us about your experience as a #{talent.object.name}" %>
@@ -44,6 +44,7 @@
 
             </div>    
           </div>
+					<% end %> <!-- End Exclude Field -->
         </div>
 
       <% end %>
@@ -149,7 +150,9 @@
 
         <div class="controls">
           <%= r.file_field :document %>
-        </div>
+          <div class='div_hint'>
+						Upload a PDF or Microsoft Word Document, keep file size to 1MB
+						</div></div>
 
         <div class='controls upload_progress'>
           Upload Progress:
