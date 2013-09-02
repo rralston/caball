@@ -113,7 +113,7 @@
 
           <div id='user_agent_name_container'>
             <% if current_user.agent_present %>
-              <input type='text' id='user_agent_name' placeholder='Enter your agents name' value='<%= agentship.object.agent.name %>'>
+              <input type='text' id='user_agent_name' placeholder='Enter your agents name' value='<%= agentship.object.agent.try(:name) %>'>
             <% else %>
               <input type='text' id='user_agent_name' placeholder='Enter your agents name'>
             <% end %>
