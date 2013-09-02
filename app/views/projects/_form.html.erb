@@ -86,7 +86,7 @@
             </div>
           
             <div class="control-group">
-            <%= p.label 'Project Type', :class => 'control-label' %>
+            <%= p.label 'Project Status', :class => 'control-label' %>
               <div class="controls">
                 <%= p.select(:status, options_for_select(@status, @project.status)) %>
               </div>
