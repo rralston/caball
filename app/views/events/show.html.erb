@@ -65,7 +65,7 @@
                     <div class="row-fluid">
                       <div id="slider" class="flexslider span12">
                         <ul class="slides span12">
-                          <% @event.other_photos.each do |photo|  %>
+                          <% @event.all_photos.each do |photo|  %>
                             <li style="background:url(<%= photo.image %>);"></li>
                           <% end %>
                         </ul>
@@ -74,7 +74,7 @@
                         <% if @event.user == current_user %>
                           <div id="carousel" class="flexslider span11">
                               <ul class="slides">
-                                <% @event.other_photos.each do |photo|  %>
+                                <% @event.all_photos.each do |photo|  %>
                                   <li style="background:url(<%= photo.image %>);"></li>
                                 <% end %>
                               </ul>
@@ -88,7 +88,7 @@
                         <% else %>
                           <div id="carousel" class="flexslider span11 not_owner">
                               <ul class="slides">
-                                <% @event.other_photos.each do |photo|  %>
+                                <% @event.all_photos.each do |photo|  %>
                                   <li style="background:url(<%= photo.image %>);"></li>
                                 <% end %>
                               </ul>
@@ -243,9 +243,22 @@
     <div class="modal-body">
       <div id='fields-for-event_photos-list' class='numerous'>
         <%= event.fields_for :other_photos, Photo.new, :child_index => 'replace_this' do |photo| %>
-          <div class='row'>
+          <div class='control-group row'>
+            <div class="span3">
+              <div class='controls upload_progress'>
+                Upload Progress:
+                <div class='progress'>
+                  <div class='bar' style='width: 0%'></div>
+                </div>
+              </div>
+
+              <div class="controls">
+                <img src='' class="image_preview_container img-rounded" >
+              </div>
+            </div>
+
             <div class='span3'>
-              <div class="control-group">
+              <div>
                 <label class="control-label">Event Image</label>
                 <div class="controls">
                   <%= photo.file_field :image %>
@@ -253,19 +266,15 @@
               </div>
             </div>
 
-            <div class='span3'>
-              <div class="control-group">
-                <label class="control-label">Image Description</label>
-                <div class="controls">
-                  <%= photo.text_field :description %>
-                </div>
-              </div>
-            </div>
+            <!-- url is updated when the image is created and uploaded  -->
+            <%= photo.hidden_field :remote_image_url, :class => 'photo_url_div' %>
+
           </div>
           
           <%= link_to 'Remove', '#', :class => 'numerous-remove pull-right' %>
           
         <% end %>
+
       </div>
 
       <div id='event_photos-list'></div>

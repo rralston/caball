@@ -336,4 +336,8 @@ class Event < ActiveRecord::Base
     videos.where('provider IS NOT NULL')
   end
 
+  def all_photos
+    [self.main_photo] + self.other_photos
+  end
+
 end
