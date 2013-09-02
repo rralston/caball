@@ -323,7 +323,8 @@ class User < ActiveRecord::Base
 
   def activities_feed
     Activity.order("created_at DESC").
-      where('(owner_id in (?) AND owner_type = ? AND recipient_id IS NULL) OR (recipient_id = ?)', self.friend_ids, 'User', self.id)
+      where('(owner_id in (?) AND owner_type = ? AND recipient_id IS NULL) OR (recipient_id = ?)', self.friend_ids, 'User', self.id).
+        where('activities.key NOT IN (?)', ['blog.update', 'comment.update'])
   end
 
   def friends_activities
