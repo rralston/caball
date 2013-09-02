@@ -98,6 +98,44 @@
       
     
   </header>
+
+  <% if flash[:notice] %>
+    <div class="alert in_header alert-success">
+      <button type="button" class="close" data-dismiss="alert">
+        ×
+      </button>
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <% if flash[:error] %>
+    <div class="alert in_header alert-error">
+      <button type="button" class="close" data-dismiss="alert">
+        ×
+      </button>
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+
+  <% if flash[:alert] %>
+    <div class="alert in_header">
+      <button type="button" class="close" data-dismiss="alert">
+        ×
+      </button>
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <% if flash[:info] %>
+    <div class="alert in_header alert-info">
+      <button type="button" class="close" data-dismiss="alert">
+        ×
+      </button>
+      <%= flash[:info] %>
+    </div>
+  <% end %>
+
+  <div id="bootstrap-alert-placeholder" class="js-alert"></div>
 </div>
 
 <% if !current_user %>
@@ -135,45 +173,6 @@
   <!-- signup modal -->
 
 <% end %>
-
-
-<% if flash[:notice] %>
-  <div class="alert alert-success">
-    <button type="button" class="close" data-dismiss="alert">
-      ×
-    </button>
-    <%= flash[:notice] %>
-  </div>
-<% end %>
-
-<% if flash[:error] %>
-  <div class="alert alert-error">
-    <button type="button" class="close" data-dismiss="alert">
-      ×
-    </button>
-    <%= flash[:error] %>
-  </div>
-<% end %>
-
-<% if flash[:alert] %>
-  <div class="alert">
-    <button type="button" class="close" data-dismiss="alert">
-      ×
-    </button>
-    <%= flash[:alert] %>
-  </div>
-<% end %>
-
-<% if flash[:info] %>
-  <div class="alert alert-info">
-    <button type="button" class="close" data-dismiss="alert">
-      ×
-    </button>
-    <%= flash[:info] %>
-  </div>
-<% end %>
-
-<div id="bootstrap-alert-placeholder" class="js-alert"></div>
 
 <script type="script/template" id='search_results_li_tempalte'>
   
