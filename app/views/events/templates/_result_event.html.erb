@@ -28,20 +28,22 @@
     </div>
   </div>
 
-  <div class='event-image pull-left'>
-    <div class='event-backdrop'  style='background: url(<%%= main_photo.image.url %>) no-repeat'>
-    </div>
-    <div class='backdrop-cover'></div>
+  <a href='/events/<%%= id %>'>
+    <div class='event-image pull-left'>
+      <div class='event-backdrop'  style='background: url(<%%= main_photo.image.url %>) no-repeat'>
+      </div>
+      <div class='backdrop-cover'></div>
 
-    <div class="date pull-left medium">
-      <div class="day">
-        <%%= start.day %>
-      </div>
-      <div class="month regular">
-        <%%= start.month_year %>
+      <div class="date pull-left medium">
+        <div class="day">
+          <%%= start.day %>
+        </div>
+        <div class="month regular">
+          <%%= start.month_year %>
+        </div>
       </div>
     </div>
-  </div>
+  </a>
 
   <div class='pull-left event-details <%% if((index%2) == 0) print("even") %>'>
     
