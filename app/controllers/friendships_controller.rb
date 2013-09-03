@@ -3,7 +3,13 @@ class FriendshipsController < ApplicationController
   load_and_authorize_resource
 
   def create
-    @friendship = current_user.friendships.create(:friend_id => params[:friend_id])
+    @friendship = current_user.friendships.where(:friend_id => params[:friend_id]).first
+
+    # create friendship if only it doesn't exist. this check will prevent creation of multiple friendships when user clicks multiple times.
+    if @friendship.nil?
+      @friendship = current_user.friendships.create(:friend_id => params[:friend_id])
+    end
+
     render :json => { :created =>true,
                       :follower => current_user.to_json(),
                       :followers_count => @friendship.friend.followers.count,

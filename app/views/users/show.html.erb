@@ -46,7 +46,7 @@
                     <div class="row-fluid">
                       <div class="flwrs span4">
                         <strong class="regular count"> 
-                          <%= @user.followers.count %>
+                          <%= @user.followers.uniq.count %>
                         </strong>
                         <span class="text light">
                           FOLLOWERS
