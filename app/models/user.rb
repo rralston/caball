@@ -290,6 +290,11 @@ class User < ActiveRecord::Base
     self.location.present?
   end
 
+  def returning_user?
+    # sign in count is 1 for new user
+    sign_in_count > 1
+  end
+
   def recommended_people
     # pick users with talents as the open roles in the projects owned by the current user
     User.joins(:talents).
