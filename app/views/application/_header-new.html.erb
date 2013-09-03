@@ -54,7 +54,7 @@
                 <li class="dboard">Dashboard</li>
               </a>
               <a href="/users/<%= current_user.id %>/edit">
-                <li class="settings">Settings</li>
+                <li class="settings">Edit Profile</li>
               </a>
               <%= link_to '<li class="lout" id="sign_out">Logout</li>'.html_safe, {:controller=> "users/sessions", :action=> "destroy"}, :method => :delete %>
               

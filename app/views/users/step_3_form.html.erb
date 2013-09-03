@@ -26,11 +26,12 @@
           </div>
         <% end %>
 
-        <div class="controls">
+        <% if false %> <!-- Content Exclusion -->
+				<div class="controls">
           <label>Your Participation</label>
           <%= video.text_area :user_description, :class => 'text_field', :rows => 5 %>
         </div>
-
+				<% end %> <!-- End Exclusion -->
         <input type='hidden' value='1' name='user[demo_reel_attributes][is_demo_reel]'>
 
       </div>
@@ -70,7 +71,7 @@
           </div>
         </div>
       <% end %>
-        
+        <% if false %> <!-- Content Exclusion -->
       <div class="control-group">
         
         <div class="controls">
@@ -78,7 +79,7 @@
           <%= video.text_area :user_description, :class => 'text_field', :rows => 5 %>
         </div>
       </div>
-
+			<% end %> <!-- End Exclusion -->
     <% end %>
 
     <div id="fields-for-videos-list" class="numerous">
@@ -91,12 +92,13 @@
             <label>Url</label>
             <%= video.text_field(:url, :placeholder => 'YouTube, Vimeo URL') %>
           </div>
-          
+          <% if false %> <!-- Content Exclusion -->
+	        
           <div class="controls">
             <label>Your Participation</label>
             <%= video.text_area :user_description, :class => 'text_field', :rows => 5 %>
           </div>
-
+					<% end %> <!-- End Exclusion -->
         </div>
         <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
 
@@ -139,12 +141,12 @@
             <div class="controls">
               <%= user_cover_photo.file_field :image, :validate => true %>
             </div>
-
+		        <% if false %> <!-- Content Exclusion -->
             <div class="controls">
               <label>Description:</label>
               <%= user_cover_photo.text_field :description %>
             </div>
-
+						<% end %> <!-- End Exclusion -->
             <input type='hidden' value='1' name='user[cover_photo_attributes][is_cover]'>
 
           </div>
@@ -188,12 +190,13 @@
             <%= p.file_field :image %>
           </div>
 
-        
+          <% if false %> <!-- Content Exclusion -->
+	      
           <div class='controls'>
             <%= p.label "Description:" %>
             <%= p.text_field :description, :class => 'text_field' %>
           </div>
-
+					<% end %> <!-- End Exclusion -->
 
         </div>
 
@@ -226,10 +229,12 @@
 
             <!-- id is updated when the image is created and uploaded  -->
             <%= photo.hidden_field :id, :class => 'photo_id_div' %>
+		        <% if false %> <!-- Content Exclusion -->
 
             <%= photo.label :description %>
 
             <%= photo.text_field :description, :class => 'text_field', :rows => "5" %>
+						<% end %> <!-- End Exclusion -->
           </div>   
         </div>
 
@@ -250,7 +255,7 @@
             <%= f.submit "Finish! Go to my profile" %>
           </div>
           
-          Congrats! You are now a part of a community od dedicated film professionals.<br/>
+          Congrats! You are now a part of a community of dedicated film professionals.<br/>
           By clicking Finish, you are agree to abide by Filmzu's Terms and Conditions
         </div>
       </div>
