@@ -25,7 +25,7 @@
           <div class="pull-right count">
             <%%= fans.length %>
           </div>
-          <div class="heart-blue <%% if(user_liked) print('active') %> icon pull-right"> </div>
+          <div class="heart-blue <%% if(typeof user_liked != 'undefined' && user_liked) print('active') %> icon pull-right"> </div>
         </span>
   
         <span class="comments pull-left">
