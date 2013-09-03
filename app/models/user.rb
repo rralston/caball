@@ -99,7 +99,7 @@ class User < ActiveRecord::Base
       self.url_name = self.name.gsub(/\s/,'-').downcase
 
       # check  and get size of if any other users having the same url_name
-      same_named_count = User.where("lower(name) = lower(?)", self.name).size
+      same_named_count = User.where("lower(url_name) = lower(?)", self.url_name).size
       if same_named_count > 0
         # append the count + 1 after the url_name.
         self.url_name = self.url_name + "-#{same_named_count.to_i + 1}"

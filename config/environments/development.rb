@@ -46,7 +46,7 @@ Caball::Application.configure do
                      :port           => 587,
                      :authentication => :plain,
                      :user_name      => "notifications@filmzu.com",
-                     :password       => "Filmzuexperiences",
+                     :password       => "TheFilmzu1912",
                      :openssl_verify_mode  => 'none'
    }
   
