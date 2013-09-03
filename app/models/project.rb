@@ -368,4 +368,109 @@ class Project < ActiveRecord::Base
     project_dates.order("important_dates.date_time ASC")
   end
 
+  def self.role_types
+    {
+      'Agent'                                             => 'Agent',
+      'Business - Manager, Studio Exec'                   => 'Business', 
+      'Cast - Actor'                                      => 'Cast', 
+      'Crew - Camera, Light, Sound'                       => 'Crew', 
+      'Director - Action!'                                => 'Director',
+      'Pre Production - Casting Director, Location'       => 'Pre Production', 
+      'Production - Producer, Assistant'                  => 'Production', 
+      'Post-Pro - Editor, Effects'                        => 'Post-Pro', 
+      'Set - Hair, Makeup, Construction'                  => 'Set', 
+      'Writing Department - Screenwriter, Assistant etc.' => 'Writer',
+      'Other'                                             => 'Other'
+    }
+  end
+
+  def self.role_sub_types
+    {
+      'Cast'           => {
+                            "Background"       => "Background",
+                            "Co star"          => "Co star",
+                            "Dancer"           => "Dancer",
+                            "Feature"          => "Feature",
+                            "Guest-star"       => "Guest-star",
+                            "Lead"             => "Lead",
+                            "Other"            => "Other",
+                            "Principal"        => "Principal",
+                            "Precision driver" => "Precision driver",
+                            "special"          => "special",
+                            "stand-in"         => "stand-in",
+                            "stunt"            => "stunt",
+                            "supporting"       => "supporting",
+                            "double"           => "double",
+                          },
+      'Crew'           => {
+                            'Camera' => 'Camera',
+                            'Light'  => 'Light',
+                            'Sound'  => 'Sound'
+                          }, 
+      'Set'            => {
+                            "Make up artist"        => "Make up artist",
+                            "Hairdresser"           => "Hairdresser",
+                            "Costume"               => "Costume",
+                            "Costume Assistant"     => "Costume Assistant",
+                            "Prop builder"          => "Prop builder",
+                            "Prop assistant"        => "Prop assistant",
+                            "Set decorator/dresser" => "Set decorator/dresser",
+                            "Script Supervisor"     => "Script Supervisor",
+                          }, 
+      'Production'     => {
+                            "production assistant"              => "production assistant",
+                            "Production Accountant/Asst"        => "Production Accountant/Asst",
+                            "Producer"                          => "Producer",
+                            "Production Supervisor/Coordinator" => "Production Supervisor/Coordinator",
+                            "Executive Producer"                => "Executive Producer",
+                            "Line Producer"                     => "Line Producer"
+                          }, 
+      'Post-Pro'       => {
+                            "Editor"                      => "Editor",
+                            "Editor asst"                 => "Editor asst",
+                            "Visual effects"              => "Visual effects",
+                            "Graphic/Titles design"       => "Graphic/Titles design",
+                            "Post- production Supervisor" => "Post- production Supervisor"
+                          }, 
+      'Business'       => {
+                            "Talent Agent"     => "Talent Agent",
+                            "Manager"          => "Manager",
+                            "Lawyer"           => "Lawyer",
+                            "Studio Executive" => "Studio Executive"
+                          }, 
+      'Writer'         => {
+                            "Screenwriter"        => "Screenwriter",
+                            "Script Consultant"   => "Script Consultant",
+                            "Script Coordinators" => "Script Coordinators",
+                            "Writers' Assistants" => "Writers' Assistants",
+                            "Formatter/Proofer"   => "Formatter/Proofer"
+                          }, 
+      'Pre Production' => {
+                            "Location Scout"     => "Location Scout",
+                            "Location Manager"   => "Location Manager",
+                            "Location Assistant" => "Location Assistant",
+                            "Casting Director"   => "Casting Director",
+                            "Casting Assistant"  => "Casting Assistant"
+                          }, 
+      'Director'       => {
+                            "Director"       => "Director",
+                            "Asst. Director" => "Asst. Director"
+                          },
+      'Agent'          => {},
+      'Other'          => {
+                            "Food/Catering"      => "Food/Catering",
+                            "Acting Coach"       => "Acting Coach",
+                            "Security"           => "Security",
+                            "Medic"              => "Medic",
+                            "Stunt coordinator"  => "Stunt coordinator",
+                            "Pyrotechnics"       => "Pyrotechnics",
+                            "Aerial photography" => "Aerial photography",
+                            "Intern"             => "Intern",
+                            "Personal Assistant" => "Personal Assistant",
+                            "PR Executive"       => "PR Executive",
+                            "Other"              => "Other"
+                          }
+    }
+  end
+
 end

@@ -106,7 +106,7 @@
           <span class="shrink-anim"><img src="/assets/opth2.png"></span>
           <h2 class='regular expand shrinked'>Roles</h2>
           <div class='srchopts'>
-            <% User.types.keys.each do |role| %>
+            <% Project.role_types.keys.each do |role| %>
               <div class="srchopt">
                 <div class="chkboxwrap">
                   <input type="checkbox" name='roles' value='<%= role %>' id='<%= role %>' />

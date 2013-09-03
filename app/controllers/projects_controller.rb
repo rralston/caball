@@ -194,7 +194,7 @@ class ProjectsController < ApplicationController
   end
     
   def project_fields
-    @talents = User.types
+    @talents = Project.role_types
     @genres = Project.genres
     @is_type = Project.types
     @unions = Project.unions
