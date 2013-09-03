@@ -503,7 +503,7 @@ class User < ActiveRecord::Base
       json[:category]= 'People'
       json[:url] = "/users/#{id}"
     end
-
+    json[:url_param] = self.url_param
     json
   end
 
@@ -579,6 +579,10 @@ class User < ActiveRecord::Base
     else
       nil
     end
+  end
+
+  def url_param
+    url_name.present? ? url_name : id
   end
 
 end

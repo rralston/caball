@@ -47,13 +47,13 @@
           </div>
           <div class="userprflistwrap">
             <ul class="proflist medium">
-              <a href="/users/<%= current_user.id %>">
+              <a href="/users/<%= current_user.url_param %>">
                 <li class="profile">profile</li>
               </a>
               <a href="/dashboard" >
                 <li class="dboard">Dashboard</li>
               </a>
-              <a href="/users/<%= current_user.id %>/edit">
+              <a href="/users/<%= current_user.url_param %>/edit">
                 <li class="settings">Edit Profile</li>
               </a>
               <%= link_to '<li class="lout" id="sign_out">Logout</li>'.html_safe, {:controller=> "users/sessions", :action=> "destroy"}, :method => :delete %>

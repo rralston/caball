@@ -37,7 +37,7 @@
             
             <div class='span7 project-created-by light'>
               <i>created by </i>
-              <%= link_to @project.user.name, "/users/#{@project.user.id}", :class => 'medium' %>
+              <%= link_to @project.user.name, "/users/#{@project.user.url_param}", :class => 'medium' %>
               &nbsp; &nbsp;<i class='report_entity icon-exclamation-sign action-div show_tooltip' data-toggle='modal'  data-target='#report-modal' title='Report Project'></i>
             </div>
 
@@ -165,7 +165,7 @@
                         </div>  
 
                         <% if role.approved_user.present? %>
-                          <a href='/users/<%= role.approved_user.id %>'>
+                          <a href='/users/<%= role.approved_user.url_param %>'>
                             <%= image_tag role.approved_user.profile_pic, :class => 'img-circle role-cast-pic' %>
                           </a>
                         <% else %>

@@ -259,7 +259,7 @@
           
           <% User.featured_people.each do |user| %>
             <div class="user_tile pull-left">
-              <a href="/users/<%= user.id %>">
+              <a href="/users/<%= user.url_param %>">
                 <div class="row">
                   <div class="backdrop-cover"></div>
                   
