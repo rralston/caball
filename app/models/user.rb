@@ -189,17 +189,17 @@ class User < ActiveRecord::Base
 
   def self.types
     {
+      'Fan - You Just Love Film!'            => 'Fan',
+      'Agent'          => 'Agent',
+      'Business - Manager, Studio Exec'       => 'Business', 
       'Cast - Actor'           => 'Cast', 
       'Crew - Camera, Light, Sound'           => 'Crew', 
-      'Set - Hair, Makeup, Construction'            => 'Set', 
+      'Director - Action!'       => 'Director',
+      'Pre Production - Casting Director, Location' => 'Pre Production', 
       'Production - Producer, Assistant'     => 'Production', 
       'Post-Pro - Editor, Effects'       => 'Post-Pro', 
-      'Business - Manager'       => 'Business', 
-      'Writer - Script, Supervisor etc.'         => 'Writer',
-      'Fan - You Just Love Film!'            => 'Fan',
-      'Pre Production - Casting Director, Location' => 'Pre Production', 
-      'Director - Action!'       => 'Director',
-      'Agent'          => 'Agent',
+      'Set - Hair, Makeup, Construction'            => 'Set', 
+      'Writing Department - Screenwriter, Assistant etc.'         => 'Writer',
       'Other'          => 'Other'
     }
   end
