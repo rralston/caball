@@ -377,40 +377,45 @@
 
       <% if @user.talent_names.include?('Writer') %>
         <% talent = @user.talents.where(:name => 'Writer').first %>
-        <div class='row right-extra-div' id='agent_profile'>
-          <div class='span4 shrink-div head'>
-            <span class="pull-left">
-              <h3>Writer Profile</h3>
-            </span>
-            
-            <span class="btn-show-all pull-right"></span> 
-            
-            <div class='clearfix'></div>
-          </div>
 
-          <div class="span4">
-            <div class="row clearfix">
-              <div class="grey-line-divider"></div>
-            </div>
-          </div>
-
-
-
-          <div class='content light'>
-
-            <div class='doc text-center'>
-              <a href='<%= talent.script_document.document %>' class='badge badge-custom-green'>Download  Script</a>
+        <% if talent.script_document.present? || talent.synopsis.present? %>
+          <div class='row right-extra-div' id='agent_profile'>
+            <div class='span4 shrink-div head'>
+              <span class="pull-left">
+                <h3>Writer Profile</h3>
+              </span>
+              
+              <span class="btn-show-all pull-right"></span> 
+              
+              <div class='clearfix'></div>
             </div>
 
-            <% if talent.synopsis.present? %>
-              Synopsis:
-              <div class='synopsis'>
-                  <%= talent.synopsis %>
+            <div class="span4">
+              <div class="row clearfix">
+                <div class="grey-line-divider"></div>
               </div>
-            <% end %>
-          </div>
+            </div>
 
-        </div>
+
+
+            <div class='content light'>
+              
+              <% if talent.script_document.present? %>
+                <div class='doc text-center'>
+                  <a href='<%= talent.script_document.document %>' class='badge badge-custom-green'>Download  Script</a>
+                </div>
+              <% end %>
+
+              <% if talent.synopsis.present? %>
+                Synopsis:
+                <div class='synopsis'>
+                    <%= talent.synopsis %>
+                </div>
+              <% end %>
+            </div>
+
+          </div>
+        <% end %>    
       <% end %>
 
       <div class='row right-extra-div' id='user_projects_div'>
