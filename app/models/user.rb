@@ -153,7 +153,7 @@ class User < ActiveRecord::Base
     elsif cover_photo.image.url == "/images/fallback/User_default.png" && !talents.empty?
       return "../assets/default_cover/#{talents.first.name}.jpg"
     else
-      return cover_photo.try("image")
+      return cover_photo.image rescue "/images/fallback/User_default.png"
     end
   end
 
