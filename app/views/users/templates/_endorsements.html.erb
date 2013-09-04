@@ -5,7 +5,7 @@
       <h3>Endorsements</h3>
     </span>
     
-    <% if current_user %>
+    <% if current_user && current_user != @user %>
       <a class='btn-endorse btn-show-all pull-right action-div' data-can='<%= current_user.friends.include?(@user) %>'>
       </a> 
     <% end %>
