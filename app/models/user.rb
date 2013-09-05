@@ -414,7 +414,8 @@ class User < ActiveRecord::Base
     extra_hash = {
       'profile_pic' => profile_pic,
       'cover_photo' => display_cover,
-      'talent_names' => talent_names
+      'talent_names' => talent_names,
+      'url_param' => url_param
     }
     hash.merge!(extra_hash)
   end
@@ -503,7 +504,7 @@ class User < ActiveRecord::Base
       json[:category]= 'People'
       json[:url] = "/users/#{id}"
     end
-
+    json[:url_param] = self.url_param
     json
   end
 
@@ -579,6 +580,10 @@ class User < ActiveRecord::Base
     else
       nil
     end
+  end
+
+  def url_param
+    url_name.present? ? url_name : id
   end
 
 end

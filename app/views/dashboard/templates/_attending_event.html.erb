@@ -1,5 +1,5 @@
 <script type="script/template" id='attending_event_template'>
-    <a href='/events/<%%= id %>'>
+    <a href='/events/<%%= url_param %>'>
       <div class='event-head'>
         <div class='event-backdrop'  style='background: url(<%%= main_photo.image.url %>) no-repeat'>
         </div>
@@ -39,7 +39,7 @@
                   created by
                   <br>
             <span class="owner-name">
-              <a href='users/<%%= user.id %>' target='_blank'><%%= user.name %></a>
+              <a href='users/<%%= user.url_param %>' target='_blank'><%%= user.name %></a>
             </span>
           </span>
 

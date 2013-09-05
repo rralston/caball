@@ -184,7 +184,7 @@
 
   app.activities.reset(<%= raw current_user.activities_feed.first(ACTIVITIES_PER_PAGE).
                                           to_json(:include => [
-                                                      :owner,
+                                                      {:owner => {:methods => :url_param}},
                                                       :trackable
                                                     ],
                                                   :check_user => current_user

@@ -7,7 +7,7 @@
       <div class="notefull">
         <% model_object = notification.trackable.commentable %>
         <div class="noteinfo">
-          <a href="/users/<%= notification.trackable.user.id %>">
+          <a href="/users/<%= notification.trackable.user.url_param %>">
             <%= notification.trackable.user.name %>
           </a> 
           commented on your <%= model_object.class.name.downcase %> 
@@ -40,7 +40,7 @@
         <div class="notefull">
           
           <div class="noteinfo">
-            <a href="/users/<%= notification.message.sender.id %>"><%= notification.message.sender.name %></a> sent you a message.
+            <a href="/users/<%= notification.message.sender.url_param %>"><%= notification.message.sender.name %></a> sent you a message.
           </div>
           
           <div class="notemsg"><%= truncate(notification.message.body, :length => 60, :separator => ' ') %></div>

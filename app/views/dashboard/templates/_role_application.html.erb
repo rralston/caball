@@ -1,6 +1,6 @@
 <script type="script/template" id='role_application_template'>  
   
-  <a href='/users/<%%= user.id %>' target='_blank'>
+  <a href='/users/<%%= user.url_param %>' target='_blank'>
     <div class='row'>
       <div class='backdrop-cover'></div>
       <%% if(user.cover_photo != null && typeof user.cover_photo != 'undefined' ){ %>

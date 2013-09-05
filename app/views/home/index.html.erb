@@ -159,7 +159,7 @@
           <% Project.sample_featured_projects.each do |project|  %>
 
           <div class="project">
-            <a href="/projects/<%= project.id %>">
+            <a href="/projects/<%= project.url_param %>">
               <div class="ptopimg">
                   <img src="<%= image_path(project.display_photo) %>" alt="">
                 <div class="topcnt">
@@ -259,7 +259,7 @@
           
           <% User.featured_people.each do |user| %>
             <div class="user_tile pull-left">
-              <a href="/users/<%= user.id %>">
+              <a href="/users/<%= user.url_param %>">
                 <div class="row">
                   <div class="backdrop-cover"></div>
                   

@@ -318,7 +318,7 @@ class Project < ActiveRecord::Base
       json[:category]= 'Projects'
       json[:url] = "/projects/#{id}"
     end
-
+    json[:url_param] = url_param
     json
   end
 
@@ -471,6 +471,10 @@ class Project < ActiveRecord::Base
                             "Other"              => "Other"
                           }
     }
+  end
+
+  def url_param
+    url_name.present? ? url_name : id
   end
 
 end
