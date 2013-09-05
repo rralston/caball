@@ -422,7 +422,7 @@ class Project < ActiveRecord::Base
                             "Production Accountant/Asst"        => "Production Accountant/Asst",
                             "Producer"                          => "Producer",
                             "Production Supervisor/Coordinator" => "Production Supervisor/Coordinator",
-                            "Executive Producer"                => "Executive Producer",
+                            "Exec. Producer"                    => "Exec. Producer",
                             "Line Producer"                     => "Line Producer"
                           }, 
       'Post-Pro'       => {
