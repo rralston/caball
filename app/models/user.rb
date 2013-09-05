@@ -414,7 +414,8 @@ class User < ActiveRecord::Base
     extra_hash = {
       'profile_pic' => profile_pic,
       'cover_photo' => display_cover,
-      'talent_names' => talent_names
+      'talent_names' => talent_names,
+      'url_param' => url_param
     }
     hash.merge!(extra_hash)
   end

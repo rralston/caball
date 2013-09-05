@@ -24,7 +24,7 @@
         ATTENDING: <br/>
 
         <%% _.first(attendees, 5).forEach(function(attendee){ %>
-          <a href='users/<%%= attendee.id %>' target='_blank'>
+          <a href='users/<%%= attendee.url_param %>' target='_blank'>
             <img src='<%%= attendee.profile_pic %>' class='img-circle event-attendee-pic pull-left'>
           </a>
         <%% }) %>
