@@ -38,7 +38,6 @@
             <div class='span7 project-created-by light'>
               <i>created by </i>
               <%= link_to @project.user.name, "/users/#{@project.user.url_param}", :class => 'medium' %>
-              &nbsp; &nbsp;<i class='report_entity icon-exclamation-sign action-div show_tooltip' data-toggle='modal'  data-target='#report-modal' title='Report Project'></i>
             </div>
 
             <div class='span7 project-description light'>
@@ -323,7 +322,20 @@
           </div>
 
           
-
+          <div class='right-extra-div coming-div row'>
+            <div class="span4 shrink-div head">
+              <span class="pull-left">
+                <h3><i class='report_entity icon-exclamation-sign action-div show_tooltip' data-toggle='modal'  data-target='#report-modal' title='Report Project'></i> Report</h3>
+              </span>
+              <span class="btn-show-all pull-right"></span>
+              <div class="clearfix"></div>
+            </div>
+            <div class="span4">
+              <div class="row clearfix">
+                <div class="grey-line-divider"></div>
+              </div>
+            </div>
+          </div>
 
         </div>
 
