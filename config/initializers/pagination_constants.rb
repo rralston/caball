@@ -6,10 +6,10 @@ RECOMMENDED_EVENTS_PER_PAGE   = 1
 
 
 # events index page
-EVENTS_PER_PAGE_IN_INDEX      = 2
+EVENTS_PER_PAGE_IN_INDEX      = 9
 
 # projects index page
-PROJECTS_PER_PAGE_IN_INDEX    = 3
+PROJECTS_PER_PAGE_IN_INDEX    = 9
 
 # users index page
-USERS_PER_PAGE_IN_INDEX    = 3
+USERS_PER_PAGE_IN_INDEX    = 9

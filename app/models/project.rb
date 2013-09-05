@@ -233,7 +233,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.sample_popular_projects
-    popular_projects.where('status <> ?', 'Draft').first(4)
+    popular_projects.where('status <> ?', 'Draft').first(3)
   end
 
   def super_roles_needed
