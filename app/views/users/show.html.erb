@@ -456,7 +456,8 @@
         <div class='span4 shrink-div head'>
           <span class="pull-left">
             <h3>
-							<i class='report_entity icon-exclamation-sign action-div show_tooltip' data-toggle='modal' data-target='#report-modal' title='Report User'></i> Report User 
+							<i class='report_entity icon-exclamation-sign action-div show_tooltip' data-toggle='modal' data-target='#report-modal' title='Report User'></i>
+							<%= link_to "#", :class => "show_tooltip", :title => "Report User", :data => {:toggle=>"modal", :target=>"#report-modal"} do %> Report<% end %> 
 						</h3>
           </span>
 					<span class="btn-show-all pull-right"></span> 

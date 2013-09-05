@@ -320,12 +320,12 @@
               <%= social_share_button_tag(@project.title) %>
             </div>
           </div>
-
           
           <div class='right-extra-div coming-div row'>
             <div class="span4 shrink-div head">
               <span class="pull-left">
-                <h3><i class='report_entity icon-exclamation-sign action-div show_tooltip' data-toggle='modal'  data-target='#report-modal' title='Report Project'></i> Report</h3>
+                <h3><i class='report_entity icon-exclamation-sign action-div show_tooltip' data-toggle='modal'  data-target='#report-modal' title='Report Project'></i> 
+								<%= link_to "#", :class => "show_tooltip", :title => "Report Project", :data => {:toggle=>"modal", :target=>"#report-modal"} do %>Report<% end %></h3>
               </span>
               <span class="btn-show-all pull-right"></span>
               <div class="clearfix"></div>
