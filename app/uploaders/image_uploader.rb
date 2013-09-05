@@ -47,6 +47,11 @@ class ImageUploader < CarrierWave::Uploader::Base
     end
   end
 
+
+  version :original do
+    process :manualcrop
+  end
+
   # Create thumb version of uploaded files:
   # Accessible through <%= image_tag @user.photo.image.url(:thumb)  %>
   version :thumb do
@@ -71,15 +76,14 @@ class ImageUploader < CarrierWave::Uploader::Base
     process :resize_to_fill => [40, 40]
   end
 
-  version :original do
-    process :manualcrop
-  end
+  
 
 
   def manualcrop
     return unless model.cropping?
     manipulate! do |img| 
-      img = img.crop(model.crop_x.to_i,model.crop_y.to_i,model.crop_h.to_i,model.crop_w.to_i) 
+      # debugger
+      img = img.crop(model.crop_x.to_i,model.crop_y.to_i,model.crop_w.to_i,model.crop_h.to_i) 
     end 
   end
 
