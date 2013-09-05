@@ -95,6 +95,7 @@ class ProjectsController < ApplicationController
   def new
     search(Project, "projects")
     project_fields
+    @project.user = current_user
     @project.roles.build
     3.times do
       @project.photos.build
@@ -148,6 +149,16 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def step_1
+    if Project.create(params[:project])
+      # render 'users/step_2_form', :layout => false
+      render :json => true
+    else
+
+      render :json => false
+    end
+  end
+
   def files_upload
     
     if params['project']['photos_attributes'].present?
@@ -184,7 +195,9 @@ class ProjectsController < ApplicationController
         
         file_url = {
           :url => url,
-          :id => photo_object.reload.id
+          :id => photo_object.reload.id,
+          :original_width => photo_object.reload.original_width,
+          :original_height => photo_object.reload.original_height
         }
         
       end

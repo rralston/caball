@@ -54,11 +54,22 @@ var Projects = {
         'project_dates-list': {
           'add' : function(form){
             app.fn.resize_form()
-            app.fn.initialize_datetime_picker('.datetime_field')
+            app.fn.initialize_date_picker('.date_field')
+            $('.project-save-form').enableClientSideValidations()
+            app.fn.initialize_time_autocomplete('.time_field')
+
+            new_imp_dates = Numerous.count(['project_dates-list'])
+
+            // if total talents are above 2 hide the add more option
+            if ((new_imp_dates) >= 3){
+              $('a#add-to-project_dates-list').hide()
+            }
+
           },
   
           'remove' : function(form){
             app.fn.resize_form()
+            $('a#add-to-project_dates-list').show()
           }
         },
         'project_photos-list': {

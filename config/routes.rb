@@ -37,6 +37,10 @@ Caball::Application.routes.draw do
     resources :characteristics, :photos, :talents, :profile, :blogs
   end
 
+
+  match '/projects/step_1' => 'projects#step_1'
+  match '/projects/step_2' => 'projects#step_2'
+  match '/projects/step_3' => 'projects#step_3'
   
   resources :projects do 
     resources :comments

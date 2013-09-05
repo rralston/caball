@@ -5,7 +5,7 @@ $(document).ready ()->
     'other_important_dates-list':
       'add' : ()->
         app.fn.initialize_datetime_picker('.date_time_field')
-        $('.new_event').enableClientSideValidations()
+        $('.new_event').enableClientSideValidations();
       'remove': ()->
         console.log "in remove"
         $('.new_event').enableClientSideValidations();

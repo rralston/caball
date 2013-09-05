@@ -91,8 +91,6 @@ class User < ActiveRecord::Base
 
   before_save :update_url_name
 
-  # this is will happen only when udate_attributes is used.
-  # won't be called for user.save
   def update_url_name
     if self.name_changed?
       # if the name is changed, convert to the url name

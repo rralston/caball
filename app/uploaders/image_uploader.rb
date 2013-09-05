@@ -47,26 +47,41 @@ class ImageUploader < CarrierWave::Uploader::Base
     end
   end
 
-
   # Create thumb version of uploaded files:
   # Accessible through <%= image_tag @user.photo.image.url(:thumb)  %>
-   version :thumb do
-     process :resize_to_fill => [25, 25]
-   end
+  version :thumb do
+    process :manualcrop
+    process :resize_to_fill => [25, 25]
+  end
    
    # Create Medium Sized Version
    # Accessible through <%= image_tag @user.photo.image.url(:medium)  %>
-    version :medium do
-      process :resize_to_fill => [170, 170]
-    end
+  version :medium do
+    process :manualcrop
+    process :resize_to_fill => [170, 170]
+  end
    
-   version :large do
-     process :resize_to_fill => [400, 400]
-   end
+  version :large do
+    process :manualcrop
+    process :resize_to_fill => [400, 400]
+  end
    
-   version :tiny do
-     process :resize_to_fill => [40, 40]
-   end
+  version :tiny do
+    process :manualcrop
+    process :resize_to_fill => [40, 40]
+  end
+
+  version :original do
+    process :manualcrop
+  end
+
+
+  def manualcrop
+    return unless model.cropping?
+    manipulate! do |img| 
+      img = img.crop(model.crop_x.to_i,model.crop_y.to_i,model.crop_h.to_i,model.crop_w.to_i) 
+    end 
+  end
 
   # White list of extensions which are allowed to be uploaded.
    def extension_white_list

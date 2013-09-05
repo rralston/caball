@@ -1,3 +1,11 @@
+
+<% @event.errors.full_messages.each do |error| %>
+    <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <p><%= error %></p>
+    </div>
+<% end %>
+
 <div class='row'>
   <div class='span12'>
     <%= form_for @event, :validate => true do |event| %>
@@ -116,7 +124,7 @@
                   <% end %>
 
                   <div class="controls">
-                    <%= event_main_photo.file_field :image, :validate => false %>
+                    <%= event_main_photo.file_field :image, :validate => {:presence => true} %>
                   </div>
                   <input type='hidden' value='1' name='event[main_photo_attributes][is_main]'>
                 </div>

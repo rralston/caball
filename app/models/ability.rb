@@ -25,7 +25,12 @@ class Ability
     can [:create], Project do
       user.persisted?
     end
+    
     can [:update, :destroy, :files_upload], Project do |project|
+      project.user == user
+    end
+
+    can [:step_1, :step_2, :step_3], Project do |project|
       project.user == user
     end
 

@@ -25,6 +25,21 @@ app.fn.initialize_datetime_picker = function(selector){
   });
 }
 
+app.fn.initialize_date_picker = function(selector){
+  $( selector ).datepicker({
+    format: 'yyyy-mm-dd',
+    autoclose: true,
+    todayBtn: true,
+    pickTime: false,
+    startDate: new Date(),
+  });
+}
+
+app.fn.initialize_time_autocomplete = function(selector){
+  $(selector).timeAutocomplete();
+}
+
+
 app.fn.bind_report_event = function(){
   $('body').on('click', '.report-btn',  function(event){
     if(app.fn.check_current_user()){
@@ -460,6 +475,24 @@ app.fn.init_show_post_button_handler = function(){
   $('body').on('click', '.writeico a', function(event){
     app.post_button_shown = true
     $(event.target).closest('form').find('.post_comment_btn').show()
+  });
+}
+
+app.fn.init_jcrop = function(element, parent, original_width, original_height){
+  element.Jcrop({
+    trueSize: [original_width, original_height],
+    onSelect: function(c){
+      parent.find('.crop_x').val(c.x)
+      parent.find('.crop_y').val(c.y)
+      parent.find('.crop_w').val(c.w)
+      parent.find('.crop_h').val(c.h)
+    },
+    onChange: function(c){
+      parent.find('.crop_x').val(c.x)
+      parent.find('.crop_y').val(c.y)
+      parent.find('.crop_w').val(c.w)
+      parent.find('.crop_h').val(c.h)
+    }
   });
 }
   

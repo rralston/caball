@@ -31,8 +31,7 @@ $(document).ready ()->
         progress = parseInt(data.loaded / data.total * 100, 10)
         data.progress_div.find('.bar').css('width', progress + '%')
       done: (e, data)->
-        console.log data
-        app.data= data
+        console.log data.result
         if typeof data.result == 'object' && _.size(data.result) > 1
           # > 1 when a hash is returned with id of the newly created object.
           image_url = data.result['url']
@@ -49,9 +48,40 @@ $(document).ready ()->
         else
           image_url = data.result
 
+
         data.image_container.attr('src', image_url)
         data.image_container.show()
         app.fn.adjust_slider_height()
         data.progress_div.hide()
+        if typeof data.result == 'object'
+          app.fn.init_jcrop(data.image_container, data.control_group_div, data.result['original_width'], data.result['original_height'])
+        app.fn.resize_form()
 
   app.fn.init_image_file_uploader('#steps form')
+
+
+  $('body').on 'click', '.step_1_submit', (event)->
+    btn = $(event.target)
+    $.ajax
+      type: 'POST'
+      url: '/projects/step_1'
+      data: $('.project-save-form').serialize()
+      success: (data)->
+        if data != false
+          $("html, body").animate({ scrollTop: 0 }, "slow");
+          alert('submitteed');
+          # if btn.hasClass('skip')
+          #   window.location = "/users/profile"
+          # else
+          #   $('#step_2').html(data)
+          #   app.allow_forward_sliding_till = 2
+          #   $('a.step_2_nav').trigger('click')
+          #   app.fn.description_tag_list_init()
+          #   app.fn.init_step_2_fileupload()
+          #   app.fn.init_agent_name_autocomplete()
+          #   app.fn.description_tag_list_init()
+        else
+          alert('Please correct form errors')
+
+    return false
+

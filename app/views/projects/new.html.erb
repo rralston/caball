@@ -1,13 +1,55 @@
 <%= javascript_include_tag "projects/projects_manifest" %>
+<%= stylesheet_link_tag "projects/manifest.css" %>
 
 <%- model_class = @project.class -%>
 <section class='section'>
-  <div class='container'>
-    <div class='page-header'>
-      <h1><%=t '.title', :default => t('helpers.titles.new', :model => model_class.model_name.human,
-                                 :default => "New #{model_class.model_name.human}") %>
-			</h1>
-		</div>
-		<%= render :partial => 'form' %>
-	</div>
+  <div class='container project-form'>
+    <div class='row'>
+      <div class='span12 edit-project'>
+        <div id="wrapper" class="row-fluid">
+          <div id="navigation" style="display:none;">
+            <ul>
+              <li class="selected first_step">
+                <a href="#" class='step_1_nav' data-stepIndex="1">
+                  <span class='step_count light'>01</span>
+                  <span class='step_text'>Basic</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class='step_2_nav' data-stepIndex="2">
+                  <span class='step_count light'>02</span>
+                  <span class='step_text'>Info</span>
+                </a>
+              </li>
+              <li>
+                <a href="#" class='step_3_nav' data-stepIndex="3">
+                  <span class='step_count light'>03</span>
+                  <span class='step_text'>Roles</span>
+                </a>
+              </li>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div id='steps'>
+            <fieldset class="step info">
+              <%= render :partial => 'step_1_form' %>
+            </fieldset> 
+
+            <fieldset class="step info">
+              <div id='step_2'>
+                Please Complete Step 1 to come here..!
+              </div>
+            </fieldset> 
+
+
+            <fieldset class="step info">
+              <div id='step_3'>
+                Please Complete previous steps to come here.
+              </div>
+            </fieldset> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

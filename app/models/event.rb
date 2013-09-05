@@ -54,8 +54,6 @@ class Event < ActiveRecord::Base
 
   before_save :update_url_name
 
-  # this is will happen only when udate_attributes is used.
-  # won't be called for event.save
   def update_url_name
     if self.title_changed?
 
