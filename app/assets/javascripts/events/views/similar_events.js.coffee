@@ -16,9 +16,10 @@ app.views.similar_events = Backbone.View.extend
 
   renderEachAll: (similar_event) ->
     this.$el.find('#similar-event-tab-all').append( this.renderElem(similar_event).el )
-
+    this.$el.find('#similar-event-tab-all').find('.message_for_empty').remove()
   renderEachCurrent: (similar_event) ->
     this.$el.find('#similar-event-tab-current').append( this.renderElem(similar_event).el )
-
+    this.$el.find('#similar-event-tab-current').find('.message_for_empty').remove()  
   renderEachPast: (similar_event) ->
     this.$el.find('#similar-event-tab-past').append( this.renderElem(similar_event).el )
+    this.$el.find('#similar-event-tab-past').find('.message_for_empty').remove()

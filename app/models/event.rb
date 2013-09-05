@@ -277,6 +277,7 @@ class Event < ActiveRecord::Base
       json[:category]= 'Events'
       json[:url] = "/events/#{id}"
     end
+    json[:url_param] = url_param
     json
   end
 
@@ -338,6 +339,10 @@ class Event < ActiveRecord::Base
 
   def all_photos
     [self.main_photo] + self.other_photos
+  end
+
+  def url_param
+    url_name.present? ? url_name : id
   end
 
 end

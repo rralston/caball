@@ -16,9 +16,12 @@ app.views.similar_projects = Backbone.View.extend
 
   renderEachAll: (project) ->
     this.$el.find('#user-project-tab-all').append( this.renderElem(project).el )
+    this.$el.find('#user-project-tab-all').find('.message_for_empty').remove()
 
   renderEachCurrent: (project) ->
     this.$el.find('#user-project-tab-current').append( this.renderElem(project).el )
+    this.$el.find('#user-project-tab-current').find('.message_for_empty').remove()
 
   renderEachPast: (project) ->
     this.$el.find('#user-project-tab-past').append( this.renderElem(project).el )
+    this.$el.find('#user-project-tab-past').find('.message_for_empty').remove()
