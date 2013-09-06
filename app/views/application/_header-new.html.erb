@@ -56,6 +56,11 @@
               <a href="/users/<%= current_user.id %>/edit">
                 <li class="settings">Edit Profile</li>
               </a>
+							<% if @current_user.admin == true %>
+							<a href="/admin/admin/index">
+                <li class="admin">Admin Area</li>
+              </a>
+							<% end %>
               <%= link_to '<li class="lout" id="sign_out">Logout</li>'.html_safe, {:controller=> "users/sessions", :action=> "destroy"}, :method => :delete %>
               
             </ul>
