@@ -22,7 +22,7 @@ class Admin::AdminController < Admin::BaseController
     @projects_4weeks = objects_created_within_date_range(@projects, 4.week.ago, 3.week.ago).count
     @recent_projects = Project.order('created_at DESC').last(10)
     # conversation analysis
-    @conversations_weekly = objects_created_within_date_range(Conversation.all, 1.week.ago, Time.now)
+    @conversations_weekly = objects_created_within_date_range(Conversation.all, 1.week.ago, Time.now).count
   end
 
   def users
@@ -70,7 +70,7 @@ class Admin::AdminController < Admin::BaseController
   private
  
   def require_admin
-    unless current_user.admin
+    unless current_user && current_user.admin
       redirect_to root_url, :flash => { :error => "Access denied." }
     end
   end

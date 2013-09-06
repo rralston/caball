@@ -28,7 +28,7 @@
 			<a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a>
 		</li> -->
 		<li class="btn btn-inverse">
-			<%= link_to signout_path, id: "sign_out" do %><i class="icon icon-share-alt"></i> <span class="text">Logout</span><% end %>
+			<%= link_to '<i class="icon icon-share-alt"></i><span class="text">Logout</span>'.html_safe, {:controller=> "users/sessions", :action=> "destroy"}, :method => :delete %>
 		</li>
 	</ul>
 </div>
