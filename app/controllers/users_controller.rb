@@ -206,15 +206,15 @@ class UsersController < ApplicationController
     if params['user']['cover_photo_attributes'].present? and params['user']['cover_photo_attributes']['image'].present?
       # build cover photo if cover photo doesn't exists.
       if current_user.cover_photo.nil?
-        cover_photo = Photo.new
-        cover_photo.update_attributes(params['user']['cover_photo_attributes'])
-        current_user.cover_photo = cover_photo
-        current_user.save
+        current_user.create_cover_photo(params['user']['cover_photo_attributes'])
       else
         current_user.cover_photo.update_attributes(params['user']['cover_photo_attributes'])
       end
 
-      file_url = current_user.cover_photo.image.url(:medium)
+      file_url = {
+        :url => current_user.cover_photo.image.url(:medium),
+        :id => current_user.cover_photo.reload.id
+      }
     end
 
     if params['user']['photos_attributes'].present?

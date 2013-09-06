@@ -141,12 +141,14 @@
 
             <div class="controls">
               <%= user_cover_photo.file_field :image, :validate => true %>
+              <!-- id is updated when the image is created and uploaded  -->
+              <%= user_cover_photo.hidden_field :id, :class => 'photo_id_div' %>
             </div>
 		        <% if false %> <!-- Content Exclusion -->
-            <div class="controls">
-              <label>Description:</label>
-              <%= user_cover_photo.text_field :description %>
-            </div>
+              <div class="controls">
+                <label>Description:</label>
+                <%= user_cover_photo.text_field :description %>
+              </div>
 						<% end %> <!-- End Exclusion -->
             <input type='hidden' value='1' name='user[cover_photo_attributes][is_cover]'>
 

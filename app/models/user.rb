@@ -148,12 +148,12 @@ class User < ActiveRecord::Base
   end
 
   def get_cover
-    if cover_photo.nil?
-      return "/images/fallback/User_default.png"
-    elsif cover_photo.image.url == "/images/fallback/User_default.png" && !talents.empty?
+    if (cover_photo.nil? || cover_photo.image.url == "/images/fallback/User_default.png") && !talents.empty?
       return "../assets/default_cover/#{talents.first.name}.jpg"
+    elsif cover_photo.nil?
+      return "/assets/default_cover/Fan.jpg"
     else
-      return cover_photo.image rescue "/images/fallback/User_default.png"
+      return cover_photo.image rescue "/assets/default_cover/Fan.jpg"
     end
   end
 
