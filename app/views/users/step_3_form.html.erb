@@ -125,6 +125,7 @@
               <!-- if image exits, allow to change it -->
               <% if user_cover_photo.object.image.present? %>
                 <img src=<%= user_cover_photo.object.image.url(:medium) %> class="image_preview_container img-polaroid" >
+								<%= user_cover_photo.check_box :_destroy %> Delete Cover Photo or Upload a new one below
               <% else %>
                 <!-- just keep the container there in case to preview if user uploads an image. -->
                 <img class='image_preview_container img-polaroid' src="">
