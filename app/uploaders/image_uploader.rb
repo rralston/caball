@@ -47,7 +47,6 @@ class ImageUploader < CarrierWave::Uploader::Base
     end
   end
 
-
   version :original do
     process :manualcrop
   end

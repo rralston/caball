@@ -23,7 +23,9 @@ $(document).ready ()->
           data.control_group_div =  $('#' + data.fileInput.attr('id')).closest('.control-group')
 
           data.image_container = data.control_group_div.find('.image_preview_container')
+          data.crop_preview = data.control_group_div.find('.crop_preview')
           data.image_container.attr('src', '')
+          data.crop_preview.attr('src', '')
           data.submit()
         else
           alert('The file you selected is not a jpeg or png image file')
@@ -51,6 +53,10 @@ $(document).ready ()->
 
         data.image_container.attr('src', image_url)
         data.image_container.show()
+
+        data.crop_preview.attr('src', image_url)
+        data.crop_preview.show()
+
         app.fn.adjust_slider_height()
         data.progress_div.hide()
         if typeof data.result == 'object'

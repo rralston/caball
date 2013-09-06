@@ -482,18 +482,32 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height){
   element.Jcrop({
     trueSize: [original_width, original_height],
     onSelect: function(c){
-      parent.find('.crop_x').val(c.x)
-      parent.find('.crop_y').val(c.y)
-      parent.find('.crop_w').val(c.w)
-      parent.find('.crop_h').val(c.h)
+      updateCrops(c)
     },
     onChange: function(c){
-      parent.find('.crop_x').val(c.x)
-      parent.find('.crop_y').val(c.y)
-      parent.find('.crop_w').val(c.w)
-      parent.find('.crop_h').val(c.h)
+      updateCrops(c)  
     }
   });
+
+  updateCrops = function (c){
+    parent.find('.crop_x').val(c.x)
+    parent.find('.crop_y').val(c.y)
+    parent.find('.crop_w').val(c.w)
+    parent.find('.crop_h').val(c.h)
+    updatePreview(c)
+  }
+
+  updatePreview = function(c){
+    previewDiv = parent.find('.crop_preview')
+    main_img_div = parent.find('.image_preview_container')
+    console.log(previewDiv)
+    previewDiv.css({
+      width: Math.round((100/c.w) * main_img_div.width()) + 'px',
+      height: Math.round((100/c.h) * main_img_div.height()) + 'px',
+      marginLeft: '-' + Math.round((100/c.w) * c.x) + 'px',
+      marginTop: '-' + Math.round((100/c.h) * c.y) + 'px'
+    })
+  }
 }
   
 
