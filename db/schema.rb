@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130829081055) do
+ActiveRecord::Schema.define(:version => 20130905121246) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -141,6 +141,8 @@ ActiveRecord::Schema.define(:version => 20130829081055) do
     t.datetime "updated_at",                                 :null => false
     t.boolean  "is_start_date",           :default => false
     t.boolean  "is_end_date",             :default => false
+    t.string   "date"
+    t.string   "time_string"
   end
 
   add_index "important_dates", ["important_dateable_id"], :name => "index_important_dates_on_important_dateable_id"
@@ -176,13 +178,19 @@ ActiveRecord::Schema.define(:version => 20130829081055) do
     t.text     "description"
     t.string   "content_type"
     t.integer  "file_size"
-    t.datetime "updated_at",                        :null => false
+    t.datetime "updated_at",                         :null => false
     t.integer  "imageable_id"
     t.string   "imageable_type"
-    t.datetime "created_at",                        :null => false
+    t.datetime "created_at",                         :null => false
     t.boolean  "primary"
-    t.boolean  "is_main",        :default => false
-    t.boolean  "is_cover",       :default => false
+    t.boolean  "is_main",         :default => false
+    t.boolean  "is_cover",        :default => false
+    t.integer  "crop_x"
+    t.integer  "crop_y"
+    t.integer  "crop_w"
+    t.integer  "crop_h"
+    t.integer  "original_width"
+    t.integer  "original_height"
   end
 
   create_table "profiles", :force => true do |t|

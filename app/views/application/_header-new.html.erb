@@ -56,7 +56,7 @@
               <a href="/users/<%= current_user.id %>/edit">
                 <li class="settings">Edit Profile</li>
               </a>
-							<% if @current_user.admin == true %>
+							<% if current_user.admin == true %>
 							<a href="/admin/admin/index">
                 <li class="admin">Admin Area</li>
               </a>
