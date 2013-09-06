@@ -1,13 +1,13 @@
 <div class='control-group'>
-  <%= date.label :description, :class => 'control-label' %>
+  <%= date.label :date, :class => 'control-label' %>
   <div class='controls'>
-    <%= date.text_field :description, :class => 'required', :validate => { :presence => true } %>
+    <%= date.text_field :date, :class => 'date_field' %> at <%= date.text_field :time_string, :class => 'time_field' %>
   </div>
 </div>
 
 <div class='control-group'>
-  <%= date.label :date, :class => 'control-label' %>
   <div class='controls'>
-    <%= date.text_field :date, :class => 'date_field' %> at <%= date.text_field :time_string, :class => 'time_field' %>
+    <%= date.label :description %>
+    <%= date.text_field :description, :class => 'required', :validate => { :presence => true } %>
   </div>
 </div>

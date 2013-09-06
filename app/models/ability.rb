@@ -26,7 +26,7 @@ class Ability
       user.persisted?
     end
     
-    can [:update, :destroy, :files_upload], Project do |project|
+    can [:update, :destroy, :files_upload, :edit], Project do |project|
       project.user == user
     end
 

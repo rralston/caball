@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130905121246) do
+ActiveRecord::Schema.define(:version => 20130906120450) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -207,8 +207,8 @@ ActiveRecord::Schema.define(:version => 20130905121246) do
     t.string   "title"
     t.text     "description"
     t.integer  "user_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.string   "status"
     t.boolean  "featured"
     t.string   "location"
@@ -219,6 +219,7 @@ ActiveRecord::Schema.define(:version => 20130905121246) do
     t.text     "headline"
     t.string   "union"
     t.string   "url_name"
+    t.boolean  "union_present", :default => false
   end
 
   create_table "receipts", :force => true do |t|

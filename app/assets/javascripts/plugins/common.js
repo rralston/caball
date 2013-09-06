@@ -479,14 +479,22 @@ app.fn.init_show_post_button_handler = function(){
 }
 
 app.fn.init_jcrop = function(element, parent, original_width, original_height){
+
+  // this will contain the parent of the image that is being cropped. User for resetting the crop.
+  app.cropper_parent = parent
+
+  var jcrop_object; 
+
   element.Jcrop({
     trueSize: [original_width, original_height],
     onSelect: function(c){
       updateCrops(c)
     },
     onChange: function(c){
-      updateCrops(c)  
+      updateCrops(c)
     }
+  }, function(){
+    jcrop_object = this;
   });
 
   updateCrops = function (c){
@@ -498,16 +506,33 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height){
   }
 
   updatePreview = function(c){
-    previewDiv = parent.find('.crop_preview')
+    // previewDiv = parent.find('.crop_preview')
     main_img_div = parent.find('.image_preview_container')
-    console.log(previewDiv)
-    previewDiv.css({
-      width: Math.round((100/c.w) * main_img_div.width()) + 'px',
-      height: Math.round((100/c.h) * main_img_div.height()) + 'px',
-      marginLeft: '-' + Math.round((100/c.w) * c.x) + 'px',
-      marginTop: '-' + Math.round((100/c.h) * c.y) + 'px'
+    main_img_div.css({
+      width: Math.round((150/c.w) * original_width) + 'px',
+      height: Math.round((150/c.h) * original_height) + 'px',
+      marginLeft: '-' + Math.round((150/c.w) * c.x) + 'px',
+      marginTop: '-' + Math.round((150/c.h) * c.y) + 'px'
     })
+    parent.find('.btn.reset_crop').show()
   }
+
+  return jcrop_object;
 }
   
-
+app.fn.reset_cropped_image = function(width, height) {
+  var control_group_div, image_container, parent;
+  control_group_div = app.cropper_parent.closest('.control-group');
+  image_container = control_group_div.find('.image_preview_container');
+  image_container.css({
+    width: width,
+    height: height,
+    marginLeft: "0px",
+    marginTop: "0px"
+  });
+  parent = control_group_div;
+  parent.find('.crop_x').val('');
+  parent.find('.crop_y').val('');
+  parent.find('.crop_w').val('');
+  parent.find('.crop_h').val('');
+};

@@ -150,11 +150,34 @@ class ProjectsController < ApplicationController
   end
 
   def step_1
-    if Project.create(params[:project])
-      # render 'users/step_2_form', :layout => false
+
+    if params[:project_id].present?
+      # editing
+      @project = Project.find(params[:project_id])
+      if @project.update_attributes(params[:project])
+        render 'projects/step_2_form', :layout => false
+      else
+        render :json => false
+      end
+    else
+      # new project
+      if @project = Project.create(params[:project])
+        @project.user = current_user
+        @project.save
+        render 'projects/step_2_form', :layout => false
+      else
+
+        render :json => false
+      end
+    end
+  end
+
+  def step_2
+    @project = Project.find(params[:project_id])
+    if @project.update_attributes(params[:project])
+      # render 'users/step_3_form', :layout => false
       render :json => true
     else
-
       render :json => false
     end
   end
@@ -188,7 +211,7 @@ class ProjectsController < ApplicationController
         photo_object.update_attributes(:image => params['project']['photos_attributes'][index]['image'])
 
         if  Rails.env == 'development'
-          url = request.env["HTTP_ORIGIN"] + photo_object.image.url
+          url = "http://" + request.env["HTTP_HOST"] + photo_object.image.url
         else
           url = photo_object.image.url
         end

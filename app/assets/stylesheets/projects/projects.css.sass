@@ -453,10 +453,10 @@ fieldset
 
   form
     input[type="text"], input[type="email"]
-      width:  300px
+      width:  390px
     textarea
       height: 100px
-      width: 300px
+      width: 390px
     img#locate
       width: 10px
       margin-top: 10px !important
@@ -481,7 +481,7 @@ fieldset
     .numerous-remove
       margin-left: 120px
       position: relative
-      top: -25px
+      top: -15px
     .sub_role_container
       margin-top: 10px
     .remove_entity
@@ -495,7 +495,25 @@ fieldset
         input
           margin-right: 20px
     .image_container
-      width: 500px
+      width: 150px
+      height: 150px
+      overflow: hidden  
       .image_preview_container
-        width: 100%
+        vertical-align: baseline
+        max-width: none
+        width: 150px
+        height: 150px
     
+    .image_btns
+      width: 150px
+      .btn.crop_image, .btn.reset_crop
+        display: none
+
+    .date_field
+      width: 100px !important
+    .time_field 
+      width: 70px !important
+
+
+#crop_image_modal
+  #crop_area

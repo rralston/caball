@@ -15,13 +15,37 @@
   
 
 
-<%= form_for @project, :validate => true, :html => { :class => 'form-horizontal project-save-form' , :name => 'formElem', :id => 'formElem'} do |p| %>
+<%= form_for @project, :validate => true, :html => { :class => 'form-horizontal project-save-form step_1_form'} do |p| %>
 
 
   <div class="span12">
 
-    <%= p.fields_for :photos, Photo.new, :child_index => 'replace_this' do |photo| %>
+    <% if p.object.id.present? %>
+      <input type='text' name='project_id' value="<%= p.object.id %>">
+    <% end %>
+
+    <%= p.fields_for :photos, @project.photos.first || Photo.new, :validate => true do |photo| %>
       <div class='control-group '>
+
+        <div class='row'>
+          <div class='span3'>
+            <%= photo.hidden_field :crop_x, :class => 'crop_x' %>
+            <%= photo.hidden_field :crop_y, :class => 'crop_y' %>
+            <%= photo.hidden_field :crop_w, :class => 'crop_w' %>
+            <%= photo.hidden_field :crop_h, :class => 'crop_h' %>
+            <label class="control-label">Project Image</label>
+            <div class="controls">
+              <div class='uploader_btn'>
+                <div class='main_txt'>Choose an image from your computer.</div>
+                <div class='format_txt'> <span class='before_dot'>JPEG, PNG or BMP</span> 10MB File limit</div>
+                <div class='size_txt'><span class='before_dot'>Atleast 640x480</span> 4:3 aspect ratio</div>
+                <%= photo.file_field :image, :validate => { :presence => false } %>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
         <div class='row'>
           <div class="span3">
             <div class='controls upload_progress'>
@@ -30,38 +54,24 @@
                 <div class='bar' style='width: 0%'></div>
               </div>
             </div>
+            <% if photo.object.image.present? %>
+              <div class="controls image_container">
+                <img src='<%= photo.object.image.url(:original) %>' class="image_preview_container img-rounded">
+              </div>
 
-            <div class="controls image_container">
-              <img src='' class="image_preview_container img-rounded" >
-            </div>
-
-            <div class="controls" style='width:100px; height: 100px; overflow:hidden;'>
-              <img src='' class="crop_preview" style="max-width: none; vertical-align: baseline;">
-            </div>
-          </div>
-        </div>
-
-        <div class='row'>
-          <div class='span3'>
-            <%= photo.text_field :crop_x, :class => 'crop_x' %>
-            <%= photo.text_field :crop_y, :class => 'crop_y' %>
-            <%= photo.text_field :crop_w, :class => 'crop_w' %>
-            <%= photo.text_field :crop_h, :class => 'crop_h' %>
-            <label class="control-label">Project Image</label>
-            <div class="controls">
-              <%= photo.file_field :image %>
-
-            </div>
-          </div>
-        </div>
-
-        <div class='row'>
-          <div class='span3'>
-            
-            <div class="controls">
-              <label>Description</label>
-              <%= photo.text_field :description %>
-            </div>
+              <div class='controls image_btns'>
+                <a href="" class='btn crop_image pull-left' data-imgUrl='<%= photo.object.image.url %>' data-orgWidth='<%= photo.object.original_width %>' data-orgHeight='<%= photo.object.original_height %>'  style='display: inline'>Crop</a>
+                <a href="" class='btn reset_crop pull-right' data-imgUrl='<%= photo.object.image.url %>'>Reset</a>
+              </div>
+            <% else %>
+              <div class="controls image_container" style='display:none;'>
+                <img src='' class="image_preview_container img-rounded" style='display:none;'>
+              </div>
+              <div class='controls image_btns'>
+                <a href="" class='btn crop_image pull-left' data-imgUrl=''>Crop</a>
+                <a href="" class='btn reset_crop pull-right' data-imgUrl=''>Reset</a>
+              </div>
+            <% end %>
           </div>
         </div>
 
@@ -69,8 +79,6 @@
         <%= photo.hidden_field :remote_image_url, :class => 'photo_url_div' %>
 
       </div>
-      
-      <%= link_to 'Remove', '#', :class => 'numerous-remove pull-left' %>
       
     <% end %>
 
@@ -83,35 +91,6 @@
     </div>
   
     <div class="control-group">
-    <%= p.label :location, :class => 'control-label' %>
-      <div class="controls">
-      <%= p.text_field :location, :class => 'text_field' %>
-      </div>
-    </div>
-
-    <h4>Important Dates</h4>
-
-    <div class="dates-container">
-      
-      <%= p.fields_for :project_dates do |date| %>
-        <%= render :partial => 'projects/imp_dates_input', :locals => { :date => date } %>
-      <% end %>
-
-      <div id='fields-for-project_dates-list' class='numerous'>
-        <div class='project_imp_date'>
-        <%= p.fields_for :project_dates, ImportantDate.new, :child_index => 'replace_this' do |date| %>
-          <%= render :partial => 'projects/imp_dates_input', :locals => { :date => date } %>
-          <%= link_to 'Remove', '#', :class => 'numerous-remove pull-left' %>
-        <% end %>
-        </div>
-      </div>
-
-      <div id='project_dates-list'></div>
-
-      <%= link_to 'Add an important Date', '#', :id => 'add-to-project_dates-list' %>
-    </div>
-
-    <div class="control-group">
       <%= p.label :description, :class => 'control-label' %>
       <div class="controls">
         <%= p.text_area :description, :class => 'textarea', :rows => "5" %> 
@@ -123,6 +102,47 @@
       <div class="controls">
         <%= p.text_area :headline, :class => 'textarea', :rows => "5" %> 
       </div>
+    </div>
+
+
+    <div class="control-group">
+    <%= p.label :location, :class => 'control-label' %>
+      <div class="controls">
+      <%= p.text_field :location, :class => 'text_field' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class='control-label'>
+        Important Dates
+      </label>
+    </div>
+
+    <div class="dates-container">
+      
+      <%= p.fields_for :project_dates do |date| %>
+        <div class='project_imp_date'>
+          <%= render :partial => 'projects/imp_dates_input', :locals => { :date => date } %>
+        </div>
+      <% end %>
+
+      <div id='fields-for-project_dates-list' class='numerous'>
+        <div class='project_imp_date'>
+        <%= p.fields_for :project_dates, ImportantDate.new, :child_index => 'replace_this' do |date| %>
+          <%= render :partial => 'projects/imp_dates_input', :locals => { :date => date } %>
+          <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+        <% end %>
+        </div>
+      </div>
+
+      <div id='project_dates-list'></div>
+      
+      <div class="control-group">
+        <div class='controls'>
+          <%= link_to 'Add an important Date', '#', :id => 'add-to-project_dates-list' %>    
+        </div>
+      </div>
+
     </div>
 
 

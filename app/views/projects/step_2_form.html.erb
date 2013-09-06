@@ -1,0 +1,132 @@
+
+
+<%= form_for @project, :validate => true, :html => { :class => 'form-horizontal project-save-form step_2_form'} do |p| %>
+
+  <div class="span12">
+
+    <input type='hidden' name='project_id' value="<%= p.object.id %>">
+    
+    <div class="control-group">
+      <%= p.label 'Type', :class => 'control-label' %>
+      <div class="controls">
+        <%= p.select(:is_type_list, options_for_select(Project.types, p.object.is_type), {}) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= p.label 'Project Status', :class => 'control-label' %>
+      <div class="controls">
+        <%= p.select(:status, options_for_select(Project.status_stages, p.object.status)) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= p.label 'Compensation', :class => 'control-label' %>
+      <div class="controls">
+        <%= p.select(:compensation, options_for_select(Project.compensation_stages, p.object.compensation)) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= p.label 'Genre', :class => 'control-label' %>
+      <div class="controls">
+        <% Project.genres.keys.each do |genre| %>
+          <div>
+            <%= check_box_tag "project[genre_list][]", genre, p.object.genre_list.include?(genre) %>
+            <%= genre %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    
+
+    <div class='control-group'>
+
+      <div class='controls'>
+        <%= p.label 'Is your product a part of any Union or Guild?' %>
+      </div>
+
+      <div class='controls radios'>
+        <div class='option'>
+          <%= p.radio_button 'union_present', 'true', :class => 'toggler_radio', 'data-target' => '#project_union_container'  %>
+          <%= label :union_present, 'Yes', :class=>'radio_label' %>
+        </div>
+
+        <div class='option'>
+          <%= p.radio_button 'union_present', 'false', :class => 'toggler_radio', 'data-target' => '#project_union_container' %>
+          <%= label :union_present, 'No', :class=>'radio_label' %>
+        </div>
+
+      </div>
+
+      <% if p.object.union_present %>
+        <div class='controls clearfix'>
+          <div id='project_union_container'>
+            <%= p.select(:union, options_for_select(Project.unions, p.object.union)) %>
+          </div>
+        </div>
+      <% else %>
+        <div class='controls'>
+          <div id='project_union_container' style='display: none;'>
+            <%= p.select(:union, options_for_select(Project.unions)) %>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+
+    <div class="control-group">
+    <%= p.label :title, :class => 'control-label' %>
+      <div class="controls">
+      <%= p.text_field :title, :class => 'text_field required' %>
+      </div>
+    </div>
+
+
+    <div class='span12'>
+      <div class='text-center form_footer'>
+        <div class='links'>
+          <%= p.submit "Next Step", :class=>'step_2_submit' %>
+          <%= p.submit "Finish! Go to my profile", :class=>'skip step_1_submit' %>
+        </div>
+        
+        You are almost done! Go to the next page to enter the fun stuff! Or you can check out profile and enter the rest of the stuff later
+      </div>
+    </div>
+
+  </div>
+
+
+
+<% end %>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    app.project_genres = <%=raw Project.genres.keys %>
+
+    $('#project_genre').tagit({
+      sortable: true,
+      tagSource: ['munna','vishnu'],
+      allowNewTags: false,
+      triggerKeys: ['comma', 'tab', 'space', 'enter'],
+      tagsChanged: function(tagValue, action, element){
+        tag_value_array = _.map($('#project_genre').tagit('tags'), function(tag){
+            tag.value  
+        })  
+        $('#project_genre_list').val(tag_value_array.toString())
+      }
+    });
+
+    app.types_costs = <%= raw User.types_costs.to_json() %>
+
+    // update the pay rate summary for the role when the select box value is changed.
+    $('body').on('change', '.talent-select select', function(event){
+      selected_talent = $(event.target).val()
+      cost = app.types_costs[selected_talent]
+      $(event.target).parent().find('.cost').html(cost)
+    });  
+    
+      
+  })
+</script>
