@@ -188,6 +188,7 @@ class Event < ActiveRecord::Base
     if page.nil?
       Event.newly_added
     else
+      debugger
       Kaminari.paginate_array(Event.newly_added).page(page).per(per_page)
     end
   end

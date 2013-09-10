@@ -387,9 +387,11 @@ app.fn.init_form_elem_hints = function(selector){
   });
 }
   
-app.fn.init_super_roles_select_handler = function(super_role_selector_class, sub_roles){
+app.fn.init_super_roles_select_handler = function(super_role_selector_class, sub_roles, sub_role_selector_class, super_sub_roles){
 
-  $('body').on('change', $('.'+super_role_selector_class), function(event){
+  handle_super_sub_roles = typeof sub_role_selector_class != 'undefined' && typeof super_sub_roles != 'undefined'
+
+  $('body').on('change', '.'+super_role_selector_class, function(event){
 
     // if case is to prevent the function to be called when the chil select are chaged and event propagates.
     app.selected = $(event.target)
@@ -402,16 +404,30 @@ app.fn.init_super_roles_select_handler = function(super_role_selector_class, sub
       sub_role_container.hide();
       sub_role_select.html('');
       sub_role_select.val('');
+
+      if(handle_super_sub_roles){
+        // hide super_sub_role container also.
+        super_sub_role_container = $(event.target).closest('.control-group').find('.super_sub_role_container');
+
+        super_sub_role_select = super_sub_role_container.find('select');
+        // initially hide the select and empty options
+        super_sub_role_container.hide();
+        super_sub_role_select.html('');
+        super_sub_role_select.val('');
+      }
+
       // check if the role has sub roles.
       if(_.size(sub_roles[selected_val]) > 0){
 
         // build options
         options = '';
-        _.each(sub_roles[selected_val], function(sub_role){
-          options += '<option value="' + sub_role + '">' + sub_role + '</option>';
+        _.each(sub_roles[selected_val], function(value, key){
+          options += '<option value="' + value + '">' + key + '</option>';
         });
 
         sub_role_select.html(options);
+
+        sub_role_select.trigger('change');
 
         sub_role_container.show();
 
@@ -419,6 +435,45 @@ app.fn.init_super_roles_select_handler = function(super_role_selector_class, sub
       }
     }
   });
+
+  if(handle_super_sub_roles){
+
+    // handler for handling sub role and showing third level super sub role
+    $('body').on('change', '.'+sub_role_selector_class, function(event){
+
+      // if case is to prevent the function to be called when the chil select are chaged and event propagates.
+      if($(event.target).hasClass(sub_role_selector_class)){
+        select_div = $('.'+sub_role_selector_class)
+        selected_val = select_div.val()
+        // selected_val = $(event.target).val();
+        super_sub_role_container = $(event.target).closest('.control-group').find('.super_sub_role_container');
+
+        super_sub_role_select = super_sub_role_container.find('select');
+        // initially hide the select and empty options
+        super_sub_role_container.hide();
+        super_sub_role_select.html('');
+        super_sub_role_select.val('');
+
+        // check if the role has sub roles.
+        if(_.size(super_sub_roles[selected_val]) > 0){
+
+          // build options
+          options = '';
+          _.each(super_sub_roles[selected_val], function(value, key){
+            options += '<option value="' + value + '">' + key + '</option>';
+          });
+
+          super_sub_role_select.html(options);
+
+          super_sub_role_container.show();
+
+          app.fn.adjust_slider_height();
+        }
+      }
+    });
+  }
+
+  
 }
 
 app.fn.adjust_slider_height = function(){

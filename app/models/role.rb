@@ -1,13 +1,17 @@
 class Role < ActiveRecord::Base
   belongs_to :project
-  attr_accessible :name, :description, :filled, :subrole, :gender
 
   has_many :applications, :class_name => 'RoleApplication', :dependent => :destroy  
+
+  accepts_nested_attributes_for :applications
+
+  attr_accessible :name, :description, :filled, :subrole, :gender, :super_subrole, :applications_attributes
 
   def serializable_hash(options)
     hash = super(options)
     extra_hash = {
-      'project' => project
+      'project' => project,
+      'approved_user' => approved_user
     }
     hash.merge!(extra_hash)
   end

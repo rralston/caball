@@ -1,0 +1,115 @@
+<script type="script/template" id='project_role_edit_template'>
+  
+  
+  <div class='control-group'>
+    <div class='controls'>
+      <div class='search_users'>
+        <%% if(typeof approved_user != 'undefined' && approved_user != null){ %>
+          <input type='text' id='search_users' placeholder='type a name' value='<%%= approved_user.name %>'>
+        <%% }else{ %>
+          <input type='text' id='search_users' placeholder='type a name'>
+        <%% } %>
+
+        <div id='searched_users_for_role'>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form id='project_role_form'>
+
+    <div class='control-group'>
+      <div class='controls'>
+        <input type='hidden' class='project_id' name='project_id' value='<%%= app.editing_project_id %>'>
+      </div>
+    </div>
+
+    <%% if(typeof approved_user != 'undefined' && approved_user != null){ %>
+      
+      <div class='control-group'>
+        <div class='controls'>
+          
+          What is <a href='/users/<%%= approved_user.url_param %>' target='_blank'><%%= approved_user.name %> </a> s Role in your film?
+
+          <input type='hidden' class='role_user_id' name='role[applications_attributes][0][user_id]' value='<%%= approved_user.id %>'>
+        </div>
+      </div>
+
+      <input type='hidden' name='role[applications_attributes][0][approved]' value = '1'>
+
+      <%% if(typeof applications != 'undefined' && typeof applications[0].id != 'undefined' && applications[0].id != null){ %>
+        <input type='hidden' class='role_application_id' name='role[applications_attributes][0][id]' value = '<%%= applications[0].id %>'>
+      <%% } %>
+
+      <input type='hidden' name='role[filled]' value = '1'>
+
+    <%% } %>
+
+
+    <%% if(typeof id != 'undefined' && id != null){ %>
+      <div class='control-group'>
+        <div class='controls'>
+          <input type='hidden' class='role_id' name='role[id]' value='<%%= id %>'>
+        </div>
+      </div>
+    <%% } %>
+
+
+    <%% super_role_present     = false; %>
+    <%% sub_role_present       = false; %>
+    <%% super_sub_role_present = false; %>
+
+    <%% if(typeof name != 'undefined' && name != null){ super_role_present = true; } %>
+    <%% if(typeof subrole != 'undefined' && subrole != null){ sub_role_present = true; } %>
+    <%% if(typeof super_subrole != 'undefined' && super_subrole != null){ super_sub_role_present = true; } %>
+
+    <div class='control-group'>
+      <div class='controls'>
+
+        <select class='super_role_select' name='role[name]'>
+          <%% _.each(app.project_role_types, function(value, key){ %>
+            <option value = '<%%= value %>' <%% if(super_role_present && name == value ){ print('selected') } %>  > <%%= key %> </option>
+          <%% }) %>
+        </select>
+
+        <div class='sub_role_container' <%% if(sub_role_present) print('style="display:block"');  %> >
+          <select class='sub_role_select' name='role[subrole]'>
+
+              <%% if(super_role_present){ %>
+                <%% _.each(app.sub_roles[name], function(value, key){ %>
+                  <option value = '<%%= value %>' <%% if(sub_role_present && subrole == value ){ print('selected') } %>  > <%%= key %> </option>
+                <%% }) %>
+
+              <%% } %>
+
+          </select>
+        </div>
+
+        <div class='super_sub_role_container' <%% if(super_sub_role_present) print('style="display:block"');  %>>
+          <select class='super_sub_role_select' name='role[super_subrole]'>
+
+            <%% if(sub_role_present){ %>
+              <%% _.each(app.super_sub_roles[subrole], function(value, key){ %>
+                <option value = '<%%= value %>' <%% if(super_sub_role_present && super_subrole == value ){ print('selected') } %>  > <%%= key %> </option>
+              <%% }) %>
+
+            <%% } %>
+
+
+          </select>
+        </div>
+
+
+      </div>
+    </div>
+
+
+    <div class='control-group'>
+      <div class='controls'>
+        <input type='submit'>
+      </div>
+    </div>
+    
+  </form>
+
+</script>

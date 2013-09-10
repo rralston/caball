@@ -403,6 +403,7 @@ class Project < ActiveRecord::Base
                             "stunt"            => "stunt",
                             "supporting"       => "supporting",
                             "double"           => "double",
+                            "Voice over"       => "Voice over",
                           },
       'Crew'           => {
                             'Camera' => 'Camera',
@@ -472,6 +473,44 @@ class Project < ActiveRecord::Base
                             "PR Executive"       => "PR Executive",
                             "Other"              => "Other"
                           }
+    }
+  end
+
+  def self.role_super_sub_types
+    {
+      'Camera' => {
+                    'Director of Photography (DP)' => 'Director of Photography (DP)',
+                    'Camera Operator'              => 'Camera Operator',
+                    'Camera Assistant'             => 'Camera Assistant',
+                    'B Camera Operator'            => 'B Camera Operator',
+                    '2nd Unit Cinematographer.'    => '2nd Unit Cinematographer.',
+                    'Additional Cinematography'    => 'Additional Cinematography',
+                    'Still Photographer'           => 'Still Photographer',
+                    'DIT (Digital Imaging Tech)'   => 'DIT (Digital Imaging Tech)',
+                    'Steadicam operator'           => 'Steadicam operator',
+                    'Underwater DP'                => 'Underwater DP'
+                  },
+      'Light' => {
+                    'Best Boy'    => 'Best Boy',
+                    'Electrician' => 'Electrician',
+                    'Gaffer'      => 'Gaffer',
+                    'Grip'        => 'Grip',
+                    'Key Grip'    => 'Key Grip'
+                  },
+      'Sound' => {
+                    'Composer'         => 'Composer',
+                    'Sound Designer'   => 'Sound Designer',
+                    'Sound Technician' => 'Sound Technician',
+                    'Boom operators'   => 'Boom operators',
+                    'Sound assistants' => 'Sound assistants',
+                    'Dialogue editor'  => 'Dialogue editor',
+                    'Dubbing mixer'    => 'Dubbing mixer',
+                    'Foley artist'     => 'Foley artist',
+                    'Foley editor'     => 'Foley editor',
+                    'Production mixer' => 'Production mixer',
+                    'Sound editor'     => 'Sound editor',
+                    'Voiceover'        => 'Voiceover'
+                  }
     }
   end
 

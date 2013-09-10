@@ -26,7 +26,7 @@ Caball::Application.routes.draw do
   match '/users/profile' => 'users#profile'
   match '/users/change_password' => 'users#change_password'
   match '/users/change_email' => 'users#change_email'
-  
+  get '/users/search_by_name'  
 
   match '/events/files_upload' => 'events#files_upload'
   match '/projects/files_upload' => 'projects#files_upload'
@@ -38,10 +38,15 @@ Caball::Application.routes.draw do
   end
 
 
-  match '/projects/step_1' => 'projects#step_1'
-  match '/projects/step_2' => 'projects#step_2'
-  match '/projects/step_3' => 'projects#step_3'
-  
+  match '/roles/destroy' => 'roles#destroy', :via => 'POST'
+
+
+  match '/projects/step_1'          => 'projects#step_1'
+  match '/projects/step_2'          => 'projects#step_2'
+  match '/projects/step_3'          => 'projects#step_3'
+  match '/projects/add_filled_role' => 'projects#add_filled_role'
+
+
   resources :projects do 
     resources :comments
   end

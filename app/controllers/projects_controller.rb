@@ -175,12 +175,35 @@ class ProjectsController < ApplicationController
   def step_2
     @project = Project.find(params[:project_id])
     if @project.update_attributes(params[:project])
-      # render 'users/step_3_form', :layout => false
-      render :json => true
+      render 'projects/step_3_form', :layout => false
     else
       render :json => false
     end
   end
+
+
+  def add_filled_role
+    project = Project.find(params[:project_id])
+
+    if params[:role][:id].present?
+
+      role = Role.find(params[:role][:id])
+
+      # making the subroles nil just in case if it as subroles before and when edited the new data doesn't have a subrole.
+      role.update_attributes(:subrole => nil, :super_subrole => nil)
+      
+      params[:role].delete(:id)
+      
+      role.update_attributes(params[:role])
+    else
+      role = project.roles.create(params[:role])
+      # role.applications.create(:user_id => params[:role_user_id], :approved => true)
+      # role.update_attributes(:filled => true)
+    end
+    render :json => role.to_json(:include => [{:applications => { :include => :user}}])
+  end
+
+
 
   def files_upload
     
@@ -230,11 +253,11 @@ class ProjectsController < ApplicationController
   end
     
   def project_fields
-    @talents = Project.role_types
-    @genres = Project.genres
-    @is_type = Project.types
-    @unions = Project.unions
-    @status = Project.status_stages
+    @talents      = Project.role_types
+    @genres       = Project.genres
+    @is_type      = Project.types
+    @unions       = Project.unions
+    @status       = Project.status_stages
     @compensation = Project.compensation_stages
   end
 

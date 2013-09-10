@@ -78,3 +78,24 @@
   </script>
 
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    app.project_role_types = <%= raw Project.role_types.to_json() %>
+    app.sub_roles          = <%= raw Project.role_sub_types.to_json() %>
+    app.super_sub_roles    = <%= raw Project.role_super_sub_types.to_json() %>
+    // super roles select change event listener and showsub roles
+    app.fn.init_super_roles_select_handler('super_role_select', app.sub_roles, 'sub_role_select', app.super_sub_roles)
+
+    // prevent forward sliding for the form.
+    app.allow_forward_sliding_till = 1
+  });
+
+</script>
+
+
+<%= render :partial => 'projects/templates/project_roles' %>
+<%= render :partial => 'projects/templates/project_role' %>
+<%= render :partial => 'projects/templates/project_role_edit' %>
+<%= render :partial => 'projects/templates/searched_users' %>
+<%= render :partial => 'projects/templates/searched_user' %>

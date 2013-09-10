@@ -14,7 +14,7 @@ class Ability
       user.persisted?
     end
 
-    can [:step_1, :step_2, :step_3, :files_upload], User do
+    can [:step_1, :step_2, :step_3, :files_upload, :search_by_name], User do
       user.persisted?
     end
 
@@ -30,7 +30,7 @@ class Ability
       project.user == user
     end
 
-    can [:step_1, :step_2, :step_3], Project do |project|
+    can [:step_1, :step_2, :step_3, :add_filled_role], Project do |project|
       project.user == user
     end
 

@@ -82,8 +82,6 @@ $(document).ready ()->
         success: (data)->
           if data != false
             $("html, body").animate({ scrollTop: 0 }, "slow");
-
-            alert('submitteed');
             # if btn.hasClass('skip')
             #   window.location = "/users/profile"
             # else
@@ -107,13 +105,14 @@ $(document).ready ()->
       success: (data)->
         if data != false
           $("html, body").animate({ scrollTop: 0 }, "slow");
-          alert('submitted')
+          
           # if btn.hasClass('skip')
           #   window.location = "/users/profile"
           # else
-            # $('#step_3').html(data)
-            # app.allow_forward_sliding_till = 3
-            # $('a.step_3_nav').trigger('click')
+          $('#step_3').html(data)
+          app.allow_forward_sliding_till = 3
+          $('a.step_3_nav').trigger('click')
+          get_ready_for_step_3()
             # # initialize numerous js
             # Users.Edit.init_numerous()
             # # initialize step_3 images file uploader.
@@ -122,7 +121,6 @@ $(document).ready ()->
         else
           alert('Please correct form errors')
         
-
     return false
 
 
@@ -149,3 +147,24 @@ $(document).ready ()->
   # this will toggle textboxes based on radio choice,
   # example: do you have an agent.? if yes, show text box.
   app.fn.initialize_radio_toggler()
+
+
+  # this function is called once after the step 3 html is loaded from the server and attached to the DOM
+  get_ready_for_step_3 = ()->
+    # prevents creation of multiples object when user is sliding back and front in the form.
+    if typeof app.project_roles == 'undefined'
+      app.project_roles = new app.collections.project_roles(app.project_added_roles)
+      app.project_roles_view = new app.views.project_roles({ collection: app.project_roles })
+
+    $('#add_roles_div').append(app.project_roles_view.render().el)
+
+    # create a new project role model and a edit view for it to show the form
+    app.project_role = new app.models.project_role()
+    app.project_role_edit_view = new app.views.project_role_edit({model: app.project_role})
+
+
+
+    $('#role_edit_region').html(app.project_role_edit_view.render().el)
+
+    app.fn.adjust_slider_height()
+

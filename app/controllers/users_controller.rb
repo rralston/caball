@@ -26,11 +26,11 @@ class UsersController < ApplicationController
         search   = params[:search] || params[:keyword]
         location = params[:location]
         cast_hash = {
-          :height => params[:height],
-          :ethnicity => params[:ethnicity],
-          :bodytype => params[:bodytype],
+          :height     => params[:height],
+          :ethnicity  => params[:ethnicity],
+          :bodytype   => params[:bodytype],
           :hair_color => params[:hair_color],
-          :language => params[:language]
+          :language   => params[:language]
         }
         distance = 100
 
@@ -412,5 +412,13 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.js #change_email.js.erb
     end
+  end
+
+
+  # this action is used in the projects creation form for searching and adding users to roles.
+  def search_by_name
+    query = params[:query]
+    users = User.search_users(query)
+    render :json => users.to_json(:check_user => current_user)
   end
 end

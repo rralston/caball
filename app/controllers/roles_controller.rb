@@ -7,5 +7,11 @@ class RolesController < ApplicationController
     applications = role.applications
     render :json => applications.to_json(:include => [:user, :role => { :include => :project }])
   end
+
+  def destroy
+    role = Role.find(params[:id])
+    role.destroy
+    render :json => true
+  end
   
 end
