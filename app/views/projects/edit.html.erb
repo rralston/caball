@@ -66,13 +66,17 @@
   </div>
 
   <div class="modal-footer">
-    <a href="#" class="btn reset_close" data-dismiss='modal'>Reset</a>
-    <a href="#" class="btn" data-dismiss='modal'>Done</a>
+    <a href="#" class="btn reset_close" data-dismiss='modal'>Cancel</a>
+    <a href="#" class="btn crop_now" data-dismiss='modal' style='display:none;'>Done</a>
   </div>
 
   <script type="text/javascript">
     $('body').on( 'click', '.btn.reset_close', function(event){
-      app.fn.reset_cropped_image("150px","150px");
+      // app.fn.reset_cropped_image("150px","150px");
+    });
+
+    $('body').on( 'click', '.btn.crop_now', function(event){
+      app.fn.crop_now();
     });
 
   </script>
@@ -81,14 +85,28 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-    app.project_role_types = <%= raw Project.role_types.to_json() %>
-    app.sub_roles          = <%= raw Project.role_sub_types.to_json() %>
-    app.super_sub_roles    = <%= raw Project.role_super_sub_types.to_json() %>
+
+    // required options for select.
+    app.project_role_types = <%= raw Project.role_types.to_json() %>;
+    app.sub_roles          = <%= raw Project.role_sub_types.to_json() %>;
+    app.super_sub_roles    = <%= raw Project.role_super_sub_types.to_json() %>;
+    // for cast role.
+    app.heights            = <%= raw Characteristics.heights.to_json() %>;
+    app.ages               = <%= raw Characteristics.ages.to_json() %>;
+    app.enthnicities       = <%= raw Characteristics.enthnicities.to_json() %>;
+    app.bodytypes          = <%= raw Characteristics.bodytypes.to_json() %>;
+    app.hair_colors        = <%= raw Characteristics.hair_colors.to_json() %>;
+
+
     // super roles select change event listener and showsub roles
-    app.fn.init_super_roles_select_handler('super_role_select', app.sub_roles, 'sub_role_select', app.super_sub_roles)
+    app.fn.init_super_roles_select_handler('super_role_select', app.sub_roles, 'sub_role_select', app.super_sub_roles);
 
     // prevent forward sliding for the form.
-    app.allow_forward_sliding_till = 1
+    app.allow_forward_sliding_till = 1;
+
+    app.fn.init_form_elem_hints('.hinted');
+
+    app.fn.set_checkbox_limit('input[name="project[genre_list][]"]', 2);
   });
 
 </script>

@@ -3,14 +3,16 @@
   
   <div class='control-group'>
     <div class='controls'>
+      <label>If you have picked people for your team, enter their name here</label>
       <div class='search_users'>
         <%% if(typeof approved_user != 'undefined' && approved_user != null){ %>
-          <input type='text' id='search_users' placeholder='type a name' value='<%%= approved_user.name %>'>
+          <input type='text' id='search_users' placeholder='type a name' value='<%%= approved_user.name %>' class='hinted' data-hint='Make sure all your team creates a profile to get more exposure<br/><br/>You need to follow your team to include them in your project'>
         <%% }else{ %>
-          <input type='text' id='search_users' placeholder='type a name'>
+          <input type='text' id='search_users' placeholder='type a name' class='hinted' data-hint='Make sure all your team creates a profile to get more exposure<br/><br/>You need to follow your team to include them in your project'>
         <%% } %>
 
         <div id='searched_users_for_role'>
+
         </div>
       </div>
     </div>
@@ -47,11 +49,7 @@
 
 
     <%% if(typeof id != 'undefined' && id != null){ %>
-      <div class='control-group'>
-        <div class='controls'>
-          <input type='hidden' class='role_id' name='role[id]' value='<%%= id %>'>
-        </div>
-      </div>
+      <input type='hidden' class='role_id' name='role[id]' value='<%%= id %>'>
     <%% } %>
 
 
@@ -65,48 +63,153 @@
 
     <div class='control-group'>
       <div class='controls'>
+        <label>Super Role:</label>
+        <select class='super_role_select updater hinted' name='role[name]' data-identi='name' data-hint="What's a Super Role? Good question! We created SuperRoles as a way to take hundreds fo roles in filmmaking and make it easy for people both inside and outside the industry to connect! You will get to enter the specific part in the next step">
 
-        <select class='super_role_select' name='role[name]'>
-          <%% _.each(app.project_role_types, function(value, key){ %>
-            <option value = '<%%= value %>' <%% if(super_role_present && name == value ){ print('selected') } %>  > <%%= key %> </option>
-          <%% }) %>
+            <%% if(super_role_present){ %>
+              <%%= app.fn.print_options_for_select(app.project_role_types, name) %>
+            <%% }else{ %>
+              <%%= app.fn.print_options_for_select(app.project_role_types) %>
+            <%% } %>
+
         </select>
 
         <div class='sub_role_container' <%% if(sub_role_present) print('style="display:block"');  %> >
-          <select class='sub_role_select' name='role[subrole]'>
 
-              <%% if(super_role_present){ %>
-                <%% _.each(app.sub_roles[name], function(value, key){ %>
-                  <option value = '<%%= value %>' <%% if(sub_role_present && subrole == value ){ print('selected') } %>  > <%%= key %> </option>
-                <%% }) %>
+          <label>Sub Role:</label>
+          <select class='sub_role_select updater' name='role[subrole]' data-identi='subrole'>
 
+              <%% if(super_role_present && sub_role_present){ %>
+                  <%% if(sub_role_present){ %>
+                    <%%= app.fn.print_options_for_select(app.sub_roles[name], subrole) %>
+                  <%% }else{ %>
+                    <%%= app.fn.print_options_for_select(app.sub_roles[name]) %>
+                  <%% } %>
               <%% } %>
 
           </select>
         </div>
 
         <div class='super_sub_role_container' <%% if(super_sub_role_present) print('style="display:block"');  %>>
-          <select class='super_sub_role_select' name='role[super_subrole]'>
+
+          <label>Super Sub Role:</label>
+          <select class='super_sub_role_select' name='role[super_subrole]' data-identi='age'>
 
             <%% if(sub_role_present){ %>
-              <%% _.each(app.super_sub_roles[subrole], function(value, key){ %>
-                <option value = '<%%= value %>' <%% if(super_sub_role_present && super_subrole == value ){ print('selected') } %>  > <%%= key %> </option>
-              <%% }) %>
-
+              <%% if(super_sub_role_present){ %>
+                <%%= app.fn.print_options_for_select(app.super_sub_roles[subrole], super_subrole) %>
+              <%% }else{ %>
+                <%%= app.fn.print_options_for_select(app.super_sub_roles[subrole]) %>
+              <%% } %>
             <%% } %>
-
 
           </select>
         </div>
 
+      </div>
+
+
+      <div class='cast_role_options' <%% if(super_role_present && name == 'Cast') print('style="display:block"');  %>>
+        <div class='controls'>
+          <label>Age:</label>
+          <select name='role[age]' data-identi='age'>
+            <%% if(typeof age == "undefined"){ %>
+              <%%= app.fn.print_options_for_select(app.ages) %>
+            <%% }else{ %>
+              <%%= app.fn.print_options_for_select(app.ages, age) %>
+            <%% } %>
+          </select>
+        </div>
+
+        <div class='controls'>
+
+          <%% if(typeof gender != 'undefined'){ gender_pref = gender;} else { gender_pref = 'any'; }  %>
+          <input type='radio' value='male' name="role[gender]"  <%% if(gender_pref == 'male'){ print('checked') } %> > Male
+          <input type='radio' value='female' name="role[gender]"  <%% if(gender_pref == 'female'){ print('checked') } %> > Female
+          <input type='radio' value='any' name="role[gender]"  <%% if(gender_pref == 'any'){ print('checked') } %> > No Preference
+          <br/><br/>
+        </div>
+
+
+
+        <div class='controls'>
+          <label>Ethnicity:</label>
+          <select name='role[ethnicity]' data-identi='ethnicity'>
+
+            <%% if(typeof ethnicity == "undefined"){ %>
+              <%%= app.fn.print_options_for_select(app.enthnicities) %>
+            <%% }else{ %>
+              <%%= app.fn.print_options_for_select(app.enthnicities, ethnicity) %>
+            <%% } %>
+          </select>
+        </div>
+
+        <div class='controls'>
+          <label>Height:</label>
+          <select name='role[height]' data-identi='height'>
+            <%% if(typeof height == "undefined"){ %>
+              <%%= app.fn.print_options_for_select(app.heights) %>
+            <%% }else{ %>
+              <%%= app.fn.print_options_for_select(app.heights, height) %>
+            <%% } %>
+          </select>
+        </div>
+
+        <div class='controls'>
+          <label>Build:</label>
+          <select name='role[build]' data-identi='build'>
+
+            <%% if(typeof bodytype == "undefined"){ %>
+              <%%= app.fn.print_options_for_select(app.bodytypes) %>
+            <%% }else{ %>
+              <%%= app.fn.print_options_for_select(app.bodytypes, bodytype) %>
+            <%% } %>
+          </select>
+        </div>
+
+        <div class='controls'>
+          <label>Hair Color:</label>
+          <select name='role[haircolor]' data-identi='haircolor'>
+
+            <%% if(typeof haircolor == "undefined"){ %>
+              <%%= app.fn.print_options_for_select(app.hair_colors) %>
+            <%% }else{ %>
+              <%%= app.fn.print_options_for_select(app.hair_colors, haircolor) %>
+            <%% } %>
+          </select>
+        </div>
+
+        <div class='controls'>
+          <label>Role Title:</label>
+          <%% if(typeof cast_title == "undefined"){ %>
+            <input tyle='text' name='role[cast_title]' class='hinted' data-hint='Some samples: <br/>The Hero<br/>Damsel in Distress<br/>The Villian'>
+          <%% }else{ %>
+            <input tyle='text' name='role[cast_title]' value='<%%= cast_title %>' class='hinted' data-hint='Some samples: <br/>The Hero<br/>Damsel in Distress<br/>The Villian'>
+          <%% } %>
 
       </div>
+
     </div>
 
+    <div class='controls'>
+      <label>Role description:</label>
+      <%% if(typeof description == "undefined"){ %>
+        <textarea name='role[description]' class='hinted' data-hint='For example: <br/> I need someone who is ok doing night shoots and can play a really rough character. This is NOT something for pretty boys!'></textarea>
+      <%% }else{ %>
+        <textarea name='role[description]' class='hinted' data-hint='For example: <br/> I need someone who is ok doing night shoots and can play a really rough character. This is NOT something for pretty boys!'><%%= description %></textarea>
+      <%% } %>
+    </div>
 
     <div class='control-group'>
       <div class='controls'>
-        <input type='submit'>
+
+        <%% if(typeof approved_user != 'undefined' && approved_user != null){ %>
+          <input type='submit' class='submit_role' value='Add <%%= approved_user.name %> to team'>
+        <%% }else{ %>
+          <input type='submit' class='submit_role' value='Add role to project'>
+        <%% } %>
+
+        
       </div>
     </div>
     

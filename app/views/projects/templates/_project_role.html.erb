@@ -1,4 +1,4 @@
-<script type="script/template" id='project_role_template'>
+<script type="script/template" id='project_filled_role_template'>
   <div class='pull-left user_img'>
     <img src='<%%= approved_user.profile_pic %>' class='img-circle'>
   </div>
@@ -16,8 +16,31 @@
   </div>
 
   <div class='role_actions'>
-    <a href='' class='delete_role'><i class='icon-minus-sign'></i> delete this person</a>
-    
-    <a href='' class='edit_role'><i class='icon-pencil'></i> edit role</a>
+    <a href='#' class='delete_role'><i class='icon-minus-sign'></i> delete this person</a> 
+    <a href='#' class='edit_role'><i class='icon-pencil'></i> edit role</a>
+  </div>
+</script>
+
+
+<script type="script/template" id='project_unfilled_role_template'>
+  <div class='pull-left role_img'>
+    <img src='/assets/role-<%%= gender %>-default.png'>
+  </div>
+  <div class='pull-left role_details'>
+    <div class='role_name'>
+      <%%= name %>
+    </div>    
+    <div class='role_sub'>
+      <%%= subrole %> <%%= super_subrole %>
+    </div>
+
+    <div class='role_description'>
+      <%%= description %>
+    </div>    
+  </div>
+
+  <div class='role_actions'>
+    <a href='#' class='delete_role'><i class='icon-minus-sign'></i> delete this role</a> 
+    <a href='#' class='edit_role'><i class='icon-pencil'></i> edit role</a>
   </div>
 </script>

@@ -60,7 +60,8 @@ $(document).ready ()->
         app.fn.adjust_slider_height()
         data.progress_div.hide()
         if typeof data.result == 'object'
-          data.crop_btn.attr('data-imgUrl', image_url)
+          data.crop_btn.attr('data-orgImgUrl', image_url)
+          data.crop_btn.attr('data-prevImgUrl', image_url)
           data.crop_btn.attr('data-orgWidth', data.result['original_width'])
           data.crop_btn.attr('data-orgHeight', data.result['original_height'])
           data.crop_btn.show()
@@ -124,24 +125,7 @@ $(document).ready ()->
     return false
 
 
-  $('body').on 'click', '.btn.crop_image', (event) ->
-    control_group_div = $(event.target).closest('.control-group')
-    image_container = control_group_div.find('.image_preview_container')
-    url = $(event.target).attr('data-imgUrl')
-    original_width = $(event.target).attr('data-orgWidth')
-    original_height = $(event.target).attr('data-orgHeight')
-    $('#crop_image_modal').on 'shown', ()->
-      app.jcrop_object = app.fn.init_jcrop($('#crop_image_modal').find('#cropping_image'), control_group_div, original_width, original_height)  
-    $('#crop_image_modal').on 'hidden', ()->
-      app.jcrop_object.release()
-    $('#crop_image_modal').find('#cropping_image').attr('src', url)
-    $('#crop_image_modal').modal('show')
-    
-    return false
-
-  $('body').on 'click', '.btn.reset_crop', (event) ->
-    app.fn.reset_cropped_image("150px","150px")
-    return false
+  app.fn.init_image_crop_handlers()
 
 
   # this will toggle textboxes based on radio choice,

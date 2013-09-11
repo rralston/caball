@@ -8,6 +8,7 @@ app.views.searched_users = Backbone.View.extend
   render: ()->
     this.$el.html(this.template(this.collection.toJSON()))
     this.collection.forEach(this.renderEach, this)
+    this.$el.prepend('<a class="close" href="#">&times;</a>')
     return this
 
   renderEach: (searched_user)->

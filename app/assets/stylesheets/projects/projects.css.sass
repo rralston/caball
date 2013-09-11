@@ -514,6 +514,9 @@ fieldset
     .time_field 
       width: 70px !important
 
+    input[type="radio"], input[type="checkbox"]
+      margin: 0px !important
+
 
 
 #add_roles_div
@@ -523,6 +526,8 @@ fieldset
   width: 600px
   .sub_role_container, .super_sub_role_container
     display: none
+  .cast_role_options
+    display: none
 
 .search_users
   position: relative
@@ -530,6 +535,14 @@ fieldset
 #searched_users_for_role
   background: white
   position: absolute
+  border: 1px solid grey
+  border-radius: 5px
+  .close
+    margin-right: 10px
+  #searched_users_list
+    max-height: 200px
+    overflow: hidden
+    overflow-y: scroll
   .searched_user
     clear: both
     margin: 10px
@@ -569,10 +582,18 @@ fieldset
       background-color: #00FFFE
       color: black
 
+#filled_roles, #unfilled_roles
+  max-height: 335px
+  overflow-y: scroll
+  margin-bottom: 10px
+
+.submit_role
+  margin-top: 10px
+
 .project_role
   clear: both
   width: 250px
-  margin: 10px
+  margin: 15px 10px
   height: 70px
   .user_img
     width: 50px
@@ -608,6 +629,18 @@ fieldset
   .select_user
     background-color: #00FFFE
     color: black
+  .role_img
+    width: 45px
+    text-align: center
+  .role_details
+    width: 190px
+    margin-left: 15px
+    line-height: 18px
+    font-size: 13px
+  .role_description
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
 
 #crop_image_modal
   #crop_area

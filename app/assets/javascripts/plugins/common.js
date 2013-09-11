@@ -430,9 +430,15 @@ app.fn.init_super_roles_select_handler = function(super_role_selector_class, sub
         sub_role_select.trigger('change');
 
         sub_role_container.show();
-
-        app.fn.adjust_slider_height();
       }
+
+      if(selected_val == 'Cast'){
+        $(event.target).closest('.control-group').find('.cast_role_options').show();
+      }else{
+        $(event.target).closest('.control-group').find('.cast_role_options').hide();
+      }
+
+      app.fn.adjust_slider_height();
     }
   });
 
@@ -444,8 +450,8 @@ app.fn.init_super_roles_select_handler = function(super_role_selector_class, sub
       // if case is to prevent the function to be called when the chil select are chaged and event propagates.
       if($(event.target).hasClass(sub_role_selector_class)){
         select_div = $('.'+sub_role_selector_class)
-        selected_val = select_div.val()
-        // selected_val = $(event.target).val();
+        selected_sub_role_val = select_div.val()
+        // selected_sub_role_val = $(event.target).val();
         super_sub_role_container = $(event.target).closest('.control-group').find('.super_sub_role_container');
 
         super_sub_role_select = super_sub_role_container.find('select');
@@ -455,11 +461,11 @@ app.fn.init_super_roles_select_handler = function(super_role_selector_class, sub
         super_sub_role_select.val('');
 
         // check if the role has sub roles.
-        if(_.size(super_sub_roles[selected_val]) > 0){
+        if(_.size(super_sub_roles[selected_sub_role_val]) > 0){
 
           // build options
           options = '';
-          _.each(super_sub_roles[selected_val], function(value, key){
+          _.each(super_sub_roles[selected_sub_role_val], function(value, key){
             options += '<option value="' + value + '">' + key + '</option>';
           });
 
@@ -533,61 +539,170 @@ app.fn.init_show_post_button_handler = function(){
   });
 }
 
-app.fn.init_jcrop = function(element, parent, original_width, original_height){
+app.fn.init_jcrop = function(element, parent, original_width, original_height, original_image_url){
 
   // this will contain the parent of the image that is being cropped. User for resetting the crop.
   app.cropper_parent = parent
+
+  // these global variable are used in the handler after cropping is done. Check app.fn.crop_now_method
+  // original image that is being cropped
+  app.cropper_original_image_url =  original_image_url
+  app.cropper_original_width    = original_width
+  app.cropper_original_height   = original_height
+
+  // intialze crop values with null
+  app.crop_values = {
+    x: null,
+    y: null,
+    w: null,
+    h: null
+  }
 
   var jcrop_object; 
 
   element.Jcrop({
     trueSize: [original_width, original_height],
     onSelect: function(c){
-      updateCrops(c)
+      updateCropValues(c)
     },
     onChange: function(c){
-      updateCrops(c)
+      updateCropValues(c)
     }
   }, function(){
     jcrop_object = this;
   });
 
-  updateCrops = function (c){
-    parent.find('.crop_x').val(c.x)
-    parent.find('.crop_y').val(c.y)
-    parent.find('.crop_w').val(c.w)
-    parent.find('.crop_h').val(c.h)
+  updateCropValues = function (c){
+    app.crop_values.x = c.x
+    app.crop_values.y = c.y
+    app.crop_values.w = c.w
+    app.crop_values.h = c.h
+    
     updatePreview(c)
   }
 
   updatePreview = function(c){
     // previewDiv = parent.find('.crop_preview')
-    main_img_div = parent.find('.image_preview_container')
-    main_img_div.css({
-      width: Math.round((150/c.w) * original_width) + 'px',
-      height: Math.round((150/c.h) * original_height) + 'px',
-      marginLeft: '-' + Math.round((150/c.w) * c.x) + 'px',
-      marginTop: '-' + Math.round((150/c.h) * c.y) + 'px'
-    })
-    parent.find('.btn.reset_crop').show()
+    // main_img_div = parent.find('.image_preview_container')
+    // main_img_div.css({
+    //   width: Math.round((150/c.w) * original_width) + 'px',
+    //   height: Math.round((150/c.h) * original_height) + 'px',
+    //   marginLeft: '-' + Math.round((150/c.w) * c.x) + 'px',
+    //   marginTop: '-' + Math.round((150/c.h) * c.y) + 'px'
+    // })
+    
+    $('#crop_image_modal').find('.btn.crop_now').show()
   }
 
   return jcrop_object;
 }
-  
-app.fn.reset_cropped_image = function(width, height) {
-  var control_group_div, image_container, parent;
-  control_group_div = app.cropper_parent.closest('.control-group');
-  image_container = control_group_div.find('.image_preview_container');
-  image_container.css({
-    width: width,
-    height: height,
-    marginLeft: "0px",
-    marginTop: "0px"
+
+
+app.fn.init_image_crop_handlers = function(){
+
+  $('body').on('click', '.btn.crop_image', function(event) {
+    var control_group_div, crop_values, image_container, original_height, original_image_url, original_width;
+    
+    control_group_div = $(event.target).closest('.control-group');
+    image_container = control_group_div.find('.image_preview_container');
+    
+    original_image_url = $(event.target).attr('data-orgImgUrl');
+    
+    original_width = $(event.target).attr('data-orgWidth');
+    original_height = $(event.target).attr('data-orgHeight');
+    
+    app.original_crop_values = {
+      x: control_group_div.find('input.crop_x').val(),
+      y: control_group_div.find('input.crop_y').val(),
+      w: control_group_div.find('input.crop_w').val(),
+      h: control_group_div.find('input.crop_h').val()
+    };
+    
+    $('#crop_image_modal').on('shown', function() {
+      app.jcrop_object = app.fn.init_jcrop($('#crop_image_modal').find('#cropping_image'), control_group_div, original_width, original_height, original_image_url);
+    });
+    
+    $('#crop_image_modal').on('hidden', function() {
+      app.jcrop_object.release();
+    });
+    
+    $('#crop_image_modal').find('#cropping_image').attr('src', original_image_url);
+    $('#crop_image_modal').modal('show');
+    
+    return false;
   });
-  parent = control_group_div;
-  parent.find('.crop_x').val('');
-  parent.find('.crop_y').val('');
-  parent.find('.crop_w').val('');
-  parent.find('.crop_h').val('');
-};
+
+  // $('body').on('click', '.btn.reset_crop', function(event) {
+  //   app.fn.reset_cropped_image("150px", "150px");
+  //   return false;
+  // });
+
+}
+
+
+app.fn.crop_now = function(){
+  // app.cropper_parent, app.crop_values, app.copper_original_image_url are set by the app.fn.init_jcrop method
+  app.cropper_parent.find('.crop_x').val(app.crop_values.x);
+  app.cropper_parent.find('.crop_y').val(app.crop_values.y);
+  app.cropper_parent.find('.crop_w').val(app.crop_values.w);
+  app.cropper_parent.find('.crop_h').val(app.crop_values.h);
+
+  img_prev_div = app.cropper_parent.find('.image_preview_container');
+
+  img_prev_div.attr('src', app.cropper_original_image_url);
+
+  img_prev_div.css({
+    width: Math.round((150/app.crop_values.w) * app.cropper_original_width) + 'px',
+    height: Math.round((150/app.crop_values.h) * app.cropper_original_height) + 'px',
+    marginLeft: '-' + Math.round((150/app.crop_values.w) * app.crop_values.x) + 'px',
+    marginTop: '-' + Math.round((150/app.crop_values.h) * app.crop_values.y) + 'px'
+  });
+
+  app.cropper_parent.find('.btn.reset_crop').show()
+}
+
+  
+// app.fn.reset_cropped_image = function(width, height) {
+//   var control_group_div, image_container, parent;
+//   control_group_div = app.cropper_parent.closest('.control-group');
+//   image_container = control_group_div.find('.image_preview_container');
+//   image_container.css({
+//     width: width,
+//     height: height,
+//     marginLeft: "0px",
+//     marginTop: "0px"
+//   });
+//   // parent = control_group_div;
+//   // parent.find('.crop_x').val('');
+//   // parent.find('.crop_y').val('');
+//   // parent.find('.crop_w').val('');
+//   // parent.find('.crop_h').val('');
+// };
+
+app.fn.print_options_for_select = function(options_array, selected_option){
+  string = '';
+
+  _.each(options_array, function(value, key){
+
+    if( typeof selected_option != 'undefined' && value == selected_option){
+      string = string + '<option value='+ value +' selected>'+ key +'</option>';
+    }else{
+      string = string + '<option value='+ value +'>'+ key +'</option>';
+    }
+
+  });
+
+  return string;
+}
+
+app.fn.set_checkbox_limit = function(selector, limit){
+  $('body').on('click', selector, function(event){
+    var selected_inputs_size = $(selector+':checked').size()
+    if(selected_inputs_size > limit)
+      return false;
+    else
+      return true
+
+  });
+}
+

@@ -5,7 +5,22 @@ class Role < ActiveRecord::Base
 
   accepts_nested_attributes_for :applications
 
-  attr_accessible :name, :description, :filled, :subrole, :gender, :super_subrole, :applications_attributes
+  attr_accessible :name, :description, :filled, :subrole, :gender, :super_subrole, :applications_attributes,
+                  :age, :ethnicity, :height, :build, :haircolor, :cast_title
+
+  before_save :reset_cast_role_options
+
+  def reset_cast_role_options
+    # if role is not cast. Reset these optional fields to nil
+    if self.name != 'Cast'
+      self.age        = nil
+      self.ethnicity  = nil
+      self.height     = nil
+      self.build      = nil
+      self.haircolor  = nil
+      self.cast_title = nil
+    end
+  end
 
   def serializable_hash(options)
     hash = super(options)
@@ -43,6 +58,10 @@ class Role < ActiveRecord::Base
     self.applications.select{ |application|
       application.approved
     }.map(&:user).first
+  end
+
+  def reset_optional_fields
+    update_attributes(:subrole => nil, :super_subrole => nil)
   end
 
 end

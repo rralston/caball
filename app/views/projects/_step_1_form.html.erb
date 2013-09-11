@@ -29,10 +29,10 @@
 
         <div class='row'>
           <div class='span3'>
-            <%= photo.hidden_field :crop_x, :class => 'crop_x' %>
-            <%= photo.hidden_field :crop_y, :class => 'crop_y' %>
-            <%= photo.hidden_field :crop_w, :class => 'crop_w' %>
-            <%= photo.hidden_field :crop_h, :class => 'crop_h' %>
+            <%= photo.text_field :crop_x, :class => 'crop_x' %>
+            <%= photo.text_field :crop_y, :class => 'crop_y' %>
+            <%= photo.text_field :crop_w, :class => 'crop_w' %>
+            <%= photo.text_field :crop_h, :class => 'crop_h' %>
             <label class="control-label">Project Image</label>
             <div class="controls">
               <div class='uploader_btn'>
@@ -40,6 +40,10 @@
                 <div class='format_txt'> <span class='before_dot'>JPEG, PNG or BMP</span> 10MB File limit</div>
                 <div class='size_txt'><span class='before_dot'>Atleast 640x480</span> 4:3 aspect ratio</div>
                 <%= photo.file_field :image, :validate => { :presence => false } %>
+              </div>
+
+              <div class='div_hint'>
+                This is one of the first things people see so pick a good one
               </div>
 
             </div>
@@ -60,8 +64,8 @@
               </div>
 
               <div class='controls image_btns'>
-                <a href="" class='btn crop_image pull-left' data-imgUrl='<%= photo.object.image.url %>' data-orgWidth='<%= photo.object.original_width %>' data-orgHeight='<%= photo.object.original_height %>'  style='display: inline'>Crop</a>
-                <a href="" class='btn reset_crop pull-right' data-imgUrl='<%= photo.object.image.url %>'>Reset</a>
+                <a href="" class='btn crop_image pull-left' data-orgImgUrl='<%= photo.object.image.url %>' data-orgWidth='<%= photo.object.original_width %>' data-orgHeight='<%= photo.object.original_height %>' data-prevImgUrl='<%= photo.object.image.url(:original) %>'  style='display: inline'>Crop</a>
+                <!-- <a href="" class='btn reset_crop pull-right' data-imgUrl='<%= photo.object.image.url %>'>Reset</a> -->
               </div>
             <% else %>
               <div class="controls image_container" style='display:none;'>
@@ -69,7 +73,7 @@
               </div>
               <div class='controls image_btns'>
                 <a href="" class='btn crop_image pull-left' data-imgUrl=''>Crop</a>
-                <a href="" class='btn reset_crop pull-right' data-imgUrl=''>Reset</a>
+                <!-- <a href="" class='btn reset_crop pull-right' data-imgUrl=''>Reset</a> -->
               </div>
             <% end %>
           </div>
@@ -86,21 +90,30 @@
     <div class="control-group">
     <%= p.label :title, :class => 'control-label' %>
       <div class="controls">
-      <%= p.text_field :title, :class => 'text_field required' %>
+        <%= p.text_field :title, :class => 'text_field required' %>
+        <div class='div_hint'>
+          The best titles are short, simple and to the point
+        </div>
       </div>
     </div>
   
     <div class="control-group">
       <%= p.label :description, :class => 'control-label' %>
       <div class="controls">
-        <%= p.text_area :description, :class => 'textarea', :rows => "5" %> 
+        <%= p.text_area :description, :class => 'textarea', :rows => "5" %>
+        <div class='div_hint'>
+          If you had to describe your project in 1-2 sentences, what would you say?
+        </div>
       </div>
     </div>
 
     <div class="control-group">
-      <%= p.label :headline, :class => 'control-label' %>
+      <%= p.label :headline, "Your quote", :class => 'control-label' %>
       <div class="controls">
-        <%= p.text_area :headline, :class => 'textarea', :rows => "5" %> 
+        <%= p.text_area :headline, :class => 'textarea hinted', :rows => "5", "data-hint" => 'Here\'s a sample: "Once more into the fray, into the last good fight I\'ll ever know. Live and die on this day, Live and die on this day" Liam Neeson, The Grey' %> 
+        <div class='div_hint'>
+          Have an incredible line from script? Or do you want say something what will be highlighted? Here is the place to say it.
+        </div>
       </div>
     </div>
 
@@ -108,7 +121,10 @@
     <div class="control-group">
     <%= p.label :location, :class => 'control-label' %>
       <div class="controls">
-      <%= p.text_field :location, :class => 'text_field' %>
+        <%= p.text_field :location, :class => 'text_field' %>
+        <div class='div_hint'>
+          This si where your primary shooting will take place.
+        </div>
       </div>
     </div>
 
@@ -121,25 +137,27 @@
     <div class="dates-container">
       
       <%= p.fields_for :project_dates do |date| %>
-        <div class='project_imp_date'>
+        
           <%= render :partial => 'projects/imp_dates_input', :locals => { :date => date } %>
-        </div>
+        
       <% end %>
 
       <div id='fields-for-project_dates-list' class='numerous'>
-        <div class='project_imp_date'>
         <%= p.fields_for :project_dates, ImportantDate.new, :child_index => 'replace_this' do |date| %>
           <%= render :partial => 'projects/imp_dates_input', :locals => { :date => date } %>
           <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
         <% end %>
-        </div>
+        
       </div>
 
       <div id='project_dates-list'></div>
       
       <div class="control-group">
         <div class='controls'>
-          <%= link_to 'Add an important Date', '#', :id => 'add-to-project_dates-list' %>    
+          <%= link_to 'Add an important Date', '#', :id => 'add-to-project_dates-list' %>
+          <div class='div_hint'>
+            3 Dates Max
+          </div> 
         </div>
       </div>
 
@@ -150,10 +168,8 @@
       <div class='text-center form_footer'>
         <div class='links'>
           <%= p.submit "Next Step", :class=>'step_1_submit' %>
-          <%= p.submit "Finish! Go to my profile", :class=>'skip step_1_submit' %>
         </div>
-        
-        You are almost done! Go to the next page to enter the fun stuff! Or you can check out profile and enter the rest of the stuff later
+        Nice job so far, in the next step you'll tell people all about the specific aspects of your project
       </div>
     </div>
 

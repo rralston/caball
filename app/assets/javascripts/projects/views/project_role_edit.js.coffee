@@ -8,9 +8,12 @@ app.views.project_role_edit = Backbone.View.extend
   events: 
     'keypress #search_users': 'search_users'
     'submit #project_role_form': 'add_role'
+    'click .close': 'close_users_result'
+    # 'change select': 'update_after_select'
 
   render: ()->
     this.$el.html( this.template(this.model.toJSON()) )
+    app.fn.adjust_slider_height()
     this
 
   search_users: (event) ->
@@ -60,9 +63,46 @@ app.views.project_role_edit = Backbone.View.extend
         # create it self a new model and render the edit view so that the form will be refreshed
         _this.model = new app.models.project_role()
         _this.render()
+
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+
     false
 
   edit_this: (role_model)->
     this.model = role_model
     this.render()
     app.fn.adjust_slider_height()
+
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+
+  close_users_result: (event)->
+    this.$el.find('#searched_users_for_role').hide()
+    this.$el.find('#search_users').val('')
+    false
+
+  # update_after_select: (event)->
+  #   console.log 'in change event'
+  #   select = $(event.target)
+
+  #   console.log select.val()
+
+  #   key = select.attr('data-identi')
+    
+  #   attr_obj = {
+  #     name: '',
+  #     subrole: '',
+  #     super_subrole: '',
+  #     age: '',
+  #     ethnicity: '',
+  #     height: '',
+  #     build: '',
+  #     haircolor: '',
+  #     cast_title: ''
+  #   }
+
+  #   attr_obj[key] = select.val()
+
+  #   this.model.set(attr_obj)
+    
+  #   true
+

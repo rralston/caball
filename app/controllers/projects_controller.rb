@@ -157,6 +157,7 @@ class ProjectsController < ApplicationController
       if @project.update_attributes(params[:project])
         render 'projects/step_2_form', :layout => false
       else
+        debugger
         render :json => false
       end
     else
@@ -189,8 +190,8 @@ class ProjectsController < ApplicationController
 
       role = Role.find(params[:role][:id])
 
-      # making the subroles nil just in case if it as subroles before and when edited the new data doesn't have a subrole.
-      role.update_attributes(:subrole => nil, :super_subrole => nil)
+      # making the subroles nil and cast just in case if it as subroles before and when edited the new data doesn't have a subrole.
+      role.reset_optional_fields
       
       params[:role].delete(:id)
       

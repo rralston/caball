@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130910061644) do
+ActiveRecord::Schema.define(:version => 20130911060934) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -257,6 +257,12 @@ ActiveRecord::Schema.define(:version => 20130910061644) do
     t.string   "subrole"
     t.string   "gender",        :default => "male"
     t.string   "super_subrole"
+    t.string   "age"
+    t.string   "ethnicity"
+    t.string   "height"
+    t.string   "build"
+    t.string   "haircolor"
+    t.string   "cast_title"
   end
 
   create_table "taggings", :force => true do |t|

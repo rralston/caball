@@ -6,15 +6,27 @@ app.views.project_roles = Backbone.View.extend
 
   render: ()->
     this.$el.html(this.template(this.collection.toJSON()))
-    this.collection.forEach(this.renderEach, this)
+    this.collection.filled_roles().forEach(this.renderFilled, this)
+    this.collection.unfilled_roles().forEach(this.renderUnFilled, this)
     return this
 
   render_added_roles: ()->
-    this.$el.find('#project_roles_display_region').html('')
-    this.collection.forEach(this.renderEach, this)
+    this.$el.find('#filled_roles').html('')
+    this.$el.find('#unfilled_roles').html('')
+    this.collection.filled_roles().forEach(this.renderFilled, this)
+    this.collection.unfilled_roles().forEach(this.renderUnFilled, this)
+    app.fn.adjust_slider_height()
     return this    
 
-  renderEach: (project_role)->
+
+  renderFilled: (project_role)->
+    this.$el.find('#filled_roles .empty_message').hide()
     project_role_view = new app.views.project_role({ model: project_role })
-    this.$el.find('#project_roles_display_region').prepend( project_role_view.render().el )
+    this.$el.find('#filled_roles').prepend( project_role_view.render().el )
+    return this
+
+  renderUnFilled: (project_role)->
+    this.$el.find('#unfilled_roles .empty_message').hide()
+    project_role_view = new app.views.project_role({ model: project_role })
+    this.$el.find('#unfilled_roles').prepend( project_role_view.render().el )
     return this

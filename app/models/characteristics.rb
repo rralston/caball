@@ -35,46 +35,58 @@ class Characteristics < ActiveRecord::Base
 
   def self.heights
     {
-      "4'0 - 4'04\""   => "4'0 - 4'04\"",
-      "4'5\" - 4'9\""  => "4'5\" - 4'9\"",
-      "5' - 5'04\""    => "5' - 5'04\"",
-      "5'5\" - 5'09\"" => "5'5\" - 5'09\""
+      "Really short" => "Really short",
+      "Short"        => "Short",
+      "Average"      => "Average",
+      "Tall"         => "Tall",
+      "Really tall"  => "Really tall"
+    }
+  end
+
+  def self.ages
+    {
+      "Kid"          => "Kid",
+      "Teen"         => "Teen",
+      "Young Adult"  => "Young Adult",
+      "Parent"       => "Parent",
+      "Golden Years" => "Golden Years"
     }
     
   end
 
   def self.enthnicities
     {
-      'Asian'            => 'Asian',
-      'black/African'    => 'black/African',
-      'descent'          => 'descent',
-      'white'            => 'white',
-      'pacific islander' => 'pacific islander',
-      'latino/ Hispanic' => 'latino/ Hispanic',
-      'Spanish'          => 'Spanish',
-      'Middle Eastern'   => 'Middle Eastern',
-      'East Indian'      => 'East Indian'
+      "Asian"                     => "Asian",
+      "African American/Black"    => "African American/Black",
+      "Caucasian"                 => "Caucasian",
+      "Pacific Islander"          => "Pacific Islander",
+      "Latino/ Hispanic/ Spanish" => "Latino/ Hispanic/ Spanish",
+      "Middle Eastern"            => "Middle Eastern",
+      "East Indian"               => "East Indian",
+      "Native American"           => "Native American",
+      "Other"                     => "Other"
     }
   end
 
   def self.bodytypes
     {
-      'lean'                 => 'lean',
-      'athletic/toned'       => 'athletic/toned',
-      'Ripped/ body builder' => 'Ripped/ body builder',
-      'plus sized/husky'     => 'plus sized/husky',
-      'large and in charge'  => 'large and in charge'
+      "Lean/Petite"          => 'Lean/Petite',
+      "Athletic/Toned"       => 'Athletic/Toned',
+      "Ripped/ Body Builder" => 'Ripped/ Body Builder',
+      "Plus sized/Husky"     => 'Plus sized/Husky',
+      "Large and in charge"  => 'Large and in charge'
     }
   end
 
   def self.hair_colors
     {
-      'brown'  => 'brown',
-      'blonde' => 'blonde',
-      'black'  => 'black',
-      'red'    => 'red',
-      'grey'   => 'grey',
-      'other'  => 'other'
+      "Brown"  => "Brown",
+      "Blonde" => "Blonde",
+      "Black"  => "Black",
+      "Red"    => "Red",
+      "Grey"   => "Grey",
+      "Bald"   => "Bald",
+      "Other"  => "Other"
     }
   end
 
