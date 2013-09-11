@@ -14,6 +14,7 @@
         <div id='searched_users_for_role'>
 
         </div>
+        
       </div>
     </div>
   </div>
@@ -30,7 +31,6 @@
       
       <div class='control-group'>
         <div class='controls'>
-          
           What is <a href='/users/<%%= approved_user.url_param %>' target='_blank'><%%= approved_user.name %> </a> s Role in your film?
 
           <input type='hidden' class='role_user_id' name='role[applications_attributes][0][user_id]' value='<%%= approved_user.id %>'>

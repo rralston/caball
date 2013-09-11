@@ -577,20 +577,6 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height, o
     app.crop_values.y = c.y
     app.crop_values.w = c.w
     app.crop_values.h = c.h
-    
-    updatePreview(c)
-  }
-
-  updatePreview = function(c){
-    // previewDiv = parent.find('.crop_preview')
-    // main_img_div = parent.find('.image_preview_container')
-    // main_img_div.css({
-    //   width: Math.round((150/c.w) * original_width) + 'px',
-    //   height: Math.round((150/c.h) * original_height) + 'px',
-    //   marginLeft: '-' + Math.round((150/c.w) * c.x) + 'px',
-    //   marginTop: '-' + Math.round((150/c.h) * c.y) + 'px'
-    // })
-    
     $('#crop_image_modal').find('.btn.crop_now').show()
   }
 
@@ -623,7 +609,8 @@ app.fn.init_image_crop_handlers = function(){
     });
     
     $('#crop_image_modal').on('hidden', function() {
-      app.jcrop_object.release();
+      if(typeof app.jcrop_object != 'undefined' )
+        app.jcrop_object.release();
     });
     
     $('#crop_image_modal').find('#cropping_image').attr('src', original_image_url);

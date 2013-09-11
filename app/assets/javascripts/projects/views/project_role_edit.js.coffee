@@ -4,6 +4,7 @@ app.views.project_role_edit = Backbone.View.extend
     this.template = _.template($('#project_role_edit_template').html())
     this.searched_users_collection = new app.collections.searched_users()
     this.searched_users_view = new app.views.searched_users({collection: this.searched_users_collection, role_edit_view: this})
+    console.log('initializing edit view')
 
   events: 
     'keypress #search_users': 'search_users'
@@ -80,29 +81,4 @@ app.views.project_role_edit = Backbone.View.extend
     this.$el.find('#search_users').val('')
     false
 
-  # update_after_select: (event)->
-  #   console.log 'in change event'
-  #   select = $(event.target)
-
-  #   console.log select.val()
-
-  #   key = select.attr('data-identi')
-    
-  #   attr_obj = {
-  #     name: '',
-  #     subrole: '',
-  #     super_subrole: '',
-  #     age: '',
-  #     ethnicity: '',
-  #     height: '',
-  #     build: '',
-  #     haircolor: '',
-  #     cast_title: ''
-  #   }
-
-  #   attr_obj[key] = select.val()
-
-  #   this.model.set(attr_obj)
-    
-  #   true
 

@@ -29,10 +29,10 @@
 
         <div class='row'>
           <div class='span3'>
-            <%= photo.text_field :crop_x, :class => 'crop_x' %>
-            <%= photo.text_field :crop_y, :class => 'crop_y' %>
-            <%= photo.text_field :crop_w, :class => 'crop_w' %>
-            <%= photo.text_field :crop_h, :class => 'crop_h' %>
+            <%= photo.hidden_field :crop_x, :class => 'crop_x' %>
+            <%= photo.hidden_field :crop_y, :class => 'crop_y' %>
+            <%= photo.hidden_field :crop_w, :class => 'crop_w' %>
+            <%= photo.hidden_field :crop_h, :class => 'crop_h' %>
             <label class="control-label">Project Image</label>
             <div class="controls">
               <div class='uploader_btn'>

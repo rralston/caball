@@ -66,13 +66,17 @@
   </div>
 
   <div class="modal-footer">
-    <a href="#" class="btn reset_close" data-dismiss='modal'>Reset</a>
-    <a href="#" class="btn" data-dismiss='modal'>Done</a>
+    <a href="#" class="btn reset_close" data-dismiss='modal'>Cancel</a>
+    <a href="#" class="btn crop_now" data-dismiss='modal' style='display:none;'>Done</a>
   </div>
 
   <script type="text/javascript">
     $('body').on( 'click', '.btn.reset_close', function(event){
-      app.fn.reset_cropped_image("150px","150px");
+      // app.fn.reset_cropped_image("150px","150px");
+    });
+
+    $('body').on( 'click', '.btn.crop_now', function(event){
+      app.fn.crop_now();
     });
 
   </script>
