@@ -14,10 +14,18 @@ $ ->
 		event.stopPropagation()
 		event.preventDefault()
 
-	$('#Cast').unbind('click').click (event) ->
-		if $(this).is(':checked')
-			$(".cast-extn").show(1000)
-		else
-			$(".cast-extn").find(':checked').each () ->
-				$(this).removeAttr('checked')
-			$(".cast-extn").hide(1000)
+	$('body').on 'click', 'input[name=roles]', (event)->
+		
+		switch $(this).val()
+			# add more when clauses here if required in future.
+			when 'Cast'
+				if $(this).is(':checked')
+					# show the extra options for search
+					$(".cast-extn").show(1000)
+				else
+					# find teh checked ones and uncheck those before hiding. 
+					$(".cast-extn").find(':checked').each () ->
+						$(this).removeAttr('checked')
+					$(".cast-extn").hide(1000)
+
+

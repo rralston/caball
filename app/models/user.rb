@@ -427,7 +427,7 @@ class User < ActiveRecord::Base
   end
 
   def self.recently_updated(page = nil, per_page = nil)
-    Kaminari.paginate_array(User.order('updated_at DESC')).page(page).per(per_page)
+    Kaminari.paginate_array(User.order('updated_at DESC')).per_page_kaminari(page).per(per_page)
   end
 
   def followed_by_user?(user)

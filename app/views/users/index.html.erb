@@ -61,13 +61,13 @@
           <span class="shrink-anim"><img src="/assets/opth2.png"></span>
           <h2 class='regular expand shrinked'>Roles</h2>
           <div class='srchopts'>
-            <% User.types.keys.each do |role| %>
+            <% User.types.each_with_index do |(key, value), index| %>
               <div class="srchopt">
                 <div class="chkboxwrap">
-                  <input type="checkbox" name='roles' value='<%= role %>' id='<%= role %>' />
-                  <label class="chklabel" for="<%= role %>"></label>
+                  <input type="checkbox" name='roles' value='<%= value %>' id='<%= value %>' />
+                  <label class="chklabel" for="<%= value %>"></label>
                 </div>
-                <span class="chktxt"><%= role %></span>
+                <span class="chktxt"><%= key %></span>
                 
               </div>
             <% end %>
