@@ -466,7 +466,7 @@ class User < ActiveRecord::Base
       #}
     end
 
-    Kaminari.paginate_array(users).page(page).per(per_page)
+    Kaminari.paginate_array(users).per_page_kaminari(page).per(per_page)
   end
 
   def self.delete_empty_values hash

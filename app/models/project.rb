@@ -211,7 +211,7 @@ class Project < ActiveRecord::Base
   end
 
   def self.recent_projects(page = nil, per_page = 10)
-    Kaminari.paginate_array(recently_launched).page(page).per(per_page)
+    Kaminari.paginate_array(recently_launched).per_page_kaminari(page).per(per_page)
   end
 
   def self.order_by_new(projects)
@@ -289,7 +289,7 @@ class Project < ActiveRecord::Base
 
 
 
-    Kaminari.paginate_array( projects ).page(page).per(per_page)
+    Kaminari.paginate_array( projects ).per_page_kaminari(page).per(per_page)
   end
 
   def self.tested

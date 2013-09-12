@@ -133,7 +133,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.search_all_with_pagination(query, page, per_page = 10)
-    Kaminari.paginate_array( Event.search_all(query) ).page(page).per(per_page)
+    Kaminari.paginate_array( Event.search_all(query) ).per_page_kaminari(page).per(per_page)
   end
 
 
@@ -141,7 +141,7 @@ class Event < ActiveRecord::Base
     search_result = Event.search_all(query)
     ordered = Event.order_by_new(search_result).reverse
     if page.present?
-      Kaminari.paginate_array( ordered ).page(page).per(per_page) 
+      Kaminari.paginate_array( ordered ).per_page_kaminari(page).per(per_page) 
     else
       ordered
     end
@@ -151,7 +151,7 @@ class Event < ActiveRecord::Base
     search_result = Event.search_all(query)
     ordered = Event.order_by_popularity(search_result).reverse
     if page.present?
-      Kaminari.paginate_array( ordered ).page(page).per(per_page) 
+      Kaminari.paginate_array( ordered ).per_page_kaminari(page).per(per_page) 
     else
       ordered
     end 
@@ -161,7 +161,7 @@ class Event < ActiveRecord::Base
     search_result = Event.search_all(query)
     ordered = Event.order_by_start_date(search_result).reverse
     if page.present?
-      Kaminari.paginate_array( ordered ).page(page).per(per_page) 
+      Kaminari.paginate_array( ordered ).per_page_kaminari(page).per(per_page) 
     else
       ordered
     end 
@@ -189,7 +189,7 @@ class Event < ActiveRecord::Base
       Event.newly_added
     else
       debugger
-      Kaminari.paginate_array(Event.newly_added).page(page).per(per_page)
+      Kaminari.paginate_array(Event.newly_added).per_page_kaminari(page).per(per_page)
     end
   end
 
@@ -197,7 +197,7 @@ class Event < ActiveRecord::Base
     if page.nil?
       Event.popular
     else
-      Kaminari.paginate_array(Event.popular).page(page).per(per_page)
+      Kaminari.paginate_array(Event.popular).per_page_kaminari(page).per(per_page)
     end
   end
 
@@ -205,7 +205,7 @@ class Event < ActiveRecord::Base
     if page.nil?
       Event.date_ordered
     else
-      Kaminari.paginate_array(Event.date_ordered).page(page).per(per_page)
+      Kaminari.paginate_array(Event.date_ordered).per_page_kaminari(page).per(per_page)
     end
   end
 
@@ -213,7 +213,7 @@ class Event < ActiveRecord::Base
     if page.nil?
       Event.order('created_at DESC')
     else
-      Kaminari.paginate_array(Event.order('created_at DESC')).page(page).per(per_page)
+      Kaminari.paginate_array(Event.order('created_at DESC')).per_page_kaminari(page).per(per_page)
     end
   end
 
