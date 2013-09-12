@@ -59,7 +59,7 @@ class Project < ActiveRecord::Base
 
   def display_photo
     if photos.present? 
-      photos.first.image.url(:large) 
+      photos.first.image.url(:original) 
     else
       # TODO: Change this to default project image.
       "/assets/actor.png"

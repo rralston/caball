@@ -167,7 +167,9 @@ class EventsController < ApplicationController
 
       file_url = {
         :url => url,
-        :id => photo_object.reload.id
+        :id => photo_object.reload.id,
+        :original_width => photo_object.reload.original_width,
+        :original_height => photo_object.reload.original_height
       }
 
     end

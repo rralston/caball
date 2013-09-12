@@ -35,8 +35,16 @@ app.fn.initialize_date_picker = function(selector){
   });
 }
 
-app.fn.initialize_time_autocomplete = function(selector){
-  $(selector).timeAutocomplete();
+app.fn.initialize_time_autocomplete = function(element){
+  element.timeAutocomplete({
+    formatter: 'ampm',
+    empty:  {
+              h: '12',
+              m: '00',
+              sep: ':',
+              postfix: ' PM'
+            }
+  });
 }
 
 

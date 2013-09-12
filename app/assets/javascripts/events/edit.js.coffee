@@ -3,21 +3,24 @@ $(document).ready ()->
 
   Numerous.init
     'other_important_dates-list':
-      'add' : ()->
-        app.fn.initialize_datetime_picker('.date_time_field')
+      'add' : (added_form_element)->
+        window.xy = added_form_element
+        app.fn.initialize_date_picker('.date_field')
+        app.fn.initialize_time_autocomplete(added_form_element.find('.time_field'))
         $('.new_event').enableClientSideValidations();
       'remove': ()->
-        console.log "in remove"
         $('.new_event').enableClientSideValidations();
     'event_photos-list':
       'add' : (added_form_element)->
-        console.log 'in add'
         app.fn.init_image_file_uploader(added_form_element.find('input[type=file]'))
       
         
+  app.fn.initialize_date_picker('.date_field')
+  app.fn.initialize_time_autocomplete($('.time_field'))
 
-  app.fn.initialize_datetime_picker('.date_time_field')
+  # app.fn.initialize_datetime_picker('.date_time_field')
 
+  app.fn.init_image_crop_handlers()
 
   $('#event_tags').tagit
     sortable: true
@@ -46,6 +49,9 @@ $(document).ready ()->
 
           data.image_container = data.control_group_div.find('.image_preview_container')
           data.image_container.attr('src', '')
+
+          data.crop_btn = data.control_group_div.find('.btn.crop_image')
+
           data.submit()
         else
           alert('The file you selected is not a jpeg or png image file')
@@ -75,5 +81,13 @@ $(document).ready ()->
         data.image_container.show()
         app.fn.adjust_slider_height()
         data.progress_div.hide()
+
+        if typeof data.result == 'object'
+          data.crop_btn.attr('data-orgImgUrl', image_url)
+          data.crop_btn.attr('data-prevImgUrl', image_url)
+          data.crop_btn.attr('data-orgWidth', data.result['original_width'])
+          data.crop_btn.attr('data-orgHeight', data.result['original_height'])
+          data.crop_btn.show()
+
 
   app.fn.init_image_file_uploader('form.edit_event, form.new_event')

@@ -59,9 +59,9 @@
 
           <%= event.fields_for :start, (@event.start || ImportantDate.new ) do |start| %>
             <div class='control-group'>
-              <%= start.label :start, 'Start Date and Time', :class => 'control-label' %>
+              <%= start.label :start, 'Start Date', :class => 'control-label' %>
               <div class='controls'>
-                <%= start.text_field :date_time, :class=>'date_time_field' %> 
+                <%= start.text_field :date, :class => 'date_field' %> at <%= start.text_field :time_string, :class => 'time_field' %>
                 <%= start.hidden_field :is_start_date, :value=>'1' %> 
               </div>
             </div>
@@ -69,9 +69,9 @@
 
           <%= event.fields_for :end, (@event.end || ImportantDate.new ) do |end_date| %>
             <div class='control-group'>
-              <%= end_date.label :end, 'End Date and Time' , :class => 'control-label' %>
+              <%= end_date.label :end, 'End Date' , :class => 'control-label' %>
               <div class='controls'>
-                <%= end_date.text_field :date_time, :class=>'date_time_field' %> 
+                <%= end_date.text_field :date, :class => 'date_field' %> at <%= end_date.text_field :time_string, :class => 'time_field' %>
                 <%= end_date.hidden_field :is_end_date, :value=>'1' %> 
               </div>
             </div>
@@ -109,6 +109,11 @@
               <div class='span3'>
                 <div class="">
 
+                  <%= event_main_photo.text_field :crop_x, :class => 'crop_x' %>
+                  <%= event_main_photo.text_field :crop_y, :class => 'crop_y' %>
+                  <%= event_main_photo.text_field :crop_w, :class => 'crop_w' %>
+                  <%= event_main_photo.text_field :crop_h, :class => 'crop_h' %>
+
                   <div class='controls upload_progress'>
                     Upload Progress:
                     <div class='progress'>
@@ -118,9 +123,22 @@
 
                   <!-- if image exits, allow to change it -->
                   <% if event_main_photo.object.image.present? %>
-                    <img src=<%= event_main_photo.object.image.url(:medium) %> class="img-rounded image_preview_container" >
+                    <div class="controls image_container">
+                      <img src=<%= event_main_photo.object.image.url(:medium) %> class="img-rounded image_preview_container" >
+                    </div>
+
+                    <div class='controls image_btns'>
+                      <a href="" class='btn crop_image pull-left' data-orgImgUrl='<%= event_main_photo.object.image.url %>' data-orgWidth='<%= event_main_photo.object.original_width %>' data-orgHeight='<%= event_main_photo.object.original_height %>' data-prevImgUrl='<%= event_main_photo.object.image.url(:original) %>'  style='display: inline'>Crop</a>
+                    </div>
+
+
                   <% else %>
-                    <img src='' class="img-rounded image_preview_container" >
+                    <div class="controls image_container">
+                      <img src='' class="img-rounded image_preview_container" >
+                    </div>
+                    <div class='controls image_btns'>
+                      <a href="" class='btn crop_image pull-left' data-imgUrl='' style='display: none;'>Crop</a>
+                    </div>
                   <% end %>
 
                   <div class="controls">
@@ -308,3 +326,5 @@
     <% end %>
   </div>
 </div>
+
+<%= render :partial => 'application/crop_image_modal' %>

@@ -56,7 +56,7 @@ var Projects = {
             app.fn.resize_form()
             app.fn.initialize_date_picker('.date_field')
             $('.project-save-form').enableClientSideValidations()
-            app.fn.initialize_time_autocomplete('.time_field')
+            app.fn.initialize_time_autocomplete(added_form_element.find('.time_field'))
             
             new_imp_dates = Numerous.count(['project_dates-list'])
 
