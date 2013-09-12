@@ -472,7 +472,7 @@ class User < ActiveRecord::Base
     followers.includes?(user)
   end
 
-  def self.filter_all(users = nil, query = nil, location = nil, radius = 100,  talents = nil, cast_hash = nil, page = nil, per_page = nil)
+  def self.filter_all(users = nil, query = nil, location = nil, radius = 100,  talents = nil,  sub_talents = nil, cast_hash = nil, page = nil, per_page = nil)
 
     users = User if users.nil?
 
@@ -492,6 +492,25 @@ class User < ActiveRecord::Base
         users = users.joins(:characteristics).where('characteristics.'+key.to_s+' in (?)', val)
       end
 
+    end
+
+    if talents and !talents.empty? and sub_talents.present? 
+      # sub_talents = [sub_talents] if !sub_talents.kind_of?(Array)
+
+      talents_with_sub_talents = sub_talents.keys
+
+      talents_with_out_sub_talents = talents - talents_with_sub_talents
+
+      if talents_with_out_sub_talents.present?
+        talents_with_sub_talents.each do |super_talent|
+          users = users.joins(:talents).where('(talents.name = (?)) OR ( talents.name = (?) and talents.sub_talent in (?))',talents_with_out_sub_talents, super_talent, sub_talents[super_talent])
+        end
+      else
+        talents_with_sub_talents.each do |super_talent|
+          users = users.joins(:talents).where('talents.name = (?) and talents.sub_talent in (?)', super_talent, sub_talents[super_talent])
+        end
+      end
+      
     end
 
     if talents and !talents.empty?
