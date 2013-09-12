@@ -15,7 +15,10 @@ $ ->
 		event.preventDefault()
 
 	$('body').on 'click', 'input[name=roles]', (event)->
+
+		show_sub_role_options($(event.target))
 		
+		# to handle any extra options to show like height, ethnicity for Cast
 		switch $(this).val()
 			# add more when clauses here if required in future.
 			when 'Cast'
@@ -28,4 +31,18 @@ $ ->
 						$(this).removeAttr('checked')
 					$(".cast-extn").hide(1000)
 
+
+	
+	show_sub_role_options = (element) ->
+		elem_wrapper = element.closest('.role_search_wrap')
+		sub_type_div = elem_wrapper.find('.srchopt.sub_type')
+
+		if sub_type_div.size() > 0
+			# i.e., sub types exist.
+			if element.is(':checked')
+				sub_type_div.show(500)
+			else
+				sub_type_div.find(':checked').each () ->
+					$(this).removeAttr('checked')
+				# sub_type_div.hide(500)
 

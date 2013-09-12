@@ -22,9 +22,13 @@ class UsersController < ApplicationController
           params[:roles].delete('') # delete empty string that is appended in few cases
         end
 
-        roles    = params[:roles]
-        search   = params[:search] || params[:keyword]
-        location = params[:location]
+        sub_roles = params[:sub_talents]
+        
+        roles     = params[:roles]
+        
+        search    = params[:search] || params[:keyword]
+        location  = params[:location]
+        
         cast_hash = {
           :height     => params[:height],
           :ethnicity  => params[:ethnicity],
@@ -47,7 +51,7 @@ class UsersController < ApplicationController
           to_be_filtered_users = current_user.send(params[:people])
         end
 
-        @users = User.filter_all(to_be_filtered_users, search, location, distance, roles, cast_hash, page, USERS_PER_PAGE_IN_INDEX)
+        @users = User.filter_all(to_be_filtered_users, search, location, distance, roles, sub_roles, cast_hash, page, USERS_PER_PAGE_IN_INDEX)
       end
     else
       @users = User.recently_updated
@@ -58,7 +62,7 @@ class UsersController < ApplicationController
       format.html # index.html.erb
       format.json { 
         if current_user.present?
-          @users = @users - [current_user]
+          # @users = @users - [current_user]
         end
         render :json => @users.to_a.to_json(:include => :followers, :check_user => current_user) 
       }

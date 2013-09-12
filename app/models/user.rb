@@ -495,6 +495,9 @@ class User < ActiveRecord::Base
     end
 
     if talents and !talents.empty? and sub_talents.present? 
+      
+      talents = [talents] if !talents.kind_of?(Array)
+
       # if sub talents are also searched for 
       talents_with_sub_talents = sub_talents.keys
 
@@ -506,13 +509,19 @@ class User < ActiveRecord::Base
         query_string = "(talents.name IN #{sql_array_for_in})"
 
         query_string = query_string + 'OR' + talents_with_sub_talents.collect { |super_talent|
+
+          sub_talents[super_talent] = [sub_talents[super_talent]] if !sub_talents[super_talent].kind_of?(Array)
           sql_array_for_in = sub_talents[super_talent].to_s.gsub(/]/, ')').gsub(/\[/, '(')
+            
           "( talents.name = '#{super_talent}' AND talents.sub_talent in #{sql_array_for_in} )"
         }.join(' OR ')
 
       else
         query_string = talents_with_sub_talents.collect { |super_talent|
+          sub_talents[super_talent] = [sub_talents[super_talent]] if !sub_talents[super_talent].kind_of?(Array)
+          
           sql_array_for_in = sub_talents[super_talent].to_s.gsub(/]/, ')').gsub(/\[/, '(')
+
           "( talents.name = '#{super_talent}' AND talents.sub_talent in #{sql_array_for_in} )"
         }.join(' OR ')
 
