@@ -44,5 +44,5 @@ $ ->
 			else
 				sub_type_div.find(':checked').each () ->
 					$(this).removeAttr('checked')
-				# sub_type_div.hide(500)
+				sub_type_div.hide(500)
 
