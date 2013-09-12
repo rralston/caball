@@ -326,12 +326,26 @@ describe User do
           FactoryGirl.create(:talent, :name => 'Crew', :sub_talent => 'Camera')
         ])
 
+      @search_user7 = FactoryGirl.create(:user, :location => 'Hyderabad, Andhra Pradesh', :name => 'pick', :talents => [
+          FactoryGirl.create(:talent, :name => 'Fan'),
+          FactoryGirl.create(:talent, :name => 'Agent', :sub_talent => 'Exec. Agent')
+        ])
+
+      @search_user8 = FactoryGirl.create(:user, :location => 'Hyderabad, Andhra Pradesh', :name => 'nopick', :talents => [
+          FactoryGirl.create(:talent, :name => 'Fan'),
+          FactoryGirl.create(:talent, :name => 'Agent', :sub_talent => 'Asst. Agent')
+        ])
+
       @sub_talents_search_hash = {
         'Crew' => [
           'Light',
           'Sound'
+        ],
+        'Agent' => [
+          'Exec. Agent'
         ]
       }
+
     }
 
     specify { User.filter_all(nil, 'search', nil, nil, ['Cast', 'Director'], nil, cast_hash, 1, 10).should == [@search_user1,@search_user2] }
@@ -344,12 +358,11 @@ describe User do
 
     specify { User.filter_all(nil, '', nil, nil, ['Cast', 'Production'], nil, asian_cast_hash).should =~ [@search_user2] }
 
-    specify { User.filter_all(nil, '', nil, nil, ['Cast', 'Crew'], @sub_talents_search_hash, cast_hash).should =~ [@search_user2, @search_user3, @search_user4, @search_user5] }
+    specify { User.filter_all(nil, '', nil, nil, ['Cast', 'Crew'], @sub_talents_search_hash, cast_hash).should =~ [@search_user2, @search_user3, @search_user4, @search_user5, @search_user7] }
   end
 
 
   context "notifications" do
-
     before(:all){
       @notif_user = FactoryGirl.create(:user, :name => 'Notif user')
       @notif_project = FactoryGirl.create(:project, :user => @notif_user)

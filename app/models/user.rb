@@ -476,7 +476,7 @@ class User < ActiveRecord::Base
 
     users = User if users.nil?
 
-    if query
+    if query.present?
       users = users.where('lower(users.name) like lower(?)', "%#{query}%")
     end
 
@@ -495,25 +495,32 @@ class User < ActiveRecord::Base
     end
 
     if talents and !talents.empty? and sub_talents.present? 
-      # sub_talents = [sub_talents] if !sub_talents.kind_of?(Array)
-
+      # if sub talents are also searched for 
       talents_with_sub_talents = sub_talents.keys
 
       talents_with_out_sub_talents = talents - talents_with_sub_talents
 
       if talents_with_out_sub_talents.present?
-        talents_with_sub_talents.each do |super_talent|
-          users = users.joins(:talents).where('(talents.name = (?)) OR ( talents.name = (?) and talents.sub_talent in (?))',talents_with_out_sub_talents, super_talent, sub_talents[super_talent])
-        end
-      else
-        talents_with_sub_talents.each do |super_talent|
-          users = users.joins(:talents).where('talents.name = (?) and talents.sub_talent in (?)', super_talent, sub_talents[super_talent])
-        end
-      end
-      
-    end
+        
+        sql_array_for_in = talents_with_out_sub_talents.to_s.gsub(/]/, ')').gsub(/\[/, '(')
+        query_string = "(talents.name IN #{sql_array_for_in})"
 
-    if talents and !talents.empty?
+        query_string = query_string + 'OR' + talents_with_sub_talents.collect { |super_talent|
+          sql_array_for_in = sub_talents[super_talent].to_s.gsub(/]/, ')').gsub(/\[/, '(')
+          "( talents.name = '#{super_talent}' AND talents.sub_talent in #{sql_array_for_in} )"
+        }.join(' OR ')
+
+      else
+        query_string = talents_with_sub_talents.collect { |super_talent|
+          sql_array_for_in = sub_talents[super_talent].to_s.gsub(/]/, ')').gsub(/\[/, '(')
+          "( talents.name = '#{super_talent}' AND talents.sub_talent in #{sql_array_for_in} )"
+        }.join(' OR ')
+
+      end
+
+      users = users.joins(:talents).where(query_string)
+      
+    elsif talents and !talents.empty?
       talents = [talents] if !talents.kind_of?(Array)
       users = users.joins(:talents).where('talents.name in (?)', talents).uniq
 
