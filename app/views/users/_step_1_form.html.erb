@@ -130,17 +130,34 @@
             <div class='sub_role_container'>
               <%= talent.label "Sub Role", :class => 'control-label' %>
               <div class="controls">
-                <%= talent.select(:sub_talent, options_for_select(User.sub_types[talent.object.name], talent.object.sub_talent)) %>
+                <%= talent.select(:sub_talent, options_for_select(User.sub_types[talent.object.name], talent.object.sub_talent), {}, :class=>'sub_role_select') %>
               </div>
             </div>
           <% else %>
             <div class='sub_role_container' style='display: none;'>
-              <%= talent.label :sub_talent, :class => 'control-label' %>
+              <%= talent.label "Sub Role", :class => 'control-label' %>
               <div class="controls">
-                <%= talent.select(:sub_talent, {}) %>
+                <%= talent.select(:sub_talent, {}, {}, :class=>'sub_role_select') %>
               </div>
             </div>
           <% end %>
+
+          <% if talent.object.super_sub_talent.present? %>
+            <div class='super_sub_role_container'>
+              <%= talent.label "Super Sub Role", :class => 'control-label' %>
+              <div class="controls">
+                <%= talent.select(:super_sub_talent, options_for_select(User.super_sub_types[talent.object.sub_talent], talent.object.super_sub_talent)) %>
+              </div>
+            </div>
+          <% else %>
+            <div class='super_sub_role_container' style='display: none;'>
+              <%= talent.label "Super Sub Role", :class => 'control-label' %>
+              <div class="controls">
+                <%= talent.select(:super_sub_talent, {}) %>
+              </div>
+            </div>
+          <% end %>
+
         </div>
 
         <div class="controls">
@@ -164,7 +181,14 @@
           <div class='sub_role_container' style='display: none;'>
             <%= talent.label "Sub Role", :class => 'control-label' %>
             <div class="controls">
-              <%= talent.select(:sub_talent, {}) %>
+              <%= talent.select(:sub_talent, {}, {}, :class=>'sub_role_select') %>
+            </div>
+          </div>
+
+          <div class='super_sub_role_container' style='display: none;'>
+            <%= talent.label "Super Sub Role", :class => 'control-label' %>
+            <div class="controls">
+              <%= talent.select(:super_sub_talent, {}) %>
             </div>
           </div>
 

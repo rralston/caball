@@ -282,6 +282,44 @@ class User < ActiveRecord::Base
     }
   end
 
+  def self.super_sub_types
+    {
+      'Camera' => {
+                    'Director of Photography (DP)' => 'Director of Photography (DP)',
+                    'Camera Operator'              => 'Camera Operator',
+                    'Camera Assistant'             => 'Camera Assistant',
+                    'B Camera Operator'            => 'B Camera Operator',
+                    '2nd Unit Cinematographer.'    => '2nd Unit Cinematographer.',
+                    'Additional Cinematography'    => 'Additional Cinematography',
+                    'Still Photographer'           => 'Still Photographer',
+                    'DIT (Digital Imaging Tech)'   => 'DIT (Digital Imaging Tech)',
+                    'Steadicam operator'           => 'Steadicam operator',
+                    'Underwater DP'                => 'Underwater DP'
+                  },
+      'Light' => {
+                    'Best Boy'    => 'Best Boy',
+                    'Electrician' => 'Electrician',
+                    'Gaffer'      => 'Gaffer',
+                    'Grip'        => 'Grip',
+                    'Key Grip'    => 'Key Grip'
+                  },
+      'Sound' => {
+                    'Composer'         => 'Composer',
+                    'Sound Designer'   => 'Sound Designer',
+                    'Sound Technician' => 'Sound Technician',
+                    'Boom operators'   => 'Boom operators',
+                    'Sound assistants' => 'Sound assistants',
+                    'Dialogue editor'  => 'Dialogue editor',
+                    'Dubbing mixer'    => 'Dubbing mixer',
+                    'Foley artist'     => 'Foley artist',
+                    'Foley editor'     => 'Foley editor',
+                    'Production mixer' => 'Production mixer',
+                    'Sound editor'     => 'Sound editor',
+                    'Voiceover'        => 'Voiceover'
+                  }
+    }
+  end
+
   def self.types_costs
     # add the cost for each role 
     {
@@ -582,6 +620,10 @@ class User < ActiveRecord::Base
 
   def url_param
     url_name.present? ? url_name : id
+  end
+
+  def reset_sub_talents
+    talents.update_all(:sub_talent => nil, :super_sub_talent => nil)
   end
 
 end

@@ -399,6 +399,7 @@ app.fn.init_super_roles_select_handler = function(super_role_selector_class, sub
 
   handle_super_sub_roles = typeof sub_role_selector_class != 'undefined' && typeof super_sub_roles != 'undefined'
 
+
   $('body').on('change', '.'+super_role_selector_class, function(event){
 
     // if case is to prevent the function to be called when the chil select are chaged and event propagates.
@@ -451,13 +452,14 @@ app.fn.init_super_roles_select_handler = function(super_role_selector_class, sub
   });
 
   if(handle_super_sub_roles){
-
     // handler for handling sub role and showing third level super sub role
     $('body').on('change', '.'+sub_role_selector_class, function(event){
 
+      
       // if case is to prevent the function to be called when the chil select are chaged and event propagates.
       if($(event.target).hasClass(sub_role_selector_class)){
-        select_div = $('.'+sub_role_selector_class)
+
+        select_div = $(event.target)
         selected_sub_role_val = select_div.val()
         // selected_sub_role_val = $(event.target).val();
         super_sub_role_container = $(event.target).closest('.control-group').find('.super_sub_role_container');
@@ -470,7 +472,7 @@ app.fn.init_super_roles_select_handler = function(super_role_selector_class, sub
 
         // check if the role has sub roles.
         if(_.size(super_sub_roles[selected_sub_role_val]) > 0){
-
+          
           // build options
           options = '';
           _.each(super_sub_roles[selected_sub_role_val], function(value, key){

@@ -138,6 +138,10 @@ class UsersController < ApplicationController
   end
 
   def step_1
+
+    # reset sub talents, for the case when user has a sub talent, super sub talent and new talent doesn't have those.
+    current_user.reset_sub_talents
+
     if current_user.update_attributes(params[:user])
       render 'users/step_2_form', :layout => false
     else

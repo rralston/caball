@@ -46,15 +46,10 @@
               <div id='step_3'>
                 Please Complete previous steps to come here.
               </div>
-            </fieldset> 
-
-
+            </fieldset>
           </div>
       </div>
     </div>
-
-          
-
 
 	</div>
 </section>
@@ -64,8 +59,9 @@
 <script type="text/javascript">
 $(document).ready(function(){
   app.sub_talents = <%= raw User.sub_types.to_json() %>
+  app.super_sub_talents = <%= raw User.super_sub_types.to_json() %>
   // super roles select change event listener and showsub roles
-  app.fn.init_super_roles_select_handler('super_role_select', app.sub_talents)
+  app.fn.init_super_roles_select_handler('super_role_select', app.sub_talents, 'sub_role_select', app.super_sub_talents);
 
   // prevent forward sliding for the form.
   app.allow_forward_sliding_till = 1
