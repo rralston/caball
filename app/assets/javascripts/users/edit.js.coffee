@@ -7,6 +7,8 @@ $(document).ready ()->
       )
       $('#user_expertise').val(tag_value_array.toString())
 
+  app.fn.init_image_crop_handlers()
+
   app.fn.description_tag_list_init = ()->
     $('#user_description_tags').tagit
       sortable: true
@@ -35,6 +37,9 @@ $(document).ready ()->
 
           data.image_container = data.control_group_div.find('.image_preview_container')
           data.image_container.attr('src', '')
+
+          data.crop_btn = data.control_group_div.find('.btn.crop_image')
+
           data.submit()
         else
           alert('The file you selected is not a jpeg or png image file')
@@ -61,6 +66,16 @@ $(document).ready ()->
 
         data.image_container.attr('src', image_url)
         data.image_container.show()
+
+        if typeof data.result == 'object'
+          data.crop_btn.attr('data-orgImgUrl', image_url)
+          data.crop_btn.attr('data-prevImgUrl', image_url)
+          data.crop_btn.attr('data-orgWidth', data.result['original_width'])
+          data.crop_btn.attr('data-orgHeight', data.result['original_height'])
+          data.crop_btn.show()
+
+          app.fn.hard_rest_crop_values(data.control_group_div, '150px', '150px')
+
         app.fn.adjust_slider_height()
         data.progress_div.hide()
 

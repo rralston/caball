@@ -109,10 +109,10 @@
               <div class='span3'>
                 <div class="">
 
-                  <%= event_main_photo.text_field :crop_x, :class => 'crop_x' %>
-                  <%= event_main_photo.text_field :crop_y, :class => 'crop_y' %>
-                  <%= event_main_photo.text_field :crop_w, :class => 'crop_w' %>
-                  <%= event_main_photo.text_field :crop_h, :class => 'crop_h' %>
+                  <%= event_main_photo.hidden_field :crop_x, :class => 'crop_x' %>
+                  <%= event_main_photo.hidden_field :crop_y, :class => 'crop_y' %>
+                  <%= event_main_photo.hidden_field :crop_w, :class => 'crop_w' %>
+                  <%= event_main_photo.hidden_field :crop_h, :class => 'crop_h' %>
 
                   <div class='controls upload_progress'>
                     Upload Progress:

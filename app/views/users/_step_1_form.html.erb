@@ -72,16 +72,31 @@
         <%= profile.label "Profile Picture", :class => 'control-label' %>
 
         <div class='controls'>
-          
+          <%= profile.hidden_field :crop_x, :class => 'crop_x' %>
+          <%= profile.hidden_field :crop_y, :class => 'crop_y' %>
+          <%= profile.hidden_field :crop_w, :class => 'crop_w' %>
+          <%= profile.hidden_field :crop_h, :class => 'crop_h' %>
         </div>
         
         <% if current_user.profile.image.present? %>
-          <div class="controls">
+          <div class="controls image_container">
             <%= image_tag current_user.profile.image.url(:medium), {:class => "image_preview_container img-polaroid"} %>
           </div>
+
+          <div class='controls image_btns'>
+            <a href="" class='btn crop_image pull-left' data-orgImgUrl='<%= profile.object.image.url %>' data-orgWidth='<%= profile.object.original_width %>' data-orgHeight='<%= profile.object.original_height %>' data-prevImgUrl='<%= profile.object.image.url(:original) %>'  style='display: inline'>Crop</a>
+          </div>
+
         <% else %>
-          <!-- just keep the container there in case to preview if user uploads an image. -->
-          <img class='image_preview_container img-polaroid' src="">
+          <div class="controls image_container" style='display:none;'>
+            <!-- just keep the container there in case to preview if user uploads an image. -->
+            <img class='image_preview_container img-polaroid' src="">
+          </div>
+
+          <div class='controls image_btns'>
+            <a href="" class='btn crop_image pull-left' data-imgUrl=''>Crop</a>
+          </div>
+
         <% end %>
           
         <div class="controls">
@@ -236,3 +251,4 @@
 
   </div>
 <% end %>
+

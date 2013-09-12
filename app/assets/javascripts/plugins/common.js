@@ -701,3 +701,17 @@ app.fn.set_checkbox_limit = function(selector, limit){
   });
 }
 
+app.fn.hard_rest_crop_values = function(element, width, height){
+  element.find('.crop_x').val('');
+  element.find('.crop_y').val('');
+  element.find('.crop_w').val('');
+  element.find('.crop_h').val('');
+
+  image_container = element.find('.image_preview_container');
+  image_container.css({
+    width: width,
+    height: height,
+    marginLeft: "0px",
+    marginTop: "0px"
+  });
+}

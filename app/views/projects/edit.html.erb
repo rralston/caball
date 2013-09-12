@@ -54,34 +54,7 @@
 	</div>
 </section>
 
-<div id='crop_image_modal' class="modal hide fade span9" data-keyboard='false' data-backdrop='static'>
-  <div class="modal-header">
-    <h3 class='cover-header'>Crop Image</h3>
-  </div>
-  
-  <div class="modal-body">
-    <div id='crop_area'>
-      <img src="" id='cropping_image' class='img-rounded'>
-    </div>
-  </div>
-
-  <div class="modal-footer">
-    <a href="#" class="btn reset_close" data-dismiss='modal'>Cancel</a>
-    <a href="#" class="btn crop_now" data-dismiss='modal' style='display:none;'>Done</a>
-  </div>
-
-  <script type="text/javascript">
-    $('body').on( 'click', '.btn.reset_close', function(event){
-      // app.fn.reset_cropped_image("150px","150px");
-    });
-
-    $('body').on( 'click', '.btn.crop_now', function(event){
-      app.fn.crop_now();
-    });
-
-  </script>
-
-</div>
+<%= render :partial => 'application/crop_image_modal' %>
 
 <script type="text/javascript">
   $(document).ready(function(){

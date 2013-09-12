@@ -168,7 +168,15 @@ class UsersController < ApplicationController
       current_user.profile = Profile.new if current_user.profile.nil?
 
       current_user.profile.update_attributes(params['user']['profile_attributes'])
-      file_url = current_user.profile.image.url(:medium)
+      photo_object = current_user.profile
+
+      file_url = {
+        :url => photo_object.image.url,
+        :id => photo_object.reload.id,
+        :original_width => photo_object.reload.original_width,
+        :original_height => photo_object.reload.original_height
+      }
+
     end
 
     # check if the talents scrip_document is sent.

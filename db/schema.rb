@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130911060934) do
+ActiveRecord::Schema.define(:version => 20130912080223) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -198,9 +198,15 @@ ActiveRecord::Schema.define(:version => 20130911060934) do
     t.string   "description"
     t.string   "content_type"
     t.integer  "file_size"
-    t.datetime "updated_at",   :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "user_id"
-    t.datetime "created_at",   :null => false
+    t.datetime "created_at",      :null => false
+    t.integer  "crop_x"
+    t.integer  "crop_y"
+    t.integer  "crop_w"
+    t.integer  "crop_h"
+    t.integer  "original_width"
+    t.integer  "original_height"
   end
 
   create_table "projects", :force => true do |t|

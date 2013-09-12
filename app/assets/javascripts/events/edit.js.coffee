@@ -18,12 +18,11 @@ $(document).ready ()->
   app.fn.initialize_date_picker('.date_field')
   app.fn.initialize_time_autocomplete($('.time_field'))
 
-  # app.fn.initialize_datetime_picker('.date_time_field')
-
   app.fn.init_image_crop_handlers()
 
   $('#event_tags').tagit
     sortable: true
+    maxTags: 4
     triggerKeys: ['comma', 'tab', 'space', 'enter']
     tagsChanged: (tagValue, action, element) ->
       console.log element
@@ -88,6 +87,8 @@ $(document).ready ()->
           data.crop_btn.attr('data-orgWidth', data.result['original_width'])
           data.crop_btn.attr('data-orgHeight', data.result['original_height'])
           data.crop_btn.show()
+
+          app.fn.hard_rest_crop_values(data.control_group_div, '150px', '150px')
 
 
   app.fn.init_image_file_uploader('form.edit_event, form.new_event')

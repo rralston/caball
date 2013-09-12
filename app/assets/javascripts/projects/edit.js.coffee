@@ -66,6 +66,8 @@ $(document).ready ()->
           data.crop_btn.attr('data-orgHeight', data.result['original_height'])
           data.crop_btn.show()
 
+          app.fn.hard_rest_crop_values(data.control_group_div, '150px', '150px')
+
         app.fn.resize_form()
 
   app.fn.init_image_file_uploader('#steps form')

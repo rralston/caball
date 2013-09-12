@@ -59,6 +59,8 @@
 	</div>
 </section>
 
+<%= render :partial => 'application/crop_image_modal' %>
+
 <script type="text/javascript">
 $(document).ready(function(){
   app.sub_talents = <%= raw User.sub_types.to_json() %>
