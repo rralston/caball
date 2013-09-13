@@ -151,7 +151,7 @@ class User < ActiveRecord::Base
     elsif cover_photo.nil?
       return "/assets/default_cover/Fan.jpg"
     else
-      return cover_photo.image rescue "/assets/default_cover/Fan.jpg"
+      return cover_photo.image.url(:original) rescue "/assets/default_cover/Fan.jpg"
     end
   end
 
@@ -642,11 +642,7 @@ class User < ActiveRecord::Base
   end
 
   def display_cover
-    if cover_photo
-      cover_photo.image
-    else
-      nil
-    end
+    get_cover
   end
 
   def url_param

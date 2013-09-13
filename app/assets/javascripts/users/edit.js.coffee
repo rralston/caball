@@ -38,6 +38,8 @@ $(document).ready ()->
           data.image_container = data.control_group_div.find('.image_preview_container')
           data.image_container.attr('src', '')
 
+          data.image_parent_container = data.control_group_div.find('.image_container')
+
           data.crop_btn = data.control_group_div.find('.btn.crop_image')
 
           data.submit()
@@ -64,8 +66,10 @@ $(document).ready ()->
         else
           image_url = data.result
 
+
         data.image_container.attr('src', image_url)
         data.image_container.show()
+        data.image_parent_container.show()
 
         if typeof data.result == 'object'
           data.crop_btn.attr('data-orgImgUrl', image_url)

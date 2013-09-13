@@ -120,15 +120,32 @@
       <div class='row'>
         <div class='span3'>
           <div class="control-group">
-
-            <div class="controls">
+            <%= user_cover_photo.hidden_field :crop_x, :class => 'crop_x' %>
+            <%= user_cover_photo.hidden_field :crop_y, :class => 'crop_y' %>
+            <%= user_cover_photo.hidden_field :crop_w, :class => 'crop_w' %>
+            <%= user_cover_photo.hidden_field :crop_h, :class => 'crop_h' %>
+            <div >
               <!-- if image exits, allow to change it -->
               <% if user_cover_photo.object.image.present? %>
-                <img src=<%= user_cover_photo.object.image.url(:medium) %> class="image_preview_container img-polaroid" >
-								<%= user_cover_photo.check_box :_destroy %> Delete Cover Photo or Upload a new one below
+                <div class="controls image_container">
+                  <img src=<%= user_cover_photo.object.image.url(:medium) %> class="image_preview_container img-rounded" >
+                </div>
+
+                <div class='controls'>
+                  <%= user_cover_photo.check_box :_destroy %> Delete Cover Photo or Upload a new one below
+                </div>
+                  
+                <div class='controls image_btns'>
+                  <a href="" class='btn crop_image pull-left' data-orgImgUrl='<%= user_cover_photo.object.image.url %>' data-orgWidth='<%= user_cover_photo.object.original_width %>' data-orgHeight='<%= user_cover_photo.object.original_height %>' data-prevImgUrl='<%= user_cover_photo.object.image.url(:original) %>'  style='display: inline'>Crop</a>
+                </div>
               <% else %>
                 <!-- just keep the container there in case to preview if user uploads an image. -->
-                <img class='image_preview_container img-polaroid' src="">
+                <div class="controls image_container" style='display:none;'>
+                  <img src='' class="image_preview_container img-rounded" style='display:none;'>
+                </div>
+                <div class='controls image_btns'>
+                  <a href="" class='btn crop_image pull-left' data-imgUrl=''>Crop</a>
+                </div>
               <% end %>
             </div>
 

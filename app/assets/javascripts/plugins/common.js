@@ -568,8 +568,6 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height, o
     h: null
   }
 
-  var jcrop_object; 
-
   element.Jcrop({
     trueSize: [original_width, original_height],
     onSelect: function(c){
@@ -579,7 +577,7 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height, o
       updateCropValues(c)
     }
   }, function(){
-    jcrop_object = this;
+    app.jcrop_object = this;
   });
 
   updateCropValues = function (c){
@@ -590,7 +588,7 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height, o
     $('#crop_image_modal').find('.btn.crop_now').show()
   }
 
-  return jcrop_object;
+  return app.jcrop_object;
 }
 
 
@@ -613,14 +611,16 @@ app.fn.init_image_crop_handlers = function(){
       w: control_group_div.find('input.crop_w').val(),
       h: control_group_div.find('input.crop_h').val()
     };
+
+    console.log(original_image_url)
     
     $('#crop_image_modal').on('shown', function() {
-      app.jcrop_object = app.fn.init_jcrop($('#crop_image_modal').find('#cropping_image'), control_group_div, original_width, original_height, original_image_url);
+      app.fn.init_jcrop($('#crop_image_modal').find('#cropping_image'), control_group_div, original_width, original_height, original_image_url);
     });
     
     $('#crop_image_modal').on('hidden', function() {
       if(typeof app.jcrop_object != 'undefined' )
-        app.jcrop_object.release();
+        app.jcrop_object.destroy();
     });
     
     $('#crop_image_modal').find('#cropping_image').attr('src', original_image_url);

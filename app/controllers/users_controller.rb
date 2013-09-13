@@ -228,7 +228,9 @@ class UsersController < ApplicationController
 
       file_url = {
         :url => current_user.cover_photo.image.url(:medium),
-        :id => current_user.cover_photo.reload.id
+        :id => current_user.cover_photo.reload.id,
+        :original_width => current_user.cover_photo.reload.original_width,
+        :original_height => current_user.cover_photo.reload.original_height
       }
     end
 

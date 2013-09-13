@@ -65,7 +65,6 @@
 
               <div class='controls image_btns'>
                 <a href="" class='btn crop_image pull-left' data-orgImgUrl='<%= photo.object.image.url %>' data-orgWidth='<%= photo.object.original_width %>' data-orgHeight='<%= photo.object.original_height %>' data-prevImgUrl='<%= photo.object.image.url(:original) %>'  style='display: inline'>Crop</a>
-                <!-- <a href="" class='btn reset_crop pull-right' data-imgUrl='<%= photo.object.image.url %>'>Reset</a> -->
               </div>
             <% else %>
               <div class="controls image_container" style='display:none;'>
@@ -73,7 +72,6 @@
               </div>
               <div class='controls image_btns'>
                 <a href="" class='btn crop_image pull-left' data-imgUrl=''>Crop</a>
-                <!-- <a href="" class='btn reset_crop pull-right' data-imgUrl=''>Reset</a> -->
               </div>
             <% end %>
           </div>
