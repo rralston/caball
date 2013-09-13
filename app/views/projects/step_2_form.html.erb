@@ -29,21 +29,18 @@
 
     <div class="control-group">
       <label class='control-label'>
-        Genre <br/> <span style='font-size: 11px; font-style:italic;'>2 Max</span> 
+        Genre
       </label>
 
       
       
       <div class="controls">
         <%= p.select(:genre_list, Project.genres ,{}, { :multiple => true, :size => 5 }) %>
-
-        <% Project.genres.keys.each do |genre| %>
-          <div>
-            <%= check_box_tag "project[genre_list][]", genre, p.object.genre_list.include?(genre) %>
-            <%= genre %>
-          </div>
-        <% end %>
+        <div class='div_hint'>
+          2 Max
+        </div>
       </div>
+
     </div>
     
 
@@ -156,6 +153,12 @@
     //   //     return true
     //   }
     // });
+
+
+  $('#project_genre_list').chosen({
+    max_selected_options: 2,
+    placeholder_text_multiple: 'Select any two, start typing'
+  })
     
 
   })

@@ -130,3 +130,6 @@ gem 'social-share-button'
 gem 'devise', "~> 2.2.3"
 gem 'omniauth'
 gem 'devise-async'
+
+
+gem 'chosen-rails'
