@@ -67,7 +67,5 @@ module Caball
 
     # Precompile additional asset types
     config.assets.precompile += %w( .svg .eot .woff .ttf )
-
-    config.assets.precompile += %w( *.css *.js )
   end
 end
