@@ -7,4 +7,5 @@ class Talent < ActiveRecord::Base
   has_one :script_document, :class_name => 'UploadedDocument', :as => :documentable, :dependent => :destroy
 
   accepts_nested_attributes_for :script_document, :allow_destroy => true
+  
 end
