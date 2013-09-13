@@ -58,8 +58,6 @@ module Caball
     # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
     # parameters by using an attr_accessible or attr_protected declaration.
     config.active_record.whitelist_attributes = true
-
-    config.assets.compile = true
     
     # Enable the asset pipeline
     config.assets.enabled = true
@@ -69,5 +67,7 @@ module Caball
 
     # Precompile additional asset types
     config.assets.precompile += %w( .svg .eot .woff .ttf )
+
+    config.assets.precompile += %w( *.css *.js )
   end
 end
