@@ -18,9 +18,6 @@ gem 'heroku'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-  gem 'less-rails'
-  gem 'compass-rails'
-  gem 'chosen-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
@@ -31,6 +28,7 @@ gem 'jquery-fileupload-rails'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'less-rails'
 # Twitter Boostrap and Upgrade dependencies
 gem 'therubyracer'
 gem 'twitter-bootstrap-rails'

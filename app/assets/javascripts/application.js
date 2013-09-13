@@ -25,7 +25,6 @@
 //= require plugins/manifest.js
 //= require social-share-button
 //= require jquery-fileupload/basic
-//= require chosen-jquery
 
 $( document ).tooltip({ 
 		hide: false, 
