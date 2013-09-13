@@ -18,6 +18,7 @@ gem 'heroku'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
+  gem 'less-rails'
   gem 'compass-rails'
   gem 'chosen-rails'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -32,7 +33,6 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 # Twitter Boostrap and Upgrade dependencies
 gem 'therubyracer'
-gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 
 # To use ActiveModel has_secure_password
