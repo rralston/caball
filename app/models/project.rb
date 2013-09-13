@@ -587,6 +587,6 @@ end
 
 class Array
   def sql_array_for_in
-    self.to_s.gsub(/]/, ')').gsub(/\[/, '(')
+    self.to_s.gsub(/]/, ')').gsub(/\[/, '(').gsub(/"/,'\'')
   end
 end
