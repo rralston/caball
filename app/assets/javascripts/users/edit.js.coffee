@@ -170,6 +170,8 @@ $(document).ready ()->
 
   $('body').on 'click', '.step_1_submit', (event)->
     btn = $(event.target)
+    btn.val('Please wait..')
+    btn.attr('disabled', 'disabled')
     $.ajax
       type: 'POST'
       url: '/users/step_1'
@@ -189,6 +191,9 @@ $(document).ready ()->
             app.fn.description_tag_list_init()
         else
           alert('Please correct form errors')
+        if !btn.hasClass('skip')
+          btn.val('Next Step')
+        btn.attr('disabled', false)
 
     return false
 
