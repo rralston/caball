@@ -52,7 +52,7 @@ Caball::Application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += %w( admin/admin.css admin/*.js )
-  config.assets.precompile += %w( *.css *.js )
+  # config.assets.precompile += %w( *.css *.js )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
