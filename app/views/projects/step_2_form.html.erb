@@ -31,8 +31,12 @@
       <label class='control-label'>
         Genre <br/> <span style='font-size: 11px; font-style:italic;'>2 Max</span> 
       </label>
+
+      
       
       <div class="controls">
+        <%= p.select(:genre_list, Project.genres ,{}, { :multiple => true, :size => 5 }) %>
+
         <% Project.genres.keys.each do |genre| %>
           <div>
             <%= check_box_tag "project[genre_list][]", genre, p.object.genre_list.include?(genre) %>
@@ -83,8 +87,8 @@
       <div class='text-center form_footer'>
         
         <div class='links'>
+          <input type='button' class='go_back_btn' value='Prev Step'>
           <%= p.submit "Next Step", :class=>'step_2_submit' %>
-          <%= p.submit "Finish! Go to my profile", :class=>'skip step_1_submit' %>
         </div>
 
         You are almost done! Go to the final step to let us know about the people you need for your project.
@@ -92,8 +96,6 @@
     </div>
 
   </div>
-
-
 
 <% end %>
 
@@ -123,7 +125,38 @@
       cost = app.types_costs[selected_talent]
       $(event.target).parent().find('.cost').html(cost)
     });  
+
+
+    // go back button redirect to edit url
+    $('body').on('click', '.go_back_btn', function(event){
+      window.location = '/projects/<%= @project.id %>/edit'
+      return false;
+    });
+
+    $('#navigation a.step_1_nav').attr('href', '/projects/<%= @project.id %>/edit');
+    $('#navigation a.step_1_nav').attr('data-stepindex', 2);
+
+    // prevent step click navigation
+    $('#navigation a.step_1_nav').bind('click',function(event){
+      $('#step_1').html('Please wait while you are redirected.')
+      window.location = '/projects/<%= @project.id %>/edit'
+      return false
+    });
+
+    // $('#project_genre_list').multipleSelect({
+    //   selectAll: false,
+    //   filter: true,
+    //   onClick: function(event){
+    //     console.log($('#project_genre_list').multipleSelect("getSelects").length)
+    //   //   // selectItem
+    //   //   if($('#project_genre_list').multipleSelect("getSelects").length > 2)
+    //   //     alert('')
+    //   //     return false
+    //   //   else
+    //   //     return true
+    //   }
+    // });
     
-      
+
   })
 </script>

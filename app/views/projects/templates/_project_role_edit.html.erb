@@ -39,12 +39,18 @@
 
       <input type='hidden' name='role[applications_attributes][0][approved]' value = '1'>
 
-      <%% if(typeof applications != 'undefined' && typeof applications[0].id != 'undefined' && applications[0].id != null){ %>
+      <%% if(typeof applications != 'undefined' && typeof applications[0] != 'undefined' && typeof applications[0].id != 'undefined' && applications[0].id != null){ %>
         <input type='hidden' class='role_application_id' name='role[applications_attributes][0][id]' value = '<%%= applications[0].id %>'>
       <%% } %>
 
       <input type='hidden' name='role[filled]' value = '1'>
 
+    <%% }else{ %>
+      <div class='control-group'>
+        <div class='controls'>
+          Or, just select the role for which others can apply.
+        </div>
+      </div>
     <%% } %>
 
 

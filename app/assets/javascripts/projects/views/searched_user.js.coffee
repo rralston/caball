@@ -10,6 +10,7 @@ app.views.searched_user = Backbone.View.extend
 
   render: ()->
     this.$el.html( this.template(this.model.toJSON()) )
+    this.delegateEvents()
     this
 
   follow_user: (event)->
@@ -30,7 +31,6 @@ app.views.searched_user = Backbone.View.extend
           btn.html('follow')
 
   select_user: (event) ->
-    console.log 'in the click event'
     _this = this
     this.project_role_edit_view.add_user_to_role(this.model.toJSON())
     true

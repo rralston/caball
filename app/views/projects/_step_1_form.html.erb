@@ -21,14 +21,14 @@
   <div class="span12">
 
     <% if p.object.id.present? %>
-      <input type='text' name='project_id' value="<%= p.object.id %>">
+      <input type='hidden' name='project_id' value="<%= p.object.id %>">
     <% end %>
 
     <%= p.fields_for :photos, @project.photos.first || Photo.new, :validate => true do |photo| %>
       <div class='control-group '>
 
         <div class='row'>
-          <div class='span3'>
+          <div class='span5'>
             <%= photo.hidden_field :crop_x, :class => 'crop_x' %>
             <%= photo.hidden_field :crop_y, :class => 'crop_y' %>
             <%= photo.hidden_field :crop_w, :class => 'crop_w' %>

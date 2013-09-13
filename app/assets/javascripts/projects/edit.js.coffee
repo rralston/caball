@@ -78,6 +78,9 @@ $(document).ready ()->
 
     form = btn.closest('form')
     if form.isValid(ClientSideValidations.forms[form.attr('id')].validators)
+      btn = $('input.step_1_submit')
+      btn.val('Please wait..')
+      btn.attr('disabled', 'disabled')
       $.ajax
         type: 'POST'
         url: '/projects/step_1'
@@ -97,6 +100,8 @@ $(document).ready ()->
               # app.fn.description_tag_list_init()
           else
             alert('Please correct form errors')
+          btn.val('Next Step')
+          btn.attr('disabled', false)
     return false
 
   $('body').on 'click', '.step_2_submit', (event)->

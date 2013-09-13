@@ -28,7 +28,12 @@ app.views.project_role_edit = Backbone.View.extend
           query: input
         success: (users)->
           _this.searched_users_collection.reset(users)
+          # destroy the old collection view and create new once.
+          _this.searched_users_view.remove()
+          
+          _this.searched_users_view = new app.views.searched_users({collection: _this.searched_users_collection, role_edit_view: _this})
           _this.$el.find('#searched_users_for_role').html(_this.searched_users_view.render().el)
+
           _this.$el.find('#searched_users_for_role').show()
     else
       _this.$el.find('#searched_users_for_role').html('')

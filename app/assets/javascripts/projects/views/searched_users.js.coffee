@@ -1,8 +1,9 @@
 app.views.searched_users = Backbone.View.extend
   initialize: (options)->
     this.template = _.template($('#searched_users_template').html())
-    this.collection.on('add', this.render, this)
-    this.collection.on('remove', this.render, this)
+    # this.collection.on('add', this.render, this)
+    # this.collection.on('remove', this.render, this)
+    this.collection.on('reset', this.test, this)
     this.project_role_edit_view = options['role_edit_view']
 
   render: ()->
