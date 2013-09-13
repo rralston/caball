@@ -505,24 +505,20 @@ class User < ActiveRecord::Base
 
       if talents_with_out_sub_talents.present?
         
-        sql_array_for_in = talents_with_out_sub_talents.to_s.gsub(/]/, ')').gsub(/\[/, '(')
-        query_string = "(talents.name IN #{sql_array_for_in})"
+        query_string = "(talents.name IN #{talents_with_out_sub_talents.sql_array_for_in})"
 
         query_string = query_string + 'OR' + talents_with_sub_talents.collect { |super_talent|
 
           sub_talents[super_talent] = [sub_talents[super_talent]] if !sub_talents[super_talent].kind_of?(Array)
-          sql_array_for_in = sub_talents[super_talent].to_s.gsub(/]/, ')').gsub(/\[/, '(')
             
-          "( talents.name = '#{super_talent}' AND talents.sub_talent in #{sql_array_for_in} )"
+          "( talents.name = '#{super_talent}' AND talents.sub_talent in #{sub_talents[super_talent].sql_array_for_in} )"
         }.join(' OR ')
 
       else
         query_string = talents_with_sub_talents.collect { |super_talent|
           sub_talents[super_talent] = [sub_talents[super_talent]] if !sub_talents[super_talent].kind_of?(Array)
-          
-          sql_array_for_in = sub_talents[super_talent].to_s.gsub(/]/, ')').gsub(/\[/, '(')
 
-          "( talents.name = '#{super_talent}' AND talents.sub_talent in #{sql_array_for_in} )"
+          "( talents.name = '#{super_talent}' AND talents.sub_talent in #{sub_talents[super_talent].sql_array_for_in} )"
         }.join(' OR ')
 
       end
@@ -661,4 +657,10 @@ class User < ActiveRecord::Base
     talents.update_all(:sub_talent => nil, :super_sub_talent => nil)
   end
 
+end
+
+class Array
+  def sql_array_for_in
+    self.to_s.gsub(/]/, ')').gsub(/\[/, '(').gsub(/"/,'\'')
+  end
 end
