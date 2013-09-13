@@ -383,6 +383,7 @@ DEPENDENCIES
   ci_reporter
   client_side_validations
   coffee-rails (~> 3.2.1)
+  compass-rails
   database_cleaner
   debugger
   devise (~> 2.2.3)
