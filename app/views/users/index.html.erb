@@ -110,13 +110,13 @@
             <span class="shrink-anim"><img src="/assets/opth2.png"></span>
             <h2 class='regular expand shrinked'>Height</h2>
             <div class='srchopts'>
-              <% Characteristics.heights.keys.each do |height| %>
+              <% Characteristics.heights.each_with_index do |(key, height), index| %>
                 <div class="srchopt">
                   <div class="chkboxwrap">
                     <input type="checkbox" name='height' value='<%= height %>' id='<%= height %>' />
                     <label class="chklabel" for="<%= height %>"></label>
                   </div>
-                  <span class="chktxt"><%= height %></span>
+                  <span class="chktxt"><%= key %></span>
                 </div>
               <% end %>
             </div>
@@ -126,13 +126,13 @@
             <span class="shrink-anim"><img src="/assets/opth2.png"></span>
             <h2 class='regular expand shrinked'>Ethnicity</h2>
             <div class='srchopts'>
-              <% Characteristics.enthnicities.keys.each do |ethnicity| %>
+              <% Characteristics.enthnicities.each_with_index do |(key, ethnicity), index| %>
                 <div class="srchopt">
                   <div class="chkboxwrap">
                     <input type="checkbox" name='ethnicity' value='<%= ethnicity %>' id='<%= ethnicity %>' />
                     <label class="chklabel" for="<%= ethnicity %>"></label>
                   </div>
-                  <span class="chktxt"><%= ethnicity %></span>
+                  <span class="chktxt"><%= key %></span>
                 </div>
               <% end %>
             </div>
@@ -142,13 +142,13 @@
             <span class="shrink-anim"><img src="/assets/opth2.png"></span>
             <h2 class='regular expand shrinked'>Build</h2>
             <div class='srchopts'>
-              <% Characteristics.bodytypes.keys.each do |bodytype| %>
+              <% Characteristics.bodytypes.each_with_index do |(key, bodytype), index| %>
                 <div class="srchopt">
                   <div class="chkboxwrap">
                     <input type="checkbox" name='bodytype' value='<%= bodytype %>' id='<%= bodytype %>' />
                     <label class="chklabel" for="<%= bodytype %>"></label>
                   </div>
-                  <span class="chktxt"><%= bodytype %></span>
+                  <span class="chktxt"><%= key %></span>
                 </div>
               <% end %>
             </div>
@@ -158,29 +158,13 @@
             <span class="shrink-anim"><img src="/assets/opth2.png"></span>
             <h2 class='regular expand shrinked'>Hair Color</h2>
             <div class='srchopts'>
-              <% Characteristics.hair_colors.keys.each do |hair_color| %>
+              <% Characteristics.hair_colors.each_with_index do |(key, hair_color), index| %>
                 <div class="srchopt">
                   <div class="chkboxwrap">
                     <input type="checkbox" name='hair_color' value='<%= hair_color %>' id='<%= hair_color %>' />
                     <label class="chklabel" for="<%= hair_color %>"></label>
                   </div>
-                  <span class="chktxt"><%= hair_color %></span>
-                </div>
-              <% end %>
-            </div>
-          </div>
-
-          <div class="srchsect">
-            <span class="shrink-anim"><img src="/assets/opth2.png"></span>
-            <h2 class='regular expand shrinked'>Languages</h2>
-            <div class='srchopts'>
-              <% Characteristics.languages.keys.each do |language| %>
-                <div class="srchopt">
-                  <div class="chkboxwrap">
-                    <input type="checkbox" name='language' value='<%= language %>' id='<%= language %>' />
-                    <label class="chklabel" for="<%= language %>"></label>
-                  </div>
-                  <span class="chktxt"><%= language %></span>
+                  <span class="chktxt"><%= key %></span>
                 </div>
               <% end %>
             </div>

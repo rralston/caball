@@ -21,14 +21,18 @@ class ProjectsController < ApplicationController
         params[:genres].delete('') if params[:genres]
         params[:types].delete('') if params[:types]
 
-        roles    = params[:roles]
-        types    = params[:types]
-        genres   = params[:genres]
-        search   = params[:search] || params[:keyword]
-        location = params[:location]
-        order_by = params[:order_by]
+        debugger
+
+
+        roles     = params[:roles]
+        sub_roles = params[:sub_roles]
+        types     = params[:types]
+        genres    = params[:genres]
+        search    = params[:search] || params[:keyword]
+        location  = params[:location]
+        order_by  = params[:order_by]
         # default distance 100
-        distance = params[:distance].present? ? params[:distance] : 100
+        distance  = params[:distance].present? ? params[:distance] : 100
 
         to_be_filtered_projects = nil
 
@@ -37,7 +41,7 @@ class ProjectsController < ApplicationController
           to_be_filtered_projects = Project.send("projects_by_#{params[:people]}", current_user)
         end
 
-        @projects = Project.search_all(to_be_filtered_projects, search, roles, genres, types, location, distance, order_by, page, 6)
+        @projects = Project.search_all(to_be_filtered_projects, search, roles, sub_roles, nil, genres, types, location, distance, order_by, page, 6)
 
         # @projects = Project.search_all(nil, nil, nil, nil, nil, nil, nil, 1, PROJECTS_PER_PAGE_IN_INDEX)
       end

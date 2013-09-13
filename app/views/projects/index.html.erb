@@ -106,14 +106,27 @@
           <span class="shrink-anim"><img src="/assets/opth2.png"></span>
           <h2 class='regular expand shrinked'>Roles</h2>
           <div class='srchopts'>
-            <% Project.role_types.keys.each do |role| %>
-              <div class="srchopt">
-                <div class="chkboxwrap">
-                  <input type="checkbox" name='roles' value='<%= role %>' id='<%= role %>' />
-                  <label class="chklabel" for="<%= role %>"></label>
+            <% Project.role_types.each_with_index do |(key, super_role), index| %>
+              <div class='role_search_wrap'>
+                <div class="srchopt">
+                  <div class="chkboxwrap">
+                    <input type="checkbox" name='roles' value='<%= super_role %>' id='<%= super_role %>' />
+                    <label class="chklabel" for="<%= super_role %>"></label>
+                  </div>
+                  <span class="chktxt"><%= key %></span>
                 </div>
-                <span class="chktxt"><%= role %></span>
-                
+
+                <% if Project.role_sub_types[super_role].present? and super_role == 'Crew' %>
+                  <% Project.role_sub_types[super_role].each_with_index do |(key, value), index| %>
+                    <div class="srchopt sub_type">
+                      <div class="chkboxwrap">
+                        <input type="checkbox" name='sub_roles[<%= super_role %>]' value='<%= value %>' id='<%= value %>' />
+                        <label class="chklabel" for="<%= value %>"></label>
+                      </div>
+                      <span class="chktxt"><%= key %></span>
+                    </div>
+                  <% end %>
+                <% end %>
               </div>
             <% end %>
           </div>
@@ -168,6 +181,75 @@
             <% end %>
           </div>
         </div>
+
+        <div class="cast-extn">
+
+          <div class="srchsect">
+            <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+            <h2 class='regular expand shrinked'>Height</h2>
+            <div class='srchopts'>
+              <% Characteristics.heights.each_with_index do |(key, height), index| %>
+                <div class="srchopt">
+                  <div class="chkboxwrap">
+                    <input type="checkbox" name='height' value='<%= height %>' id='<%= height %>' />
+                    <label class="chklabel" for="<%= height %>"></label>
+                  </div>
+                  <span class="chktxt"><%= key %></span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="srchsect">
+            <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+            <h2 class='regular expand shrinked'>Ethnicity</h2>
+            <div class='srchopts'>
+              <% Characteristics.enthnicities.each_with_index do |(key, ethnicity), index| %>
+                <div class="srchopt">
+                  <div class="chkboxwrap">
+                    <input type="checkbox" name='ethnicity' value='<%= ethnicity %>' id='<%= ethnicity %>' />
+                    <label class="chklabel" for="<%= ethnicity %>"></label>
+                  </div>
+                  <span class="chktxt"><%= key %></span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="srchsect">
+            <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+            <h2 class='regular expand shrinked'>Build</h2>
+            <div class='srchopts'>
+              <% Characteristics.bodytypes.each_with_index do |(key, bodytype), index| %>
+                <div class="srchopt">
+                  <div class="chkboxwrap">
+                    <input type="checkbox" name='bodytype' value='<%= bodytype %>' id='<%= bodytype %>' />
+                    <label class="chklabel" for="<%= bodytype %>"></label>
+                  </div>
+                  <span class="chktxt"><%= key %></span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="srchsect">
+            <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+            <h2 class='regular expand shrinked'>Hair Color</h2>
+            <div class='srchopts'>
+              <% Characteristics.hair_colors.each_with_index do |(key, hair_color), index| %>
+                <div class="srchopt">
+                  <div class="chkboxwrap">
+                    <input type="checkbox" name='hair_color' value='<%= hair_color %>' id='<%= hair_color %>' />
+                    <label class="chklabel" for="<%= hair_color %>"></label>
+                  </div>
+                  <span class="chktxt"><%= key %></span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+
 
         <div class='text-center'>
           <a id='btn-search_projects' class="srchbtn2 srchbtn btn-custom btn-red center-div text-center btn-search_projects">

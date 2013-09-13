@@ -3,7 +3,7 @@ $(document).ready ()->
   app.fn.extend_params_data = (data)->
     form = $('#projects_search_form')
 
-    form_data = app.fn.serializeJSON(form)
+    form_data = app.fn.jquerySerailize(form)
     _.extend(data, form_data)
 
     if data.distance != ''

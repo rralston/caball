@@ -155,7 +155,7 @@ describe Project do
     before(:all){
       @roles =
         [
-          FactoryGirl.create(:role, :name => 'role1'),
+          FactoryGirl.create(:role, :name => 'cast'),
           FactoryGirl.create(:role, :name => 'role2'),
           FactoryGirl.create(:role, :name => 'role3'),
           FactoryGirl.create(:role, :name => 'role4'),
@@ -169,12 +169,13 @@ describe Project do
       @roles_project_1 = FactoryGirl.create(:project, 
                                 :title => 'im project',
                                 :roles => [
-                                    FactoryGirl.create(:role, :name => 'role1'),
+                                    FactoryGirl.create(:role, :name => 'Cast', :height => 'tall', :ethnicity => 'asian'),
+                                    FactoryGirl.create(:role, :name => 'Crew', :subrole => 'Light'),
                                     FactoryGirl.create(:role, :name => 'role2'),
                                     FactoryGirl.create(:role, :name => 'role3'),
                                     FactoryGirl.create(:role, :name => 'role4'),
                                     FactoryGirl.create(:role, :name => 'role5'),
-                                    FactoryGirl.create(:role, :name => 'role6')
+                                    FactoryGirl.create(:role, :name => 'role6'),
                                   ],
                                 :location => 'Hyderabad' 
                               )
@@ -185,7 +186,9 @@ describe Project do
                                     FactoryGirl.create(:role, :name => 'role3'),
                                     FactoryGirl.create(:role, :name => 'role4'),
                                     FactoryGirl.create(:role, :name => 'role5'),
-                                    FactoryGirl.create(:role, :name => 'role6')
+                                    FactoryGirl.create(:role, :name => 'role6'),
+                                    FactoryGirl.create(:role, :name => 'Cast', :height => 'tall', :ethnicity => 'asian'),
+                                    FactoryGirl.create(:role, :name => 'Crew', :subrole => 'Sound')
                                   ],
                                 :location => 'Bangalore',
                                 :featured => true,
@@ -206,7 +209,9 @@ describe Project do
                                 :title => 'search me',
                                 :roles => [
                                     FactoryGirl.create(:role, :name => 'role5'),
-                                    FactoryGirl.create(:role, :name => 'role6')
+                                    FactoryGirl.create(:role, :name => 'role6'),
+                                    FactoryGirl.create(:role, :name => 'Cast', :height => 'short', :ethnicity => 'asian'),
+                                    FactoryGirl.create(:role, :name => 'Crew', :subrole => 'Camera'),
                                   ],
                                 :location => 'Bangalore',
                                 :likes => [
@@ -219,59 +224,96 @@ describe Project do
       @roles_project_3.genre_list = 'action, adventure, thriller'
       @roles_project_3.is_type_list = 'scifi, fiction'
       @roles_project_3.save
+
+      @cast_hash = {
+        :height => 'tall',
+        :ethnicity => 'asian'
+      }
+
+      @sub_roles_search_hash = {
+        'Crew' => [
+          'Light',
+          'Sound'
+        ]
+      }
     }
       
 
     # specify { Project.search_with_roles(@roles[0..6].map(&:name)).should == [@roles_project_1] }
-    # specify { @roles_project_2.super_roles_needed.should =~ ['role1', 'role2', 'role3'] }
+    # specify { @roles_project_2.super_roles_needed.should =~ ['cast', 'role2', 'role3'] }
 
     specify { 
-      Project.search_all(nil, nil, ['role5', 'role6'], ['action'], ['fiction'], 'bangalore', nil, nil, 1, 3).
-        should =~ [@roles_project_2, @roles_project_3]
-    }
-
-    specify { 
-      Project.search_all(nil, nil, ['role5', 'role6'], nil, nil, 'bangalore', 800, nil, 1, 3).
-        should =~ [@roles_project_1, @roles_project_2, @roles_project_3]
-    }
-
-    specify { 
-      Project.search_all(nil, 'search', nil, nil, nil, nil, nil, nil, 1, 3).
-        should =~ [@roles_project_2, @roles_project_3]
-    }
-
-    specify { 
-      Project.search_all(nil, 'search', ['role5', 'role6'], nil, nil, nil, nil, nil, 1, 3).
-        should =~ [@roles_project_2, @roles_project_3]
-    }
-
-    specify { 
-      Project.search_all(nil, 'search', ['role5', 'role6'], ['adventure', 'thriller'], nil, nil, nil, nil, 1, 3).
-        should == [@roles_project_3]
-    }
-
-    specify { 
-      Project.search_all(nil, 'search', ['role5', 'role6'], ['adventure', 'action'], ['fiction', 'romance'], nil, nil, nil, 1, 3).
-        should == [@roles_project_2]
-    }
-
-    specify { 
-      Project.search_all(nil, nil , ['role4', 'role5', 'role6'], nil, nil, nil, nil, nil, 1, 3).
+      Project.search_all(nil, nil, ['Cast', 'Crew'], @sub_roles_search_hash, @cast_hash, nil, nil, nil, nil, nil, 1, 3).
         should =~ [@roles_project_1, @roles_project_2]
     }
 
     specify { 
-      Project.search_all(nil, nil, ['role5', 'role6'], ['action'], ['fiction'], 'bangalore', nil, 'recent', 1, 3).
+      Project.search_all(nil, nil, ['role5', 'Cast', 'Crew'], @sub_roles_search_hash, @cast_hash, nil, nil, nil, nil, nil, 1, 3).
+        should =~ [@roles_project_1, @roles_project_2, @roles_project_3]
+    }
+
+    specify { 
+      Project.search_all(nil, nil, ['role5', 'Cast', 'Crew'], @sub_roles_search_hash, nil, nil, nil, nil, nil, nil, 1, 3).
+        should =~ [@roles_project_1, @roles_project_2, @roles_project_3]
+    }
+
+    specify { 
+      Project.search_all(nil, nil, ['Cast', 'Crew'], nil, nil, nil, nil, nil, nil, nil, 1, 3).
+        should =~ [@roles_project_1, @roles_project_2, @roles_project_3]
+    }
+
+    specify { 
+      Project.search_all(nil, nil, ['role5', 'Cast'], nil, @cast_hash, nil, nil, nil, nil, nil, 1, 3).
+        should =~ [@roles_project_2, @roles_project_1, @roles_project_3]
+    }
+
+    specify { 
+      Project.search_all(nil, nil, ['role5', 'role6'], nil, nil, ['action'], ['fiction'], 'bangalore', nil, nil, 1, 3).
+        should =~ [@roles_project_2, @roles_project_3]
+    }
+
+    specify { 
+      Project.search_all(nil, nil, ['role5', 'role6'], nil, nil, nil, nil, 'bangalore', 800, nil, 1, 3).
+        should =~ [@roles_project_1, @roles_project_2, @roles_project_3]
+    }
+
+    specify { 
+      Project.search_all(nil, 'search', nil, nil, nil, nil, nil, nil, nil, nil, 1, 3).
+        should =~ [@roles_project_2, @roles_project_3]
+    }
+
+    specify { 
+      Project.search_all(nil, 'search', ['role5', 'role6'], nil, nil, nil, nil, nil, nil, nil, 1, 3).
+        should =~ [@roles_project_2, @roles_project_3]
+    }
+
+    specify { 
+      Project.search_all(nil, 'search', ['role5', 'role6'], nil, nil, ['adventure', 'thriller'], nil, nil, nil, nil, 1, 3).
+        should == [@roles_project_3]
+    }
+
+    specify { 
+      Project.search_all(nil, 'search', ['role5', 'role6'], nil, nil, ['adventure', 'action'], ['fiction', 'romance'], nil, nil, nil, 1, 3).
+        should == [@roles_project_2]
+    }
+
+    specify { 
+      Project.search_all(nil, nil , ['role4', 'role5', 'role6'], nil, nil, nil, nil, nil, nil, nil, 1, 3).
+        should =~ [@roles_project_1, @roles_project_2, @roles_project_3]
+    }
+
+    specify { 
+      Project.search_all(nil, nil, ['role5', 'role6'], nil, nil, ['action'], ['fiction'], 'bangalore', nil, 'recent', 1, 3).
         should == [@roles_project_3, @roles_project_2]
     }
 
     specify { 
-      Project.search_all(nil, nil, ['role5', 'role6'], ['action'], ['fiction'], 'bangalore', nil, 'featured', 1, 3).
+      Project.search_all(nil, nil, ['role5', 'role6'], nil, nil, ['action'], ['fiction'], 'bangalore', nil, 'featured', 1, 3).
         should == [@roles_project_2, @roles_project_3]
     }
 
     specify { 
-      Project.search_all(nil, nil, ['role5', 'role6'], ['action'], ['fiction'], 'bangalore', nil, 'popular', 1, 3).
+      Project.search_all(nil, nil, ['role5', 'role6'], nil, nil, ['action'], ['fiction'], 'bangalore', nil, 'popular', 1, 3).
         should == [@roles_project_2, @roles_project_3]
     }
   end

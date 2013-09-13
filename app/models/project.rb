@@ -243,7 +243,7 @@ class Project < ActiveRecord::Base
   end
 
 
-  def self.search_all(projects, query, roles, genres, types, location, radius, order_by, page, per_page = nil)
+  def self.search_all(projects, query, roles, sub_roles, cast_hash, genres, types, location, radius, order_by, page, per_page = nil)
 
     projects = Project.where('status <> ?', 'Draft') if (projects.nil? || projects.empty?)
 
@@ -251,9 +251,74 @@ class Project < ActiveRecord::Base
       projects = projects.where('lower(projects.title) like lower(?)', "%#{query}%")
     end
 
-    if roles.present?
+    query_string = ''
+
+    if roles.present? and sub_roles.present?
       roles = [roles].flatten
-      projects = projects.joins(:roles).where(:roles => {:name => roles}).group('projects.id').having("COUNT(DISTINCT roles.name) = #{roles.size}")
+
+      roles_with_sub_talents = sub_roles.keys
+
+      roles_with_out_sub_talents = roles - roles_with_sub_talents
+
+      # this needs to be handled in the cash_hash check loop
+      roles = roles_with_out_sub_talents
+
+      if cast_hash.present?
+        # cast role is handled in cast_hash check loop
+        roles_with_out_sub_talents = roles_with_out_sub_talents - ['Cast']
+      end 
+
+      if roles_with_out_sub_talents.present?
+        query_string = "( roles.name in #{roles_with_out_sub_talents.sql_array_for_in} ) OR "
+      end
+
+      query_string = query_string + roles_with_sub_talents.collect { |super_role|
+        sub_roles[super_role] = [sub_roles[super_role]] if !sub_roles[super_role].kind_of?(Array)
+
+        "( roles.name = '#{super_role}' AND roles.subrole in #{sub_roles[super_role].sql_array_for_in} )"
+
+      }.join(' OR ')
+
+      # projects = projects.joins(:roles).where(query_string).uniq
+
+    elsif roles.present? and !cast_hash.present?
+      roles = [roles].flatten
+
+      query_string = "( roles.name IN #{roles.sql_array_for_in} )"
+
+      # projects = projects.joins(:roles).where(:roles => {:name => roles}).uniq
+    end
+
+    # this will run every time when cast hash is present
+    if cast_hash.present?
+      roles = [roles].flatten
+
+      # search for those projects containing roles in all other than Cast
+      # and then search for projects containing role as cast and the cast hash params
+      roles = roles - ['Cast']
+
+      if query_string.present?
+        query_string = query_string + " OR "
+      end
+
+      if roles.present?
+        query_string = query_string + "( roles.name IN #{roles.sql_array_for_in} ) OR "
+      end
+
+      # example = if searched for  height => ['tall', 'short'], ethnicity => ['Asian', 'East Indian']
+      # the following logic will search for the projects having (height as either of ['tall', 'short']) AND (ethnicity as either of ['Asian', 'East Indian'])
+      query_string = query_string + cast_hash.collect { |key, value|
+        val = value.kind_of?(Array) ? value : [value]
+        "( roles.#{key.to_s} IN #{val.sql_array_for_in} )"
+      }.join(' AND ')
+
+    end
+
+    # if above two if loops execute, they generate a query string.
+    if query_string.present?
+      projects = projects.joins(:roles).where(query_string).uniq
+
+      # debugger
     end
 
     if genres.present?
@@ -518,4 +583,10 @@ class Project < ActiveRecord::Base
     url_name.present? ? url_name : id
   end
 
+end
+
+class Array
+  def sql_array_for_in
+    self.to_s.gsub(/]/, ')').gsub(/\[/, '(')
+  end
 end
