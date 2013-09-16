@@ -2,12 +2,13 @@
     <div class="controls">
       <h5>Agent</h5>
     </div>
-    
-    <div class="control-group">
-      <div class="controls">
-        <%= talent.text_area :description, :class => 'textarea', :rows => "5", :placeholder => 'Tell us about your experience as an agent' %>
+    <% if false %> <!-- Exclude Fields -->
+      <div class="control-group">
+        <div class="controls">
+          <%= talent.text_area :description, :class => 'textarea', :rows => "5", :placeholder => 'Tell us about your experience as an agent' %>
+        </div>
       </div>
-    </div>
+    <% end %>
 
     <div class="control-group">
       <div class="controls">

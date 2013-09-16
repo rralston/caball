@@ -5,12 +5,13 @@
     <div class="controls">
       <h5>Writer</h5>
     </div>
-    
-    <div class="control-group">
-      <div class="controls">
-        <%= talent.text_area :description, :class => 'textarea', :rows => "5", :placeholder => 'Tell us about your experience as a writer, what have you written, what types of films do you like write? comedies, features, shorts, romance?' %>
+    <% if false %> <!-- Exclude Fields -->
+      <div class="control-group">
+        <div class="controls">
+          <%= talent.text_area :description, :class => 'textarea', :rows => "5", :placeholder => 'Tell us about your experience as a writer, what have you written, what types of films do you like write? comedies, features, shorts, romance?' %>
+        </div>
       </div>
-    </div>
+    <% end %>
 
     <div class="control-group">
       <div class="controls">

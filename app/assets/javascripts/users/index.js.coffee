@@ -36,7 +36,7 @@ $(document).ready ()->
       data =  app.fn.extend_params_data(data)
 
     $.ajax
-      url: 'users.json'
+      url: '/users.json'
       data: data
 
       success: (resp) ->

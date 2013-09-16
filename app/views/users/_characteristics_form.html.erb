@@ -5,11 +5,13 @@
       <h5>Actor</h5>
     </div>
 
-    <div class="control-group">
-      <div class="controls">
-        <%= talent.text_area :description, :class => 'textarea', :rows => "5", :placeholder => 'Tell us about your experience as an actor, what type of roles have you played? What are your strengths? Do you have a look that stands out?' %>
+    <% if false %> <!-- Exclude Fields -->
+      <div class="control-group">
+        <div class="controls">
+          <%= talent.text_area :description, :class => 'textarea', :rows => "5", :placeholder => 'Tell us about your experience as an actor, what type of roles have you played? What are your strengths? Do you have a look that stands out?' %>
+        </div>
       </div>
-    </div>
+    <% end %>
 
     <div class="control-group">
       <div class="controls">
