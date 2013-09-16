@@ -330,23 +330,18 @@
             </div>
           </div>
           
-          <div class='right-extra-div coming-div row'>
-            <div class="span4 shrink-div head">
+          <div class='row right-extra-div' id='report_div'>
+            <div class='span4 shrink-div head'>
               <span class="pull-left">
-                <h3><i class='report_entity icon-exclamation-sign action-div show_tooltip' data-toggle='modal'  data-target='#report-modal' title='Report Project'></i> 
-								<%= link_to "#", :class => "show_tooltip", :title => "Report Project", :data => {:toggle=>"modal", :target=>"#report-modal"} do %>Report<% end %></h3>
+                <h3 class='action-div report_entity' data-toggle='modal' data-target='#report-modal' title='Report Project'>
+                  <i class='icon-exclamation-sign'></i>
+                  <%= link_to "#" do %> Report<% end %> 
+                </h3>
               </span>
-              <span class="btn-show-all pull-right"></span>
-              <div class="clearfix"></div>
-            </div>
-            <div class="span4">
-              <div class="row clearfix">
-                <div class="grey-line-divider"></div>
-              </div>
+              
+              <div class='clearfix'></div>
             </div>
           </div>
-
-        </div>
 
 
       </div>

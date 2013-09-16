@@ -183,7 +183,7 @@
           <div class='row about-div right-extra-div'>
             <div class='span4 shrink-div head'>
               <span class='pull-left'>
-                <h3>About <i class='report_entity icon-exclamation-sign action-div show_tooltip' data-toggle='modal' data-target='#report-modal' title='Report Event'></i></h3>
+                <h3>About</h3>
               </span>
               <span class='btn-show-all pull-right'></span>
 
@@ -218,8 +218,17 @@
             </div>
           <% end %>
 
-          <div class='right-extra-div coming-div row' id='similar_events'>
-
+          <div class='row right-extra-div' id='report_div'>
+            <div class='span4 shrink-div head'>
+              <span class="pull-left">
+                <h3 class='action-div report_entity' data-toggle='modal' data-target='#report-modal' title='Report Event'>
+                  <i class='icon-exclamation-sign'></i>
+                  <%= link_to "#" do %> Report<% end %> 
+                </h3>
+              </span>
+              
+              <div class='clearfix'></div>
+            </div>
           </div>
 
 
