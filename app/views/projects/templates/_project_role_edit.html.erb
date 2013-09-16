@@ -27,6 +27,8 @@
       </div>
     </div>
 
+    <%% roles_to_show = app.project_role_types %>
+
     <%% if(typeof approved_user != 'undefined' && approved_user != null){ %>
       
       <div class='control-group'>
@@ -44,6 +46,8 @@
       <%% } %>
 
       <input type='hidden' name='role[filled]' value = '1'>
+
+      <%% roles_to_show = app.fn.filter_roles(app.project_role_types, approved_user.talent_names) %>
 
     <%% }else{ %>
       <div class='control-group'>
@@ -73,9 +77,9 @@
         <select class='super_role_select updater hinted' name='role[name]' data-identi='name' data-hint="What's a Super Role? Good question! We created SuperRoles as a way to take hundreds fo roles in filmmaking and make it easy for people both inside and outside the industry to connect! You will get to enter the specific part in the next step">
 
             <%% if(super_role_present){ %>
-              <%%= app.fn.print_options_for_select(app.project_role_types, name) %>
+              <%%= app.fn.print_options_for_select(roles_to_show, name) %>
             <%% }else{ %>
-              <%%= app.fn.print_options_for_select(app.project_role_types) %>
+              <%%= app.fn.print_options_for_select(roles_to_show) %>
             <%% } %>
 
         </select>

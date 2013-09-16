@@ -717,3 +717,19 @@ app.fn.hard_rest_crop_values = function(element, width, height){
     marginTop: "0px"
   });
 }
+
+
+app.fn.check_if_photo_uploaded = function(selector){
+  var to_return = true
+  $('.photo_required_error').remove();
+  $(selector).each(function(){
+
+    control_group_div = $(this).closest('control-group');
+
+    if($(this).val() == '' && control_group_div.find('.image_preview_container').attr('src') == ''){
+      to_return = false;
+      $('<label class="message error photo_required_error">Please upload a image</label>').insertAfter($(this));
+    }
+  });
+  return to_return;
+}

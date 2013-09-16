@@ -68,6 +68,9 @@ $(document).ready ()->
 
           app.fn.hard_rest_crop_values(data.control_group_div, '150px', '150px')
 
+        # if any error message for not uploading image is present., remove it.
+        data.control_group_div.find('.photo_required_error').remove()
+        
         app.fn.resize_form()
 
   app.fn.init_image_file_uploader('#steps form')
@@ -77,7 +80,7 @@ $(document).ready ()->
     btn = $(event.target)
 
     form = btn.closest('form')
-    if form.isValid(ClientSideValidations.forms[form.attr('id')].validators)
+    if form.isValid(ClientSideValidations.forms[form.attr('id')].validators) && app.fn.check_if_photo_uploaded('.photo_url_div')
       btn = $('input.step_1_submit')
       btn.val('Please wait..')
       btn.attr('disabled', 'disabled')
@@ -159,3 +162,9 @@ $(document).ready ()->
 
     app.fn.adjust_slider_height()
 
+
+  # this funtion is used to show only roles that the selected user has while adding him to team.
+  app.fn.filter_roles = (all_roles_object, to_have_roles_array) ->
+    to_show_roles = _.invert(all_roles_object)
+    to_show_roles = _.pick(to_show_roles, to_have_roles_array)
+    _.invert(to_show_roles)
