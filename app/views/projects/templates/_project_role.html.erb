@@ -24,7 +24,13 @@
 
 <script type="script/template" id='project_unfilled_role_template'>
   <div class='pull-left role_img'>
-    <img src='/assets/role-<%%= gender %>-default.png'>
+    <%% if(name == 'Cast'){ %>
+      <img src='/assets/role-<%%= gender %>-default.png'>
+    <%% }else if(name == 'Crew'){ %>
+      <img src='/assets/role_icons/<%%= subrole %>.png'>
+    <%% }else{ %>
+      <img src='/assets/role_icons/<%%= name %>.png'>
+    <%% } %>
   </div>
   <div class='pull-left role_details'>
     <div class='role_name'>

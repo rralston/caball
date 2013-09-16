@@ -682,9 +682,9 @@ app.fn.print_options_for_select = function(options_array, selected_option){
   _.each(options_array, function(value, key){
 
     if( typeof selected_option != 'undefined' && value == selected_option){
-      string = string + '<option value='+ value +' selected>'+ key +'</option>';
+      string = string + '<option value="'+ value +'" selected>'+ key +'</option>';
     }else{
-      string = string + '<option value='+ value +'>'+ key +'</option>';
+      string = string + '<option value="'+ value +'">'+ key +'</option>';
     }
 
   });
