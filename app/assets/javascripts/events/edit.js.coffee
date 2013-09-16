@@ -92,3 +92,18 @@ $(document).ready ()->
 
 
   app.fn.init_image_file_uploader('form.edit_event, form.new_event')
+
+
+  $('body').on 'submit', '.new_event, .edit_event', (event) ->
+
+    form = $(event.target)
+    if form.isValid(ClientSideValidations.forms[form.attr('id')].validators) && app.fn.check_if_photo_uploaded('.photo_url_div')
+      return true
+    else
+      alert('Please correct the form errors')
+      if $('.field_with_errors').size() > 0
+        $("html, body").animate({ scrollTop: $('.field_with_errors').offset().top }, "slow")
+      else
+        $("html, body").animate({ scrollTop: $('.message.error').parent().offset().top }, "slow")
+
+      return false

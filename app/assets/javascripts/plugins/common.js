@@ -726,10 +726,18 @@ app.fn.check_if_photo_uploaded = function(selector){
   $(selector).each(function(){
 
     control_group_div = $(this).closest('.control-group');
+    remove_field = control_group_div.parent().find('input[type=hidden].numerous-remove-field')
+    // this is present if the element is added via numerous remove plugin dynamically
 
-    if($(this).val() == '' && control_group_div.find('.image_preview_container').attr('src') == ''){
-      to_return = false;
-      $('<label class="message error photo_required_error">Please upload a image</label>').insertAfter($(this));
+    if($(this).val() == '' && control_group_div.find('.image_preview_container').attr('src') == '' ) {
+
+      if ((remove_field.size() > 0) && (remove_field.val() == 1)){
+        to_return = true;
+      }else{
+        to_return = false;
+        $('<label class="message error photo_required_error">Please upload a image</label>').insertAfter($(this));  
+      }
+      
     }
   });
   return to_return;

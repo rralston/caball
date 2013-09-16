@@ -148,7 +148,7 @@ class UsersController < ApplicationController
     if current_user.update_attributes(params[:user])
       render 'users/step_2_form', :layout => false
     else
-      render :json => false
+      render :json => {:success => false, :message => current_user.errors.full_messages.first}
     end
   end
 
@@ -156,7 +156,7 @@ class UsersController < ApplicationController
     if current_user.update_attributes(params[:user])
       render 'users/step_3_form', :layout => false
     else
-      render :json => false
+      render :json => {:success => false, :message => current_user.errors.full_messages.first}
     end
   end
 

@@ -91,20 +91,22 @@ $(document).ready ()->
         success: (data)->
           if data != false
             $("html, body").animate({ scrollTop: 0 }, "slow");
-            # if btn.hasClass('skip')
-            #   window.location = "/users/profile"
-            # else
+
             $('#step_2').html(data)
             app.allow_forward_sliding_till = 2
             $('a.step_2_nav').trigger('click')
-              # app.fn.description_tag_list_init()
-              # app.fn.init_step_2_fileupload()
-              # app.fn.init_agent_name_autocomplete()
-              # app.fn.description_tag_list_init()
           else
             alert('Please correct form errors')
           btn.val('Next Step')
           btn.attr('disabled', false)
+    else
+      alert('You have form errors, Please verify')
+      
+      if $('.field_with_errors').size() > 0
+        $("html, body").animate({ scrollTop: $('.field_with_errors').offset().top }, "slow")
+      else
+        $("html, body").animate({ scrollTop: 0 }, "slow")
+
     return false
 
   $('body').on 'click', '.step_2_submit', (event)->
@@ -116,19 +118,12 @@ $(document).ready ()->
       success: (data)->
         if data != false
           $("html, body").animate({ scrollTop: 0 }, "slow");
-          
-          # if btn.hasClass('skip')
-          #   window.location = "/users/profile"
-          # else
+
           $('#step_3').html(data)
           app.allow_forward_sliding_till = 3
           $('a.step_3_nav').trigger('click')
           get_ready_for_step_3()
-            # # initialize numerous js
-            # Users.Edit.init_numerous()
-            # # initialize step_3 images file uploader.
-            # app.fn.init_image_file_uploader($('#user_edit_form_step_3'))
-            # app.fn.adjust_slider_height()
+
         else
           alert('Please correct form errors')
         

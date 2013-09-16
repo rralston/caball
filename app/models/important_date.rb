@@ -3,7 +3,7 @@ class ImportantDate < ActiveRecord::Base
 
   attr_accessible :description, :date_time, :is_start_date, :is_end_date, :date, :time_string
 
-  # validates_presence_of :date_time, :message => "is required"
+  validates_presence_of :date, :message => "is required"
   validates_presence_of :description, :message => "is required", :if => :is_not_start_or_end?
 
   before_save :update_date_time

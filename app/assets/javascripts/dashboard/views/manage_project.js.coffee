@@ -5,7 +5,6 @@ app.views.manage_project = Backbone.View.extend
     # create cuper role collections
     this.super_roles_collection = new app.collections.super_roles()
     this.super_roles_collection.reset(this.model.get('roles_for_dashboard'))
-    console.log this.model
 
   events: 
     'click .mark_done': 'mark_as_done'

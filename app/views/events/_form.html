@@ -107,6 +107,10 @@
             <h5>Event Main Image</h5>
             <div class='control-group row'>
               <div class='span3'>
+                <div class='controls'>
+                  <!-- url is updated when the image is created and uploaded  -->
+                  <%= event_main_photo.hidden_field :remote_image_url, :class => 'photo_url_div' %>
+                </div>
                 <div class="">
 
                   <%= event_main_photo.hidden_field :crop_x, :class => 'crop_x' %>
@@ -156,9 +160,6 @@
                   </div>
                 </div>
               </div>
-
-              <!-- url is updated when the image is created and uploaded  -->
-              <%= event_main_photo.hidden_field :remote_image_url, :class => 'photo_url_div' %>
 
             </div>
           <% end %>

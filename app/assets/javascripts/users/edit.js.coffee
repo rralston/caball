@@ -178,7 +178,8 @@ $(document).ready ()->
       url: '/users/step_1'
       data: $('#user_edit_form').serialize()
       success: (data)->
-        if data != false
+        # if object, that has some error messages
+        if typeof data != 'object'
           $("html, body").animate({ scrollTop: 0 }, "slow");
           if btn.hasClass('skip')
             window.location = "/users/profile"
@@ -191,7 +192,7 @@ $(document).ready ()->
             app.fn.init_agent_name_autocomplete()
             app.fn.description_tag_list_init()
         else
-          alert('Please correct form errors')
+          alert(data.message)
         if !btn.hasClass('skip')
           btn.val('Next Step')
         btn.attr('disabled', false)
@@ -205,7 +206,8 @@ $(document).ready ()->
       url: '/users/step_2'
       data: $('#user_edit_form_step_2').serialize()
       success: (data)->
-        if data != false
+        # if object, that has some error messages
+        if typeof data != 'object'
           $("html, body").animate({ scrollTop: 0 }, "slow");
           if btn.hasClass('skip')
             window.location = "/users/profile"
@@ -219,7 +221,7 @@ $(document).ready ()->
             app.fn.init_image_file_uploader($('#user_edit_form_step_3'))
             app.fn.adjust_slider_height()
         else
-          alert('Please correct form errors')
+          alert(data.message)
         
 
     return false
