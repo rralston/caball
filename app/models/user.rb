@@ -572,6 +572,7 @@ class User < ActiveRecord::Base
       json[:url] = "/users/#{id}"
     end
     json[:url_param] = self.url_param
+    json[:display_cover] = self.display_cover
     json
   end
 

@@ -386,6 +386,7 @@ class Project < ActiveRecord::Base
       json[:url] = "/projects/#{id}"
     end
     json[:url_param] = url_param
+    json[:display_photo] = display_photo
     json
   end
 

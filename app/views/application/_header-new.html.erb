@@ -230,7 +230,7 @@ $(document).ready(function(){
 
   var on_select_callback = function(item){
     // similar behavior as an HTTP redirect
-    window.location.replace(item.url);
+    window.location.replace(item.url_param);
   }
 
   var this_template = _.template( $('#search_results_li_tempalte').html())
