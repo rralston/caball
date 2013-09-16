@@ -3,8 +3,8 @@ class Characteristics < ActiveRecord::Base
 
   acts_as_taggable_on :description_tag
   
-  attr_accessible :age, :height, :weight, :ethnicity, :bodytype, :skin_color,
-                  :eye_color, :hair_color, :chest, :waist, :hips, :dress_size,
+  attr_accessible :age, :height, :ethnicity, :bodytype,
+                  :hair_color,
                   :description_tag_list, :language
 
 
@@ -14,7 +14,7 @@ class Characteristics < ActiveRecord::Base
   # tells if the characteristics are completely provided
   def completeness_sum
     # get the column names for which the completeness has to be checked.
-    check_columns = Characteristics.column_names - ["id", "user_id", "created_at", "updated_at"]
+    check_columns = Characteristics.column_names - ["id", "user_id", "language", "created_at", "updated_at"]
     
     # calculate the sum of properties that are present.
     present_sum = check_columns.map { |prop|
