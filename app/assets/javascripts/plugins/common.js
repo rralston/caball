@@ -724,7 +724,7 @@ app.fn.check_if_photo_uploaded = function(selector){
   $('.photo_required_error').remove();
   $(selector).each(function(){
 
-    control_group_div = $(this).closest('control-group');
+    control_group_div = $(this).closest('.control-group');
 
     if($(this).val() == '' && control_group_div.find('.image_preview_container').attr('src') == ''){
       to_return = false;
