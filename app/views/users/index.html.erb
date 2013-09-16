@@ -62,28 +62,29 @@
           <h2 class='regular expand shrinked'>Roles</h2>
           <div class='srchopts'>
             <% User.types.each_with_index do |(key, super_role), index| %>
-              <div class='role_search_wrap'>
-                <div class="srchopt">
-                  <div class="chkboxwrap">
-                    <input type="checkbox" name='roles' value='<%= super_role %>' id='<%= super_role %>' />
-                    <label class="chklabel" for="<%= super_role %>"></label>
-                  </div>
-                  <span class="chktxt"><%= key %></span>
-                </div>
-
-                <% if User.sub_types[super_role].present? and super_role == 'Crew' %>
-                  <% User.sub_types[super_role].each_with_index do |(key, value), index| %>
-                    <div class="srchopt sub_type">
-                      <div class="chkboxwrap">
-                        <input type="checkbox" name='sub_talents[<%= super_role %>]' value='<%= value %>' id='<%= value %>' />
-                        <label class="chklabel" for="<%= value %>"></label>
-                      </div>
-                      <span class="chktxt"><%= key %></span>
+              <% if super_role != 'Fan' %>
+                <div class='role_search_wrap'>
+                  <div class="srchopt">
+                    <div class="chkboxwrap">
+                      <input type="checkbox" name='roles' value='<%= super_role %>' id='<%= super_role %>' />
+                      <label class="chklabel" for="<%= super_role %>"></label>
                     </div>
-                  <% end %>
-                <% end %>
-              </div>
+                    <span class="chktxt"><%= super_role %></span>
+                  </div>
 
+                  <% if User.sub_types[super_role].present? and super_role == 'Crew' %>
+                    <% User.sub_types[super_role].each_with_index do |(key, value), index| %>
+                      <div class="srchopt sub_type">
+                        <div class="chkboxwrap">
+                          <input type="checkbox" name='sub_talents[<%= super_role %>]' value='<%= value %>' id='<%= value %>' />
+                          <label class="chklabel" for="<%= value %>"></label>
+                        </div>
+                        <span class="chktxt"><%= value %></span>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
             <% end %>
           </div>
         </div>
@@ -116,7 +117,7 @@
                     <input type="checkbox" name='height' value='<%= height %>' id='<%= height %>' />
                     <label class="chklabel" for="<%= height %>"></label>
                   </div>
-                  <span class="chktxt"><%= key %></span>
+                  <span class="chktxt"><%= height %></span>
                 </div>
               <% end %>
             </div>
@@ -132,7 +133,7 @@
                     <input type="checkbox" name='ethnicity' value='<%= ethnicity %>' id='<%= ethnicity %>' />
                     <label class="chklabel" for="<%= ethnicity %>"></label>
                   </div>
-                  <span class="chktxt"><%= key %></span>
+                  <span class="chktxt"><%= ethnicity %></span>
                 </div>
               <% end %>
             </div>
@@ -148,7 +149,7 @@
                     <input type="checkbox" name='bodytype' value='<%= bodytype %>' id='<%= bodytype %>' />
                     <label class="chklabel" for="<%= bodytype %>"></label>
                   </div>
-                  <span class="chktxt"><%= key %></span>
+                  <span class="chktxt"><%= bodytype %></span>
                 </div>
               <% end %>
             </div>
@@ -164,7 +165,7 @@
                     <input type="checkbox" name='hair_color' value='<%= hair_color %>' id='<%= hair_color %>' />
                     <label class="chklabel" for="<%= hair_color %>"></label>
                   </div>
-                  <span class="chktxt"><%= key %></span>
+                  <span class="chktxt"><%= hair_color %></span>
                 </div>
               <% end %>
             </div>

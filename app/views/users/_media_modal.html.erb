@@ -11,7 +11,7 @@
     <div id="user_photos" class="carousel slide">
       <!-- Carousel items -->
       <div class="carousel-inner">
-        <% @user.photos.each_with_index do |photo, index| %>
+        <% @user.all_photos.each_with_index do |photo, index| %>
           <% if index == 0 %>
             <div class="item active">
               <div class='media-slider-image' style="background: url(<%= photo.image %>)">
@@ -26,7 +26,7 @@
         <% end %>
       </div>
 
-      <% if @user.photos.size > 1 %>
+      <% if @user.all_photos.size > 1 %>
         <!-- Carousel nav -->
         <a class="carousel-control left" href="#user_photos" data-slide="prev">&lsaquo;</a>
         <a class="carousel-control right" href="#user_photos" data-slide="next">&rsaquo;</a>

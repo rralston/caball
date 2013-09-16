@@ -24,10 +24,18 @@
   <% elsif current_user.has_applied?(@role) %>  
     <div class='text-center' style='margin-top: 40px;'>
       <h4>You have already applied for this role.</h4>
+      <div class='row text-center'>
+        <br/>
+        <a href="/projects/<%= @role.project.id %>" class='btn btn-success'>Take me back to the project</a>
+      </div>
     </div>
   <% else %>
     <div class='text-center' style='margin-top: 40px;'>
       <h4>You are not eligible to apply for this role as your talents doesn't include the particular role - "<%= @role.name %>"</h4>
+      <div class='row text-center'>
+        <br/>
+        <a href="/projects/<%= @role.project.id %>" class='btn btn-success'>Take me back to the project</a>
+      </div>
     </div>
 
   <% end %>

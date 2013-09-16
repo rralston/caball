@@ -29,6 +29,14 @@
                 </div>
               </div>
             </div>
+          <% else %>
+            <div class='row'>
+              <div class='span6'>
+                <a class='btn-custom pull-right btn-red' href='/projects/<%= @project.id %>/edit'>
+                  Edit Project
+                </a>
+              </div>
+            </div>
           <% end %>
           <div class='row'>
             <div class='span7 title'>
@@ -293,11 +301,12 @@
             </div>
           <% end %>
 
-          <div class='right-extra-div coming-div row' id='similar_events'>
-
-          </div>
+          
 
           <div class='row right-extra-div' id='similar_projects_div'>
+          </div>
+
+          <div class='right-extra-div coming-div row' id='similar_events'>
           </div>
 
           

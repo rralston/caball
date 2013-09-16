@@ -139,8 +139,8 @@ app.fn.bind_click_event_on_modal_btn = function(selector){
       alert('Enter Subject and Message')
     
     else{
-      btn.html('Please wait..')
-      btn.attr('disabled', 'disabled')
+      btn.html('Please wait..');
+      btn.attr('disabled', 'disabled');
       $.ajax({
         url: '/conversations/send-generic-message',
         type: 'POST',
@@ -150,13 +150,14 @@ app.fn.bind_click_event_on_modal_btn = function(selector){
           recipients: recipients
         },
         success: function(resp){
-          if(resp != 'false')
-            modal.modal('hide')
-          else
-            alert('Something went Wrong, Please try again')
-
-          btn.attr('disabled', false)
-          btn.html('Send Message')  
+          if(resp != 'false'){
+            alert('Message sent successfully');
+            modal.modal('hide');
+          }else{
+            alert('Something went Wrong, Please try again');
+          }
+          btn.attr('disabled', false);
+          btn.html('Send Message');
         }
           
       });

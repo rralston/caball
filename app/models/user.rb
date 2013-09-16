@@ -654,6 +654,11 @@ class User < ActiveRecord::Base
     talents.update_all(:sub_talent => nil, :super_sub_talent => nil)
   end
 
+  def all_photos
+    # this include other photos and profile photo also, used in the photos popup
+    ([profile]+[photos]).flatten
+  end
+
 end
 
 class Array
