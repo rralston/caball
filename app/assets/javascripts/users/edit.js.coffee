@@ -12,6 +12,7 @@ $(document).ready ()->
   app.fn.description_tag_list_init = ()->
     $('#user_description_tags').tagit
       sortable: true
+      maxTags: 4
       initialTags: []
       tagsChanged: (tagValue, action, element) ->
         tags_array = _.map($('#user_description_tags').tagit('tags'), (tag) ->
