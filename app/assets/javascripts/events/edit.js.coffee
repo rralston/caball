@@ -8,8 +8,10 @@ $(document).ready ()->
         app.fn.initialize_date_picker('.date_field')
         app.fn.initialize_time_autocomplete(added_form_element.find('.time_field'))
         $('.new_event').enableClientSideValidations();
+        $('.edit_event').enableClientSideValidations();
       'remove': ()->
         $('.new_event').enableClientSideValidations();
+        $('.edit_event').enableClientSideValidations();
     'event_photos-list':
       'add' : (added_form_element)->
         app.fn.init_image_file_uploader(added_form_element.find('input[type=file]'))
@@ -107,3 +109,19 @@ $(document).ready ()->
       else
         $("html, body").animate({ scrollTop: $('.message.error').parent().offset().top }, "slow")
       return false
+
+  # handler to remove talents, photos and videos dynamically.!
+  $('body').on 'click', '.remove_entity', (event)->
+    event.stopPropagation()
+    target = $(event.target)
+
+    # find the desctroy checkbox and make it checked.
+    check_box = target.parent().find('.destroy_checkbox')
+    check_box.attr('checked', true)
+
+    to_remove = target.attr('data-toRemove')
+    target.closest(to_remove).hide()
+    target.closest(to_remove).removeClass(to_remove.substring(1, to_remove.length)) # to_remove is a class selector, we don't need dot(.) infront of it
+
+    return false
+

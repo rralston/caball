@@ -79,14 +79,20 @@
 
 
           <%= event.fields_for :other_important_dates do |date| %>
+          <div class="event_imp_date">
+
             <%= render :partial => 'events/imp_dates_fields', :locals => { :date => date } %>
-            <%= date.check_box :_destroy %> Delete Date
+            <%= date.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+                            
+            <a href='#' class='remove_entity' data-toRemove='.event_imp_date'>Remove Date</a>
+          </div>
           <% end %>
 
           <div id='fields-for-other_important_dates-list' class='numerous'>
             <%= event.fields_for :other_important_dates, ImportantDate.new, :child_index => 'replace_this' do |date| %>
-
-              <%= render :partial => 'events/imp_dates_fields', :locals => { :date => date } %>
+              <div class="event_imp_date">
+                <%= render :partial => 'events/imp_dates_fields', :locals => { :date => date } %>
+              </div>
 
               <%= link_to 'Remove', '#', :class => 'numerous-remove pull-left' %>
               <br/>
@@ -108,10 +114,10 @@
             <div class='control-group row'>
               <div class='span3'>
                 <div class='controls'>
-                  <%= event_main_photo.text_field :crop_x, :class => 'crop_x' %>
-                  <%= event_main_photo.text_field :crop_y, :class => 'crop_y' %>
-                  <%= event_main_photo.text_field :crop_w, :class => 'crop_w' %>
-                  <%= event_main_photo.text_field :crop_h, :class => 'crop_h' %>
+                  <%= event_main_photo.hidden_field :crop_x, :class => 'crop_x' %>
+                  <%= event_main_photo.hidden_field :crop_y, :class => 'crop_y' %>
+                  <%= event_main_photo.hidden_field :crop_w, :class => 'crop_w' %>
+                  <%= event_main_photo.hidden_field :crop_h, :class => 'crop_h' %>
                   <!-- url is updated when the image is created and uploaded  -->
                   <%= event_main_photo.hidden_field :remote_image_url, :class => 'photo_url_div' %>
                 </div>
@@ -230,15 +236,14 @@
           <%= link_to 'Add one more Photo', '#', :id => 'add-to-event_photos-list' %>
 
           <!-- Event videos -->
-          <h3>Event Videos</h3>
+          <h3>Event Video</h3>
           <div class='row'>
             <div class='span6'>
               
               <!-- Begin Existing Videos -->
-              <%= event.fields_for :videos do |video| %>
-                <div class='row'>    
-                  <% if @event.videos.present? %>
-                    
+              <%= event.fields_for :videos, @event.videos.first || Video.new do |video| %>
+                <div class='row event-video'>    
+                  
                     <% if video.object.thumbnail_small.present? %>  
                       <div class='span3'>
                         <div class="control-group">
@@ -251,48 +256,25 @@
                         
                     <% end %>
                     
-                      <div class='span3'>
-                        <div class="control-group">
-                          <%= video.label :url, :class => 'control-label' %>
-                          <div class="controls">
-                            <%= video.text_field(:url) %>
-                            <br/>
-                            <%= video.check_box :_destroy %> Click Here to Delete
-                          </div>
+                    <div class='span3'>
+                      <div class="control-group">
+                        <%= video.label :url, :class => 'control-label' %>
+                        <div class="controls">
+                          <%= video.text_field(:url, :placeholder => 'Youtube or Vimeo URL') %>
+                          <br/>
+                          <% if video.object.id.present? and video.object.url.present? %>
+                            
+                            <%= video.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+                            
+                            <a href='#' class='remove_entity' data-toRemove='.event-video'>Remove Video</a>
+                          <% end %>
                         </div>
                       </div>
-
-                  <% else %> 
-                    <div class="control-group">
-                      <label class="control-label">URL</label>
-                      <div class="controls">
-                        <%= video.text_field(:url) %>
-                      </div>
                     </div>
-                  <% end %>
+
                 </div>
               <% end %>
               <!-- End Existing Videos -->
-
-              <div id='fields-for-event_videos-list' class='numerous row'>
-                <%= event.fields_for :videos, Video.new, :child_index => 'replace_this' do |video| %>
-            
-                  <div class="span3 control-group">
-                    <label class="control-label">Video URL</label>
-                    <div class="controls">
-                      <%= video.text_field :url %>
-                    </div>
-                  </div>
-                  
-                  <%= link_to 'Remove', '#', :class => 'span3 numerous-remove pull-left' %>
-                  
-                <% end %>
-
-              </div>
-
-              <div id='event_videos-list'></div>
-
-              <%= link_to 'Add one a event video', '#', :id => 'add-to-event_videos-list'%>
 
 
             </div>
