@@ -1,11 +1,14 @@
 $(document).ready ()->
 
-  $('body').on 'change', "#project_union" , (event)->
+  $('body').on 'change', ".union_select" , (event)->
     val = $(event.target).val()
     if val == 'WGA'
       $('#wga_terms').show()
     else 
       $('#wga_terms').hide()
+
+
+  app.fn.handle_guilds_dropdown('.union_select', '.union_input')
 
   app.fn.init_image_file_uploader = (selector)->
     $(selector).fileupload

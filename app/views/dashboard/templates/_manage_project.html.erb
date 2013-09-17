@@ -46,13 +46,13 @@
         <ul class='dropdown-menu' role='menu' aria-label='message_options' id='mesasge_options'>
           
           <li role='presentation'>
-            <a href='#' class='send-generic-message project_selected_applicants'  data-message-subject='Regarding Your role appliations - <%%= title %>' data-message-recipients='<%%= selected_applicants_mails.join(",") %>' data-message-header='Message Selected Participants - <%%= title %>'>
+            <a href='#' class='send-generic-message project_selected_applicants'  data-message-subject='Regarding Your role appliations - <%%= title %>' data-message-recipients='<%%= selected_applicants_mails.join(",") %>' data-message-header='Message Selected Participants - <%%= title %>' data-recipients-error="You don't have any selected applicants">
               Selected Applicants
             </a>
           </li>
           
           <li role='presentation'>
-            <a href='#' class='send-generic-message project_other_applicants' data-message-subject='Regarding Your role appliations - <%%= title %>' data-message-recipients='<%%= non_selected_applicants_mails.join(",") %>' data-message-header='Message Non Selected Participants - <%%= title %>'>
+            <a href='#' class='send-generic-message project_other_applicants' data-message-subject='Regarding Your role appliations - <%%= title %>' data-message-recipients='<%%= non_selected_applicants_mails.join(",") %>' data-message-header='Message Non Selected Participants - <%%= title %>' data-recipients-error="You don't have any applicants to send messages.">
               Other Applicants
             </a>
           </li>

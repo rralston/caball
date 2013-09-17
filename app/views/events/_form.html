@@ -152,15 +152,6 @@
                 </div>
               </div>
 
-              <div class='span3'>
-                <div> 
-                  <label class="control-label">Image Description</label>
-                  <div class="controls">
-                    <%= event_main_photo.text_field :description %>
-                  </div>
-                </div>
-              </div>
-
             </div>
           <% end %>
 
@@ -188,7 +179,6 @@
                   <div>
                     <label class="control-label">Description</label>
                     <div class="controls">
-                      <%= event_photo.text_field :description, :class => 'text_field' %>
                       <br/>
                       <%= event_photo.check_box :_destroy %> Delete Image
                     </div>
@@ -221,15 +211,6 @@
                     <div class="controls">
                       <%= photo.file_field :image %>
 
-                    </div>
-                  </div>
-                </div>
-
-                <div class='span3'>
-                  <div>
-                    <label class="control-label">Image Description</label>
-                    <div class="controls">
-                      <%= photo.text_field :description %>
                     </div>
                   </div>
                 </div>

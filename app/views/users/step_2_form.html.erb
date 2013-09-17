@@ -73,14 +73,27 @@
         <div class='controls clearfix'>
           <div id='user_guild_container'>
             Which one?<br/>
-            <%= f.select(:guild, options_for_select(User.guilds, current_user.guild)) %>
+
+            <% to_select = User.guilds.values.include?(current_user.guild) ? current_user.guild : "Other" %>
+
+            <%= select_tag(:guild, options_for_select(User.guilds, to_select), :class => "guild_select") %>
+
+            <% if to_select == 'Other' %>
+              <%= f.text_field :guild, :class=>'guild_input', :placeholder => 'Tell us which one' %>
+            <% else %>
+              <%= f.text_field :guild, :class=>'guild_input', :placeholder => 'Tell us which one', :style => 'display:none;' %>
+            <% end %>
           </div>
         </div>
       <% else %>
         <div class='controls'>
           <div id='user_guild_container' style='display: none;'>
             Which one?<br/>
-            <%= f.select(:guild, options_for_select(User.guilds)) %>
+
+            <%= select_tag(:guild_select, options_for_select(User.guilds), :class => 'guild_select') %>
+
+            <!-- in this case, the value is set to the first value from the array because anyway the first one will be selected in the select box, if the select box is changed to show empty first., change the behaviour here also. -->
+            <%= f.text_field :guild, :class=>'guild_input', :value => User.guilds.values.first, :placeholder => 'Tell us which one', :style => 'display:none;' %>
           </div>
         </div>
       <% end %>

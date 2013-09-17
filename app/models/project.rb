@@ -112,7 +112,8 @@ class Project < ActiveRecord::Base
       'WGA'       => 'WGA',
       'IATSE'     => 'IATSE',
       'PGA'       => 'PGA',
-      'DGA'       => 'DGA'
+      'DGA'       => 'DGA',
+      'Other'     => 'Other'
     }
   end
 

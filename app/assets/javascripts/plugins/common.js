@@ -106,6 +106,7 @@ app.fn.initalize_location_click_handler = function(click_selector, input_selecto
         $(input_selector).val(results[3].formatted_address);  
         var $loca = results[3].formatted_address;
         alert($loca);
+        $(input_selector).trigger('keypress');
           // $("body").append("<div>").text(results[3].formatted_address);      
       };
     
@@ -169,15 +170,27 @@ app.fn.show_generic_message_modal = function(event){
   modal = $('#send_message_generic_modal')
   btn = $(event.target)
   app.btn = btn
-  modal.find('.header-text').html(btn.attr('data-message-header'))
 
-  modal.find('#message_recipients').val(btn.attr('data-message-recipients'))
+  recipients = btn.attr('data-message-recipients')
+  if (recipients == ''){
+    error_message = btn.attr('data-recipients-error')
+    if (typeof error_message == 'undefined' || error_message == ''){
+      alert('No recipients found');
+    }else{
+      alert(error_message)
+    }
 
-  modal.find('#message_subject').val(btn.attr('data-message-subject'))
+  }else{
+    modal.find('.header-text').html(btn.attr('data-message-header'))
 
-  modal.modal('show')
+    modal.find('#message_recipients').val(btn.attr('data-message-recipients'))
 
-  app.fn.bind_click_event_on_modal_btn('#send_message_generic_modal')
+    modal.find('#message_subject').val(btn.attr('data-message-subject'))
+
+    modal.modal('show')
+
+    app.fn.bind_click_event_on_modal_btn('#send_message_generic_modal')
+  }
 
 }
 
@@ -735,10 +748,28 @@ app.fn.check_if_photo_uploaded = function(selector){
         to_return = true;
       }else{
         to_return = false;
-        $('<label class="message error photo_required_error">Please upload a image</label>').insertAfter($(this));  
+        $('<label class="message error photo_required_error">Please upload an image</label>').insertAfter($(this));  
       }
       
     }
   });
   return to_return;
+}
+
+app.fn.handle_guilds_dropdown = function(select_selector, input_selector){
+  // remember, the select and input field should be under the same parent DIV in HTML
+  $('body').on ('change', select_selector, function(event){
+    select     = $(event.target);
+    selected   = select.val();
+    parent     = select.parent();
+    text_field = parent.find('input'+input_selector);
+    text_field.val('');
+    text_field.hide();
+    if(selected != 'Other'){
+      text_field.val(selected);
+      // text_field.show();
+    }else{
+      text_field.show();
+    }
+  });
 }

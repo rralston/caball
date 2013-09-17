@@ -8,7 +8,9 @@ $(document).ready ()->
       )
       $('#user_expertise').val(tag_value_array.toString())
 
+
   app.fn.init_image_crop_handlers()
+  app.fn.handle_guilds_dropdown('.guild_select', '.guild_input')
 
   app.fn.description_tag_list_init = ()->
     $('#user_description_tags').tagit

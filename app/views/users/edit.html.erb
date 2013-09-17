@@ -65,6 +65,8 @@ $(document).ready(function(){
 
   // prevent forward sliding for the form.
   app.allow_forward_sliding_till = 1
+
+  app.user_guilds = <%= raw User.guilds.keys.to_json() %>
 });
 
 </script>

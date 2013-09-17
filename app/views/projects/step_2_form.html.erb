@@ -66,13 +66,33 @@
       <% if p.object.union_present %>
         <div class='controls clearfix'>
           <div id='project_union_container'>
-            <%= p.select(:union, options_for_select(Project.unions, p.object.union)) %>
+            <% to_select = Project.unions.values.include?(p.object.union) ? p.object.union : "Other" %>
+
+            <%= select_tag(:union, options_for_select(Project.unions, to_select), :class => "union_select") %>
+
+            <% if to_select == 'Other' %>
+              <%= p.text_field :union, :class=>'union_input', :placeholder => 'Tell us which one' %>
+            <% else %>
+              <%= p.text_field :union, :class=>'union_input', :placeholder => 'Tell us which one', :style => 'display:none;' %>
+            <% end %>
+
+            <span id='wga_terms' style='display: none;'>
+              If you select this you must adhere to the WGA guild rates
+            </span>
+
           </div>
         </div>
       <% else %>
         <div class='controls'>
           <div id='project_union_container' style='display: none;'>
-            <%= p.select(:union, options_for_select(Project.unions)) %>
+            <%= select_tag(:union_select, options_for_select(Project.unions), :class => 'union_select') %>
+
+            <!-- in this case, the value is set to the first value from the array because anyway the first one will be selected in the select box, if the select box is changed to show empty first., change the behaviour here also. -->
+            <%= p.text_field :union, :class=>'union_input', :value => Project.unions.values.first, :placeholder => 'Tell us which one', :style => 'display:none;' %>
+
+            <span id='wga_terms' style='display: none;'>
+              If you select this you must adhere to the WGA guild rates
+            </span>
           </div>
         </div>
       <% end %>
