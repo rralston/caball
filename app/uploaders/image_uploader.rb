@@ -81,9 +81,9 @@ class ImageUploader < CarrierWave::Uploader::Base
 
 
   def manualcrop
+    debugger
     return unless model.cropping?
     manipulate! do |img| 
-      # debugger
       img = img.crop(model.crop_x.to_i,model.crop_y.to_i,model.crop_w.to_i,model.crop_h.to_i) 
     end 
   end

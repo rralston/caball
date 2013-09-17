@@ -105,7 +105,9 @@
                           <% image_name = talent.name %>
                         <% end %>
 
-                        <li><a href="#" title='<%= talent.name %>'><img src="/assets/role_icons/<%= image_name %>.png" alt="<%= talent.name %>" width="45" height="45" /></a></li>
+                        <li>
+                          <img src="/assets/role_icons/<%= image_name %>.png" alt="<%= talent.name %>" width="45" height="45" title='<%= talent.name %>' data-scrollto='#<%= talent.name.downcase %>_profile' class='action-div scroll_to'/>
+                        </li>
                       <% end %>
                       <!--<li><a href="#"><img src="/assets/cut.png" alt="" /></a></li>
                       <li><a href='#' ><img src="/assets/pencil.png" alt="" /></a></li>-->
@@ -389,7 +391,7 @@
         <% talent = @user.talents.where(:name => 'Writer').first %>
 
         <% if talent.script_document.present? || talent.synopsis.present? %>
-          <div class='row right-extra-div' id='agent_profile'>
+          <div class='row right-extra-div' id='writer_profile'>
             <div class='span4 shrink-div head'>
               <span class="pull-left">
                 <h3>Writer Profile</h3>

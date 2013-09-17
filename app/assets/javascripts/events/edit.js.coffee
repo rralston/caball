@@ -15,7 +15,8 @@ $(document).ready ()->
         app.fn.init_image_file_uploader(added_form_element.find('input[type=file]'))
       
         
-  app.fn.initialize_date_picker('.date_field')
+  # app.fn.initialize_date_picker('.date_field')
+  app.fn.add_chained_datepicker('#event_start_attributes_date', '#event_end_attributes_date')
   app.fn.initialize_time_autocomplete($('.time_field'))
 
   app.fn.init_image_crop_handlers()
@@ -94,9 +95,9 @@ $(document).ready ()->
   app.fn.init_image_file_uploader('form.edit_event, form.new_event')
 
 
-  $('body').on 'submit', '.new_event, .edit_event', (event) ->
-
-    form = $(event.target)
+  # event photo and other form validations handler
+  $('body').on 'click', 'input[type=submit]', (event) ->
+    form = $(event.target).closest('form')
     if form.isValid(ClientSideValidations.forms[form.attr('id')].validators) && app.fn.check_if_photo_uploaded('.photo_url_div')
       return true
     else
@@ -105,5 +106,4 @@ $(document).ready ()->
         $("html, body").animate({ scrollTop: $('.field_with_errors').offset().top }, "slow")
       else
         $("html, body").animate({ scrollTop: $('.message.error').parent().offset().top }, "slow")
-
       return false

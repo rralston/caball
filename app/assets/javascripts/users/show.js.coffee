@@ -113,3 +113,12 @@ $(document).ready ->
         else
           alert('Something went wrong, Please try again later')
         $(event.target).attr('disabled', false)
+
+  $('body').on 'click', '.scroll_to', (event)->
+    btn = $(event.target)
+    to_selector = btn.attr('data-scrollto')
+    target = $(to_selector)
+    window.targ = target
+    if target.size() > 0
+      $("html, body").animate({ scrollTop: target.offset().top }, "slow")
+    return false

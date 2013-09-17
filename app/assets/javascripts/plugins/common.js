@@ -32,6 +32,11 @@ app.fn.initialize_date_picker = function(selector){
     todayBtn: true,
     pickTime: false,
     startDate: new Date(),
+  }).on('changeDate', function(ev) {
+    // this will make the validation check happen by triggering focusout
+    $(ev.target).focus();
+    $(ev.target).data('datepicker').hide();
+    $(ev.target).trigger('focusout');
   });
 }
 
@@ -772,4 +777,45 @@ app.fn.handle_guilds_dropdown = function(select_selector, input_selector){
       text_field.show();
     }
   });
+}
+
+
+// function to add datepicker to from and to date fields in the app
+app.fn.add_chained_datepicker = function(start_selector, end_selector, format){
+  var nowTemp = new Date();
+  var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+  
+  var format = 'yyyy-mm-dd'
+
+  var checkin = $(start_selector).datepicker({
+    format: format,
+    startDate: new Date(),
+    onRender: function(date) {
+      return date.valueOf() < now.valueOf() ? 'disabled' : '';
+    }
+  }).on('changeDate', function(ev) {
+    if (ev.date.valueOf() > checkout.date.valueOf()) {
+      var newDate = new Date(ev.date)
+      newDate.setDate(newDate.getDate() + 1);
+      // checkout.setValue(newDate);
+      checkout.setStartDate(newDate);
+    }
+    $(start_selector).focus();
+    checkin.hide();
+    $(start_selector).trigger('focusout');
+    // $(end_selector)[0].focus();
+  }).data('datepicker');
+
+  var checkout = $(end_selector).datepicker({
+    format: format,
+    onRender: function(date) {
+      return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+    }
+  }).on('changeDate', function(ev) {
+    $(end_selector).focus();
+    checkout.hide();
+    $(end_selector).trigger('focusout');
+  }).data('datepicker');
+
+  window.data = checkout;
 }
