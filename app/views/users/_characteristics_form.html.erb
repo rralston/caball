@@ -25,6 +25,13 @@
   
       <div class="control-group">
         <div class="controls">
+          <%= c.label "Age" %>
+          <%= c.select(:age, options_for_select(Characteristics.ages, c.object.age)) %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
           <%= c.label "Height" %>
           <%= c.select(:height, options_for_select(Characteristics.heights, c.object.height)) %>
         </div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130916065353) do
+ActiveRecord::Schema.define(:version => 20130917044632) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20130916065353) do
   add_index "blogs", ["user_id"], :name => "index_blogs_on_user_id"
 
   create_table "characteristics", :force => true do |t|
-    t.integer  "age"
+    t.string   "age"
     t.string   "height"
     t.string   "ethnicity"
     t.string   "bodytype"

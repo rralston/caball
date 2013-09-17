@@ -5,7 +5,6 @@ app.views.user_projects = Backbone.View.extend
 
   render: ()->
     this.$el.html(this.template)
-    console.log this.collection.length
     this.collection.all_projects().forEach(this.renderEachAll, this)
     this.collection.current_projects().forEach(this.renderEachCurrent, this)
     this.collection.past_projects().forEach(this.renderEachPast, this)
