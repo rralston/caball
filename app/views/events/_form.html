@@ -103,20 +103,19 @@
         <div class='span6'>
 
           <h3>Event Images</h3>
-          <%= event.fields_for :main_photo, (@event.main_photo || Photo.new) do |event_main_photo|  %>
+          <%= event.fields_for :main_photo, @event.main_photo || Photo.new do |event_main_photo|  %>
             <h5>Event Main Image</h5>
             <div class='control-group row'>
               <div class='span3'>
                 <div class='controls'>
+                  <%= event_main_photo.text_field :crop_x, :class => 'crop_x' %>
+                  <%= event_main_photo.text_field :crop_y, :class => 'crop_y' %>
+                  <%= event_main_photo.text_field :crop_w, :class => 'crop_w' %>
+                  <%= event_main_photo.text_field :crop_h, :class => 'crop_h' %>
                   <!-- url is updated when the image is created and uploaded  -->
                   <%= event_main_photo.hidden_field :remote_image_url, :class => 'photo_url_div' %>
                 </div>
                 <div class="">
-
-                  <%= event_main_photo.hidden_field :crop_x, :class => 'crop_x' %>
-                  <%= event_main_photo.hidden_field :crop_y, :class => 'crop_y' %>
-                  <%= event_main_photo.hidden_field :crop_w, :class => 'crop_w' %>
-                  <%= event_main_photo.hidden_field :crop_h, :class => 'crop_h' %>
 
                   <div class='controls upload_progress'>
                     Upload Progress:

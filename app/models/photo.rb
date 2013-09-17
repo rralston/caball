@@ -38,7 +38,6 @@ class Photo < ActiveRecord::Base
   # end
 
   def cropping?
-    debugger
     !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
   end
 

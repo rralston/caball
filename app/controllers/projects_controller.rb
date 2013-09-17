@@ -21,9 +21,6 @@ class ProjectsController < ApplicationController
         params[:genres].delete('') if params[:genres]
         params[:types].delete('') if params[:types]
 
-        debugger
-
-
         roles     = params[:roles]
         sub_roles = params[:sub_roles]
         types     = params[:types]
@@ -154,14 +151,12 @@ class ProjectsController < ApplicationController
   end
 
   def step_1
-
     if params[:project_id].present?
       # editing
       @project = Project.find(params[:project_id])
       if @project.update_attributes(params[:project])
         render 'projects/step_2_form', :layout => false
       else
-        debugger
         render :json => false
       end
     else

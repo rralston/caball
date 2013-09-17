@@ -75,12 +75,13 @@ class EventsController < ApplicationController
   def new
     search
     @event = Event.new()
+    # @event.create_main_photo
   end
   
   def create
     search
-    @event.user_id = current_user.id
-    if @event.save
+    params[:event][:user_id] = current_user.id
+    if @event.update_attributes(params[:event])
       redirect_to @event
     else
       render :new, notice: 'Please correct the errors'
