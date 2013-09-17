@@ -96,9 +96,16 @@
                   <div class="profico">
                     <ul class="picos span3">
                       <!-- reverse is done because float right puts the first one to right. Reverse makes sure that they are in order. -->
+
                       <% @user.talents.reverse.each do |talent| %>
-                        <% image_name = talent.sub_talent.nil? ? talent.name : talent.sub_talent %>
-                        <li><a href="#" class="show_tooltip" title='<%= talent.name %>'><img src="/assets/role_icons/<%= image_name %>.png" alt="<%= talent.name %>" width="45" height="45" /></a></li>
+
+                        <% if talent.name == 'Crew' %>
+                          <% image_name = talent.sub_talent %>
+                        <% else %>
+                          <% image_name = talent.name %>
+                        <% end %>
+
+                        <li><a href="#" title='<%= talent.name %>'><img src="/assets/role_icons/<%= image_name %>.png" alt="<%= talent.name %>" width="45" height="45" /></a></li>
                       <% end %>
                       <!--<li><a href="#"><img src="/assets/cut.png" alt="" /></a></li>
                       <li><a href='#' ><img src="/assets/pencil.png" alt="" /></a></li>-->

@@ -621,14 +621,23 @@ class User < ActiveRecord::Base
       "profile", "photos", "cover_photo", "talents", "videos", "experience"]
 
     present_sum = check_array.map { |prop|
-      self.send(prop).present? ? 1 : 0
+      if self.send(prop).present?
+        if prop == 'photos'
+          # photos size needs to be 3 in order to have 100% completeness
+          self.send(prop).size >= 3 ? 1 : 0
+        else
+          1
+        end
+      else
+        0
+      end
     }.reduce(:+)
 
     if characteristics.present?
       present_sum = present_sum + characteristics.completeness_sum
     end
 
-    total_props = check_array.size + 12 # plus 12 for characteristics size
+    total_props = check_array.size + 5 # plus 12 for characteristics size
 
     ((present_sum.to_f/total_props.to_f) * 100).to_i
   end
