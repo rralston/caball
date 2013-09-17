@@ -1,6 +1,7 @@
 $(document).ready ()-> 
   $('#expertise_tags').tagit
     sortable: true
+    maxTags: 4
     tagsChanged: (tagValue, action, element) ->
       tag_value_array = _.map($('#expertise_tags').tagit('tags'), (tag) ->
         tag.value
