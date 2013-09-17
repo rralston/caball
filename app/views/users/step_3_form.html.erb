@@ -12,7 +12,7 @@
 
     <%= f.fields_for :demo_reel, (current_user.demo_reel || Video.new) do |video|  %>
       
-      <div class="control-group">
+      <div class="control-group demo-reel">
 
         <div class="controls">
           <%= video.label :url, "Demo Reel:" %>
@@ -22,7 +22,9 @@
         <% if video.object.embed_code.present? %>
           <div class="controls">
             <%= raw video.object.embed_code %>
-            <%= video.check_box :_destroy %> Click Here to Delete
+            <%= video.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+
+            <a href='#' class='remove_entity' data-toRemove='.demo-reel'>Remove this Video</a>
           </div>
         <% end %>
 
@@ -47,7 +49,7 @@
       <% if current_user.other_videos.exists? %>
               
         <% if video.object.embed_code.present? %>
-          <div class="control-group">
+          <div class="control-group user-video">
 
             <div class="controls">
               <%= video.label :url %>
@@ -57,7 +59,10 @@
 
             <div class="controls">
               <%= raw video.object.embed_code %>
-              <%= video.check_box :_destroy %> Click Here to Delete
+              <%= video.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+
+              <a href='#' class='remove_entity' data-toRemove='.user-video'>Remove this Video</a>
+
             </div>
 
           </div>
@@ -117,7 +122,7 @@
     </div>
     <%= f.fields_for :cover_photo, (current_user.cover_photo || Photo.new) do |user_cover_photo|  %>
 
-      <div class='row'>
+      <div class='row cover-photo-container'>
         <div class='span3'>
           <div class="control-group">
             <%= user_cover_photo.hidden_field :crop_x, :class => 'crop_x' %>
@@ -131,8 +136,10 @@
                   <img src=<%= user_cover_photo.object.image.url(:medium) %> class="image_preview_container img-rounded" >
                 </div>
 
-                <div class='controls'>
-                  <%= user_cover_photo.check_box :_destroy %> Delete Cover Photo or Upload a new one below
+                <div class='controls' style='margin-top: 15px;'>
+                  <%= user_cover_photo.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+
+                  <a href='#' class='remove_entity' data-toRemove='.cover-photo-container' style='margin-top: 10px;'>Remove cover photo</a>
                 </div>
                   
                 <div class='controls image_btns'>
