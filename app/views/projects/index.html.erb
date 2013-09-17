@@ -279,12 +279,18 @@
               <% Project.sample_featured_projects.each do |project| %>
                 <div class="slide" class="item">
                   <div class="slbg span6" >
-                    <div class='img' style='background: url(<%= image_path(project.photos.sample.image) %>) no-repeat'>
-                    </div>
+                    <a href='/projects/<%= project.url_param %>'>
+                      <div class='img' style='background: url(<%= image_path(project.display_photo) %>) no-repeat'>
+                      </div>
+                    </a>
                   </div>
                   <div class='shadow-div'> </div>
                   <div class="slcontent span6">
-                    <h2 class='medium'><%= project.title %></h2>
+                    <h2 class='medium'>
+                      <a href='/projects/<%= project.url_param %>'>
+                        <%= project.title %>
+                      </a>
+                    </h2>
                     <% if project.description.length > 70 %>
                       <p>
                         <%= truncate(project.description, :length => 70, :separator => ' ') %> <span class='read_more_btn' data-content='<%= project.description %>' data-header='Project description - <%= project.title %>' >Read more</span>
