@@ -164,7 +164,7 @@
           <h5>Other Event Images</h5>
           <%= event.fields_for :other_photos do |event_photo|  %>
             <% if event_photo.object.image.present? %>
-              <div class='control-group row'>
+              <div class='control-group row event-photo-div'>
                 <div class='span3'>
                   <div class="span3">
                     <div class='controls upload_progress'>
@@ -185,7 +185,9 @@
                     <label class="control-label">Description</label>
                     <div class="controls">
                       <br/>
-                      <%= event_photo.check_box :_destroy %> Delete Image
+                      <%= event_photo.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+                            
+                      <a href='#' class='remove_entity' data-toRemove='.event-photo-div'>Remove Photo</a>
                     </div>
                   </div>
                 </div>
