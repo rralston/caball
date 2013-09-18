@@ -36,9 +36,10 @@
         
         <div class="userprofwrap">
           <div class="usrprev">
-            <div class="usrimg img-circle" style='background: url(<%= current_user.profile_pic %>)'>
+
+            <a href='/users/<%= current_user.url_param %>' class="usrimg img-circle" style='background: url(<%= current_user.profile_pic %>)'>
               <!--user prof images as cover bg-->
-            </div>
+            </a>
             
             <div class="username">
               <%= current_user.name %>

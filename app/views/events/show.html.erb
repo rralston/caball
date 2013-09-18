@@ -42,12 +42,22 @@
                     <span class='text'>Like this</span>
                   </span>
                 <% end %>
-              <% end %>
 
+                <span class='span2 pull-left btn-custom btn-light-grey center-div text-center btn-invite-followers' data-event-id='<%= @event.id %>' >
+                  Invite Followers
+                </span>
+              </div>
+            <% elsif current_user == @event.user %>
+              <a href='/events/<%= @event.id %>/edit'>
+                <span class='span2 btn-custom btn-light-grey center-div text-center btn-edit'>
+                  Edit Project
+                </span>
+              </a>
               <span class='span2 pull-left btn-custom btn-light-grey center-div text-center btn-invite-followers' data-event-id='<%= @event.id %>' >
                 Invite Followers
               </span>
-            </div>
+            <% end %>
+
           </div>
 
         </div>

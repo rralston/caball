@@ -21,17 +21,22 @@
     </div>
 
     <%= talent.fields_for :script_document, talent.object.script_document || UploadedDocument.new do |script_document| %>
-      <div class="control-group">
+      <div class="control-group script_document">
         
 
         <% if talent.object.script_document.present? %>
           <div class='controls'>
-            <a class='upload_doc_preview' href="<%= talent.object.script_document.document %>" target='_black'>Check your uploaded doc.</a>
+            <a class='upload_doc_preview' href="<%= talent.object.script_document.document %>" target='_black'><%= File.basename(talent.object.script_document.document.url) %></a>
+          </div>
+
+          <div class='controls'>
+            <%= script_document.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+            <a href='#' class='remove_entity' data-toRemove='.script_document' style='top: 0px;'>Remove this script</a>
           </div>
         <% else %>
           <!-- hide initially, but when a file uploaded show the preview -->
           <div class='controls'>
-            <a class='upload_doc_preview' href="" target='_black' style='display: none;'>Check your uploaded doc.</a>
+            <a class='upload_doc_preview' href="" target='_black' style='display: none;'></a>
           </div>
         <% end %>
 
@@ -68,7 +73,7 @@
       <div class="control-group script_synopsis" style='display: none;'>
         
         <div class="controls">
-          <%= talent.label :synopsis, :class => 'control-label' %>
+          <%= talent.label :synopsis %>
           <%= talent.text_area :synopsis, :class => 'textarea', :rows => "5", :placeholder => 'Briefly describe what the film is about on the scene you just uploaded' %>
           <div class='div_hint'>
             Save your fingures, a sentence or 2 is all you need.

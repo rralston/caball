@@ -142,7 +142,7 @@
     
     <%= f.fields_for :resume, current_user.resume || current_user.build_resume do |r|  %>
 
-      <div class="control-group">
+      <div class="control-group resume-div">
 
         <div class='controls clearfix'>
           <%= r.label "Resume:", :class => 'control-label', :style=>'text-align: left;' %>
@@ -150,7 +150,7 @@
 
         <% if current_user.resume.present? and current_user.resume.document.present? %>
           <div class='controls'>
-            <a class='upload_doc_preview' href="<%= current_user.resume.document.url %>" target='_black'>Check your previous doc.</a>
+            <a class='upload_doc_preview' href="<%= current_user.resume.document.url %>" target='_black'><%= File.basename(current_user.resume.document.url) %></a>
           </div>
         <% else %>
           <!-- hide initially, but when a file uploaded show the preview -->
@@ -171,6 +171,13 @@
             <div class='bar' style='width: 0%'></div>
           </div>
         </div>
+
+        <% if current_user.resume.present? and current_user.resume.document.present? %>
+          <div class="controls">
+            <%= r.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+            <a href='#' class='remove_entity' data-toRemove='.resume-div' style='top:0px;'>Remove resume</a>
+          </div>
+        <% end %>
       </div>
 
     <% end %>

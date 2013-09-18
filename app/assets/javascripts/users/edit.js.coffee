@@ -118,8 +118,9 @@ $(document).ready ()->
         progress = parseInt(data.loaded / data.total * 100, 10)
         data.progress_div.find('.bar').css('width', progress + '%')
       done: (e, data)->
-        console.log data
-        data.preview_container.attr('href', data.result)
+        
+        data.preview_container.attr('href', data.result.link)
+        data.preview_container.html(data.result.name)
         data.preview_container.show()
         data.progress_div.hide()
         app.fn.adjust_slider_height()

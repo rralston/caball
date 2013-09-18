@@ -71,6 +71,7 @@ class Characteristics < ActiveRecord::Base
     {
       "Lean/Petite"          => 'Lean/Petite',
       "Athletic/Toned"       => 'Athletic/Toned',
+      "Average"              => 'Average',
       "Ripped/ Body Builder" => 'Ripped/ Body Builder',
       "Plus sized/Husky"     => 'Plus sized/Husky',
       "Large and in charge"  => 'Large and in charge'

@@ -408,22 +408,24 @@
               </div>
             </div>
 
+            <div class="span4 shrink-div desc">
 
+              <div class='content light'>
+                
+                <% if talent.script_document.present? %>
+                  <div class='doc text-center'>
+                    <a href='<%= talent.script_document.document %>' class='badge badge-custom-green'>Download  Script</a>
+                  </div>
+                <% end %>
 
-            <div class='content light'>
-              
-              <% if talent.script_document.present? %>
-                <div class='doc text-center'>
-                  <a href='<%= talent.script_document.document %>' class='badge badge-custom-green'>Download  Script</a>
-                </div>
-              <% end %>
+                <% if talent.synopsis.present? %>
 
-              <% if talent.synopsis.present? %>
-                Synopsis:
-                <div class='synopsis'>
-                    <%= talent.synopsis %>
-                </div>
-              <% end %>
+                  Synopsis:
+                  <div class='synopsis'>
+                      <%= talent.synopsis %>
+                  </div>
+                <% end %>
+              </div>
             </div>
 
           </div>
@@ -605,6 +607,10 @@ $(document).ready(function(){
   });
 
   app.fn.init_show_post_button_handler()
+
+
+  // if this line is not there it will show similar projects as the same templte is used for projects also.
+  $('#user_projects_div').find('.shrink-div').find('h3').html('Projects');
 
 });
 </script>
