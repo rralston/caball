@@ -2,11 +2,9 @@ app.collections.blogs = Backbone.Collection.extend
   model: app.models.blog
   
   video_sorted: ()->
+    _this = this
     sorted = _.sortBy(this.models, (blog)->
-      try
-        return blog.get('video').provider != null ? 0 : 1
-      catch (e)->
-        return 0
+      return _this.video_present(blog) ? 0 : 1
     )
     sorted
   photo_sorted: ()->
@@ -15,10 +13,14 @@ app.collections.blogs = Backbone.Collection.extend
     )
     sorted
   text_sorted: ()->
+    _this = this
     sorted = _.sortBy(this.models, (blog)->
-      try
-        return (blog.get('video').provider == null && blog.get('photo') == null) ? 0 : 1
-      catch (e)->
-        return 0
+      return ( _this.video_not_present(blog) && blog.get('photo') == null) ? 0 : 1
     )
     sorted
+
+  video_present: (blog) ->
+    return typeof blog.get('video') != 'undefined' && blog.get('video') != null && blog.get('video').provider != null
+
+  video_not_present: (blog) ->
+    return (typeof blog.get('video') == 'undefined' || blog.get('video') == null || blog.get('video').provider == null)
