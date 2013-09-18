@@ -197,13 +197,13 @@
                 <span>FANS</span>
               </div>
               <div class="follow">
-                <div class="btn-follow btn-custom btn-cement medium flw">
+                <div class="btn-follow btn-custom btn-cement medium flw show_login_message">
                   
                     Like
                   
                 </div>
 
-                <div class="btn-message msg btn-custom btn-cement medium send-generic-message" data-message-subject="<%= project.title %>" data-message-header="Message Project Owner - <%= project.user.name %>" data-message-recipients="<%= project.user.email %>">
+                <div class="btn-message msg btn-custom btn-cement medium show_login_message">
                     Message
                 </div>
               </div>
@@ -263,7 +263,7 @@
                 <div class="row">
                   <div class="backdrop-cover"></div>
                   
-                    <div class="user-cover-photo" style="background: url(<%= image_path(user.display_cover) %>) no-repeat">
+                    <div class="user-cover-photo" style="background: url(<%= user.display_cover %>) no-repeat">
                     </div>
                   
                 </div>
@@ -303,11 +303,11 @@
 
                     <div class="row buttons text-center">
                       
-                        <div class="btn-follow-user btn-custom btn-cement medium flw">
+                        <div class="btn-follow-user btn-custom btn-cement show_login_message medium flw">
                           Follow
                         </div>
                       
-                      <div class="btn-message msg btn-custom btn-cement medium send-generic-message" data-message-subject="Hey, wassup..!" data-message-header="Message user - <%= user.name %>" data-message-recipients="<%= user.email %>">
+                      <div class="btn-message msg btn-custom btn-cement medium show_login_message">
                         Message
                       </div>
                       
@@ -335,7 +335,7 @@
     <h3><span>Filmzu</span></h3>
   </div>
   <div class="modal-body">
-    <iframe width="530" height="315" src="//www.youtube.com/embed/hoRyaVKE2vE" frameborder="0" allowfullscreen></iframe>
+    <iframe src="//player.vimeo.com/video/69262690?title=0&amp;byline=0&amp;portrait=0" width="530" height="300" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
   </div>
   <div class='modal-footer'>
     <button class='btn' data-dismiss="modal">Close</button>
@@ -385,6 +385,10 @@
       maxSlides:3,
       moveSlides:1
       
+    });
+
+    $('body').on('click', '.show_login_message', function(event){
+      alert('You must create an account to follow or message this person/project');
     });
   });
 </script>

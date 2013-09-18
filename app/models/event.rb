@@ -46,7 +46,7 @@ class Event < ActiveRecord::Base
   accepts_nested_attributes_for :other_photos, :videos, :main_photo,
                                 :start, :end, :other_important_dates, :allow_destroy => true  
   
-  validates_presence_of :title, :description, :message => "is required"
+  validates_presence_of :title, :description, :location, :message => "is required"
   
   geocoded_by :location   # can also be an IP address
   after_validation :geocode, :if => :location_changed?  # auto-fetch coordinates
