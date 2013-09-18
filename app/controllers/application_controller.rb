@@ -48,9 +48,9 @@ class ApplicationController < ActionController::Base
     id_check = true if params[:entity_id].present?
 
     if id_check
-      same_named_count = entity.camelize.constantize.where("lower(raw_url_name) = lower(?) AND id <> ? ", name, params[:entity_id]).count
+      same_named_count = entity.camelize.constantize.where("lower(url_name) like lower(?) AND id <> ? ", "#{name}%", params[:entity_id]).count
     else
-      same_named_count = entity.camelize.constantize.where("lower(raw_url_name) = lower(?)", name).count
+      same_named_count = entity.camelize.constantize.where("lower(url_name) like lower(?)", "#{name}%").count
     end
 
     if same_named_count > 0
