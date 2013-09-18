@@ -381,17 +381,27 @@ $(document).ready(function(){
   $('#similar_events').html( similar_events_view.render().el )
 
 
-  var LatLong = new google.maps.LatLng(<%= @event.latitude %>, <%= @event.longitude %>)
-   var mapOptions = {
-    zoom: 10,
-    center: LatLong,
-  };
-  map = new google.maps.Map(document.getElementById('event-map'), mapOptions);
-  var marker = new google.maps.Marker({
-      position: LatLong,
-      map: map,
-      title: 'Event Location'
-  });
+  
+  <% if @event.latitude.present? and @event.longitude.present? %>
+
+    $('#event_map_modal').on('shown', function(){
+      var LatLong = new google.maps.LatLng(<%= @event.latitude %>, <%= @event.longitude %>)
+      var mapOptions = {
+        zoom: 10,
+        center: LatLong,
+      };
+      var map = new google.maps.Map(document.getElementById('event-map'), mapOptions);
+      var marker = new google.maps.Marker({
+          position: LatLong,
+          map: map,
+          title: 'Event Location'
+      });
+      google.maps.event.trigger(map, 'resize');  
+    });
+  <% end %>
+
+  
+
 
 
   // listen to the new comment creation event
