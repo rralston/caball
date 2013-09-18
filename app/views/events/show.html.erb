@@ -365,7 +365,7 @@ $(document).ready(function(){
 
 // similar events
   similar_events = new app.collections.similar_events()
-  similar_events.reset(<%= raw Event.custom_json(@event.similar_events, current_user) %>)
+  similar_events.reset(<%= raw Event.custom_json(@event.similar_events.first(4), current_user) %>)
   similar_events_view = new app.views.similar_events({ collection: similar_events })
 
   $('#similar_events').html( similar_events_view.render().el )

@@ -4,7 +4,7 @@
     <div class='row'>
       <div class='backdrop-cover'></div>
       <%% if(user.cover_photo != null && typeof user.cover_photo != 'undefined' ){ %>
-        <div class='user-cover-photo'  style='background: url(<%%= user.display_cover %>) no-repeat'>
+        <div class='user-cover-photo'  style='background: url(<%%= user.cover_photo %>) no-repeat'>
         </div>
       <%% }else{ %>
         <div class='user-cover-photo' >

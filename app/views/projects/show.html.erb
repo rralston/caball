@@ -409,13 +409,13 @@ $(document).ready(function(){
 
   // similar events
   similar_events = new app.collections.similar_events()
-  similar_events.reset(<%= raw Event.custom_json(@project.similar_events, current_user) %>)
+  similar_events.reset(<%= raw Event.custom_json(@project.similar_events.first(4), current_user) %>)
   similar_events_view = new app.views.similar_events({ collection: similar_events })
   $('#similar_events').html( similar_events_view.render().el )
 
   // similar projects
   app.similar_projects = new app.collections.similar_projects()
-  app.similar_projects.reset(<%= raw Project.custom_json(@project.similar_projects, current_user) %>)
+  app.similar_projects.reset(<%= raw Project.custom_json(@project.similar_projects.first(4), current_user) %>)
   app.similar_projects_view = new app.views.similar_projects({ collection: app.similar_projects })
   $('#similar_projects_div').html(app.similar_projects_view.render().el)
 
