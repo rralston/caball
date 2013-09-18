@@ -90,9 +90,13 @@
     <div class="control-group">
     <%= p.label :title, :class => 'control-label' %>
       <div class="controls">
-        <%= p.text_field :title, :class => 'text_field required' %>
+        <%= p.text_field :title, :class => 'text_field required', "data-entity" => 'Project', "data-entityid" => p.object.try(:id) %>
         <div class='div_hint'>
           The best titles are short, simple and to the point
+        </div>
+
+        <div class='url_name_summary'>
+          <b>Project url will be</b>: filmzu.com/projects/<span class='url_param'></span>
         </div>
       </div>
     </div>

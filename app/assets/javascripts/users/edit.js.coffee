@@ -11,6 +11,8 @@ $(document).ready ()->
 
   app.fn.init_image_crop_handlers()
   app.fn.handle_guilds_dropdown('.guild_select', '.guild_input')
+  app.fn.bind_show_url_name('#user_name','.url_name_summary')
+
 
   app.fn.description_tag_list_init = ()->
     $('#user_description_tags').tagit

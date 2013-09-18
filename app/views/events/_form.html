@@ -6,6 +6,12 @@
     </div>
 <% end %>
 
+<script type="text/javascript">
+  $(document).ready(function(){
+    
+  });
+</script>
+
 <div class='row'>
   <div class='span12'>
     <%= form_for @event, :validate => true do |event| %>
@@ -14,7 +20,11 @@
           <div class='control-group'>
             <%= event.label :title, :class => 'control-label' %>
             <div class='controls'>
-              <%= event.text_field :title %>
+              <%= event.text_field :title, "data-entity" => 'Event', "data-entityid" => event.object.try(:id) %>
+
+              <div class='url_name_summary'>
+                <b>Event url will be</b>: filmzu.com/events/<span class='url_param'></span>
+              </div>
             </div>
           </div>
 

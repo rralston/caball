@@ -8,6 +8,7 @@ Caball::Application.routes.draw do
 
   match "/skills(/*path)" => redirect{ |env, req| "http://skills.filmzu.com" + (req.path ? "#{req.path}" : '/')}
 
+  match 'check_url_param' => 'application#check_url_param'
 
   match "/main_search" => 'application#main_search'
 

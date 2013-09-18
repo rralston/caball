@@ -38,6 +38,30 @@ class ApplicationController < ActionController::Base
     render :json => JSON.parse(users.to_json(:for_search => true)) + JSON.parse(projects.to_json(:for_search => true)) + JSON.parse(events.to_json(:for_search => true))
   end
 
+  def check_url_param
+    entity = params[:entity]
+    name = params[:value].gsub(/\s/,'-').downcase
+
+    id_check = false
+    
+
+    id_check = true if params[:entity_id].present?
+
+    if id_check
+      same_named_count = entity.camelize.constantize.where("lower(raw_url_name) = lower(?) AND id <> ? ", name, params[:entity_id]).count
+    else
+      same_named_count = entity.camelize.constantize.where("lower(raw_url_name) = lower(?)", name).count
+    end
+
+    if same_named_count > 0
+      to_return = name + "-#{same_named_count.to_i + 1 }"
+    else
+      to_return = name
+    end
+
+    render :json => to_return.to_json()
+  end
+
 
   # def current_user
   #   @current_user ||= User.find(session[:user_id]) if session[:user_id]

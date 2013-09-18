@@ -1,6 +1,8 @@
 $(document).ready ()->
   app.fn.initalize_location_click_handler('#locate', 'input#event_location')
 
+  app.fn.bind_show_url_name('#event_title','.url_name_summary');
+
   Numerous.init
     'other_important_dates-list':
       'add' : (added_form_element)->

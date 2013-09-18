@@ -93,11 +93,14 @@ class User < ActiveRecord::Base
 
   def update_url_name
     if self.name_changed?
-      # if the name is changed, convert to the url name
-      self.url_name = self.name.gsub(/\s/,'-').downcase
 
+      new_name = truncate(self.name, :length => 20, :separator => ' ', :omission => '')
+
+      # if the name is changed, convert to the url name
+      self.url_name = new_name.gsub(/\s/,'-').downcase
+      self.raw_url_name = self.url_name
       # check  and get size of if any other users having the same url_name
-      same_named_count = User.where("lower(url_name) = lower(?)", self.url_name).size
+      same_named_count = User.where("lower(raw_url_name) = lower(?)", self.url_name).size
       if same_named_count > 0
         # append the count + 1 after the url_name.
         self.url_name = self.url_name + "-#{same_named_count.to_i + 1}"

@@ -819,3 +819,56 @@ app.fn.add_chained_datepicker = function(start_selector, end_selector, format){
 
   window.data = checkout;
 }
+
+
+app.fn.bind_show_url_name = function(selector, target){
+
+  var options = {
+    callback: function (value) {
+      make_ajax_call(value, $(this));
+    },
+    wait: 1000,
+    highlight: true,
+    captureLength: 2
+  }
+
+  function make_ajax_call(val, field){
+    $.ajax({
+      url: '/check_url_param',
+      data:{
+        value: val,
+        entity: field.attr('data-entity'),
+        entity_id: field.attr('data-entityid')
+      },
+      success: function (resp) {
+        $(target).show();
+        $(target).find('.url_param').html(resp);
+      }
+    });
+  }
+    
+
+  $(selector).typeWatch(options);
+
+  // var typewatchTimer;
+
+  // $('body').on('keyup', selector, function(event){
+  //   field   = $(event.target)
+  //   val     = field.val()
+  //   to_show = val.replace(/ /gi, '-').toLowerCase()
+
+  //   // clear timer first
+  //   window.clearInterval(typewatchTimer);
+  //   typewatchTimer = window.setInterval(make_ajax_call(val, field), 1000);
+    
+  //   // $(target).show()
+  //   // $(target).find('.url_param').html(to_show)
+  // });
+
+  // $('body').on('focusout', selector, function(event){
+  //   field   = $(event.target)
+  //   val     = field.val()
+
+    
+  // });
+}

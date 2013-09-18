@@ -9,6 +9,7 @@ $(document).ready ()->
 
 
   app.fn.handle_guilds_dropdown('.union_select', '.union_input')
+  app.fn.bind_show_url_name('#project_title','.url_name_summary');
 
   app.fn.init_image_file_uploader = (selector)->
     $(selector).fileupload

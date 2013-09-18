@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130917044632) do
+ActiveRecord::Schema.define(:version => 20130918063458) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -108,9 +108,10 @@ ActiveRecord::Schema.define(:version => 20130917044632) do
     t.string   "location"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.string   "url_name"
+    t.string   "raw_url_name"
   end
 
   add_index "events", ["user_id"], :name => "index_events_on_user_id"
@@ -219,6 +220,7 @@ ActiveRecord::Schema.define(:version => 20130917044632) do
     t.string   "union"
     t.string   "url_name"
     t.boolean  "union_present", :default => false
+    t.string   "raw_url_name"
   end
 
   create_table "receipts", :force => true do |t|
@@ -342,6 +344,7 @@ ActiveRecord::Schema.define(:version => 20130917044632) do
     t.string   "last_sign_in_ip"
     t.string   "fb_token"
     t.string   "managing_company"
+    t.string   "raw_url_name"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
