@@ -538,13 +538,14 @@ $(document).ready(function(){
 
   // user projects
   app.user_projects = new app.collections.user_projects()
-  app.user_projects.reset(<%= raw Project.custom_json(@user.projects, current_user) %>)
+  app.user_projects.reset(<%= raw Project.custom_json(@user.projects.first(4), current_user) %>)
   app.user_projects_view = new app.views.user_projects({ collection: app.user_projects })
   $('#user_projects_div').html(app.user_projects_view.render().el)
 
   // user events
+  // there are attending events
   app.user_events = new app.collections.user_events()
-  app.user_events.reset(<%= raw @user.events.to_json(:include => 
+  app.user_events.reset(<%= raw @user.attending_events.first(4).to_json(:include => 
       [
         :main_photo, 
         :start => { :methods => [:pretty_date, :formatted_time] }
@@ -556,7 +557,7 @@ $(document).ready(function(){
 
   // endorsements
   app.endorsements = new app.collections.endorsements()
-  app.endorsements.reset(<%= raw @user.received_endorsements.to_json(:include =>:sender) %>)
+  app.endorsements.reset(<%= raw @user.received_endorsements.first(4).to_json(:include =>:sender) %>)
   app.endorsements_view = new app.views.endorsements({ collection: app.endorsements })
   $('#endorsements_div').html(app.endorsements_view.render().el)
 
