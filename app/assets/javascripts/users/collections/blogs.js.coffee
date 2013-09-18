@@ -3,7 +3,10 @@ app.collections.blogs = Backbone.Collection.extend
   
   video_sorted: ()->
     sorted = _.sortBy(this.models, (blog)->
-      return blog.get('video').provider != null ? 0 : 1
+      try
+        return blog.get('video').provider != null ? 0 : 1
+      catch (e)->
+        return 0
     )
     sorted
   photo_sorted: ()->
@@ -13,6 +16,9 @@ app.collections.blogs = Backbone.Collection.extend
     sorted
   text_sorted: ()->
     sorted = _.sortBy(this.models, (blog)->
-      return (blog.get('video').provider == null && blog.get('photo') == null) ? 0 : 1
+      try
+        return (blog.get('video').provider == null && blog.get('photo') == null) ? 0 : 1
+      catch (e)->
+        return 0
     )
     sorted

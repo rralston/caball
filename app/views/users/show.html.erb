@@ -133,6 +133,15 @@
                     <% if @user.experience.present? %>
                       <li class="badge regular"><%= @user.experience %></li>
                     <% end %>
+
+                    <% if @user.imdb_url.present? %>
+                      <li class="badge regular">
+                        <a href='<%= @user.imdb_url %>' target='_blank'>
+                          IMDB Link
+                        </a>
+                      </li>
+                    <% end %>                    
+
                   </ul>
                 </div>
               </div>
