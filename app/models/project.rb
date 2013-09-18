@@ -40,7 +40,7 @@ class Project < ActiveRecord::Base
       self.raw_url_name = self.url_name
       
       # check  and get size of if any other projects having the same url_name
-      same_named_count = Project.where("lower(raw_url_name) = lower(?)", self.url_name).size
+      same_named_count = Project.where("lower(raw_url_name) like lower(?)", "#{self.url_name}%").size
       if same_named_count > 0
         # append the count + 1 after the url_name.
         self.url_name = self.url_name + "-#{same_named_count.to_i + 1}"

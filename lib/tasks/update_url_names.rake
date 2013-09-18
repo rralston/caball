@@ -10,7 +10,7 @@ def update_user(user)
   user.url_name = new_name.gsub(/\s/,'-').downcase
   user.raw_url_name = user.url_name
   # check  and get size of if any other users having the same url_name
-  same_named_count = User.where("lower(raw_url_name) = lower(?)", user.url_name).size
+  same_named_count = User.where("lower(raw_url_name) like lower(?)", "#{user.url_name}%").size
 
   if same_named_count > 0
   # append the count + 1 after the url_name.
@@ -29,7 +29,8 @@ def update_project(project)
       project.url_name = new_title.gsub(/\s/,'-').downcase
       project.raw_url_name = project.url_name
       # check  and get size of if any other projects having the same url_name
-      same_named_count = Project.where("lower(raw_url_name) = lower(?)", project.url_name).size
+      same_named_count = Project.where("lower(raw_url_name) like lower(?)", "#{project.url_name}%").size
+
       if same_named_count > 0
         # append the count + 1 after the url_name.
         project.url_name = project.url_name + "-#{same_named_count.to_i + 1}"
@@ -47,7 +48,7 @@ def update_event(event)
       event.url_name = new_title.gsub(/\s/,'-').downcase
       event.raw_url_name = event.url_name
       # check  and get size of if any other events having the same url_name
-      same_named_count = Event.where("lower(raw_url_name) = lower(?)", event.url_name).size
+      same_named_count = Event.where("lower(raw_url_name) like lower(?)", "#{event.url_name}%").size
       if same_named_count > 0
         # append the count + 1 after the url_name.
         event.url_name = event.url_name + "-#{same_named_count.to_i + 1}"
@@ -77,27 +78,6 @@ namespace :caball  do
 
     puts "Updating Events"
     Event.where(:url_name => nil).each  do |event|
-      update_event(event)
-    end
-  end
-
-  task :update_raw_url_names => :environment do
-
-    puts "Updating Users"
-    
-    User.where(:raw_url_name => nil).each  do |user|
-      update_user(user)
-    end
-
-
-    puts "Updating Projects"
-    Project.where(:raw_url_name => nil).each  do |project|
-      update_project(project)
-    end
-
-
-    puts "Updating Events"
-    Event.where(:raw_url_name => nil).each  do |event|
       update_event(event)
     end
   end
