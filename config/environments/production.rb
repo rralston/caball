@@ -53,11 +53,11 @@ Caball::Application.configure do
   config.assets.precompile += %w( admin/admin.css admin/*.js )
 
   config.assets.precompile += %w( conversations/new.css users/users_manifest.js dashboard/dashboard.css dashboard/dashboard_manifest.js users/users.js signup.css signin.css
-                                events_manifest.js events/manifest.css events/index.css events/events_manifest.js home_page.css projects/index.css
-                                users/index.css application.js 
-                                projects/projects_manifest.js projects/manifest.css users/user_search.js projects/index.css 
+                                events_manifest.js events/manifest.css events/event_index.css events/events_manifest.js home_page.css 
+                                users/user_index.css application.js 
+                                projects/projects_manifest.js projects/manifest.css users/user_search.js projects/project_index.css 
                                 static_pages/our_story.css 
-                                users/users_manifest.js users/manifest.css users/index.css users/show.css )
+                                users/users_manifest.js users/manifest.css users/show.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
