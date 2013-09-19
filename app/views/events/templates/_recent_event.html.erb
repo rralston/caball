@@ -1,7 +1,7 @@
 <script type="script/template" id='recent_event_template'>
   <a href='/events/<%%= url_param %>'>
     <div class='event-head'>
-      <div class='event-backdrop'  style='background: url(<%%= main_photo.image.url %>) no-repeat'>
+      <div class='event-backdrop'  style='background: url(<%%= main_photo.image.regular.url %>) no-repeat'>
       </div>
       <div class='backdrop-cover'></div>
 
@@ -31,7 +31,7 @@
 
         <div class='event-owner pull-left'>
           <span class="pull-left owner-img">
-            <div class="img-circle user-circle-image" style="background: url(<%%= user.profile_pic %>)">
+            <div class="img-circle user-circle-image" style="background: url(<%%= user.profile_thumb %>)">
             </div>
           </span>
 
@@ -51,7 +51,7 @@
 
             <%% _.first(attendees, 5).forEach(function(attendee){ %>
               <a href='users/<%%= attendee.url_param %>' target='_blank'>
-                <img src='<%%= attendee.profile_pic %>' class='img-circle event-attendee-pic pull-left'>
+                <img src='<%%= attendee.profile_tiny %>' class='img-circle event-attendee-pic pull-left'>
               </a>
             <%% }) %>
 

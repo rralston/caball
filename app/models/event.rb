@@ -269,7 +269,7 @@ class Event < ActiveRecord::Base
     end
 
     if options[:for_search].present? and options[:for_search] == true
-      json[:thumbnail] = main_photo.image.url(:medium)
+      json[:thumbnail] = main_photo.image.url(:thumb)
       json[:label] = title
       json[:value] = title
       json[:category]= 'Events'

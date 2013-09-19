@@ -93,6 +93,15 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def display_thumb
+    if photos.present? 
+      photos.first.image.url(:thumb) 
+    else
+      # TODO: Change this to default project image.
+      "/assets/actor.png"
+    end
+  end
+
 
   def roles_percent
     if roles.size > 0
@@ -407,7 +416,7 @@ class Project < ActiveRecord::Base
     end
 
     if options[:for_search].present? and options[:for_search] == true
-      json[:thumbnail] = display_photo
+      json[:thumbnail] = display_thumb
       json[:label] = title
       json[:value] = title
       json[:category]= 'Projects'
