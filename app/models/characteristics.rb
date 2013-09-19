@@ -34,27 +34,30 @@ class Characteristics < ActiveRecord::Base
 
   def self.heights
     {
-      "Really short" => "Really short",
-      "Short"        => "Short",
-      "Average"      => "Average",
-      "Tall"         => "Tall",
-      "Really tall"  => "Really tall"
+      "Not Applicable" => "Not Applicable",
+      "Really short"   => "Really short",
+      "Short"          => "Short",
+      "Average"        => "Average",
+      "Tall"           => "Tall",
+      "Really tall"    => "Really tall"
     }
   end
 
   def self.ages
     {
-      "Kid"          => "Kid",
-      "Teen"         => "Teen",
-      "Young Adult"  => "Young Adult",
-      "Parent"       => "Parent",
-      "Golden Years" => "Golden Years"
+      "Not Applicable" => "Not Applicable",
+      "Kid"            => "Kid",
+      "Teen"           => "Teen",
+      "Young Adult"    => "Young Adult",
+      "Parent"         => "Parent",
+      "Golden Years"   => "Golden Years"
     }
     
   end
 
   def self.enthnicities
     {
+      "Not Applicable"            => "Not Applicable",
       "Asian"                     => "Asian",
       "African American/Black"    => "African American/Black",
       "Caucasian"                 => "Caucasian",
@@ -69,6 +72,7 @@ class Characteristics < ActiveRecord::Base
 
   def self.bodytypes
     {
+      "Not Applicable"       => "Not Applicable",
       "Lean/Petite"          => 'Lean/Petite',
       "Athletic/Toned"       => 'Athletic/Toned',
       "Average"              => 'Average',
@@ -80,23 +84,25 @@ class Characteristics < ActiveRecord::Base
 
   def self.hair_colors
     {
-      "Brown"  => "Brown",
-      "Blonde" => "Blonde",
-      "Black"  => "Black",
-      "Red"    => "Red",
-      "Grey"   => "Grey",
-      "Bald"   => "Bald",
-      "Other"  => "Other"
+      "Not Applicable" => "Not Applicable",
+      "Brown"          => "Brown",
+      "Blonde"         => "Blonde",
+      "Black"          => "Black",
+      "Red"            => "Red",
+      "Grey"           => "Grey",
+      "Bald"           => "Bald",
+      "Other"          => "Other"
     }
   end
 
   def self.languages
     {
-      'English' => 'English',
-      'Spanish' => 'Spanish',
-      'French'  => 'French',
-      'German'  => 'German',
-      'Italian' => 'Italian'
+      "Not Applicable" => "Not Applicable",
+      'English'        => 'English',
+      'Spanish'        => 'Spanish',
+      'French'         => 'French',
+      'German'         => 'German',
+      'Italian'        => 'Italian'
     }
   end
 

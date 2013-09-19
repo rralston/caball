@@ -49,6 +49,8 @@
 
       <%% roles_to_show = app.fn.filter_roles(app.project_role_types, approved_user.talent_names) %>
 
+      <%% roles_to_show = _.extend({'Select Role': '---'}, roles_to_show) %>
+
     <%% }else{ %>
       <div class='control-group'>
         <div class='controls'>
@@ -117,7 +119,6 @@
         </div>
 
       </div>
-
 
       <div class='cast_role_options' <%% if(super_role_present && name == 'Cast') print('style="display:block"');  %>>
         <div class='controls'>

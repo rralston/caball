@@ -350,7 +350,8 @@
               Representation:
               <div class='representation'>
                 <span class="pull-left agent-img">
-                  <img src="<%= @user.agent.profile_pic %>" class="img-circle">
+                  <div class='agent_photo img-circle' style='background: url("<%= @user.agent.profile_thumb %>") no-repeat;'>
+                  </div>
                 </span>
                 <span class="agent pull-left">
                   <a href='<%= user_path(@user.agent) %>'><%= @user.agent.name %></a>

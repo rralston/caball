@@ -54,29 +54,33 @@ app.views.project_role_edit = Backbone.View.extend
 
   add_role: (event)->
     _this = this
-    data = $('#project_role_form').serialize()
-    $.ajax
-      url: '/projects/add_filled_role'
-      type: "POST"
-      data: data
-      success: (resp) ->
-        if typeof _this.model.get('id') == 'undefined'
-          # if there is no id, it says that this is a new role being added.
-          _this.model.set(resp)
-          # add it to the collection so that it will get rendered on the right hand side
-          app.project_roles.add(_this.model)
-        else
-          # if id is present, this is a old role being edited.
-          # so call the event of roles display to refresh this role's html.
-          _this.model.set(resp)
-          app.events.trigger('role_updated_'+_this.model.get('id'))
+    select = this.$el.find('.super_role_select')
+    if select.val() == '---'
+      alert('Select Role')
+    else
+      data = $('#project_role_form').serialize()
+      $.ajax
+        url: '/projects/add_filled_role'
+        type: "POST"
+        data: data
+        success: (resp) ->
+          if typeof _this.model.get('id') == 'undefined'
+            # if there is no id, it says that this is a new role being added.
+            _this.model.set(resp)
+            # add it to the collection so that it will get rendered on the right hand side
+            app.project_roles.add(_this.model)
+          else
+            # if id is present, this is a old role being edited.
+            # so call the event of roles display to refresh this role's html.
+            _this.model.set(resp)
+            app.events.trigger('role_updated_'+_this.model.get('id'))
 
 
-        # create it self a new model and render the edit view so that the form will be refreshed
-        _this.model = new app.models.project_role()
-        _this.render()
+          # create it self a new model and render the edit view so that the form will be refreshed
+          _this.model = new app.models.project_role()
+          _this.render()
 
-        $("html, body").animate({ scrollTop: 0 }, "slow");
+          $("html, body").animate({ scrollTop: 0 }, "slow");
 
     false
 
