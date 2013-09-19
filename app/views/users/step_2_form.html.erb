@@ -150,7 +150,7 @@
 
         <% if current_user.resume.present? and current_user.resume.document.present? %>
           <div class='controls'>
-            <a class='upload_doc_preview' href="<%= current_user.resume.document.url %>" target='_black'><%= File.basename(current_user.resume.document.url) %></a>
+            <a class='upload_doc_preview' href="<%= current_user.resume.document.url %>" target='_black'><%= current_user.resume.filename %></a>
           </div>
         <% else %>
           <!-- hide initially, but when a file uploaded show the preview -->

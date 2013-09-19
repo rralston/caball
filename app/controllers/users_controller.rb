@@ -195,7 +195,7 @@ class UsersController < ApplicationController
 
       file_url = {
         :link => current_user.reload.resume.document.url,
-        :name => File.basename(current_user.reload.resume.document.url)
+        :name => current_user.reload.resume.filename
       }
     end
 
@@ -212,7 +212,7 @@ class UsersController < ApplicationController
 
         file_url = {
           :link => link,
-          :name => File.basename(current_user.talents.first.reload.script_document.document.url)
+          :name => current_user.talents.first.reload.script_document.filename
         }
       
       # if second talent has the script document.
@@ -225,7 +225,7 @@ class UsersController < ApplicationController
 
         file_url = {
           :link => link,
-          :name => File.basename(link)
+          :name => current_user.talents.last.reload.script_document.filename
         }
       end
 

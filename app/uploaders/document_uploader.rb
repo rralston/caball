@@ -56,4 +56,9 @@ class DocumentUploader < CarrierWave::Uploader::Base
   #   "something.jpg" if original_filename
   # end
 
+  # Override the filename of the uploaded files:
+  def filename
+    original_filename
+  end
+
 end
