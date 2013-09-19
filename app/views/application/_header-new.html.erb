@@ -37,7 +37,7 @@
         <div class="userprofwrap">
           <div class="usrprev">
 
-            <a href='/users/<%= current_user.url_param %>' class="usrimg img-circle" style='background: url(<%= current_user.profile_pic %>)'>
+            <a href='/users/<%= current_user.url_param %>' class="usrimg img-circle" style='background: url(<%= current_user.profile_thumb %>)'>
               <!--user prof images as cover bg-->
             </a>
             
@@ -206,7 +206,7 @@ $(document).ready(function(){
     $('.noticontentwrap').slideUp(600);
   });
 
-  $('.usrprev').on('click',function(){
+  $('.usrprev .username').on('click',function(){
     $('.userprflistwrap').slideToggle(600);
   });
 

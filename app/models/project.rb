@@ -66,6 +66,33 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def display_medium
+    if photos.present? 
+      photos.first.image.url(:medium) 
+    else
+      # TODO: Change this to default project image.
+      "/assets/actor.png"
+    end
+  end
+
+  def display_large
+    if photos.present? 
+      photos.first.image.url(:large) 
+    else
+      # TODO: Change this to default project image.
+      "/assets/actor.png"
+    end
+  end
+
+  def display_regular
+    if photos.present? 
+      photos.first.image.url(:regular) 
+    else
+      # TODO: Change this to default project image.
+      "/assets/actor.png"
+    end
+  end
+
 
   def roles_percent
     if roles.size > 0
@@ -388,6 +415,8 @@ class Project < ActiveRecord::Base
     end
     json[:url_param] = url_param
     json[:display_photo] = display_photo
+    json[:display_medium] = display_medium
+    json[:display_regular] = display_regular
     json
   end
 

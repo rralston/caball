@@ -4,7 +4,7 @@
     <div class='span7'>
       <div class='row'>
         <% if current_user %>
-          <div class="usrimg img-circle user-profile-img" style='background: url(<%= current_user.profile_pic %>)'> </div>
+          <div class="usrimg img-circle user-profile-img" style='background: url(<%= current_user.profile_thumb %>)'> </div>
         <% end %>
 
         <%= form_for Comment.new, :remote => true do |c|  %>

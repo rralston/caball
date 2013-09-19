@@ -1,7 +1,7 @@
 <script type="script/template" id='user_event_template'>
     <a href='/events/<%%= url_param %>'>
       <div class='event-head'>
-        <div class='event-backdrop'  style='background: url(<%%= main_photo.image.url %>) no-repeat'>
+        <div class='event-backdrop'  style='background: url(<%%= main_photo.image.regular.url %>) no-repeat'>
         </div>
         <div class='backdrop-cover'></div>
 
@@ -42,7 +42,7 @@
             ATTENDING: <br/>
 
             <%% _.first(attendees, 5).forEach(function(attendee){ %>
-              <div class="img-circle event-attendee-pic user-circle-image pull-left" style="background: url(<%%= attendee.profile_pic %>)">
+              <div class="img-circle event-attendee-pic user-circle-image pull-left" style="background: url(<%%= attendee.profile_tiny %>)">
               </div>
             <%% }) %>
 

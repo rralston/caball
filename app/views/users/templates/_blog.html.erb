@@ -1,7 +1,7 @@
 <script type="script/template" id='blog_template'>
   <div class='comment'>
 
-    <div class="usrimg img-circle user-profile-img comment-circle-image" style='background: url(<%%= user.profile_pic %>)'> </div>
+    <div class="usrimg img-circle user-profile-img comment-circle-image" style='background: url(<%%= user.profile_thumb %>)'> </div>
     <div class='comment-details'>
       
       <div class='row'>
@@ -33,7 +33,7 @@
 
         <%% if (photo != null) { %>
           <div class='comment-img'>
-            <img src='<%%= photo.image.url %>'>
+            <img src='<%%= photo.image.large.url %>'>
           </div>
         <%% } %>
 

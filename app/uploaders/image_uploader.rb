@@ -57,24 +57,29 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Accessible through <%= image_tag @user.photo.image.url(:thumb)  %>
   version :thumb do
     process :manualcrop
-    process :resize_to_fill => [25, 25]
+    process :resize_to_limit => [70, 70]
   end
    
    # Create Medium Sized Version
    # Accessible through <%= image_tag @user.photo.image.url(:medium)  %>
   version :medium do
     process :manualcrop
-    process :resize_to_fill => [170, 170]
+    process :resize_to_limit => [170, 170]
   end
-   
+
+  version :regular do
+    process :manualcrop
+    process :resize_to_limit => [300, 300]
+  end
   version :large do
     process :manualcrop
-    process :resize_to_fill => [400, 400]
+    process :resize_to_limit => [500, 500]
   end
    
   version :tiny do
     process :manualcrop
-    process :resize_to_fill => [40, 40]
+    process :quality => 30
+    process :resize_to_limit => [50, 50]
   end
 
   

@@ -6,7 +6,7 @@
     <div class='span12'>
       
       <div class='row project-main-head'>
-        <div class='span5 project-image action-div' data-toggle='modal' data-target='#media-modal'  style='background: url("<%= @project.display_photo %>")'>
+        <div class='span5 project-image action-div' data-toggle='modal' data-target='#media-modal'  style='background: url("<%= @project.display_large %>")'>
         </div>
         <div class="shadow-div"> </div>
         <div class='pull-left main-right'>
@@ -173,7 +173,7 @@
 
                         <% if role.approved_user.present? %>
                           <a href='/users/<%= role.approved_user.url_param %>'>
-                            <%= image_tag role.approved_user.profile_pic, :class => 'img-circle role-cast-pic' %>
+                            <%= image_tag role.approved_user.profile_medium, :class => 'img-circle role-cast-pic' %>
                           </a>
                         <% else %>
                           <%= image_tag "role-#{role.gender}-default.png", :class => 'default-role-pic' %>

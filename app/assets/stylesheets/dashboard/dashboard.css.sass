@@ -504,7 +504,10 @@ $grey-backdrop-text: #636a73
       width: 255px
     .project-fans-tiles
       .fan-img
-        width: 85px
+        .back-img
+          width: 85px
+          height: 85px
+          background-size: cover
       .empty-grey-tile
         width: 85px
         height: 85px
@@ -592,12 +595,14 @@ $grey-backdrop-text: #636a73
         background: black
         opacity: 0.5
         filter: alpha(opacity=50)
-      img.applicant-photo
+      .applicant-photo
         width: 90px 
         border: 5px solid white
         position: absolute
         top: 40px
         left: 75px
+        height: 90px
+        background-size: cover
       .applicant-details 
         padding-top: 30px
         width: 100%

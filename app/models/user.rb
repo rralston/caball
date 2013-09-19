@@ -161,6 +161,27 @@ class User < ActiveRecord::Base
     end
   end
 
+
+  def get_cover_large
+    if (cover_photo.nil? || cover_photo.image.url == "/images/fallback/User_default.png") && !talents.empty?
+      return "../assets/default_cover/#{talents.first.name}.jpg"
+    elsif cover_photo.nil?
+      return "/assets/default_cover/Fan.jpg"
+    else
+      return cover_photo.image.url(:large) rescue "/assets/default_cover/Fan.jpg"
+    end
+  end
+
+  def get_cover_regular
+    if (cover_photo.nil? || cover_photo.image.url == "/images/fallback/User_default.png") && !talents.empty?
+      return "../assets/default_cover/#{talents.first.name}.jpg"
+    elsif cover_photo.nil?
+      return "/assets/default_cover/Fan.jpg"
+    else
+      return cover_photo.image.url(:regular) rescue "/assets/default_cover/Fan.jpg"
+    end
+  end
+
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
@@ -388,6 +409,26 @@ class User < ActiveRecord::Base
     end
   end
 
+  def profile_medium
+    if profile.present? 
+      profile.image.url(:medium)
+    elsif photos.present?
+      photos.first.image.url(:medium)
+    else
+      "/assets/actor.png"
+    end
+  end
+
+  def profile_tiny
+    if profile.present? 
+      profile.image.url(:tiny)
+    elsif photos.present?
+      photos.first.image.url(:tiny)
+    else
+      "/assets/actor.png"
+    end
+  end
+
   def details_complete?
     self.location.present?
   end
@@ -455,7 +496,11 @@ class User < ActiveRecord::Base
     hash = super(options)
     extra_hash = {
       'profile_pic' => profile_pic,
+      'profile_thumb' => profile_thumb,
+      'profile_medium' => profile_medium,
+      'profile_tiny' => profile_tiny,
       'cover_photo' => display_cover,
+      'cover_regular' => get_cover_regular,
       'talent_names' => talent_names,
       'url_param' => url_param
     }
@@ -571,7 +616,7 @@ class User < ActiveRecord::Base
     end
 
     if options[:for_search].present? and options[:for_search] == true
-      json[:thumbnail] = profile_pic
+      json[:thumbnail] = profile_thumb
       json[:label] = name
       json[:value] = name
       json[:category]= 'People'

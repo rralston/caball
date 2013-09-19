@@ -50,7 +50,7 @@
             <% elsif current_user == @event.user %>
               <a href='/events/<%= @event.id %>/edit'>
                 <span class='span2 btn-custom btn-light-grey center-div text-center btn-edit'>
-                  Edit Project
+                  Edit Event
                 </span>
               </a>
               <span class='span2 pull-left btn-custom btn-light-grey center-div text-center btn-invite-followers' data-event-id='<%= @event.id %>' >
@@ -85,7 +85,7 @@
                           <div id="carousel" class="flexslider span11">
                               <ul class="slides">
                                 <% @event.all_photos.each do |photo|  %>
-                                  <li style="background:url(<%= photo.image.url(:original) %>);"></li>
+                                  <li style="background:url(<%= photo.image.url(:medium) %>);"></li>
                                 <% end %>
                               </ul>
                           </div>
@@ -99,7 +99,7 @@
                           <div id="carousel" class="flexslider span11 not_owner">
                               <ul class="slides">
                                 <% @event.all_photos.each do |photo|  %>
-                                  <li style="background:url(<%= photo.image %>);"></li>
+                                  <li style="background:url(<%= photo.image.url(:medium) %>);"></li>
                                 <% end %>
                               </ul>
                           </div>
@@ -144,7 +144,7 @@
             <div class='owner-row row'>
               <div class='span4 shrink-div'>
                 <span class='pull-left owner-img'>
-                  <img src="<%= @event.user.profile_pic %>" class='img-circle'>
+                  <img src="<%= @event.user.profile_thumb %>" class='img-circle'>
                 </span>
                 <span class='owner pull-left'>
                   created by
@@ -219,6 +219,10 @@
           </div>
 
           <div class='right-extra-div coming-div row' id='who_coming'>
+
+          </div>
+
+          <div class='right-extra-div coming-div row' id='similar_events'>
 
           </div>
 
