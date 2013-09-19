@@ -609,11 +609,85 @@ font-weight:700;
   
 }
 /* worlmap ends-------=============== */
+
+
+.team_div{
+  margin-bottom: 80px;
+}
+
+
 /* teamlist ends-------=============== */
 
 #teamfounder .teamlist{
   margin-bottom:80px;
 }
+
+
+.codebrahma{
+  height: 150px;
+}
+
+.codebrahma .logo{
+  background-color: #575757;
+  height: 150px;
+  float: left;
+  width: 720px;
+  text-align: center;
+  /*border: 1px solid #FFAF00;*/
+}
+
+.codebrahma .logo img{
+  margin-top: 15px;
+}
+
+.codebrahma .contact{
+  width: 230px;
+  height: 130px;
+  color: white;
+  float: left;
+
+  background-color: #575757;
+  padding: 20px 0px 0px 10px;
+}
+
+
+.codebrahma .contact .by{
+  margin-bottom: 10px;
+}
+
+.codebrahma .contact .address{
+  font-size: 15px;
+  color: #FFAF00;
+}
+
+
+.designer{
+  display: inline;
+  float: left;
+  width: 480px;
+  height: 150px;
+}
+
+.designer .image{
+  float: left;
+  width: 240px;
+  height: 100%;
+}
+
+.designer .image img{
+  width: 240px;
+  height: 100%;
+}
+
+.designer .contact{
+  float: left;
+  width: 200px;
+  height: 130px;
+  color: white;
+  background-color: #575757;
+  padding:20px 10px 0px 30px;
+}
+
 
 
 .teamlist ul{
@@ -625,7 +699,7 @@ font-weight:700;
   background:#575757;
   color:#eaeaea;
   font-size:14px;
-  width:175px;
+  width: 250px;
   float:left;
 }
 
@@ -634,6 +708,7 @@ font-weight:700;
 .teamlist .teamimg{
   width:100%;
   height:120px;
+  float: left;
 }
 
 .teamimg img{
@@ -644,6 +719,7 @@ font-weight:700;
 .teamlist .teamtext{
   height:80px;
   padding:20px 10px 20px 30px;
+  float: left;
 }
 
 .teammail{
@@ -658,7 +734,7 @@ font-weight:700;
 /* twit ends-------=============== */
 #twitfb{
   background:url('/assets/twitfbbg.png');
-  
+  margin-top: 80px;
 }
 
 #twitfb .featureh{
