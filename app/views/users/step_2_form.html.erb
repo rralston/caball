@@ -149,8 +149,11 @@
         </div>
 
         <% if current_user.resume.present? and current_user.resume.document.present? %>
-          <div class='controls'>
+          <div class='controls upload-doc-preview upload-doc-parent'>
             <a class='upload_doc_preview' href="<%= current_user.resume.document.url %>" target='_black'><%= current_user.resume.filename %></a>
+            <%= r.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+            <br/>
+            <a href='#' class='remove_entity' data-toRemove='.upload-doc-preview' style='top:0px;'>Remove resume</a>
           </div>
         <% else %>
           <!-- hide initially, but when a file uploaded show the preview -->
@@ -174,8 +177,7 @@
 
         <% if current_user.resume.present? and current_user.resume.document.present? %>
           <div class="controls">
-            <%= r.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
-            <a href='#' class='remove_entity' data-toRemove='.resume-div' style='top:0px;'>Remove resume</a>
+            
           </div>
         <% end %>
       </div>

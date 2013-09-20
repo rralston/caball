@@ -105,6 +105,11 @@ $(document).ready ()->
           data.progress_div.show()
 
           data.preview_container = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.upload_doc_preview')
+          data.destroy_checkbox = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.destroy_checkbox')
+          data.preview_parent = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.upload-doc-parent') 
+
+          data.destroy_checkbox.attr('checked', false)
+          
           data.preview_container.hide()
           data.submit()
           
@@ -122,6 +127,9 @@ $(document).ready ()->
         data.preview_container.attr('href', data.result.link)
         data.preview_container.html(data.result.name)
         data.preview_container.show()
+        data.preview_parent.show()
+        # find the desctroy checkbox and make it un checked.
+        data.destroy_checkbox.attr('checked', false)
         data.progress_div.hide()
         app.fn.adjust_slider_height()
 

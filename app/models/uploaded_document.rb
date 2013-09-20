@@ -1,5 +1,9 @@
 class UploadedDocument < ActiveRecord::Base
   belongs_to :documentable, :polymorphic => true
+  
+  attr_accessor :_destroy
+  attr_accessible :_destroy
+
   attr_accessible :document, :description, :content_type, :file_size, :updated_at, :filename
   mount_uploader :document, DocumentUploader
 
@@ -10,7 +14,9 @@ class UploadedDocument < ActiveRecord::Base
   end
 
   def save_file_name
-    self.filename = document.filename
+    if document_changed?
+      self.filename = document.filename
+    end
   end
 
 end

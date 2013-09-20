@@ -22,16 +22,17 @@
 
     <%= talent.fields_for :script_document, talent.object.script_document || UploadedDocument.new do |script_document| %>
       <div class="control-group script_document">
-        
+        <div class='controls'>
+          <%= script_document.label :document ,"Script Document" %>
+        </div>
 
         <% if talent.object.script_document.present? %>
-          <div class='controls'>
-            <a class='upload_doc_preview' href="<%= talent.object.script_document.document %>" target='_black'><%= File.basename(talent.object.script_document.document.url) %></a>
-          </div>
+          <div class='controls upload-doc-preview upload-doc-parent'>
+            <a class='upload_doc_preview' href="<%= talent.object.script_document.document %>" target='_black'><%= talent.object.script_document.filename %></a>
 
-          <div class='controls'>
             <%= script_document.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
-            <a href='#' class='remove_entity' data-toRemove='.script_document' style='top: 0px;'>Remove this script</a>
+            <br/>
+            <a href='#' class='remove_entity' data-toRemove='.upload-doc-preview' style='top: 0px;'>Remove this script</a>
           </div>
         <% else %>
           <!-- hide initially, but when a file uploaded show the preview -->
@@ -41,7 +42,7 @@
         <% end %>
 
         <div class="controls">
-          <%= script_document.label :document %>
+          
           <%= script_document.file_field :document, :class => 'script_document' %>
           <div class='div_hint'>
             Uploading just your best scene is the best way to get noticed!

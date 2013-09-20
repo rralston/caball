@@ -186,24 +186,11 @@ class UsersController < ApplicationController
 
     end
 
-    # check if resume attribtues are present    
-    if params['user']['resume_attributes'].present? and params['user']['resume_attributes']["document"].present?
-      # build resume if its not present
-      current_user.resume = UploadedDocument.new if current_user.resume.nil?
-
-      current_user.resume.update_attributes(params['user']['resume_attributes'])
-
-      file_url = {
-        :link => current_user.reload.resume.document.url,
-        :name => current_user.reload.resume.filename
-      }
-    end
-
     # check if the talents scrip_document is sent.
-    if params['user']['talents_attributes'].present? and (params['user']['talents_attributes']["0"].present?)
+    if params['user']['talents_attributes'].present? and (params['user']['talents_attributes']["0"].present? or params['user']['talents_attributes']["1"].present? )
       
       # if first talent has the script document.
-      if params['user']['talents_attributes']["0"]['script_document_attributes'].present?
+      if params['user']['talents_attributes']["0"].present? and params['user']['talents_attributes']["0"]['script_document_attributes'].present? and params['user']['talents_attributes']["0"]["script_document_attributes"]["document"].present?
         # build docuemnt if its not present
         current_user.talents.last.script_document = UploadedDocument.new if current_user.talents.last.script_document.nil?
 
@@ -216,7 +203,7 @@ class UsersController < ApplicationController
         }
       
       # if second talent has the script document.
-      elsif params['user']['talents_attributes']["1"].present? and params['user']['talents_attributes']["1"]['script_document_attributes'].present?
+      elsif params['user']['talents_attributes']["1"].present? and params['user']['talents_attributes']["1"]['script_document_attributes'].present? and params['user']['talents_attributes']["1"]["script_document_attributes"]["document"].present?
         # build docuemnt if its not present
         current_user.talents.last.script_document = UploadedDocument.new if current_user.talents.last.script_document.nil?
 
@@ -230,6 +217,21 @@ class UsersController < ApplicationController
       end
 
       
+    end
+
+    # check if resume attribtues are present    
+    if params['user']['resume_attributes'].present? and params['user']['resume_attributes']["document"].present?
+      # build resume if its not present
+      current_user.resume = UploadedDocument.new if current_user.resume.nil?
+
+      current_user.resume.update_attributes(params['user']['resume_attributes'])
+
+      resume = current_user.reload.resume.reload
+
+      file_url = {
+        :link => resume.document.url,
+        :name => resume.filename
+      }
     end
 
   
