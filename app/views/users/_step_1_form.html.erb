@@ -105,6 +105,8 @@
           
         <div class="controls">
           <%= profile.file_field :image %>
+          <!-- id is updated when the image is created and uploaded  -->
+          <%= profile.hidden_field :id, :class => 'photo_id_div' %>
         </div>
 
         <div class='controls upload_progress'>
