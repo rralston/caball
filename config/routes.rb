@@ -96,8 +96,8 @@ Caball::Application.routes.draw do
   # Static Pages 
   
   resources :home, except: :show  
-  %w[privacy terms about].each do |page|
-    get page, controller: "home", action: page
+  %w[privacy terms about opportunities].each do |page|
+    get page, controller: "static_pages", action: page
   end
 
   match 'dashboard'               => 'users#dashboard'
