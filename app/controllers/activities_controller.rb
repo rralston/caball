@@ -12,7 +12,8 @@ class ActivitiesController < ApplicationController
     render :json => activities.to_json(:include => [
                                                     :owner, 
                                                     :trackable
-                                                  ]
+                                                  ],
+                                                  :check_user => current_user
                                                 )
   end
 end
