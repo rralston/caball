@@ -175,22 +175,12 @@
           <%= event.fields_for :other_photos do |event_photo|  %>
             <% if event_photo.object.image.present? %>
               <div class='control-group row event-photo-div'>
-                <div class='span3'>
-                  <div class="span3">
-                    <div class='controls upload_progress'>
-                      Upload Progress:
-                      <div class='progress'>
-                        <div class='bar' style='width: 0%'></div>
-                      </div>
-                    </div>
 
                     <div class="controls">
                       <img src=<%= event_photo.object.image.url(:medium) %> class="image_preview_container img-rounded" >
                     </div>
-                  </div>
-                </div>
+
                 
-                <div class='span3'>
                   <div>
                     <label class="control-label">Description</label>
                     <div class="controls">
@@ -200,7 +190,13 @@
                       <a href='#' class='remove_entity' data-toRemove='.event-photo-div'>Remove Photo</a>
                     </div>
                   </div>
-                </div>
+
+                    <div class='controls upload_progress'>
+                      Upload Progress:
+                      <div class='progress'>
+                        <div class='bar' style='width: 0%'></div>
+                      </div>
+                    </div>
 
               </div>
             <% end %>
@@ -209,20 +205,11 @@
           <div id='fields-for-event_photos-list' class='numerous'>
             <%= event.fields_for :other_photos, Photo.new, :child_index => 'replace_this' do |photo| %>
               <div class='control-group row'>
-                <div class="span3">
-                  <div class='controls upload_progress'>
-                    Upload Progress:
-                    <div class='progress'>
-                      <div class='bar' style='width: 0%'></div>
-                    </div>
-                  </div>
-
+                
                   <div class="controls">
                     <img src='' class="image_preview_container img-rounded" >
                   </div>
-                </div>
 
-                <div class='span3'>
                   <div>
                     <label class="control-label">Event Image</label>
                     <div class="controls">
@@ -230,14 +217,20 @@
 
                     </div>
                   </div>
-                </div>
+
+                  <div class='controls upload_progress'>
+                    Upload Progress:
+                    <div class='progress'>
+                      <div class='bar' style='width: 0%'></div>
+                    </div>
+                  </div>
 
                 <!-- url is updated when the image is created and uploaded  -->
                 <%= photo.hidden_field :remote_image_url, :class => 'photo_url_div' %>
 
               </div>
               
-              <%= link_to 'Remove', '#', :class => 'numerous-remove pull-right' %>
+              <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
               
             <% end %>
 
