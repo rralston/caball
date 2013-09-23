@@ -91,3 +91,25 @@ $(document).ready ()->
           else
             alert 'Something went wrong. Please try later'
           btn.html('Invite Followers')
+
+  $('body').on 'click', '.vote-action', (event) ->
+    app.fn.vote_event(event)
+
+  app.fn.vote_event = (event) ->
+    btn = $(event.target)
+    type = btn.attr('data-type')
+    if app.fn.check_current_user() and !(btn.hasClass('active'))
+      btn.parent().find('.vote-action.active').removeClass('active')
+      btn.addClass('active')
+      $.ajax
+        url: '/events/'+type
+        type: "POST"
+        data:
+          id: btn.attr('data-eventid')
+        success: (resp)->
+          if resp != 'false'
+            # console.log(resp)
+            btn.parent().find('.votes-count').html(resp.votes_count)
+          else
+            alert 'Something went wrong. Please try later'
+            btn.removeClass('active')

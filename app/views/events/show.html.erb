@@ -4,21 +4,25 @@
 <div class='container'>
   <div class='row main-event-row'>
     <div class='event-votes-parent pull-left'>
-      <!-- <div class='event-vote-div'>
+      <div class='event-vote-div'>
 
-        <div class='vote-action up-vote <%% if(typeof voted_type_by_user != "undefined" && voted_type_by_user == "up") print("active") %> '>
-
-        </div>
-
+        <% if @event.voted_by_user?(current_user) and @event.voted_type_by_user(current_user) == 'up' %>
+          <div class='vote-action up-vote active' data-eventid = '<%= @event.id %>' data-type='up_vote'> </div> 
+        <% else %>
+          <div class='vote-action up-vote' data-eventid = '<%= @event.id %>' data-type='up_vote'> </div>
+        <% end %>
+        
         <div class='votes-count'>
           <%= @event.votes_count %>
         </div>
 
-        <div class='vote-action down-vote <%% if(typeof voted_type_by_user != "undefined" && voted_type_by_user == "down") print("active") %> '>
+        <% if @event.voted_by_user?(current_user) and @event.voted_type_by_user(current_user) == 'down' %>
+          <div class='vote-action down-vote active' data-eventid = '<%= @event.id %>' data-type='down_vote'> </div>
+        <% else %>
+          <div class='vote-action down-vote' data-eventid = '<%= @event.id %>' data-type='down_vote'> </div>
+        <% end %>
 
-        </div>
-
-      </div> -->
+      </div>
     </div>
     <div class='span12'>   
       <div class='row event-main-head'>
