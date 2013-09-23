@@ -96,7 +96,7 @@ Caball::Application.routes.draw do
   # Static Pages 
   
   resources :home, except: :show  
-  %w[privacy terms about opportunities FAQ glossary].each do |page|
+  %w[privacy terms about opportunities FAQ glossary contact].each do |page|
     get page, controller: "static_pages", action: page
   end
 
