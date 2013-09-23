@@ -699,7 +699,7 @@ class User < ActiveRecord::Base
 
   def self.featured_people
     #  TODO: Change this to true
-    User.where(:featured => nil)
+    User.where(:featured => true)
   end
 
   def display_cover

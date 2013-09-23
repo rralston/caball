@@ -268,7 +268,8 @@ class Project < ActiveRecord::Base
   end
 
   def self.sample_featured_projects
-    featured_projects.first(10)
+    Project.where(:featured => true)
+    # featured_projects.first(10)
   end
 
   def self.sample_popular_projects
