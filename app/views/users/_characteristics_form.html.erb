@@ -66,27 +66,29 @@
       </div>
 
 
-      <div class="control-group">
-        
-        
-        <div class='controls'>
-          <%= c.label :description_tag_list %>
+      <% if false %> <!-- Exclude Fields -->
+        <div class="control-group">
+          
+          
+          <div class='controls'>
+            <%= c.label :description_tag_list %>
 
-            <ul id="user_description_tags" class='tagit ui-sortable' style='width: 300px;'>
-              <% if current_user.characteristics.present? and current_user.characteristics.description_tag_list.present? %>
-                <% current_user.characteristics.description_tag_list.each do |desc| %>
-                  <li data-value="<%= desc %>"><%= desc %> </li>
+              <ul id="user_description_tags" class='tagit ui-sortable' style='width: 300px;'>
+                <% if current_user.characteristics.present? and current_user.characteristics.description_tag_list.present? %>
+                  <% current_user.characteristics.description_tag_list.each do |desc| %>
+                    <li data-value="<%= desc %>"><%= desc %> </li>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </ul>
+              </ul>
 
-        </div>  
+          </div>  
 
-        <div class="controls">
-          <%= c.hidden_field :description_tag_list, :class => 'text_field' %>
+          <div class="controls">
+            <%= c.hidden_field :description_tag_list, :class => 'text_field' %>
+          </div>
+
         </div>
-
-      </div>
+      <% end %>
 
     </div>
 

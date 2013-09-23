@@ -2,8 +2,25 @@
 <%= stylesheet_link_tag "events/manifest.css" %>
 
 <div class='container'>
-  <div class='row'>
-    <div class='span12'>      
+  <div class='row main-event-row'>
+    <div class='event-votes-parent pull-left'>
+      <!-- <div class='event-vote-div'>
+
+        <div class='vote-action up-vote <%% if(typeof voted_type_by_user != "undefined" && voted_type_by_user == "up") print("active") %> '>
+
+        </div>
+
+        <div class='votes-count'>
+          <%= @event.votes_count %>
+        </div>
+
+        <div class='vote-action down-vote <%% if(typeof voted_type_by_user != "undefined" && voted_type_by_user == "down") print("active") %> '>
+
+        </div>
+
+      </div> -->
+    </div>
+    <div class='span12'>   
       <div class='row event-main-head'>
         <div class='span8'>
           <div class='row event-main-details'>
