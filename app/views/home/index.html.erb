@@ -161,7 +161,9 @@
           <div class="project">
             <a href="/projects/<%= project.url_param %>">
               <div class="ptopimg">
-                  <img src="<%= image_path(project.display_photo) %>" alt="">
+                <div class="project-img" style="background: url(<%= image_path(project.display_regular) %>) no-repeat">
+                </div>
+                  <img src="" alt="">
                 <div class="topcnt">
                     <h3 class="medium">
                         <%= project.title %>
