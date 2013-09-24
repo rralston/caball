@@ -11,7 +11,7 @@ class ConversationsController < ApplicationController
 
     @friends = current_user.friends.select("users.*, users.name AS label").map{|user| 
       {
-        "label" => user.label,
+        "label" => user.name,
         "value" => user.email,
         "desc" => user.email
       }

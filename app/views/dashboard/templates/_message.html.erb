@@ -4,18 +4,39 @@
     <%%= app.fn.format_date(created_at) %>
   </span>
 
-  <div class='message-sender pull-left'>
-    <div class="img-circle user-circle-image" style="background: url(<%%= sender.profile_pic %>)">
+  <%% if(typeof sender != 'undefined' && sender != null){ %>
+    <div class='message-sender pull-left'>
+      <div class="img-circle user-circle-image" style="background: url(<%%= sender.profile_pic %>)">
+      </div>
     </div>
-  </div>
 
-  <div class='message-details pull-left'>
-    <div class='user-name'>
-      <a href='/users/<%%= sender.url_param %>'><%%= sender.name %></a>
+    <div class='message-details pull-left'>
+      <div class='user-name'>
+        <a href='/users/<%%= sender.url_param %>'><%%= sender.name %></a>
+      </div>
+      <div class='msg-body'>
+        <%%= body %>
+      </div>
     </div>
-    <div class='msg-body'>
-      <%%= body %>
+
+  <%% }else{ %>
+    <div class='message-sender pull-left'>
+      <div class="img-circle user-circle-image" style="background: url('')">
+      </div>
     </div>
-  </div>
+
+    <div class='message-details pull-left'>
+      <div class='user-name'>
+        <a href='#'>Unrecognised User</a>
+      </div>
+      <div class='msg-body'>
+        <%%= body %>
+      </div>
+    </div>
+
+  <%% } %>
+  
+
+  
   
 </script>

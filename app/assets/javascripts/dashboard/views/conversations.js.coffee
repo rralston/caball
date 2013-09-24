@@ -10,7 +10,7 @@ app.views.conversations = Backbone.View.extend
   render: ()->
     this.collection.set_values() # this will set the unread and messages count
     this.$el.html( this.template(this.collection.toJSON()) )
-    this.collection.forEach(this.renderEach, this)
+    this.collection.time_sorted().forEach(this.renderEach, this)
     return this
 
   renderEach: (conversation)->
@@ -18,7 +18,7 @@ app.views.conversations = Backbone.View.extend
     # this is actually a fail safe when other user in a conversation is no more present in the database
     if conversation.get('originator') != null && conversation.get('other_user_names').length > 0 
       conversation_view = new app.views.conversation({ model: conversation })
-      this.$el.find('.conversations_list').append(conversation_view.render().el)
+      this.$el.find('.conversations_list').prepend(conversation_view.render().el)
 
   empty_trash: (event) ->
     _this = this

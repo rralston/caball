@@ -17,7 +17,7 @@ app.views.conversation = Backbone.View.extend
 
   show_messages: (event)->
     this.fetch_messages()
-    $('.conversation.active').removeClass('active')
+    this.$el.closest('.tab-pane').find('.conversation.active').removeClass('active')
     this.$el.addClass('active')
     # remove the unread class if it has.
     if this.$el.hasClass('un_read')

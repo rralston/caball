@@ -9,3 +9,10 @@ app.collections.conversations = Backbone.Collection.extend
       return memo + parseInt(model.get('count_messages'))
     , 0)
 
+  time_sorted: ()->
+    sorted = _.sortBy(this.models, (conversation_model)->
+      return conversation_model.get('last_message').created_at
+    )
+    return sorted
+
+
