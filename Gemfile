@@ -108,7 +108,7 @@ gem 'newrelic_rpm'
 gem 'public_activity'
 
 # Heroku CDN Link to AWS
-# gem "asset_sync"
+gem "asset_sync"
 
 # Carrier Wave link to AWS S#
 gem 'fog', '~> 1.12.1'
