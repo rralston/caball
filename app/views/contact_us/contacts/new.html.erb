@@ -1,23 +1,27 @@
-<div class='standard-static-div' style='margin: 0px auto; width: 600px;'>
 <%= stylesheet_link_tag "home_page.css" %>
+<%= javascript_include_tag "contact.js" %>
+<section id="promo" class="section alt">
+    <div id="map"></div>
+</section>
+<br>
+<div class="detailinfowrap">
+  <div class="detailinfo maincontain container">
+    <div class="row">    
+    <div class="discover clearfix">
+        <br><br>
+        <div class="info verylight">
+          <b>Contact Us </b><small> We answer every email, even when we are sleeping.</small>
+        </div>
 
+        <div class="dtlinfotext light">
 
 <!-- Main Content -->
 <div id="content" role="main">
 
-    <section id="promo" class="section alt">
-        <div class="map-top-shadow"></div>
-        <div id="map"></div>
-        <div class="map-bottom-shadow"></div>
-    </section>
+    
 
     <section class="section">
         <div class="container">
-            <div class="page-header">
-                <h1>
-                    Contact Us <small>We answer every email, even when we are sleeping.</small>
-                </h1>
-            </div>
             <div class="span4">
                 <div class="row-fluid dtlinfotext light">
                     <p>
@@ -75,18 +79,14 @@
 											</div>
 											<div class="span4">
 											<form class="form-horizontal">
-												 <div class="contactbutton text-center">
-											      <a data-toggle='modal' data-target='#signup_modal' class="contctbtn btn regular text-left">
-											        <div class="contctbtntext">Start Creating</div>
-											      </a>
-											    </div>
+												 
 
 											<br><br>
 											<p><b> Info </b></p><br>
 											<ul class="icons">
 											    <li>
 											        <p>
-											            <i class="icon-home"></i> 2377 Beryl St, San Diego, CA 92109
+											            <i class="icon-home"></i> 820 Broadway, Santa Monica, CA 94102
 											        </p>
 
 											    </li>
@@ -117,6 +117,13 @@
 											<p><b>Speaker</b></p><br>
 											<p>Want us to speak at your film school or company event? Know anyone who would like to get involved with Filmzu?
 											<p>Use the form on the left and let us know!</p>
+											<br><br>
+											<div class="contactbutton text-center">
+										      <a data-toggle='modal' data-target='#signup_modal' class="contctbtn btn regular text-left">
+										        <div class="contctbtntext">Start Creating</div>
+										      </a>
+										    </div>
+										
 											</form>
 											</div>
 											</div>
@@ -124,3 +131,24 @@
 											</section>
 </div>
 </div>
+</div>
+	
+
+</div>
+
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script>
+    // Call the google map
+    mapInit();
+</script>
+<!-- end scripts -->

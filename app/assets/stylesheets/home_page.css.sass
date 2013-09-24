@@ -374,3 +374,32 @@ $divider-border: #c6d0db
   border-right: 1px solid rgba(172,44,38,.2)
   border-left: 1px solid rgba(172,44,38,.2)
   padding: 0
+
+/* MAP AREA */
+/* -------- */
+#map
+  height: 500px
+  margin: -30px -20px
+  position: relative
+  z-index: 0
+#map img
+  max-width: none
+
+.map-top-shadow, .map-bottom-shadow
+  position: absolute
+  height: 10px
+  left: 0
+  width: 100%
+  z-index: 1
+
+.map-top-shadow
+  top: 0
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) inset
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) inset
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25) inset
+
+.map-bottom-shadow
+  bottom: 0
+  -webkit-box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.25) inset
+  -moz-box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.25) inset
+  box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.25) inset
