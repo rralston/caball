@@ -259,3 +259,19 @@ $(document).ready ()->
     $('#steps').stop().animate { marginLeft: '-' + widths[current-1] + 'px'}, 500, () ->
       $('#formElem').children(':nth-child('+ parseInt(current) +')').find(':input:first').focus();  
 
+  $(document).on 'FanSelection', (event) ->
+    if $('.user-talent').size() > 1
+      # remove the role if second one is already saved.
+      $('.user-talent:nth(1)').find('.remove_entity').trigger('click')
+      # remove the second role if it was added
+      $('.user-talent:nth(1)').find('.numerous-remove').trigger('click')
+    
+    # hide the option to add one more talent
+    $('#add-to-talents-list').hide()
+
+    $('#skills_label').html('Movie types you like')
+
+  $(document).on 'NonFanSelection', (event) ->
+    $('#add-to-talents-list').show()
+
+    $('#skills_label').html('Skills')

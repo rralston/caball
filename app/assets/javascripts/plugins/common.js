@@ -460,6 +460,21 @@ app.fn.init_super_roles_select_handler = function(super_role_selector_class, sub
         sub_role_container.show();
       }
 
+      // if the primary role is changed 
+      if( $(event.target).closest('.user-talent')[0] == $('.user-talent:nth(0)')[0] ){
+
+        if(selected_val == 'Fan'){
+          console.log('triggering');
+          $.event.trigger({
+            type: 'FanSelection'
+          })
+        }else{
+          $.event.trigger({
+            type: 'NonFanSelection'
+          })
+        }
+      }
+
       if(selected_val == 'Cast'){
         $(event.target).closest('.control-group').find('.cast_role_options').show();
       }else{
