@@ -63,7 +63,7 @@ Caball::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
   
-  config.action_controller.asset_host = "http://d1cujs8uckytjb.cloudfront.net"
+  config.action_controller.asset_host = "https://d1cujs8uckytjb.cloudfront.net"
   
   # Enable threaded mode
   # config.threadsafe!
