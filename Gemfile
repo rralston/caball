@@ -50,7 +50,7 @@ gem 'awesome_print'
 
 group :test, :development do
   gem 'rspec-rails', '>= 2.0.1'
-  gem "capybara-webkit"
+  # gem "capybara-webkit"
   gem 'capybara'
   gem 'launchy'
   gem 'selenium-webdriver'
