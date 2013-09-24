@@ -129,3 +129,6 @@ gem 'social-share-button'
 gem 'devise', "~> 2.2.3"
 gem 'omniauth'
 gem 'devise-async'
+
+#Contact Us Form
+gem 'contact_us', '~> 0.4.0'

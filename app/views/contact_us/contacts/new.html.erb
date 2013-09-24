@@ -1,0 +1,126 @@
+<div class='standard-static-div' style='margin: 0px auto; width: 600px;'>
+<%= stylesheet_link_tag "home_page.css" %>
+
+
+<!-- Main Content -->
+<div id="content" role="main">
+
+    <section id="promo" class="section alt">
+        <div class="map-top-shadow"></div>
+        <div id="map"></div>
+        <div class="map-bottom-shadow"></div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="page-header">
+                <h1>
+                    Contact Us <small>We answer every email, even when we are sleeping.</small>
+                </h1>
+            </div>
+            <div class="span4">
+                <div class="row-fluid dtlinfotext light">
+                    <p>
+                        We can't read minds yet so tell us what you are thinking!
+                    </p>
+									  <fieldset>
+											<%= form_for @contact, :url => contacts_path, :html => {:class => 'form-horizontal'} do |f| %>
+											  <% if ContactUs.require_name %>
+												<div class="control-group">
+												      <%= f.label :name, (t('.name') + content_tag(:abbr, '*', :class => 'required')).html_safe %>
+												<div class="controls">
+											      <%= f.text_field :name %>
+											      <% if f.object.errors[:name].present? %>
+											        <p class='inline-error'><%= f.object.errors[:name].join(' and ') %></p>
+											      <% end %>
+											    </div></div>
+											  <% end %>
+												<div class="control-group">
+											    <%= f.label :email, (t('.email') + content_tag(:abbr, '*', :class => 'required')).html_safe %>
+													<div class="controls">
+											    <%= f.text_field :email %>
+											    <% if f.object.errors[:email].present? %>
+											      <p class='inline-error'><%= f.object.errors[:email].join(' and ') %></p>
+											    <% end %>
+												</div></div>
+
+											  <% if ContactUs.require_subject %>
+												<div class="control-group">
+											      <%= f.label :subject, (t('.subject') + content_tag(:abbr, '*', :class => 'required')).html_safe %>
+														<div class="controls">
+											      <%= f.text_field :subject %>
+											      <% if f.object.errors[:subject].present? %>
+											        <p class='inline-error'><%= f.object.errors[:subject].join(' and ') %></p>
+														<% end %>
+											  <% end %>
+											</div></div>
+
+												<div class="control-group">
+											    <%= f.label :message, (t('.message') + content_tag(:abbr, '*', :class => 'required')).html_safe %>
+													<div class="controls">
+											    <%= f.text_area :message %>
+											    <% if f.object.errors[:message].present? %>
+											      <p class='inline-error'><%= f.object.errors[:message].join(' and ') %></p>
+											    <% end %>
+											</div></div>
+											  <div class="control-group">
+											      <div class="controls">
+											    <%= f.submit :submit, :alt => t('.submit'), :class => 'submit create', :label => t('.submit'), :title => t('.submit') %>
+											  </div></div>
+											<% end %>
+											   </div>
+											</fieldset>
+											</div>
+											<div class="span1">
+											</div>
+											<div class="span4">
+											<form class="form-horizontal">
+												 <div class="contactbutton text-center">
+											      <a data-toggle='modal' data-target='#signup_modal' class="contctbtn btn regular text-left">
+											        <div class="contctbtntext">Start Creating</div>
+											      </a>
+											    </div>
+
+											<br><br>
+											<p><b> Info </b></p><br>
+											<ul class="icons">
+											    <li>
+											        <p>
+											            <i class="icon-home"></i> 2377 Beryl St, San Diego, CA 92109
+											        </p>
+
+											    </li>
+											    <li>
+											        <p>
+											            <i class = "icon-phone"></i> 1-800-TheFilms    
+											        </p> 
+											    </li>
+											    <li>
+											        <p>
+											            <i class = "icon-envelope"></i> info@filmzu.com    
+											        </p>
+											    </li>
+											    <li>
+											        <p>
+											            <i class = "icon-globe"></i> <a href="http://www.filmzu.com">www.filmzu.com</a>    
+											        </p>
+											    </li>
+											</ul><br><br>
+											<p><b>Connect with Us</b></p><br>
+											<div class           = 'row share_area text-center'>
+											  <div class         = "social-share-button" data-title="Filmzu" data-img="" data-url="">
+											    <a href          = "http://twitter.com/thefilmzu" target='_blank' class="social-share-button-twitter" data-site="twitter"></a>
+											    <a href          = "http://facebook.com/filmzu" target='_blank' class="social-share-button-facebook" data-site="facebook"></a>
+											    <a href          = "http://plus.google.com/filmzu" target='_blank' class="social-share-button-google_plus" data-site="google_plus"></a>
+											    </div></div>
+													<br><br>
+											<p><b>Speaker</b></p><br>
+											<p>Want us to speak at your film school or company event? Know anyone who would like to get involved with Filmzu?
+											<p>Use the form on the left and let us know!</p>
+											</form>
+											</div>
+											</div>
+											</div>
+											</section>
+</div>
+</div>
