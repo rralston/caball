@@ -1,4 +1,4 @@
-# AssetSync.configure do |config|
+AssetSync.configure do |config|
   config.fog_provider = 'AWS'
   config.fog_directory = 'filmzu'
   config.aws_access_key_id = 'AKIAJHIBHMAKIHAHLSJQ'
@@ -17,6 +17,6 @@
 #   # upload instead of searching the assets directory.
 #   # config.manifest = true
 #   #
-#   # Fail silently.  Useful for environments such as Heroku
-#   # config.fail_silently = true
-# end
+# Fail silently.  Useful for environments such as Heroku
+  config.fail_silently = true
+end
