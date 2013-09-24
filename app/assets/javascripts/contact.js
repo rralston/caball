@@ -47,7 +47,7 @@ function mapInit() {
         marker = new google.maps.Marker({
                                         position: charlotte,
                                         map: map,
-                                        title: "Hello World!"
+                                        title: "Filmzu HQ!"
                                     });
 
 

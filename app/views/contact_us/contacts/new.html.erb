@@ -1,5 +1,5 @@
+<%= javascript_include_tag "contact" %>
 <%= stylesheet_link_tag 'home_page' %>
-<%= javascript_include_tag 'contact.js' %>
 <section id="promo" class="section alt">
     <div id="map"></div>
 </section>
@@ -10,7 +10,7 @@
     <div class="discover clearfix">
         <br><br>
         <div class="info verylight">
-          <b>Contact Us </b><small> We answer every email, even when we are sleeping.</small>
+          Contact Us: <small> We can't read minds yet so tell us what you are thinking!</small>
         </div>
 
         <div class="dtlinfotext light">
@@ -24,11 +24,8 @@
         <div class="container">
             <div class="span6">
                 <div class="row-fluid dtlinfotext light">
-                    <p>
-                        We can't read minds yet so tell us what you are thinking!
-                    </p>
 									  <fieldset>
-											<%= form_for @contact, :url => contacts_path, :html => {:class => 'form-horizontal'} do |f| %>
+											<%= form_for @contact, :url => contacts_path, :html => {:class => 'form-horizontal' ,:id => 'form-horizontal'} do |f| %>
 											  <% if ContactUs.require_name %>
 												<div class="control-group">
 												      <%= f.label :name, (t('.name') + content_tag(:abbr, '*', :class => 'required')).html_safe %>
@@ -82,7 +79,7 @@
 												 
 
 											<br><br>
-											<p><b> Info </b></p><br>
+											<div class="info verylight"> Info </div><br>
 											<ul class="icons">
 											    <li>
 											        <p>
@@ -106,7 +103,7 @@
 											        </p>
 											    </li>
 											</ul><br><br>
-											<p><b>Connect with Us</b></p><br>
+											<div class="info verylight">Connect with Us</div><br>
 											<div class           = 'row share_area text-center'>
 											  <div class         = "social-share-button" data-title="Filmzu" data-img="" data-url="">
 											    <a href          = "http://twitter.com/thefilmzu" target='_blank' class="social-share-button-twitter" data-site="twitter"></a>
@@ -114,15 +111,10 @@
 											    <a href          = "http://plus.google.com/filmzu" target='_blank' class="social-share-button-google_plus" data-site="google_plus"></a>
 											    </div></div>
 													<br><br>
-											<p><b>Speaker</b></p><br>
+											<div class="info verylight">Speaker</div><br>
 											<p>Want us to speak at your film school or company event? Know anyone who would like to get involved with Filmzu?
 											<p>Use the form on the left and let us know!</p>
-											<br><br>
-											<div class="contactbutton text-center">
-										      <a data-toggle='modal' data-target='#signup_modal' class="contctbtn btn regular text-left">
-										        <div class="contctbtntext">Start Creating</div>
-										      </a>
-										    </div>
+											
 										
 											</form>
 											</div>
@@ -146,7 +138,6 @@
 
 
 </div>
-<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script>
     // Call the google map
     mapInit();
