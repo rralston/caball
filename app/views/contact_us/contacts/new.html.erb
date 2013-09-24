@@ -1,5 +1,5 @@
-<%= stylesheet_link_tag "home_page" %>
-<%= javascript_include_tag "contact" %>
+<%= stylesheet_link_tag 'home_page' %>
+<%= javascript_include_tag 'contact.js' %>
 <section id="promo" class="section alt">
     <div id="map"></div>
 </section>
@@ -22,7 +22,7 @@
 
     <section class="section">
         <div class="container">
-            <div class="span4">
+            <div class="span6">
                 <div class="row-fluid dtlinfotext light">
                     <p>
                         We can't read minds yet so tell us what you are thinking!
@@ -62,7 +62,7 @@
 												<div class="control-group">
 											    <%= f.label :message, (t('.message') + content_tag(:abbr, '*', :class => 'required')).html_safe %>
 													<div class="controls">
-											    <%= f.text_area :message %>
+											    <%= f.text_area :message, :rows => 15, :cols => 80 %>
 											    <% if f.object.errors[:message].present? %>
 											      <p class='inline-error'><%= f.object.errors[:message].join(' and ') %></p>
 											    <% end %>
