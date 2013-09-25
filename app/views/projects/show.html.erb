@@ -176,7 +176,13 @@
                             <%= image_tag role.approved_user.profile_medium, :class => 'img-circle role-cast-pic' %>
                           </a>
                         <% else %>
-                          <%= image_tag "role-#{role.gender}-default.png", :class => 'default-role-pic' %>
+                          
+                          <% if role.name == 'Cast' %>
+                            <%= image_tag "role-#{role.gender}-default.png", :class => 'default-role-pic' %>
+                          <% else %>
+                            <%= image_tag "/assets/role_icons/#{role.name}.png", :class => 'default-role-pic' %>
+                          <% end %>
+
                         <% end %>
 
                         <div class='role-filled-sumary'>
@@ -189,7 +195,11 @@
                           <%= role.subrole %>
                         </div>
 
-                        <%= image_tag "role-#{role.gender}-default.png", :class => 'default-role-pic' %>
+                        <% if role.name == 'Cast' %>
+                          <%= image_tag "role-#{role.gender}-default.png", :class => 'default-role-pic' %>
+                        <% else %>
+                          <%= image_tag "/assets/role_icons/#{role.name}.png", :class => 'default-role-pic' %>
+                        <% end %>
 
                         <% if can? :edit, @project %>
                           <div class='btn-custom btn-red info-button show_applicants' data-id='<%= role.id %>'>
