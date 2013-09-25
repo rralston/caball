@@ -57,7 +57,7 @@ Caball::Application.configure do
                                 users/user_index.css application.js 
                                 projects/projects_manifest.js projects/manifest.css users/user_search.js projects/project_index.css 
                                 static_pages/our_story.css 
-                                users/users_manifest.js users/manifest.css users/show.css contact.js glossary.js )
+                                users/users_manifest.js users/manifest.css users/show.css contact.js glossary.js labs.css)
   config.assets.precompile += %w( chosen )
 
   # Disable delivery errors, bad email addresses will be ignored
