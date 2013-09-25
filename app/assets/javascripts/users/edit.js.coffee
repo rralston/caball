@@ -13,7 +13,6 @@ $(document).ready ()->
   app.fn.handle_guilds_dropdown('.guild_select', '.guild_input')
   app.fn.bind_show_url_name('#user_name','.url_name_summary')
 
-
   app.fn.description_tag_list_init = ()->
     $('#user_description_tags').tagit
       sortable: true
@@ -153,11 +152,17 @@ $(document).ready ()->
     check_box.attr('checked', true)
 
     to_remove = target.attr('data-toRemove')
+
+    # remove the super_role_select class on the select since it is used in triggering FanSelection events and might mess things up if present
+    target.closest(to_remove).find('.super_role_select').removeClass('super_role_select')
+
     target.closest(to_remove).hide()
+
     target.closest(to_remove).removeClass(to_remove.substring(1, to_remove.length)) # to_remove is a class selector, we don't need dot(.) infront of it
 
+    app.fn.check_and_trigger_fan_selection()
     # show the link to add more talents
-    $('a#add-to-talents-list').show()
+    # $('a#add-to-talents-list').show()
     return false
 
 
@@ -252,7 +257,6 @@ $(document).ready ()->
   #       # $('a.step_3_nav').trigger('click')
   #       # initialize step_3 images file uploader.
   #       # app.fn.init_image_file_uploader('#user_edit_form_step_3')
-
   #   return false
 
   app.fn.slide_form = (current)->
@@ -263,15 +267,23 @@ $(document).ready ()->
     if $('.user-talent').size() > 1
       # remove the role if second one is already saved.
       $('.user-talent:nth(1)').find('.remove_entity').trigger('click')
-      # remove the second role if it was added
-      $('.user-talent:nth(1)').find('.numerous-remove').trigger('click')
     
+    if( $('.super_role_select').size() > 1 )
+      # if there are two sub roles in view
+      # remove the second role if it was added
+      $('#talents-list').find('.numerous-remove:last').trigger('click')
+
     # hide the option to add one more talent
     $('#add-to-talents-list').hide()
 
+    # hide the next step button
+    $('input.step_1_submit:not(.skip)').hide()
+
     $('#skills_label').html('Movie types you like')
+    $('#step_1_submit_hint').html('Fans need only one step! You are ready to explore Filmzu!')
 
   $(document).on 'NonFanSelection', (event) ->
     $('#add-to-talents-list').show()
-
+    $('input.step_1_submit:not(.skip)').show()
     $('#skills_label').html('Skills')
+    $('#step_1_submit_hint').html("You are almost done! Go to the next page to enter the fun stuff! Or you can check out profile and enter the rest of the stuff later")

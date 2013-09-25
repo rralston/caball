@@ -276,11 +276,19 @@
     <div class='span12'>
       <div class='text-center form_footer'>
         <div class='links'>
-          <%= f.submit "Next Step", :class=>'step_1_submit' %>
+          <% if current_user.talent_names.try(:first) == 'Fan' %>
+            <%= f.submit "Next Step", :class=>'step_1_submit', :style => 'display:none;' %>
+          <% else %>
+            <%= f.submit "Next Step", :class=>'step_1_submit' %>
+          <% end %>
           <%= f.submit "Finish! Go to my profile", :class=>'skip step_1_submit' %>
         </div>
         
-        You are almost done! Go to the next page to enter the fun stuff! Or you can check out profile and enter the rest of the stuff later
+        <% if current_user.talent_names.try(:first) == 'Fan' %>
+          <span id='step_1_submit_hint'>Fans need only one step! You are ready to explore Filmzu!</span>
+        <% else %>
+          <span id='step_1_submit_hint'>You are almost done! Go to the next page to enter the fun stuff! Or you can check out profile and enter the rest of the stuff later</span>
+        <% end %>
       </div>
     </div>
 

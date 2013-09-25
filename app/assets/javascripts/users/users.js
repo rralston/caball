@@ -111,10 +111,11 @@ var Users = {
           }
         },
         'talents-list': {
-          'add': function(form){
+          'add': function(added_form_element){
             var current = $('#steps').data('index');
             var stepHeight = $('#steps .step:eq(' + (current - 1) + ')').height();
             $('#steps').height(stepHeight);
+            added_form_element.find('.super_role_select').trigger('change')
 
             added_talents = $('.user-talent').length
             new_talents = Numerous.count(['talents-list'])
@@ -123,8 +124,11 @@ var Users = {
             if ((added_talents + new_talents) >= 2){
               $('a#add-to-talents-list').hide()
             }
+
+            app.fn.check_and_trigger_fan_selection()
+            
           },
-          'remove': function(event){
+          'remove': function(added_form_element){
             var current = $('#steps').data('index');
             var stepHeight = $('#steps .step:eq(' + (current - 1) + ')').height();
             $('#steps').height(stepHeight);
@@ -136,6 +140,8 @@ var Users = {
             if ((added_talents + new_talents) < 2){
               $('a#add-to-talents-list').show()
             }
+          
+            app.fn.check_and_trigger_fan_selection()
           }
         }
       });
