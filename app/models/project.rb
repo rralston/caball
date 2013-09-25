@@ -196,7 +196,7 @@ class Project < ActiveRecord::Base
                                                   :talent_names
                                                 ],
                                                 :include => [
-                                                  :lovers,
+                                                  :followers,
                                                   :resume
                                                 ]
                                               }
