@@ -55,7 +55,7 @@
 
       <div class="fans">
         <div class="fans-count regular text-center">
-          <%%= user.followers.length %>
+          <%%= _.uniq(user.followers, function(user){return user.id}).length %>
         </div>
         <span>FANS</span>
       </div>
