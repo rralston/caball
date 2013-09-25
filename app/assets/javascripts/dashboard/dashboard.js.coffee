@@ -85,28 +85,54 @@ $(document).ready ->
           else
             alert('Something went wrong, Please try again')
 
-  $('body').on 'click', 'a[href=#messages]', (event)->
-    if app.messages_loaded == false
-      # fetch and render the user events
-      $.ajax
-        url: '/dashboard/conversations.json'
-        type: 'GET'
-        success: (resp)->
-          if resp != 'false'
-            # user conversations
-            app.inbox_conversations.reset(resp.inbox_conversations)
-            app.sent_conversations.reset(resp.sent_conversations)
-            app.trash_conversations.reset(resp.trash_conversations)
 
-            # render and add views to DOM
+  loading_div_fn = ()->
+    $('<div>').addClass('dashboard_section_loading text-center').html('Loading...<br/><img src="/assets/ajax-loader-bar.gif">')
+
+  fetch_messages_and_show = (type)->
+    loading_div = loading_div_fn
+    
+    $('#conversation-tab-inbox').html(loading_div)
+    $('#conversation-tab-sent').html(loading_div)
+    $('#conversation-tab-trash').html(loading_div)
+
+    $.ajax
+      url: '/dashboard/conversations.json'
+      data:
+        type: type
+      type: 'GET'
+      success: (resp)->
+        if resp != 'false'
+          
+          if type == 'inbox'
+            app.inbox_conversations.reset(resp.inbox_conversations)
             $('#conversation-tab-inbox').html(inbox_view.render().el)
+          
+          else if type == 'sent'
+            app.sent_conversations.reset(resp.sent_conversations)
             $('#conversation-tab-sent').html(sent_view.render().el)
+          
+          else if type == 'trash'
+            app.trash_conversations.reset(resp.trash_conversations)
             $('#conversation-tab-trash').html(trash_view.render().el)
 
-            # set conversations loaded as true
-            app.messages_loaded = true
-          else
-            alert('Something went wrong, Please try again')
+          app.messages_loaded = true
+
+        else
+          alert('Something went wrong, Please try again')
+
+  $('body').on 'click', 'a[href=#messages]', (event)->
+    if app.messages_loaded == false
+      fetch_messages_and_show('inbox')
+
+  $('body').on 'click', 'a[href=#conversation-tab-sent]', (event) ->
+    fetch_messages_and_show('sent')
+
+  $('body').on 'click', 'a[href=#conversation-tab-inbox]', (event) ->
+    fetch_messages_and_show('inbox')
+
+  $('body').on 'click', 'a[href=#conversation-tab-trash]', (event) ->
+    fetch_messages_and_show('trash')
 
 
   app.fn.add_receipient = (selector, email)->

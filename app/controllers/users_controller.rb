@@ -383,9 +383,10 @@ class UsersController < ApplicationController
 
   def dashboard_conversations
     resp = {}
-    resp['inbox_conversations'] = current_user.mailbox.inbox
-    resp['sent_conversations'] = current_user.mailbox.sentbox
-    resp['trash_conversations'] = current_user.mailbox.trash
+
+    resp['inbox_conversations'] = current_user.mailbox.inbox if params[:type] == 'inbox'
+    resp['sent_conversations'] = current_user.mailbox.sentbox if params[:type] == 'sent'
+    resp['trash_conversations'] = current_user.mailbox.trash if params[:type] == 'trash'
 
     respond_to do |format|
       format.html { redirect_to root_url }

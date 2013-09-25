@@ -56,8 +56,8 @@ app.views.conversation = Backbone.View.extend
       type: "POST"
       success: (resp)->
         if resp == true
-          conversation = new app.models.conversation( _this.model )
-          app.trash_conversations.add(conversation)
+          # conversation = new app.models.conversation( _this.model )
+          # app.trash_conversations.add(conversation)
           _this.model.collection.remove(_this.model)
         else
           alert('Something went wrong, Please try again.')
@@ -71,13 +71,13 @@ app.views.conversation = Backbone.View.extend
       type: "POST"
       success: (resp)->
         if resp == true
-          conversation = new app.models.conversation( _this.model )
-          if _this.model.get('originator').id == app.current_user.id
-            # the current user is the originator of the message, so this should be added to SENT messages
-            app.sent_conversations.add(conversation)
-          else
-            # if the originator is different add this to INBOX
-            app.inbox_conversations.add(conversation)
+          # conversation = new app.models.conversation( _this.model )
+          # if _this.model.get('originator').id == app.current_user.id
+          #   # the current user is the originator of the message, so this should be added to SENT messages
+          #   app.sent_conversations.add(conversation)
+          # else
+          #   # if the originator is different add this to INBOX
+          #   app.inbox_conversations.add(conversation)
             
           _this.model.collection.remove(_this.model)
 
