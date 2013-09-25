@@ -72,7 +72,7 @@
                     <span class="chktxt"><%= super_role %></span>
                   </div>
 
-                  <% if User.sub_types[super_role].present? and super_role == 'Crew' %>
+                  <% if User.sub_types[super_role].present? %>
                     <% User.sub_types[super_role].each_with_index do |(key, value), index| %>
                       <div class="srchopt sub_type">
                         <div class="chkboxwrap">
