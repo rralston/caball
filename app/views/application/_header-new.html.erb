@@ -3,7 +3,7 @@
 
   <header>
     <div class='logo pull-left'>
-      <a href="/" class="brand pull-right"><img src="/assets/emboss-logo.png" alt="" /></a>
+      <a href="/" class="brand pull-right"><img src="/assets/emboss-logo-beta.png" alt="" /></a>
     </div>
 
 
@@ -70,13 +70,13 @@
       </div>
 
 
-    <% else %>
+    <% else %><% if false %>
       <div class='user-section pull-right'>
         <a href="#" data-toggle='modal' data-target='#signin_modal' class="signin-btn">Sign In</a>
         <a href="" data-toggle='modal' data-target='#signup_modal'>Create  an Account</a>  
       </div>
-    <% end %>
-
+    <% end %><% end %>
+		<% if current_user %>
     <div class="container" style='width: 800px'>
       <div class="hnav navbar light pull-left">
         <div class="navbar-inner ">
@@ -101,7 +101,7 @@
         </form>
       </div>
     </div>
-      
+      <% end %>
     
   </header>
 
@@ -143,7 +143,7 @@
 
   <div id="bootstrap-alert-placeholder" class="js-alert"></div>
 </div>
-
+<% if false %>
 <% if !current_user %>
   <div id='signin_modal' class="modal hide fade span9">
     <div class="modal-header">
@@ -179,7 +179,7 @@
   <!-- signup modal -->
 
 <% end %>
-
+<% end %>
 <script type="script/template" id='search_results_li_tempalte'>
   
   <a class='full-li'>
