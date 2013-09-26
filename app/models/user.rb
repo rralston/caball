@@ -214,14 +214,14 @@ class User < ActiveRecord::Base
 
   def self.types
     {
-      'Fan - You Just Love Film!'                         => 'Fan',
+      'Fan - "Only select if your a just a film fan'      => 'Fan',
       'Agent'                                             => 'Agent',
       'Business - Manager, Studio Exec'                   => 'Business', 
       'Cast - Actor'                                      => 'Cast', 
-      'Camera'                                            => 'Camera',
-      'Light'                                             => 'Light',
-      'Sound'                                             => 'Sound',
-      'Director - Action!'                                => 'Director',
+      'Camera Dept.'                                      => 'Camera',
+      'Light Dept.'                                       => 'Light',
+      'Sound/Audio Dept.'                                 => 'Sound',
+      'Directing'                                         => 'Director',
       'Pre Production - Casting Director, Location'       => 'Pre Production', 
       'Production - Producer, Assistant'                  => 'Production', 
       'Post-Pro - Editor, Effects'                        => 'Post-Pro', 

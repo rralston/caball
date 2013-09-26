@@ -217,7 +217,7 @@
         <% end %>
       </div>
 
-      <% if current_user == @user  %>
+      <% if current_user == @user and !@user.only_fan?  %>
         <div class="row right-extra-div">
           <div class="span4 shrink-div head">
             <span class="pull-left">
