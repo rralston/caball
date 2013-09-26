@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  load_and_authorize_resource :except => [:show, :next_recommended_projects, :next_recommended_people, :next_recommended_events, :set_notification_check_time]
+  load_and_authorize_resource :except => [:show, :next_recommended_projects, :next_recommended_people, :next_recommended_events, :set_notification_check_time, :manage_project]
   
   before_filter :search, only: [:index, :show, :new, :edit, :update, :dashboard]
   before_filter :authenticate_user!, only: [:dashboard]
@@ -324,21 +324,30 @@ class UsersController < ApplicationController
                                         :open_roles,
                                         :filled_roles,
                                         :roles,
-                                        :photos,
-                                        :fans,
                                         :user
                                       ],
                                       :methods => [
-                                        :pending_applications,
+                                        :pending_applications
+                                      ])
+      }
+    end
+  end
+
+  def manage_project
+    project = Project.find(params[:id])
+    # assosciations and methods that were previously added in json in dashboard_projects action
+    # are not needed to be added in this.
+    render :json => project.to_json(:include => 
+                                      [
+                                        :fans
+                                      ],
+                                      :methods => [
                                         :participant_mails,
-                                        :roles_json,
                                         :roles_for_dashboard,
                                         :roles_percent,
                                         :non_selected_applicants_mails,
                                         :selected_applicants_mails
                                       ])
-      }
-    end
   end
 
 

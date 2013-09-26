@@ -1,7 +1,7 @@
 <script type="script/template" id='user_project_template'>
     <a href='/projects/<%%= url_param %>'>
       <div class='project-head'>
-        <%% if(typeof photos[0] != 'undefined' ){ %>
+        <%% if(typeof display_regular != 'undefined' ){ %>
           <div class='project-backdrop'  style='background: url(<%%= display_regular %>) no-repeat'>
           </div>
         <%% }else{ %>
@@ -22,7 +22,7 @@
     <div class='project-summary'>
       <div class='message pull-left'>
         <div class='status'> Status: <span class='status-text'><%%= status %></span></div>
-        <a class='btn-manage btn-custom btn-cement medium'>
+        <a class='btn-manage btn-custom btn-cement medium active'>
           Manage Project
         </a>
       </div>

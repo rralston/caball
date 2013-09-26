@@ -102,10 +102,12 @@ Caball::Application.routes.draw do
     get page, controller: "static_pages", action: page
   end
 
-  match 'dashboard'               => 'users#dashboard'
-  match 'dashboard/projects'      => 'users#dashboard_projects', :via => 'GET'
-  match 'dashboard/events'        => 'users#dashboard_events', :via => 'GET'
-  match 'dashboard/conversations' => 'users#dashboard_conversations', :via => 'GET'
+  match 'dashboard'                 => 'users#dashboard'
+  match 'dashboard/projects'        => 'users#dashboard_projects', :via => 'GET'
+  match 'dashboard/events'          => 'users#dashboard_events', :via => 'GET'
+  match 'dashboard/conversations'   => 'users#dashboard_conversations', :via => 'GET'
+  match '/dashboard/manage_project' => 'users#manage_project', :via => 'GET'
+  
 
   match 'projects/show' => 'projects#show'
   # match 'auth/:provider/callback', to: 'sessions#create'

@@ -158,17 +158,16 @@ class Project < ActiveRecord::Base
   end
 
   def roles_json
-
-    super_roles = self.roles.group_by(&:name).keys
+    super_roles = self.roles.group_by(&:name)
     roles_to_return = Hash.new
 
-    super_roles.each do |super_role|
-      sub_roles = roles.where(:name => super_role)
+    super_roles.keys.each do |super_role|
+      sub_roles = super_roles[super_role]
       roles_to_return[super_role] = {
         :subroles => sub_roles,
-        :open_count => sub_roles.where(:filled => false).count,
-        :filled_count => sub_roles.where(:filled => true).count,
-        :total_count => sub_roles.where(:name => super_role).count
+        :open_count => sub_roles.find_all{ |role| role.filled == false }.size,
+        :filled_count => sub_roles.find_all{ |role| role.filled == true }.size,
+        :total_count => sub_roles.size
       }
     end
 
@@ -180,11 +179,11 @@ class Project < ActiveRecord::Base
   end
 
   def roles_for_dashboard
-    super_roles = self.roles.group_by(&:name).keys
+    super_roles = self.roles.group_by(&:name)
     roles_to_return = []
-
-    super_roles.each_with_index do |super_role, index|
-      sub_roles = roles.where(:name => super_role)
+    super_roles.keys.each_with_index do |super_role, index|
+      # sub_roles = roles.where(:name => super_role)
+      sub_roles = super_roles[super_role]
       roles_to_return << {
         :id => index,
         :name => super_role,
@@ -203,9 +202,9 @@ class Project < ActiveRecord::Base
                                             }
                                           }
                                         }),
-        :open_count => sub_roles.where(:filled => false).count,
-        :filled_count => sub_roles.where(:filled => true).count,
-        :total_count => sub_roles.where(:name => super_role).count
+        :open_count => sub_roles.find_all{ |role| role.filled == false }.size,
+        :filled_count => sub_roles.find_all{ |role| role.filled == true }.size,
+        :total_count => sub_roles.size
       }
     end
     roles_to_return
