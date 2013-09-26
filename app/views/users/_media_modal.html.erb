@@ -12,16 +12,18 @@
       <!-- Carousel items -->
       <div class="carousel-inner">
         <% @user.all_photos.each_with_index do |photo, index| %>
-          <% if index == 0 %>
-            <div class="item active">
-              <div class='media-slider-image' style="background: url(<%= photo.try(:image).url(:original) %>)">
+          <% if photo.present? %>
+            <% if index == 0 %>
+              <div class="item active">
+                <div class='media-slider-image' style="background: url(<%= photo.try(:image).url(:original) %>)">
+                </div>
               </div>
-            </div>
-          <% else %>
-            <div class="item">
-              <div class='media-slider-image' style="background: url(<%= photo.try(:image).url(:original) %>)">
+            <% else %>
+              <div class="item">
+                <div class='media-slider-image' style="background: url(<%= photo.try(:image).url(:original) %>)">
+                </div>
               </div>
-            </div>
+            <% end %>
           <% end %>
         <% end %>
       </div>

@@ -126,8 +126,10 @@
                         
                   <ul class="inline libg span12">
                   SKILLS + EXPERTISE:
-                    <% @user.expertise.split(',').each do |skill| %>
-                      <li class="badge regular"><%= skill %></li>
+                    <% if @user.expertise.present? %>
+                      <% @user.expertise.split(',').each do |skill| %>
+                        <li class="badge regular"><%= skill %></li>
+                      <% end %>
                     <% end %>
 
                     <% if @user.experience.present? %>
@@ -283,7 +285,7 @@
               <i class='icon-pencil action-div edit_about'></i>
             <% end %>
             <div class="about_content">
-              <% if @user.about.length > 200 %>
+              <% if @user.about.present? and @user.about.length > 200 %>
                 <%= truncate(@user.about, :length => 200, :separator => ' ') %> <a class='read_more_btn' data-content='<%= @user.about %>' data-header='About - <%= @user.name %>' >Read more</a>
               <% else %>
                 <%= @user.about %> 
