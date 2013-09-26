@@ -195,7 +195,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
   $('.notstarwrap').on('click',function(){
-    $('.noticontentwrap').slideToggle(600);
+    $('.noticontentwrap').slideToggle();
 
     if($('.notstarwrap').hasClass('set_time')){
       app.fn.set_notification_check_time($('.notstarwrap'))
@@ -203,11 +203,11 @@ $(document).ready(function(){
   });
 
   $('.noteclose').on('click',function(){
-    $('.noticontentwrap').slideUp(600);
+    $('.noticontentwrap').slideUp();
   });
 
   $('.usrprev .username').on('click',function(){
-    $('.userprflistwrap').slideToggle(600);
+    $('.userprflistwrap').slideToggle();
   });
 
 
