@@ -436,9 +436,14 @@ class User < ActiveRecord::Base
 
   def recommended_people
     # pick users with talents as the open roles in the projects owned by the current user
-    User.joins(:talents).
-          where(:talents => {:name => roles_required}).
-            where('user_id != ?', self.id).uniq
+    # User.joins(:talents).
+    #       where(:talents => {:name => roles_required}).
+    #         where('user_id != ?', self.id).uniq
+    # Would like Users Close to your Location with The Highest numbers of Fans that you don't already follow. 
+    User.select('users.*, count(friendships.id) AS fans_count').
+    joins("inner join friendships on friendships.friend_id = users.id").
+    group("users.id").
+    order("fans_count DESC")
   end
 
   def recommended_projects
