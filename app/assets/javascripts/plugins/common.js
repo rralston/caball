@@ -409,9 +409,24 @@ app.fn.init_form_elem_hints = function(selector){
     app.hint_div.insertAfter(div);
   });
 
+  // if they have any input inside them, add listener to that aswell.
+  // this is for the taggit plugin cases.
+  $('body').on('focus', selector+' input', function(event) {
+    var div;
+    div = $(event.target).closest('.hinted');
+    msg = div.attr('data-hint');
+    app.hint_div = $('<div>').html(msg).addClass('hint_msg');
+    app.hint_div.insertAfter(div);
+  });
+
   $('body').on('focusout', selector, function(event) {
     app.hint_div.remove();
-    // $('.hint_msg').remove();
+    $('.hint_msg').remove();
+  });
+
+  $('body').on('focusout', selector+' input', function(event) {
+    app.hint_div.remove();
+    $('.hint_msg').remove();
   });
 }
   
