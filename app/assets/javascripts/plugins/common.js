@@ -411,6 +411,7 @@ app.fn.init_form_elem_hints = function(selector){
 
   $('body').on('focusout', selector, function(event) {
     app.hint_div.remove();
+    // $('.hint_msg').remove();
   });
 }
   

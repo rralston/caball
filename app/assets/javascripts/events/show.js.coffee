@@ -92,7 +92,7 @@ $(document).ready ()->
             alert 'Something went wrong. Please try later'
           btn.html('Invite Followers')
 
-  $('body').on 'click', '.vote-action', (event) ->
+  $('body').on 'click', '.vote-action.show_page', (event) ->
     app.fn.vote_event(event)
 
   app.fn.vote_event = (event) ->

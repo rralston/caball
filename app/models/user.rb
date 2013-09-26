@@ -715,6 +715,10 @@ class User < ActiveRecord::Base
     ([profile]+[photos]).flatten
   end
 
+  def only_fan?
+    talent_names.try(:first) == 'Fan'
+  end
+
 end
 
 class Array

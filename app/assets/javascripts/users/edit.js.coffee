@@ -279,11 +279,27 @@ $(document).ready ()->
     # hide the next step button
     $('input.step_1_submit:not(.skip)').hide()
 
-    $('#skills_label').html('Movie types you like')
+    $('.hide_for_fans').hide()
+    $('.fan_unhint').removeClass('hinted')
+
+    $('#skills_label').html('Types of films you like')
     $('#step_1_submit_hint').html('Fans need only one step! You are ready to explore Filmzu!')
 
   $(document).on 'NonFanSelection', (event) ->
     $('#add-to-talents-list').show()
     $('input.step_1_submit:not(.skip)').show()
     $('#skills_label').html('Skills')
+    $('.hide_for_fans').show()
+    $('.fan_unhint').addClass('hinted')
     $('#step_1_submit_hint').html("You are almost done! Go to the next page to enter the fun stuff! Or you can check out profile and enter the rest of the stuff later")
+
+
+
+  # adding hinted to the skills and expertise tags div
+  # $('#expertise_tags .tagit-input').addClass('hinted')
+  # hint = "This is a great wat to show case your strengths, some good suggestions: <br/>action sports <br/>weddings<br/>comedy<br/>Horror"
+  # $('#expertise_tags .tagit-input').attr('data-hint', hint)
+
+  $('body').on 'click', ':not(.hinted)', (event)->
+    if !$(event.target).hasClass('hinted')
+      $('.hint_msg').remove()

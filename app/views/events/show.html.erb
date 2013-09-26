@@ -7,9 +7,9 @@
       <div class='event-vote-div'>
 
         <% if @event.voted_by_user?(current_user) and @event.voted_type_by_user(current_user) == 'up' %>
-          <div class='vote-action up-vote active' data-eventid = '<%= @event.id %>' data-type='up_vote'> </div> 
+          <div class='vote-action show_page up-vote active' data-eventid = '<%= @event.id %>' data-type='up_vote'> </div> 
         <% else %>
-          <div class='vote-action up-vote' data-eventid = '<%= @event.id %>' data-type='up_vote'> </div>
+          <div class='vote-action show_page up-vote' data-eventid = '<%= @event.id %>' data-type='up_vote'> </div>
         <% end %>
         
         <div class='votes-count'>
@@ -17,9 +17,9 @@
         </div>
 
         <% if @event.voted_by_user?(current_user) and @event.voted_type_by_user(current_user) == 'down' %>
-          <div class='vote-action down-vote active' data-eventid = '<%= @event.id %>' data-type='down_vote'> </div>
+          <div class='vote-action show_page down-vote active' data-eventid = '<%= @event.id %>' data-type='down_vote'> </div>
         <% else %>
-          <div class='vote-action down-vote' data-eventid = '<%= @event.id %>' data-type='down_vote'> </div>
+          <div class='vote-action show_page down-vote' data-eventid = '<%= @event.id %>' data-type='down_vote'> </div>
         <% end %>
 
       </div>
