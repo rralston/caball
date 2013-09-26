@@ -607,6 +607,8 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height, o
 
   element.Jcrop({
     trueSize: [original_width, original_height],
+    boxWidth: 500,
+    boxHeight: 400,
     onSelect: function(c){
       updateCropValues(c)
     },
@@ -648,10 +650,11 @@ app.fn.init_image_crop_handlers = function(){
       w: control_group_div.find('input.crop_w').val(),
       h: control_group_div.find('input.crop_h').val()
     };
-
-    console.log(original_image_url)
     
     $('#crop_image_modal').on('shown', function() {
+      // reset the style properties on the image tag
+      $('#crop_image_modal').find('#cropping_image').attr('style','display: none; visibility: hidden; width: none; height: none; max-width: none; max-height: none;')
+
       app.fn.init_jcrop($('#crop_image_modal').find('#cropping_image'), control_group_div, original_width, original_height, original_image_url);
     });
     
