@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
       new_name = truncate(self.name, :length => 20, :separator => ' ', :omission => '')
 
       # if the name is changed, convert to the url name
-      self.url_name = new_name.gsub(/\s/,'-').downcase
+      self.url_name = new_name.gsub(/\s/,'-').gsub(/\./,'').downcase
 
       # check  and get size of if any other users having the same url_name
       same_named_count = User.where("lower(url_name) like lower(?)", "#{self.url_name}%").size

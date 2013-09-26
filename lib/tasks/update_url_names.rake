@@ -9,7 +9,7 @@ namespace :caball  do
       new_name = truncate(user.name, :length => 20, :separator => ' ', :omission => '')
 
       # if the name is changed, convert to the url name
-      user.url_name = new_name.gsub(/\s/,'-').downcase
+      user.url_name = new_name.gsub(/\s/,'-').gsub(/\./,'').downcase
 
       # check  and get size of if any other users having the same url_name
       same_named_count = User.where("lower(url_name) like lower(?)", "#{user.url_name}%").size
@@ -28,7 +28,7 @@ namespace :caball  do
       # if the name is changed, convert to the url name
       new_title = truncate(project.title, :length => 20, :separator => ' ', :omission => '')
       # if the name is changed, convert to the url name
-      project.url_name = new_title.gsub(/\s/,'-').downcase
+      project.url_name = new_title.gsub(/\s/,'-').gsub(/\./,'').downcase
 
       # check  and get size of if any other projects having the same url_name
       same_named_count = Project.where("lower(url_name) like lower(?)", "#{project.url_name}%").size
@@ -47,7 +47,7 @@ namespace :caball  do
       # if the name is changed, convert to the url name
       new_title = truncate(event.title, :length => 20, :separator => ' ', :omission => '')
       # if the name is changed, convert to the url name
-      event.url_name = new_title.gsub(/\s/,'-').downcase
+      event.url_name = new_title.gsub(/\s/,'-').gsub(/\./,'').downcase
 
       # check  and get size of if any other events having the same url_name
       same_named_count = Event.where("lower(url_name) like lower(?)", "#{event.url_name}%").size

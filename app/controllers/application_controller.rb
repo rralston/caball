@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
 
   def check_url_param
     entity = params[:entity]
-    name = params[:value].gsub(/\s/,'-').downcase
+    name = params[:value].gsub(/\s/,'-').gsub(/\./,'').downcase
 
     id_check = false
     
