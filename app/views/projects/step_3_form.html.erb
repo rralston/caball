@@ -21,7 +21,19 @@
 <script type="text/javascript">
   $(document).ready(function(){
     app.editing_project_id = <%= @project.id %>;
-    app.project_added_roles = <%= raw @project.roles.to_json( :include => [{:applications => { :include => :user}}] ) %>;
+    app.project_added_roles = <%= raw @project.roles.to_json( 
+                                                      :include => 
+                                                      [
+                                                        {
+                                                          :applications => { 
+                                                            :include => :user
+                                                          } 
+                                                        } 
+                                                      ], 
+                                                      :methods => [
+                                                        :approved_user
+                                                      ] 
+                                                    ) %>;
   });
   
 </script>

@@ -76,6 +76,9 @@ class User < ActiveRecord::Base
                                 :agentship, :allow_destroy => true
 
   has_many :role_applications, :dependent => :destroy
+  has_many :applied_roles, :class_name => 'Role', :through => :role_applications, :source => :role
+  has_many :all_applied_projects, :class_name => 'Project', :through => :applied_roles, :source => :project
+  
   attr_accessible :name, :email, :location, :about, :profile_attributes,
                   :imdb_url, :characteristics_attributes, :photos_attributes,
                   :talents_attributes, :photo, :other_videos_attributes, :projects_attributes,
@@ -489,9 +492,11 @@ class User < ActiveRecord::Base
   end
 
   def applied_projects
-    role_applications.map{ |application|
-      application.role.project
-    }.uniq
+    # Projects.where('id in (?)' role_applications.roles.)
+    # role_applications.map{ |application|
+    #   application.role.project
+    # }.uniq
+    all_applied_projects.uniq
   end
 
   def serializable_hash(options)
@@ -624,8 +629,8 @@ class User < ActiveRecord::Base
       json[:category]= 'People'
       json[:url] = "/users/#{id}"
     end
-    json[:url_param] = self.url_param
-    json[:display_cover] = self.display_cover
+    json[:url_param]      = self.url_param
+    json[:display_cover]  = self.display_cover
     json
   end
 

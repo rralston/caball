@@ -2,6 +2,11 @@ class Role < ActiveRecord::Base
   belongs_to :project
 
   has_many :applications, :class_name => 'RoleApplication', :dependent => :destroy  
+  has_many :rejected_applications, :class_name => 'RoleApplication', :dependent => :destroy, :conditions => { :approved => false }
+  has_many :approved_applications, :class_name => 'RoleApplication', :dependent => :destroy, :conditions => { :approved => true }
+
+  has_many :all_approved_users, :class_name => 'User', :through => :approved_applications, :source => :user
+  has_many :all_rejected_users, :class_name => 'User', :through => :rejected_applications, :source => :user
 
   accepts_nested_attributes_for :applications
 
@@ -22,14 +27,14 @@ class Role < ActiveRecord::Base
     end
   end
 
-  def serializable_hash(options)
-    hash = super(options)
-    extra_hash = {
-      'project' => project,
-      'approved_user' => approved_user
-    }
-    hash.merge!(extra_hash)
-  end
+  # def serializable_hash(options)
+  #   hash = super(options)
+  #   extra_hash = {
+  #     'project' => project,
+  #     'approved_user' => approved_user
+  #   }
+  #   hash.merge!(extra_hash)
+  # end
 
   def send_application_rejection_mails
     self.project.user.
@@ -49,15 +54,11 @@ class Role < ActiveRecord::Base
   end
 
   def rejected_users
-    self.applications.select{ |application|
-      !application.approved
-    }.map(&:user)
+    self.all_rejected_users
   end
 
   def approved_user
-    self.applications.select{ |application|
-      application.approved
-    }.map(&:user).first
+    self.all_approved_users.first
   end
 
   def reset_optional_fields
