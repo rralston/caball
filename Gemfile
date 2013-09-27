@@ -9,6 +9,7 @@ gem 'rails', '3.2.8'
 
 gem 'mysql2'
 gem 'pg'
+gem 'sqlite3'
 
 # Ok lets try out the heroku business
 gem 'heroku'
@@ -132,3 +133,6 @@ gem 'devise-async'
 
 #Contact Us Form
 gem 'contact_us', '~> 0.4.0'
+
+# for db commands
+gem 'taps'
