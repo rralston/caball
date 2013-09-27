@@ -89,4 +89,7 @@ Caball::Application.configure do
   
   # Change when Push to the Website or will Error out
   config.action_mailer.default_url_options = { :host => 'mysterious-brook-4528.herokuapp.com' }
+
+  # show SQL activity and params in the logs.
+  config.logger = Logger.new(STDOUT)
 end
