@@ -439,6 +439,7 @@ class User < ActiveRecord::Base
     # User.joins(:talents).
     #       where(:talents => {:name => roles_required}).
     #         where('user_id != ?', self.id).uniq
+    
     # Would like Users Close to your Location with The Highest numbers of Fans that you don't already follow. 
     User.select('users.*, count(friendships.id) AS fans_count').
     joins("inner join friendships on friendships.friend_id = users.id").
