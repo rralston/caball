@@ -9,7 +9,6 @@ gem 'rails', '3.2.8'
 
 gem 'mysql2'
 gem 'pg'
-gem 'sqlite3'
 
 # Ok lets try out the heroku business
 gem 'heroku'
@@ -62,6 +61,8 @@ group :test, :development do
   gem "spork-rails"
   # To use debugger
   gem 'debugger'
+
+  gem 'sqlite3'
 end
 
 group :test do
