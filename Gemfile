@@ -136,3 +136,6 @@ gem 'contact_us', '~> 0.4.0'
 
 # for db commands
 gem 'taps'
+
+#Required for AWS Setuup
+gem 'rake', '~> 10.1.0'

@@ -382,6 +382,7 @@ DEPENDENCIES
   possessive
   public_activity
   rails (= 3.2.8)
+  rake (~> 10.1.0)
   ransack
   rb-fsevent (~> 0.9.1)
   remotipart (~> 1.2.1)
