@@ -44,8 +44,8 @@ gem 'twitter-bootstrap-rails'
 gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano'
-gem 'cap_bootstrap', github: 'benrs44/cap_bootstrap'
+# gem 'capistrano'
+# gem 'cap_bootstrap', github: 'benrs44/cap_bootstrap'
 
 gem 'awesome_print'
 
