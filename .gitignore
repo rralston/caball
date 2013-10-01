@@ -22,3 +22,4 @@ Snippets.txt
 
 # Ignore Public Assets
 /public/assets
+.elasticbeanstalk/
