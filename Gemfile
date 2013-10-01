@@ -9,10 +9,10 @@ gem 'rails', '3.2.8'
 
 gem 'mysql2'
 # gem 'pg'
-gem 'sqlite3'
+# gem 'sqlite3'
 
 # Ok lets try out the heroku business
-# gem 'heroku'
+gem 'heroku'
 
 # Gems used only for assets and not required
 # in production environments by default.
