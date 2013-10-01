@@ -9,7 +9,8 @@
 
 # Ignore database.yml
 # Change for Heroku to Read
-/config/database.yml
+# Show for Elastic Beanstalk
+# /config/database.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
