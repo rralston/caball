@@ -8,8 +8,8 @@ gem 'rails', '3.2.8'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'mysql2'
-gem 'pg'
-gem 'sqlite3'
+# gem 'pg'
+# gem 'sqlite3'
 
 # Ok lets try out the heroku business
 gem 'heroku'
