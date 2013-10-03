@@ -224,7 +224,7 @@ class User < ActiveRecord::Base
       'Camera Dept.'                                      => 'Camera',
       'Light Dept.'                                       => 'Light',
       'Sound/Audio Dept.'                                 => 'Sound',
-      'Directing'                                         => 'Director',
+      'Directing'                                         => 'Directing',
       'Pre Production - Casting Director, Location'       => 'Pre Production', 
       'Production - Producer, Assistant'                  => 'Production', 
       'Post-Pro - Editor, Effects'                        => 'Post-Pro', 
@@ -321,7 +321,7 @@ class User < ActiveRecord::Base
                             "Casting Director"   => "Casting Director",
                             "Casting Assistant"  => "Casting Assistant"
                           }, 
-      'Director'       => {
+      'Directing'       => {
                             "Director"       => "Director",
                             "Asst. Director" => "Asst. Director"
                           },
