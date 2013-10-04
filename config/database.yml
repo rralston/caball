@@ -24,7 +24,7 @@
 #   port: <%= ENV['RDS_PORT'] %>
 
 production:
-  adapter: mysql2
+  adapter: postgresql
   encoding: unicode
   pool: 5
   database: d5gplihnrmuhgp
