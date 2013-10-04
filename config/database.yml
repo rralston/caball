@@ -13,16 +13,26 @@
 #   password: password
 #   pool: 5
 #   timeout: 5000
+# 
+# production:
+#   adapter: mysql2
+#   encoding: utf8
+#   database: <%= ENV['RDS_DB_NAME'] %>
+#   username: <%= ENV['RDS_USERNAME'] %>
+#   password: <%= ENV['RDS_PASSWORD'] %>
+#   host: <%= ENV['RDS_HOSTNAME'] %>
+#   port: <%= ENV['RDS_PORT'] %>
 
 production:
   adapter: mysql2
-  encoding: utf8
-  database: <%= ENV['RDS_DB_NAME'] %>
-  username: <%= ENV['RDS_USERNAME'] %>
-  password: <%= ENV['RDS_PASSWORD'] %>
-  host: <%= ENV['RDS_HOSTNAME'] %>
-  port: <%= ENV['RDS_PORT'] %>
- 
+  encoding: unicode
+  pool: 5
+  database: d5gplihnrmuhgp
+  username: cgqmoimdevhcvm
+  password: BSib5K0ZAgokA3z8nMNTJXZC2y
+  host: ec2-54-243-62-232.compute-1.amazonaws.com
+  port: 5432
+  
 # Max Heroku 
 development:
   adapter: postgresql
