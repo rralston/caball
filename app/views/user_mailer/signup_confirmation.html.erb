@@ -1,7 +1,55 @@
-<p><%= @user.name %>,</p>
+<%= stylesheet_link_tag "welcome_email.css" %>
 
-<p>Thank you for signing up. You can find your <%= link_to "User Profile", user_url(@user) %> now live on Filmzu</p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Welcome to Filmzu</title>
+</head>
 
-<p>
-<%= link_to "Filmzu.com" ,root_url %> Freedom for Filmmakers
-</p>
+<body>
+		<div class="wrap_main">
+
+			<div class="film_zu">
+				<div class="top_logo"><a href="#"><img src="/assets/top-image.jpg" alt="" /></a></div>
+					<div class="its_nice"><h1>It's nice to meet you </h1>
+                    <h2><%= @user.name %></h2>
+		<p>Welcome to <span>Filmzu,</span> the exclusive Entertainment Industry network designed<br/>to help you connect to other film professionals with<br/>
+ 			relevant info to help keep you current.</p></div>
+ 
+ 			<div class="diffrent"><p>The difference between a good film and a bad one is they probably had the wrong person. Maybe a different writer, better DP, or switching out a 			   				cast would have done it,  but there was never a good place to turn to find the right ones.  </p>
+       				 <p>As a member of <span>Filmzu</span> you have access to talented filmmakers that share your  vision for creating great film and video content, and interact   	   						with fans across the globe. <span>Filmzu</span> enables you to post a project to find people to work with, apply to other people's projects, and even         				includes a dashboard to easily manage the process.</p>
+        							<p>If you've been trying to break in, <span>Filmzu</span> gives you the tools to be discovered and create great video content in a simple, and 																								 										stunning experience.</p></div>
+				
+                			<div class="people_main">
+							<div class="people_one">
+								<div class="connect_main"><img src="/assets/image-01.jpg" alt="" /><h1>Connect with the industry.</h1></div>
+                                </div>
+                                <div class="people_one">
+                                  <div class="connect_main"><img src="/assets/image-02.jpg" alt="" /><h1>Hire talent or find work.</h1></div>
+                                  </div>
+                                  <div class="people_one">
+                                       <div class="connect_main"><img src="/assets/image-03.jpg" alt="" /><h1>Get discovered.</h1></div>
+									
+                                 </div>
+                                 <div class="create_button"></div>
+                                 
+                                </div>
+									<div class="diffrent"><p>No matter if you are  cast, crew, writer, producer, agent, or a fan, there is a place for you here.   </p></div>
+
+								<div class="cheers_bottom">
+								<div class="cheers_text"><h1>Cheers,</h1>
+                                <h2>The <%= link_to "Filmzu.com" ,root_url %> Team</h2></div>
+								<div class="video_icon"><img src="/assets/cemra.png" alt="" /></div>
+                        		</div>
+                              </div>
+			<div class="copy_right"><h1>Copyright and unsubscribe information here.</h1></div>
+
+
+
+
+
+
+</div>
+</body>
+</html>
