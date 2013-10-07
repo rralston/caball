@@ -70,7 +70,7 @@ class Admin::AdminController < Admin::BaseController
   private
  
   def require_admin
-    unless current_user && current_user.admin
+    unless current_user && current_user.admin = true
       redirect_to root_url, :flash => { :error => "Access denied." }
     end
   end
