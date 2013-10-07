@@ -4,7 +4,6 @@ Caball::Application.routes.draw do
 
   get "activities/index"
 
-  match '/email' => 'static_pages#email'
   match '/our_story' => 'static_pages#our_story'
   match '/contact_us' => 'contact_us/contacts#new'
   # get 'people', to: 'users#index', via: :all
