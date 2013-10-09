@@ -6,8 +6,8 @@ Caball::Application.routes.draw do
 
   match '/our_story' => 'static_pages#our_story'
   match '/contact_us' => 'contact_us/contacts#new'
-  
-
+  # get 'people', to: 'users#index', via: :all
+  resources :users, :path => "people"
   match "/skills(/*path)" => redirect{ |env, req| "http://skills.filmzu.com" + (req.path ? "#{req.path}" : '/')}
 
   match 'check_url_param' => 'application#check_url_param'

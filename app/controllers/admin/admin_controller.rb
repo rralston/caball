@@ -29,13 +29,16 @@ class Admin::AdminController < Admin::BaseController
     @count = User.all.count
     # @users = User.order("name").page(params[:page]).per(10)
     @search = User.search(params[:q])
-    @users = @search.result.order("name").page(params[:page]).per(10)
+    # @users = @search.result.order("name").page(params[:page]).per(10)
+    # Kaminari.paginate_array(users).per_page_kaminari(page).per(per_page)
+    @users = @search.result.order("name").per_page_kaminari(params[:page]).per(10)
+    
   end
 
   def user_images
     @count = Photo.where('imageable_type = ? AND image = ?', "User", "Profile_Image.jpg").count
     @search = Photo.where('imageable_type = ? AND image = ?', "User", "Profile_Image.jpg").search(params[:q])
-    @photos = @search.result.order("id").page(params[:page]).per(20)
+    @photos = @search.result.order("id").per_page_kaminari(params[:page]).per(20)
   end
 
   def interrogate
@@ -51,19 +54,20 @@ class Admin::AdminController < Admin::BaseController
     @count = Project.all.count
     # @projects = Project.order("title").page(params[:page]).per(10)
     @search = Project.search(params[:q])
-    @projects = @search.result.order("title").page(params[:page]).per(10)
+    @projects = @search.result.order("title").per_page_kaminari(params[:page]).per(10)
   end
 
   def project_images
-    @count = Photo.where('imageable_type = ? AND image = ?', "Project", "Profile_Image.jpg").count
-    @search = Photo.where('imageable_type = ? AND image = ?', "Project", "Profile_Image.jpg").search(params[:q])
-    @photos = @search.result.order("id").page(params[:page]).per(20)
+    # @count = Photo.where('imageable_type = ? AND image = ?', "Project", "Profile_Image.jpg").count
+    Photo.where('imageable_type = ?', "Project").count
+    @search = Photo.where('imageable_type = ?', "Project").search(params[:q])
+    @photos = @search.result.order("id").per_page_kaminari(params[:page]).per(20)
   end
 
   def messages
     @count = Notification.all.count
     @search = Notification.search(params[:q])
-    @notification = @search.result.order("subject").page(params[:page]).per(10)
+    @notification = @search.result.order("subject").per_page_kaminari(params[:page]).per(10)
     # @notification = Notification.order("subject").page(params[:page]).per(10)
   end
   

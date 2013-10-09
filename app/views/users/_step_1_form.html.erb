@@ -114,7 +114,7 @@
 
 
     <div class="control-group">
-      <label class='control-label'>Roles</label>
+      <label class='control-label'>Your Roles*</label>
     </div>
 
     <%= f.fields_for :talents do |talent|   %>
@@ -162,7 +162,7 @@
         <div class="controls">
           <%= talent.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
 
-          <a href='#' class='remove_entity' data-toRemove='.user-talent'>Remove this role</a>
+          <a href='#' class='remove_entity btn btn-danger' data-toRemove='.user-talent'>Remove this role</a>
         </div>
 
       </div>
@@ -199,7 +199,7 @@
         </div>
 
 
-        <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+        <%= link_to 'Remove', '#', :class => 'numerous-remove btn btn-danger' %>
       <% end %>
     </div>
 
@@ -210,9 +210,9 @@
         <!-- don't allow user to add more than 3 talents -->
         <!-- if the user's primary role is Fan, don't show option to add more roles -->
         <% if current_user.talents.count < 2 and current_user.talent_names.try(:first) != 'Fan' %>
-          <%= link_to 'Add another role', '#', :id => 'add-to-talents-list' %>
+          <%= link_to 'Add a Role!', '#', :class => 'btn btn-success', :id => 'add-to-talents-list' %>
         <% else %>
-          <%= link_to 'Add another role', '#', :id => 'add-to-talents-list', :style => 'display:none;' %>
+          <%= link_to 'Add another role', '#', :class => 'btn btn-success', :id => 'add-to-talents-list', :style => 'display:none;' %>
         <% end %>
       </div>
     </div>

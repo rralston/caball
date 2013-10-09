@@ -87,6 +87,7 @@ class User < ActiveRecord::Base
                   :agent_present, :guild_present, :guild, :agentship_attributes, :demo_reel_attributes,
                   :terms_of_service, :provider, :uid, :managing_company
 
+ # Name, Email is Required for User Sign-Up
   validates_presence_of :name, :email, :message => "is required"
   
   validates :terms_of_service, acceptance: true
