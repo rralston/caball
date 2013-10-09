@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  include PublicActivity::Model
+  include PublicActivity::Common
   include ActionView::Helpers
   
   # tracked owner: ->(controller, model) { controller && controller.current_user }
