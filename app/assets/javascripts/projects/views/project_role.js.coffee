@@ -19,6 +19,13 @@ app.views.project_role = Backbone.View.extend
 
   edit_role: (event)->
     app.project_role_edit_view.edit_this(this.model)
+    
+    if this.model.get('name') == 'Cast'
+      $.event.trigger({
+        type: 'CastRoleSelected',
+        target: '.super_role_select'
+      });
+
     false
 
 

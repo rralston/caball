@@ -121,73 +121,76 @@
       </div>
 
       <div class='cast_role_options' <%% if(super_role_present && name == 'Cast') print('style="display:block"');  %>>
-        <div class='controls'>
-          <label>Age:</label>
-          <select name='role[age]' data-identi='age'>
-            <%% if(typeof age == "undefined"){ %>
-              <%%= app.fn.print_options_for_select(app.ages) %>
-            <%% }else{ %>
-              <%%= app.fn.print_options_for_select(app.ages, age) %>
-            <%% } %>
-          </select>
-        </div>
 
-        <div class='controls'>
+        <div class = 'options_1'>
+          <div class='controls'>
+            <label>Age:</label>
+            <select name='role[age]' data-identi='age'>
+              <%% if(typeof age == "undefined"){ %>
+                <%%= app.fn.print_options_for_select(app.ages) %>
+              <%% }else{ %>
+                <%%= app.fn.print_options_for_select(app.ages, age) %>
+              <%% } %>
+            </select>
+          </div>
 
-          <%% if(typeof gender != 'undefined'){ gender_pref = gender;} else { gender_pref = 'any'; }  %>
-          <input type='radio' value='male' name="role[gender]"  <%% if(gender_pref == 'male'){ print('checked') } %> > Male
-          <input type='radio' value='female' name="role[gender]"  <%% if(gender_pref == 'female'){ print('checked') } %> > Female
-          <input type='radio' value='any' name="role[gender]"  <%% if(gender_pref == 'any'){ print('checked') } %> > No Preference
-          <br/><br/>
-        </div>
+          <div class='controls'>
+
+            <%% if(typeof gender != 'undefined'){ gender_pref = gender;} else { gender_pref = 'any'; }  %>
+            <input type='radio' value='male' name="role[gender]"  <%% if(gender_pref == 'male'){ print('checked') } %> > Male
+            <input type='radio' value='female' name="role[gender]"  <%% if(gender_pref == 'female'){ print('checked') } %> > Female
+            <input type='radio' value='any' name="role[gender]"  <%% if(gender_pref == 'any'){ print('checked') } %> > No Preference
+            <br/><br/>
+          </div>
 
 
 
-        <div class='controls'>
-          <label>Ethnicity:</label>
-          <select name='role[ethnicity]' data-identi='ethnicity'>
+          <div class='controls'>
+            <label>Ethnicity:</label>
+            <select name='role[ethnicity]' data-identi='ethnicity'>
 
-            <%% if(typeof ethnicity == "undefined"){ %>
-              <%%= app.fn.print_options_for_select(app.enthnicities) %>
-            <%% }else{ %>
-              <%%= app.fn.print_options_for_select(app.enthnicities, ethnicity) %>
-            <%% } %>
-          </select>
-        </div>
+              <%% if(typeof ethnicity == "undefined"){ %>
+                <%%= app.fn.print_options_for_select(app.enthnicities) %>
+              <%% }else{ %>
+                <%%= app.fn.print_options_for_select(app.enthnicities, ethnicity) %>
+              <%% } %>
+            </select>
+          </div>
 
-        <div class='controls'>
-          <label>Height:</label>
-          <select name='role[height]' data-identi='height'>
-            <%% if(typeof height == "undefined"){ %>
-              <%%= app.fn.print_options_for_select(app.heights) %>
-            <%% }else{ %>
-              <%%= app.fn.print_options_for_select(app.heights, height) %>
-            <%% } %>
-          </select>
-        </div>
+          <div class='controls'>
+            <label>Height:</label>
+            <select name='role[height]' data-identi='height'>
+              <%% if(typeof height == "undefined"){ %>
+                <%%= app.fn.print_options_for_select(app.heights) %>
+              <%% }else{ %>
+                <%%= app.fn.print_options_for_select(app.heights, height) %>
+              <%% } %>
+            </select>
+          </div>
 
-        <div class='controls'>
-          <label>Build:</label>
-          <select name='role[build]' data-identi='build'>
+          <div class='controls'>
+            <label>Build:</label>
+            <select name='role[build]' data-identi='build'>
 
-            <%% if(typeof bodytype == "undefined"){ %>
-              <%%= app.fn.print_options_for_select(app.bodytypes) %>
-            <%% }else{ %>
-              <%%= app.fn.print_options_for_select(app.bodytypes, bodytype) %>
-            <%% } %>
-          </select>
-        </div>
+              <%% if(typeof bodytype == "undefined"){ %>
+                <%%= app.fn.print_options_for_select(app.bodytypes) %>
+              <%% }else{ %>
+                <%%= app.fn.print_options_for_select(app.bodytypes, bodytype) %>
+              <%% } %>
+            </select>
+          </div>
 
-        <div class='controls'>
-          <label>Hair Color:</label>
-          <select name='role[haircolor]' data-identi='haircolor'>
+          <div class='controls'>
+            <label>Hair Color:</label>
+            <select name='role[haircolor]' data-identi='haircolor'>
 
-            <%% if(typeof haircolor == "undefined"){ %>
-              <%%= app.fn.print_options_for_select(app.hair_colors) %>
-            <%% }else{ %>
-              <%%= app.fn.print_options_for_select(app.hair_colors, haircolor) %>
-            <%% } %>
-          </select>
+              <%% if(typeof haircolor == "undefined"){ %>
+                <%%= app.fn.print_options_for_select(app.hair_colors) %>
+              <%% }else{ %>
+                <%%= app.fn.print_options_for_select(app.hair_colors, haircolor) %>
+              <%% } %>
+            </select>
+          </div>
         </div>
 
         <div class='controls'>
