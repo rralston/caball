@@ -155,6 +155,7 @@ class ProjectsController < ApplicationController
       # editing
       @project = Project.find(params[:project_id])
       if @project.update_attributes(params[:project])
+        @project.create_activity :update, owner: current_user
         render 'projects/step_2_form', :layout => false
       else
         render :json => false
@@ -164,6 +165,7 @@ class ProjectsController < ApplicationController
       if @project = Project.create(params[:project])
         @project.user = current_user
         @project.save
+        @project.create_activity :create, owner: current_user
         render 'projects/step_2_form', :layout => false
       else
 
