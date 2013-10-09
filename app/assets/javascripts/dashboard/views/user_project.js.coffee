@@ -10,7 +10,7 @@ app.views.user_project = Backbone.View.extend
     this.$el.html( this.template(this.model.toJSON()) )
     return this
 
-  show_project:()->
+  show_project:(event)->
     
     btn = $(event.target)
     btn.html('Please wait...')
