@@ -130,10 +130,9 @@ describe User do
     before(:all){
       @owner_talents = [
         FactoryGirl.create(:talent, :name => 'Lighting'),
-        FactoryGirl.create(:talent, :name => 'talent1'),
         FactoryGirl.create(:talent, :name => 'Other')
       ]
-      @project_owner = FactoryGirl.create(:user, :talents => @owner_talents)
+      @project_owner = FactoryGirl.create(:user, :talents => @owner_talents, :location => 'Bangalore')
       @roles = [
         FactoryGirl.create(:role, :name => "Actor", :filled => true),
         FactoryGirl.create(:role, :name => "Lighting", :filled => false),
@@ -154,9 +153,19 @@ describe User do
         @required_talents = @roles.select{|role| !role.filled}.map(&:name).uniq!.map { |role_name|
           FactoryGirl.create(:talent, :name => role_name)
         }
-        @user_1 = FactoryGirl.create(:user, :talents => [@required_talents[0]]) 
-        @user_2 = FactoryGirl.create(:user, :talents => [@required_talents[1]])
+
+        @user_1 = FactoryGirl.create(:user, :name => 'USer_1', :talents => [@required_talents[0]], :location => 'Bangalore') 
+        @user_2 = FactoryGirl.create(:user, :name => 'User_2', :talents => [@required_talents[1]], :location => 'Indiranagar, Bangalore, India')
+
+        @friend_1 = FactoryGirl.create(:user, :name => 'Friend_1', :talents => [@required_talents[1]], :location => 'Indiranagar, Bangalore, India')
+
+        @project_owner.friends << @friend_1
+        @project_owner.save
+
+        @user_1.friends << @friend_1
+        @user_1.save
       }
+
       specify { @project_owner.recommended_people.should =~ [@user_1, @user_2] }
     end
 

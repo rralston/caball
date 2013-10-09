@@ -49,7 +49,7 @@ class Project < ActiveRecord::Base
 
   scope :popular,
     select('projects.*, count(likes.id) AS fans_count').
-    joins("inner join likes on likes.loveable_id = projects.id AND likes.loveable_type = 'Project' ").
+    joins("left outer join likes on likes.loveable_id = projects.id AND likes.loveable_type = 'Project' ").
     group("projects.id").
     order("fans_count DESC")
 
