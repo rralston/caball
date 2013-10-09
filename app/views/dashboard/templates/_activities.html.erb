@@ -20,8 +20,7 @@
 
   <%% if (trackable.photo != null) { %>
     <div class='comment-img'>
-      <div class='img-container' style='background:url(<%%= trackable.photo.image.large.url %>)'>
-      </div>
+      <img src="<%%= trackable.photo.image.large.url %>">
     </div>
   <%% } %>
 
@@ -68,8 +67,7 @@
 
   <%% if (trackable.photo != null) { %>
     <div class='comment-img'>
-      <div class='img-container' style='background:url(<%%= trackable.photo.image.url %>)'>
-      </div>
+      <img src="<%%= trackable.photo.image.large.url %>">
     </div>
   <%% } %>
 
@@ -86,7 +84,7 @@
     </div>
     <div class="pull-right like-comment likes action-div">
       <div class="pull-right likes-count"><%%= trackable.likes_count %></div>
-      <div class="heart-blue <%% if(trackable.user_liked) print('active') %> pull-right"> </div>        
+      <div class="heart-blue <%% if(trackable.user_liked) print('active') %> pull-right"> </div>
     </div>
   </div>
 
