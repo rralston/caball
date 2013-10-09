@@ -95,6 +95,7 @@ class User < ActiveRecord::Base
   geocoded_by :location   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates
 
+  validates_with UserRolesValidator
 
   before_save :update_url_name
 

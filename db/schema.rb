@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130919103553) do
+ActiveRecord::Schema.define(:version => 20130926101448) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -171,19 +171,20 @@ ActiveRecord::Schema.define(:version => 20130919103553) do
     t.text     "description"
     t.string   "content_type"
     t.integer  "file_size"
-    t.datetime "updated_at",                         :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "imageable_id"
     t.string   "imageable_type"
-    t.datetime "created_at",                         :null => false
+    t.datetime "created_at",                          :null => false
     t.boolean  "primary"
-    t.boolean  "is_main",         :default => false
-    t.boolean  "is_cover",        :default => false
+    t.boolean  "is_main",          :default => false
+    t.boolean  "is_cover",         :default => false
     t.integer  "crop_x"
     t.integer  "crop_y"
     t.integer  "crop_w"
     t.integer  "crop_h"
     t.integer  "original_width"
     t.integer  "original_height"
+    t.boolean  "image_processing"
   end
 
   create_table "profiles", :force => true do |t|
@@ -191,15 +192,16 @@ ActiveRecord::Schema.define(:version => 20130919103553) do
     t.string   "description"
     t.string   "content_type"
     t.integer  "file_size"
-    t.datetime "updated_at",      :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "user_id"
-    t.datetime "created_at",      :null => false
+    t.datetime "created_at",       :null => false
     t.integer  "crop_x"
     t.integer  "crop_y"
     t.integer  "crop_w"
     t.integer  "crop_h"
     t.integer  "original_width"
     t.integer  "original_height"
+    t.boolean  "image_processing"
   end
 
   create_table "projects", :force => true do |t|
@@ -382,8 +384,8 @@ ActiveRecord::Schema.define(:version => 20130919103553) do
     t.integer  "value",        :default => 0
   end
 
-  add_foreign_key "notifications", "conversations", :name => "notifications_on_conversation_id"
+  add_foreign_key "notifications", "conversations", name: "notifications_on_conversation_id"
 
-  add_foreign_key "receipts", "notifications", :name => "receipts_on_notification_id"
+  add_foreign_key "receipts", "notifications", name: "receipts_on_notification_id"
 
 end

@@ -482,4 +482,13 @@ describe User do
     specify { @user2.url_name.should == 'munna-vishnu' + "-2" }
   end
 
+  context "validation of presence of talents" do
+    before(:all){
+      @no_talent_user = FactoryGirl.build(:user, :talents => [])
+      @no_talent_user.valid?
+    }
+    specify { @no_talent_user.valid?.should == false }
+    specify { @no_talent_user.errors.full_messages.first.should == 'Roles : Atleast one has to be selected.' }
+  end
+
 end
