@@ -49,18 +49,22 @@ $(document).ready(function(){
     })
   });
 
-  $('#endorse_tags').tagit({
-    sortable: true,
-    allowNewTags: false,
-    tagSource: <%= raw @user.expertise.split(',') %>,
-    tagsChanged: function(tagValue, action, element){
-      tag_value_array = _.map($('#endorse_tags').tagit('tags'), function(tag){
-        return tag.value
-      });
-      // update the hidden textbox
-      $('#endorsement_expertise').val(tag_value_array.toString())
-    }
-  })
+  <% if @user.expertise.present? %>
+
+    $('#endorse_tags').tagit({
+      sortable: true,
+      allowNewTags: false,
+      tagSource: <%= raw @user.expertise.split(',') %>,
+      tagsChanged: function(tagValue, action, element){
+        tag_value_array = _.map($('#endorse_tags').tagit('tags'), function(tag){
+          return tag.value
+        });
+        // update the hidden textbox
+        $('#endorsement_expertise').val(tag_value_array.toString())
+      }
+    })
+
+  <% end %>
 
 });
 
