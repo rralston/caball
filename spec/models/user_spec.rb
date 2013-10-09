@@ -486,9 +486,22 @@ describe User do
     before(:all){
       @no_talent_user = FactoryGirl.build(:user, :talents => [])
       @no_talent_user.valid?
+
+
+      @more_talented_user = FactoryGirl.build(:user, :talents => [
+          FactoryGirl.create(:talent, :name => 'Fan'),
+          FactoryGirl.create(:talent, :name => 'Agent'),
+          FactoryGirl.create(:talent, :name => 'Writer')
+        ])
+
+      @valid_user =  FactoryGirl.build(:user, :talents => [ FactoryGirl.create(:talent) ])
     }
     specify { @no_talent_user.valid?.should == false }
     specify { @no_talent_user.errors.full_messages.first.should == 'Roles : Atleast one has to be selected.' }
+
+    specify { @more_talented_user.valid?.should == false }
+
+    specify { @valid_user.valid?.should == true }
   end
 
 end

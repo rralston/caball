@@ -286,7 +286,11 @@ $(document).ready ()->
     $('#step_1_submit_hint').html('Fans need only one step! You are ready to explore Filmzu!')
 
   $(document).on 'NonFanSelection', (event) ->
-    $('#add-to-talents-list').show()
+
+    if( $('.super_role_select').size() < 2 )
+      # show the option to add more talent if the value is less than limit
+      $('#add-to-talents-list').show()
+
     $('input.step_1_submit:not(.skip)').show()
     $('#skills_label').html('Skills')
     $('.hide_for_fans').show()
