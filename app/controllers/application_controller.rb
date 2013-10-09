@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   # Search
   helper_method :search
 
+  # If the user authorization fails, a CanCan::AccessDenied exception will be raised.
   rescue_from CanCan::AccessDenied do |exception|
     if request.xhr?
       render :text => false
@@ -112,6 +113,10 @@ class ApplicationController < ActionController::Base
     unless current_user == @user || @current_user.admin == true
       redirect_to root_url, :error => 'Access denied.'
     end
+  end
+  
+  def admin_user?
+    return true if current_user.admin=true
   end
 
   # def authenticate_user!
