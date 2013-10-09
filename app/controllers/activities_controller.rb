@@ -8,7 +8,8 @@ class ActivitiesController < ApplicationController
 
   def next_activities
     activities = current_user.activities_feed.
-                  paginate(:page => params[:page_number], :per_page => ACTIVITIES_PER_PAGE)
+                  per_page_kaminari( params[:page_number] ).
+                  per( ACTIVITIES_PER_PAGE )
     render :json => activities.to_json(:include => [
                                                     :owner, 
                                                     :trackable
