@@ -156,7 +156,6 @@ $(document).ready ()->
     app.project_role_edit_view = new app.views.project_role_edit({model: app.project_role})
 
 
-
     $('#role_edit_region').html(app.project_role_edit_view.render().el)
 
     app.fn.adjust_slider_height()
@@ -167,3 +166,13 @@ $(document).ready ()->
     to_show_roles = _.invert(all_roles_object)
     to_show_roles = _.pick(to_show_roles, to_have_roles_array)
     _.invert(to_show_roles)
+
+
+  $(document).on 'CastRoleSelected', (event) ->
+    # show cast role options only when the role doesn't have a user selected.
+    if $('.role_user_id').size() == 0
+      $(event.target).closest('.control-group').find('.cast_role_options').show();
+
+  $(document).on 'NonCastRoleSelected', (event) ->
+    $(event.target).closest('.control-group').find('.cast_role_options').hide();
+

@@ -479,9 +479,15 @@ app.fn.init_super_roles_select_handler = function(super_role_selector_class, sub
       app.fn.check_and_trigger_fan_selection()
 
       if(selected_val == 'Cast'){
-        $(event.target).closest('.control-group').find('.cast_role_options').show();
+        $.event.trigger({
+          type: 'CastRoleSelected',
+          target: event.target
+        });
       }else{
-        $(event.target).closest('.control-group').find('.cast_role_options').hide();
+        $.event.trigger({
+          type: 'NonCastRoleSelected',
+          target: event.target
+        });
       }
 
       app.fn.adjust_slider_height();
