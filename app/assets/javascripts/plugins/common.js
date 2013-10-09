@@ -896,7 +896,7 @@ app.fn.bind_show_url_name = function(selector, target){
 
 app.fn.check_and_trigger_fan_selection = function(){
   // if the primary role is changed
-  if( $('.super_role_select:nth(0)').val() == 'Fan' ){
+  if( $('.super_role_select:nth(0)').val() == 'Fan' && $('.super_role_select:nth(0)').is(':visible') ){
     $.event.trigger({
       type: 'FanSelection'
     });
