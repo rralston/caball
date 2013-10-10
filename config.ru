@@ -2,12 +2,4 @@
 
 require ::File.expand_path('../config/environment',  __FILE__)
 use Rack::Static, :urls => ['/carrierwave'], :root => 'tmp'
-
-use Rack::Cors do 
-  allow do 
-    origins '*' 
-    resource '/assets/*', :headers => :any, :methods => :get 
-  end 
-end 
-
 run Caball::Application

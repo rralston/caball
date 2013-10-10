@@ -141,5 +141,3 @@ gem 'taps'
 
 #Required for AWS Setuup
 gem 'rake', '~> 10.1.0'
-
-gem 'rack-cors', :require => 'rack/cors'
