@@ -112,110 +112,111 @@
       </div>
     <%end%>
 
+    <div class='all-roles-container'>
 
-    <div class="control-group">
-      <label class='control-label'>Your Roles*</label>
-    </div>
+      <div class="control-group">
+        <label class='control-label'>Your Roles*</label>
+        <div class='controls'>
+          <!-- don't allow user to add more than 3 talents -->
+          <!-- if the user's primary role is Fan, don't show option to add more roles -->
+          <% if current_user.talents.count < 2 and current_user.talent_names.try(:first) != 'Fan' %>
+            <%= link_to 'Add a Role!', '#', :class => 'btn btn-success', :id => 'add-to-talents-list' %>
+          <% else %>
+            <%= link_to 'Add another role', '#', :class => 'btn btn-success', :id => 'add-to-talents-list', :style => 'display:none;' %>
+          <% end %>
+        </div>
+      </div>
 
-    <%= f.fields_for :talents do |talent|   %>
-      <div class='user-talent'>
-        <div class="control-group">
-          <%= talent.label :name, "Role", :class => 'control-label' %>
-          <div class="controls">
-            <%= talent.select(:name, options_for_select(User.types, talent.object.name), {}, :class=>'super_role_select') %>
+      <%= f.fields_for :talents do |talent|   %>
+        <div class='user-talent'>
+          <div class="control-group">
+            <%= talent.label :name, "Role", :class => 'control-label' %>
+            <div class="controls">
+              <%= talent.select(:name, options_for_select(User.types, talent.object.name), {}, :class=>'super_role_select') %>
+            </div>
+
+            <% if talent.object.sub_talent.present? %>
+              <div class='sub_role_container'>
+                <%= talent.label "Sub Role", :class => 'control-label' %>
+                <div class="controls">
+                  <%= talent.select(:sub_talent, options_for_select(User.sub_types[talent.object.name], talent.object.sub_talent), {}, :class=>'sub_role_select') %>
+                </div>
+              </div>
+            <% else %>
+              <div class='sub_role_container' style='display: none;'>
+                <%= talent.label "Sub Role", :class => 'control-label' %>
+                <div class="controls">
+                  <%= talent.select(:sub_talent, {}, {}, :class=>'sub_role_select') %>
+                </div>
+              </div>
+            <% end %>
+
+            <% if talent.object.super_sub_talent.present? %>
+              <div class='super_sub_role_container'>
+                <%= talent.label "Super Sub Role", :class => 'control-label' %>
+                <div class="controls">
+                  <%= talent.select(:super_sub_talent, options_for_select(User.super_sub_types[talent.object.sub_talent], talent.object.super_sub_talent)) %>
+                </div>
+              </div>
+            <% else %>
+              <div class='super_sub_role_container' style='display: none;'>
+                <%= talent.label "Super Sub Role", :class => 'control-label' %>
+                <div class="controls">
+                  <%= talent.select(:super_sub_talent, {}) %>
+                </div>
+              </div>
+            <% end %>
+
           </div>
 
-          <% if talent.object.sub_talent.present? %>
-            <div class='sub_role_container'>
-              <%= talent.label "Sub Role", :class => 'control-label' %>
-              <div class="controls">
-                <%= talent.select(:sub_talent, options_for_select(User.sub_types[talent.object.name], talent.object.sub_talent), {}, :class=>'sub_role_select') %>
-              </div>
+          <div class="controls">
+            <%= talent.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+
+            <a href='#' class='remove_entity btn btn-danger' data-toRemove='.user-talent'>Remove this role</a>
+          </div>
+
+        </div>
+      <% end %>
+
+      
+      <div id="fields-for-talents-list" class="numerous">
+        <%= f.fields_for :talents, Talent.new, :child_index => 'replace_this' do |talent| %>
+          <div class="control-group">
+            <%= talent.label "Role", :class => 'control-label' %>
+            <div class="controls">
+              <%= talent.select(:name, options_for_select(User.types), {}, :class=>'super_role_select') %>
             </div>
-          <% else %>
+
             <div class='sub_role_container' style='display: none;'>
               <%= talent.label "Sub Role", :class => 'control-label' %>
               <div class="controls">
                 <%= talent.select(:sub_talent, {}, {}, :class=>'sub_role_select') %>
               </div>
             </div>
-          <% end %>
 
-          <% if talent.object.super_sub_talent.present? %>
-            <div class='super_sub_role_container'>
-              <%= talent.label "Super Sub Role", :class => 'control-label' %>
-              <div class="controls">
-                <%= talent.select(:super_sub_talent, options_for_select(User.super_sub_types[talent.object.sub_talent], talent.object.super_sub_talent)) %>
-              </div>
-            </div>
-          <% else %>
             <div class='super_sub_role_container' style='display: none;'>
               <%= talent.label "Super Sub Role", :class => 'control-label' %>
               <div class="controls">
                 <%= talent.select(:super_sub_talent, {}) %>
               </div>
             </div>
-          <% end %>
 
-        </div>
-
-        <div class="controls">
-          <%= talent.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
-
-          <a href='#' class='remove_entity btn btn-danger' data-toRemove='.user-talent'>Remove this role</a>
-        </div>
-
-      </div>
-    <% end %>
-
-    
-    <div id="fields-for-talents-list" class="numerous">
-      <%= f.fields_for :talents, Talent.new, :child_index => 'replace_this' do |talent| %>
-        <div class="control-group">
-          <%= talent.label "Role", :class => 'control-label' %>
-          <div class="controls">
-            <%= talent.select(:name, options_for_select(User.types), {}, :class=>'super_role_select') %>
           </div>
-
-          <div class='sub_role_container' style='display: none;'>
-            <%= talent.label "Sub Role", :class => 'control-label' %>
-            <div class="controls">
-              <%= talent.select(:sub_talent, {}, {}, :class=>'sub_role_select') %>
-            </div>
-          </div>
-
-          <div class='super_sub_role_container' style='display: none;'>
-            <%= talent.label "Super Sub Role", :class => 'control-label' %>
-            <div class="controls">
-              <%= talent.select(:super_sub_talent, {}) %>
-            </div>
-          </div>
-
-        </div>
-      
         
-        <div class='control-group sub_role_container'>
           
-        </div>
+          <div class='control-group sub_role_container'>
+            
+          </div>
 
 
-        <%= link_to 'Remove', '#', :class => 'numerous-remove btn btn-danger' %>
-      <% end %>
-    </div>
-
-    <div id="talents-list"></div>
-    
-    <div class='control-group'>
-      <div class='controls'>
-        <!-- don't allow user to add more than 3 talents -->
-        <!-- if the user's primary role is Fan, don't show option to add more roles -->
-        <% if current_user.talents.count < 2 and current_user.talent_names.try(:first) != 'Fan' %>
-          <%= link_to 'Add a Role!', '#', :class => 'btn btn-success', :id => 'add-to-talents-list' %>
-        <% else %>
-          <%= link_to 'Add another role', '#', :class => 'btn btn-success', :id => 'add-to-talents-list', :style => 'display:none;' %>
+          <%= link_to 'Remove', '#', :class => 'numerous-remove btn btn-danger' %>
         <% end %>
       </div>
+
+      <div id="talents-list"></div>
+
     </div>
+
 
     <div class="control-group">
       <%= f.label 'About you', :class => 'control-label' %>

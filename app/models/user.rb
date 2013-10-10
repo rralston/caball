@@ -525,15 +525,20 @@ class User < ActiveRecord::Base
     User.popular
   end
 
-  def self.recently_updated(page = nil, per_page = nil)
-    Kaminari.paginate_array(User.order('updated_at DESC')).per_page_kaminari(page).per(per_page)
+  def self.recently_updated(page = nil, per_page = nil, current_user = nil)
+    if current_user.present?
+      User.where('id <> ?', current_user.id).order('updated_at DESC').per_page_kaminari(page).per(per_page)
+    else
+      User.order('updated_at DESC').per_page_kaminari(page).per(per_page)
+    end
+
   end
 
   def followed_by_user?(user)
     followers.includes?(user)
   end
 
-  def self.filter_all(users = nil, query = nil, location = nil, radius = 100,  talents = nil,  sub_talents = nil, cast_hash = nil, page = nil, per_page = nil)
+  def self.filter_all(users = nil, query = nil, location = nil, radius = 100,  talents = nil,  sub_talents = nil, cast_hash = nil, page = nil, per_page = nil, current_user = nil)
 
     users = User if users.nil?
 
@@ -594,6 +599,10 @@ class User < ActiveRecord::Base
       #  user_talents = user.talents.map(&:name).uniq
       #  (talents - user_talents).empty?
       #}
+    end
+
+    if current_user.present?
+      users = users.where( 'users.id <> ?', current_user.id )
     end
 
     Kaminari.paginate_array(users).per_page_kaminari(page).per(per_page)

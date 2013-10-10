@@ -368,6 +368,8 @@ describe User do
     specify { User.filter_all(nil, '', nil, nil, ['Cast', 'Production'], nil, asian_cast_hash).should =~ [@search_user2] }
 
     specify { User.filter_all(nil, '', nil, nil, ['Cast', 'Crew'], @sub_talents_search_hash, cast_hash).should =~ [@search_user2, @search_user3, @search_user4, @search_user5, @search_user7] }
+
+    specify { User.filter_all(nil, '', nil, nil, ['Cast', 'Crew'], @sub_talents_search_hash, cast_hash, nil, nil, @search_user7).should =~ [@search_user2, @search_user3, @search_user4, @search_user5] }
   end
 
 

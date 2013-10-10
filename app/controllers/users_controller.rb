@@ -51,18 +51,26 @@ class UsersController < ApplicationController
           to_be_filtered_users = current_user.send(params[:people])
         end
 
-        @users = User.filter_all(to_be_filtered_users, search, location, distance, roles, sub_roles, cast_hash, page, USERS_PER_PAGE_IN_INDEX)
+        
+
+        if current_user.present?
+          @users = User.filter_all(to_be_filtered_users, search, location, distance, roles, sub_roles, cast_hash, page, USERS_PER_PAGE_IN_INDEX, current_user)
+        else
+          @users = User.filter_all(to_be_filtered_users, search, location, distance, roles, sub_roles, cast_hash, page, USERS_PER_PAGE_IN_INDEX)
+        end
+
       end
     else
-      @users = User.recently_updated
+      if current_user.present?
+        @users = User.recently_updated(nil, nil, current_user)
+      else
+        @users = User.recently_updated
+      end
     end
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { 
-        if current_user.present?
-          @users = @users - [current_user]
-        end
         render :json => @users.to_a.to_json(:include => :followers, :check_user => current_user) 
       }
     end
