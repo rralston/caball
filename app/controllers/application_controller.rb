@@ -15,6 +15,13 @@ class ApplicationController < ActionController::Base
   # Search
   helper_method :search
 
+
+  after_filter :set_access_control_headers
+
+  def set_access_control_headers
+    headers['Access-Control-Allow-Origin'] = "d1cujs8uckytjb.cloudfront.net"
+  end
+
   # If the user authorization fails, a CanCan::AccessDenied exception will be raised.
   rescue_from CanCan::AccessDenied do |exception|
     if request.xhr?
