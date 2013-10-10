@@ -67,5 +67,13 @@ module Caball
 
     # Precompile additional asset types
     config.assets.precompile += %w( .svg .eot .woff .ttf )
+
+    config.middleware.use Rack::Cors do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options]
+      end
+    end
+
   end
 end
