@@ -191,32 +191,37 @@ $(document).ready ()->
         results: ()->
 
   $('body').on 'click', '.step_1_submit', (event)->
-    btn = $(event.target)
-    btn.val('Please wait..')
-    btn.attr('disabled', 'disabled')
-    $.ajax
-      type: 'POST'
-      url: '/users/step_1'
-      data: $('#user_edit_form').serialize()
-      success: (data)->
-        # if object, that has some error messages
-        if typeof data != 'object'
-          $("html, body").animate({ scrollTop: 0 }, "slow");
-          if btn.hasClass('skip')
-            window.location = "/users/profile"
+
+    if( $('.super_role_select').size() > 0 )
+      btn = $(event.target)
+      btn.val('Please wait..')
+      btn.attr('disabled', 'disabled')
+      $.ajax
+        type: 'POST'
+        url: '/users/step_1'
+        data: $('#user_edit_form').serialize()
+        success: (data)->
+          # if object, that has some error messages
+          if typeof data != 'object'
+            $("html, body").animate({ scrollTop: 0 }, "slow");
+            if btn.hasClass('skip')
+              window.location = "/users/profile"
+            else
+              $('#step_2').html(data)
+              app.allow_forward_sliding_till = 2
+              $('a.step_2_nav').trigger('click')
+              app.fn.description_tag_list_init()
+              app.fn.init_step_2_fileupload()
+              app.fn.init_agent_name_autocomplete()
+              app.fn.description_tag_list_init()
           else
-            $('#step_2').html(data)
-            app.allow_forward_sliding_till = 2
-            $('a.step_2_nav').trigger('click')
-            app.fn.description_tag_list_init()
-            app.fn.init_step_2_fileupload()
-            app.fn.init_agent_name_autocomplete()
-            app.fn.description_tag_list_init()
-        else
-          alert(data.message)
-        if !btn.hasClass('skip')
-          btn.val('Next Step')
-        btn.attr('disabled', false)
+            alert(data.message)
+          if !btn.hasClass('skip')
+            btn.val('Next Step')
+          btn.attr('disabled', false)
+    else
+      alert('Please select atleast one role.')
+      $('.all-roles-container').addClass('have_error')
 
     return false
 

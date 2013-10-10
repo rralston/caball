@@ -125,6 +125,8 @@ var Users = {
               $('a#add-to-talents-list').hide()
             }
 
+            $('.all-roles-container.have_error').removeClass('have_error')
+
             app.fn.check_and_trigger_fan_selection()
             
           },
