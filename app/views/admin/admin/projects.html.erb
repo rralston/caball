@@ -44,8 +44,15 @@
 											<td><%= link_to project.title, project_path(project.id) %></td>
 											<td><%= link_to User.find(project.user_id).name, user_path(project.user_id) %></td>
 											<td><%= project.created_at %></td>
-											<td><%= form_for(project) do |f| %><%= f.check_box :featured %></td>
-											<td><%= f.submit "Update", :class => 'btn btn-info btn-mini' %><% end %>
+											<td>
+										<%= form_for(project, :url => admin_admin_update_project_path , :remote => true) do |f| %>
+												<input type='hidden' name='project_id' value='<%= project.id %>' >
+												<%= f.check_box :featured %>
+											</td>
+											<td>
+												<%= f.submit "Update", :class => 'btn btn-info btn-mini' %>
+										<% end %>
+										
 											<%= link_to(edit_project_path(project.id), :class => "btn btn-primary btn-mini") do %>Edit<% end %>
 											<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
 						                      project_path(project),

@@ -68,6 +68,17 @@ class Admin::AdminController < Admin::BaseController
     @projects = @search.result.order("title").per_page_kaminari(params[:page]).per(10)
   end
 
+  def update_project
+    project = Project.find(params[:project_id])
+    
+    if project.update_attributes( params[:project] )
+      render js: 'alert("Project details updated.")' 
+    else
+      render js: "alert('Failed to updated. Errors: #{project.errors.full_messages.first}')"
+    end
+    
+  end
+
   def project_images
     # @count = Photo.where('imageable_type = ? AND image = ?', "Project", "Profile_Image.jpg").count
     Photo.where('imageable_type = ?', "Project").count

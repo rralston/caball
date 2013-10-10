@@ -122,6 +122,7 @@ Caball::Application.routes.draw do
     end
 
     put 'admin/update_user'
+    put 'admin/update_project'
   end
   
   resources :conversations, only: [:index, :show, :new, :create] do
