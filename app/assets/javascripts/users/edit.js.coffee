@@ -292,6 +292,8 @@ $(document).ready ()->
     $('#skills_label').html('Types of films you like')
     $('#step_1_submit_hint').html('Fans need only one step! You are ready to explore Filmzu!')
 
+    app.fn.adjust_slider_height()
+
   $(document).on 'NonFanSelection', (event) ->
 
     if( $('.super_role_select').size() < 2 )
@@ -303,3 +305,5 @@ $(document).ready ()->
     $('.hide_for_fans').show()
     $('.fan_unhint').addClass('hinted')
     $('#step_1_submit_hint').html("You are almost done! Go to the next page to enter the fun stuff! Or you can check out profile and enter the rest of the stuff later")
+
+    app.fn.adjust_slider_height()
