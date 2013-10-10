@@ -406,14 +406,14 @@ class UsersController < ApplicationController
   end
 
   def next_recommended_projects
-    projects = current_user.recommended_projects.paginate(:page => params[:page_number], :per_page => RECOMMENDED_PROJECTS_PER_PAGE)
+    projects = current_user.recommended_projects.per_page_kaminari( params[:page_number] ).per( RECOMMENDED_PROJECTS_PER_PAGE )
     respond_to do |format|
       format.json { render :json => Project.custom_json(projects, current_user) }
     end
   end
 
   def next_recommended_people
-    people = current_user.recommended_people.paginate(:page => params[:page_number], :per_page => RECOMMENDED_PEOPLE_PER_PAGE)
+    people = current_user.recommended_people.per_page_kaminari( params[:page_number] ).per( RECOMMENDED_PEOPLE_PER_PAGE )
     respond_to do |format|
       format.json { render :json => people.to_json() }
     end
@@ -421,7 +421,7 @@ class UsersController < ApplicationController
   
 
   def next_recommended_events
-    events = current_user.recommended_events.paginate(:page => params[:page_number], :per_page => RECOMMENDED_EVENTS_PER_PAGE)
+    events = current_user.recommended_events.per_page_kaminari( params[:page_number] ).per( RECOMMENDED_EVENTS_PER_PAGE )
     respond_to do |format|
       format.json { render :json => Event.custom_json(events, current_user) }
     end
