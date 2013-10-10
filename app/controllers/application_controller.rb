@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   after_filter :set_access_control_headers
 
   def set_access_control_headers
-    headers['Access-Control-Allow-Origin'] = "d1cujs8uckytjb.cloudfront.net"
+    headers['Access-Control-Allow-Origin'] = "http://mysterious-brook-4528.herokuapp.com"
   end
 
   # If the user authorization fails, a CanCan::AccessDenied exception will be raised.
