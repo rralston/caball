@@ -158,6 +158,8 @@ $(document).ready ()->
 
     target.closest(to_remove).hide()
 
+    target.parent().find('.super_role_select').removeClass('super_role_select')
+
     target.closest(to_remove).removeClass(to_remove.substring(1, to_remove.length)) # to_remove is a class selector, we don't need dot(.) infront of it
 
     app.fn.check_and_trigger_fan_selection()
