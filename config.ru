@@ -6,7 +6,7 @@ use Rack::Static, :urls => ['/carrierwave'], :root => 'tmp'
 use Rack::Cors do 
   allow do 
     origins '*' 
-    resource '/fonts/*', :headers => :any, :methods => :get 
+    resource '/assets/*', :headers => :any, :methods => :get 
   end 
 end 
 
