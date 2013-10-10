@@ -35,6 +35,17 @@ class Admin::AdminController < Admin::BaseController
     
   end
 
+  def update_user
+    user = User.find(params[:user_id])
+    
+    if user.update_attributes( params[:user] )
+      render js: 'alert("User details updated.")' 
+    else
+      render js: "alert('Failed to updated. Errors: #{user.errors.full_messages.first}')"
+    end
+    
+  end
+
   def user_images
     @count = Photo.where('imageable_type = ? AND image = ?', "User", "Profile_Image.jpg").count
     @search = Photo.where('imageable_type = ? AND image = ?', "User", "Profile_Image.jpg").search(params[:q])
