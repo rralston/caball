@@ -47,8 +47,9 @@ class Admin::AdminController < Admin::BaseController
   end
 
   def user_images
-    @count = Photo.where('imageable_type = ? AND image = ?', "User", "Profile_Image.jpg").count
-    @search = Photo.where('imageable_type = ? AND image = ?', "User", "Profile_Image.jpg").search(params[:q])
+    # @count = Photo.where('imageable_type = ? AND image = ?', "User", "Profile_Image.jpg").count
+    @count = Photo.where('imageable_type = ?', "User").count
+    @search = Photo.where('imageable_type = ?', "User").search(params[:q])
     @photos = @search.result.order("id").per_page_kaminari(params[:page]).per(20)
   end
 

@@ -74,8 +74,8 @@
 								<% @recent_users.each do |user| %>
 								<li>
 									<div class="user-thumb">
-										<% if user.photos.exists? %>
-											<%= image_tag user.photos.first.image.url(:medium), :size => "40x40"  %>
+										<% if user.profile.present? %>
+											<%= image_tag user.profile.image.url(:thumb), :size => "40x40"  %>
 											<% else %>
 											<%= image_tag("admin/demo/av2.jpg", :size => "40x40") %>
 											<% end %>
