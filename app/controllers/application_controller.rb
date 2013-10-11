@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   #News Feed
   include PublicActivity::StoreController
   include RedirectHelper
+
   protect_from_forgery
   
   before_filter :subdomain_view_path
@@ -40,8 +41,12 @@ class ApplicationController < ActionController::Base
   end
 
   def check_url_param
+    
+
     entity = params[:entity]
-    name = params[:value].gsub(/\s/,'-').gsub(/\./,'').downcase
+    params[:value] = view_context.truncate(params[:value], :length => 20, :separator => ' ', :omission => '')
+
+    name = params[:value].gsub(/\s/,'-').gsub(/[^a-zA-Z0-9-]/, '').downcase
 
     id_check = false
     
@@ -55,7 +60,13 @@ class ApplicationController < ActionController::Base
     end
 
     if same_named_count > 0
-      to_return = name + "-#{same_named_count.to_i + 1 }"
+      if id_check
+        to_return = name + "-#{params[:entity_id]}"
+      else
+        # if the entity doesn't have an id, it will probably have id of last + 1
+        total_entities =  entity.camelize.constantize.count > 0 ? entity.camelize.constantize.last.id : 0
+        to_return = name + "-#{total_entities.to_i + 1 }"
+      end
     else
       to_return = name
     end

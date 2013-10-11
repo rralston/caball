@@ -59,14 +59,23 @@ class Event < ActiveRecord::Base
 
       new_title = truncate(self.title, :length => 20, :separator => ' ', :omission => '')
       # if the name is changed, convert to the url name
-      self.url_name = new_title.gsub(/\s/,'-').gsub(/\./,'').downcase
+      self.url_name = new_title.gsub(/\s/,'-').gsub(/[^a-zA-Z0-9-]/, '').downcase
 
-      # check  and get size of if any other events having the same url_name
-      same_named_count = Event.where("lower(url_name) like lower(?)", "#{self.url_name}%").size
+      if self.id.present?
+        same_named_count = Event.where("lower(url_name) like lower(?) and id <> ? ",  "#{self.url_name}%", self.id).size
+      else
+        # check  and get size of if any other Events having the same url_name
+        same_named_count = Event.where("lower(url_name) like lower(?)", "#{self.url_name}%").size
+      end
       
       if same_named_count > 0
-        # append the count + 1 after the url_name.
-        self.url_name = self.url_name + "-#{same_named_count.to_i + 1}"
+        if self.id.present?
+          # append the id after the url_name.
+          self.url_name = self.url_name + "-#{self.id}"
+        else
+          total_entities = Event.last.id rescue 0
+          self.url_name = self.url_name + "-#{total_entities.to_i + 1}"
+        end
       end
     end
   end
