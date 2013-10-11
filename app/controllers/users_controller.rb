@@ -200,7 +200,7 @@ class UsersController < ApplicationController
       # if first talent has the script document.
       if params['user']['talents_attributes']["0"].present? and params['user']['talents_attributes']["0"]['script_document_attributes'].present? and params['user']['talents_attributes']["0"]["script_document_attributes"]["document"].present?
         # build docuemnt if its not present
-        current_user.talents.last.script_document = UploadedDocument.new if current_user.talents.last.script_document.nil?
+        current_user.talents.first.script_document = UploadedDocument.new if current_user.talents.first.script_document.nil?
 
         current_user.talents.first.script_document.update_attributes(:document => params['user']['talents_attributes']["0"]["script_document_attributes"]["document"])
         link = current_user.talents.first.reload.script_document.document.url

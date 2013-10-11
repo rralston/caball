@@ -152,7 +152,7 @@
             
             <div class='event-links row'>
               <div class='span4 text-center'>
-                <a href="<%= @event.website %>" target='_blank'>Visit website</a>
+                <a href="http://<%= @event.website.gsub('http://', '') %>" target='_blank'>Visit website</a>
                 <span class='dot-seperator-red'></span>
                 <a href="<%= @event.website %>" data-toggle='modal' data-target='#event_map_modal'>Visit Map</a>
               </div>
