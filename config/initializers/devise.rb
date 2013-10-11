@@ -124,11 +124,15 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  # config.remember_for = 2.weeks
+  config.remember_for = 2.weeks
 
   # If true, extends the user's remember period when remembered via cookie.
-  # config.extend_remember_period = false
+  config.extend_remember_period = true
 
+  # Support from http://stackoverflow.com/questions/5987075/devise-remember-me-not-working-localhost-issue
+  # http://rubydoc.info/github/plataformatec/devise/master/Devise
+  Devise::TRUE_VALUES << [true, 1, '1', 't', 'T', 'true', 'TRUE', 'on']
+  
   # Options to be passed to the created cookie. For instance, you can set
   # :secure => true in order to force SSL only cookies.
   # config.rememberable_options = {}
