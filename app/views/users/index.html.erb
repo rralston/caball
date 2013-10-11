@@ -266,12 +266,7 @@ app.popular_users = new app.collections.users()
 popular_users_view = new app.views.users({ collection: app.popular_users })
 
 
-<% if current_user.present? %>
-// remove current user from the display
-  app.popular_users.reset(<%= raw User.popular_users.where('users.id <> ? ', current_user.id).first(3).to_json(:include => [:followers], :check_user => current_user) %>)
-<% else %>
-  app.popular_users.reset(<%= raw User.popular_users.first(3).to_json(:include => [:followers], :check_user => current_user) %>)
-<% end %>
+app.popular_users.reset(<%= raw User.popular_users.first(3).to_json(:include => [:followers], :check_user => current_user) %>)
 
 
 $('#popular_users_container').html(popular_users_view.render().el)
