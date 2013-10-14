@@ -86,6 +86,18 @@ class Admin::AdminController < Admin::BaseController
     @search = Photo.where('imageable_type = ?', "Project").search(params[:q])
     @photos = @search.result.order("id").per_page_kaminari(params[:page]).per(20)
   end
+  
+  def events
+    @count = Event.all.count
+    @search = Event.search(params[:q])
+    @events = @search.result.order("title").per_page_kaminari(params[:page]).per(10)
+  end
+  
+  def event_images
+    Photo.where('imageable_type = ?', "Event").count
+    @search = Photo.where('imageable_type = ?', "Event").search(params[:q])
+    @photos = @search.result.order("id").per_page_kaminari(params[:page]).per(20)
+  end
 
   def messages
     @count = Notification.all.count

@@ -39,6 +39,23 @@
 			</li>
 		</ul>
 		<% end %>
+		<%= content_tag(:li, :class => open?("events", "event_images")) do %>
+			<%= link_to "#" do %>
+				<i class="icon-glass"></i> <span>Events</span> <span class="label">2</span>
+			<% end %>
+			<ul>
+		<li class="<%= is_active?("events") %>">
+			<%= link_to 'events' do %>
+				<i class="icon-glass"></i> <span>Events</span>
+			<% end %>
+		</li>
+			<li class="<%= is_active?("event_images") %>">
+				<%= link_to 'event_images' do %>
+					<i class="icon-picture"></i> <span>Event Images</span>
+				<% end %>
+			</li>
+		</ul>
+		<% end %>
 		<li class="<%= is_active?("messages") %>">
 			<%= link_to 'messages' do %>
 				<i class="icon-envelope"></i> <span>Messages</span>
