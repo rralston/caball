@@ -105,6 +105,13 @@ class EventsController < ApplicationController
     end
   end
 
+  def destroy
+    @event.destroy
+    respond_to do |format|
+     format.html { redirect_to admin_admin_events_url, :notice => @event.title + ' Event was deleted.' }
+    end
+  end
+  
   def attend
     event = Event.find(params[:id])
     attend = event.attends.create(:user => current_user)

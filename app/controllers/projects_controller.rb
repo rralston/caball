@@ -146,7 +146,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-     format.html { redirect_to root_url, :notice => @project.title + ' Project was deleted.' }
+     format.html { redirect_to admin_admin_projects_url, :notice => @project.title + ' Project was deleted.' }
     end
   end
 
