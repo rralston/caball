@@ -12,7 +12,7 @@
   <div class="span12">
 
     <div class="controls">
-      You said you're <%= current_user.talent_names.join(' and ') %>
+      You said you're Positions are: <%= current_user.talent_names.join(' and ') %>
     </div>
 
     <%= f.fields_for :talents do |talent| %>
@@ -40,7 +40,7 @@
 
               <%= talent.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
 
-              <a href='#' class='remove_entity' data-toRemove='.user-talent'>Remove this role</a>
+              <a href='#' class='remove_entity' data-toRemove='.user-talent'>Remove this Position</a>
 
             </div>    
           </div>

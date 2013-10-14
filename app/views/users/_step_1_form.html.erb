@@ -130,21 +130,21 @@
       <%= f.fields_for :talents do |talent|   %>
         <div class='user-talent'>
           <div class="control-group">
-            <%= talent.label :name, "Role", :class => 'control-label' %>
+            <%= talent.label :name, "Position", :class => 'control-label' %>
             <div class="controls">
               <%= talent.select(:name, options_for_select(User.types, talent.object.name), {}, :class=>'super_role_select') %>
             </div>
 
             <% if talent.object.sub_talent.present? %>
               <div class='sub_role_container'>
-                <%= talent.label "Sub Role", :class => 'control-label' %>
+                <%= talent.label "Sub Position", :class => 'control-label' %>
                 <div class="controls">
                   <%= talent.select(:sub_talent, options_for_select(User.sub_types[talent.object.name], talent.object.sub_talent), {}, :class=>'sub_role_select') %>
                 </div>
               </div>
             <% else %>
               <div class='sub_role_container' style='display: none;'>
-                <%= talent.label "Sub Role", :class => 'control-label' %>
+                <%= talent.label "Sub Position", :class => 'control-label' %>
                 <div class="controls">
                   <%= talent.select(:sub_talent, {}, {}, :class=>'sub_role_select') %>
                 </div>
@@ -153,14 +153,14 @@
 
             <% if talent.object.super_sub_talent.present? %>
               <div class='super_sub_role_container'>
-                <%= talent.label "Super Sub Role", :class => 'control-label' %>
+                <%= talent.label "Super Sub Position", :class => 'control-label' %>
                 <div class="controls">
                   <%= talent.select(:super_sub_talent, options_for_select(User.super_sub_types[talent.object.sub_talent], talent.object.super_sub_talent)) %>
                 </div>
               </div>
             <% else %>
               <div class='super_sub_role_container' style='display: none;'>
-                <%= talent.label "Super Sub Role", :class => 'control-label' %>
+                <%= talent.label "Super Sub Position", :class => 'control-label' %>
                 <div class="controls">
                   <%= talent.select(:super_sub_talent, {}) %>
                 </div>
@@ -172,7 +172,7 @@
           <div class="controls">
             <%= talent.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
 
-            <a href='#' class='remove_entity btn btn-danger' data-toRemove='.user-talent'>Remove this role</a>
+            <a href='#' class='remove_entity btn btn-danger' data-toRemove='.user-talent'>Remove this Position</a>
           </div>
 
         </div>
@@ -182,20 +182,20 @@
       <div id="fields-for-talents-list" class="numerous">
         <%= f.fields_for :talents, Talent.new, :child_index => 'replace_this' do |talent| %>
           <div class="control-group">
-            <%= talent.label "Role", :class => 'control-label' %>
+            <%= talent.label "Position", :class => 'control-label' %>
             <div class="controls">
               <%= talent.select(:name, options_for_select(User.types), {}, :class=>'super_role_select') %>
             </div>
 
             <div class='sub_role_container' style='display: none;'>
-              <%= talent.label "Sub Role", :class => 'control-label' %>
+              <%= talent.label "Sub Position", :class => 'control-label' %>
               <div class="controls">
                 <%= talent.select(:sub_talent, {}, {}, :class=>'sub_role_select') %>
               </div>
             </div>
 
             <div class='super_sub_role_container' style='display: none;'>
-              <%= talent.label "Super Sub Role", :class => 'control-label' %>
+              <%= talent.label "Super Sub Position", :class => 'control-label' %>
               <div class="controls">
                 <%= talent.select(:super_sub_talent, {}) %>
               </div>
@@ -209,7 +209,7 @@
           </div>
 
 
-          <%= link_to 'Remove', '#', :class => 'numerous-remove btn btn-danger' %>
+          <%= link_to 'Remove this Position', '#', :class => 'numerous-remove btn btn-danger' %>
         <% end %>
       </div>
 
