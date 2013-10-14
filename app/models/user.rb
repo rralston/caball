@@ -256,7 +256,8 @@ class User < ActiveRecord::Base
                             'Actress' => 'Actress',
                             'Stunt'   => 'Stunt',
                             'Dancer'  => 'Dancer',
-                            'Driver'  => 'Driver'
+                            'Driver'  => 'Driver',
+                            'Voice'  => 'Voice'
                           },
       'Camera'          => {
                             'Director of Photography (DP)' => 'Director of Photography (DP)',
@@ -289,7 +290,7 @@ class User < ActiveRecord::Base
                             'Foley editor'     => 'Foley editor',
                             'Production mixer' => 'Production mixer',
                             'Sound editor'     => 'Sound editor',
-                            'Voiceover'        => 'Voiceover'
+                            'Sound recordist'  => 'Sound recordist'
                           },
       'Set'            => {
                             "Make up artist"        => "Make up artist",

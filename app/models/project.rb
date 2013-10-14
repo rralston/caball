@@ -515,12 +515,12 @@ class Project < ActiveRecord::Base
                             "Other"            => "Other",
                             "Principal"        => "Principal",
                             "Precision driver" => "Precision driver",
-                            "special"          => "special",
-                            "stand-in"         => "stand-in",
-                            "stunt"            => "stunt",
-                            "supporting"       => "supporting",
-                            "double"           => "double",
-                            "Voice over"       => "Voice over",
+                            "Dpecial"          => "special",
+                            "Dtand-in"         => "stand-in",
+                            "Dtunt"            => "stunt",
+                            "Dupporting"       => "supporting",
+                            "Double"           => "double",
+                            "Voice"            => "Voice"
                           },
       'Camera'          => {
                             'Director of Photography (DP)' => 'Director of Photography (DP)',
@@ -553,7 +553,7 @@ class Project < ActiveRecord::Base
                             'Foley editor'     => 'Foley editor',
                             'Production mixer' => 'Production mixer',
                             'Sound editor'     => 'Sound editor',
-                            'Voiceover'        => 'Voiceover'
+                            'Sound recordist'  => 'Sound recordist'
                           },
       'Crew'           => {
                             'Camera' => 'Camera',
