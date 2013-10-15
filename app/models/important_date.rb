@@ -9,7 +9,7 @@ class ImportantDate < ActiveRecord::Base
   before_save :update_date_time
 
   def update_date_time
-    if self.date_changed? and self.time_string_changed?
+    if self.date_changed? or self.time_string_changed?
       self.date_time = Time.parse("#{self.date} #{self.time_string}").to_s.split(' ').first(2).join(' ')
       # take only the date time the user enters and save, first(2) is to ignore the timezone difference calculated.
     end
