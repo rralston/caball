@@ -49,9 +49,11 @@
 										<tr>
 											<td><%= link_to user.id, user_path(user.id), :class => "btn btn-mini" %></td>
 											<td><%= link_to user.name, user_path(user.id) %></td>
-											<td><%= user.email %></td>
+											<td><%= form_for(user, :url => admin_admin_update_user_path, :remote => true) do |f| %>
+												<%= f.text_field :email, :class => 'text_field required email', :placeholder => 'This where we notify you of the new opportunities' %></td>
+											
 											<td><%= user.created_at %></td>
-											<%= form_for(user, :url => admin_admin_update_user_path, :remote => true) do |f| %>
+											
 												<input type='hidden' name='user_id' value='<%= user.id %>' >
 
 											<td><%= f.check_box :admin %></td>
