@@ -232,7 +232,7 @@ class User < ActiveRecord::Base
 
   def self.types
     {
-      'Fan - "Only select if your a just a film fan'      => 'Fan',
+      'Fan - Only select if your a just a film fan'      => 'Fan',
       'Agent'                                             => 'Agent',
       'Business - Manager, Studio Exec'                   => 'Business', 
       'Cast - Actor'                                      => 'Cast', 
