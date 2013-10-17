@@ -97,7 +97,7 @@
                       <div id="slider" class="flexslider span12">
                         <ul class="slides span12">
                           <% @event.all_photos.each do |photo|  %>
-                            <li style="background:url(<%= photo.image.url(:original) %>);"></li>
+                            <li style="background:url(<%= photo.image.url(:large) %>);"></li>
                           <% end %>
                         </ul>
                         </div>

@@ -60,7 +60,7 @@
             </div>
             <% if photo.object.image.present? %>
               <div class="controls image_container">
-                <img src='<%= photo.object.image.url(:original) %>' class="image_preview_container img-rounded">
+                <img src='<%= photo.object.image.url(:medium) %>' class="image_preview_container img-rounded">
               </div>
 
               <div class='controls image_btns'>

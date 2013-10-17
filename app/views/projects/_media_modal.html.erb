@@ -14,12 +14,12 @@
         <% @project.photos.each_with_index do |photo, index| %>
           <% if index == 0 %>
             <div class="item active">
-              <div class='media-slider-image' style="background: url(<%= photo.try(:image).url(:original) %>)">
+              <div class='media-slider-image' style="background: url(<%= photo.try(:image).url(:large) %>)">
               </div>
             </div>
           <% else %>
             <div class="item">
-              <div class='media-slider-image' style="background: url(<%= photo.try(:image).url(:original) %>)">
+              <div class='media-slider-image' style="background: url(<%= photo.try(:image).url(:large) %>)">
               </div>
             </div>
           <% end %>
