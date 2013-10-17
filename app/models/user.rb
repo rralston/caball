@@ -240,7 +240,7 @@ class User < ActiveRecord::Base
       'Light Dept.'                                       => 'Light',
       'Sound/Audio Dept.'                                 => 'Sound',
       'Directing'                                         => 'Directing',
-      'Pre Production - Casting Director, Location'       => 'Pre Production', 
+      'Pre Production - Casting Director, Location'       => 'Pre-Production', 
       'Production - Producer, Assistant'                  => 'Production', 
       'Post-Pro - Editor, Effects'                        => 'Post-Pro', 
       'Set - Hair, Makeup, Construction'                  => 'Set', 
