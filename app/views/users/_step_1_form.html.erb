@@ -291,13 +291,13 @@
           <% else %>
             <%= f.submit "Next Step", :class=>'step_1_submit' %>
           <% end %>
-          <%= f.submit "Finish! Go to my profile", :class=>'skip step_1_submit' %>
+          <%= f.submit "Finish! Go to my Dashboard", :class=>'skip step_1_submit' %>
         </div>
         
         <% if current_user.only_fan? %>
           <span id='step_1_submit_hint'>Fans need only one step! You are ready to explore Filmzu!</span>
         <% else %>
-          <span id='step_1_submit_hint'>You are almost done! Go to the next page to enter the fun stuff! Or you can check out profile and enter the rest of the stuff later</span>
+          <span id='step_1_submit_hint'>You are almost done! Go to the next page to enter the fun stuff! Or you can check out your Dashboard and enter the rest of the stuff later</span>
         <% end %>
       </div>
     </div>

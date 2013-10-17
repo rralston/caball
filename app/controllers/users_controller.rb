@@ -312,7 +312,7 @@ class UsersController < ApplicationController
   end
 
   def profile
-    redirect_to user_path(current_user)
+    redirect_to dashboard_url
   end
 
   def dashboard
