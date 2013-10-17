@@ -160,6 +160,11 @@ class UsersController < ApplicationController
     end
   end
 
+
+  def step_1_reload
+    render 'users/_step_1_form', :layout => false
+  end
+
   def step_2
     if current_user.update_attributes(params[:user])
       render 'users/step_3_form', :layout => false

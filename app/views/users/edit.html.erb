@@ -9,7 +9,7 @@
         <div id="wrapper" class="row-fluid">
           <div id="navigation" style="display:none;">
             <ul>
-              <li class="selected first_step">
+              <li class="selected first_step step_1_reload_button">
                 <a href="#" class='step_1_nav' data-stepIndex="1">
                   <span class='step_count light'>01</span>
                   <span class='step_text'>General Info</span>
@@ -31,7 +31,7 @@
             <div class="clearfix"></div>
           </div>
           <div id='steps'>
-            <fieldset class="step info">
+            <fieldset class="step info" id='step_1_form_container'>
               <%= render :partial => 'step_1_form' %>
             </fieldset> 
 
