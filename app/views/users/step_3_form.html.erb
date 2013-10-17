@@ -91,7 +91,7 @@
       <%= f.fields_for :other_videos, Video.new, :child_index => 'replace_this' do |video| %>
         
         <div class="control-group">
-          <h3>Video</h3>      
+          <%= video.label "Video", :class => 'control-label' %>
           
           <div class="controls">
             <label>Url</label>
