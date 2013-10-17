@@ -63,7 +63,7 @@
         </div>
       </div>
     </div>
-
+		<div class='all-profo-container'>
     <%= f.fields_for :profile, current_user.profile || current_user.build_profile  do |profile|  %>
       <div class="control-group">
         <%= profile.label "Profile Picture", :class => 'control-label' %>
@@ -111,7 +111,7 @@
 
       </div>
     <%end%>
-
+		</div>
     <div class='all-roles-container'>
 
       <div class="control-group">
