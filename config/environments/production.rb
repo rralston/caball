@@ -1,9 +1,9 @@
 Caball::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
-  # config.middleware.use Rack::Auth::Basic, "Beta Access" do |username, password|
-  #   'secret' == password
-  # end
+  config.middleware.use Rack::Auth::Basic, "Beta Access" do |username, password|
+    'secret' == password
+  end
   
   # Code is not reloaded between requests
   config.cache_classes = true
@@ -51,14 +51,13 @@ Caball::Application.configure do
   config.action_controller.asset_host = "d1cujs8uckytjb.cloudfront.net"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( admin/admin.css admin/*.js )
-
-  config.assets.precompile += %w( conversations/new.css users/users_manifest.js dashboard/dashboard.css dashboard/dashboard_manifest.js users/users.js signup.css signin.css
-                                events_manifest.js events/manifest.css events/event_index.css events/events_manifest.js home_page.css 
-                                users/user_index.css application.js 
+  config.assets.precompile += %w( admin/admin.css admin/*.js conversations/new.css users/users_manifest.js dashboard/dashboard.css 
+                                dashboard/dashboard_manifest.js users/users.js signup.css signin.css
+                                events_manifest.js events/manifest.css events/event_index.css events/events_manifest.js 
+                                home_page.css users/user_index.css application.js 
                                 projects/projects_manifest.js projects/manifest.css users/user_search.js projects/project_index.css 
                                 static_pages/our_story.css 
-                                users/users_manifest.js users/manifest.css users/show.css contact.js glossary.js static_pages/labs.css)
+                                users/users_manifest.js users/manifest.css users/show.css contact.js glossary.js static_pages/labs.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
