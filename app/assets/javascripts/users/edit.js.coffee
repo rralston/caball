@@ -268,6 +268,20 @@ $(document).ready ()->
     $('#steps').stop().animate { marginLeft: '-' + widths[current-1] + 'px'}, 500, () ->
       $('#formElem').children(':nth-child('+ parseInt(current) +')').find(':input:first').focus();  
 
+
+  $('body').on 'click', '.step_1_reload_button', (event) -> 
+
+    $('#step_1_form_container').html('<div class="text-center">Please wait while we refresh..</div>');
+
+    $.ajax
+      url: '/users/step_1_reload'
+      success: (data) ->
+        $('#step_1_form_container').html(data)
+        app.fn.adjust_slider_height()
+        # initialize numerous js
+        Users.Edit.init_numerous()
+
+
   $(document).on 'FanSelection', (event) ->
     if $('.user-talent').size() > 1
       # remove the role if second one is already saved.

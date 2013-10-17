@@ -129,22 +129,24 @@
             <%= user_cover_photo.hidden_field :crop_y, :class => 'crop_y' %>
             <%= user_cover_photo.hidden_field :crop_w, :class => 'crop_w' %>
             <%= user_cover_photo.hidden_field :crop_h, :class => 'crop_h' %>
-            <div >
+
               <!-- if image exits, allow to change it -->
               <% if user_cover_photo.object.image.present? %>
                 <div class="controls image_container">
                   <img src=<%= user_cover_photo.object.image.url(:medium) %> class="image_preview_container img-rounded" >
                 </div>
 
-                <div class='controls' style='margin-top: 15px;'>
-                  <%= user_cover_photo.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
-
-                  <a href='#' class='remove_entity' data-toRemove='.cover-photo-container' style='margin-top: 10px;'>Remove cover photo</a>
+                <div class='controls' style='margin-top: 5px; white-space: nowrap;'>
+                  <label class="checkbox">
+                      <%= user_cover_photo.check_box :_destroy, :class=>'destroy_checkbox checkbox' %> Delete cover photo
+                  </label>
                 </div>
                   
                 <div class='controls image_btns'>
                   <a href="" class='btn crop_image pull-left' data-orgImgUrl='<%= user_cover_photo.object.image.url %>' data-orgWidth='<%= user_cover_photo.object.original_width %>' data-orgHeight='<%= user_cover_photo.object.original_height %>' data-prevImgUrl='<%= user_cover_photo.object.image.url(:original) %>'  style='display: inline'>Crop</a>
                 </div>
+
+
               <% else %>
                 <!-- just keep the container there in case to preview if user uploads an image. -->
                 <div class="controls image_container" style='display:none;'>
@@ -154,7 +156,6 @@
                   <a href="" class='btn crop_image pull-left' data-imgUrl=''>Crop</a>
                 </div>
               <% end %>
-            </div>
 
             <div class='controls upload_progress'>
               Upload Progress:
