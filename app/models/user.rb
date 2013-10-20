@@ -318,10 +318,10 @@ class User < ActiveRecord::Base
                             "Post- production Supervisor" => "Post- production Supervisor"
                           }, 
       'Business'       => {
-                            "Talent Agent"     => "Talent Agent",
                             "Manager"          => "Manager",
                             "Lawyer"           => "Lawyer",
-                            "Studio Executive" => "Studio Executive"
+                            "Studio Executive" => "Studio Executive",
+                            "Investment"        => "Investment"
                           }, 
       'Writer'         => {
                             "Screenwriter"        => "Screenwriter",
