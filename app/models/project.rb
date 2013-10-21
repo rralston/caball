@@ -494,7 +494,7 @@ class Project < ActiveRecord::Base
       'Light Dept.'                                       => 'Light',
       'Sound/Audio Dept.'                                 => 'Sound',
       'Directing'                                         => 'Directing',
-      'Pre Production - Casting Director, Location'       => 'Pre Production', 
+      'Pre Production - Casting Director, Location'       => 'Pre-Production', 
       'Production - Producer, Assistant'                  => 'Production', 
       'Post-Pro - Editor, Effects'                        => 'Post-Pro', 
       'Set - Hair, Makeup, Construction'                  => 'Set', 
@@ -598,7 +598,7 @@ class Project < ActiveRecord::Base
                             "Writers' Assistants" => "Writers' Assistants",
                             "Formatter/Proofer"   => "Formatter/Proofer"
                           }, 
-      'Pre Production' => {
+      'Pre-Production' => {
                             "Location Scout"     => "Location Scout",
                             "Location Manager"   => "Location Manager",
                             "Location Assistant" => "Location Assistant",

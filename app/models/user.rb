@@ -330,7 +330,7 @@ class User < ActiveRecord::Base
                             "Writers' Assistants" => "Writers' Assistants",
                             "Formatter/Proofer"   => "Formatter/Proofer"
                           }, 
-      'Pre Production' => {
+      'Pre-Production' => {
                             "Location Scout"     => "Location Scout",
                             "Location Manager"   => "Location Manager",
                             "Location Assistant" => "Location Assistant",
