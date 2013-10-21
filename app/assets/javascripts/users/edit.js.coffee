@@ -217,7 +217,7 @@ $(document).ready ()->
             if data.message.match(/Profile image/)
               $('.all-profo-container').addClass('have_error')
               $("html, body").animate({ scrollTop: $('.all-profo-container').position().top }, "slow");
-              btn.val('Next Step')
+              btn.val('Finish! Go to my Dashboard')
               btn.attr('disabled', false)
 
           if !btn.hasClass('skip')
