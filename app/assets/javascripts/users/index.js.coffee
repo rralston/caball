@@ -7,7 +7,7 @@ $(document).ready ()->
     #form_data = app.fn.serializeJSON(form)
     _.extend(data, form_data)
 
-    if data.distance != ''
+    if typeof data.distance != 'undefined' && data.distance != ''
       data['location'] = app.current_user_location
 
     # if something was searched in the search bar previously, preserve it and apply filters on it.
