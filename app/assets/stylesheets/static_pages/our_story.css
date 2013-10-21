@@ -360,6 +360,10 @@ font-weight:700;
 #featuredpeople{
   background:url('/assets/featuredpplbg.png');
 }
+#featuredpeople  .detailinfo {
+  padding-top:50px!important;
+  padding-bottom:70px!important;
+}
 
 #featuredpeople .featuretext{
   color:#edfdfb;
@@ -425,8 +429,8 @@ font-weight:700;
 /* storiesinfo ends-------=============== */
 /* contentcreator starts-------=============== */
 #contentcreator  .detailinfo {
-  padding-top:150px!important;
-  padding-bottom:150px!important;
+  padding-top:80px!important;
+  padding-bottom:80px!important;
 }
 
 #contentcreator  .dtlinfoh{
