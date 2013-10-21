@@ -68,13 +68,21 @@
       <div class="control-group">
         <%= profile.label "Profile Picture", :class => 'control-label' %>
 
+				<div class="controls clearfix">
+          <%= profile.file_field :image %>
+          <!-- id is updated when the image is created and uploaded  -->
+          <%= profile.hidden_field :id, :class => 'photo_id_div' %>
+        </div>
+
         <div class='controls'>
           <%= profile.hidden_field :crop_x, :class => 'crop_x' %>
           <%= profile.hidden_field :crop_y, :class => 'crop_y' %>
           <%= profile.hidden_field :crop_w, :class => 'crop_w' %>
           <%= profile.hidden_field :crop_h, :class => 'crop_h' %>
         </div>
-        
+
+  
+
         <% if current_user.profile.image.present? %>
           <div class="controls image_container">
             <%= image_tag current_user.profile.image.url(:medium), {:class => "image_preview_container img-polaroid"} %>
@@ -96,12 +104,6 @@
 
         <% end %>
           
-        <div class="controls clearfix">
-          <%= profile.file_field :image %>
-          <!-- id is updated when the image is created and uploaded  -->
-          <%= profile.hidden_field :id, :class => 'photo_id_div' %>
-        </div>
-
         <div class='controls upload_progress'>
           Upload Progress:
           <div class='progress'>
