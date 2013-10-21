@@ -153,7 +153,7 @@ filter: gray; /* IE6-9 */
 /*attract starts-------=============== */
 /*attractinfo starts-------=============== */
   .attractinfowrap{
-    background:url('/assets/attractinfobg.jpg');
+	background:url('/assets/detailbg.jpg');
     clear:both;
     padding-top:40px;
     color:white;
@@ -445,9 +445,6 @@ font-weight:700;
 
 /* worldmap start-------=============== */
 #worldmap .featured{
-  background:url('/assets/map.png') no-repeat;
-  padding-top:100px;
-  padding-bottom:120px;
   background-size:contain;
   color:#cccccc;
 }
@@ -467,13 +464,13 @@ font-weight:700;
 
 
 #worldmap .featuretext{
-  color:#cccccc;
-  text-shadow:1px -1px 1px rgb(0,0,0);
+  color:#d3d3d3 !important;
+  text-shadow:1px -1px 1px rgb(0,0,0) !important;
 }
 
 #worldmap .featureh{
-  color:#b8dcf4;
-  text-shadow:1px -1px 1px rgb(0,0,0);
+  color:#d3d3d3 !important;
+  text-shadow:1px -1px 1px rgb(0,0,0) !important;
 }
 /* worlmap ends-------=============== */
 
@@ -657,7 +654,7 @@ font-weight:700;
 /* twit ends-------=============== */
 #twitfb{
   background:url('/assets/twitfbbg.png');
-  
+  padding-top:30px;
 }
 
 #twitfb .featureh{
