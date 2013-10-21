@@ -185,7 +185,7 @@ class UsersController < ApplicationController
     # TODO: try to send only required parameters from client side if possible.
 
     if params['user']['profile_attributes'].present? and params['user']['profile_attributes']['image'].present?
-      current_user.profile = Profile.new if current_user.profile.nil?
+      current_user.build_profile if current_user.profile.nil?
 
       current_user.profile.update_attributes(params['user']['profile_attributes'])
       photo_object = current_user.profile
