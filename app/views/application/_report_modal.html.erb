@@ -9,10 +9,10 @@
     <h3><span>Report <%= entity.class.name.camelize %></span></h3>
   </div>
   <div class="modal-body">
-    Are you sure the you want to report this <%= entity.class.name.camelize %>? 
+    Are you sure you want to report this <%= entity.class.name.camelize(:lower) %>? 
     <br/>
     <br/>
-    Please provide details why you have reported this <%= entity.class.name.camelize %>.
+    Please provide details why you have reported this <%= entity.class.name.camelize(:lower) %>.
     <br/>
     <textarea id='report_entity_reason' style='width: 350px;'></textarea>
   </div>
