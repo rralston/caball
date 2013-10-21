@@ -5,7 +5,7 @@ class Profile < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
   after_update :reprocess_profile, :if => :cropping?
-  # validates_presence_of :image, :message => 'is required', :if => :image_present?
+  validates_presence_of :image, :message => 'is required'
 
   before_save :save_original_size, :if => :image_object_present?
   

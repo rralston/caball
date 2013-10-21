@@ -81,8 +81,6 @@
           <%= profile.hidden_field :crop_h, :class => 'crop_h' %>
         </div>
 
-  
-
         <% if current_user.profile.image.present? %>
           <div class="controls image_container">
             <%= image_tag current_user.profile.image.url(:medium), {:class => "image_preview_container img-polaroid"} %>
