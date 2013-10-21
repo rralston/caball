@@ -16,7 +16,7 @@
     <div class="control-group">
       <div class="controls">
         <%= talent.check_box :_destroy, :class=>'destroy_checkbox', :style => 'display:none;' %>
-        <a href='#' class='remove_entity' data-toRemove='.user-talent'>Remove this role</a>
+        <!-- <a href='#' class='remove_entity' data-toRemove='.user-talent'>Remove this role</a> -->
       </div>    
     </div>
   
@@ -58,12 +58,12 @@
         </div>
       </div>
 
-      <div class="control-group">
+      <!-- <div class="control-group">
         <div class="controls">
           <%= c.label "Languages" %>
           <%= c.select(:language, options_for_select(Characteristics.languages, c.object.language)) %>
         </div>
-      </div>
+      </div> -->
 
 
       <% if false %> <!-- Exclude Fields -->
