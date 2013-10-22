@@ -221,7 +221,45 @@
                         </div>
 
                         <div class="modal-body">
-                          <%= simple_format role.description %>
+                          <%= simple_format role.description %> 
+													
+													<!-- Special Cast Area for Modal Begins -->
+													<br>
+													<% if role.name == 'Cast' %>
+													<h3>Cast Profile</h3>
+													<br>
+													<%= image_tag "role-#{role.gender}-default.png", :class => 'default-role-pic', :align => 'left', :style => "margin: 50px;" %>	
+													<div class='content light'>
+
+								            <% if role.gender.present? %>
+								              Sex: <%=  role.gender.camelize %><br/>
+								            <% end %>
+
+								             <% if role.height.present? %>
+								                Height: <%=  role.height.camelize %><br/>
+								             <% end %>
+
+								             <% if role.ethnicity.present? %>
+								                Ethnicity: <%=  role.ethnicity.camelize %><br/>
+								             <% end %>
+
+								             <% if role.build.present? %>
+								                Build: <%=  role.build %><br/>
+								             <% end %>
+
+								             <% if role.haircolor.present? %>
+								                Hair Color: <%=  role.haircolor.camelize %><br/>
+								             <% end %>
+
+								             <% if role.age.present? %>
+								                Age: <%=  role.age.camelize %><br/>
+								             <% end %>
+													<br>
+													</div>
+										
+													<% end %>
+													<!-- Special Cast Area for Modal Ends -->
+													
 
                           <% if current_user %>
                            <%= link_to 'Apply', new_role_application_path(:role_id => role.id), class: "btn btn-small btn-success" %>
