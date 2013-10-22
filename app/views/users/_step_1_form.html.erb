@@ -118,7 +118,7 @@
       <div class="control-group">
         <label class='control-label'>Your Positions*</label>
         <div class='controls'>
-          <!-- don't allow user to add more than 3 talents -->
+          <!-- don't allow user to add more than 2 talents -->
           <!-- if the user's primary role is Fan, don't show option to add more roles -->
           <% if current_user.talents.count < 2 and current_user.talent_names.try(:first) != 'Fan' %>
             <%= link_to 'Add a Position!', '#', :class => 'btn btn-success', :id => 'add-to-talents-list', :title => "Select a max of two positions", :data => {:toggle => 'tooltip', :placement => 'right'} %>
