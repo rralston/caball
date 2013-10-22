@@ -121,15 +121,9 @@
           <!-- don't allow user to add more than 3 talents -->
           <!-- if the user's primary role is Fan, don't show option to add more roles -->
           <% if current_user.talents.count < 2 and current_user.talent_names.try(:first) != 'Fan' %>
-            <%= link_to 'Add a Position!', '#', :class => 'btn btn-success', :id => 'add-to-talents-list' %>
-						<div class='div_hint'>
-		          Select up to a maximum of two positions.
-		        </div>
+            <%= link_to 'Add a Position!', '#', :class => 'btn btn-success', :id => 'add-to-talents-list', :title => "Select a max of two positions", :data => {:toggle => 'tooltip', :placement => 'right'} %>
           <% else %>
-            <%= link_to 'Add another position', '#', :class => 'btn btn-success', :id => 'add-to-talents-list', :style => 'display:none;' %>
-						<div class='div_hint'>
-		          Select up to a maximum of two positions.
-		        </div>
+            <%= link_to 'Add another position', '#', :class => 'btn btn-success', :id => 'add-to-talents-list', :style => 'display:none;', :title => "Select a max of two positions", :data => {:toggle => 'tooltip', :placement => 'right'} %>
           <% end %>
         </div>
       </div>
