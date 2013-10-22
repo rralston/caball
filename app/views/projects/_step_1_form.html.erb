@@ -1,0 +1,215 @@
+ 
+<script>
+	$(function() {
+		app.fn.initialize_date_picker('.date_field')
+	});
+</script>
+
+
+<% @project.errors.full_messages.each do |error| %>
+    <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <p><%= error %></p>
+    </div>
+<% end %>
+  
+
+
+<%= form_for @project, :validate => true, :html => { :class => 'form-horizontal project-save-form step_1_form'} do |p| %>
+
+
+  <div class="span12">
+
+    <% if p.object.id.present? %>
+      <input type='hidden' name='project_id' value="<%= p.object.id %>">
+    <% end %>
+
+    <%= p.fields_for :photos, @project.photos.first || Photo.new, :validate => true do |photo| %>
+      <div class='control-group '>
+
+        <div class='row'>
+          <div class='span5'>
+            <%= photo.hidden_field :crop_x, :class => 'crop_x' %>
+            <%= photo.hidden_field :crop_y, :class => 'crop_y' %>
+            <%= photo.hidden_field :crop_w, :class => 'crop_w' %>
+            <%= photo.hidden_field :crop_h, :class => 'crop_h' %>
+            <label class="control-label">Project Image</label>
+            <div class="controls">
+              <div class='uploader_btn'>
+                <div class='main_txt'>Choose an image from your computer.</div>
+                <div class='format_txt'> <span class='before_dot'>JPEG, PNG or BMP</span> 10MB File limit</div>
+                <div class='size_txt'><span class='before_dot'>Atleast 640x480</span> 4:3 aspect ratio</div>
+                <%= photo.file_field :image, :validate => { :presence => false } %>
+              </div>
+
+              <div class='div_hint'>
+                This is one of the first things people see so pick a good one
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class='row'>
+          <div class="span3">
+            <div class='controls upload_progress'>
+              Upload Progress:
+              <div class='progress'>
+                <div class='bar' style='width: 0%'></div>
+              </div>
+            </div>
+            <% if photo.object.image.present? %>
+              <div class="controls image_container">
+                <img src='<%= photo.object.image.url(:medium) %>' class="image_preview_container img-rounded">
+              </div>
+
+              <div class='controls image_btns'>
+                <a href="" class='btn crop_image pull-left' data-orgImgUrl='<%= photo.object.image.url %>' data-orgWidth='<%= photo.object.original_width %>' data-orgHeight='<%= photo.object.original_height %>' data-prevImgUrl='<%= photo.object.image.url(:original) %>'  style='display: inline'>Crop</a>
+              </div>
+            <% else %>
+              <div class="controls image_container" style='display:none;'>
+                <img src='' class="image_preview_container img-rounded" style='display:none;'>
+              </div>
+              <div class='controls image_btns'>
+                <a href="" class='btn crop_image pull-left' data-imgUrl=''>Crop</a>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class='controls'>
+          <!-- url is updated when the image is created and uploaded  -->
+          <%= photo.hidden_field :remote_image_url, :class => 'photo_url_div' %>
+        </div>
+
+      </div>
+      
+    <% end %>
+
+
+    <div class="control-group">
+    <%= p.label :title, :class => 'control-label' %>
+      <div class="controls">
+        <%= p.text_field :title, :class => 'text_field required', "data-entity" => 'Project', "data-entityid" => p.object.try(:id) %>
+        <div class='div_hint'>
+          The best titles are short, simple and to the point
+        </div>
+
+        <div class='url_name_summary'>
+          <b>Project url will be</b>: filmzu.com/projects/<span class='url_param'></span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="control-group">
+      <%= p.label :description, :class => 'control-label' %>
+      <div class="controls">
+        <%= p.text_area :description, :class => 'textarea', :rows => "5" %>
+        <div class='div_hint'>
+          If you had to describe your project in 1-2 sentences, what would you say?
+        </div>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= p.label :headline, "Your quote", :class => 'control-label' %>
+      <div class="controls">
+        <%= p.text_area :headline, :class => 'textarea hinted', :rows => "5", "data-hint" => 'Here\'s a sample: "Once more into the fray, into the last good fight I\'ll ever know. Live and die on this day, Live and die on this day" Liam Neeson, The Grey' %> 
+        <div class='div_hint'>
+          Have an incredible line from script? Or do you want say something what will be highlighted? Here is the place to say it.
+        </div>
+      </div>
+    </div>
+
+
+    <div class="control-group">
+    <%= p.label :location, :class => 'control-label' %>
+      <div class="controls">
+        <%= p.text_field :location, :class => 'text_field' %>
+        <div class='div_hint'>
+          This is where your primary shooting will take place.
+        </div>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class='control-label'>
+        Important Dates
+      </label>
+    </div>
+
+    <div class="dates-container">
+      
+      <%= p.fields_for :project_dates do |date| %>
+        
+          <%= render :partial => 'projects/imp_dates_input', :locals => { :date => date } %>
+        
+      <% end %>
+
+      <div id='fields-for-project_dates-list' class='numerous'>
+        <%= p.fields_for :project_dates, ImportantDate.new, :child_index => 'replace_this' do |date| %>
+          <%= render :partial => 'projects/imp_dates_input', :locals => { :date => date } %>
+          <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+        <% end %>
+        
+      </div>
+
+      <div id='project_dates-list'></div>
+      
+      <div class="control-group">
+        <div class='controls'>
+          <%= link_to 'Add an important Date', '#', :id => 'add-to-project_dates-list' %>
+          <div class='div_hint'>
+            3 Dates Max
+          </div> 
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class='span12'>
+      <div class='text-center form_footer'>
+        <div class='links'>
+          <%= p.submit "Next Step", :class=>'step_1_submit' %>
+        </div>
+        Nice job so far, in the next step you'll tell people all about the specific aspects of your project
+      </div>
+    </div>
+
+  </div>
+
+
+
+<% end %>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    app.project_genres = <%=raw Project.genres.keys %>
+
+    $('#project_genre').tagit({
+      sortable: true,
+      tagSource: ['munna','vishnu'],
+      allowNewTags: false,
+      triggerKeys: ['comma', 'tab', 'space', 'enter'],
+      tagsChanged: function(tagValue, action, element){
+        tag_value_array = _.map($('#project_genre').tagit('tags'), function(tag){
+            tag.value  
+        })  
+        $('#project_genre_list').val(tag_value_array.toString())
+      }
+    });
+
+    app.types_costs = <%= raw User.types_costs.to_json() %>
+
+    // update the pay rate summary for the role when the select box value is changed.
+    $('body').on('change', '.talent-select select', function(event){
+      selected_talent = $(event.target).val()
+      cost = app.types_costs[selected_talent]
+      $(event.target).parent().find('.cost').html(cost)
+    });  
+    
+      
+  })
+</script>

@@ -1,14 +1,46 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html  lang="en"> 
+<link rel="shortcut icon" href="/favicon.ico" />
+
 <head>
-  <title>Caball</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
+  <title>Filmzu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <%= stylesheet_link_tag "application", :media => "all" %>
+
+  <script type="text/javascript" src="//use.typekit.net/bej5twh.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body>
 
-<%= yield %>
+<body class="theme" data-controller="<%= controller_name %>" data-action="<%= action_name %>">
+    
+  <div id="wrap">
+  <%= render 'header-new' %>
+    <div id="<%= controller_name %>-<%= action_name %>" role="main" class="contentwrap">
+      <%= yield %>
+    </div>
+  </div>
+
+  <%= render 'footer' %>
+
+  <div class='page_main_loading_overlay text-center'>
+    <div class='page_main_loading_display text-center'>
+      Loading...
+      <br/>
+      <img src="/assets/ajax-loader-bar.gif">
+    </div>
+  </div>
+
 
 </body>
+<%= google_analytics_js 'UA-38653918-1' %>
 </html>

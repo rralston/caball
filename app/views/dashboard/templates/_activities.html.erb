@@ -1,0 +1,236 @@
+<script type="script/template" id='blog_activity_template'>
+  
+  <div class='activity_owner'>
+    <div class="img-circle user-circle-image" style="background: url(<%%= owner.profile_thumb %>)">
+    </div>
+  </div>
+
+  <div class='activity_summary light'>
+    <a class='regular' href='/users/<%%= owner.url_param %>'> <%%= owner.name %> </a>
+    <%% if(key == 'blog.create'){ %>
+      <%= render :partial => 'public_activity/blog/create' %>
+    <%% }else if(key == 'blog.update'){ %>
+      <%= render :partial => 'public_activity/blog/update' %>
+    <%% } %>
+  </div>
+
+  <div class='activity_main'>
+    <%%= trackable.content %>
+  </div>
+
+  <%% if (trackable.photo != null) { %>
+    <div class='comment-img'>
+      <img src="<%%= trackable.photo.image.large.url %>">
+    </div>
+  <%% } %>
+
+  <%% if (trackable.video != null && trackable.video.provider != null) { %>
+    <div class='comment-video'>
+      <%%= trackable.video.embed_code %>
+    </div>
+  <%% } %>
+
+  <div class="row comment-actions">
+    <div class='pull-left time-ago'>
+      <%%= jQuery.timeago(created_at) %>
+    </div>
+    <div class="pull-right like-comment likes action-div">
+      <div class="pull-right likes-count"><%%= trackable.likes_count %></div>
+      <div class="heart-blue <%% if(trackable.user_liked) print('active') %> pull-right"> </div>        
+    </div>
+  </div>
+
+</script>
+
+<script type="script/template" id='comment_activity_template'>
+
+  <div class='activity_owner'>
+    <div class="img-circle user-circle-image" style="background: url(<%%= owner.profile_thumb %>)">
+    </div>
+  </div>
+
+  <div class='activity_summary light'>
+    <a class='regular' href='/users/<%%= owner.url_param %>'> <%%= owner.name %> </a>
+    <%% if(key == 'comment.create'){ %>
+      posted a <%%= trackable.commentable_type %> update to
+      <a href='<%%= trackable.commentable_type.toLowerCase() %>s/<%%= trackable.commentable.id %>'> <%%= trackable.commentable.title %> </a>
+    <%% }else if(key == 'comment.update'){ %>
+      edited a <%%= trackable.commentable_type %> update to
+      <a href='<%%= trackable.commentable_type.toLowerCase() %>s/<%%= trackable.commentable.id %>'> <%%= trackable.commentable.title %> </a>
+    <%% } %>
+    <br/>
+  </div>
+
+  <div class='activity_main'>
+    <%%= trackable.content %>
+  </div>
+
+  <%% if (trackable.photo != null) { %>
+    <div class='comment-img'>
+      <img src="<%%= trackable.photo.image.large.url %>">
+    </div>
+  <%% } %>
+
+  <%% if (trackable.video != null && trackable.video.provider != null) { %>
+    <div class='comment-video'>
+      <%%= trackable.video.embed_code %>
+    </div>
+  <%% } %>
+  
+
+  <div class="row comment-actions">
+    <div class='pull-left time-ago'>
+      <%%= jQuery.timeago(created_at) %>
+    </div>
+    <div class="pull-right like-comment likes action-div">
+      <div class="pull-right likes-count"><%%= trackable.likes_count %></div>
+      <div class="heart-blue <%% if(trackable.user_liked) print('active') %> pull-right"> </div>
+    </div>
+  </div>
+
+</script>
+
+<script type="script/template" id='project_activity_template'>
+
+  <div class='activity_owner'>
+    <div class="img-circle user-circle-image" style="background: url(<%%= owner.profile_thumb %>)">
+    </div>
+  </div>
+
+  <div class='activity_summary light'>
+    <a class='regular' href='/users/<%%= owner.url_param %>'> <%%= owner.name %> </a>
+    <%% if(key == 'project.create'){ %>
+      created a new Project
+    <%% }else if(key == 'project.update'){ %>
+      updated the Project
+    <%% } %>
+  </div>
+
+  <div class='activity_main'>
+    <div class='project-title'>
+      <a href='projects/<%%= trackable.id %>'> <%%= trackable.title %> </a>
+    </div>
+    
+    <div class='project-desc'>
+      <%%= trackable.description %>
+    </div>
+  </div>
+
+  <div class="row project-actions">
+    <div class='pull-left time-ago'>
+      <%%= jQuery.timeago(created_at) %>
+    </div>
+    <div class="pull-right like-project likes action-div">
+      <div class="pull-right likes-count"><%%= trackable.likes_count %></div>
+      <div class="heart-blue <%% if(trackable.user_liked) print('active') %> pull-right"> </div>        
+    </div>
+  </div>
+  
+
+</script>
+
+
+<script type="script/template" id='event_activity_template'>
+  
+  <div class='activity_owner'>
+    <div class="img-circle user-circle-image" style="background: url(<%%= owner.profile_thumb %>)">
+    </div>
+  </div>
+
+  <div class='activity_summary light'>
+    <a class='regular' href='/users/<%%= owner.url_param %>'> <%%= owner.name %> </a>
+    <%% if(key == 'event.create'){ %>
+      created a new Event
+    <%% }else if(key == 'event.update'){ %>
+      updated the Event
+    <%% } %>
+  </div>
+  <div class='activity_main'>
+    <div class='event-title'>
+      <a href='events/<%%= trackable.url_param %>'> <%%= trackable.title %> </a>
+    </div>
+    
+    <div class='event-desc'>
+      <%%= trackable.description %>
+    </div>
+  </div>
+
+  <div class="row event-actions">
+    <div class='pull-left time-ago'>
+      <%%= jQuery.timeago(created_at) %>
+    </div>
+    <div class="pull-right like-event likes action-div">
+      <div class="pull-right likes-count"><%%= trackable.likes_count %></div>
+      <div class="heart-blue <%% if(trackable.user_liked) print('active') %> pull-right"> </div>        
+    </div>
+  </div>
+  
+
+</script>
+
+<script type="script/template" id='roleapplication_activity_template'>
+  
+  <div class='activity_owner'>
+    <div class="img-circle user-circle-image" style="background: url(<%%= owner.profile_thumb %>)">
+    </div>
+  </div>
+
+  <div class='activity_summary light'>
+    <a class='regular' href='/users/<%%= owner.url_param %>'> <%%= owner.name %> </a>
+    
+    <%% if(key == 'role_application.create'){ %>
+      has applied for the <%%= trackable.role.name %> (<%%= trackable.role.subrole %>) role in <a href='projects/<%%= trackable.role.project.id %>'> <%%= trackable.role.project.title %> </a>
+    <%% } %>
+
+  </div>
+
+  <div class='activity_main'>
+    <%%= trackable.message %>
+  </div>
+
+  <div class="row comment-actions">
+    
+  </div>
+
+</script>
+
+
+<script type="script/template" id='endorsement_activity_template'>
+
+  <div class='activity_owner'>
+    <div class="img-circle user-circle-image" style="background: url(<%%= owner.profile_thumb %>)">
+    </div>
+  </div>
+
+  <div class='activity_summary light'>
+    <a class='regular' href='/users/<%%= owner.url_param %>'> <%%= owner.name %> </a>
+    <%% if(key == 'endorsement.create'){ %>
+      has endrosed <a href='users/<%%= trackable.receiver.id %>'> <%%= trackable.receiver.name %> </a>
+    <%% } %>
+
+  </div>
+
+
+  <div class='activity_main'>
+    <%%= trackable.message %>
+
+    <%% if( typeof trackable.expertise != 'undefined' && trackable.expertise != null){ %>
+      <div class="expertise light">
+        SKILLS &amp; EXPERTISE: 
+        <%% _.each(trackable.expertise.split(','), function(skill){ %>    
+          <span class="badge">
+              <%%= skill %>
+          </span>
+        <%% }); %>
+      </div>
+    <%% } %>
+
+  </div>
+
+  <div class="row comment-actions">
+    <div class='pull-left time-ago'>
+      <%%= jQuery.timeago(created_at) %>
+    </div>
+  </div>
+
+</script>

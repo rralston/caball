@@ -1,0 +1,823 @@
+
+
+/* Edit Projects Page */
+
+#projects-new, #projects-edit {
+  
+  .edit-project {
+    
+    .step > .span12 {
+      padding: 20px;
+    }
+    
+    .details {
+      
+      .dates-container {
+        .control-group {
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  .has_errors{
+    border: 1px solid red;
+    color: red;
+  }
+  
+}
+
+	.go_back_btn { 
+		background-color: #d97735;
+		border: 0px;
+		padding: 5px;
+		margin-top: 10px;
+		color: #fff;
+}
+	.finish_project_btn { 
+		background-color: #d97735;
+		border: 0px;
+		padding: 5px;
+		margin-top: 10px;
+		color: #fff;
+		font-size: 24px;
+		line-height: 30px;
+}
+	.finish_project_btn:hover { 
+		color: #fff;
+}
+
+/* Projects Display Page */
+
+#projects-show {
+  
+  a, a:hover, a:focus, a:active, a:visited {
+    text-decoration: none;
+  }
+  
+  .page-header {
+ 
+    border-bottom: none;
+ 
+    h1 {
+      font-size: 4em;
+      color: #4c99c0;
+      margin-bottom: 20px;
+    }
+    
+    span {
+      font-size: 1.4em;
+    }
+    
+  }
+  
+  .follow-roles-bar {
+    background-color: @white;
+    border: solid 1px #ccc;
+    .box-shadow(0px 0px 12px 3px #ccc);
+  }
+  
+  .follow-container {
+    position: relative;
+    top: 10px;
+    left: 10px;
+    
+    .follow-button {
+      display: inline-block;
+      position: relative;
+      
+      a {
+        .border-radius(5px);
+        color: @white;
+        text-align: center;
+        padding:5px;
+        cursor: pointer;
+        color: @white;
+        background-color: #666;
+      }
+      
+      img {
+        width: 25px;
+      }
+    }
+    
+    .follow-count {
+      display: inline-block;
+      .border-radius(5px);
+      color: @white;
+      text-align: center;
+      padding: 2px 5px 1px 5px;
+      cursor: pointer;
+      color: @white;
+      background-color: #666;
+     
+    }
+    
+    .follow-button:hover {
+      background-color: darken(#666, 10%);
+    }
+  }
+  
+  .roles-buttons {
+    
+    vertical-align: middle;
+    line-height: 45px;
+    position: relative;
+    left: 0px;
+    
+    .navigate-button {
+      color: #4c99c0;
+      font-size: 1.5em;
+      vertical-align: middle;
+      cursor: pointer;
+    }
+    
+    .vrule {
+      border-left: 2px solid #ccc;
+      height: 15px;
+      margin: 0px 10px;
+      display: inline-block;
+      vertical-align: middle;
+      
+    }
+    
+  }
+
+  .roles-container {
+    background-color: @white;
+    .box-shadow(0px 0px 12px 3px #ccc);
+    margin-top: 20px;
+    
+    .roles-title {
+      float: left;
+      border: 1px solid #ccc;
+      background-color: #ededed;
+      width: 100px;
+      padding: 0 20px;
+      margin: 10px 0 50px 20px;
+      text-align: left;
+    }
+    
+    .roles-details {
+      
+      width: 90%;
+      margin-left: 5%;
+      background: url('debut_light.png');
+      
+      .role-box:nth-of-type(1) {
+        margin-top: -12px;
+      }
+      
+      .role-type-title {
+        background-color: #ccc;
+        width: 108%;
+        margin: 0 -4%;
+        
+        a, a:hover, a:focus, a:active {
+          text-decoration: none;
+        }
+        
+        h3 {
+          padding: 5px 25px;
+        }
+      }
+      
+      .role-type-content {
+        text-align: center;
+        position: relative;
+        width: 90%;
+        margin: 0 5%;
+        
+        .role:nth-of-type(4n + 1) {
+          margin-left: 0;
+          border-right: 2px solid #cbcbcb;
+        }
+        
+        .role:nth-of-type(4n + 2) {
+          border-right: 2px solid #cbcbcb;
+        }
+        
+        .role:nth-of-type(4n + 3) {
+          border-right: 2px solid #cbcbcb;
+        }
+        
+        .hrule {
+          position: relative;
+          left: 0;  
+          width: 100%;
+          border-bottom: 2px solid #cbcbcb;
+          border-top: none;
+          margin: 0;
+        }
+        
+        .role {
+          
+          margin-top: 10px;
+          margin-bottom: 10px;
+          
+          .role-title {
+            font-size: 16px;
+            margin: 10px 0 0 0;
+          }
+          
+          .info-button {
+            margin-bottom: 10px;
+          }
+          
+          img {
+            width: 80px;
+          }
+          
+        }
+      }
+      
+    }
+  }
+
+
+  
+  .producer-container {
+    margin-top: 20px;
+    padding-bottom: 10px;
+    background-color: @white;
+    .box-shadow(0px 0px 12px 3px #ccc);
+    position: relative;
+      
+    .producer-headline {
+      
+      margin-left: 60px;
+      
+      .vrule {
+        position: absolute;
+        border-left: 2px solid #ccc;
+        height: 80%;
+        left: 17%;
+        top: 10%;
+      }
+      
+      .producer-headline-title {
+        
+      }
+      
+      .producer-headline-content {
+        h3 {
+          line-height: 1.5em;
+        }
+      }
+    }
+    
+    .producer-profile {
+      
+      a {
+        text-decoration: none;
+      }
+      
+      .producer-title {
+        border: 1px solid #ccc;
+        background-color: #ededed;
+        width: 80px;
+        padding: 0 20px;
+        margin: 10px 0 0 20px;
+      }
+      
+      .producer-content {
+        position: relative;
+        width: 80%;
+        left: 10%;
+      }
+      
+      .producer-image {
+        /* Right now this is working with a fixed image size - we'll have to figure
+         * out how it works when we put in correct images 
+         */
+        width: 100px;
+        left: 50%;
+        position: relative;
+        margin-left: -50px;
+        margin-top: 10px;
+      }
+      
+      .producer-name {
+        text-align: center;
+      }
+     
+      .message-button {
+        background-color: #5a86de;
+        border: 1px solid #ccc;
+        .border-radius(5px);
+        text-decoration: none;
+        color: @white;
+        cursor: pointer;
+        font-weight: 400;
+        font-size: 1.4em;
+        padding: 5px;
+        
+      }
+      .message-button:hover {
+        background-color: darken(#5a86de, 10%);
+      }
+      
+      .message-row {
+        font-weight: bold;
+        
+        .message-span {
+          text-align: center;
+        }
+      }
+    }
+  }
+  
+  .about-content {
+    margin-top: 20px;
+    background-color: @white;
+    border: solid 1px #ccc;
+    .box-shadow(0px 0px 12px 3px #ccc);
+    
+    .video-stuff-container {
+      
+      margin-top: 40px;
+      
+      .headline-container {
+        border-top: 2px solid #ccc;
+        border-bottom: 2px solid #ccc;
+        text-align: center;
+        padding: 40px;
+        width: 75%;
+        position: relative;
+        left: 9%;
+        p {
+          font-size: 2em;
+          color: #4c99c0;
+        }
+      }
+    }
+    
+    .project-details {
+      
+      .details-well {
+        padding-top: 0px;
+        margin: 20px;
+      }
+      
+      .project-details-title {
+        font-size: 1.5em;
+        text-align: center;
+      }
+      
+      .project-details-content {
+        text-align: center;
+        
+        .project-detail {
+          margin: 0 10px;
+        }
+      }
+      
+      .shooting-locations-title {
+        margin-top: 10px;
+        font-size: 1.5em;
+        text-align: center;
+        border-top: 2px solid #ccc;
+      }
+      
+      .shooting-locations-content {
+        text-align: left;
+        .shooting-location {
+          margin-bottom: 10px;
+        }
+      }
+      
+      .open-roles-title {
+        font-size: 1.5em;
+        text-align: center;
+        border-top: 2px solid #ccc;
+      }
+      
+      .open-roles-content {
+        text-align: left;
+        .open-role {
+          margin-bottom: 5px;
+        }
+      }
+      
+      .dates-well {
+        margin: 20px;
+        
+        .dates-title {
+          font-weight: 1.5em;
+          text-align: center;
+          
+        }
+        
+        .date {
+          font-size: 1.2em;
+          text-align: left;
+        }
+      }
+    }
+    
+    .about-text-images {
+      margin-left: 0;
+      
+      .photo-gallery {
+        
+      }
+      
+      .about-text {
+        
+        p {
+          padding-left: 40px;
+        }
+      }
+    }
+  }
+  
+  #comments {
+    margin-top: 20px;
+    padding-bottom: 10px;
+    background-color: @white;
+    .box-shadow(0px 0px 7px 2px rgba(204, 204, 204, 0.3));
+    position: relative;
+    
+    .updates-title {
+      float: left;
+      border: 1px solid #ccc;
+      background-color: #ededed;
+      width: 100px;
+      padding: 0 20px;
+      margin: 10px 0 20px 0;
+      text-align: left;
+    }
+    
+    .blog-post:nth-of-type(2n + 1) {
+      margin-left: 0;
+    }
+    
+    .vertical-rule {
+      position: absolute;
+      top: 0;
+      left: 468px;
+      height: 95%;
+      width: 4px;
+    }
+    
+    .blog-circle {
+      position: absolute;
+      left: 50%;
+      margin-left: -19px;
+    }
+    
+    .blog-circle-top {
+      top: 0;
+    }
+    
+    .blog-post {
+      position: relative;
+      
+      .blog-arrow {
+        position: absolute;
+        top: 50px;
+      }
+      
+      .blog-arrow-left {
+        right: 0%;
+        margin-right: -14px;
+        border-left: solid 15px #e3e3e3;
+        border-top: solid 15px transparent;
+        border-bottom: solid 15px transparent;
+      }
+      
+      .blog-arrow-left:after{
+        content: '';
+        position: absolute;
+        top: -15px;
+        left: -16px;
+        width: 0;
+        height: 0;
+        border-left: 15px solid #f5f5f5;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+       }
+      
+      .blog-arrow-right {
+        left: 0%;
+        margin-left: -14px;
+        border-right: solid 15px #e3e3e3;
+        border-top: solid 15px transparent;
+        border-bottom: solid 15px transparent;
+      }
+      
+      .blog-arrow-right:after{
+        content: '';
+        position: absolute;
+        top: -15px;
+        left: 1px;
+        width: 0;
+        height: 0;
+        border-right: 15px solid #f5f5f5;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+       }
+    } 
+  }
+}
+.comment p {
+  margin-right: 500px;
+}
+.dates span {
+  margin-right: 10px;
+}
+
+.dates .label {
+  padding: 0.4em;
+}
+
+#projects-flow {
+  font-size: 8em;
+  
+  i {
+    position: absolute;
+    bottom: 52%;
+    left: 38%;
+    cursor: pointer;  
+  }
+}
+
+.roles {
+  margin-bottom: 20px;  
+}
+
+.roles .well {
+  display: block;
+  float: none;
+  margin: 0 auto;
+  height: auto;
+  width: 70%;
+  text-align: center;
+}
+
+.roles:nth-child(3n + 1) {
+  margin-left: 0;
+}
+
+.roles-row { 
+  margin-bottom: 30px;  
+}
+
+/* Projects Search/Index */
+
+#projects-index {
+  
+  .search-column {
+    
+    .projects-search-content {
+      background-color: #333;
+      padding: 10px;
+      border: 1px solid #ccc;
+      color: @white;
+      //.box-shadow(~'0px 7px 11px 1px #333333, 0px -2px 11px 1px #333333');
+      input {
+        width: 80%;
+      }
+      select {
+        width: 80%;
+      }
+    }
+    
+    .projects-search-title {
+      background-color: @white;
+      border: 1px solid #ccc;
+      margin-bottom: -1px;
+      text-align: center;
+      h3 {
+        margin: 0;
+        font-weight: 800;
+      }
+    }
+  }
+  
+  .projects-box:nth-child(3n + 1) {
+    margin-left: 0;
+  }
+  
+  .projects-description-more {
+    position: relative;
+    top: 5px;
+    text-align: right;
+  }
+  
+  .icon-search {
+    cursor: pointer;
+  }
+  
+  .projects-box {
+    
+    border: solid 1px #dadada;
+    background-color: @white;
+    padding: 0 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+    height: 372px;
+    
+    a, a:hover, a:active, a:visited {
+      text-decoration: none;
+      color: #333;
+    }
+    
+    .title {
+      height: 1.4em;
+      overflow: hidden;
+      font-size: 1.6em;
+      margin-top: 0px;
+      margin-bottom: 0px;
+      border-bottom: 1px solid #dadada;
+      display: inline-block;
+    }
+    
+    .location-name {
+      display: block;
+      height: 1em;
+      overflow: hidden;
+    }
+    
+    .producer-name {
+      display: block;
+      height: 1.5em;
+      overflow: hidden;
+      
+      a {
+        color: #4c99c0;
+        text-decoration: none;
+      }
+    }
+    
+    .thumbnail-container {
+      margin-top: 10px;
+    }
+    
+    .open-roles {
+      border: 1px solid #ccc;
+    }
+    
+    .role-circle-container {
+      display: inline-block;
+      position: relative;
+      margin: 10px 0 0 0;
+      width: 70%;
+      height: 88px;
+      
+      .role-title {
+        position: relative;
+        float: left;
+        top: -30px;
+        width: 80px;
+        z-index: 10;
+      }
+      
+      .role-count {
+        position: relative;
+        top: 69px;
+        width: 103px;
+        left: -18px;
+        display: inline-block;
+      }
+      
+      .role-circle {
+        border: 3px solid #4c99c0;
+        background-color: transparent;
+        .border-radius(45px);
+        width: 60px;
+        height: 60px;
+        z-index: 9;
+        position: absolute;
+      }
+      
+      .circle-fill {
+        border: 3px solid @white;
+        background-color: #4c99c0;
+        .border-radius(45px);
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        z-index: 7;
+      }
+      
+      .circle-measure {
+        width: 60px;
+        z-index: 8;
+        background-color: @white;
+        position: absolute;
+        left: 3px;
+        top: 0;
+      }
+    }
+    
+    .modal-body {
+      text-align: left;
+    }
+   
+    .profile-image {
+    }
+    
+    .thumbnail-details {
+      margin-top: 5px;
+      display: table;
+      height: 150px;
+      
+      
+      .project-description {
+        font-size: 0.8em;
+      }
+      
+      .roles-container {
+        height: 20px;
+        overflow: hidden;
+        font-size: 0.9em;
+        display: table-row;
+        vertical-align: bottom;
+        
+        .more-roles-link {
+          display: inline-block;
+          color: #4c99c0;
+        }
+      }
+      
+      .role-name {
+        display: inline-block;
+        padding-right: 10px;
+      }
+    }
+    
+    .message-follow-row {
+      position: absolute;
+      height: 2em;
+      top: 100%;
+      width: 100%;
+      margin-top: -28px;
+      margin-left: -10px;
+      font-size: 0.8em;
+    }
+    
+    hr.bottom {
+      margin: 0;
+      border: 1px solid #ccc;
+      bottom: 32px;
+      position: absolute;
+      width: 91%;
+    }
+
+    .message-button {
+      background-color: #5a86de;
+      border: 1px solid #ccc;
+      .border-radius(5px);
+      text-decoration: none;
+      color: @white;
+      cursor: pointer;
+      font-weight: 400;
+      font-size: 1em;
+      padding: 5px;
+    }
+    
+    .message-button:hover {
+      background-color: darken(#5a86de, 10%);
+    }
+    
+    
+    .follow-button {
+      display: inline-block;
+      position: relative;
+      
+      a {
+        .border-radius(5px);
+        color: @white;
+        text-align: center;
+        padding:5px;
+        cursor: pointer;
+        color: @white;
+        background-color: #666;
+      }
+      
+      img {
+        width: 25px;
+      }
+    }
+    
+    .follow-count {
+      display: inline-block;
+      .border-radius(5px);
+      color: @white;
+      text-align: center;
+      padding: 2px 5px 1px 5px;
+      cursor: pointer;
+      color: @white;
+      background-color: #666;
+     
+    }
+  }
+}
+
+
+/* End Projects Search/Index */

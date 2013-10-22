@@ -1,0 +1,185 @@
+
+
+<%= form_for @project, :validate => true, :html => { :class => 'form-horizontal project-save-form step_2_form'} do |p| %>
+
+  <div class="span12">
+
+    <input type='hidden' name='project_id' value="<%= p.object.id %>">
+    
+    <div class="control-group">
+      <%= p.label 'Type', :class => 'control-label' %>
+      <div class="controls">
+        <%= p.select(:is_type_list, options_for_select(Project.types, p.object.is_type), {}) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= p.label 'Project Status', :class => 'control-label' %>
+      <div class="controls">
+        <%= p.select(:status, options_for_select(Project.status_stages, p.object.status)) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= p.label 'Compensation', :class => 'control-label' %>
+      <div class="controls">
+        <%= p.select(:compensation, options_for_select(Project.compensation_stages, p.object.compensation)) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class='control-label'>
+        Genre
+      </label>
+
+      
+      
+      <div class="controls">
+        <%= p.select(:genre_list, Project.genres ,{}, { :multiple => true, :size => 5 }) %>
+        <div class='div_hint'>
+          2 Max
+        </div>
+      </div>
+
+    </div>
+    
+
+    <div class='control-group'>
+      <%= p.label 'Guild', :class => 'control-label' %>
+      <div class='controls'>
+        <%= p.label 'Is your product a part of any Union or Guild?' %>
+      </div>
+
+      <div class='controls radios'>
+        <div class='option'>
+          <%= p.radio_button 'union_present', 'true', :class => 'toggler_radio', 'data-target' => '#project_union_container'  %>
+          <%= label :union_present, 'Yes', :class=>'radio_label' %>
+        </div>
+
+        <div class='option'>
+          <%= p.radio_button 'union_present', 'false', :class => 'toggler_radio', 'data-target' => '#project_union_container' %>
+          <%= label :union_present, 'No', :class=>'radio_label' %>
+        </div>
+
+      </div>
+
+      <% if p.object.union_present %>
+        <div class='controls clearfix'>
+          <div id='project_union_container'>
+            <% to_select = Project.unions.values.include?(p.object.union) ? p.object.union : "Other" %>
+
+            <%= select_tag(:union, options_for_select(Project.unions, to_select), :class => "union_select") %>
+
+            <% if to_select == 'Other' %>
+              <%= p.text_field :union, :class=>'union_input', :placeholder => 'Tell us which one' %>
+            <% else %>
+              <%= p.text_field :union, :class=>'union_input', :placeholder => 'Tell us which one', :style => 'display:none;' %>
+            <% end %>
+
+            <span id='wga_terms' style='display: none;'>
+              If you select this you must adhere to the WGA guild rates
+            </span>
+
+          </div>
+        </div>
+      <% else %>
+        <div class='controls'>
+          <div id='project_union_container' style='display: none;'>
+            <%= select_tag(:union_select, options_for_select(Project.unions), :class => 'union_select') %>
+
+            <!-- in this case, the value is set to the first value from the array because anyway the first one will be selected in the select box, if the select box is changed to show empty first., change the behaviour here also. -->
+            <%= p.text_field :union, :class=>'union_input', :value => Project.unions.values.first, :placeholder => 'Tell us which one', :style => 'display:none;' %>
+
+            <span id='wga_terms' style='display: none;'>
+              If you select this you must adhere to the WGA guild rates
+            </span>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+
+
+    <div class='span12'>
+      <div class='text-center form_footer'>
+        
+        <div class='links'>
+          <input type='button' class='go_back_btn' value='Prev Step'>
+          <%= p.submit "Next Step", :class=>'step_2_submit' %>
+        </div>
+
+        You are almost done! Go to the final step to let us know about the people you need for your project.
+      </div>
+    </div>
+
+  </div>
+
+<% end %>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    app.project_genres = <%=raw Project.genres.keys %>
+
+    $('#project_genre').tagit({
+      sortable: true,
+      tagSource: ['munna','vishnu'],
+      allowNewTags: false,
+      triggerKeys: ['comma', 'tab', 'space', 'enter'],
+      tagsChanged: function(tagValue, action, element){
+        tag_value_array = _.map($('#project_genre').tagit('tags'), function(tag){
+            tag.value  
+        })  
+        $('#project_genre_list').val(tag_value_array.toString())
+      }
+    });
+
+    app.types_costs = <%= raw User.types_costs.to_json() %>
+
+    // update the pay rate summary for the role when the select box value is changed.
+    $('body').on('change', '.talent-select select', function(event){
+      selected_talent = $(event.target).val()
+      cost = app.types_costs[selected_talent]
+      $(event.target).parent().find('.cost').html(cost)
+    });  
+
+
+    // go back button redirect to edit url
+    $('body').on('click', '.go_back_btn', function(event){
+      window.location = '/projects/<%= @project.id %>/edit'
+      return false;
+    });
+
+    $('#navigation a.step_1_nav').attr('href', '/projects/<%= @project.id %>/edit');
+    $('#navigation a.step_1_nav').attr('data-stepindex', 2);
+
+    // prevent step click navigation
+    $('#navigation a.step_1_nav').bind('click',function(event){
+      $('#step_1').html('Please wait while you are redirected.')
+      window.location = '/projects/<%= @project.id %>/edit'
+      return false
+    });
+
+    // $('#project_genre_list').multipleSelect({
+    //   selectAll: false,
+    //   filter: true,
+    //   onClick: function(event){
+    //     console.log($('#project_genre_list').multipleSelect("getSelects").length)
+    //   //   // selectItem
+    //   //   if($('#project_genre_list').multipleSelect("getSelects").length > 2)
+    //   //     alert('')
+    //   //     return false
+    //   //   else
+    //   //     return true
+    //   }
+    // });
+
+
+  $('#project_genre_list').chosen({
+    max_selected_options: 2,
+    placeholder_text_multiple: 'Select any two, start typing'
+  })
+    
+
+  })
+</script>

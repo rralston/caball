@@ -8,11 +8,19 @@
 /.bundle
 
 # Ignore database.yml
-/config/database.yml
+# Change for Heroku to Read
+# Show for Elastic Beanstalk
+# /config/database.yml
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
 *.DS_Store
-public/uploads/
+
+# Ignore Image Uploads Folder
+/public/uploads/
 Snippets.txt
+
+# Ignore Public Assets
+/public/assets
+.elasticbeanstalk/

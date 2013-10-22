@@ -1,0 +1,298 @@
+<!--========= Header starts======------>
+<div class="headerwrap">
+
+  <header>
+    <div class='logo pull-left'>
+      <a href="/" class="brand pull-right"><img src="/assets/emboss-logo-beta.png" alt="" /></a>
+    </div>
+
+		<% if current_user %>
+      <div class="loggedwrap pull-right">
+
+        <div class="notiwrap">
+          <% class_to_set = current_user.unread_notifications.empty? ? '' : 'set_time' %>
+          <div class="notstarwrap <%= class_to_set %> ">
+          <div class="notico"></div>
+          <% if current_user.unread_notifications.present? %>
+            <div class="notno  medium img-circle text-center">
+              <%= current_user.unread_notifications.count %>
+            </div>
+          <% end %>
+          </div>
+          <div class="noticontentwrap">
+            <div class="noticontent">
+            <div class="notih1 medium text-center">NOTIFICATIONS</div>
+            
+
+              <%= render :partial => 'user_notifications' %>
+            
+          
+            <div class="noteclose img-circle medium text-center">x</div>
+            </div>
+          </div>
+          
+        </div>
+        
+        <div class="userprofwrap">
+          <div class="usrprev">
+
+            <a href='/users/<%= current_user.url_param %>' class="usrimg img-circle" style='background: url(<%= current_user.profile_thumb %>)'>
+              <!--user prof images as cover bg-->
+            </a>
+            
+            <div class="username">
+              <%= current_user.name %>
+            </div>
+          
+          </div>
+          <div class="userprflistwrap">
+            <ul class="proflist medium">
+              <a href="/users/<%= current_user.url_param %>">
+                <li class="profile">profile</li>
+              </a>
+              <a href="/dashboard" >
+                <li class="dboard">Dashboard</li>
+              </a>
+              <a href="/users/<%= current_user.id %>/edit">
+                <li class="settings">Edit Profile</li>
+              </a>
+							<% if current_user.admin == true %>
+							<a href="/admin/admin/index">
+                <li class="admin">Admin Area</li>
+              </a>
+							<% end %>
+              <%= link_to '<li class="lout" id="sign_out">Logout</li>'.html_safe, {:controller=> "users/sessions", :action=> "destroy"}, :method => :delete %>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+    <% else %>
+      <div class='user-section pull-right'>
+        <a href="#" data-toggle='modal' data-target='#signin_modal' class="signin-btn">Sign In</a>
+        <a href="" data-toggle='modal' data-target='#signup_modal'>Create  an Account</a>  
+      </div>
+    <% end %>
+		<% if current_user %>
+    <div class="container" style='width: 800px'>
+      <div class="hnav navbar light pull-left">
+        <div class="navbar-inner ">
+          
+          <ul class="nav nav-tabs">
+
+            <% class_names={} %>
+            <% class_names['projects'] = 'active' if controller_name == 'projects' %>
+            <% class_names['users'] = 'active' if controller_name == 'users' and action_name != 'dashboard' %>
+            <% class_names['events'] = 'active' if controller_name == 'events' %>
+
+            <li class="<%= class_names['projects'] %>"><a href="/projects" >Projects</a></li>
+            <li class="<%= class_names['users'] %>" ><a href="/users">People</a></li>
+            <li class="<%= class_names['events'] %>"><a href="/events">Events</a></li>
+          </ul>
+          
+        </div>
+      </div>
+      <div class="hdrfrm pull-left">
+        <form action="">
+          <input type="text" class='search_header' id='main_header_search' placeholder='Search for people, projects and events'/>
+        </form>
+      </div>
+    </div>
+    <% end %>
+  </header>
+
+  <% if flash[:notice] %>
+    <div class="alert in_header alert-success">
+      <button type="button" class="close" data-dismiss="alert">
+        ×
+      </button>
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <% if flash[:error] %>
+    <div class="alert in_header alert-error">
+      <button type="button" class="close" data-dismiss="alert">
+        ×
+      </button>
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+
+  <% if flash[:alert] %>
+    <div class="alert in_header">
+      <button type="button" class="close" data-dismiss="alert">
+        ×
+      </button>
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <% if flash[:info] %>
+    <div class="alert in_header alert-info">
+      <button type="button" class="close" data-dismiss="alert">
+        ×
+      </button>
+      <%= flash[:info] %>
+    </div>
+  <% end %>
+
+  <div id="bootstrap-alert-placeholder" class="js-alert"></div>
+</div>
+<% if !current_user %>
+  <div id='signin_modal' class="modal hide fade span9">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3 class='cover-header'> Sign In </h3>
+    </div>
+    
+    <div class="modal-body">
+      <%= render :template => 'devise/sessions/new' %>
+    </div>
+
+    <div class="modal-footer">
+      <a href="#" class="btn" data-dismiss='modal'>Close</a>
+    </div>
+  </div>
+
+  <!-- signup modal -->
+  <div id='signup_modal' class="modal hide fade span9">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3 class='cover-header'> Create Account</h3>
+    </div>
+    
+    <div class="modal-body">
+      <%= render :template => 'devise/registrations/new' %>
+    </div>
+
+    <div class="modal-footer">
+      <a href="#" class="btn" data-dismiss='modal'>Close</a>
+    </div>
+  </div>
+
+  <!-- signup modal -->
+
+<% end %>
+<script type="script/template" id='search_results_li_tempalte'>
+  
+  <a class='full-li'>
+    <img src='<%%= thumbnail %>'>
+    <span>
+      <%%= label %>
+    </span>
+  </a>
+
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.notstarwrap').on('click',function(){
+    $('.noticontentwrap').slideToggle(500);
+
+    if($('.notstarwrap').hasClass('set_time')){
+      app.fn.set_notification_check_time($('.notstarwrap'))
+    }
+  });
+
+  $('.noteclose').on('click',function(){
+    $('.noticontentwrap').slideUp(500);
+  });
+
+  $('.usrprev .username').on('click',function(){
+    $('.userprflistwrap').slideToggle(500);
+  });
+
+
+  $('.timeago').timeago()
+
+  // for search
+  $.widget( "custom.catcomplete", $.ui.autocomplete, {
+      _renderMenu: function( ul, items ) {
+        var that = this,
+          currentCategory = "";
+        $.each( items, function( index, item ) {
+          if ( item.category != currentCategory ) {
+            ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+            currentCategory = item.category;
+          }
+          that._renderItem( ul, item );
+        });
+      }
+    });
+
+
+  var on_select_callback = function(item){
+    // similar behavior as an HTTP redirect
+    window.location.replace(item.url);
+  }
+
+  var this_template = _.template( $('#search_results_li_tempalte').html())
+
+
+  // fail safe when the search is removed for the beta header.
+  if( $('#main_header_search').size() > 0 ){
+
+    $("#main_header_search").catcomplete({
+      delay: 0,
+      source: function(request, response){
+        $.getJSON( "/main_search?q="+request.term, function(data){
+          response(data)
+        });
+      },
+      select: function(event, ui){
+        on_select_callback(ui.item)
+      },
+      messages:{
+        noResult: '',
+        results: function(){}
+      },  
+     }).data("custom-catcomplete")._renderItem = function(ul, item){
+        return $( "<li>" ).addClass('custom-ui-item clearfix')
+              .data( "ui-autocomplete-item", item )
+              .append( this_template(item) )
+              .appendTo( ul );
+      };
+  }
+
+});
+
+jQuery(function() {
+    $('body').prepend('<div id="fb-root"></div>');
+    return $.ajax({
+      url: "" + window.location.protocol + "//connect.facebook.net/en_US/all.js",
+      dataType: 'script',
+      cache: true
+    });
+  });
+
+  window.fbAsyncInit = function() {
+    console.log('fb init')
+    FB.init({
+      appId: '<%= ENV["FACEBOOK_APP_ID"] %>',
+      cookie: true
+    });
+    $('body').on('click', '#fb_auth', function(e) {
+      e.preventDefault();
+      console.log('here')
+      FB.login(function(response) {
+        if (response.authResponse) {
+          window.location = '/users/auth/facebook/callback';
+        }
+      });
+      return false;
+    });
+    return $('#sign_out').click(function(e) {
+      FB.getLoginStatus(function(response) {
+        if (response.authResponse) {
+          FB.logout();
+        }
+      });
+      return true;
+    });
+  };
+  
+</script>

@@ -1,0 +1,71 @@
+<script type="script/template" id='comment_template'>
+  <div class='comment'>
+
+    <div class="usrimg img-circle user-profile-img comment-circle-image" style='background: url(<%%= user.profile_thumb %>)'> </div>
+    <div class='comment-details'>
+      
+      <div class='row'>
+        <div class='commentor-name'>
+          <a href='/users/<%%= user.url_param %>'><%%= user.name %></a>
+        </div>
+        <div class='commentor-location'>
+          <div class='pull-left location-img-grey'></div>
+          <div class='pull-left light'>
+            <%%= user.location %>
+          </div>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='comment-content light'>
+          <%%= content %>
+        </div>
+
+        <%% if(typeof can_edit != 'undefined' && can_edit) { %>
+
+          <div class='comment-edit-textarea'>
+            <textarea class='edit_comment_area'><%%= content %></textarea>
+            <div class='action-div update icon-ok'></div>
+            <div class='action-div icon-remove-sign hide_edit'></div>
+          </div>
+        <%% } %>
+
+        <%% if (photo != null) { %>
+          <div class='comment-img'>
+            <img src='<%%= photo.image.large.url %>'>
+          </div>
+        <%% } %>
+
+        <%% if (video != null && video.provider != null) { %>
+          <div class='comment-video'>
+            <%%= video.embed_code %>
+          </div>
+        <%% } %>
+        
+      </div>
+    </div>
+      
+    
+    <div class='row comment-actions action-div'>
+      <div class='pull-left time-ago'>
+        <%%= jQuery.timeago(created_at) %>
+      </div>
+      <div class='pull-right like-comment'>
+        <div class='pull-right likes-count'><%%= likes_count %></div>
+        <div class='heart-blue <%% if(typeof user_following != "undefined" && user_following) print("active") %> pull-right'> </div>        
+      </div>
+    </div>
+    
+    <%% if(typeof can_edit != 'undefined' && can_edit) { %> 
+      <div class='comment_edit'>
+        <i class='edit_comment icon-pencil action-div'></i>
+        <i class='destroy_comment icon-remove action-div'></i>
+      </div>
+    <%% } else if(typeof can_delete != 'undefined' && can_delete) { %>
+        <div class='comment_edit'>
+          <i class='destroy_comment icon-remove action-div'></i>
+        </div>
+    <%% } %>
+
+  </div>
+</script>

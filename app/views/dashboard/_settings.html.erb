@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="span11" id='dashboard_settings'>
+  		<!-- Change Password Section -->
+  		<% if current_user.provider.nil? %>
+	  		<div class="row">
+	  			<h3>Change Password</h3>
+	  			<hr/>
+		      <form class="form-horizontal change_password_form" action="<%= users_change_password_path %>" data-remote="true" method="post">
+		      	<div class="errors" style="margin-left: 400px;">
+
+		      	</div>
+		      	<div class="success" style="margin-left: 400px;">
+
+		      	</div>
+					  <div class="control-group">
+					    <div class="controls">
+					      <input type="password" class="require" id="currentPassword" name="currentPassword" placeholder="Current Password">
+					    </div>
+					  </div>
+					  <div class="control-group">
+					    <div class="controls">
+					      <input type="password" class="require" id="password" name="password" placeholder="New Password">
+					    </div>
+					  </div>
+					  <div class="control-group">
+					    <div class="controls">
+					      <input type="password" class="require" id="confirmPassword" name="confirmPassword" placeholder="Password Confirmation">
+					    </div>
+					  </div>
+					  <div class="control-group">
+					    <div class="controls">
+					      <button type="submit" class="btn chng_password">Change Password</button>
+					    </div>
+					  </div>
+					</form>
+				</div>
+			<% end %>
+  		<!-- Change Email Section -->
+  		<div class="row">
+  			<h3>Change Email</h3>
+  			<hr/>
+  			<form class="form-horizontal change_email_form" action="<%= users_change_email_path %>" data-remote="true" method="post">
+  				<div class="errors" style="margin-left: 400px;">
+
+	      	</div>
+				  <div class="control-group">
+				    <div class="controls">
+				      <input type="text" class="require" id="newEmail" name="newEmail" placeholder="New Email">
+				    </div>
+				  </div>
+				  <div class="control-group">
+				    <div class="controls">
+				      <button type="submit" class="btn chng_email">Change Email</button>
+				    </div>
+				  </div>
+				</form>
+  		</div>
+  </div>
+</div>

@@ -12,4 +12,34 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require twitter/bootstrap
+//= require users/bootstrap-lightbox.js
+//= require projects/numerous-2.1.1.js
+//= require projects/slider.js
+//= require application/sliding.form.js
+//= require users/jquery.form.js
+//= require rails.validations
+//= require_directory .
+//= require init
+//= require jquery.remotipart
+//= require plugins/manifest.js
+//= require social-share-button
+//= require jquery-fileupload/basic
+
+$( document ).tooltip({ 
+		hide: false, 
+		position: {
+	        my: "center top+15",
+	        at: "center bottom",
+	        using: function( position, feedback ) {
+	          $( this ).css( position );
+	          $( "<div>" )
+	            .addClass( "arrow" )
+	            .addClass( feedback.vertical )
+	            .addClass( feedback.horizontal )
+	            .appendTo( this );
+        }}});
+jQuery(document).ready(function() {
+  jQuery("abbr.timeago").timeago();
+  jQuery(".timeago").timeago();
+});

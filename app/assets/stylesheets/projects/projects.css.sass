@@ -1,0 +1,654 @@
+$grey: #a5a8b1
+$light-grey: #d4d6dc
+$divider-border: #c6d0db
+$role-circle-border: #1691de
+$comments-left-border: #c8d2de
+$brick-red: #e44f65
+$light-grey-text: #a0a8b1
+$comment-text: #636a73
+
+.project-description
+  margin-top: 20px
+  width: 520px
+
+.shadow-div
+  box-shadow: -26px 0px 79px 135px #eaedf1
+  -webkit-box-sizing: -26px 0px 79px 99px #eaedf1
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box 
+  -ms-box-sizing: border-box
+  box-sizing: border-box
+  position: absolute
+  left: 473px
+  height: 350px
+
+.project-created-by
+  color: #82848d
+
+
+.project-types
+  margin-top: 10px
+  ul
+    margin-left: 0px
+  li
+    text-transform:  uppercase
+    float: left
+    margin-right: 20px
+
+.project-main-head
+  background: #eaedf0
+  position: relative
+  .project-image
+    height: 418px
+    background-size: cover !important
+  .main-right
+    position: relative
+    padding: 20px
+    width: 520px
+    .btn-message
+      padding: 7px 1px
+      margin-top: 8px
+  .title
+    width: 520px
+  .project-description
+    color: #82848d
+    font-style: italic
+    font-size: 17px
+  .read_more
+    color: #e8aaa7
+    cursor: pointer
+  .project-location
+    font-size: 18px
+    color: #82848d
+  .project-genres
+    margin-top: 10px
+    ul
+      color: #82848d
+      margin-left: 0px 
+      li
+        text-transform:  uppercase
+        float: left
+        margin-right: 5px
+
+      li:after
+        content: " \00b7"
+        font-size: 40px
+        position: relative
+        top: 5px
+        margin-left: 5px
+      li:last-child
+        position: relative
+        top: 8px
+      li:last-child:after
+        content: none
+
+
+.headline
+  position: relative
+  background: url(/assets/project-healine-bg.png) repeat-x
+  height: 100px
+  padding: 35px 35px 25px 70px
+  color: #a5a8b1
+  font-size: 23px
+  line-height: 25px
+
+  i:before
+    content: "\201C"
+    font-size: 60px
+    float: left
+    margin-right: 8px
+    font-weight: 800
+    position: relative
+    left: -35px
+    top: 18px
+    line-height: 0px
+  i:after
+    content: "\201D"
+    font-size: 60px
+    position: relative
+    top: 35px
+    margin-right: 8px
+    font-weight: 800
+    line-height: 0px
+
+.big-quotes
+  font-size: 50px
+  position: relative
+  top: 15px
+
+.imp-dates-div
+  padding-top: 20px
+  height: auto
+  background: url(/assets/grey-light-bg.png) repeat
+  .imp-date-head
+    font-size: 14px
+    color: white
+    letter-spacing: 8px
+    padding-left: 22px
+  .imp-dates
+    margin-top: 30px
+    .imp-date
+      margin-bottom: 15px
+      .month
+        font-size: 12px
+        width: 48px
+        margin-top: 2px
+      .date
+        text-transform: uppercase
+        padding: 10px
+        background: black
+        color: $grey
+        text-align: center
+        .day
+          font-size: 28px
+      .date-details
+        padding: 5px 10px 10px 15px
+        color: $light-grey
+        font-size: 16px
+        line-height: 21px
+
+.project-wall
+  .role-circle-container
+    left: 0px
+.role-circles
+  a.circle-wrapper:hover, a.circle-wrapper
+    color: #0088cc !important
+
+
+.role-portfolio
+  width: 100px
+  margin-left: 20px
+  margin-top: 20px
+  text-align: center
+  .role-title
+    width: 100px
+    text-transform: uppercase
+    min-height: 20px
+  .role-cast-pic
+    width: 45px
+    height: 45px
+    border: 5px solid $role-circle-border
+  .default-role-pic
+    display: block
+    margin: 0px auto
+    height: 45px
+    margin-bottom: 20px
+  .role-apply-btn, .show_applicants
+    min-width: 30px
+    margin: 10px auto 0px auto
+    width: 68px
+    height: 12px
+    padding-top: 2px
+    padding-bottom: 10px
+  .show_applicants
+    width: 80px !important
+    font-size: 10px
+  .role-filled-sumary
+    margin-top: 10px
+    margin-left: -10px
+
+.role-filters
+  margin-left: 20px
+  text-align: center
+  margin-bottom: 15px
+  .role-filter
+    margin: 5px 5px 
+    font-size: 13px
+
+.roles-display-tabs
+  margin-bottom: 30px
+
+.project-comments-container
+  background: #D6DFE8
+  .updates-head
+    padding: 20px 0px 20px 50px
+    font-size: 30px
+    border-bottom: 1px solid $divider-border
+
+
+
+// role circles
+.roles-div
+  background: #EAEDF0
+  .available-roles-head
+    padding: 20px 0px 20px 50px
+    font-size: 30px
+    border-bottom: 1px solid $divider-border
+
+.role-circles  
+  margin-left: 0px
+  text-align: left
+  padding-left: 30px
+  margin-top: 20px
+  
+  .circle-wrapper
+    margin: 20px 0px 0px 5px
+  .role-circle-container
+    display: inline-block
+    position: relative
+    margin: 10px 20px
+    width: 65px
+    height: 110px
+    
+    .role-title
+      position: relative
+      float: left
+      top: -20px
+      left: -15px
+      width: 90px
+      z-index: 10
+      white-space: nowrap
+      text-align: center
+      overflow: hidden
+      text-overflow: ellipsis
+      font-size: 13px
+    
+    .circle-measure    
+      top: 3px
+      width: 60px
+      z-index: 8
+      background-color: #EAEDF0
+      position: absolute
+      left: 5px
+    
+    .role-count
+      position: relative
+      float: left
+      top: 50px
+      width: 75px
+      text-align: center
+      font-size: 12px
+
+    
+    .role-circle
+      border: 3px solid $role-circle-border
+      background-color: transparent
+      border-radius: 45px
+      width: 60px
+      height: 60px
+      z-index: 9
+      position: absolute
+    
+    .circle-fill
+      border: 3px solid #EAEDF0
+      background-color: $role-circle-border
+      border-radius: 45px
+      width: 50px
+      height: 50px
+      position: absolute
+      top: 5px
+      left: 5px
+      z-index: 7
+      box-shadow: 17px -35px 50px -42px black inset
+      -moz-box-shadow: 17px -35px 50px -42px black inset
+      -webkit-box-shadow: 17px -35px 50px -42px black inset
+
+#comments_div
+  border-left: 5px solid $comments-left-border
+  width: 595px
+  margin-top: 20px
+  position: relative
+  #comment_please_wait
+    display: none
+    margin-left: 30PX
+  #please_sign_in
+    margin-left: 30PX
+  .add-comment
+    img.user-profile-img
+      width: 40px
+      position: absolute
+      left: -24px
+      top: 0px
+      -moz-box-shadow: 0px 0px 10px -1px black
+      -webkit-box-shadow: 0px 0px 10px -1px black
+      box-shadow: 0px 0px 10px -1px black
+      border: 1px solid #D0D7Df
+  
+  #comments_display
+    color: $comment-text
+    .comment
+      position: relative
+      background: white
+      margin: 50px 0px
+      width: 580px
+
+      img.user-profile-img
+        width: 40px
+        position: absolute
+        left: -28px
+        top: -20px
+        -moz-box-shadow: 0px 0px 10px -1px black
+        -webkit-box-shadow: 0px 0px 10px -1px black
+        box-shadow: 0px 0px 10px -1px black
+        border: 1px solid #D0D7Df
+      .comment-details
+        padding: 15px 10px 10px 30px
+        .commentor-name
+          color: $brick-red
+          font-size: 20px
+          margin-bottom: 5px
+        .commentor-location
+          color: $light-grey-text
+        .comment-content
+          margin-top: 15px
+        .comment-img
+          img
+            max-width: 580px
+            width: 580px
+            margin-left: -30px
+      .comment-actions
+        padding: 15px
+        border-top: 2px solid $divider-border
+        background: url(/assets/comment-actions-bg.png) repeat-x
+        .like-comment
+          padding-right: 20px
+          .heart-blue
+            margin-right: 10px
+
+
+
+  textarea#comment_content
+    margin-left: 30px
+    margin-top: 0px
+    height: 70px
+    width: 445px
+    -moz-box-shadow: 0px 0px 12px -1px #c8d2de inset
+    -webkit-box-shadow: 0px 0px 12px -1px #c8d2de inset
+    box-shadow: 0px 0px 12px -1px #c8d2de inset
+    border: 1px solid #D0D7Df
+    padding: 10px
+
+.share_area
+  margin-bottom: 40px
+  .social-share-button
+    a
+      width: 50px
+      height: 50px
+      margin-right: 10px
+      background-size: 100% 100% !important
+  .social-share-button-facebook
+    background: url("/assets/fb-link.png") no-repeat !important
+  .social-share-button-twitter
+    background: url("/assets/twitter-link.png") no-repeat !important
+  .social-share-button-google_plus
+    background: url("/assets/g-link.png") no-repeat !important
+
+/* edit page */
+
+form
+  .gender
+    label
+      display: inline-block
+      position: relative
+      top: 5px
+      margin-right: 10px
+
+$grey: #a5a8b1
+$light-grey: #d4d6dc
+$divider-border: #c6d0db
+
+
+fieldset
+  position: relative
+
+.edit-project
+  .step_progress
+    width: 400px
+    position: absolute
+    right: 20px
+    top: 50px
+    text-align: center
+    .progress
+      width: 200px
+      margin-left: auto
+      margin-right: auto
+      margin-bottom: 0px
+
+  #navigation
+    background: none
+    ul
+      margin-left: 90px
+      margin-top: 20px
+      li
+        .checked
+          display: none !important
+        border: none
+        margin: 5px 2px 5px -15px
+
+        .step_count
+          font-size: 30px
+          padding-right: 10px
+          color: #A3A3A3
+          border-right: 1px solid #A3A3A3
+        .step_text
+          font-size: 20px
+          font-weight: 400
+          position: relative
+          top: -3px
+          color: white
+          margin-left: 10px
+        
+      li.first_step.selected a
+        background: url('/assets/step-1-active.png') no-repeat !important
+        background-size: 100% 100% !important
+
+      li.first_step.done a
+        background: url('/assets/step-1-done.png') no-repeat !important
+        background-size: 100% 100% !important
+
+      li a
+        background: url('/assets/step-yet.png') no-repeat !important
+        border: none !important
+        background-size: 100% 100% !important
+        min-width: 240px
+
+
+      li.selected a
+        background: url('/assets/step-current.png') no-repeat !important
+        background-size: 100% 100% !important
+        text-shadow: none
+
+      li.done a
+        background: url('/assets/step-done.png') no-repeat !important
+        background-size: 100% 100% !important
+
+
+  form
+    input[type="text"], input[type="email"]
+      width:  390px
+    textarea
+      height: 100px
+      width: 390px
+    img#locate
+      width: 10px
+      margin-top: 10px !important
+      cursor: pointer
+    .div_hint
+      font-size: 11px
+      font-style: italic
+    .location i
+      top: 10px !important
+      cursor: pointer
+    .radios
+      margin-bottom: 20px
+      display: block
+      height: 30px
+      .option
+        margin-right: 40px
+        float: left
+        text-align: center
+      label
+        display: block
+        margin: 0px
+    .numerous-remove
+      margin-left: 120px
+      position: relative
+      top: -15px
+    .sub_role_container
+      margin-top: 10px
+    .remove_entity
+      position: relative
+      top: -15px
+    .form_footer
+      width: 400px
+      margin: 30px auto
+      .links
+        margin: 20px 0px
+        input
+          margin-right: 20px
+    .image_container
+      width: 150px
+      height: 150px
+      overflow: hidden  
+      .image_preview_container
+        vertical-align: baseline
+        max-width: none
+        width: 150px
+        height: 150px
+    
+    .image_btns
+      width: 150px
+      .btn.crop_image, .btn.reset_crop
+        display: none
+
+    .date_field
+      width: 100px !important
+    .time_field 
+      width: 70px !important
+
+    input[type="radio"], input[type="checkbox"]
+      margin: 0px !important
+
+
+
+#add_roles_div
+  select
+    margin-bottom: 10px
+#role_edit_region
+  width: 600px
+  .sub_role_container, .super_sub_role_container
+    display: none
+  .cast_role_options
+    display: none
+
+.search_users
+  position: relative
+  min-height: 50px
+#searched_users_for_role
+  background: white
+  position: absolute
+  border: 1px solid grey
+  border-radius: 5px
+  z-index: 999999
+  .close
+    margin-right: 10px
+  #searched_users_list
+    max-height: 200px
+    overflow: hidden
+    overflow-y: auto
+  .searched_user
+    clear: both
+    margin: 10px
+    height: 35px
+    width: 260px
+    .user_img
+      img
+        width: 40px
+        height: 40px
+    .user_details
+      margin-left: 10px
+      width: 133px
+      font-size: 10px
+      white-space: nowrap
+      text-overflow: ellipsis
+      line-height: 13px
+      overflow: hidden
+      .user_name
+        text-overflow: ellipsis
+        width: 133px
+        overflow: hidden
+        font-size: 13px
+      .user_loc
+        text-overflow: ellipsis
+        width: 133px
+        overflow: hidden
+      .user_talents
+        text-overflow: ellipsis
+        width: 133px
+        overflow: hidden
+    .user_action
+      cursor: pointer
+      width: 60px
+      text-align: center
+      margin-top: 10px
+    .follow_user
+      background-color: #D3262C
+      color: white
+    .select_user
+      background-color: #00FFFE
+      color: black
+
+#filled_roles, #unfilled_roles
+  max-height: 335px
+  overflow-y: auto
+  margin-bottom: 10px
+
+.submit_role
+  margin-top: 10px
+
+.project_role
+  clear: both
+  width: 250px
+  margin: 15px 10px
+  height: 70px
+  .user_img
+    img
+      width: 50px
+      height: 50px
+  .user_details
+    margin-left: 10px
+    width: 190px
+    font-size: 13px
+    white-space: nowrap
+    text-overflow: ellipsis
+    line-height: 16px
+    overflow: hidden
+    .user_name
+      text-overflow: ellipsis
+      width: 190px
+      overflow: hidden
+      font-size: 15px
+    .user_loc
+      text-overflow: ellipsis
+      width: 190px
+      overflow: hidden
+    .user_talents
+      text-overflow: ellipsis
+      width: 190px
+      overflow: hidden
+  .user_action
+    cursor: pointer
+    width: 60px
+    text-align: center
+    margin-top: 10px
+  .follow_user
+    background-color: #D3262C
+    color: white
+  .select_user
+    background-color: #00FFFE
+    color: black
+  .role_img
+    width: 45px
+    text-align: center
+  .role_details
+    width: 190px
+    margin-left: 15px
+    line-height: 18px
+    font-size: 13px
+  .role_description
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+#crop_image_modal
+  #crop_area

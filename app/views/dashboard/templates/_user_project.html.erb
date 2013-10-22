@@ -1,0 +1,50 @@
+<script type="script/template" id='user_project_template'>
+    <a href='/projects/<%%= url_param %>'>
+      <div class='project-head'>
+        <%% if(typeof display_regular != 'undefined' ){ %>
+          <div class='project-backdrop'  style='background: url(<%%= display_regular %>) no-repeat'>
+          </div>
+        <%% }else{ %>
+          <div class='project-backdrop'>
+          </div>
+        <%% } %>
+
+        <div class='backdrop-cover'></div>
+        <div class='project-title'>
+          <%%= title %>
+        </div>
+        <div class='project-headline'> 
+          <%%= headline %>
+        </div>
+      </div>
+    </a>
+    
+    <div class='project-summary'>
+      <div class='message pull-left'>
+        <div class='status'> Status: <span class='status-text'><%%= status %></span></div>
+        <a class='btn-manage btn-custom btn-cement medium active'>
+          Manage Project
+        </a>
+      </div>
+      <div class='roles-summary pull-right'>
+        <div class="role-circle-container">
+          <div class="role-circle"> </div>
+          <div class="circle-fill"> </div>
+
+          <div class="circle-measure circle-measure-<%%= parseInt((parseFloat(filled_roles.length) / parseFloat(roles.length)) * 10) %>"> </div>
+          <span class="role-count medium">
+            <%%= open_roles.length %> Open Positions
+          </span>
+        </div>  
+
+        
+        <div class='applications-summary text-center light'>
+          <%%= pending_applications.length %>
+          <br/>
+          PENDING APPLICATIONS        
+        </div>
+          
+      </div>
+    </div> 
+  
+</script>

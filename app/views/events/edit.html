@@ -1,0 +1,10 @@
+<%= javascript_include_tag "events/events_manifest" %>
+<%= stylesheet_link_tag "events/manifest.css" %>
+<div class='main-contain'>
+	<div class='container'>
+		<div class='standard-static-div' style='margin: 0px auto; width: 600px;'>
+			<h1>Edit "<%= @event.title %>"</h1>
+	  <%= render :partial => 'events/form' %>
+		</div>
+	</div>
+</div>

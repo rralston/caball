@@ -1,0 +1,88 @@
+<%= f.fields_for :characteristics_attributes, current_user.characteristics || Characteristics.new do |c|   %>
+
+            
+  <div class='user-talent'>
+    <div class="controls">
+      <h5>Writer</h5>
+    </div>
+    <% if false %> <!-- Exclude Fields -->
+      <div class="control-group">
+        <div class="controls">
+          <%= talent.text_area :description, :class => 'textarea', :rows => "5", :placeholder => 'Tell us about your experience as a writer, what have you written, what types of films do you like write? comedies, features, shorts, romance?' %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= talent.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+        <!-- <a href='#' class='remove_entity' data-toRemove='.user-talent'>Remove this role</a> -->
+      </div>    
+    </div>
+
+    <%= talent.fields_for :script_document, talent.object.script_document || UploadedDocument.new do |script_document| %>
+      <div class="control-group script_document">
+        <div class='controls'>
+          <%= script_document.label :document ,"Script Document" %>
+        </div>
+
+        <% if talent.object.script_document.present? %>
+          <div class='controls upload-doc-preview upload-doc-parent'>
+            <a class='upload_doc_preview' href="<%= talent.object.script_document.document %>" target='_black'><%= talent.object.script_document.filename %></a>
+
+            <%= script_document.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+            <br/>
+            <a href='#' class='remove_entity' data-toRemove='.upload-doc-preview' style='top: 0px;'>Remove this script</a>
+          </div>
+        <% else %>
+          <!-- hide initially, but when a file uploaded show the preview -->
+          <div class='controls'>
+            <a class='upload_doc_preview' href="" target='_black' style='display: none;'></a>
+          </div>
+        <% end %>
+
+        <div class="controls">
+          
+          <%= script_document.file_field :document, :class => 'script_document' %>
+          <div class='div_hint'>
+            Uploading just your best scene is the best way to get noticed!
+          </div>
+        </div>
+
+        <div class='controls upload_progress'>
+          Upload Progress:
+          <div class='progress'>
+            <div class='bar' style='width: 0%'></div>
+          </div>
+        </div>
+
+      </div>
+    <% end %>
+
+
+    <% if talent.object.script_document.present? or talent.object.synopsis.present? %>
+      <div class="control-group script_synopsis">
+        <div class="controls">
+          <%= talent.label :synopsis %>
+          <%= talent.text_area :synopsis, :class => 'textarea', :rows => "5", :placeholder => 'Briefly describe what the film is about on the scene you just uploaded' %>
+          <div class='div_hint'>
+            Save your fingers, a sentence or two is all you need.
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <div class="control-group script_synopsis" style='display: none;'>
+        
+        <div class="controls">
+          <%= talent.label :synopsis %>
+          <%= talent.text_area :synopsis, :class => 'textarea', :rows => "5", :placeholder => 'Briefly describe what the film is about on the scene you just uploaded' %>
+          <div class='div_hint'>
+            Save your fingers, a sentence or two is all you need.
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+
+<% end %>

@@ -1,0 +1,299 @@
+
+<% @event.errors.full_messages.each do |error| %>
+    <div class="alert alert-error">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <p><%= error %></p>
+    </div>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    
+  });
+</script>
+
+<div class='row'>
+  <div class='span12'>
+    <%= form_for @event, :validate => true do |event| %>
+      <div class='row'>
+        <div class='span6'>
+          <div class='control-group'>
+            <%= event.label :title, :class => 'control-label' %>
+            <div class='controls'>
+              <%= event.text_field :title, "data-entity" => 'Event', "data-entityid" => event.object.try(:id) %>
+
+              <div class='url_name_summary'>
+                <b>Event url will be</b>: filmzu.com/events/<span class='url_param'></span>
+              </div>
+            </div>
+          </div>
+
+          <div class='control-group'>
+            <%= event.label :description, :class => 'control-label' %>
+            <div class='controls'>
+              <%= event.text_area :description, :rows => 5 %>
+            </div>
+          </div>
+
+          <div class='control-group'>
+            <%= event.label :website, :class => 'control-label' %>
+            <div class='controls'>
+              <%= event.text_field :website %>
+            </div>
+          </div>
+
+          <div class='control-group'>
+            <%= event.label :location, :class => 'control-label' %>
+            <div class='controls'>
+              <%= event.text_field :location %> 
+              <!-- <span class='location_finder' id='locate'> Find my Location <i class='icon-map-marker'></i></span>     -->
+            </div>
+          </div>
+
+          <div class='control-grip'>
+            <%= event.label :tag_list, "Tags",  :class => 'control-label' %>
+
+            <div class='controls'>
+              <%= event.hidden_field :tag_list, :class => 'text_field' %>
+              <!-- data name attr will create a select box with name as provided..! -->
+              <ul id="event_tags" class='tagit ui-sortable'>
+                <% event.object.tag_list.each do |event_tag| %>
+                  <li data-value="<%= event_tag %>"><%= event_tag %> </li>
+                <% end %>
+              </ul>
+            </div>    
+          </div>
+
+
+          <h3>Important Dates</h3>
+
+          <%= event.fields_for :start, (@event.start || ImportantDate.new ) do |start| %>
+            <div class='control-group'>
+              <%= start.label :start, 'Start Date', :class => 'control-label' %>
+              <div class='controls'>
+                <%= start.text_field :date, :class => 'date_field' %> at <%= start.text_field :time_string, :class => 'time_field' %>
+                <%= start.hidden_field :is_start_date, :value=>'1' %> 
+              </div>
+            </div>
+          <% end %>
+
+          <%= event.fields_for :end, (@event.end || ImportantDate.new ) do |end_date| %>
+            <div class='control-group'>
+              <%= end_date.label :end, 'End Date' , :class => 'control-label' %>
+              <div class='controls'>
+                <%= end_date.text_field :date, :class => 'date_field' %> at <%= end_date.text_field :time_string, :class => 'time_field' %>
+                <%= end_date.hidden_field :is_end_date, :value=>'1' %> 
+              </div>
+            </div>
+          <% end %>
+
+					<!-- Other Important Dates Begins -->
+          <!-- <%= event.fields_for :other_important_dates do |date| %>
+          <div class="event_imp_date">
+
+            <%= render :partial => 'events/imp_dates_fields', :locals => { :date => date } %>
+            <%= date.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+                            
+            <a href='#' class='remove_entity' data-toRemove='.event_imp_date'>Remove Date</a>
+          </div>
+          <% end %>
+
+          <div id='fields-for-other_important_dates-list' class='numerous'>
+            <%= event.fields_for :other_important_dates, ImportantDate.new, :child_index => 'replace_this' do |date| %>
+              <div class="event_imp_date">
+                <%= render :partial => 'events/imp_dates_fields', :locals => { :date => date } %>
+              </div>
+
+              <%= link_to 'Remove', '#', :class => 'numerous-remove pull-left' %>
+              <br/>
+            <% end %>
+          </div>
+
+          <div id='other_important_dates-list'></div>
+
+          <%= link_to 'Add an important Date', '#', :id => 'add-to-other_important_dates-list' %> -->
+					<!-- Other Important Dates Ends Retiring -->
+					
+
+        </div>
+
+        <div class='span6'>
+
+          <h3>Event Images</h3>
+          <%= event.fields_for :main_photo, @event.main_photo || Photo.new do |event_main_photo|  %>
+            <h5>Event Main Image</h5>
+            <div class='control-group row'>
+              <div class='span3'>
+                <div class='controls'>
+                  <%= event_main_photo.hidden_field :crop_x, :class => 'crop_x' %>
+                  <%= event_main_photo.hidden_field :crop_y, :class => 'crop_y' %>
+                  <%= event_main_photo.hidden_field :crop_w, :class => 'crop_w' %>
+                  <%= event_main_photo.hidden_field :crop_h, :class => 'crop_h' %>
+                  <!-- url is updated when the image is created and uploaded  -->
+                  <%= event_main_photo.hidden_field :remote_image_url, :class => 'photo_url_div' %>
+                </div>
+                <div class="">
+
+                  <div class='controls upload_progress'>
+                    Upload Progress:
+                    <div class='progress'>
+                      <div class='bar' style='width: 0%'></div>
+                    </div>
+                  </div>
+
+                  <!-- if image exits, allow to change it -->
+                  <% if event_main_photo.object.image.present? %>
+                    <div class="controls image_container">
+                      <img src=<%= event_main_photo.object.image.url(:medium) %> class="img-rounded image_preview_container" >
+                    </div>
+
+                    <div class='controls image_btns'>
+                      <a href="" class='btn crop_image pull-left' data-orgImgUrl='<%= event_main_photo.object.image.url %>' data-orgWidth='<%= event_main_photo.object.original_width %>' data-orgHeight='<%= event_main_photo.object.original_height %>' data-prevImgUrl='<%= event_main_photo.object.image.url(:original) %>'  style='display: inline'>Crop</a>
+                    </div>
+
+
+                  <% else %>
+                    <div class="controls image_container">
+                      <img src='' class="img-rounded image_preview_container" >
+                    </div>
+                    <div class='controls image_btns'>
+                      <a href="" class='btn crop_image pull-left' data-imgUrl='' style='display: none;'>Crop</a>
+                    </div>
+                  <% end %>
+
+                  <div class="controls">
+                    <%= event_main_photo.file_field :image, :validate => {:presence => true} %>
+                  </div>
+                  <input type='hidden' value='1' name='event[main_photo_attributes][is_main]'>
+                </div>
+              </div>
+
+            </div>
+          <% end %>
+
+
+          <h5>Other Event Images</h5>
+          <%= event.fields_for :other_photos do |event_photo|  %>
+            <% if event_photo.object.image.present? %>
+              <div class='control-group row event-photo-div'>
+
+                    <div class="controls">
+                      <img src=<%= event_photo.object.image.url(:medium) %> class="image_preview_container img-rounded" >
+                    </div>
+
+                
+                  <div>
+                    <label class="control-label">Description</label>
+                    <div class="controls">
+                      <br/>
+                      <%= event_photo.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+                            
+                      <a href='#' class='remove_entity' data-toRemove='.event-photo-div'>Remove Photo</a>
+                    </div>
+                  </div>
+
+                    <div class='controls upload_progress'>
+                      Upload Progress:
+                      <div class='progress'>
+                        <div class='bar' style='width: 0%'></div>
+                      </div>
+                    </div>
+
+              </div>
+            <% end %>
+          <% end %>
+
+          <div id='fields-for-event_photos-list' class='numerous'>
+            <%= event.fields_for :other_photos, Photo.new, :child_index => 'replace_this' do |photo| %>
+              <div class='control-group row'>
+                
+                  <div class="controls">
+                    <img src='' class="image_preview_container img-rounded" >
+                  </div>
+
+                  <div>
+                    <label class="control-label">Event Image</label>
+                    <div class="controls">
+                      <%= photo.file_field :image %>
+
+                    </div>
+                  </div>
+
+                  <div class='controls upload_progress'>
+                    Upload Progress:
+                    <div class='progress'>
+                      <div class='bar' style='width: 0%'></div>
+                    </div>
+                  </div>
+
+                <!-- url is updated when the image is created and uploaded  -->
+                <%= photo.hidden_field :remote_image_url, :class => 'photo_url_div' %>
+
+              </div>
+              
+              <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+              
+            <% end %>
+
+          </div>
+
+          <div id='event_photos-list'></div>
+
+          <%= link_to 'Add one more Photo', '#', :id => 'add-to-event_photos-list' %>
+
+          <!-- Event videos -->
+          <h3>Event Video</h3>
+          <div class='row'>
+            <div class='span6'>
+              
+              <!-- Begin Existing Videos -->
+              <%= event.fields_for :videos, @event.videos.first || Video.new do |video| %>
+                <div class='row event-video'>    
+                  
+                    <% if video.object.thumbnail_small.present? %>  
+                      <div class='span3'>
+                        <div class="control-group">
+                          <label class="control-label">Video Preview</label>
+                          <div class="controls">
+                            <img src=<%= video.object.thumbnail_small %> class="img-rounded" >
+                          </div>
+                        </div>
+                      </div>
+                        
+                    <% end %>
+                    
+                    <div class='span3'>
+                      <div class="control-group">
+                        <%= video.label :url, :class => 'control-label' %>
+                        <div class="controls">
+                          <%= video.text_field(:url, :placeholder => 'Youtube or Vimeo URL') %>
+                          <br/>
+                          <% if video.object.id.present? and video.object.url.present? %>
+                            
+                            <%= video.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+                            
+                            <a href='#' class='remove_entity' data-toRemove='.event-video'>Remove Video</a>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+
+                </div>
+              <% end %>
+              <!-- End Existing Videos -->
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+          
+      <br/>
+      <%= event.submit 'Save Event' %>
+
+
+    <% end %>
+  </div>
+</div>
+
+<%= render :partial => 'application/crop_image_modal' %>

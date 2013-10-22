@@ -1,11 +1,15 @@
 Caball::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  # config.middleware.use Rack::Auth::Basic, "Beta Access" do |username, password|
+  #   'secret' == password
+  # end
+  
   # Code is not reloaded between requests
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local       = true
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
@@ -43,10 +47,18 @@ Caball::Application.configure do
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
-  # config.action_controller.asset_host = "http://assets.example.com"
+  # config.action_controller.asset_host = "https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
+  config.action_controller.asset_host = "d1stg2u3ujiznp.cloudfront.net"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  # config.assets.precompile += %w( search.js )
+  config.assets.precompile += %w( admin/admin.css admin/*.js )
+
+  config.assets.precompile += %w( conversations/new.css users/users_manifest.js dashboard/dashboard.css dashboard/dashboard_manifest.js users/users.js signup.css signin.css
+                                events_manifest.js events/manifest.css events/event_index.css events/events_manifest.js home_page.css 
+                                users/user_index.css application.js 
+                                projects/projects_manifest.js projects/manifest.css users/user_search.js projects/project_index.css 
+                                static_pages/our_story.css 
+                                users/users_manifest.js users/manifest.css users/show.css contact.js glossary.js static_pages/labs.css)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
@@ -64,4 +76,18 @@ Caball::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+  
+  # Change mail delvery to either :smtp, :sendmail, :file, :test
+  config.action_mailer.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+                     :address        => "smtp.gmail.com",
+                     :port           => 587,
+                     :authentication => :plain,
+                     :user_name      => "notifications@filmzu.com",
+                     :password       => "TheFilmzu1912",
+                     :openssl_verify_mode  => 'none'
+   }
+  
+  # Change when Push to the Website or will Error out
+  config.action_mailer.default_url_options = { :host => 'filmzu-dev-env-cpbt693qtg.elasticbeanstalk.com' }
 end

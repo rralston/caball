@@ -1,0 +1,24 @@
+<div class="row-fluid roles-row">
+	  <div class="well">
+      <%= form_for [@user, @blog] do |f| %>
+        <% if @blog.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@blog.errors.count, "error") %> prohibited this comment from being saved:</h2>
+            <ul>
+            <% @blog.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        
+        <div class="field">
+          <%= f.text_area :content, rows: 8, :class => 'span12', :placeholder => "Enter your blog updates here" %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Create New Update", :class => 'btn btn-primary' %>
+        </div>
+
+      <% end %>
+		</div>
+</div>

@@ -1,0 +1,84 @@
+<script type="script/template" id='attending_event_template'>
+    <a href='/events/<%%= url_param %>'>
+      <div class='event-head'>
+        <div class='event-backdrop'  style='background: url(<%%= main_photo.image.regular.url %>) no-repeat'>
+        </div>
+        <div class='backdrop-cover'></div>
+
+        <div class='event-title'>
+          <%%= title %>
+        </div>
+        <div class='event-location light'>
+          <div class="location-img-blue pull-left"></div>
+          <%%= location %>
+        </div>
+        <div class='event-headline light'> 
+          <%%= description %>
+        </div>
+
+        <div class="date pull-left medium">
+          <div class="day">
+            <%%= start.day %>
+          </div>
+          <div class="month regular">
+            <%%= start.month_year %>
+          </div>
+        </div>
+      </div>
+    </a>
+    
+    <div class='event-summary'>
+      <div class='gradient clearfix'>
+        <div class='event-owner pull-left'>
+          <span class="pull-left owner-img">
+            <div class="img-circle user-circle-image" style="background: url(<%%= user.profile_thumb %>)">
+            </div>
+          </span>
+
+          <span class="owner pull-left">
+                  created by
+                  <br>
+            <span class="owner-name">
+              <a href='users/<%%= user.url_param %>' target='_blank'><%%= user.name %></a>
+            </span>
+          </span>
+
+        </div>
+
+        <div class='attendees-details pull-left'>
+          <div class='attendees pull-left light'>
+            ATTENDING: <br/>
+
+            <%% _.first(attendees, 5).forEach(function(attendee){ %>
+              <div class="img-circle event-attendee-pic user-circle-image pull-left" style="background: url(<%%= attendee.profile_tiny %>)">
+              </div>
+            <%% }) %>
+
+          </div>
+          <div class='pull-right attending-btn text-center'>
+            <a class='btn-unattend btn-custom pattern-grey-btn regular pull-left'>
+              <i class='icon-ok'></i>Attending
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class='event-popularity clearfix'>
+        
+        <div class="likes action-div like-event icon pull-right">
+          <div class='pull-right count'>
+            <%%= likes.length %>
+          </div>
+          <div class="heart-blue <%% if(user_liked) print('active') %> icon pull-right"> </div>
+        </div>
+
+        <div class='comments pull-right'>
+          <div class='pull-right'>
+            <%%= comments.length %>
+          </div>
+          <div class="comment-blue icon pull-right"> </div>
+        </div>
+        
+      </div>
+    </div> 
+  
+</script>

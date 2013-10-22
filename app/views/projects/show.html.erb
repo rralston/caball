@@ -1,0 +1,517 @@
+<%= javascript_include_tag "projects/projects_manifest" %>
+<%= stylesheet_link_tag "projects/manifest.css" %>
+
+<div class='container'>
+  <div class='row'>
+    <div class='span12'>
+      
+      <div class='row project-main-head'>
+        <div class='span5 project-image action-div' data-toggle='modal' data-target='#media-modal'  style='background: url("<%= @project.display_large %>")'>
+        </div>
+        <div class="shadow-div"> </div>
+        <div class='pull-left main-right'>
+          <% if current_user != @project.user %>
+            <div class='row'>
+              <div class='span6'>
+
+                <% if current_user and @project.liker_ids.include?(current_user.id) %>
+                  <div class='btn-custom pull-right btn-red btn-like-project liked' data-projectId='<%= @project.id %>' data-ownerId='<%= @project.user.id %>'>
+                    Un Like This
+                  </div>
+                <% else %>
+                  <div class='btn-custom pull-right btn-red btn-like-project' data-projectId='<%= @project.id %>' data-ownerId='<%= @project.user.id %>'>
+                    Like This
+                  </div>
+                <% end %>
+                
+                <div class='btn-custom pull-right btn-message btn-grey send-generic-message' data-message-subject='Regarding project - <%= @project.title %>' data-message-header='Message Project Owner - <%= @project.title %>' data-message-recipients='<%= @project.user.email %>'>
+                  Message
+                </div>
+              </div>
+            </div>
+          <% else %>
+            <div class='row'>
+              <div class='span6'>
+                <a class='btn-custom pull-right btn-red' href='/projects/<%= @project.id %>/edit'>
+                  Edit Project
+                </a>
+              </div>
+            </div>
+          <% end %>
+          <div class='row'>
+            <div class='span7 title'>
+              <h2><%= @project.title %></h2>
+            </div>
+            
+            <div class='span7 project-created-by light'>
+              <i>created by </i>
+              <%= link_to @project.user.name, "/users/#{@project.user.url_param}", :class => 'medium' %>
+            </div>
+
+            <div class='span7 project-description light'>
+              <% if @project.description.length > 200 %>
+                <%= truncate(@project.description, :length => 200, :separator => ' ') %> <a class='read_more_btn' data-content='<%= @project.description %>' data-header='Project description - <%= @project.title %>' >Read more</a>
+              <% else %>
+                <%= @project.description %> 
+              <% end %>
+              <div class='shaded-divider'></div>
+            </div>
+            
+          </div>
+
+          <div class='row'>
+            <div class='span7 project-location light'>
+              <% if !@project.location.nil? %>
+                <div class='location-img-blue pull-left'></div>
+                Shooting in <%= @project.location %>
+              <% end %>
+            </div>
+            
+            <div class='span7 project-genres light'>
+              <ul>
+                <% @project.genre.each do |genre| %>
+                  <% if genre.present? %>
+                    <li> <%= genre %> </li>
+                  <% end %>
+                <% end %>
+
+                <% if @project.union.present? %>
+                  <li> <%= @project.union %> </li>
+                <% end %>
+                
+              </ul>
+            </div>
+
+            <div class='span7 project-types'>
+              <ul>
+                <% @project.is_type.each do |type| %>
+                  <% if type.present? %>
+                    <li class='badge badge-custom-green'> <%= type %> </li>
+                  <% end %>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class='row'>
+        
+        <div class='span8 project-wall'>
+          <div class='row'>
+            <div class='headline'>
+              <i>
+                <%= @project.headline %>
+              </i>
+            </div>
+          </div>
+
+          <div class='row roles-div'>
+            <div class='span8 available-roles-head'>
+              Available Positions
+            </div>
+
+            <div class="span8 role-circles">
+              <% accordion_target = 0 %>              
+              <% @project.roles_json.each do |name, super_role_details| %>
+                <a data-toggle="tab" href="#role-tab-<%= accordion_target %>" class='circle-wrapper'>
+                  <div class="role-circle-container">
+                    <span class="role-title">
+                      <%= name %>
+                    </span>
+                    
+                    <div class="role-circle"> </div>
+                    <div class="circle-fill"> </div>
+
+                    <div class="circle-measure circle-measure-<%= ((super_role_details[:filled_count] / super_role_details[:total_count].to_f) * 10).to_i %>"> </div>
+                    
+                    <span class="role-count">
+                      <%= super_role_details[:filled_count]%> of <%= super_role_details[:total_count]%>
+                      <br/>
+                    </span>
+
+                  </div>
+                </a>
+
+                <% accordion_target+=1 %>
+              <% end %>
+
+            </div>
+
+
+
+            <% accordion_counter = 0 %>
+            <% modal_counter = 0 %>
+           
+             <ul class="span7 role-filters clearfix custom-green-filters nav">
+              <% @project.roles_json.each do |name, super_role_details| %>
+                <li>
+                  <a href="#role-tab-<%= accordion_counter %>" data-toggle='tab' class='badge badge-custom-green pull-left role-filter'>
+                    <%= name %>
+                  </a>
+                <% accordion_counter += 1 %>
+                </li>
+              <% end %>
+            </ul>
+           
+
+            <% accordion_counter = 0 %>
+            <% modal_counter = 0 %>
+
+            <div class='span8 tab-content roles-display-tabs'>
+              <% @project.roles_json.each do |name, super_role_details| %>
+              
+                <div class='tab-pane' id='role-tab-<%= accordion_counter %>'>
+                  <% super_role_details[:subroles].each_with_index do |role, counter| %>
+                    
+                    <% if role.filled %>
+                      <div class='role-portfolio pull-left'>
+                        <div class="role-title medium">
+                          <%= role.subrole %>
+                        </div>  
+
+                        <% if role.approved_user.present? %>
+                          <a href='/users/<%= role.approved_user.url_param %>'>
+                            <%= image_tag role.approved_user.profile_medium, :class => 'img-circle role-cast-pic' %>
+                          </a>
+                        <% else %>
+                          
+                          <% if role.name == 'Cast' %>
+                            <%= image_tag "role-#{role.gender}-default.png", :class => 'default-role-pic' %>
+                          <% else %>
+                            <%= image_tag "/assets/role_icons/#{role.name}.png", :class => 'default-role-pic' %>
+                          <% end %>
+
+                        <% end %>
+
+                        <div class='role-filled-sumary'>
+                          <i class='icon-ok'></i> Filled
+                        </div>
+                      </div>
+                    <% else %>
+                      <div class='role-portfolio pull-left'>
+                        <div class="role-title">
+                          <%= role.subrole %>
+                        </div>
+
+                        <% if role.name == 'Cast' %>
+                          <%= image_tag "role-#{role.gender}-default.png", :class => 'default-role-pic' %>
+                        <% else %>
+                          <%= image_tag "/assets/role_icons/#{role.name}.png", :class => 'default-role-pic' %>
+                        <% end %>
+
+                        <% if can? :edit, @project %>
+                          <div class='btn-custom btn-red info-button show_applicants' data-id='<%= role.id %>'>
+                            Applicants <%= role.applications.size %>
+                          </div>
+                        <% else %>
+                          <div class="btn-custom btn-red info-button role-apply-btn" data-toggle="modal" data-target="#role-modal-<%= modal_counter %>" data-keyboard="true" >
+                              Apply
+                          </div>
+                        <% end %>
+                        
+                      </div>
+
+                      <!-- Role Info Modal -->
+                      <div id="role-modal-<%= modal_counter %>" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                          <h3><span> <%= role.subrole %> </span></h3>
+                        </div>
+
+                        <div class="modal-body">
+                          <%= simple_format role.description %> 
+													
+													<!-- Special Cast Area for Modal Begins -->
+													<br>
+													<% if role.name == 'Cast' %>
+													<h3>Cast Profile</h3>
+													<br>
+													<%= image_tag "role-#{role.gender}-default.png", :class => 'default-role-pic', :align => 'left', :style => "margin: 50px;" %>	
+													<div class='content light'>
+
+								            <% if role.gender.present? %>
+								              Sex: <%=  role.gender.camelize %><br/>
+								            <% end %>
+
+								             <% if role.height.present? %>
+								                Height: <%=  role.height.camelize %><br/>
+								             <% end %>
+
+								             <% if role.ethnicity.present? %>
+								                Ethnicity: <%=  role.ethnicity.camelize %><br/>
+								             <% end %>
+
+								             <% if role.build.present? %>
+								                Build: <%=  role.build %><br/>
+								             <% end %>
+
+								             <% if role.haircolor.present? %>
+								                Hair Color: <%=  role.haircolor.camelize %><br/>
+								             <% end %>
+
+								             <% if role.age.present? %>
+								                Age: <%=  role.age.camelize %><br/>
+								             <% end %>
+													<br>
+													</div>
+										
+													<% end %>
+													<!-- Special Cast Area for Modal Ends -->
+													
+
+                          <% if current_user %>
+                           <%= link_to 'Apply', new_role_application_path(:role_id => role.id), class: "btn btn-small btn-success" %>
+                          <% else %>
+                           <%= link_to "Sign in", "../users/sign_in", id: "sign_in", class: "btn btn-small btn-danger" %>
+													<%= link_to "Or sign up to apply!", "../users/sign_up", id: "sign_up", class: "btn btn-small btn-danger" %>
+                          <% end %>
+                        </div>
+                      </div>
+                      <!-- Role Info Modal -->
+
+                    <% end %>
+
+                  <% modal_counter += 1 %>
+                  <% end %>
+                </div> 
+                <% accordion_counter += 1 %>   
+              <% end %>
+            </div>
+          </div>
+
+          <div class='row'>
+            <div class='span8 grey-divider'></div>
+          </div>
+
+
+          <div class='row project-comments-container'>
+
+            <div class='span8 updates-head'>
+              Updates
+            </div>
+            <div class='span8'>
+              <div class='row'>
+                <div class='pull-right' id='comments_div'>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          
+
+
+        </div>
+        
+        <div class='span4 project-right-divs right-container'>
+          <div class='row imp-dates-div'>
+            <div class='span4'>
+              <div class='imp-date-head light'>
+                IMPORTANT DATES
+              </div>
+              
+              <div class='imp-dates'>
+                <% @project.display_dates.each do |date| %>
+                  
+                  <div class='imp-date'>
+                    
+                    <div class='date pull-left'>
+                      <div class='day'>
+                        <%= date.day %>
+                      </div>
+                      <div class='month'>
+                        <%= date.month_year %>
+                      </div>
+                    </div>
+                    
+                    <div class='date-details pull-left light'>
+                      <div class='date-desc'>
+                        <%= date.description %>
+                      </div>
+                      <div class='date-time'>
+                        <%= date.formatted_time %>
+                      </div>
+                    </div>
+                    <div class='clearfix'></div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class='row right-extra-div' id='fans_div'>
+          </div>
+
+          <% if @project.valid_videos.present? %>
+            <div class='row right-extra-div' id='project_video'>
+              <%= raw @project.valid_videos.first.embed_code %>
+            </div>
+          <% end %>
+
+          
+
+          <div class='row right-extra-div' id='similar_projects_div'>
+          </div>
+
+          <div class='right-extra-div coming-div row' id='similar_events'>
+          </div>
+
+          
+
+          <div class='right-extra-div coming-div row'>
+            <div class="span4 shrink-div head">
+              <span class="pull-left">
+                <h3>Connect</h3>
+              </span>
+              <span class="btn-show-all pull-right"></span>
+              <div class="clearfix"></div>
+            </div>
+            <div class="span4">
+              <div class="row clearfix">
+                <div class="grey-line-divider"></div>
+              </div>
+            </div>
+
+            <div class='row share_area text-center'>
+              <%= social_share_button_tag(@project.title) %>
+            </div>
+          </div>
+          
+          <div class='row right-extra-div' id='report_div'>
+            <div class='span4 shrink-div head'>
+              <span class="pull-left">
+                <h3 class='action-div report_entity' data-toggle='modal' data-target='#report-modal' title='Report Project'>
+                  <i class='icon-exclamation-sign'></i>
+                  <%= link_to "#" do %> Report<% end %> 
+                </h3>
+              </span>
+              
+              <div class='clearfix'></div>
+            </div>
+          </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Role Applicants Modal -->
+
+<div id="show_applicants_modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <% modal_counter += 1 %>
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span> Role Applicants </span></h3>
+  </div>
+
+  <div class="modal-body">
+    <ul class='applicants_list'>
+
+    </ul>  
+  </div>
+
+</div>
+<!-- Role Applicants Modal -->
+
+<%= render :partial => 'conversations/send_new_message_modal' %>
+
+<%= render :partial => 'projects/templates/comments' %>
+<%= render :partial => 'projects/templates/comment' %>
+<%= render :partial => 'events/templates/similar_events' %>
+<%= render :partial => 'events/templates/similar_event' %>
+<%= render :partial => 'projects/templates/similar_projects' %>
+<%= render :partial => 'projects/templates/similar_project' %>
+<%= render :partial => 'projects/templates/fans' %>
+<%= render :partial => 'projects/templates/fan' %>
+
+<%= render :partial => 'projects/templates/role_applicant_template' %>
+
+<%= render :partial => 'application/read_more_modal' %>
+<%= render :partial => 'projects/media_modal' %>
+
+<%= render :partial => 'application/report_modal', :locals => { :entity => @project } %>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+  // bind read more btn click event
+  app.fn.bind_read_more_show()
+  app.fn.initialize_send_generic_message()
+
+  $('.show_tooltip').tooltip()
+
+  app.current_user = <%= raw current_user.to_json() %>
+
+  app.project_data = <%= raw @project.to_json() %>
+
+  app.comments = new app.collections.comments()
+  app.comments.reset(<%= raw @project.comments.to_json(:include => [:user, :likes], :check_user => current_user) %>)
+  app.comments_view = new app.views.comments({ collection: app.comments })
+  $('#comments_div').html(app.comments_view.render().el)
+  app.fn.init_comment_image_file_uploader($('#comment_photo_attributes_image'), '/comments/files_upload')
+
+
+
+  // similar events
+  similar_events = new app.collections.similar_events()
+  similar_events.reset(<%= raw Event.custom_json(@project.similar_events.first(4), current_user) %>)
+  similar_events_view = new app.views.similar_events({ collection: similar_events })
+  $('#similar_events').html( similar_events_view.render().el )
+
+  // similar projects
+  app.similar_projects = new app.collections.similar_projects()
+  app.similar_projects.reset(<%= raw Project.custom_json(@project.similar_projects.first(4), current_user) rescue nil %>)
+  app.similar_projects_view = new app.views.similar_projects({ collection: app.similar_projects })
+  $('#similar_projects_div').html(app.similar_projects_view.render().el)
+
+
+  // fans
+  app.fans = new app.collections.fans()
+  app.fans.reset(<%= raw @project.fans.to_json() %>)
+  app.fans_view = new app.views.fans({ collection: app.fans })
+  $('#fans_div').html(app.fans_view.render().el)
+
+  $(document).on('newComment', function(event){
+    
+    comment = new app.models.comment(event.comment)
+
+    app.comments.add(comment)
+    
+    $('#comment_please_wait').hide()
+    $('textarea#comment_content').attr('disabled', false).val('')
+    $('#comment_video_attributes_url').attr('disabled', false).val('')
+    $('#comment_photo_attributes_image').attr('disabled', false)
+    $('button.post_update').attr('disabled', false)
+    $('.post_comment_btn').hide()
+    app.post_button_shown = false
+    // remove the image preview if a photo was uploaded and clear the hidden url value
+    $('.image_preview_container').hide()
+    $('.photo_url_div').val('')
+  });
+
+  // listen to the comment error event event
+  $(document).on('commentError', function(event){
+    alert(event.message)
+    $('#comment_please_wait').hide()
+    $('textarea#comment_content').attr('disabled', false)
+    $('#comment_video_attributes_url').attr('disabled', false)
+    $('#comment_photo_attributes_image').attr('disabled', false)
+    $('button.post_update').attr('disabled', false)
+    $('.post_comment_btn').hide()
+    app.post_button_shown = false
+    // remove the image preview if a photo was uploaded and clear the hidden url value
+    $('.image_preview_container').hide()
+    $('.photo_url_div').val('')
+  });
+
+  app.fn.init_show_post_button_handler()
+
+  
+});
+
+
+</script>

@@ -1,0 +1,54 @@
+<div class="row-fluid">
+	<div class="span9 offset1">
+		<div class="well">
+			<h1> Conversations <% if notification %>- New (<%= notification %>)<% end %></h1>
+			<div class="well">
+
+				<div class="accordion" id="accordion2">
+				  <div class="accordion-group">
+				    <div class="accordion-heading">
+				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+				        <h2> Inbox </h2>
+				      </a>
+				    </div>
+				    <div id="collapseOne" class="accordion-body collapse in">
+				      <div class="accordion-inner">
+				        <ul class="unstyled">
+									<%= render mailbox.inbox %>
+								</ul>
+				      </div>
+				    </div>
+				  </div>
+				  <div class="accordion-group">
+				    <div class="accordion-heading">
+				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+				        <h2> Sentbox </h2>
+				      </a>
+				    </div>
+				    <div id="collapseTwo" class="accordion-body collapse">
+				      <div class="accordion-inner">
+				        <ul class="unstyled">
+									<%= render mailbox.sentbox %>
+								</ul>
+				      </div>
+				    </div>
+				  </div>
+					<div class="accordion-group">
+				    <div class="accordion-heading">
+				      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseThree">
+				        <h2> Trash </h2>
+				      </a>
+				    </div>
+				    <div id="collapseThree" class="accordion-body collapse">
+				      <div class="accordion-inner">
+				        <ul class="unstyled">
+									<%= render mailbox.trash %>
+								</ul>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			<!-- <%= link_to 'Start New Conversation', :new_conversation, {:class => 'btn'} %> -->
+		</div>
+	</div>
+</div>

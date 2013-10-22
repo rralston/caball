@@ -1,0 +1,146 @@
+<%= javascript_include_tag "contact" %>
+<%= stylesheet_link_tag 'home_page' %>
+<section id="promo" class="section alt">
+    <div id="map"></div>
+</section>
+<br>
+<div class="detailinfowrap">
+  <div class="detailinfo maincontain container">
+    <div class="row">    
+    <div class="discover clearfix">
+        <br><br>
+        <div class="info verylight">
+          Contact Us: <small> We can't read minds yet so tell us what you are thinking!</small>
+        </div>
+
+        <div class="dtlinfotext light">
+
+<!-- Main Content -->
+<div id="content" role="main">
+
+    
+
+    <section class="section">
+        <div class="container">
+            <div class="span6">
+                <div class="row-fluid dtlinfotext light">
+									  <fieldset>
+											<%= form_for @contact, :url => contacts_path, :html => {:class => 'form-horizontal' ,:id => 'form-horizontal'} do |f| %>
+											  <% if ContactUs.require_name %>
+												<div class="control-group">
+												      <%= f.label :name, (t('.name') + content_tag(:abbr, '*', :class => 'required')).html_safe %>
+												<div class="controls">
+											      <%= f.text_field :name %>
+											      <% if f.object.errors[:name].present? %>
+											        <p class='inline-error'><%= f.object.errors[:name].join(' and ') %></p>
+											      <% end %>
+											    </div></div>
+											  <% end %>
+												<div class="control-group">
+											    <%= f.label :email, (t('.email') + content_tag(:abbr, '*', :class => 'required')).html_safe %>
+													<div class="controls">
+											    <%= f.text_field :email %>
+											    <% if f.object.errors[:email].present? %>
+											      <p class='inline-error'><%= f.object.errors[:email].join(' and ') %></p>
+											    <% end %>
+												</div></div>
+
+											  <% if ContactUs.require_subject %>
+												<div class="control-group">
+											      <%= f.label :subject, (t('.subject') + content_tag(:abbr, '*', :class => 'required')).html_safe %>
+														<div class="controls">
+											      <%= f.text_field :subject %>
+											      <% if f.object.errors[:subject].present? %>
+											        <p class='inline-error'><%= f.object.errors[:subject].join(' and ') %></p>
+														<% end %>
+											  <% end %>
+											</div></div>
+
+												<div class="control-group">
+											    <%= f.label :message, (t('.message') + content_tag(:abbr, '*', :class => 'required')).html_safe %>
+													<div class="controls">
+											    <%= f.text_area :message, :rows => 15, :cols => 80 %>
+											    <% if f.object.errors[:message].present? %>
+											      <p class='inline-error'><%= f.object.errors[:message].join(' and ') %></p>
+											    <% end %>
+											</div></div>
+											  <div class="control-group">
+											      <div class="controls">
+											    <%= f.submit :submit, :alt => t('.submit'), :class => 'btn-custom load_more btn-red red_submit', :label => t('.submit'), :title => t('.submit'), :value => "Send Message" %>
+											  </div></div>
+											<% end %>
+											   </div>
+											</fieldset>
+											</div>
+											<div class="span1">
+											</div>
+											<div class="span5">
+											<form class="form-horizontal">
+
+											<div class="info verylight"> Physical Address </div><br>
+											<ul class="icons">
+											    <li>
+											        <p>
+											            <i class="icon-home"></i> 820 Broadway, Santa Monica, CA 90401
+											        </p>
+
+											    </li>
+											    <!-- <li>
+											    															<p>
+											    											            <i class = "icon-phone"></i> 1-800-TheFilms    
+											    											        </p> 
+											    											    </li>
+											    												    <li>
+											    											        <p>
+											    											            <i class = "icon-envelope"></i> info@filmzu.com    
+											    											        </p>
+											    											    </li>
+											    											    <li>
+											    											        <p>
+											    											            <i class = "icon-globe"></i> <a href="http://www.filmzu.com">www.filmzu.com</a>    
+											    											        </p>
+											    											    </li> -->
+											</ul><br>
+											<div class="info verylight">Connect with Us</div><br>
+											<div class           = 'row share_area text-left'>
+											  <div class         = "social-share-button" data-title="Filmzu" data-img="" data-url="">
+											    <a href          = "http://twitter.com/filmzu" target='_blank' class="social-share-button-twitter" data-site="twitter"></a><a href          = "http://twitter.com/filmzu" target='_blank'> Twitter</a><br>
+											    <a href          = "http://facebook.com/filmzu" target='_blank' class="social-share-button-facebook" data-site="facebook"></a><a href          = "http://facebook.com/filmzu" target='_blank'> Facebook</a>	
+													<!-- <br>
+																							    <a href          = "http://plus.google.com/filmzu" target='_blank' class="social-share-button-google_plus" data-site="google_plus"></a><a href          = "http://plus.google.com/filmzu" target='_blank'> Google+</a> -->
+											    </div></div>
+													<br>
+											<div class="info verylight">Opportunities</div><br>
+											<p>Please see our <%= link_to "current opportunities", opportunities_url %> page.</p>
+											<br>
+											<div class="info verylight">Speaker</div><br>
+											<p>Please fill out the form on the left if you would like a Filmzu representative to speak at your film school or event</p>
+											
+										
+											</form>
+											</div>
+											</div>
+											</div>
+											</section>
+</div>
+</div>
+</div>
+	
+
+</div>
+
+</div>
+
+
+</div>
+</div>
+</div>
+
+
+
+</div>
+<script>
+    // Call the google map
+    mapInit();
+</script>
+<!-- end scripts -->

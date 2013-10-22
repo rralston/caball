@@ -1,0 +1,15 @@
+<% if @comment.nil? %>
+
+  $.event.trigger({
+    type: 'commentError',
+    message: "<%= @error %>"
+  });  
+
+<% else %>
+
+  $.event.trigger({
+    type: 'newComment',
+    comment: <%= raw @comment.to_json(:include => [:user, :likes], :check_user => current_user) %>
+  });
+
+<% end %>

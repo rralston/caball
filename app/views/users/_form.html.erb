@@ -1,0 +1,572 @@
+<% @user.errors.full_messages.each do |error| %>
+<div class="alert alert-error">
+  <button type="button" class="close" data-dismiss="alert">
+    ×
+  </button>
+  <p>
+    <%= error %>
+  </p>
+</div>
+<% end %>
+
+<div class="row">
+  <div class="span12 edit-user">
+    <h2>User Profile</h2>
+    <div id="wrapper" class="row-fluid">
+      <div id="navigation" style="display:none;">
+        <ul>
+          <li class="selected">
+            <a href="#">General Info</a>
+          </li>
+          <li>
+            <a href="#">About You</a>
+          </li>
+          <li>
+            <a href="#">Your Roles</a>
+          </li>
+          <li>
+            <a href="#">More Photos</a>
+          </li>
+          <li>
+            <a href="#"><%= @user.name.possessive %> Reel</a>
+          </li>
+          <li>
+            <a href="#">Finish</a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div id="steps">
+        <%= form_for @user, :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'formElem'} do |f| %>
+
+        <fieldset class="step info">
+          <div class="span12">
+            <h2>General Info</h2>
+            <div class="control-group">
+              <%= f.label :name, :class => 'control-label' %>
+              <div class="controls">
+                <%= f.text_field :name, :class => 'text_field required' %>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label :email, :class => 'control-label' %>
+              <div class="controls">
+                <%= f.text_field :email, :class => 'text_field required email' %>
+              </div>
+            </div>
+            <div class="control-group">
+              <%= f.label :location, :class => 'control-label' %>
+              <div class="controls location">
+                <%= f.text_field :location, :class => 'text_field required' %>
+                <div class="clearfix"></div>
+                <%= image_tag("locate_me.png", :align => "left", :height => "30", :id => "locate") %>
+                <i>Click icon for your location</i>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <div class="controls gender">
+                <%= radio_button("user", "gender", "male", {:checked => (!@user.gender.nil? && (@user.gender == "male" && 'checked')) || "false"}) %>
+                <%= label :gender_male, 'Male' %>
+                <%= radio_button("user", "gender", "female", {:checked => (!@user.gender.nil? && (@user.gender == "female" && 'checked')) || "false"}) %>
+                <%= label :gender_male, 'Female' %>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <%= f.label :imdb_url, :class => 'control-label' %>
+              <div class="controls">
+                <%= f.text_field :imdb_url, :class => 'text_field' %>
+              </div>
+            </div>
+
+            <h4>Profile Picture</h4>
+            <%= f.fields_for :profile, @user.profile || @user.build_profile  do |profile|  %>
+              <div class="control-group">
+                <%= profile.label "Profile Photo", :class => 'control-label' %>
+                
+                <% if @user.profile.image.present? %>
+                  <div class="controls">
+                    <%= image_tag @user.profile.image.url(:medium), {:class => "img-polaroid"} %>
+                  </div>
+                <% end %>
+                  
+                <div class="controls">
+                  <%= profile.file_field :image %>
+                </div>
+
+              </div>
+            <%end%>
+
+            <div class='control-group'>
+              <label class='control-label'>Experience & Skills</label>
+
+              <div class='controls'>
+                <%= f.hidden_field :expertise, :class => 'text_field' %>
+                
+                  <ul id="expertise_tags" class='tagit ui-sortable'>
+                    <% if @user.expertise.present? %>
+                      <%= @user.expertise.split(',').each do |exp_tag| %>
+                        <li data-value="<%= exp_tag %>"><%= exp_tag %> </li>
+                      <% end %>
+                    <% end %>
+                  </ul>
+                
+              </div>    
+            </div>
+
+            <div class="control-group">
+              <%= f.label "Experience", :class => 'control-label' %>
+              <div class="controls">
+                <%= f.select(:experience, options_for_select(User.experience, @user.experience)) %>
+              </div>
+            </div>
+
+
+            <div class='control-group'>
+
+              <%= f.label 'Do you have an agent?' %>
+              
+              <div class='controls'>
+                <%= f.radio_button 'agent_present', 'true', :class => 'toggler_radio', 'data-target' => '#user_agent_name'  %>
+                <%= label :agent_present, 'Yes', :class=>'radio_label' %>
+                <%= f.radio_button 'agent_present', 'false', :class => 'toggler_radio', 'data-target' => '#user_agent_name' %>
+                <%= label :agent_present, 'No', :class=>'radio_label' %>
+
+                <% if @user.agent_name.present? %>
+                  <%= f.text_field :agent_name, :class => 'text_field' %>
+                <% else %>
+                  <%= f.text_field :agent_name, :class => 'text_field', :style => 'display: none;' %>
+                <% end %>
+              </div>
+            </div>
+
+            <div class='control-group'>
+
+              <%= f.label 'Are You a part of any professional guilds' %>
+              
+              <div class='controls'>
+                
+                <%= f.radio_button 'guild_present', 'true', :class => 'toggler_radio', 'data-target' => '#user_guild'  %>
+                <%= label :guild_present, 'Yes', :class=>'radio_label' %>
+                <%= f.radio_button 'guild_present', 'false', :class => 'toggler_radio', 'data-target' => '#user_guild' %>
+                <%= label :guild_present, 'No', :class=>'radio_label' %>
+
+                <% if @user.guild.present? %>
+                  <%= f.select(:guild, options_for_select(User.guilds, @user.guild)) %>
+                <% else %>
+                  <%= f.select(:guild, options_for_select(User.guilds), {}, {:style => 'display: none;'}) %>
+                <% end %>
+
+              </div>
+            </div>
+
+          </div>
+        </fieldset>
+
+        <fieldset class="step about-you">
+          <div class="span12">
+            <h2>About You</h2>
+
+            <div class="control-group">
+              <%= f.label :headline, :class => 'control-label' %>
+              <div class="controls">
+                <%= f.text_field :headline, :class => 'text_field' %>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <%= f.label :about, :class => 'control-label' %>
+              <div class="controls">
+                <%= f.text_area :about, :class => 'text_area' %>
+              </div>
+            </div>
+
+
+            <h3>Upload Your Resume</h3>
+            <%= f.fields_for :resume, @user.resume || Resume.new do |r|  %>
+              <div class="control-group">
+                <%= r.label "Resume", :class => 'control-label' %>
+                <div class="controls">
+                  <%= r.file_field :document %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </fieldset>
+
+        <fieldset class="step roles-content">
+          <div class="span12">
+            <h2>Your Roles</h2>
+              
+            <%= f.fields_for :talents do |talent|   %>
+              <div class='user-talent'>
+                <h4>Role</h4>
+                <div class="control-group">
+                  <%= talent.label :name, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= talent.select(:name, options_for_select(User.types)) %>
+                   </div>
+                </div>
+              
+                <div class="control-group">
+                <%= talent.label :description, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= talent.text_area :description, :class => 'textarea', :rows => "5" %>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <div class="controls">
+                    <%= talent.check_box :_destroy %> Click Here to Delete
+                  </div>    
+                </div>
+              </div>
+            <% end %>
+
+            <!-- don't allow user to add more than 3 talents -->
+            <% if @user.talents.count < 3 %>
+              <div id="fields-for-talents-list" class="numerous">
+                <%= f.fields_for :talents, Talent.new, :child_index => 'replace_this' do |talent| %>
+                  <div class="control-group">
+                    <%= talent.label :name, :class => 'control-label' %>
+                    <div class="controls">
+                      <%= talent.select(:name, options_for_select(User.types)) %>
+                    </div>
+                  </div>
+                
+                  <div class="control-group">
+                    <%= talent.label :description, :class => 'control-label' %>
+
+                    <div class="controls">
+                      <%= talent.text_area :description, :class => 'textarea', :rows => "5" %>  
+                    </div>
+                  </div>
+                
+                  <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+                <% end %>
+              </div>
+
+              <div id="talents-list"></div>
+              
+              <%= link_to 'Add More Talent', '#', :id => 'add-to-talents-list' %>
+            <% end %>
+
+
+            <div id='talents_append_div'>
+              
+            </div>
+
+            
+
+            <%= f.fields_for :characteristics_attributes, @user.characteristics || Characteristics.new do |c|   %>
+
+						
+            <div class="row-fluid actor-characteristics">
+						
+              <h3>Physical Characteristics</h3>
+              <div class="span4">
+                <div class="control-group">
+                  <%= c.label :age, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= c.text_field :age, :class => 'text_field' %>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <%= c.label :height, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= c.text_field :height, :class => 'text_field' %>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <%= c.label :ethnicity, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= c.text_field :ethnicity, :class => 'text_field' %>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <%= c.label :bodytype, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= c.text_field :bodytype, :class => 'text_field' %>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <%= c.label :skin_color, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= c.text_field :skin_color, :class => 'text_field' %>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <%= c.label :eye_color, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= c.text_field :eye_color, :class => 'text_field' %>
+                  </div>
+                </div>
+              </div>
+              <div class="span4">
+                <div class="control-group">
+                  <%= c.label :hair_color, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= c.text_field :hair_color, :class => 'text_field' %>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <%= c.label :chest, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= c.text_field :chest, :class => 'text_field' %>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <%= c.label :waist, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= c.text_field :waist, :class => 'text_field' %>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <%= c.label :hips, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= c.text_field :hips, :class => 'text_field' %>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <%= c.label :dress_size, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= c.text_field :dress_size, :class => 'text_field' %>
+                  </div>
+                </div>
+
+                <div class="control-group">
+                  <%= c.label :description_tag_list, :class => 'control-label' %>
+                  
+                  <div class='controls'>
+
+                      <ul id="user_description_tags" class='tagit ui-sortable'>
+                        <% if @user.characteristics.present? and @user.characteristics.description_tag_list.present? %>
+                          <% @user.characteristics.description_tag_list.each do |desc| %>
+                            <li data-value="<%= desc %>"><%= desc %> </li>
+                          <% end %>
+                        <% end %>
+                      </ul>
+
+                  </div>  
+
+                  <div class="controls">
+                    <%= c.hidden_field :description_tag_list, :class => 'text_field' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <% end %>
+            
+          </div>
+        </fieldset>
+
+        <fieldset class="step more-photos">
+
+          <h2>Cover Photo</h2>
+          <%= f.fields_for :cover_photo, (@user.cover_photo || Photo.new) do |user_cover_photo|  %>
+
+            <div class='row'>
+              <div class='span3'>
+                <div class="control-group">
+                  <!-- if image exits, allow to change it -->
+                  <% if user_cover_photo.object.image.present? %>
+                    <img src=<%= user_cover_photo.object.image.url(:medium) %> class="img-rounded" >
+                  <% end %>
+
+                  <div class="controls">
+                    <%= user_cover_photo.file_field :image, :validate => true %>
+                  </div>
+                  <input type='hidden' value='1' name='user[cover_photo_attributes][is_cover]'>
+                </div>
+              </div>
+
+              <div class='span3'>
+                <div class="control-group">
+                  <label class="control-label">Image Description</label>
+                  <div class="controls">
+                    <%= user_cover_photo.text_field :description %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+
+          <h2>More Photos</h2>
+
+          <%= f.fields_for :photos do |p|  %>
+            <% if @user.photos.exists? %>
+              <div class="control-group">
+                <%= p.label "Photo", :class => 'control-label' %>
+                <div class="controls">
+                  <%= image_tag p.object.image.url(:medium), {:class => "img-polaroid"} %>
+                  <%= p.file_field :image %>
+                  <%= p.check_box :_destroy %> Click Here to Destroy
+                </div>
+              </div>
+
+              <div class="control-group">
+                <%= p.label "Description", :class => 'control-label' %>
+                <div class="controls">
+                  <%= p.text_area :description, :class => 'textarea', :rows => "5"%>
+                </div>
+              </div>
+            <% else %>
+
+              <div class="control-group">
+                <%= p.label :description, :class => 'control-label' %>
+                <div class="controls">
+                  <%= p.text_field :description, :class => 'text_field' %>
+                </div>
+              </div>
+              <div class="control-group">
+                <p>
+                  Please Upload Additional Images
+                </p>
+                <div class="controls">
+                  <%= p.file_field :image %>
+                </div>
+              </div>
+
+            <% end %>
+          <% end %>
+
+          <% comment= "Allowing for multiple photos here..." %>
+
+          <div id="fields-for-photos-list" class="numerous">
+            <%= f.fields_for :photos, Photo.new, :child_index => 'replace_this' do |photo| %>
+            <div class="control-group">
+              <div class="controls">
+                <%= photo.file_field :image %>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <%= photo.label :description, :class => 'control-label' %>
+              <div class="controls">
+                <%= photo.text_area :description, :class => 'textarea', :rows => "5" %>
+              </div>
+            </div>
+
+            <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+            <% end %>
+          </div>
+
+          <div id="photos-list"></div>
+          <%= link_to 'Add Another Photo', '#', :id => 'add-to-photos-list' %>
+
+        </fieldset>
+
+        <fieldset class="step videos">
+          <div class="span12">
+            <h2><%= @user.name.possessive %> Reel</h2>
+            <% videos_counter = 1 %>  
+            <%= f.fields_for :videos do |video|  %>
+            <h3>Video <%= videos_counter%></h3>
+            <% if @user.videos.exists? %>
+            
+              <% if video.object.thumbnail_small.present? %>
+                <div class="control-group">
+                  <label class="control-label">Video Preview</label>
+                  <div class="controls">
+                    <img src=<%= video.object.thumbnail_small %> class="img-polaroid" >
+                    <%= video.check_box :_destroy %> Click Here to Delete
+                  </div>
+                </div>
+              <% end %>
+            
+              <div class="control-group">
+                <%= video.label :url, :class => 'control-label' %>
+                <div class="controls">
+                  <%= video.text_field(:url) %>
+                </div>
+              </div>
+            <% else %>
+              <div class="control-group">
+                <label class="control-label">Youtube URL</label>
+                <div class="controls">
+                  <%= video.text_field(:url) %>
+                </div>
+              </div>
+            <% end %>
+            
+            <div class="control-group">
+              <label class="control-label">Your Participation</label>
+              <div class="controls">
+                <%= video.text_area :user_description, :class => 'text_field', :rows => 5 %>
+								<%= video.check_box :_destroy %> Click Here to Delete
+              </div>
+            </div>
+            
+            <% videos_counter+=1 %>
+            <% end %>
+            
+            <div id="fields-for-videos-list" class="numerous">
+              <%= f.fields_for :videos, Video.new, :child_index => 'replace_this' do |video| %>
+              <h3>Video <%= videos_counter%></h3>
+              <div class="control-group">
+                <label class="control-label">Title</label>
+                <div class="controls">
+                  <%= video.text_field(:title) %>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Url</label>
+                <div class="controls">
+                  <%= video.text_field(:url) %>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Your Participation</label>
+                <div class="controls">
+                  <%= video.text_area :user_description, :class => 'text_field', :rows => 5 %>
+                </div>
+              </div>
+              <div class="control-group">
+                <%= video.label :imdb, :class => 'control-label' %>
+                <div class="controls">
+                  <%= video.text_field :imdb, :class => 'text_field' %>
+                </div>
+              </div>
+              <%= link_to 'Remove', '#', :class => 'numerous-remove' %>            
+              
+              <% videos_counter+=1 %>
+              <% end %>
+            </div>
+            <div id="videos-list"></div>
+            <%= link_to 'Add Another Video', '#', :id => 'add-to-videos-list' %>
+
+            
+          </div>
+        </fieldset>
+
+        <fieldset class="step terms">
+          <div class="span12">
+            <h2>Terms and Conditions</h2>
+            <div class="control-group">
+              <label class="control-label">Terms and Conditions</label>
+              <div class="controls">
+
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">I agree</label>
+              <div class="controls">
+                <input type="checkbox" name="terms-agree" />
+              </div>
+              <div class="form-actions">
+                <%= f.submit nil, :class => 'btn btn-primary', :id => 'submit-user-form' %>
+                <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                users_path, :class => 'btn' %>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <% end %>
+        <!-- End of Form Inputs -->
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<script type="script/template" id='endorsement_template'>
+
+  <div class='endo-main-container'>
+    <span class='quo-left'>&ldquo;</span>
+    <div class='endorser'>
+      <div class='name medium'>
+        <a href='/users/<%%= sender.url_param %>'><%%= sender.name %></a>:
+      </div>  
+    </div>
+
+    <div class='endo-details'>
+      <div class='message light'>
+        <%%= message %><span class='quo-right'>&rdquo;</span>
+
+        <%% if(expertise != null){ %>
+          <div class='expertise light'>
+            SKILLS & EXPERTISE: 
+            <%% expertise.split(',').forEach(function(skill){ %>
+              <span class='badge'>
+                <%%= skill %>
+              </span>
+            <%% }) %>
+          </div>
+        <%% } %>
+      </div>
+
+
+    </div>
+    
+  </div>
+
+</script>

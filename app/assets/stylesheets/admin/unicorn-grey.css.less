@@ -1,0 +1,82 @@
+/**
+ * Unicorn Admin Template
+ * Diablo9983 -> diablo9983@gmail.com
+**/
+body {
+	background-color: #444444;
+}
+
+#header {
+  .box-shadow(0 1px 0 #333333);
+	background-color: #333333;
+	#gradient > .vertical(#3F3F3F, #222222);
+  border-bottom: 1px solid #555555;
+}
+
+#search input[type=text], #search button {
+	background-color: #222222;
+	color: #CCCCCC;
+}
+#search input[type=text]:focus {
+	color: #777777;
+}
+
+#sidebar > ul {
+	border-top: 1px solid #393939;
+	border-bottom: 1px solid #4E4E4E;
+}
+#sidebar > ul > li {
+	border-top: 1px solid #4E4E4E;
+	border-bottom: 1px solid #393939;
+}
+#sidebar > ul > li.active {
+  background-color: #3a3a3a;
+  #gradient > .vertical(#333333, #3F3F3F);
+}
+
+#sidebar > ul > li.open.submenu > a {
+	border-bottom: 1px solid #393939;
+}
+#sidebar > ul > li.open.active.submenu > a {
+	border-bottom: 1px solid #2A2A2A;
+}
+#sidebar > ul > li > a > .label {
+	background-color: #333333;
+}
+#sidebar > ul > li > a:hover {
+	background-color: #4A4A4A;
+}
+#sidebar > ul ul {
+	border-top: 1px solid #4E4E4E;
+	background-color: #2A2A2A;
+}
+#sidebar > ul ul li a {
+	border-top: 1px solid #333333;
+	border-bottom: 1px solid #202020;
+}
+#sidebar > ul ul li a:hover, #sidebar > ul ul li.active a {
+	color: #CCCCCC;
+	background-color: #272727;
+}
+
+.dropdown-menu li a:hover, .dropdown-menu .active a, .dropdown-menu .active a:hover {
+	background-color: #444444;
+}
+
+@media (max-width: 480px) {
+	#sidebar > a {
+		#gradient > .vertical(#464646, #404040);
+		border-bottom: 1px solid #6e6e6e;
+	}
+	#sidebar > ul {
+		background-color: #444444;
+	}
+}
+@media (min-width: 481px) and (max-width: 767px) {
+	#sidebar > ul ul:before {
+		border-right: 7px solid rgba(0, 0, 0, 0.2);
+	}
+	#sidebar > ul ul:after {
+		border-right: 6px solid #222222;
+    }
+}

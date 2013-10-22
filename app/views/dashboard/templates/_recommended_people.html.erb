@@ -1,0 +1,31 @@
+<script type="script/template" id='recommended_person_template'>
+    
+    <div class='person-img pull-left'>
+      <div class='img-circle user-circle-image' style='background: url(<%%= profile_thumb %>)'>
+      </div>
+    </div>
+
+    <div class='user-details medium'>
+      <div class='name'>
+        <a href='/users/<%%= url_param %>'><%%= name %></a>
+      </div>
+      <div class='location regular'>
+        <%%= location %>
+      </div>
+      <div class='headline light'>
+        &ldquo;<%%= headline.substring(0,35) %>&rdquo;
+      </div>
+    </div>
+
+    <%% if (typeof user_following != 'undefined' &&  user_following){ %>
+      <div class="btn-follow-user btn-custom btn-cement medium flw unfollow">
+        Following
+      </div>
+    <%% }else{ %>
+      <div class="btn-follow-user btn-custom btn-cement medium flw">
+        Follow
+      </div>
+    <%% } %>
+
+
+</script>

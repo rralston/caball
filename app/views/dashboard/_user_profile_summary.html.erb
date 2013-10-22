@@ -1,0 +1,38 @@
+<div class='row  dashboard-tab-main-head user-profile-head'>
+  
+  <div class="profpicwrap img-circle pull-left" style="background: url('<%= @user.profile_pic %>') no-repeat"></div>
+  <a class='btn-custom btn-dark-grey pull-left edit-user-photo' >
+    <div class='black-pencil-icon pull-left' data-toggle='modal' data-target='#profile_update_modal'></div>
+  </a>
+  <div class='summary pull-left'>
+    <div class='welcome regular'>
+      Welcome, <%= @user.name %>.
+    </div>
+    
+    <div class='notifications-summary'>
+      <div class='btn-custom btn-notification'>
+        <div class='blue-star-icon pull-left light'></div> 
+        You have <span class='count'><%= current_user.unread_notifications.count %></span> new <%= "notification".pluralize(current_user.unread_notifications.count) %>!
+        
+        <% class_to_set = current_user.unread_notifications.empty? ? '' : 'set_time' %>
+
+        <div class='ignore-btn <%= class_to_set %>'>
+           <i class='icon-remove-sign'> </i>
+        </div>
+
+
+      </div>
+    </div>
+    
+    <div class='links'>
+      <%= link_to user_path(@user.id), :class => 'btn-custom btn-dark-grey pull-left link' do %>
+        <div class='eye-open-icon'></div> View Profile
+      <% end %>
+
+      <%= link_to edit_user_path(@user.id), :class => 'btn-custom btn-dark-grey pull-left link' do %>
+        <div class='black-pencil-icon'></div> Edit Profile
+      <% end %>
+    </div>
+
+  </div>
+</div>

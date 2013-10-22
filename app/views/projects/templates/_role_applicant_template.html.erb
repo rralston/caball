@@ -1,0 +1,17 @@
+<script type="script/template" id='applicant_modal_template'>
+
+  <li>
+    <a href='/users/<%%= user.url_param %>'><%%= user.name %></a>
+
+    <%% if(approved){ %>
+      <button class='btn btn-primary btn-small remove_applicant' data-roleid ='<%%= role.id %>' data-applicationid='<%%= id %>' >
+        Remove
+      </button>
+    <%% }else{ %>
+      <button class='btn btn-primary btn-small select_applicant' data-roleid ='<%%= role.id %>' data-applicationid='<%%= id %>' >
+        Select
+      </button>
+    <%% } %>
+  </li>
+
+</script>

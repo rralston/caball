@@ -1,0 +1,42 @@
+<div class='container'>
+  
+
+  <% if current_user.can_apply_for?(@role) %>
+    <%= form_for RoleApplication.new do |role_application| %>
+      <h3>Role Application</h3>
+      Project - <%= @role.project.title %> <br/>
+      Role - <%= @role.name %> <br/>
+      SubRole - <%= @role.subrole %> <br/>
+
+      <div class="control-group">
+        <label class='control-label' for='role_application[message]'>
+          Leave a message to the Project Creator
+        </label>
+        <div class="controls">
+          <%= role_application.text_area :message, :class => 'text_area required', :rows => 10 %>
+        </div>
+      </div>
+
+      <input type='hidden' name='role_application[role_id]' value= <%= @role.id %> >
+
+      <%= role_application.submit 'Submit Application', :class => 'btn btn-success' %>
+    <% end %>
+  <% elsif current_user.has_applied?(@role) %>  
+    <div class='text-center' style='margin-top: 40px;'>
+      <h4>You have already applied for this role.</h4>
+      <div class='row text-center'>
+        <br/>
+        <a href="/projects/<%= @role.project.id %>" class='btn btn-success'>Take me back to the project</a>
+      </div>
+    </div>
+  <% else %>
+    <div class='text-center' style='margin-top: 40px;'>
+      <h4>You are not eligible to apply for this role as your talents doesn't include the particular role - "<%= @role.name %>"</h4>
+      <div class='row text-center'>
+        <br/>
+        <a href="/projects/<%= @role.project.id %>" class='btn btn-success'>Take me back to the project</a>
+      </div>
+    </div>
+
+  <% end %>
+</div>

@@ -1,0 +1,37 @@
+  
+<div class=' container'>
+  <%= simple_form_for :conversation, url: :conversations do |f| %>
+      <h3>New Conversation</h3>
+      <div class="input string required recipients">
+        <label class="string required" for="recipients"><abbr title="required">*</abbr>
+          Recipients
+        </label>
+
+        <%= hidden_field_tag 'recipients' %>
+      </div>
+
+      <ul type='text' id='tag_users' style='margin-left: 0px;width: 400px;'>
+      </ul>
+
+      <% if @subject.present? %>
+        <%= f.input :subject, :as => :hidden, :input_html => { :value => @subject } %>
+      <% else %>
+        <%= f.input :subject %>
+      <% end %>
+      
+      <div class="input string required message">
+        <label class="string required" for="message"><abbr title="required">*</abbr>
+          Message
+        </label>
+        <%= text_area_tag 'message', nil, :size => "25x10", :style => 'width: 400px;' %>
+      </div>
+
+    
+      <div id="form-actions">
+        <%= f.button :submit, 'Send Message', class: 'btn-primary' %>
+        <%= submit_tag 'Reset', type: :reset, class: 'btn btn-danger' %>
+        <a href='/dashboard#messages' class='btn btn-warning'>Cancel</a>
+      </div>
+  <% end %>
+</div>
+

@@ -1,0 +1,399 @@
+<%= stylesheet_link_tag "home_page.css" %>
+<%= stylesheet_link_tag "projects/project_index.css" %>
+<%= stylesheet_link_tag "users/user_index.css" %>
+
+<!--========= Attract top starts======------>
+<div class="attractwrap">
+  <div class="attractshadow">
+  <div class="attract maincontain container">
+    <div class="row">
+      <div class="toptext span10 offset1 medium text-center">Filmmaker Matchmaking</div>
+      
+      <div class='midtext text-center'>
+        <div class='center-it light'>
+          Filmzu gives you access to the best filmmakers,<br/>
+					cast, crew, agents, and fans in an incredibly simple and stunning experience.
+        </div>
+      </div>
+      
+      <div class="startbutton text-center">
+        <a data-toggle='modal' data-target='#signup_modal' class="strtbtn btn regular text-left">
+          <div class="strtbtntext">Free, Start Creating</div>
+        </a>
+      </div>
+
+      <div class="wtchvideo offset4 text-center" data-toggle='modal' data-target='#video-modal'>
+        <div class="wtchvideobtn btn">
+          <div class="playpic">
+            <img src="/assets/wtchbtn.png" alt="" />
+          </div>
+          <div class="wtchtext text-left">
+            <div class="wtchh1 medium">Watch the Video</div>
+            <div class="wtchexp light">To see how Filmzu gives you the tools to create the film you imagined</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<!--========= Attract top end======------>
+<!--========= attract info starts======------>
+<div class="attractinfowrap">
+  <div class="attractinfo maincontain container text-center">
+    <div class="row">
+    
+      <article class="span4">
+        <div class="atrctinfoimg">
+          <img src="/assets/ppl.png" alt="" />
+        </div>
+        <div class="light head">Access the Best</div>
+        <div class="infocnt regular">
+          <p>Cast & Crew your project with talented people who want to be a part of your film.</p>
+        </div>
+      </article >
+      
+      <article class="span4">
+        <div class="atrctinfoimg">
+          <img src="/assets/infopp.png" alt="" />
+        </div>
+        <div class="light head">Find the Talent</div>
+        <div class="infocnt regular">
+          <p>Connect with film industry professionals and fans in your area.</p>
+        </div>
+      </article>
+
+      <article class="span4">
+        <div class="atrctinfoimg">
+          <img src="/assets/book.png" alt="" />
+        </div>
+        <div class="light head">Get Discovered</div>
+        <div class="infocnt regular">
+          <p>A stunning place designed to spotlight your skills and talents.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+<!--========= attract info ends======------>
+<!--========= detailed info start======------>
+<div class="detailinfowrap">
+  <div class="detailinfo maincontain container">
+    <div class="row">
+    <div class="dtlh1 span12 text-center regular">Discover Why Top Filmmakers Love Filmzu</div>
+    
+
+    <div class='discover clearfix'>
+      <div class='left-div pull-left'>
+        <img src="/assets/firstdtl.png" alt="" />
+      </div>
+
+      <div class='right-div pull-left'>
+        <div class="info verylight">
+           The Artist gets put first 
+        </div>
+
+        <div class="dtlinfotext light">
+          A system so intuitive that makes it easy for filmmakers to search for projects based on location, genre, schedule, pay rate, and more. Project creators are easily able to manage the applicants to build the best team, all while saving time and money.
+        </div>
+
+      </div>
+    </div>
+
+    <div class='discover clearfix'>
+      <div class='left-div pull-left'>
+        
+        <div class="info verylight">
+          Fans get involved 
+        </div>
+
+        <div class="dtlinfotext light">
+          Fans now have a dedicated place to find the the best events that match up with their interests and schedule. Fans can follow along the process of creating a film, giving the artist an audience already built up when it’s ready for the world to see. 
+        </div>
+      </div>
+
+      <div class='right-div pull-left'>
+        <img src="/assets/home-feature-2.png" alt="" />
+      </div>
+    </div>
+
+    <div class='discover clearfix'>
+      <div class='left-div pull-left'>
+        <img src="/assets/dtlthrid.png" alt="" />
+      </div>
+
+      <div class='right-div pull-left'>
+        <div class="info verylight">
+           New Ways to Make Money 
+        </div>
+
+        <div class="dtlinfotext light">
+          There is a lot of demand for filmmakers to folks outside the industry. Filmzu gives everyday people access to filmmakers who can make them a music video, commercial, or anything else requiring a creative touch.
+        </div>
+
+      </div>
+    </div>
+
+
+    </div>
+    </div>
+</div>
+<!--========= detailed info ends======------>
+
+<!--=========  featured projects starts======-->
+<div class="featurewrap">
+  <div class="featured maincontain container">
+    <div class="row" style='width: 960px'>
+    <div class="featureh light text-center">
+      Featured Projects
+    </div>
+    <div class="featuretext text-center light" style='margin: 0px auto; width: 600px;'> 
+      The hottest projects on Filmzu
+    </div>
+    
+    <div class="featuredslider span12">
+      <!--======Projects div===-->
+      <div class="row">
+        <div class="pdiv span10" id="pdiv">
+          
+          <% Project.sample_featured_projects.each do |project|  %>
+
+          <div class="project">
+            <a href="/projects/<%= project.url_param %>">
+              <div class="ptopimg">
+                <div class="project-img" style="background: url(<%= image_path(project.display_regular) %>) no-repeat">
+                </div>
+                  <img src="" alt="">
+                <div class="topcnt">
+                    <h3 class="medium">
+                        <%= project.title %>
+                    </h3>
+                    <p>
+                      <%= project.description %>
+                    </p>
+                  </div>
+                
+              </div>
+            </a>
+            <div class="pinfo">
+              
+              <ul class="plist">
+                <% project.roles.first(4).each do |role| %> 
+                  <li class="badge badge-custom-green">
+                    <%= role.name %>
+                  </li>
+                <% end %>
+                <% if project.roles.count > 4 %>
+                  <li class="badge badge-custom-green">
+                      +<%= project.roles.count - 4 %>MORE
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+            
+            <div class="proindi"> 
+              <div class="fans">
+                <div class="fans-count regular text-center">
+                  <%= project.likes.count %>
+                </div>
+                <span>FANS</span>
+              </div>
+              <div class="follow">
+                <div class="btn-follow btn-custom btn-cement medium flw show_login_message">
+                  
+                    Like
+                  
+                </div>
+
+                <div class="btn-message msg btn-custom btn-cement medium show_login_message">
+                    Message
+                </div>
+              </div>
+            </div>
+
+            <div class="progcircle">
+              <div class="role-circle-container">
+
+                <div class="role-circle"> </div>
+            
+                <div class="circle-fill"> </div>
+            
+            
+                <div class="circle-measure circle-measure-<%= project.roles_percent %>"> </div>
+            
+                <span class="role-count medium">
+            
+                  <%= project.open_roles.count %> Open Positions
+            
+                </span>
+            
+              </div>
+
+            </div>
+          </div>
+
+          <% end %>
+          
+        </div>
+      <!--======Projects div===-->
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+<!--========= featured projects ends======-->
+
+
+<div class="featurewrap" id="featuredpeople">
+  <div class="featured maincontain container">
+    <div class="row" style='width: 960px'>
+    <div class="featureh light text-center">
+      Featured People
+    </div>
+    <div class="featuretext text-center light" style='margin: 0px auto; width: 600px;'> 
+      The hottest people on Filmzu
+    </div>
+    
+    <div class="featuredslider span12">
+      <!--======Projects div===-->
+      <div class="row">
+        <div class="pdiv span10" id="pdiv2">
+          
+          <% User.featured_people.each do |user| %>
+            <div class="user_tile pull-left">
+              <a href="/users/<%= user.url_param %>">
+                <div class="row">
+                  <div class="backdrop-cover"></div>
+                  
+                    <div class="user-cover-photo" style="background: url(<%= user.display_cover %>) no-repeat">
+                    </div>
+                  
+                </div>
+                <img src="<%= image_path(user.profile_pic) %>" class="img-circle user-photo">
+                <div class="row">
+                  <div class="span3 user-details grey-backdrop text-center">
+                    <div class="name bold">
+                      <%= user.name %>
+                    </div>
+
+                    <div class="location light">
+                      <div class="location-img-blue"></div>
+                      <%= user.location %>
+                    </div>
+                      <div class="user-roles medium">
+                        <%= user.talent_names.join('/ ') %>
+                      </div>
+                    </div>
+                  </div>
+              </a>
+
+                <div class="row white">
+                  <div class="about-user pull-left">
+                    <div class="about-text regular">
+                      <%= user.about %>
+
+                    </div>
+                  </div>
+
+                  <div class="user-reputation pull-left">
+                    <div class="fans">
+                      <div class="fans-count regular text-center">
+                        <%= user.followers.count %>
+                      </div>
+                      <span>FANS</span>
+                    </div>
+
+                    <div class="row buttons text-center">
+                      
+                        <div class="btn-follow-user btn-custom btn-cement show_login_message medium flw">
+                          Follow
+                        </div>
+                      
+                      <div class="btn-message msg btn-custom btn-cement medium show_login_message">
+                        Message
+                      </div>
+                      
+                    </div>
+                    
+                  </div>
+                </div>
+
+            </div>
+
+          <% end %>
+          
+        </div>
+      <!--======Projects div===-->
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- Filmzu video modal -->
+<div id="video-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Filmzu</span></h3>
+  </div>
+  <div class="modal-body">
+    <iframe src="//player.vimeo.com/video/77489221?title=0&amp;byline=0&amp;portrait=0" width="530" height="300" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Close</button>
+  </div>
+</div>
+<!-- Filmzu video modal -->
+
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#pdiv').bxSlider({
+      auto:false,
+      useCss:false,
+      infiniteLoop:false,
+      pause:4000,
+      adaptiveHeight: false,
+      mode: 'horizontal',
+      speed: 1000,
+      autoHover:true,
+      pager:false,
+      nextText:'Prev',
+      prevText:' Prev',
+      slideWidth:230,
+      slideMargin:10,
+      minSlides:4,
+      maxSlides:4,
+      moveSlides:1
+      
+    });
+    
+    $('#pdiv2').bxSlider({
+      auto:false,
+      useCss:false,
+      infiniteLoop:false,
+      pause:4000,
+      adaptiveHeight: false,
+      mode: 'horizontal',
+      speed: 1000,
+      autoHover:true,
+      pager:false,
+      nextText:'Prev',
+      prevText:' Prev',
+      slideWidth:230,
+      slideMargin:10,
+      minSlides:3,
+      maxSlides:3,
+      moveSlides:1
+      
+    });
+
+    $('body').on('click', '.show_login_message', function(event){
+      alert('You must create an account to follow or message this person/project');
+    });
+  });
+</script>
+
+								
+         

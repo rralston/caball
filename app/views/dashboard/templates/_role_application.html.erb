@@ -1,0 +1,79 @@
+<script type="script/template" id='role_application_template'>  
+  
+  <a href='/users/<%%= user.url_param %>' target='_blank'>
+    <div class='row'>
+      <div class='backdrop-cover'></div>
+      <%% if(user.cover_photo != null && typeof user.cover_photo != 'undefined' ){ %>
+        <div class='user-cover-photo'  style='background: url(<%%= user.cover_regular %>) no-repeat'>
+        </div>
+      <%% }else{ %>
+        <div class='user-cover-photo' >
+        </div>
+      <%% } %>
+    </div>
+
+    <div class='img-circle applicant-photo' style='background: url("<%%= user.profile_medium %>")'>
+    </div>
+  </a>
+
+  <div class='row'>
+    <div class='span3 applicant-details grey-backdrop text-center'>
+      <div class='name bold'>
+        <%%= user.name %>
+      </div>
+
+      <div class='location'>
+        <div class='location-img-blue light'></div>
+        <%%= user.location %>
+      </div
+
+      <div class='talent medium'>
+        <%%=  user.talent_names %>
+      </div>
+    </div>
+  </div>
+
+  <div class='row white'>
+    <div class='about-applicant pull-left'>
+      <div class='about-text regular'>
+        <%%= user.about %>
+      </div>
+
+      <div class='actions'>
+        <div class='action action-div message-applicant pull-left' data-message-subject='Regarding Your role appliation - <%%= role.name %>' data-message-recipients='<%%= user.email %>' data-message-header='Message Applicant - <%%= user.name %>'>
+        </div>
+        <%% if(approved != true) { %>
+          <div class='action action-div accept pull-left'>
+          </div>
+        <%% } %>
+        <div class='action action-div reject pull-left'>
+        </div>
+      </div>
+    </div>
+
+    <div class='applicant-reputation pull-left'>
+
+      <div class="fans">
+        <div class="fans-count regular text-center">
+          <%%= _.uniq(user.followers, function(user){return user.id}).length %>
+        </div>
+        <span>FANS</span>
+      </div>
+
+      <div class='row buttons text-center'>
+
+        <div class='btn-view-cover btn-custom btn-cement medium flw'>
+          View Cover
+        </div>
+
+        <%% if(user.resume){ %>
+          <a href='<%%= user.resume.document.url %>' target='_black' class='btn-view-resume msg btn-custom btn-cement medium'>
+            View Resume
+          </a>
+        <%% } %>
+      </div>
+      
+    </div>
+  </div>
+
+</script> 

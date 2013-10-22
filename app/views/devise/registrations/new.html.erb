@@ -1,0 +1,64 @@
+<%= stylesheet_link_tag "signup" %>
+
+<%= devise_error_messages! %>
+
+<div class='sign_up_div'>
+
+  <div class='email_div pull-left'>
+    <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :validate => true) do |f| %>
+      
+      <div>
+        <%= f.text_field :name, :validate => { :presence => true }, :placeholder => 'Full Name' %>
+        
+      </div>
+      
+      <div>
+        <%= f.email_field :email, :validate => { :presence => true }, :placeholder => 'Email address ' %>
+        <div class='div_hint'>
+          We NEVER, EVER Spam our Users email addresses
+        </div>
+      </div>
+      
+      <div>
+        <%= f.password_field :password, :validate => { :presence => true }, :placeholder => 'Password' %>
+      </div>
+      
+      <div>
+        <%= f.password_field :password_confirmation, :validate => { :presence => true }, :placeholder => 'Confirm Password' %>
+      </div>
+      
+      <div class='terms_services'>
+        <%= f.check_box :terms_of_service %>
+        I agree to Filmzu's <%= link_to("Terms and Conditions", terms_url, :target =>'_blank') %>
+        <div class='terms_text'>
+          I will not send unsolicited materials to Filmzu members.<br/>
+          Filmzu may promote my profile/s per my settings<br/>
+          I'm 18+ years old or have permission from a parent/rep.<br/>
+        </div>
+      </div>
+      
+
+      <%= f.button :submit, "Next" %>
+
+    <% end %>
+  </div>
+
+  <div class='social_signup pull-left'>
+    <a href='' id='fb_auth'>
+      <div class='facebook_link'>
+        
+      </div>
+    </a>
+    <div class='div_hint'>
+      We will never post on your wall without your permission
+    </div>
+    
+  </div>
+
+  <div id='or'>
+    or
+  </div>
+
+  <div class='clearfix'></div>
+  
+</div>

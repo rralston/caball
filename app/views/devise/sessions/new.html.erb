@@ -1,0 +1,29 @@
+<%= stylesheet_link_tag "signin" %>
+
+<div class='signin_form'>
+  <div class='email_signin pull-left'>
+    <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <%= f.email_field :email, :autofocus => true, :placeholder => 'Email address' %>
+      <%= f.password_field :password, :placeholder => 'Password' %>
+      <%= f.input :remember_me, :as => :boolean if devise_mapping.rememberable? %>
+      <a href="/users/password/new">Forgot your password?</a>
+      <br>
+      <%= f.button :submit, "Sign in" %>
+    <% end %>
+  </div>
+
+  <div id='or'>
+    or
+  </div>
+  
+  <div class='social_signin pull-left'>
+    <a href="/users/auth/facebook" id="fb_auth">
+      <img src="/assets/fb-sign-in.png">
+    </a>
+    <div class='facbook-hint'>
+      We will never post on your wall without your permission
+    </div>
+  </div>
+
+  <div class='clearfix'></div>
+</div>

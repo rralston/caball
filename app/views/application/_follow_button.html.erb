@@ -1,0 +1,18 @@
+<% if current_user %> 
+  <% if Friendship.where(:friend_id => user.id, :user_id => current_user.id).count == 0 %>
+    <% follow_class = 'start-following follow-button-handler' %>
+    <% un_follow_class = 'stop-following follow-button-hide follow-button-handler' %>
+  <% else %>
+    <% follow_class = 'start-following follow-button-hide follow-button-handler' %>
+    <% un_follow_class = 'stop-following follow-button-handler' %>
+  <% end %>
+
+  <%= link_to(friendships_path(friend_id: user), :method => :post, :data => {'user-id' => user.id}, :class => follow_class) do %>
+    <%= image_tag('camera_keyhole.png')%> <span> Follow </span>
+  <% end %>
+  
+  <%= link_to current_user.friendships.find_by_friend_id(user.id), :method => :delete, :data => {'user-id' => user.id}, :class => un_follow_class do %>
+    <%= image_tag('camera_keyhole.png')%> <span> Un-Follow </span>
+  <% end %>
+
+<% end %>

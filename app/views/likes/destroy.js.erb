@@ -1,0 +1,2 @@
+$('#<%= "#{@like.loveable_type}-#{@like.loveable_id}" %>').html('<%= escape_javascript( render :partial => "application/love_form.html.erb", :locals => {:id => @like.loveable_id, :type => @like.loveable_type} ) %>');
+$('#count-<%= @like.loveable_id %>').text("<%= pluralize Project.find(@like.loveable_id).likes.all.count, 'Fan' %>");

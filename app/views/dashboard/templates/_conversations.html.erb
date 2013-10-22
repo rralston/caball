@@ -1,0 +1,23 @@
+<script type="script/template" id='conversations_template'>
+
+  <div class='row conversations-summary'>
+    <%%= this.collection.mailbox_type %>
+    <span class='light'>(<%%= this.collection.messages_count %> Messages, <span class='convos_unread_count'><%%= this.collection.unread_count %></span> Unread)</span>
+
+    <%% if(this.collection.mailbox_type == 'Trash'){ %>
+      <span class='empty_trash'>Empty Trash</span>
+    <%% } %>
+  </div>
+
+  <div class='row'>
+    <div class='span4'>
+      <div class='row conversations_list'>
+      </div> 
+    </div>
+
+    <div class='span7 messages_container text-center'>
+      Select a conversation to view messages.
+    </div>
+  </div>
+
+</script>

@@ -1,0 +1,38 @@
+<script type="script/template" id='conversation_template'>
+
+  <%% if(this.model.collection.mailbox_type != 'Trash'){%>
+    <div class='delete_conversation conv-action'>
+      
+    </div>
+  <%% }else{ %>
+    <div class='undelete_conversation conv-action'>
+      <i class='icon-share-alt'></i>
+    </div>
+  <%% } %>
+
+  <span class="conv-time">
+    <%%= app.fn.format_date(last_message.created_at) %>
+  </span>
+
+  <div class='conv-sender pull-left'>
+    <div class="img-circle user-circle-image" style="background: url(<%%= originator.profile_thumb %>)">
+    </div>
+    <%% if(!is_read){%>
+      <div class="notno  medium img-circle text-center">
+        <%%= unread_count %>
+      </div>
+    <%% } %>
+  </div>
+
+  <div class='conv-details pull-left'>
+    <div class='user-name'>
+      <a href='/users/<%%= originator.url_param %>' target='_blank'>
+        <%%= originator.name %>
+      </a>
+    </div>
+    <div class='msg-preview'>
+      <%%= last_message.body %>
+    </div>
+  </div>
+  
+</script>

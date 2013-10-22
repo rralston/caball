@@ -1,0 +1,630 @@
+<%= javascript_include_tag "users/users_manifest" %>
+<%= stylesheet_link_tag "users/show" %>
+
+<!--========= content wrapper======------>
+<div>
+  <div class="container">
+    <div class="row">
+  <!--========= Main starts======------>
+      <div class="mainwrap span8" >
+        <div class="main">
+          <div class="row-fluid">
+          <!--========= Header ends======------>
+              <div class="profhdr span12">
+                  
+                  <div class="blurbgcover">
+                    <div class="blurbg">
+                      <div class="cover" style='background-image: url(<%= @user.get_cover_large %>)'></div>
+                    </div>
+                  </div>
+                  <div class="proftagwrap row-fluid">
+                    <div class="proftag regular span7 offset5">
+                      <p>
+                        <% if current_user == @user %>
+                          
+                          <div class='edit_headline_input'>
+                            <textarea id='edit_headline'><%= @user.headline %></textarea>
+                            <i class='icon-remove-sign action-div'></i>
+                          </div>
+
+                        <% end %>
+                        <span class='user_headline_text'>
+                          <% if current_user == @user %>
+                            <i class='icon-pencil action-div edit_headline'></i>
+                          <% end %>
+                          <span class='headline_content'><%= @user.headline %></span>
+                        </span>
+
+                      </p>
+                    </div>
+
+                  </div>
+                <div class="profflwwrap row-fluid">
+                  
+                  <div class="proflwfbg"></div>
+                  <div class="profflw span7 offset5">
+                    <div class="row-fluid">
+                      <div class="flwrs span4">
+                        <strong class="regular count"> 
+                          <%= @user.followers.uniq.count %>
+                        </strong>
+                        <span class="text light">
+                          FOLLOWERS
+                        </span>
+                      </div>
+                      <div class="flwrs span4">
+                        <strong class='regular'>
+                          <%= @user.friends.count %>
+                        </strong>
+                        <span class='text light'>
+                          FOLLOWING
+                        </span>
+                      </div>
+                      <% if @user != current_user %>
+                        <div class="flwmsg span4">
+                          <% if current_user and current_user.friends.include?(@user) %>
+                            <a class="flw btn btn-follow btn-custom btn-red center-div text-center unfollow" data-friend-id='<%= @user.id %>'>
+                              Un Follow
+                            </a>
+                          <% else %>
+                            <a class="flw btn btn-custom btn-red center-div text-center regular btn-follow" data-friend-id='<%= @user.id %>'>
+                              Follow
+                            </a>
+                          <% end %>
+                          <a class='msg btn medium send-generic-message' data-message-subject='' data-message-header='Message - <%= @user.name %>' data-message-recipients='<%= @user.email %>'>Message</a>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+                
+                
+                  <div class="profpicwrap img-circle action-div" data-toggle='modal' data-target='#media-modal' style="background: url('<%= @user.profile_pic_large %>') no-repeat">
+                    <!---this is the div whose bg is the profile pic -->
+                    <% if @user.photos.size > 0 %>
+										<div class='profwrapoverlay'>
+                      Click to view <%= @user.photos.size %> more pictures
+                    </div>
+										<% end %>
+                  </div>
+                
+              </div>
+          <!--========= Header ends======------>
+          <!--========= Profile name starts======------>
+              <div class="profname">
+                <div class="row-fluid">
+                  <div class="profico">
+                    <ul class="picos span3">
+                      <!-- reverse is done because float right puts the first one to right. Reverse makes sure that they are in order. -->
+
+                      <% @user.talents.reverse.each do |talent| %>
+
+                        <% if talent.name == 'Crew' %>
+                          <% image_name = talent.sub_talent %>
+                        <% else %>
+                          <% image_name = talent.name %>
+                        <% end %>
+
+                        <li>
+                          <img src="/assets/role_icons/<%= image_name %>.png" alt="<%= talent.name %>" width="45" height="45" title='<%= talent.sub_talent %>' data-scrollto='#<%= talent.name.downcase %>_profile' class='action-div scroll_to'/>
+                        </li>
+                      <% end %>
+                      <!--<li><a href="#"><img src="/assets/cut.png" alt="" /></a></li>
+                      <li><a href='#' ><img src="/assets/pencil.png" alt="" /></a></li>-->
+                    </ul>
+                  </div>
+                </div>
+                <div class="row-fluid">
+                  <div class="profnm">
+                    <div class="profnmh1"><%= @user.name %></div>
+                    <div class="profnmh2"><%= @user.location %></div>
+                  </div>
+                </div>
+              </div>
+              <div class="skillexp">
+                <div class="row-fluid">
+                        
+                  <ul class="inline libg span12">
+                  SKILLS + EXPERTISE:
+                    <% if @user.expertise.present? %>
+                      <% @user.expertise.split(',').each do |skill| %>
+                        <li class="badge regular"><%= skill %></li>
+                      <% end %>
+                    <% end %>
+
+                    <% if @user.experience.present? %>
+                      <li class="badge regular"><%= @user.experience %></li>
+                    <% end %>
+
+                    <% if @user.imdb_url.present? %>
+                      <li class="badge regular">
+                        <a href='<%= @user.imdb_url %>' target='_blank'>
+                          IMDB Link
+                        </a>
+                      </li>
+                    <% end %>                    
+
+                  </ul>
+                </div>
+              </div>
+          <!--========= Profile name ends======------>
+
+
+            <div class='row-fluid'>
+
+              <div class="sortico clearfix">
+                      
+                <ul class="picos span5">
+                  
+                  <li><span class='action-div' id='sort_by_video' title='Video'><img src="/assets/sortv.png" alt="" /></span></li>
+                  <li><span class='action-div' id='sort_by_photo' title='Pictures'><img src="/assets/sortp.png" alt="" /></span></li>
+                  <li><span class='action-div' id='sort_by_text' title='Text'><img src="/assets/sortw.png" alt="" /></span></li>
+                  <li class='sort_text'>SORT UPDATES: </li>
+                </ul>
+              </div>
+
+              <div class='pull-right' id='comments_div'>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  <!--========= Main starts=====-->
+  <!--========= Sidebar starts======-->
+    <div class="rside span4 right-container">
+
+      <div class='row right-extra-div' id='user_fans_div'>
+      </div>
+      
+      <div class='row right-extra-div' id='user_video'>
+        <% if @user.valid_videos.size > 0 %>
+
+        <div id="user_side_bar_videos" class="carousel slide" data-interval='false'>
+          <!-- Carousel items -->
+          <div class="carousel-inner">
+            <% @user.valid_videos.each_with_index do |video, index| %>
+              
+              <% if index == 0 %>
+                <!-- make the first one as active. -->
+                <div class="item active text-center">
+                  <%= raw video.embed_code %>
+                </div>
+              
+              <% else %>
+                <div class="item text-center">
+                  <%= raw video.embed_code %>
+                </div>
+              <% end %>
+            
+            <% end %>
+          </div>
+          
+          <% if @user.valid_videos.size > 1 %>
+
+            <ol class="carousel-indicators">
+              <% @user.valid_videos.each_with_index do |video, index| %>
+                
+                <% if index == 0 %>
+                  <!-- make the first one as active. -->
+                  <li data-target="#user_side_bar_videos" data-slide-to="<%= index %>" class="active"></li>
+                <% else %>
+                  <li data-target="#user_side_bar_videos" data-slide-to="<%= index %>"></li>
+                <% end %>
+              <% end %>
+            </ol>
+
+          <% end %>
+        </div>
+        <% end %>
+      </div>
+
+      <% if current_user == @user and !@user.only_fan?  %>
+        <div class="row right-extra-div">
+          <div class="span4 shrink-div head">
+            <span class="pull-left">
+              <h3>Profile Completeness</h3>
+            </span>
+            <span class="btn-show-all pull-right"></span>
+
+          </div>
+
+          <div class="span4">
+            <div class="row clearfix">
+              <div class="grey-line-divider"></div>
+            </div>
+          </div>
+
+
+          <div class="span4 shrink-div" style='margin-left: 20px'>
+            <div class='row'>
+              <div class='edit text-center'>
+                <a href='/users/<%= @user.id %>/edit'>Edit Profile</a>
+              </div>
+              <div class="progress">
+                <div class="bar" style="width: <%= @user.completeness %>%;">
+                  <%= @user.completeness %>%
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+        </div>
+
+      <% end %>
+
+
+      <div class="row about-div right-extra-div">
+        <div class="span4 shrink-div head">
+          <span class="pull-left">
+            <h3>About</h3>
+            
+          </span>
+          <span class="btn-show-all pull-right"></span>
+
+        </div>
+
+        <div class="span4">
+          <div class="row clearfix">
+            <div class="grey-line-divider"></div>
+          </div>
+        </div>
+
+        <div class="span4 shrink-div desc">
+          <% if current_user == @user %>
+                          
+            <div class='edit_about_input'>
+              <textarea id='edit_about'><%= @user.about %></textarea>
+              <i class='icon-remove-sign action-div'></i>
+            </div>
+
+          <% end %>
+          <div class="user_about_text">
+            <% if current_user == @user %>
+              <i class='icon-pencil action-div edit_about'></i>
+            <% end %>
+            <div class="about_content">
+              <% if @user.about.present? and @user.about.length > 200 %>
+                <%= truncate(@user.about, :length => 200, :separator => ' ') %> <a class='read_more_btn' data-content='<%= @user.about %>' data-header='About - <%= @user.name %>' >Read more</a>
+              <% else %>
+                <%= @user.about %> 
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <% if @user.talent_names.include?('Cast') %>
+        <div class='row right-extra-div' id='cast_profile'>
+          <div class='span4 shrink-div head'>
+            <span class="pull-left">
+              <h3>Cast Profile</h3>
+            </span>
+            
+            <span class="btn-show-all pull-right"></span> 
+            
+            <div class='clearfix'></div>
+          </div>
+
+          <div class="span4">
+            <div class="row clearfix">
+              <div class="grey-line-divider"></div>
+            </div>
+          </div>
+
+          <div class='content light'>
+
+            <% if @user.guild_present and @user.guild.present? %>
+              Guild: <%=  @user.guild %><br/>
+            <% end %>
+
+            <% if @user.gender.present? %>
+              Sex: <%=  @user.gender.camelize %><br/>
+            <% end %>
+
+            <% if @user.characteristics.present? %>
+              
+              <% if @user.characteristics.height.present? %>
+                Height: <%=  @user.characteristics.height.camelize %><br/>
+              <% end %>
+
+              <% if @user.characteristics.ethnicity.present? %>
+                Ethnicity: <%=  @user.characteristics.ethnicity.camelize %><br/>
+              <% end %>
+
+              <% if @user.characteristics.bodytype.present? %>
+                Build: <%=  @user.characteristics.bodytype %><br/>
+              <% end %>
+
+              <% if @user.characteristics.hair_color.present? %>
+                Hair Color: <%=  @user.characteristics.hair_color.camelize %><br/>
+              <% end %>
+
+              <% if @user.characteristics.age.present? %>
+                Age: <%=  @user.characteristics.age.camelize %><br/>
+              <% end %>
+
+            <% end %>
+
+            <% if @user.agent.present? %>
+              Representation:
+              <div class='representation'>
+                <span class="pull-left agent-img">
+                  <div class='agent_photo img-circle' style='background: url("<%= @user.agent.profile_thumb %>") no-repeat;'>
+                  </div>
+                </span>
+                <span class="agent pull-left">
+                  <a href='<%= user_path(@user.agent) %>'><%= @user.agent.name %></a>
+                  <br>
+                  <span class="agent-company medium">
+                    <%= @user.agent.managing_company %>
+                  </span>
+                </span>
+              </div>
+            <% end %>
+          </div>
+
+        </div>
+      <% end %>
+
+      <% if @user.talent_names.include?('Agent') %>
+        <div class='row right-extra-div' id='agent_profile'>
+          <div class='span4 shrink-div head'>
+            <span class="pull-left">
+              <h3>Agent Profile</h3>
+            </span>
+            
+            <span class="btn-show-all pull-right"></span> 
+            
+            <div class='clearfix'></div>
+          </div>
+
+          <div class="span4">
+            <div class="row clearfix">
+              <div class="grey-line-divider"></div>
+            </div>
+          </div>
+
+          <div class='content light'>
+            <% if @user.agent.present? %>
+              Managing Comany:
+              <div class='company'>
+                  <%= @user.managing_company %>
+              </div>
+            <% end %>
+          </div>
+
+        </div>
+      <% end %>
+
+      <% if @user.talent_names.include?('Writer') %>
+        <% talent = @user.talents.where(:name => 'Writer').first %>
+
+        <% if talent.script_document.present? || talent.synopsis.present? %>
+          <div class='row right-extra-div' id='writer_profile'>
+            <div class='span4 shrink-div head'>
+              <span class="pull-left">
+                <h3>Writer Profile</h3>
+              </span>
+              
+              <span class="btn-show-all pull-right"></span> 
+              
+              <div class='clearfix'></div>
+            </div>
+
+            <div class="span4">
+              <div class="row clearfix">
+                <div class="grey-line-divider"></div>
+              </div>
+            </div>
+
+            <div class="span4 shrink-div desc">
+
+              <div class='content light'>
+                
+                <% if talent.script_document.present? %>
+                  <div class='doc text-center'>
+                    <a href='<%= talent.script_document.document %>' class='badge badge-custom-green'>Download  Script</a>
+                  </div>
+                <% end %>
+
+                <% if talent.synopsis.present? %>
+
+                  Synopsis:
+                  <div class='synopsis'>
+                      <%= talent.synopsis %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+
+          </div>
+        <% end %>    
+      <% end %>
+
+      <div class='row right-extra-div' id='user_projects_div'>
+      </div>
+
+      <div class='row right-extra-div' id='user_events_div'>
+      </div>
+
+      <div class='row right-extra-div' id='endorsements_div'>
+      </div>
+
+      <% if @user.resume.present? and @user.resume.document.present? %>
+        <div class='row right-extra-div' id='resume_div'>
+          <div class='span4 shrink-div head'>
+            <span class="pull-left">
+              <h3>Resume</h3>
+            </span>
+            
+            <span class="btn-show-all pull-right"></span> 
+            
+            <div class='clearfix'></div>
+          </div>
+
+          <div class="span4">
+            <div class="row clearfix">
+              <div class="grey-line-divider"></div>
+            </div>
+          </div>
+
+          <div class='row text-center link'>
+            <a href='<%= @user.resume.document.url %>' class='badge badge-custom-green'>
+              DOWNLOAD
+            </a>
+          </div>
+        </div>
+      <% end %>
+			<div class='row right-extra-div' id='report_div'>
+        <div class='span4 shrink-div head'>
+          <span class="pull-left">
+            <h3 class='action-div report_entity' data-toggle='modal' data-target='#report-modal' title='Report User'>
+              <i class='icon-exclamation-sign'></i>
+              <%= link_to "#" do %> Report<% end %> 
+            </h3>
+          </span>
+          
+          <div class='clearfix'></div>
+        </div>
+      </div>
+  <!--=========Sidebar ends======------>
+  </div><!--rowfluid-->
+</div><!--container fluid-->
+
+
+
+<%= render :partial => 'users/templates/blogs' %>
+<%= render :partial => 'users/templates/blog' %>
+<%= render :partial => 'projects/templates/similar_projects' %>
+<%= render :partial => 'projects/templates/similar_project' %>
+<%= render :partial => 'users/templates/user_events' %>
+<%= render :partial => 'users/templates/user_event' %>
+<%= render :partial => 'users/templates/endorsements' %>
+<%= render :partial => 'users/templates/endorsement' %>
+<%= render :partial => 'users/templates/fans' %>
+<%= render :partial => 'users/templates/fan' %>
+
+<%= render :partial => 'application/read_more_modal' %>
+
+<% if current_user && current_user != @user %>
+  <%= render :partial => 'users/endorsement_form_modal' %>
+<% end %>
+
+<% if current_user == @user %>
+  <%= render :partial => 'users/edit_headline_modal' %>
+<% end %>
+
+<%= render :partial => 'conversations/send_new_message_modal' %>
+
+<%= render :partial => 'users/media_modal' %>
+
+<%= render :partial => 'application/report_modal', :locals => { :entity => @user } %>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+  
+  // bind read more btn click event
+  app.fn.bind_read_more_show()
+
+  app.current_user = <%= raw current_user.to_json() %>
+
+  $('.show_tooltip').tooltip()
+
+  app.blogs = new app.collections.blogs()
+  app.blogs.reset(<%= raw @user.blogs.to_json(:include => [:user, :likes], :check_user => current_user) %>)
+  app.blogs_view = new app.views.blogs({ collection: app.blogs })
+  $('#comments_div').html(app.blogs_view.render().el)
+  app.fn.init_comment_image_file_uploader($('#blog_photo_attributes_image'), '/blogs/files_upload')
+
+  $('body').on('click', '#sort_by_video', function(event){
+    app.blogs_view.render_video_sorted()
+  });
+
+  $('body').on('click', '#sort_by_photo', function(event){
+    app.blogs_view.render_photo_sorted()
+  });
+
+  $('body').on('click', '#sort_by_text', function(event){
+    app.blogs_view.render_text_sorted()
+  });
+
+  // user projects
+  app.user_projects = new app.collections.user_projects()
+  app.user_projects.reset(<%= raw Project.custom_json(@user.projects.first(4), current_user) %>)
+  app.user_projects_view = new app.views.user_projects({ collection: app.user_projects })
+  $('#user_projects_div').html(app.user_projects_view.render().el)
+
+  // user events
+  // there are attending events
+  app.user_events = new app.collections.user_events()
+  app.user_events.reset(<%= raw @user.attending_events.first(4).to_json(:include => 
+      [
+        :main_photo, 
+        :start => { :methods => [:pretty_date, :formatted_time] }
+      ],
+      :methods => [:location_city]) %>)
+  app.user_events_view = new app.views.user_events({ collection: app.user_events })
+  $('#user_events_div').html(app.user_events_view.render().el)
+
+
+  // endorsements
+  app.endorsements = new app.collections.endorsements()
+  app.endorsements.reset(<%= raw @user.received_endorsements.first(4).to_json(:include =>:sender) %>)
+  app.endorsements_view = new app.views.endorsements({ collection: app.endorsements })
+  $('#endorsements_div').html(app.endorsements_view.render().el)
+
+  // fans
+  app.user_fans = new app.collections.user_fans()
+  app.user_fans.reset(<%= raw @user.followers.to_json() %>)
+  app.user_fans_view = new app.views.user_fans({ collection: app.user_fans })
+  $('#user_fans_div').html(app.user_fans_view.render().el)
+
+  // listen to the new blog creation event
+  $(document).on('newBlog', function(event){
+    
+    blog = new app.models.blog(event.blog)
+
+    app.blogs.add(blog)
+    
+    $('#comment_please_wait').hide()
+    $('textarea#blog_content').attr('disabled', false).val('')
+    $('#blog_video_attributes_url').attr('disabled', false).val('')
+    $('#blog_photo_attributes_image').attr('disabled', false)
+    $('button.post_update').attr('disabled', false)
+    $('.post_comment_btn').hide()
+    app.post_button_shown = false
+    // remove the image preview if a photo was uploaded and clear the hidden url value
+    $('.image_preview_container').hide()
+    $('.photo_url_div').val('')
+    
+  });
+
+
+  // listen to the blog error event event
+  $(document).on('blogError', function(event){
+    alert(event.message)
+    $('#comment_please_wait').hide()
+    $('textarea#blog_content').attr('disabled', false)
+    $('#blog_video_attributes_url').attr('disabled', false)
+    $('#blog_photo_attributes_image').attr('disabled', false)
+    $('button.post_update').attr('disabled', false)
+    $('.post_comment_btn').hide()
+    app.post_button_shown = false
+    // remove the image preview if a photo was uploaded and clear the hidden url value
+    $('.image_preview_container').hide()
+    $('.photo_url_div').val('')
+
+  });
+
+  app.fn.init_show_post_button_handler()
+
+
+  // if this line is not there it will show similar projects as the same templte is used for projects also.
+  $('#user_projects_div').find('.shrink-div').find('h3').html('Projects');
+
+});
+</script>

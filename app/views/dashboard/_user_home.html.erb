@@ -1,0 +1,33 @@
+<div class='row' style='position: absolute;'>
+
+  <div class='tabs-nav-home'>
+    <ul class='nav nav-tabs'>
+      <li class='active'>
+        <a href="#news_feed" data-toggle='tab'>
+          News Feed
+        </a>
+      </li>
+      <li>
+        <!-- set set_time class if notifications are available -->
+        <% class_to_set = current_user.unread_notifications.empty? ? '' : 'set_time' %>
+        <a href="#notifications_tab" data-toggle='tab' id='notif_tab_link' class='<%= class_to_set %>'>
+          Notifications
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class='user-home-tab-content pull-left'>
+  <div class='tab-content'>
+    <div class='tab-pane active' id='news_feed'>
+      <%= render :partial => 'dashboard/news_feed' %>
+    </div>
+    <div class='tab-pane' id='notifications_tab'>
+      <div class='notif_summary'>
+        You have <span class='count'><%= current_user.unread_notifications.count %></span> new <%= "notification".pluralize(current_user.unread_notifications.count) %>!
+      </div>
+      <%= render :partial => 'user_notifications' %>
+    </div>
+  </div>
+</div>

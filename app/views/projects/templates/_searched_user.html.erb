@@ -1,0 +1,31 @@
+<script type="script/template" id='searched_user_template'>
+
+  <div class='pull-left user_img'>
+    <img src='<%%= profile_thumb %>' class='img-circle'>
+  </div>
+  <div class='pull-left user_details'>
+    <div class='user_name'>
+      <%%= name %>
+    </div>    
+    <div class='user_loc'>
+      <i class='icon-map-marker'></i> <%%= location %>
+    </div>
+
+    <div class='user_talents'>
+      <%%= talent_names.join('/') %>
+    </div>    
+  </div>
+
+  <div class='pull-left add_user'>
+    <%% if(user_following){ %>
+      <div class='select_user user_action'>
+        select
+      </div>
+    <%% }else{ %>
+      <div class='follow_user user_action'>
+        follow
+      </div>
+    <%% } %>
+  </div>
+  
+</script>

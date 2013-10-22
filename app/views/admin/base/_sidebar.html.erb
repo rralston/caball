@@ -1,0 +1,131 @@
+<div id="sidebar">
+	<ul>
+		<li class="<%= is_active?("index") %>" >
+			<%= link_to 'index' do %>
+				<i class="icon icon-home"></i> <span>Dashboard</span>
+			<% end %>
+		</li>
+		<%= content_tag(:li, :class => open?("users", "user_images")) do %>
+			<%= link_to "#" do %>
+				<i class="icon icon-user"></i> <span>Users</span> <span class="label">2</span>
+			<% end %>
+			<ul>
+		<li class="<%= is_active?("users") %>">
+			<%= link_to 'users' do %>
+				<i class="icon icon-user"></i> <span>Users</span>
+			<% end %>
+		</li>
+		<li class="<%= is_active?("user_images") %>">
+			<%= link_to 'user_images' do %>
+				<i class="icon-th-large"></i> <span>User Images</span>
+			<% end %>
+		</li>
+		</ul>
+		<% end %>
+		<%= content_tag(:li, :class => open?("projects", "project_images")) do %>
+			<%= link_to "#" do %>
+				<i class="icon-facetime-video"></i> <span>Projects</span> <span class="label">2</span>
+			<% end %>
+			<ul>
+		<li class="<%= is_active?("projects") %>">
+			<%= link_to 'projects' do %>
+				<i class="icon-facetime-video"></i> <span>Projects</span>
+			<% end %>
+		</li>
+			<li class="<%= is_active?("project_images") %>">
+				<%= link_to 'project_images' do %>
+					<i class="icon-th-large"></i> <span>Project Images</span>
+				<% end %>
+			</li>
+		</ul>
+		<% end %>
+		<%= content_tag(:li, :class => open?("events", "event_images")) do %>
+			<%= link_to "#" do %>
+				<i class="icon-glass"></i> <span>Events</span> <span class="label">2</span>
+			<% end %>
+			<ul>
+		<li class="<%= is_active?("events") %>">
+			<%= link_to 'events' do %>
+				<i class="icon-glass"></i> <span>Events</span>
+			<% end %>
+		</li>
+			<li class="<%= is_active?("event_images") %>">
+				<%= link_to 'event_images' do %>
+					<i class="icon-picture"></i> <span>Event Images</span>
+				<% end %>
+			</li>
+		</ul>
+		<% end %>
+		<li class="<%= is_active?("messages") %>">
+			<%= link_to 'messages' do %>
+				<i class="icon-envelope"></i> <span>Messages</span>
+			<% end %>
+		</li>
+		<!-- <%= content_tag(:li, :class => open?("form_common", "form_validation", "form_wizard")) do %>
+			<%= link_to "#" do %>
+				<i class="icon icon-th-list"></i> <span>Form elements</span> <span class="label">3</span>
+			<% end %>
+			<ul>
+				<li class="<%= is_active?("form_common") %>" >
+					<%= link_to "Common Elements", 'form_common' %>
+				</li>
+				<li class="<%= is_active?("form_validation") %>" >
+					<%= link_to "Validation", 'form_validation' %>
+				</li>
+				<li class="<%= is_active?("form_wizard") %>" >
+					<%= link_to "Wizard", 'form_wizard' %>
+				</li>
+			</ul>
+		<% end %>
+		<li class="<%= is_active?("buttons") %>">
+			<%= link_to 'buttons' do %>
+				<i class="icon icon-tint"></i> <span>Buttons &amp; icons</span>
+			<% end %>
+		</li>
+		<li class="<%= is_active?("interface") %>">
+			<%= link_to 'interface' do %>
+				<i class="icon icon-pencil"></i> <span>Interface elements</span>
+			<% end %>
+		</li>
+		<li class="<%= is_active?("tables") %>">
+			<%= link_to 'tables' do %>
+				<i class="icon icon-th"></i> <span>Tables</span>
+			<% end %>
+		</li>
+		<li class="<%= is_active?("grid") %>">
+			<%= link_to 'grid' do %>
+				<i class="icon icon-th-list"></i> <span>Grid Layout</span>
+			<% end %>
+		</li>
+		<%= content_tag(:li, :class => open?("invoice", "chat", "calendar", "gallery")) do %>
+			<%= link_to "#" do %>
+				<i class="icon icon-file"></i> 
+				<span>Sample pages</span> <span class="label">4</span>
+			<% end %>
+			<ul>
+				<li class="<%= is_active?("invoice") %>" >
+					<%= link_to "Invoice", 'invoice' %>
+				</li>
+				<li class="<%= is_active?("chat") %>" >
+					<%= link_to "Support Chat", 'chat' %>
+				</li>
+				<li class="<%= is_active?("calendar") %>" >
+					<%= link_to "Calendar", 'calendar' %>
+				</li>
+				<li class="<%= is_active?("gallery") %>" >
+					<%= link_to "Gallery", 'gallery' %>
+				</li>
+			</ul>
+		<% end %>
+		<li class="<%= is_active?("charts") %>" >
+			<%= link_to 'charts' do %>
+				<i class="icon icon-signal"></i> <span>Charts &amp; graphs</span>
+			<% end %>
+		</li>
+		<li class="<%= is_active?("widgets") %>" >
+			<%= link_to('widgets') do %>
+				<i class="icon icon-inbox"></i> <span>Widgets</span>
+			<% end %>
+		</li>
+	</ul> -->
+</div>

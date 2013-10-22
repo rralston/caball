@@ -1,0 +1,5 @@
+$('#endorsement_modal').modal('hide')
+alert('Endorsement Successfully added')
+
+new_endorsement = new app.models.endorsement(<%= raw @endorsement.to_json(:include =>:sender) %>)
+app.endorsements.add(new_endorsement)

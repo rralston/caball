@@ -1,0 +1,73 @@
+<!-- Endorsement Modal -->
+<div id="endorsement_modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog"  aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Endorse <%= @user.name.split[0..0].join(" ") %></span></h3>
+  </div>
+  <div class="modal-body">
+    <%= form_for Endorsement.new, :remote => true  do |endorsement| %>
+      <%= endorsement.label :message %>
+      <%= endorsement.text_area :message, :rows => 5, :style=>'width: 520px' %>
+
+      <%= endorsement.hidden_field :receiver_id, :value => @user.id %>
+      <%= endorsement.hidden_field :sender_id, :value => current_user.id %>
+
+      <% if @user.expertise.present? %>
+        Select expertise:
+
+        <% @user.expertise.split(',').each do |exp_tag| %>
+          <span class='badge select_expertise action-div' data-value="<%= exp_tag %>"><%= exp_tag %></span>
+        <% end %>
+          
+        <%= endorsement.hidden_field :expertise %>
+        <!-- data name attr will create a select box with name as provided..! -->
+        
+        <br/>
+        <br/>
+        <div>
+          Endorse for skills: 
+        </div>
+        <ul id="endorse_tags" class='tagit ui-sortable'>
+        </ul>
+      <% end %>
+
+      <%= endorsement.submit 'Endorse' %>
+    <% end %>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+  $('body').on('click', '.select_expertise', function(event){
+    skill = $(event.target).attr('data-value')
+    $('#endorse_tags').tagit("add", {
+      label: skill,
+      value: skill
+    })
+  });
+
+  <% if @user.expertise.present? %>
+
+    $('#endorse_tags').tagit({
+      sortable: true,
+      allowNewTags: false,
+      tagSource: <%= raw @user.expertise.split(',') %>,
+      tagsChanged: function(tagValue, action, element){
+        tag_value_array = _.map($('#endorse_tags').tagit('tags'), function(tag){
+          return tag.value
+        });
+        // update the hidden textbox
+        $('#endorsement_expertise').val(tag_value_array.toString())
+      }
+    })
+
+  <% end %>
+
+});
+
+</script>
+
+<!-- Endorsement Modal -->

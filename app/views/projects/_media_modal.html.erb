@@ -1,0 +1,68 @@
+<!-- Media Modal -->
+<div id="media-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Project Media</span></h3>
+  </div>
+  <div class="modal-body">
+
+    <h4>Photos:</h4>
+
+    <div id="project_photos" class="carousel slide" data-interval="false">
+      <!-- Carousel items -->
+      <div class="carousel-inner">
+        <% @project.photos.each_with_index do |photo, index| %>
+          <% if index == 0 %>
+            <div class="item active">
+              <div class='media-slider-image' style="background: url(<%= photo.try(:image).url(:large) %>)">
+              </div>
+            </div>
+          <% else %>
+            <div class="item">
+              <div class='media-slider-image' style="background: url(<%= photo.try(:image).url(:large) %>)">
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+
+      <% if @project.photos.size > 1 %>
+        <!-- Carousel nav -->
+        <a class="carousel-control left" href="#project_photos" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#project_photos" data-slide="next">&rsaquo;</a>
+      <% end %>
+    </div>
+
+    <% if @project.valid_videos.size > 0 %>
+      <h4>Videos:</h4>
+
+      <div id="project_videos" class="carousel slide" data-interval="false">
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+          <% @project.valid_videos.each_with_index do |video, index| %>
+            <% if index == 0 %>
+              <div class="item active text-center">
+                <%= raw video.embed_code %>
+              </div>
+            <% else %>
+              <div class="item text-center">
+                <%= raw video.embed_code %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+        <% if @project.valid_videos.size > 1 %>
+          <!-- Carousel nav -->
+          <a class="carousel-control left" href="#project_videos" data-slide="prev">&lsaquo;</a>
+          <a class="carousel-control right" href="#project_videos" data-slide="next">&rsaquo;</a>
+        <% end %>
+      </div>
+    <% end %>
+
+
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Close</button>
+  </div>
+</div>
+<!-- Media Modal -->

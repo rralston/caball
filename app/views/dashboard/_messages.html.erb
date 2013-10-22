@@ -1,0 +1,77 @@
+<div class='row'>
+  <div class='span11 dashboard-tab-main-head'>
+    <div class='row'>
+      <div class='span7 details'>
+        <div class='dashboard-tab-name regular'>
+          Messages
+        </div>
+        <div class='dashboard-tab-desc light'>
+          Create, manage and view your messages
+        </div>
+      </div>
+
+      <div class='span4 text-center'>
+        <a href="/conversations/new" class='regular btn-custom btn-dark-grey medium action-div new-project'>
+          <i class='icon-plus' style='color: black'></i>&nbsp;&nbsp;New Message
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class='row messages-main' >
+  <ul class='row conversations-filter clearfix custom-green-filters nav'>
+    <li class='active'>
+      <a href="#conversation-tab-inbox" data-toggle='tab' class='badge badge-custom-green pull-left conversation-filter'>
+        INBOX
+      </a>
+    </li>
+
+    <li>
+      <a href="#conversation-tab-sent" data-toggle='tab' class='badge badge-custom-green pull-left conversation-filter'>
+        SENT
+      </a>
+    </li>
+
+    <li>
+      <a href="#conversation-tab-trash" data-toggle='tab' class='badge badge-custom-green pull-left conversation-filter'>
+        TRASH
+      </a>
+    </li>
+  </ul>
+</div>
+
+<div class='row'>
+  <div class='tab-content conversations-display-tabs'>
+    <div class='tab-pane active' id='conversation-tab-inbox'>
+      
+      <div class='dashboard_section_loading text-center'>
+        Loading...
+        <br/>
+        <img src="/assets/ajax-loader-bar.gif">
+      </div>
+
+    </div>
+
+    <div class='tab-pane' id='conversation-tab-sent'>
+      
+      <div class='dashboard_section_loading text-center'>
+        Loading...
+        <br/>
+        <img src="/assets/ajax-loader-bar.gif">
+      </div>
+    
+    </div>
+
+    <div class='tab-pane' id='conversation-tab-trash'>
+    
+      <div class='dashboard_section_loading text-center'>
+        Loading...
+        <br/>
+        <img src="/assets/ajax-loader-bar.gif">
+      </div>
+    
+    </div>
+  </div>
+</div>

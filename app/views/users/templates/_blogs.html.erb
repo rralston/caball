@@ -1,0 +1,77 @@
+<script type="script/template" id='blogs_template'>
+
+  <% if current_user == @user %>
+    <div class='row add-comment'>
+      <div class='span7'>
+        <div class='row'>
+          
+            <div class="usrimg img-circle user-profile-img" style='background: url(<%= current_user.profile_pic %>)'> </div>
+          
+            <%= form_for Blog.new, :remote => true do |c|  %>
+              <%= c.text_area :content, :placeholder => 'Write a post...'  %>
+
+              
+              <div class="writeico">
+                <ul class="wrtico">
+                  <li>
+                    <a href="#video_form_tab" data-toggle="tab" title="Add a Video">
+                      <img src="/assets/writev.png" alt="" >
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#image_form_tab" data-toggle="tab" title="Add a Image">
+                      <img src="/assets/writep.png" alt="" >
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class='tab-content'>
+                <div class='tab-pane' id='image_form_tab'>
+                  <%= c.fields_for :photo, Photo.new do |p| %>
+                    <img class='image_preview_container img-polaroid' src="">
+                    <%= p.file_field :image %>
+                    <%= p.hidden_field :remote_image_url, :class => 'photo_url_div' %>
+                    
+                    <div class='controls upload_progress'>
+                      Upload Progress:
+                      <div class='progress'>
+                        <div class='bar' style='width: 0%'></div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+
+                <div class='tab-pane' id='video_form_tab'>
+                  <%= c.fields_for :video, Video.new do |v| %>
+                    <%= v.text_field :url, :placeholder => 'Video URL' %>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class='post_comment_btn'>
+                <span class='pull-left'>"Press enter to post" or </span>
+                <button class='btn post_update'>
+                  Post Update
+                </button>
+              </div>
+
+            <% end %>
+
+
+          
+        </div>
+        <div class='row'>
+          <div class='span8' id='comment_please_wait' style='disaplay:none;'>
+            Please wait while we add your comment..
+          </div>
+        </div>
+      </div>
+
+    </div>
+  <% end %>
+
+  <div id='comments_display'>
+    
+  </div>
+</script>

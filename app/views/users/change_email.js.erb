@@ -1,0 +1,7 @@
+<% if current_user.errors.any? %>
+	<% error = "Email "+current_user.errors.messages[:email][0] %>
+	$('.change_email_form .errors').html("<div class='alert alert-error'><button type='button' class='close' data-dismiss='alert'>&times;</button><br/><%= error %><br/></div>")
+<% else %>
+	$('.change_email_form .errors').html("<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button><br/>Email changed successfully.<br/></div>")
+<% end %>
+$('.change_email_form')[0].reset();

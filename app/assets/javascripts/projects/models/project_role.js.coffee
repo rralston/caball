@@ -1,0 +1,1 @@
+app.models.project_role = Backbone.Model.extend()

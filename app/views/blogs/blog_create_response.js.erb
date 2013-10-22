@@ -1,0 +1,15 @@
+<% if @blog.nil? %>
+
+  $.event.trigger({
+    type: 'blogError',
+    message: "<%= @error %>"
+  });  
+
+<% else %>
+
+  $.event.trigger({
+    type: 'newBlog',
+    blog: <%= raw @blog.to_json(:include => [:user, :likes], :check_user => current_user) %>
+  });
+
+<% end %>

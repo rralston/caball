@@ -1,0 +1,32 @@
+<script type="script/template" id='messages_template'>
+
+  <div class='row'>
+    <div class='span7 conversation-summary'>
+      Conversation between you and 
+        <%%= this.conversation.get('other_user_names').join(', ') %>
+    </div>
+
+    <div class='span7 messages_list'>
+    </div>
+
+
+    <%% if(this.collection.mailbox_type != 'Trash'){%>
+
+      <div class='span7 reply-div light'>
+        <div class='reply-text'>Reply</div>
+
+        <div class='message_please_wait text-center'>
+          Please while we send your message...
+        </div>
+
+        <div class='reply-area'>
+          <div class="img-circle user-circle-image pull-left" style="background: url(<%%= app.current_user.profile_thumb %>)">
+          </div>
+          <textarea id='new_message' class='pull-left' placeholder='Write a message...'></textarea>
+        </div>
+             
+      </div>
+    <%% } %>
+  </div>
+
+</script>

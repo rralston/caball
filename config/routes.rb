@@ -1,58 +1,139 @@
 Caball::Application.routes.draw do
-  # The priority is based upon order of creation:
-  # first created -> highest priority.
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
+                                       :registrations => "users/registrations", :sessions => "users/sessions"}
 
-  # Sample of regular route:
-  #   match 'products/:id' => 'catalog#view'
-  # Keep in mind you can assign values other than :controller and :action
+  get "activities/index"
 
-  # Sample of named route:
-  #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-  # This route can be invoked with purchase_url(:id => product.id)
+  match '/our_story' => 'static_pages#our_story'
+  match '/contact_us' => 'contact_us/contacts#new'
+  # get 'people', to: 'users#index', via: :all
+  resources :users, :path => "people"
+  match "/skills(/*path)" => redirect{ |env, req| "http://skills.filmzu.com" + (req.path ? "#{req.path}" : '/')}
 
-  # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  match 'check_url_param' => 'application#check_url_param'
 
-  # Sample resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+  match "/main_search" => 'application#main_search'
 
-  # Sample resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
+  match 'users/recommended_projects' => 'users#next_recommended_projects'
+  match 'users/recommended_people' => 'users#next_recommended_people'
+  match 'users/recommended_events' => 'users#next_recommended_events'
 
-  # Sample resource route with more complex sub-resources
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', :on => :collection
-  #     end
-  #   end
+  match '/users/set_notification_check_time' => 'users#set_notification_check_time'
 
-  # Sample resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  match '/users/update' => 'users#custom_update', :via => 'POST'
+  match '/users/step_1' => 'users#step_1'
 
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  match '/users/step_1_reload' => 'users#step_1_reload'
+  match '/users/step_2' => 'users#step_2'
+  match '/users/step_3' => 'users#step_3'
+  match '/users/files_upload' => 'users#files_upload'
+  match '/users/agent_names' => 'users#agent_names'
+  match '/users/profile' => 'users#profile'
+  match '/users/change_password' => 'users#change_password'
+  match '/users/change_email' => 'users#change_email'
+  get '/users/search_by_name'  
 
-  # See how all your routes lay out with "rake routes"
+  match '/events/files_upload' => 'events#files_upload'
+  match '/projects/files_upload' => 'projects#files_upload'
+  match '/comments/files_upload' => 'comments#files_upload'
+  match '/blogs/files_upload' => 'blogs#files_upload'
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+  resources :users do 
+    resources :characteristics, :photos, :talents, :profile, :blogs
+  end
+
+
+  match '/roles/destroy' => 'roles#destroy', :via => 'POST'
+
+
+  match '/projects/step_1'          => 'projects#step_1'
+  match '/projects/step_2'          => 'projects#step_2'
+  match '/projects/step_3'          => 'projects#step_3'
+  match '/projects/add_filled_role' => 'projects#add_filled_role'
+
+
+  resources :projects do 
+    resources :comments
+  end
+
+  match '/blogs/:id' => 'blogs#update', :via => 'POST'
+  resources :blogs
+  # post request to handle comment handle
+  match '/comments/:id' => 'comments#update', :via => 'POST'
+  resources :comments
+  match 'conversations/get_messages' => 'conversations#get_messages', :via => 'GET'
+  match '/conversations/empty_trash' => 'conversations#empty_trash', :via => 'POST'
+  resources :conversations
+  match 'conversations/send-generic-message' => 'conversations#send_message_generic', :via => 'POST'
+
+  resources :notifications
+  resources :friendships
+  match 'friendships/destroy' => 'friendships#destroy', :via => 'POST'
+  resources :likes
+  match 'likes/unlike' => 'likes#unlike', :via => 'POST'
+
+  resources :endorsements
+ 
+  resources :events
+  match 'events/up_vote' => 'events#up_vote', :via => 'POST'
+  match 'events/down_vote' => 'events#down_vote', :via => 'POST'
+  match 'events/load_more' => 'events#load_more', :via => 'POST'
+  match 'events/message_organizer' => 'events#send_message_to_organizer', :via => 'POST'
+  match 'events/attend' => 'events#attend', :via => 'POST'
+  match 'events/unattend' => 'events#unattend', :via => 'POST'
+  match 'events/invite_followers' => 'events#invite_followers', :via => 'POST'
+
+  resources :role_applications do
+    get :already_approved
+  end
+  match 'roles_applicants' => 'roles#applicants_list', :via => 'POST'
+  match 'role_applications/approve' => 'role_applications#approve', :via => 'POST'
+  match 'role_applications/un_approve' => 'role_applications#un_approve', :via => 'POST'
+
+  match 'report' => 'application#report'
+  
+  # News feed
+  match 'activities/load_more' => 'activities#next_activities'
+  resources :activities
+  
+  
+  # Static Pages 
+  
+  resources :home, except: :show  
+  %w[privacy terms about opportunities FAQ glossary contact labs].each do |page|
+    get page, controller: "static_pages", action: page
+  end
+
+  match 'dashboard'                 => 'users#dashboard'
+  match 'dashboard/projects'        => 'users#dashboard_projects', :via => 'GET'
+  match 'dashboard/events'          => 'users#dashboard_events', :via => 'GET'
+  match 'dashboard/conversations'   => 'users#dashboard_conversations', :via => 'GET'
+  match '/dashboard/manage_project' => 'users#manage_project', :via => 'GET'
+  
+
+  match 'projects/show' => 'projects#show'
+  # match 'auth/:provider/callback', to: 'sessions#create'
+  match 'auth/failure', to: redirect('/')
+  match 'signout', to: 'sessions#destroy', as: 'signout'
+  root :to => 'home#index'
+  
+  # Admin Area
+  namespace :admin do
+    %w[index users user_images interrogate projects project_images events event_images messages interface buttons calendar charts chat gallery grid invoice login tables widgets form_wizard form_common form_validation ].each do |page|
+      get 'admin/' + page
+    end
+
+    put 'admin/update_user'
+    put 'admin/update_project'
+  end
+  
+  resources :conversations, only: [:index, :show, :new, :create] do
+    member do
+      post :reply
+      post :trash
+      post :untrash
+      post :unread
+      post :read
+    end
+  end
 end

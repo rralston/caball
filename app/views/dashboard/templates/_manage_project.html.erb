@@ -1,0 +1,96 @@
+<script type="script/template" id='manage_project_template'>
+
+  <div class='project-head span11'>
+    <div class='project-title span4'>
+      <div class='row'>
+        <div class='title medium'>
+          <%%= title %>
+        </div>
+        <div class='manage-btns'>
+          <a href='/projects/<%%= id %>/edit' class='manage-btn regular pull-left'>
+            <div class='gear-grey'></div> Edit Project Settings
+          </a>
+
+          <%% if(status!='Completed'){ %>
+            <a href='#' class='manage-btn pull-right regular mark_done'>
+              <i class='icon-ok'></i> Mark Project Done
+            </a>
+          <%% } %>
+        </div>
+      </div>
+      
+    </div>
+    
+    <div id='project-fans' class='pull-left'>
+      
+    </div>
+    
+
+    <div class='project-roles-filled pull-left text-center'>
+      <div class='row'>
+        Positions Filled
+      </div>
+      <div class='row'>
+        <div class="role-circle-container">
+          <div class="role-circle"> </div>
+          <div class="circle-fill"> </div>
+
+          <div class="circle-measure circle-measure-<%%= roles_percent  %>"> </div>
+        </div> 
+      </div>
+
+      <div class='dropdown message-participants btn-custom btn-dark-grey medium action-div'>
+        <div class='dropdown-toggle' data-toggle='dropdown' data-target='#message_options'>
+          <div class='pencil-black'></div> Message Participants
+        </div>
+        <ul class='dropdown-menu' role='menu' aria-label='message_options' id='mesasge_options'>
+          
+          <li role='presentation'>
+            <a href='#' class='send-generic-message project_selected_applicants'  data-message-subject='Regarding Your role appliations - <%%= title %>' data-message-recipients='<%%= selected_applicants_mails.join(",") %>' data-message-header='Message Selected Participants - <%%= title %>' data-recipients-error="You don't have any selected applicants">
+              Selected Applicants
+            </a>
+          </li>
+          
+          <li role='presentation'>
+            <a href='#' class='send-generic-message project_other_applicants' data-message-subject='Regarding Your role appliations - <%%= title %>' data-message-recipients='<%%= non_selected_applicants_mails.join(",") %>' data-message-header='Message Non Selected Participants - <%%= title %>' data-recipients-error="You don't have any applicants to send messages.">
+              Other Applicants
+            </a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class='row'>
+    <div class='span11' id='project-roles-main-container'>
+      <div class='row'>
+        <div class='span11' id='project-roles-circles'>
+
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='span11 dashboard-tab-heading secondary'>
+          Applicants
+        </div>
+      </div>
+
+
+      <div class='row'>
+        <ul class='span11' id='project-roles-filters'>
+        
+        </ul>
+      </div>
+
+      <div class='row'>
+        <ul class='span11' id='project-roles-tabs'>
+        
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</script>

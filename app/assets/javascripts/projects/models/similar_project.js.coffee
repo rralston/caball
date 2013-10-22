@@ -1,0 +1,1 @@
+app.models.similar_project = Backbone.Model.extend()

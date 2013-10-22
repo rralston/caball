@@ -1,0 +1,14 @@
+case ENV['RAILS_ENV'] 
+when "development" 
+  ENV["FACEBOOK_APP_ID"] = ''
+  ENV['FACEBOOK_KEY'] = ''
+  ENV['FACEBOOK_SECRET'] = ''
+when "staging" 
+  ENV["FACEBOOK_APP_ID"] = ''
+  ENV['FACEBOOK_KEY'] = ''
+  ENV['FACEBOOK_SECRET'] = ''
+when "production" 
+  ENV["FACEBOOK_APP_ID"] = '157500387725769'
+  ENV['FACEBOOK_KEY'] = '157500387725769'
+  ENV['FACEBOOK_SECRET'] = 'c83875c4189828808e4cf948b43e12d5'
+end 

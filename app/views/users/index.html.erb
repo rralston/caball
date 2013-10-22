@@ -1,0 +1,311 @@
+<%= javascript_include_tag "users/users_manifest" %>
+<%= javascript_include_tag "users/user_search" %>
+<%= stylesheet_link_tag "users/user_index.css" %>
+
+<div class="topbnrwrap">
+  <div class="topbnr container">
+    <div class="bnrenclose">
+      <div class="bnrbg">
+        <img src="/assets/people-index-bg.png" alt="">
+      </div>
+      <div class="bnrtext light span12">
+          <h1>PEOPLE</h1>
+          <p class='light'> Discover and contact filmmakers or fans who share your enthusiasm for creating great content.</p>
+          </div>
+    </div>
+  </div>
+</div>
+
+<!--========= main content starts======------>
+<div class="mainwrap" >
+  <div class="maincontain container-fluid" >
+  <div class="row-fluid">
+  
+  <!--========= left sidebar starts======------>
+    <aside class="lside span3">
+      <form action="" class=" srchfrm span">
+        <input type="text" id='search-users-input'>
+        <div class="search_filters">
+          
+        </div>
+        <div class='search_please_wait'>
+          Please wait while we search
+        </div>
+      </form>
+      <form id='users_search_form' class="psearch">
+        <h2 class='regular'>Advanced Search</h2>
+        <div class='srchopts' style="height: 90px; overflow: hidden;">
+          <div class="srchsect">
+
+            <div class="srchopt">
+              <div class="rdboxwrap">
+                <input type="radio" name='people' value='followers' id='followers' />
+                <label class="rdlabel" for="followers"></label>
+              </div>
+              <span class="chktxt">Follows You</span>
+              
+            </div>
+
+            <div class="srchopt">
+              <div class="rdboxwrap">
+                <input type="radio" name='people' value='friends' id='friends' />
+                <label class="rdlabel" for="friends"></label>
+              </div>
+              <span class="chktxt">You follow</span>
+              
+            </div>
+          </div>
+        </div>
+
+        <div class="srchsect">
+          <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+          <h2 class='regular expand shrinked'>Positions</h2>
+          <div class='srchopts'>
+            <% User.types.each_with_index do |(key, super_role), index| %>
+              <% if super_role != 'Fan' %>
+                <div class='role_search_wrap'>
+                  <div class="srchopt">
+                    <div class="chkboxwrap">
+                      <input type="checkbox" name='roles' value='<%= super_role %>' id='<%= super_role %>' />
+                      <label class="chklabel" for="<%= super_role %>"></label>
+                    </div>
+                    <span class="chktxt"><%= super_role %></span>
+                  </div>
+
+                  <% if User.sub_types[super_role].present? %>
+                    <% User.sub_types[super_role].each_with_index do |(key, value), index| %>
+                      <div class="srchopt sub_type">
+                        <div class="chkboxwrap">
+                          <input type="checkbox" name='sub_talents[<%= super_role %>]' value='<%= value %>' id='<%= value %>' />
+                          <label class="chklabel" for="<%= value %>"></label>
+                        </div>
+                        <span class="chktxt"><%= value %></span>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="srchsect">
+          <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+          <h2 class='regular expand shrinked'>Distance</h2>
+          <div class='srchopts'>
+            <% [10, 25, 50, 100, 200].each do |distance| %>
+              <div class="srchopt">
+                <div class="rdboxwrap">
+                  <input type="radio" name='distance' value='<%= distance %>' id='<%= distance %>'>
+                  <label class="rdlabel distance_radio" for="<%= distance %>"></label>
+                </div>
+                <span class="chktxt"><%= distance %> miles</span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="cast-extn">
+
+          <div class="srchsect">
+            <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+            <h2 class='regular expand shrinked'>Height</h2>
+            <div class='srchopts'>
+              <% Characteristics.heights.each_with_index do |(key, height), index| %>
+                <div class="srchopt">
+                  <div class="chkboxwrap">
+                    <input type="checkbox" name='height' value='<%= height %>' id='<%= height %>' />
+                    <label class="chklabel" for="<%= height %>"></label>
+                  </div>
+                  <span class="chktxt"><%= height %></span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="srchsect">
+            <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+            <h2 class='regular expand shrinked'>Ethnicity</h2>
+            <div class='srchopts'>
+              <% Characteristics.enthnicities.each_with_index do |(key, ethnicity), index| %>
+                <div class="srchopt">
+                  <div class="chkboxwrap">
+                    <input type="checkbox" name='ethnicity' value='<%= ethnicity %>' id='<%= ethnicity %>' />
+                    <label class="chklabel" for="<%= ethnicity %>"></label>
+                  </div>
+                  <span class="chktxt"><%= ethnicity %></span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="srchsect">
+            <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+            <h2 class='regular expand shrinked'>Build</h2>
+            <div class='srchopts'>
+              <% Characteristics.bodytypes.each_with_index do |(key, bodytype), index| %>
+                <div class="srchopt">
+                  <div class="chkboxwrap">
+                    <input type="checkbox" name='bodytype' value='<%= bodytype %>' id='<%= bodytype %>' />
+                    <label class="chklabel" for="<%= bodytype %>"></label>
+                  </div>
+                  <span class="chktxt"><%= bodytype %></span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="srchsect">
+            <span class="shrink-anim"><img src="/assets/opth2.png"></span>
+            <h2 class='regular expand shrinked'>Hair Color</h2>
+            <div class='srchopts'>
+              <% Characteristics.hair_colors.each_with_index do |(key, hair_color), index| %>
+                <div class="srchopt">
+                  <div class="chkboxwrap">
+                    <input type="checkbox" name='hair_color' value='<%= hair_color %>' id='<%= hair_color %>' />
+                    <label class="chklabel" for="<%= hair_color %>"></label>
+                  </div>
+                  <span class="chktxt"><%= hair_color %></span>
+                </div>
+              <% end %>
+            </div>
+          </div>
+
+        </div>
+
+        <div class='text-center'>
+          <a id='btn-search_users' class="srchbtn2 srchbtn btn-custom btn-red center-div text-center btn-search_projects">
+            Search
+          </a>
+					<button type="reset" value="Reset" class="btn btn-link">Clear</button>
+        </div>
+
+      </form>
+    </aside>
+  <!--========= left sodebar ends======-->
+
+
+  <!--========= main content starts======-->
+    <div class="main-wrap span9" id="mwrap">
+      <div class="row-fluid">
+      <div class="main span12 pdiv" id='all_users'>
+
+        <!--======Popular people div===-->
+        
+          <div class="pdiv span12">
+            <div class="row-fluid">
+            
+              <div class="page-header-secondary">
+                Popular on Filmzu
+              </div>
+              
+              <div id='popular_users_container'>
+
+              </div>
+            </div>
+          </div>
+        <!--======Popular people div===-->
+        <!--======Recently updated div===-->
+        
+          <div class="pdiv span12">
+            <div class="row-fluid">
+              <div class="page-header-secondary">
+                Recently Updated
+              </div>
+              <div id='recent_users_container'>
+
+              </div>
+            </div>
+          </div>
+        <!--======Recently updated div===-->
+      </div>
+
+      <div class='load_more_div clearfix text-center'>
+        <a class="btn-custom btn-red center-div text-center btn-load_more" data-next-page="2">
+          Load More
+        </a>
+      </div>
+
+      </div>
+    </div>
+  <!--========= main content ends======-->
+    
+
+  </div>
+  </div>
+</div>
+<!--========= main content ends======-->
+
+<%= render :partial => 'users/templates/user_tile' %>
+<%= render :partial => 'conversations/send_new_message_modal' %>
+
+<script type="text/javascript">
+
+app.status = 'index'
+
+app.current_user = <%= raw current_user.to_json() %>
+
+<% if current_user %>
+  app.logged_in_user_location = '<%= current_user.location %>'
+<% end %>
+
+app.recent_users = new app.collections.users()
+recent_users_view = new app.views.users({ collection: app.recent_users })
+
+
+<% if current_user.present? %>
+// remove current user from the display
+  app.recent_users.reset(<%= raw User.recently_updated(1, USERS_PER_PAGE_IN_INDEX, current_user).to_json(:include => [:followers], :check_user => current_user) %>)
+<% else %>
+  app.recent_users.reset(<%= raw User.recently_updated(1, USERS_PER_PAGE_IN_INDEX).to_json(:include => [:followers], :check_user => current_user) %>)
+<% end %>
+
+$('#recent_users_container').html(recent_users_view.render().el)
+
+
+app.popular_users = new app.collections.users()
+popular_users_view = new app.views.users({ collection: app.popular_users })
+
+
+app.popular_users.reset(<%= raw User.popular_users.first(3).to_json(:include => [:followers], :check_user => current_user) %>)
+
+
+$('#popular_users_container').html(popular_users_view.render().el)
+
+
+// initializing the result users view and collection
+app.result_users = new app.collections.users()
+app.result_users_view = new app.views.users({ collection: app.result_users })
+
+// default initial state
+app.geolocation_tried = false
+
+$('body').on('click', '.distance_radio', function(event){
+
+  app.current_user_location = app.logged_in_user_location
+  // if the geolocation is not yet tried
+  if(app.geolocation_tried == false){
+    // get user current location to search
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(function(position){
+        var latlng = new google.maps.LatLng(
+                          position.coords.latitude,
+                          position.coords.longitude);
+
+        var geoCoder = new google.maps.Geocoder();
+
+        geoCoder.geocode({ location: latlng }, function(results, status){
+          app.current_user_location = results[3].formatted_address;
+        });
+      });
+    }
+
+    // set geo_location tried status to true
+    app.geolocation_tried = true
+
+  }
+});
+
+
+
+</script>

@@ -1,0 +1,13 @@
+<% activities.each do |activity| %>
+
+  <% user = activity.owner || activity.user || activity.trackable.user %>
+  <% if activity.trackable %>
+    <div class='activity'>
+      <%= image_tag user.profile_pic, :class => "producer-image", :width => 10 %>
+      <%= link_to user.name, user  %>
+
+      <%= render_activity activity %>
+    </div>
+  <% end %>
+
+<% end %>

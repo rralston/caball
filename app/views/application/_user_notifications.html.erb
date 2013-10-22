@@ -1,0 +1,60 @@
+<% current_user.unread_notifications.each do |notification| %>
+  <% if notification.class.name == 'Activity' %>
+    <div class="notification">
+      <div class="usrimg img-circle" style='background: url(<%= notification.trackable.user.profile_pic %>)'>
+      <!--user prof images as cover bg-->
+      </div>
+      <div class="notefull">
+        <% model_object = notification.trackable.commentable %>
+        <div class="noteinfo">
+          <a href="/users/<%= notification.trackable.user.url_param %>">
+            <%= notification.trackable.user.name %>
+          </a> 
+          commented on your <%= model_object.class.name.downcase %> 
+          <a href="/<%= model_object.class.name.downcase%>s/<%= model_object.id %>">
+            <%= notification.trackable.commentable.title %>
+          </a>
+        </div>
+        
+        <div class="notemsg"><%= notification.trackable.content %></div>
+
+        <div class='notetime light'>
+          <span class="timeago" title="<%= notification.trackable.created_at.to_json() %>"><%= time_ago_in_words(notification.trackable.created_at) %> ago</span>
+        </div>
+        
+      </div>  
+
+      <div class='hide-me action-div' style='display: none;'>
+        <i class='icon-remove-sign'> </i>
+      </div>
+
+    </div>
+  <% elsif notification.class.name == 'Receipt' %>
+
+    <!-- if the sender was later deleted, no need to show his notifications. -->
+    <% if notification.message.sender.present? %>
+      <div class="notification">  
+        <div class="usrimg img-circle" style='background: url(<%= notification.message.sender.profile_pic %>)'>
+        <!--user prof images as cover bg-->
+        </div>
+        <div class="notefull">
+          
+          <div class="noteinfo">
+            <a href="/users/<%= notification.message.sender.url_param %>"><%= notification.message.sender.name %></a> sent you a message.
+          </div>
+          
+          <div class="notemsg"><%= truncate(notification.message.body, :length => 60, :separator => ' ') %></div>
+          
+          <div class='notetime light'>
+            <span class="timeago" title="<%= notification.created_at.to_json() %>"><%= time_ago_in_words(notification.created_at) %> ago</span>
+          </div>
+        </div>  
+
+        <div class='hide-me action-div' style='display: none;'>
+          <i class='icon-remove-sign'> </i>
+        </div>
+      </div>
+    <% end %>
+
+  <% end %>
+<% end %>

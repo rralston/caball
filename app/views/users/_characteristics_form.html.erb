@@ -1,0 +1,97 @@
+<%= f.fields_for :characteristics_attributes, current_user.characteristics || Characteristics.new do |c|   %>
+  <div class='user-talent'>
+    
+    <div class="controls">
+      <h5>Actor</h5>
+    </div>
+
+    <% if false %> <!-- Exclude Fields -->
+      <div class="control-group">
+        <div class="controls">
+          <%= talent.text_area :description, :class => 'textarea', :rows => "5", :placeholder => 'Tell us about your experience as an actor, what type of roles have you played? What are your strengths? Do you have a look that stands out?' %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= talent.check_box :_destroy, :class=>'destroy_checkbox', :style => 'display:none;' %>
+        <!-- <a href='#' class='remove_entity' data-toRemove='.user-talent'>Remove this role</a> -->
+      </div>    
+    </div>
+  
+            
+    <div class="row-fluid actor-characteristics">
+  
+      <div class="control-group">
+        <div class="controls">
+          <%= c.label "Age" %>
+          <%= c.select(:age, options_for_select(Characteristics.ages, c.object.age)) %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= c.label "Height" %>
+          <%= c.select(:height, options_for_select(Characteristics.heights, c.object.height)) %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= c.label "Ethnicity" %>
+          <%= c.select(:ethnicity, options_for_select(Characteristics.enthnicities, c.object.ethnicity)) %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= c.label "Build" %>
+          <%= c.select(:bodytype, options_for_select(Characteristics.bodytypes, c.object.bodytype)) %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= c.label "Hair Color" %>
+          <%= c.select(:hair_color, options_for_select(Characteristics.hair_colors, c.object.hair_color)) %>
+        </div>
+      </div>
+
+      <!-- <div class="control-group">
+        <div class="controls">
+          <%= c.label "Languages" %>
+          <%= c.select(:language, options_for_select(Characteristics.languages, c.object.language)) %>
+        </div>
+      </div> -->
+
+
+      <% if false %> <!-- Exclude Fields -->
+        <div class="control-group">
+          
+          
+          <div class='controls'>
+            <%= c.label :description_tag_list %>
+
+              <ul id="user_description_tags" class='tagit ui-sortable' style='width: 300px;'>
+                <% if current_user.characteristics.present? and current_user.characteristics.description_tag_list.present? %>
+                  <% current_user.characteristics.description_tag_list.each do |desc| %>
+                    <li data-value="<%= desc %>"><%= desc %> </li>
+                  <% end %>
+                <% end %>
+              </ul>
+
+          </div>  
+
+          <div class="controls">
+            <%= c.hidden_field :description_tag_list, :class => 'text_field' %>
+          </div>
+
+        </div>
+      <% end %>
+
+    </div>
+
+  </div>
+
+<% end %>

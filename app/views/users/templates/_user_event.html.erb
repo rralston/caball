@@ -1,0 +1,17 @@
+<script type="script/template" id='user_event_template'>
+
+  <div class='event-main-container'>
+    <div class='event-image pull-left'>
+      <img class='img-circle' src='<%%= main_photo.image.thumb.url %>'>
+    </div>
+
+    <div class='event-details pull-left'>
+      <div class='event-title medium'>
+        <a href='/events/<%%= url_param %>'><%%= title %></a>
+      </div>
+      <div class='event-date light'>
+        <%%= start.pretty_date %> at <%%= location_city %>
+    </div>
+  </div>
+
+</script>

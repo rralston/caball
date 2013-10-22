@@ -1,0 +1,62 @@
+<script type="script/template" id='similar_event_template'>
+
+  <div class='event-image pull-left'>
+    <img src='<%%= main_photo.image.thumb.url %>' class='img-circle event-image'>
+  </div>
+
+
+  <div class='pull-left event-details'>
+    
+    <div class='row'>
+      <div class='event-title medium'>
+        <a href='/events/<%%= url_param %>'><%%= title %></a>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class='event-time light'>
+        <%%= start.formatted_time %>
+      </div>
+    </div>
+
+    <div class='attendees-details pull-left'>
+      <div class='attendees pull-left light'>
+        ATTENDING: <br/>
+
+        <%% _.first(attendees, 5).forEach(function(attendee){ %>
+          <a href='/users/<%%= attendee.url_param %>' target='_blank'>
+            <img src='<%%= attendee.profile_tiny %>' class='img-circle event-attendee-pic pull-left'>
+          </a>
+        <%% }) %>
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class='event-right-details pull-left'>
+    <div class="date pull-left medium">
+      <div class="day">
+        <%%= start.day %>
+      </div>
+      <div class="month regular">
+        <%%= start.month_year %>
+      </div>
+    </div>
+
+    <div class='event-attend-status'>
+      <%% if(typeof user_attending != 'undefined' && user_attending){ %>
+        <div class='unattend-event btn-custom btn-red'>
+          Attending
+        </div>
+      <%% }else{ %>
+        <div class='attend-event btn-custom btn-red'>
+          Attend
+        </div>
+      <%% } %>
+    </div>
+  </div>
+
+    
+
+</script>
