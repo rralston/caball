@@ -39,16 +39,17 @@
         </div>
       </div>
     </div>
-
+	<div class='all-location-container'>
     <div class="control-group">
       <%= f.label "Location*", :class => 'control-label' %>
       <div class="controls location">
-        <%= f.text_field :location, :class => 'text_field required' %>
+        <%= f.text_field :location, :class => 'text_field required location_entry' %>
         <div class="clearfix"></div>
         <%= image_tag("locate_me.png", :align => "left", :height => "30", :id => "locate") %>
         <i>Click icon for your location</i>
       </div>
     </div>
+	</div>
 
     <div class="control-group">
       <%= f.label :gender, :class => 'control-label' %>
@@ -121,8 +122,14 @@
           <!-- if the user's primary role is Fan, don't show option to add more roles -->
           <% if current_user.talents.count < 2 and current_user.talent_names.try(:first) != 'Fan' %>
             <%= link_to 'Add a Position!', '#', :class => 'btn btn-success', :id => 'add-to-talents-list' %>
+						<div class='div_hint'>
+		          Select up to a maximum of two positions.
+		        </div>
           <% else %>
             <%= link_to 'Add another position', '#', :class => 'btn btn-success', :id => 'add-to-talents-list', :style => 'display:none;' %>
+						<div class='div_hint'>
+		          Select up to a maximum of two positions.
+		        </div>
           <% end %>
         </div>
       </div>
@@ -223,7 +230,7 @@
       <div class="controls">
         <%= f.text_area :about, :class => 'text_area' %>
         <div class='div_hint'>
-          1 paragraph is all you need!
+          1 paragraph is all you need.
         </div>
       </div>
     </div>

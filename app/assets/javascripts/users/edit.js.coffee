@@ -189,7 +189,6 @@ $(document).ready ()->
         results: ()->
 
   $('body').on 'click', '.step_1_submit', (event)->
-
     if( $('.super_role_select').size() > 0 )
       btn = $(event.target)
       btn.val('Please wait..')
@@ -219,6 +218,12 @@ $(document).ready ()->
               $("html, body").animate({ scrollTop: $('.all-profo-container').position().top }, "slow");
               btn.val('Finish! Go to my Dashboard')
               btn.attr('disabled', false)
+            else 
+              if data.message.match(/Location/) 
+                $('.all-location-container').addClass('have_error')
+                $("html, body").animate({ scrollTop: $('.all-location-container').position().top }, "slow");
+                btn.val('Finish! Go to my Dashboard')
+                btn.attr('disabled', false)
 
           if !btn.hasClass('skip')
             btn.val('Next Step')
@@ -226,6 +231,7 @@ $(document).ready ()->
     else
       alert('Please select atleast one role.')
       $('.all-roles-container').addClass('have_error')
+      $("html, body").animate({ scrollTop: $('.all-roles-container').position().top }, "slow");
 
     return false
 

@@ -96,6 +96,7 @@ class User < ActiveRecord::Base
   after_validation :geocode          # auto-fetch coordinates
 
   validates_with UserRolesValidator
+  validates_with UserLocationValidator
 
   before_save :update_url_name
 
