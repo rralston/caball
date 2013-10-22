@@ -264,7 +264,8 @@
                           <% if current_user %>
                            <%= link_to 'Apply', new_role_application_path(:role_id => role.id), class: "btn btn-small btn-success" %>
                           <% else %>
-                           <%= link_to "Sign In to Apply!", "/auth/facebook", id: "sign_in", class: "btn btn-small btn-success" %>
+                           <%= link_to "Sign in", "../users/sign_in", id: "sign_in", class: "btn btn-small btn-danger" %>
+													<%= link_to "Or sign up to apply!", "../users/sign_up", id: "sign_up", class: "btn btn-small btn-danger" %>
                           <% end %>
                         </div>
                       </div>
