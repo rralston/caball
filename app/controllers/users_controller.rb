@@ -312,7 +312,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to admin_admin_users_url, :notice => @user.name +  'was deleted from Filmzu.' }
+      format.html { redirect_to admin_admin_users_url, :notice => @user.name +  ' was deleted from Filmzu.' }
     end
   end
 
