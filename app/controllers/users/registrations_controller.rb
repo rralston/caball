@@ -12,6 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         redirect_back_or(edit_user_path(resource))
         @user.friendships.create(:friend_id => "1")
         @user.friendships.create(:friend_id => "2")
+        @user.friendships.create(:friend_id => "4")
       else
         set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
         expire_session_data_after_sign_in!
