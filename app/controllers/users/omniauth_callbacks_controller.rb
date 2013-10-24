@@ -10,7 +10,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_back_or('/dashboard')
       else
         redirect_back_or(edit_user_path(@user))
-        @user.friendships.create(:friend_id => "5")
+        @user.friendships.create(:friend_id => "1")
+        @user.friendships.create(:friend_id => "2")
+        @user.friendships.create(:friend_id => "4")
       end
     else
       session["devise.facebook_data"] = request.env["omniauth.auth"]
