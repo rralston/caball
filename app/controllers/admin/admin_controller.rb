@@ -21,6 +21,10 @@ class Admin::AdminController < Admin::BaseController
     @projects_3weeks = objects_created_within_date_range(@projects, 3.week.ago, 2.week.ago).count
     @projects_4weeks = objects_created_within_date_range(@projects, 4.week.ago, 3.week.ago).count
     @recent_projects = Project.order('created_at DESC').last(10)
+    #Events analysis
+    @events = Event.all
+    @events_count = @events.count
+    @events_weekly = objects_created_within_date_range(@events, 1.week.ago, Time.now).count
     # conversation analysis
     @conversations_weekly = objects_created_within_date_range(Conversation.all, 1.week.ago, Time.now).count
   end
