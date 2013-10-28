@@ -49,9 +49,9 @@ Caball::Application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "https://#{ENV['FOG_DIRECTORY']}.s3.amazonaws.com"
   # Development Cloudfront
-  # config.action_controller.asset_host = "d1stg2u3ujiznp.cloudfront.net"
+  config.action_controller.asset_host = "d1stg2u3ujiznp.cloudfront.net"
   # Production Cloudfront
-  config.action_controller.asset_host = "d1w6ekkvcymcvm.cloudfront.net"
+  # config.action_controller.asset_host = "d1w6ekkvcymcvm.cloudfront.net"
   
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
 
@@ -91,6 +91,6 @@ Caball::Application.configure do
    }
   
   # Change when Push to the Website or will Error out
-  # config.action_mailer.default_url_options = { :host => 'filmzu-dev-env-cpbt693qtg.elasticbeanstalk.com' }
-  config.action_mailer.default_url_options = { :host => 'filmzu-4mapu5m2zx.elasticbeanstalk.com' }
+  config.action_mailer.default_url_options = { :host => 'filmzu-dev-env-cpbt693qtg.elasticbeanstalk.com' }
+  # config.action_mailer.default_url_options = { :host => 'filmzu-4mapu5m2zx.elasticbeanstalk.com' }
 end
