@@ -54,9 +54,8 @@ Caball::Application.configure do
   config.action_controller.asset_host = "d1w6ekkvcymcvm.cloudfront.net"
   
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( admin/admin.css admin/*.js )
 
-  config.assets.precompile += %w( conversations/new.css users/users_manifest.js dashboard/dashboard.css dashboard/dashboard_manifest.js users/users.js signup.css signin.css
+  config.assets.precompile += %w( admin/admin.css admin/*.js conversations/new.css users/users_manifest.js dashboard/dashboard.css dashboard/dashboard_manifest.js users/users.js signup.css signin.css
                                 events_manifest.js events/manifest.css events/event_index.css events/events_manifest.js home_page.css 
                                 users/user_index.css application.js 
                                 projects/projects_manifest.js projects/manifest.css users/user_search.js projects/project_index.css 
@@ -92,5 +91,6 @@ Caball::Application.configure do
    }
   
   # Change when Push to the Website or will Error out
-  config.action_mailer.default_url_options = { :host => 'filmzu-dev-env-cpbt693qtg.elasticbeanstalk.com' }
+  # config.action_mailer.default_url_options = { :host => 'filmzu-dev-env-cpbt693qtg.elasticbeanstalk.com' }
+  config.action_mailer.default_url_options = { :host => 'filmzu-4mapu5m2zx.elasticbeanstalk.com' }
 end

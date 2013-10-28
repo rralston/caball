@@ -36,6 +36,7 @@
 											<th><%= sort_link(@search, :title, "Title") %></th>
 											<th>Owner</th>
 											<th><%= sort_link(@search, :created_at, "Created On") %></th>
+											<th>Attendees</th>
 											<th>Actions</th>
 										</tr>
 									</thead>
@@ -46,7 +47,7 @@
 											<td><%= link_to event.title, event_path(event.id) %></td>
 											<td><%= link_to User.find(event.user_id).name, user_path(event.user_id) %></td>
 											<td><%= event.created_at %></td>
-											
+											<td><%= event.fans.count %></td>
 											<td>
 									
 										

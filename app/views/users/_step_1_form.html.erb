@@ -34,7 +34,7 @@
       <%= f.label "Email*", :class => 'control-label' %>
       <div class="controls">
         <%= f.text_field :email, :class => 'text_field required email', :placeholder => 'This where we notify you of the new opportunities' %>
-        <div class='div_hint'>
+        <div class='form_hint'>
           We will NEVER, EVER spam or sell your email address
         </div>
       </div>
@@ -223,8 +223,8 @@
       <%= f.label 'About you', :class => 'control-label' %>
       <div class="controls">
         <%= f.text_area :about, :class => 'text_area' %>
-        <div class='div_hint'>
-          1 paragraph is all you need.
+        <div class='form_hint'>
+          1 paragraph is all you need
         </div>
       </div>
     </div>
@@ -240,7 +240,7 @@
           <%= f.text_field :headline, :class => 'text_field fan_unhint hinted', "data-hint" => 'Some good examples: <br/> - I directed my first feature when I was 12.<br/> - I graduated from NYU Film School and won award for music videos, <br/> - I know how to make awesome horror movies for cheap' %>
         <% end %>
         
-        <div class='div_hint'>
+        <div class='form_hint'>
           200 characters Max (more than Twitter gives you)
         </div>
       </div>
@@ -279,11 +279,12 @@
               <% end %>
             <% end %>
           </ul>
-        
-      </div>    
+					<div class='ul_hint'>
+			      If entering more then one word use Shift+Spacebar between words. Please write a maximum of 4
+			    </div>
+      </div>  
     </div>
 
-    
     <div class='span12'>
       <div class='text-center form_footer'>
         <div class='links'>
