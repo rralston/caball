@@ -282,7 +282,7 @@ jQuery(function() {
         if (response.authResponse) {
           window.location = '/users/auth/facebook/callback';
         }
-      });
+      }, {scope: 'email'});
       return false;
     });
     return $('#sign_out').click(function(e) {
