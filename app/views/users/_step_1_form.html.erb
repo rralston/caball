@@ -19,6 +19,70 @@
 <%= form_for current_user, :url => '/users/step_1', :validate => true, :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'user_edit_form'} do |f| %>
   <div class="span12">
     
+
+		<!-- Begin Profile Photo Area -->
+		<div class='all-profo-container'>
+    <%= f.fields_for :profile, current_user.profile || current_user.build_profile  do |profile|  %>
+      <div class='control-group '>
+
+        <div class='row'>
+          <div class='span5'>
+						<%= profile.hidden_field :crop_x, :class => 'crop_x' %>
+	          <%= profile.hidden_field :crop_y, :class => 'crop_y' %>
+	          <%= profile.hidden_field :crop_w, :class => 'crop_w' %>
+	          <%= profile.hidden_field :crop_h, :class => 'crop_h' %>
+	
+						<label class="control-label">Profile Image*</label>
+            <div class="controls">
+              <div class='uploader_btn'>
+                <div class='main_txt'>Choose an image from your computer.</div>
+                <div class='format_txt'> <span class='before_dot'>JPEG, PNG or BMP</span> 10MB File limit</div>
+                <div class='size_txt'><span class='before_dot'>Your Headshot</span> You can Crop</div>
+								<%= profile.file_field :image, :validate => { :presence => false } %>
+							</div>
+						</div>
+          </div>
+				</div>
+
+				<div class='row'>
+          <div class="span3">
+            <div class='controls upload_progress'>
+              Upload Progress:
+              <div class='progress'>
+                <div class='bar' style='width: 0%'></div>
+              </div>
+            </div>
+
+
+        <% if current_user.profile.image.present? %>
+          <div class="controls image_container">
+            <%= image_tag current_user.profile.image.url(:medium), {:class => "image_preview_container img-circle"} %>
+          </div>
+
+          <div class='controls image_btns'>
+            <a href="" class='btn crop_image pull-left' data-orgImgUrl='<%= profile.object.image.url %>' data-orgWidth='<%= profile.object.original_width %>' data-orgHeight='<%= profile.object.original_height %>' data-prevImgUrl='<%= profile.object.image.url(:original) %>'  style='display: inline'>Crop</a>
+          </div>
+
+        <% else %>
+          <div class="controls image_container" style='display:none;'>
+            <!-- just keep the container there in case to preview if user uploads an image. -->
+            <img class='image_preview_container img-circle' src="">
+          </div>
+
+          <div class='controls image_btns'>
+            <a href="" class='btn crop_image pull-left' data-imgUrl=''>Crop</a>
+          </div>
+
+        <% end %>
+          
+        	</div>
+				</div>
+
+      </div>
+    <%end%>
+		</div>
+		<!-- End Profile Photo Area -->
+		
     <div class="control-group">
       <%= f.label "Name*", :class => 'control-label' %>
       <div class="controls">
@@ -50,7 +114,115 @@
       </div>
     </div>
 	</div>
+	
+	<!-- Begin Positions Area -->
+	<div class='all-roles-container'>
 
+     <div class="control-group">
+       <label class='control-label'>Your Positions*</label>
+       <div class='controls'>
+         <!-- don't allow user to add more than 2 talents -->
+         <!-- if the user's primary role is Fan, don't show option to add more roles -->
+         <% if current_user.talents.count < 2 and current_user.talent_names.try(:first) != 'Fan' %>
+           <%= link_to 'Add a Position!', '#', :class => 'btn btn-success', :id => 'add-to-talents-list', :title => "Select a max of two positions", :data => {:toggle => 'tooltip', :placement => 'right'} %>
+         <% else %>
+           <%= link_to 'Add another position', '#', :class => 'btn btn-success', :id => 'add-to-talents-list', :style => 'display:none;', :title => "Select a max of two positions", :data => {:toggle => 'tooltip', :placement => 'right'} %>
+         <% end %>
+       </div>
+     </div>
+ 
+     <%= f.fields_for :talents do |talent|   %>
+       <div class='user-talent'>
+         <div class="control-group">
+           <%= talent.label :name, "Position", :class => 'control-label' %>
+           <div class="controls">
+             <%= talent.select(:name, options_for_select(User.types, talent.object.name), {}, :class=>'super_role_select') %>
+           </div>
+
+           <% if talent.object.sub_talent.present? %>
+             <div class='sub_role_container'>
+               <%= talent.label "Sub Position", :class => 'control-label' %>
+               <div class="controls">
+                 <%= talent.select(:sub_talent, options_for_select(User.sub_types[talent.object.name], talent.object.sub_talent), {}, :class=>'sub_role_select') %>
+               </div>
+             </div>
+           <% else %>
+             <div class='sub_role_container' style='display: none;'>
+               <%= talent.label "Sub Position", :class => 'control-label' %>
+               <div class="controls">
+                 <%= talent.select(:sub_talent, {}, {}, :class=>'sub_role_select') %>
+               </div>
+             </div>
+           <% end %>
+
+           <% if talent.object.super_sub_talent.present? %>
+             <div class='super_sub_role_container'>
+               <%= talent.label "Super Sub Position", :class => 'control-label' %>
+               <div class="controls">
+                 <%= talent.select(:super_sub_talent, options_for_select(User.super_sub_types[talent.object.sub_talent], talent.object.super_sub_talent)) %>
+               </div>
+             </div>
+           <% else %>
+             <div class='super_sub_role_container' style='display: none;'>
+               <%= talent.label "Super Sub Position", :class => 'control-label' %>
+               <div class="controls">
+                 <%= talent.select(:super_sub_talent, {}) %>
+               </div>
+             </div>
+           <% end %>
+
+         </div>
+
+         <div class="controls">
+           <%= talent.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+
+           <a href='#' class='remove_entity btn btn-danger' data-toRemove='.user-talent'>Remove this Position</a>
+         </div>
+
+       </div>
+     <% end %>
+
+     
+     <div id="fields-for-talents-list" class="numerous">
+       <%= f.fields_for :talents, Talent.new, :child_index => 'replace_this' do |talent| %>
+         <div class="control-group">
+           <%= talent.label "Position", :class => 'control-label' %>
+           <div class="controls">
+             <%= talent.select(:name, options_for_select(User.types), {}, :class=>'super_role_select hinted', "data-hint" => 'While you might be able to do a lot of things in the film industry, focus on the 2 positions you are strongest at and want to be known for.') %>
+           </div>
+
+           <div class='sub_role_container' style='display: none;'>
+             <%= talent.label "Sub Position", :class => 'control-label' %>
+             <div class="controls">
+               <%= talent.select(:sub_talent, {}, {}, :class=>'sub_role_select') %>
+             </div>
+           </div>
+
+           <div class='super_sub_role_container' style='display: none;'>
+             <%= talent.label "Super Sub Position", :class => 'control-label' %>
+             <div class="controls">
+               <%= talent.select(:super_sub_talent, {}) %>
+             </div>
+           </div>
+
+         </div>
+       
+         
+         <div class='control-group sub_role_container'>
+           
+         </div>
+
+
+         <%= link_to 'Remove this Position', '#', :class => 'numerous-remove btn btn-danger' %>
+       <% end %>
+     </div>
+
+     <div id="talents-list"></div>
+
+   </div>
+	<!-- End Positions Area -->
+
+		<!-- Begin Gender Area -->
     <div class="control-group">
       <%= f.label :gender, :class => 'control-label' %>
       <div class="controls gender radios">
@@ -64,160 +236,7 @@
         </div>
       </div>
     </div>
-		<div class='all-profo-container'>
-    <%= f.fields_for :profile, current_user.profile || current_user.build_profile  do |profile|  %>
-      <div class="control-group">
-        <%= profile.label "Profile Picture*", :class => 'control-label' %>
-
-				<div class="controls clearfix">
-          <%= profile.file_field :image %>
-          <!-- id is updated when the image is created and uploaded  -->
-          <%= profile.hidden_field :id, :class => 'photo_id_div' %>
-        </div>
-
-        <div class='controls'>
-          <%= profile.hidden_field :crop_x, :class => 'crop_x' %>
-          <%= profile.hidden_field :crop_y, :class => 'crop_y' %>
-          <%= profile.hidden_field :crop_w, :class => 'crop_w' %>
-          <%= profile.hidden_field :crop_h, :class => 'crop_h' %>
-        </div>
-
-        <% if current_user.profile.image.present? %>
-          <div class="controls image_container">
-            <%= image_tag current_user.profile.image.url(:medium), {:class => "image_preview_container img-polaroid"} %>
-          </div>
-
-          <div class='controls image_btns'>
-            <a href="" class='btn crop_image pull-left' data-orgImgUrl='<%= profile.object.image.url %>' data-orgWidth='<%= profile.object.original_width %>' data-orgHeight='<%= profile.object.original_height %>' data-prevImgUrl='<%= profile.object.image.url(:original) %>'  style='display: inline'>Crop</a>
-          </div>
-
-        <% else %>
-          <div class="controls image_container" style='display:none;'>
-            <!-- just keep the container there in case to preview if user uploads an image. -->
-            <img class='image_preview_container img-polaroid' src="">
-          </div>
-
-          <div class='controls image_btns'>
-            <a href="" class='btn crop_image pull-left' data-imgUrl=''>Crop</a>
-          </div>
-
-        <% end %>
-          
-        <div class='controls upload_progress'>
-          Upload Progress:
-          <div class='progress'>
-            <div class='bar' style='width: 0%'></div>
-          </div>
-        </div>
-
-      </div>
-    <%end%>
-		</div>
-    <div class='all-roles-container'>
-
-      <div class="control-group">
-        <label class='control-label'>Your Positions*</label>
-        <div class='controls'>
-          <!-- don't allow user to add more than 2 talents -->
-          <!-- if the user's primary role is Fan, don't show option to add more roles -->
-          <% if current_user.talents.count < 2 and current_user.talent_names.try(:first) != 'Fan' %>
-            <%= link_to 'Add a Position!', '#', :class => 'btn btn-success', :id => 'add-to-talents-list', :title => "Select a max of two positions", :data => {:toggle => 'tooltip', :placement => 'right'} %>
-          <% else %>
-            <%= link_to 'Add another position', '#', :class => 'btn btn-success', :id => 'add-to-talents-list', :style => 'display:none;', :title => "Select a max of two positions", :data => {:toggle => 'tooltip', :placement => 'right'} %>
-          <% end %>
-        </div>
-      </div>
-
-      <%= f.fields_for :talents do |talent|   %>
-        <div class='user-talent'>
-          <div class="control-group">
-            <%= talent.label :name, "Position", :class => 'control-label' %>
-            <div class="controls">
-              <%= talent.select(:name, options_for_select(User.types, talent.object.name), {}, :class=>'super_role_select') %>
-            </div>
-
-            <% if talent.object.sub_talent.present? %>
-              <div class='sub_role_container'>
-                <%= talent.label "Sub Position", :class => 'control-label' %>
-                <div class="controls">
-                  <%= talent.select(:sub_talent, options_for_select(User.sub_types[talent.object.name], talent.object.sub_talent), {}, :class=>'sub_role_select') %>
-                </div>
-              </div>
-            <% else %>
-              <div class='sub_role_container' style='display: none;'>
-                <%= talent.label "Sub Position", :class => 'control-label' %>
-                <div class="controls">
-                  <%= talent.select(:sub_talent, {}, {}, :class=>'sub_role_select') %>
-                </div>
-              </div>
-            <% end %>
-
-            <% if talent.object.super_sub_talent.present? %>
-              <div class='super_sub_role_container'>
-                <%= talent.label "Super Sub Position", :class => 'control-label' %>
-                <div class="controls">
-                  <%= talent.select(:super_sub_talent, options_for_select(User.super_sub_types[talent.object.sub_talent], talent.object.super_sub_talent)) %>
-                </div>
-              </div>
-            <% else %>
-              <div class='super_sub_role_container' style='display: none;'>
-                <%= talent.label "Super Sub Position", :class => 'control-label' %>
-                <div class="controls">
-                  <%= talent.select(:super_sub_talent, {}) %>
-                </div>
-              </div>
-            <% end %>
-
-          </div>
-
-          <div class="controls">
-            <%= talent.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
-
-            <a href='#' class='remove_entity btn btn-danger' data-toRemove='.user-talent'>Remove this Position</a>
-          </div>
-
-        </div>
-      <% end %>
-
-      
-      <div id="fields-for-talents-list" class="numerous">
-        <%= f.fields_for :talents, Talent.new, :child_index => 'replace_this' do |talent| %>
-          <div class="control-group">
-            <%= talent.label "Position", :class => 'control-label' %>
-            <div class="controls">
-              <%= talent.select(:name, options_for_select(User.types), {}, :class=>'super_role_select hinted', "data-hint" => 'While you might be able to do a lot of things in the film industry, focus on the 2 positions you are strongest at and want to be known for.') %>
-            </div>
-
-            <div class='sub_role_container' style='display: none;'>
-              <%= talent.label "Sub Position", :class => 'control-label' %>
-              <div class="controls">
-                <%= talent.select(:sub_talent, {}, {}, :class=>'sub_role_select') %>
-              </div>
-            </div>
-
-            <div class='super_sub_role_container' style='display: none;'>
-              <%= talent.label "Super Sub Position", :class => 'control-label' %>
-              <div class="controls">
-                <%= talent.select(:super_sub_talent, {}) %>
-              </div>
-            </div>
-
-          </div>
-        
-          
-          <div class='control-group sub_role_container'>
-            
-          </div>
-
-
-          <%= link_to 'Remove this Position', '#', :class => 'numerous-remove btn btn-danger' %>
-        <% end %>
-      </div>
-
-      <div id="talents-list"></div>
-
-    </div>
-
+		<!-- End Gender Area -->
 
     <div class="control-group">
       <%= f.label 'About you', :class => 'control-label' %>
