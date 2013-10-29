@@ -327,8 +327,10 @@ class UsersController < ApplicationController
 
   def dashboard_projects
     resp = {}
-    resp['user_projects'] = current_user.projects
-    resp['applied_projects'] = current_user.applied_projects
+    resp['user_projects']          = current_user.projects
+    resp['user_managing_projects'] = current_user.managing_projects
+    resp['applied_projects']       = current_user.applied_projects
+    
     respond_to do |format|
       format.html { redirect_to root_url }
       format.json {
