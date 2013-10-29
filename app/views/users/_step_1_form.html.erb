@@ -32,13 +32,15 @@
 	          <%= profile.hidden_field :crop_w, :class => 'crop_w' %>
 	          <%= profile.hidden_field :crop_h, :class => 'crop_h' %>
 	
-						<label class="control-label">Profile Image*</label>
+						<%= profile.label "Profile Picture*", :class => 'control-label' %>
+						<!-- id is updated when the image is created and uploaded  -->
+						<%= profile.hidden_field :id, :class => 'photo_id_div' %>
             <div class="controls">
               <div class='uploader_btn'>
                 <div class='main_txt'>Choose an image from your computer.</div>
                 <div class='format_txt'> <span class='before_dot'>JPEG, PNG or BMP</span> 10MB File limit</div>
                 <div class='size_txt'><span class='before_dot'>Your Headshot</span> You can Crop</div>
-								<%= profile.file_field :image, :validate => { :presence => false } %>
+								<%= profile.file_field :image %>
 							</div>
 						</div>
           </div>
