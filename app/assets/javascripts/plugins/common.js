@@ -592,7 +592,7 @@ app.fn.init_show_post_button_handler = function(){
   });
 }
 
-app.fn.init_jcrop = function(element, parent, original_width, original_height, original_image_url){
+app.fn.init_jcrop = function(element, parent, original_width, original_height, original_image_url, aspect_ratio){
 
   // this will contain the parent of the image that is being cropped. User for resetting the crop.
   app.cropper_parent = parent
@@ -602,6 +602,67 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height, o
   app.cropper_original_image_url =  original_image_url
   app.cropper_original_width    = original_width
   app.cropper_original_height   = original_height
+
+  if( typeof aspect_ratio == 'undefined' ){
+    aspect_ratio = '16:9'
+  }
+
+
+  ar_width = parseInt( aspect_ratio.split(':')[0] )
+  ar_height = parseInt( aspect_ratio.split(':')[1] )
+
+  $('#crop_preview_area').attr('src', original_image_url)
+  if( aspect_ratio == '1:1' ){
+
+    prev_div_width = 100;
+    prev_div_heigth = 100;
+
+    app.main_prev_width = 150;
+    app.main_prev_height = 150;
+
+  }else if( aspect_ratio == '16:9' ){
+
+    prev_div_width = 160;
+    prev_div_heigth = 90;
+
+    app.main_prev_width = 160;
+    app.main_prev_height = 90;
+
+  }else if( aspect_ratio == '4:3' ){
+    
+    prev_div_width = 120;
+    prev_div_heigth = 90;
+
+    app.main_prev_width = 160;
+    app.main_prev_height = 120;
+
+  }else if( aspect_ratio == '128:69' ){
+    
+    prev_div_width = 128;
+    prev_div_heigth = 69;
+
+    app.main_prev_width = 128;
+    app.main_prev_height = 69;
+
+  }else{
+    
+    prev_div_width = 100;
+    prev_div_heigth = 100;
+
+    app.main_prev_width = 150;
+    app.main_prev_height = 150;
+
+  }
+  
+  $('#crop_preview_area, .prev_container .crop_preview_container').css({
+    width: prev_div_width + 'px',
+    height: prev_div_heigth + 'px'
+  });
+
+  $('#crop_preview_area').css({
+    marginLeft: '0px',
+    marginTop: '0px'
+  });
 
   // intialze crop values with null
   app.crop_values = {
@@ -613,8 +674,9 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height, o
 
   element.Jcrop({
     trueSize: [original_width, original_height],
+    aspectRatio: ar_width / ar_height,
     boxWidth: 500,
-    boxHeight: 400,
+    boxHeight: 350,
     onSelect: function(c){
       updateCropValues(c)
     },
@@ -631,6 +693,16 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height, o
     app.crop_values.w = c.w
     app.crop_values.h = c.h
     $('#crop_image_modal').find('.btn.crop_now').show()
+
+    var rx = prev_div_width / c.w;
+    var ry = prev_div_heigth / c.h;
+
+    $('#crop_preview_area').css({
+      width: Math.round(rx * original_width) + 'px',
+      height: Math.round(ry * original_height) + 'px',
+      marginLeft: '-' + Math.round(rx * c.x) + 'px',
+      marginTop: '-' + Math.round(ry * c.y) + 'px'
+    });
   }
 
   return app.jcrop_object;
@@ -649,6 +721,8 @@ app.fn.init_image_crop_handlers = function(){
     
     original_width = $(event.target).attr('data-orgWidth');
     original_height = $(event.target).attr('data-orgHeight');
+
+    aspect_ratio = $(event.target).attr('data-ar')
     
     app.original_crop_values = {
       x: control_group_div.find('input.crop_x').val(),
@@ -661,7 +735,7 @@ app.fn.init_image_crop_handlers = function(){
       // reset the style properties on the image tag
       $('#crop_image_modal').find('#cropping_image').attr('style','display: none; visibility: hidden; width: none; height: none; max-width: none; max-height: none;')
 
-      app.fn.init_jcrop($('#crop_image_modal').find('#cropping_image'), control_group_div, original_width, original_height, original_image_url);
+      app.fn.init_jcrop($('#crop_image_modal').find('#cropping_image'), control_group_div, original_width, original_height, original_image_url, aspect_ratio);
     });
     
     $('#crop_image_modal').on('hidden', function() {
@@ -695,10 +769,10 @@ app.fn.crop_now = function(){
   img_prev_div.attr('src', app.cropper_original_image_url);
 
   img_prev_div.css({
-    width: Math.round((150/app.crop_values.w) * app.cropper_original_width) + 'px',
-    height: Math.round((150/app.crop_values.h) * app.cropper_original_height) + 'px',
-    marginLeft: '-' + Math.round((150/app.crop_values.w) * app.crop_values.x) + 'px',
-    marginTop: '-' + Math.round((150/app.crop_values.h) * app.crop_values.y) + 'px'
+    width: Math.round(( app.main_prev_width / app.crop_values.w) * app.cropper_original_width) + 'px',
+    height: Math.round(( app.main_prev_height / app.crop_values.h) * app.cropper_original_height) + 'px',
+    marginLeft: '-' + Math.round(( app.main_prev_width / app.crop_values.w) * app.crop_values.x) + 'px',
+    marginTop: '-' + Math.round(( app.main_prev_height /app.crop_values.h) * app.crop_values.y) + 'px'
   });
 
   app.cropper_parent.find('.btn.reset_crop').show()
