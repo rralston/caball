@@ -758,6 +758,13 @@ class User < ActiveRecord::Base
     talent_names.try(:first) == 'Fan'
   end
 
+  def managing_projects
+    # Projects for which the user has a approved role and has the manager flag set for the role application.
+    Project.joins( :roles => { :applications => :user } ).
+      where( "role_applications.approved = true AND role_applications.manager = true AND role_applications.user_id = ? ", self.id ).
+        uniq
+  end
+
 end
 
 class Array
