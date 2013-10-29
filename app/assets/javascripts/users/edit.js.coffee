@@ -214,13 +214,17 @@ $(document).ready ()->
           else
             alert(data.message)
             if data.message.match(/Profile image/)
-              $('.all-profo-container').addClass('have_error')
+              $('.all-profo-container .control-label').css({"font-size": "16px", "color": "red"})
+              $('.all-profo-container .uploader_btn').css('border-color', 'red')
+              # $('.all-profo-container').addClass('have_error')
               $("html, body").animate({ scrollTop: $('.all-profo-container').position().top }, "slow");
               btn.val('Finish! Go to my Dashboard')
               btn.attr('disabled', false)
             else 
               if data.message.match(/Location/) 
                 $('.all-location-container').addClass('have_error')
+                $('.all-location-container .control-label').css({"font-size": "16px", "color": "red"})
+                $('.all-location-container #user_location').css('border-color', 'red')
                 $("html, body").animate({ scrollTop: $('.all-location-container').position().top }, "slow");
                 btn.val('Finish! Go to my Dashboard')
                 btn.attr('disabled', false)
@@ -231,6 +235,7 @@ $(document).ready ()->
     else
       alert('Please select atleast one role.')
       $('.all-roles-container').addClass('have_error')
+      $('.all-roles-container .control-label').css({"font-size": "16px", "color": "red"})
       $("html, body").animate({ scrollTop: $('.all-roles-container').position().top }, "slow");
 
     return false
