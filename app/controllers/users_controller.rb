@@ -107,6 +107,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    render layout: "edit"
     @talents = User.types
     @experience = User.experience
     @user.talents.present? || @user.talents.build

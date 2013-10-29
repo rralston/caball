@@ -1,0 +1,171 @@
+<!--========= Header starts======------>
+<div class="headerwrap">
+
+  <header>
+    <div class='logo pull-left'>
+      <a href="/" class="brand pull-right"><img src="/assets/emboss-logo-beta.png" alt="" /></a>
+    </div>
+
+
+
+  </header>
+
+  <% if flash[:notice] %>
+    <div class="alert in_header alert-success">
+      <button type="button" class="close" data-dismiss="alert">
+        ×
+      </button>
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <% if flash[:error] %>
+    <div class="alert in_header alert-error">
+      <button type="button" class="close" data-dismiss="alert">
+        ×
+      </button>
+      <%= flash[:error] %>
+    </div>
+  <% end %>
+
+  <% if flash[:alert] %>
+    <div class="alert in_header">
+      <button type="button" class="close" data-dismiss="alert">
+        ×
+      </button>
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+  <% if flash[:info] %>
+    <div class="alert in_header alert-info">
+      <button type="button" class="close" data-dismiss="alert">
+        ×
+      </button>
+      <%= flash[:info] %>
+    </div>
+  <% end %>
+
+  <div id="bootstrap-alert-placeholder" class="js-alert"></div>
+</div>
+
+<script type="script/template" id='search_results_li_tempalte'>
+  
+  <a class='full-li'>
+    <img src='<%%= thumbnail %>'>
+    <span>
+      <%%= label %>
+    </span>
+  </a>
+
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.notstarwrap').on('click',function(){
+    $('.noticontentwrap').slideToggle(500);
+
+    if($('.notstarwrap').hasClass('set_time')){
+      app.fn.set_notification_check_time($('.notstarwrap'))
+    }
+  });
+
+  $('.noteclose').on('click',function(){
+    $('.noticontentwrap').slideUp(500);
+  });
+
+  $('.usrprev .username').on('click',function(){
+    $('.userprflistwrap').slideToggle(500);
+  });
+
+
+  $('.timeago').timeago()
+
+  // for search
+  $.widget( "custom.catcomplete", $.ui.autocomplete, {
+      _renderMenu: function( ul, items ) {
+        var that = this,
+          currentCategory = "";
+        $.each( items, function( index, item ) {
+          if ( item.category != currentCategory ) {
+            ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+            currentCategory = item.category;
+          }
+          that._renderItem( ul, item );
+        });
+      }
+    });
+
+
+  var on_select_callback = function(item){
+    // similar behavior as an HTTP redirect
+    window.location.replace(item.url);
+  }
+
+  var this_template = _.template( $('#search_results_li_tempalte').html())
+
+
+  // fail safe when the search is removed for the beta header.
+  if( $('#main_header_search').size() > 0 ){
+
+    $("#main_header_search").catcomplete({
+      delay: 0,
+      source: function(request, response){
+        $.getJSON( "/main_search?q="+request.term, function(data){
+          response(data)
+        });
+      },
+      select: function(event, ui){
+        on_select_callback(ui.item)
+      },
+      messages:{
+        noResult: '',
+        results: function(){}
+      },  
+     }).data("custom-catcomplete")._renderItem = function(ul, item){
+        return $( "<li>" ).addClass('custom-ui-item clearfix')
+              .data( "ui-autocomplete-item", item )
+              .append( this_template(item) )
+              .appendTo( ul );
+      };
+  }
+
+});
+
+jQuery(function() {
+    $('body').prepend('<div id="fb-root"></div>');
+    return $.ajax({
+      url: "" + window.location.protocol + "//connect.facebook.net/en_US/all.js",
+      dataType: 'script',
+      cache: true
+    });
+  });
+
+  window.fbAsyncInit = function() {
+    console.log('fb init')
+    FB.init({
+      appId: '<%= ENV["FACEBOOK_APP_ID"] %>',
+      cookie: true
+    });
+    $('body').on('click', '#fb_auth', function(e) {
+      e.preventDefault();
+      console.log('here')
+      FB.login(function(response) {
+        if (response.authResponse) {
+          window.location = '/users/auth/facebook/callback';
+        }
+      }, {scope: 'email'});
+      return false;
+    });
+    return $('#sign_out').click(function(e) {
+      FB.getLoginStatus(function(response) {
+        if (response.authResponse) {
+          FB.logout();
+        }
+      });
+      return true;
+    });
+  };
+  
+</script>
