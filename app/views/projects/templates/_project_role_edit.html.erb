@@ -51,6 +51,24 @@
 
       <%% roles_to_show = _.extend({'Select Role': '---'}, roles_to_show) %>
 
+
+      <%% application_flag = false %>
+
+      <%% if(typeof applications != 'undefined' && typeof applications[0] != 'undefined'){ application_flag = true } %>
+
+      <div class='controls'>
+        <label>Can manage this project?</label>
+
+        &nbsp;
+              
+        <input type='radio' value='true' name="role[applications_attributes][0][manager]"  <%% if( application_flag != false && typeof applications[0].manager != 'undefined' && applications[0].manager == true ){ print('checked') } %> > Yes
+
+        &nbsp;
+
+        <input type='radio' value='No' name="role[applications_attributes][0][manager]"  <%% if( application_flag == false || typeof applications[0].manager == 'undefined' || applications[0].manager == false ){ print('checked') } %> > No
+        <br/><br/>
+      </div>
+
     <%% }else{ %>
       <div class='control-group'>
         <div class='controls'>
