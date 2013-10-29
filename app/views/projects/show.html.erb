@@ -10,7 +10,18 @@
         </div>
         <div class="shadow-div"> </div>
         <div class='pull-left main-right'>
-          <% if current_user != @project.user %>
+          <% if current_user == @project.user or @project.is_manager?( current_user ) %>
+            
+            <div class='row'>
+              <div class='span6'>
+                <a class='btn-custom pull-right btn-red' href='/projects/<%= @project.id %>/edit'>
+                  Edit Project
+                </a>
+              </div>
+            </div>
+
+          <% else %>
+
             <div class='row'>
               <div class='span6'>
 
@@ -29,14 +40,8 @@
                 </div>
               </div>
             </div>
-          <% else %>
-            <div class='row'>
-              <div class='span6'>
-                <a class='btn-custom pull-right btn-red' href='/projects/<%= @project.id %>/edit'>
-                  Edit Project
-                </a>
-              </div>
-            </div>
+
+            
           <% end %>
           <div class='row'>
             <div class='span7 title'>
@@ -78,7 +83,6 @@
                 <% if @project.union.present? %>
                   <li> <%= @project.union %> </li>
                 <% end %>
-                
               </ul>
             </div>
 
