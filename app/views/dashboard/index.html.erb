@@ -150,6 +150,7 @@
 
 <!-- Projects -->
 <%= render :partial => 'dashboard/templates/user_projects' %>
+<%= render :partial => 'dashboard/templates/user_managing_projects' %>
 <%= render :partial => 'dashboard/templates/user_project' %>
 <%= render :partial => 'dashboard/templates/applied_project' %>
 <%= render :partial => 'dashboard/templates/manage_project' %>
@@ -222,6 +223,11 @@
 // user projects
   app.user_projects = new app.collections.user_projects()
   app.user_projects_view = new app.views.user_projects({ collection: app.user_projects })
+
+// Managing Projects
+  app.user_managing_projects = new app.collections.user_projects()
+  app.user_managing_projects_view = new app.views.user_managing_projects({ collection: app.user_managing_projects })
+
   
 // Applied projects
   app.applied_projects = new app.collections.applied_projects()

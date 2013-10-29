@@ -758,6 +758,19 @@ class User < ActiveRecord::Base
     talent_names.try(:first) == 'Fan'
   end
 
+
+
+  # HEADS UP :  Use .count("DISTINCT projects.id") if you need count of these projects. if not it will give wrong value.
+  def self_and_managing_projects
+    # Projects the user created.
+    # +
+    # Projects for which the user has a approved role and has the manager flag set for the role application.
+    Project.
+      joins( "LEFT OUTER JOIN roles ON roles.project_id = projects.id LEFT OUTER JOIN role_applications ON role_applications.role_id = roles.id LEFT OUTER JOIN users ON users.id = role_applications.user_id" ).
+        where( " ( projects.user_id = ? ) OR ( role_applications.approved = true AND role_applications.manager = true AND role_applications.user_id = ? )", self.id, self.id ).
+          uniq
+  end
+
   def managing_projects
     # Projects for which the user has a approved role and has the manager flag set for the role application.
     Project.joins( :roles => { :applications => :user } ).
