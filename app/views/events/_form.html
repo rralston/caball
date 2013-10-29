@@ -148,7 +148,7 @@
                     </div>
 
                     <div class='controls image_btns'>
-                      <a href="" class='btn crop_image pull-left' data-orgImgUrl='<%= event_main_photo.object.image.url %>' data-orgWidth='<%= event_main_photo.object.original_width %>' data-orgHeight='<%= event_main_photo.object.original_height %>' data-prevImgUrl='<%= event_main_photo.object.image.url(:original) %>'  style='display: inline'>Crop</a>
+                      <a href="" class='btn crop_image pull-left' data-orgImgUrl='<%= event_main_photo.object.image.url %>' data-orgWidth='<%= event_main_photo.object.original_width %>' data-orgHeight='<%= event_main_photo.object.original_height %>' data-prevImgUrl='<%= event_main_photo.object.image.url(:original) %>' data-ar='128:69' style='display: inline'>Crop</a>
                     </div>
 
 
@@ -157,7 +157,7 @@
                       <img src='' class="img-rounded image_preview_container" >
                     </div>
                     <div class='controls image_btns'>
-                      <a href="" class='btn crop_image pull-left' data-imgUrl='' style='display: none;'>Crop</a>
+                      <a href="" class='btn crop_image pull-left' data-imgUrl='' style='display: none;' data-ar='128:69' >Crop</a>
                     </div>
                   <% end %>
 
