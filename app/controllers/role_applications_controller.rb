@@ -29,7 +29,8 @@ class RoleApplicationsController < ApplicationController
   def approve
     role_application = RoleApplication.find(params[:application_id])
     role = role_application.role
-    if not role.filled
+    
+    if not ( role.filled or role_application.user == current_user)
       role_application.update_attributes(:approved => true)  
       role.update_attributes(:filled => true)
       role.send_role_filled_messages

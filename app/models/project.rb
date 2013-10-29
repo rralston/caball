@@ -634,6 +634,17 @@ class Project < ActiveRecord::Base
     url_name.present? ? url_name : id
   end
 
+  def managers
+     # Users who has a role application that is applied to the roles in this project and is approved as well as has the manager set true
+    User.joins( :role_applications => :role ).
+      where( "role_applications.approved = true AND role_applications.manager = true AND roles.project_id = ? ", self.id ).
+        uniq
+  end
+
+  def is_manager?( user )
+    managers.include?( user )
+  end
+
 end
 
 class Array

@@ -43,7 +43,7 @@ app.views.role_application = Backbone.View.extend
                 app.fn.add_receipient('.project_selected_applicants', _this.model.get('user').email)
                 app.fn.remove_receipient('.project_other_applicants', _this.model.get('user').email)
               else
-                alert 'Error approving application. May be you approved a appilcation for this role already. Please check'
+                alert 'Error approving application. May be you approved a appilcation for this role already or you are trying to approve yourself. Please check'
 
   cancel_action: (event)->
     # if the application is already approved, then un approve, if not reject application

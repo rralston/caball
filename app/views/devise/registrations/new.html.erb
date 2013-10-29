@@ -9,22 +9,11 @@
       
       <div>
         <%= f.text_field :name, :validate => { :presence => true }, :placeholder => 'Full Name' %>
+        
       </div>
-
-			<div>
-				<%= f.text_field :location, :validate => { :presence => true }, :placeholder => 'Location (City & State or Country) ' %>
-			</div>
-
-			<div>
-				<%= talent.select(:name, options_for_select(User.types, talent.object.name), {}, :class=>'super_role_select') %>
-			</div>
-    	<div>
-	      <%= f.label "Profile Picture*", :class => 'control-label' %>
-        <%= f.file_field :profile %>
-			</div>
       
       <div>
-        <%= f.email_field :email, :validate => { :presence => true }, :placeholder => 'Email address' %>
+        <%= f.email_field :email, :validate => { :presence => true }, :placeholder => 'Email address ' %>
         <div class='div_hint'>
           We NEVER, EVER Spam our Users email addresses
         </div>
@@ -37,7 +26,7 @@
       <div>
         <%= f.password_field :password_confirmation, :validate => { :presence => true }, :placeholder => 'Confirm Password' %>
       </div>
-				
+      
       <div class='terms_services'>
         <%= f.check_box :terms_of_service %>
         I agree to Filmzu's <%= link_to("Terms and Conditions", terms_url, :target =>'_blank') %>

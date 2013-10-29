@@ -1,6 +1,6 @@
 <script type="script/template" id='comments_template'>
   
-  <% if current_user == @project.user %>
+  <% if current_user == @project.user or @project.managers.include?( current_user ) %>
     
     <div class='row add-comment'>
       <div class='span7'>

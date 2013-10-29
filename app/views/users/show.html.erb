@@ -554,7 +554,7 @@ $(document).ready(function(){
 
   // user projects
   app.user_projects = new app.collections.user_projects()
-  app.user_projects.reset(<%= raw Project.custom_json(@user.projects.first(4), current_user) %>)
+  app.user_projects.reset(<%= raw Project.custom_json(@user.self_and_managing_projects.first(4), current_user) %>)
   app.user_projects_view = new app.views.user_projects({ collection: app.user_projects })
   $('#user_projects_div').html(app.user_projects_view.render().el)
 
