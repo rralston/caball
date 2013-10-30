@@ -70,6 +70,9 @@ $(document).ready ->
       else
         $('#endorsement_modal').modal('show')
 
+   $('body').on 'click', '.btn-skills', (event)->
+    $('#edit_skills_modal').modal('show')
+
   $('body').on 'click', '.edit_headline', (event)->
     $('.user_headline_text').hide()
     $('.edit_headline_input').show()

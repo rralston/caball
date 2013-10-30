@@ -1,0 +1,96 @@
+<%= stylesheet_link_tag "users/show" %>
+
+<div id="edit_skills_modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Update Skills + Expertise</span></h3>
+  </div>
+	<br><br>
+	<%= form_for @user, html: {class: "form-horizontal"} do |f| %>
+  <div class="control-group">
+    <label class="control-label">IMDB URL</label>
+    <div class="controls">
+      <%= f.text_field :imdb_url, :class => 'text_field', :placeholder => "It's OK if you don't, we all started somewhere!" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label">Experience</label>
+    <div class="controls">
+      <%= f.select(:experience, options_for_select(User.experience, current_user.experience), {}, :class=>'hinted', "data-hint" => 'Tell us how long you have been working in the film industry. Be honest, otherwise you might lose a position you really wanted!') %>
+    </div>
+  </div>
+	<div class="control-group">
+    <label class="control-label">Expertise Tags</label>
+    <div class="controls">
+      <%= f.hidden_field :expertise, :class => 'text_field' %>
+        <ul id="expertise_tags" class='tagit ui-sortable' style="margin-left:0px; height:80px; width:300px">
+          <% if current_user.expertise.present? %>
+            <%= current_user.expertise.split(',').each do |exp_tag| %>
+              <li data-value="<%= exp_tag %>"><%= exp_tag %> </li>
+            <% end %>
+          <% end %>
+        </ul>
+				<div class='ul_hint'>
+		      To tag more then one word use Shift+Spacebar between words. This is a great way to show case your strengths, some good suggestions: <i>Action, Comedy, Sports, Horror. </i> <b>Maximum of 4</b>
+		    </div>
+    </div>
+  </div>
+	<div class="control-group">
+	<div class="controls">
+		<%= f.submit 'Update' %>
+	  <% end %>
+	</div>
+	</div>
+	<div class='modal-footer'>
+	<!-- <button class='btn' data-dismiss="modal">Close</button> -->
+	</div>
+</div>
+
+<!-- Media Modal -->
+<!-- <div id="edit_skills_modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Update Skills & Expertise</span></h3>
+  </div>
+  <div class="modal-body">
+    <%= form_for @user do |f| %>
+		<div class="span8">
+		<div class="control-group hide_for_fans" <% if current_user.only_fan? %> style='display:none;' <% end %> >
+      <%= f.label :imdb_url, :class => 'control-label' %>
+      <div class="controls">
+        <%= f.text_field :imdb_url, :class => 'text_field', :placeholder => "It's OK if you don't, we all started somewhere!" %>
+      </div>
+    </div>
+
+  
+    <div class="control-group hide_for_fans" <% if current_user.only_fan? %> style='display:none;' <% end %> >
+
+      <%= f.label "Experience", :class => 'control-label' %>
+      <div class="controls">
+        <%= f.select(:experience, options_for_select(User.experience, current_user.experience), {}, :class=>'hinted', "data-hint" => 'Tell us how long you have been working in the film industry. Be honest, otherwise you might lose a position you really wanted!') %>
+      </div>
+    </div>
+
+        <div class='controls'>
+	        <%= f.hidden_field :expertise, :class => 'text_field' %>
+
+	          <ul id="expertise_tags" class='tagit ui-sortable hinted' data-hint='This is a great wat to show case your strengths, some good suggestions: <br/>action sports <br/>weddings<br/>comedy<br/>Horror'>
+	            <% if current_user.expertise.present? %>
+	              <%= current_user.expertise.split(',').each do |exp_tag| %>
+	                <li data-value="<%= exp_tag %>"><%= exp_tag %> </li>
+	              <% end %>
+	            <% end %>
+	          </ul>
+						<div class='ul_hint'>
+				      If entering more then one word use Shift+Spacebar between words. Please write a maximum of 4
+				    </div>
+	      </div>
+
+    </div>
+  </div>
+  <div class='modal-footer'>
+     <%= f.submit 'Update', :class => 'btn btn-primary', :id => 'submit-user-form' %>
+    <% end %><button class='btn' data-dismiss="modal">Close</button>
+  </div>
+</div> -->
+<!-- Media Modal -->	

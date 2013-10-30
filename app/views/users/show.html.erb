@@ -106,7 +106,7 @@
                         <% end %>
 
                         <li>
-                          <img src="/assets/role_icons/<%= image_name %>.png" alt="<%= talent.name %>" width="45" height="45" title='<%= talent.sub_talent ? talent_subtalent : talent.name %>' data-scrollto='#<%= talent.name.downcase %>_profile' class='action-div scroll_to'/>
+                          <img src="/assets/role_icons/<%= image_name %>.png" alt="<%= talent.name %>" width="45" height="45" title='<%= talent.sub_talent ? talent.sub_talent : talent.name %>' data-scrollto='#<%= talent.name.downcase %>_profile' class='action-div scroll_to'/>
                         </li>
                       <% end %>
                       <!--<li><a href="#"><img src="/assets/cut.png" alt="" /></a></li>
@@ -143,7 +143,11 @@
                         </a>
                       </li>
                     <% end %>                    
-
+										<% if current_user == @user %>
+											<li class="badge regular">
+									      <a class='btn-skills action-div' data-toggle="tooltip" title="Update your Skills + Experience">Add +</a> 
+											</li>
+										<% end %>
                   </ul>
                 </div>
               </div>
@@ -515,6 +519,7 @@
 
 <% if current_user == @user %>
   <%= render :partial => 'users/edit_headline_modal' %>
+  <%= render :partial => 'users/edit_skills_modal' %>
 <% end %>
 
 <%= render :partial => 'conversations/send_new_message_modal' %>
