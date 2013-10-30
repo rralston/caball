@@ -30,7 +30,7 @@
                         <% end %>
                         <span class='user_headline_text'>
                           <% if current_user == @user %>
-                            <i class='icon-pencil action-div edit_headline'></i>
+                            <i class='icon-pencil action-div edit_headline' data-toggle="tooltip" title="Click here to update your headline"></i>
                           <% end %>
                           <span class='headline_content'><%= @user.headline %></span>
                         </span>
@@ -106,7 +106,7 @@
                         <% end %>
 
                         <li>
-                          <img src="/assets/role_icons/<%= image_name %>.png" alt="<%= talent.name %>" width="45" height="45" title='<%= talent.sub_talent %>' data-scrollto='#<%= talent.name.downcase %>_profile' class='action-div scroll_to'/>
+                          <img src="/assets/role_icons/<%= image_name %>.png" alt="<%= talent.name %>" width="45" height="45" title='<%= talent.sub_talent ? talent_subtalent : talent.name %>' data-scrollto='#<%= talent.name.downcase %>_profile' class='action-div scroll_to'/>
                         </li>
                       <% end %>
                       <!--<li><a href="#"><img src="/assets/cut.png" alt="" /></a></li>
@@ -238,13 +238,13 @@
 
           <div class="span4 shrink-div" style='margin-left: 20px'>
             <div class='row'>
-              <div class='edit text-center'>
-                <a href='/users/<%= @user.id %>/edit'>Edit Profile</a>
-              </div>
               <div class="progress">
                 <div class="bar" style="width: <%= @user.completeness %>%;">
                   <%= @user.completeness %>%
                 </div>
+              </div>
+							<div class='edit text-center'>
+                <a href='/users/<%= @user.id %>/edit'><i class='icon-pencil'></i> Edit Profile</a>
               </div>
             </div>
           </div>
@@ -282,7 +282,7 @@
           <% end %>
           <div class="user_about_text">
             <% if current_user == @user %>
-              <i class='icon-pencil action-div edit_about'></i>
+              <i class='icon-pencil action-div edit_about' data-toggle="tooltip" title="Click here to update your about"></i>
             <% end %>
             <div class="about_content">
               <% if @user.about.present? and @user.about.length > 200 %>
