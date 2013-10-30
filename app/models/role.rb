@@ -28,14 +28,14 @@ class Role < ActiveRecord::Base
     end
   end
 
-  # def serializable_hash(options)
-  #   hash = super(options)
-  #   extra_hash = {
-  #     'project' => project,
-  #     'approved_user' => approved_user
-  #   }
-  #   hash.merge!(extra_hash)
-  # end
+  # this is needed to show the project in the dashboard activities for a RoleApplication.
+  def serializable_hash(options)
+    hash = super(options)
+    extra_hash = {
+      'project' => project,
+    }
+    hash.merge!(extra_hash)
+  end
 
   def send_application_rejection_mails
     self.project.user.
