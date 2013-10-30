@@ -314,6 +314,7 @@ $(document).ready ()->
 
     # hide the next step button
     $('input.step_1_submit:not(.skip)').hide()
+    $('.or_hint').hide()
 
     $('.hide_for_fans').hide()
     $('.fan_unhint').removeClass('hinted')
@@ -330,6 +331,7 @@ $(document).ready ()->
       $('#add-to-talents-list').show()
 
     $('input.step_1_submit:not(.skip)').show()
+    $('.or_hint').show()
     $('#skills_label').html('Skills')
     $('.hide_for_fans').show()
     $('.fan_unhint').addClass('hinted')
