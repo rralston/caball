@@ -156,17 +156,29 @@ fieldset
     #user_guild_container
       margin-top: 10px
     .image_container
-      #width: 100px
-      #height: 100px
+      width: 100px
+      height: 100px
+      overflow: hidden  
+      position: absolute
+      margin-top: -110px
+      margin-left: 125px
+      .image_preview_container
+        vertical-align: baseline
+        max-width: none
+
+        width: 100px
+        height: 100px
+
+    .image_container.cover_photo_container
+      width: 160px
+      height: 90px
       overflow: hidden  
       .image_preview_container
         vertical-align: baseline
         max-width: none
-        width: 100px
-        height: 100px
-        margin-left: 10px
-        margin-top: -110px
-        position: absolute
+        width: 160px
+        height: 90px
+
     .user-extra-photo
       .image_preview_container
         height: 180px
