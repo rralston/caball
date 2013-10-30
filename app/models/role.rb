@@ -8,11 +8,12 @@ class Role < ActiveRecord::Base
   has_many :all_approved_users, :class_name => 'User', :through => :approved_applications, :source => :user
   has_many :all_rejected_users, :class_name => 'User', :through => :rejected_applications, :source => :user
 
+  has_many :approved_managers, :class_name => 'User', :through => :approved_applications, :source => :user, :conditions => { :manager => true } 
+
   accepts_nested_attributes_for :applications
 
   attr_accessible :name, :description, :filled, :subrole, :gender, :super_subrole, :applications_attributes,
                   :age, :ethnicity, :height, :build, :haircolor, :cast_title
-
   before_save :reset_cast_role_options
 
   def reset_cast_role_options
@@ -64,5 +65,9 @@ class Role < ActiveRecord::Base
   def reset_optional_fields
     update_attributes(:subrole => nil, :super_subrole => nil)
   end
+
+  # def approved_user_manager
+  #   self.all_approved_users.
+  # end
 
 end

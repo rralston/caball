@@ -90,6 +90,11 @@ fieldset
       position: relative
       top: 90px
       left: -310px
+    .or_hint
+      font-size: 20px
+      font-style: italic
+      margin-right: 20px
+      margin-top: 10px
     .location i
       top: 10px !important
       cursor: pointer
@@ -151,14 +156,29 @@ fieldset
     #user_guild_container
       margin-top: 10px
     .image_container
-      width: 150px
-      height: 150px
+      width: 100px
+      height: 100px
+      overflow: hidden  
+      position: absolute
+      margin-top: -110px
+      margin-left: 125px
+      .image_preview_container
+        vertical-align: baseline
+        max-width: none
+
+        width: 100px
+        height: 100px
+
+    .image_container.cover_photo_container
+      width: 160px
+      height: 90px
       overflow: hidden  
       .image_preview_container
         vertical-align: baseline
         max-width: none
-        width: 150px
-        height: 150px
+        width: 160px
+        height: 90px
+
     .user-extra-photo
       .image_preview_container
         height: 180px

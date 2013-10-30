@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130926101448) do
+ActiveRecord::Schema.define(:version => 20131029052712) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -244,6 +244,7 @@ ActiveRecord::Schema.define(:version => 20130926101448) do
     t.datetime "updated_at",                    :null => false
     t.text     "message"
     t.boolean  "approved",   :default => false
+    t.boolean  "manager",    :default => false
   end
 
   add_index "role_applications", ["user_id", "role_id"], :name => "index_role_applications_on_user_id_and_role_id"
@@ -327,7 +328,7 @@ ActiveRecord::Schema.define(:version => 20130926101448) do
     t.text     "headline"
     t.boolean  "featured"
     t.string   "expertise"
-    t.datetime "notification_check_time", :default => '2013-07-31 14:32:36'
+    t.datetime "notification_check_time", :default => '2013-07-31 14:32:25'
     t.string   "experience"
     t.boolean  "agent_present",           :default => false
     t.string   "agent_name"

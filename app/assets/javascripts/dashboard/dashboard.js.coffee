@@ -47,10 +47,14 @@ $(document).ready ->
           if resp != 'false'
             # user projects
             app.user_projects.reset(resp.user_projects)
+            # user managin projects
+            app.user_managing_projects.reset(resp.user_managing_projects)
+            # user applied projects
             app.applied_projects.reset(resp.applied_projects)
 
             # render and add views to DOM
-            $('#dashboard_projects').html(app.user_projects_view.render().el)
+            $('#dashboard_projects').html( app.user_projects_view.render().el )
+            $('#dashboard_projects').find('#user-managing-projects').html( app.user_managing_projects_view.render().el )
             $('#dashboard_projects').find('#applied-projects').html(app.applied_projects_view.render().el)
 
             # set projects loaded as true
@@ -61,6 +65,7 @@ $(document).ready ->
       # rerender and add views to DOM, this is required to go back when user in the 
       # manage project view
       $('#dashboard_projects').html(app.user_projects_view.render().el)
+      $('#dashboard_projects').find('#user-managing-projects').html( app.user_managing_projects_view.render().el )
       $('#dashboard_projects').find('#applied-projects').html(app.applied_projects_view.render().el)  
 
   
