@@ -85,6 +85,7 @@
 		</div>
 		<!-- End Profile Photo Area -->
 		
+		<!-- Begin Name Area -->
     <div class="control-group">
       <%= f.label "Name*", :class => 'control-label' %>
       <div class="controls">
@@ -95,7 +96,9 @@
         </div>
       </div>
     </div>
-
+		<!-- End Name Area -->
+		
+		<!-- Begin Email Area -->
     <div class="control-group">
       <%= f.label "Email*", :class => 'control-label' %>
       <div class="controls">
@@ -105,6 +108,7 @@
         </div>
       </div>
     </div>
+		<!-- End Email Area -->
 
 		<!-- Begin Gender Area -->
     <div class="control-group">
@@ -123,6 +127,7 @@
 
 		<!-- End Gender Area -->
 		
+		<!-- Begin Location Area -->
 	<div class='all-location-container'>
     <div class="control-group">
       <%= f.label "Location*", :class => 'control-label' %>
@@ -134,7 +139,8 @@
       </div>
     </div>
 	</div>
-	
+		<!-- End Location Area -->
+
 	<!-- Begin Positions Area -->
 	<div class='all-roles-container'>
 
@@ -156,21 +162,21 @@
          <div class="control-group">
            <%= talent.label :name, "Position", :class => 'control-label' %>
            <div class="controls">
-             <%= talent.select(:name, options_for_select(User.types, talent.object.name), {}, :class=>'super_role_select') %>
+             <%= talent.select(:name, options_for_select(User.types, talent.object.name), {}, :style => "width:400px", :class=>'super_role_select') %>
            </div>
 
            <% if talent.object.sub_talent.present? %>
              <div class='sub_role_container'>
                <%= talent.label "Sub Position", :class => 'control-label' %>
                <div class="controls">
-                 <%= talent.select(:sub_talent, options_for_select(User.sub_types[talent.object.name], talent.object.sub_talent), {}, :class=>'sub_role_select') %>
+                 <%= talent.select(:sub_talent, options_for_select(User.sub_types[talent.object.name], talent.object.sub_talent), {}, :style => "width:400px", :class=>'sub_role_select') %>
                </div>
              </div>
            <% else %>
              <div class='sub_role_container' style='display: none;'>
                <%= talent.label "Sub Position", :class => 'control-label' %>
                <div class="controls">
-                 <%= talent.select(:sub_talent, {}, {}, :class=>'sub_role_select') %>
+                 <%= talent.select(:sub_talent, {}, {}, :style => "width:400px", :class=>'sub_role_select') %>
                </div>
              </div>
            <% end %>
@@ -179,14 +185,14 @@
              <div class='super_sub_role_container'>
                <%= talent.label "Super Sub Position", :class => 'control-label' %>
                <div class="controls">
-                 <%= talent.select(:super_sub_talent, options_for_select(User.super_sub_types[talent.object.sub_talent], talent.object.super_sub_talent)) %>
+                 <%= talent.select(:super_sub_talent, options_for_select(User.super_sub_types[talent.object.sub_talent], talent.object.super_sub_talent), :style => "width:400px",) %>
                </div>
              </div>
            <% else %>
              <div class='super_sub_role_container' style='display: none;'>
                <%= talent.label "Super Sub Position", :class => 'control-label' %>
                <div class="controls">
-                 <%= talent.select(:super_sub_talent, {}) %>
+                 <%= talent.select(:super_sub_talent, {}, :style => "width:400px") %>
                </div>
              </div>
            <% end %>
@@ -239,7 +245,7 @@
 
      <div id="talents-list"></div>
 
-   </div>
+  </div>
 	<!-- End Positions Area -->
 
 		<!-- Simple Form Hash Begins -->
