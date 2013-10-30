@@ -57,18 +57,18 @@
 
 
         <% if current_user.profile.image.present? %>
-          <div class="controls image_container">
-            <%= image_tag current_user.profile.image.url(:medium), {:class => "image_preview_container img-circle"} %>
+          <div class="controls image_container img-circle">
+            <%= image_tag current_user.profile.image.url(:medium), {:class => "image_preview_container "} %>
           </div>
 
           <div class='controls image_btns'>
-            <a href="" class='btn crop_image pull-left' data-orgImgUrl='<%= profile.object.image.url %>' data-orgWidth='<%= profile.object.original_width %>' data-orgHeight='<%= profile.object.original_height %>' data-prevImgUrl='<%= profile.object.image.url(:original) %>'  style='display: inline'>Crop</a>
+            <a href="" class='btn crop_image pull-left' data-orgImgUrl='<%= profile.object.image.url %>' data-orgWidth='<%= profile.object.original_width %>' data-orgHeight='<%= profile.object.original_height %>' data-prevImgUrl='<%= profile.object.image.url(:original) %>' data-ar='1:1' style='display: inline'>Crop</a>
           </div>
 
         <% else %>
-          <div class="controls image_container" style='display:none;'>
+          <div class="controls image_container img-circle" style='display:none;'>
             <!-- just keep the container there in case to preview if user uploads an image. -->
-            <img class='image_preview_container img-circle' src="">
+            <img class='image_preview_container ' src="">
           </div>
 
           <div class='controls image_btns'>

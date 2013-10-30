@@ -614,11 +614,12 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height, o
   $('#crop_preview_area').attr('src', original_image_url)
   if( aspect_ratio == '1:1' ){
 
+    // this is for the profile picture
     prev_div_width = 100;
     prev_div_heigth = 100;
 
-    app.main_prev_width = 150;
-    app.main_prev_height = 150;
+    app.main_prev_width = 100;
+    app.main_prev_height = 100;
 
   }else if( aspect_ratio == '16:9' ){
 
