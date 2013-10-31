@@ -13,7 +13,9 @@
         <%%= location %>
       </div>
       <div class='headline light'>
-        &ldquo;<%%= headline.substring(0,35) %>&rdquo;
+			  <%% if (typeof headline != 'undefined' &&  headline != null){ %>
+          &ldquo;<%%= headline.substring(0,35) %>&rdquo;
+        <%% } %>
       </div>
     </div>
 
