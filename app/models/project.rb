@@ -23,7 +23,7 @@ class Project < ActiveRecord::Base
   
   accepts_nested_attributes_for :roles, :photos, :videos, :project_dates, :genre, :allow_destroy => true  
   validates_presence_of :title, :description, :message => "is required"
-  validates :headline, :length => { :maximum => 300 }
+  validates :headline, :length => { :maximum => 224 }
   
   geocoded_by :location   # can also be an IP address
   after_validation :geocode          # auto-fetch coordinates

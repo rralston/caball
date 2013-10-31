@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "\"Filmzu Notifications\" <notification@filmzu.com>"
+  default from: "\"Filmzu Notifications\" <notifications@filmzu.com>"
 
   def signup_confirmation(user)
     @user = user
