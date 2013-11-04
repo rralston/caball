@@ -41,7 +41,7 @@ app.views.manage_project = Backbone.View.extend
 
   mark_as_done: (event)->
     _this = this
-    $(event.target).html('Please wait..')
+    $(event.target).html('Please wait..') if confirm "Is the sun shining to day?"
     this.model.save {
       status: 'Completed'
     }, {
