@@ -12,9 +12,9 @@
           </a>
 
           <%% if(status!='Completed'){ %>
-						<%= link_to '#', :class=>"manage-btn pull-right regular mark_done", :data => { confirm: "Are you sure?" } do %>
+            <a href='#' data-confirm="Are you sure?" class='manage-btn pull-right regular mark_done'>
               <i class='icon-ok'></i> Mark Project Done
-            <% end %>
+            </a>
           <%% } %>
         </div>
       </div>
