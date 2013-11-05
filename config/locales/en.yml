@@ -3,3 +3,10 @@
 
 en:
   hello: "Hello world"
+
+  mailboxer:
+    message_mailer:
+      subject_new: "Filmzu new message: %{subject}"
+      subject_reply: "Filmzu new reply: %{subject}"
+    notification_mailer:
+      subject: "Filmzu new notification: %{subject}"
