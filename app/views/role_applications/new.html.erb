@@ -1,6 +1,6 @@
 <div class='container'>
   
-	<div class='role_application_div' style="position: relative; margin-top: 150px; padding-top: 20px; padding-bottom:20px; margin-left: auto; margin-right: auto; width: 800px; background-color: white; -moz-border-radius: 15px; border-radius: 15px">
+	<div class='role_application_div' style="position: relative; margin-top: 50px; margin-bottom: 50px; padding-top: 20px; padding-bottom:20px; padding-left: 20px; margin-left: auto; margin-right: auto; width: 800px; background-color: white; -moz-border-radius: 15px; border-radius: 15px">
 		
 		  <% if current_user.can_apply_for?(@role) %>
 		    <%= form_for RoleApplication.new do |role_application| %>
@@ -12,9 +12,10 @@
 		      <div class="control-group">
 		        <label class='control-label' for='role_application[message]'>
 		          <br>Please write or paste in your cover letter below:<br>
+							<i>Your resume, and any other information will automatically be included on your application</i><br>
 		        </label>
 		        <div class="controls">
-		          <%= role_application.text_area :message, :class => 'text_area required', :rows => 20 %>
+		          <%= role_application.text_area :message, :class => 'text_area required', :rows => 15 %>
 		        </div>
 		      </div>
 
