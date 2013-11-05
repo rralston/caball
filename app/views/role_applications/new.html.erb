@@ -4,10 +4,10 @@
 		
 		  <% if current_user.can_apply_for?(@role) %>
 		    <%= form_for RoleApplication.new do |role_application| %>
-		      <h3>Role Application</h3>
+		      <h3>Position Application</h3>
 		      Project - <%= @role.project.title %> <br/>
 		      Position - <%= @role.name %> <br/>
-		      Sub Position - <%= @role.subrole %> <br/>
+		      Sub Position (if applicable)- <%= @role.subrole %> <br/>
 
 		      <div class="control-group">
 		        <label class='control-label' for='role_application[message]'>
