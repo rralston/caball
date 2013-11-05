@@ -41,14 +41,17 @@ app.views.manage_project = Backbone.View.extend
 
   mark_as_done: (event)->
     _this = this
-    $(event.target).html('Please wait..')
-    this.model.save {
-      status: 'Completed'
-    }, {
-      success: (model, response) ->
-        console.log response
-        if response
-            _this.model.set('status', 'Completed')
-            alert('Project marked as Done')
-            _this.render()
-    }
+    if confirm "Are you sure you want to Complete this Project?"
+      $(event.target).html('Please wait..')
+      this.model.save {
+        status: 'Completed'
+      }, {
+        success: (model, response) ->
+          console.log response
+          if response
+              _this.model.set('status', 'Completed')
+              alert('Project marked as Done')
+              _this.render()
+      }
+    else
+      alert('Project Status Unchanged')

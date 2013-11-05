@@ -482,6 +482,29 @@
           </div>
         </div>
       <% end %>
+
+      <div class='right-extra-div coming-div row'>
+        <div class="span4 shrink-div head">
+          <span class="pull-left">
+            <h3>Promote</h3>
+          </span>
+          <span class="btn-show-all pull-right"></span>
+          <div class="clearfix"></div>
+        </div>
+        <div class="span4">
+          <div class="row clearfix">
+            <div class="grey-line-divider"></div>
+          </div>
+        </div>
+
+        <div class='row share_area text-center'>
+          <%= social_share_button_tag(@user.name) %>
+				<p style="color: #a0a8b1">
+				http://www.filmzu.com/people/<%= @user.url_name %>
+				</p>
+				</div>
+      </div>
+
 			<div class='row right-extra-div' id='report_div'>
         <div class='span4 shrink-div head'>
           <span class="pull-left">
