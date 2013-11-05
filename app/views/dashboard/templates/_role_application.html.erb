@@ -40,13 +40,13 @@
       </div>
 
       <div class='actions'>
-        <div class='action action-div message-applicant pull-left' data-message-subject='Regarding Your role appliation - <%%= role.name %>' data-message-recipients='<%%= user.email %>' data-message-header='Message Applicant - <%%= user.name %>'>
+        <div class='action action-div message-applicant pull-left' data-toggle="tooltip" title="Send a message" data-message-subject='Regarding Your role appliation - <%%= role.name %>' data-message-recipients='<%%= user.email %>' data-message-header='Message Applicant - <%%= user.name %>'>
         </div>
         <%% if(approved != true) { %>
-          <div class='action action-div accept pull-left'>
+          <div class='action action-div accept pull-left' data-toggle="tooltip" title="Select for position">
           </div>
         <%% } %>
-        <div class='action action-div reject pull-left'>
+        <div class='action action-div reject pull-left' data-toggle="tooltip" title="Deny for this position">
         </div>
       </div>
     </div>
