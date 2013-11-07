@@ -6,7 +6,7 @@
     </span>
     
     <% if current_user && current_user != @user %>
-      <a class='btn-endorse btn-show-all pull-right action-div' data-can='<%= @user.friends.include?(current_user) && current_user.friends.include?(@user) ? 'True' : 'False' %>'>
+      <a class='btn-endorse btn-show-all pull-right action-div' data-can='<%= current_user.friends.include?(@user)%>' data-can2='<%= current_user.followers.include?(@user) %>' >
       </a> 
     <% end %>
     

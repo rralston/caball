@@ -66,9 +66,13 @@ $(document).ready ->
       # can tell if the user can endorse.(i.e., that if he is following the user or not)
       can = btn.attr('data-can')
       if can == 'false'
-        alert('You both need to follow each other to be able to endorse')
+        alert('You need to follow this user to leave an endorsement')
       else
-        $('#endorsement_modal').modal('show')
+        can2 = btn.attr('data-can2')
+        if can2 == 'false'
+          alert('This user needs to follow you for you to leave an endorsement')
+        else
+          $('#endorsement_modal').modal('show')
 
    $('body').on 'click', '.btn-skills', (event)->
     $('#edit_skills_modal').modal('show')
