@@ -66,7 +66,7 @@ $(document).ready ->
       # can tell if the user can endorse.(i.e., that if he is following the user or not)
       can = btn.attr('data-can')
       if can == 'false'
-        alert('You need to follow the user in order to endorse him')
+        alert('You both need to follow each other to be able to endorse')
       else
         $('#endorsement_modal').modal('show')
 

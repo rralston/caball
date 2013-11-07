@@ -536,7 +536,7 @@
 
 <%= render :partial => 'application/read_more_modal' %>
 
-<% if current_user && current_user != @user && @user.friends.include?(current_user) %>
+<% if current_user && current_user != @user %>
   <%= render :partial => 'users/endorsement_form_modal' %>
 <% end %>
 
