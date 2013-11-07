@@ -14,7 +14,7 @@
       </p>
     </blockquote>
     <p>
-      Message from <%= link_to User.find(@message.sender_id).name, "http://beta.filmzu.com"+user_path(User.find(@message.sender_id)) %>. Please visit <%= link_to "Filmzu.com", "http://beta.filmzu.com" %> and go to your inbox for more info.
+      Message from <%= link_to User.find(@message.sender_id).name, "http://filmzu.com"+user_path(User.find(@message.sender_id)) %>. Please visit <%= link_to "Filmzu.com", "http://filmzu.com" %> and go to your inbox for more info.
     </p>
 		<br>
 		<div class="cheers_text" style="margin: 15px 0 0 13px;padding: 0;text-align: left;width: 120px;height: auto;float: left">
