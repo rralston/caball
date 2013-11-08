@@ -178,14 +178,14 @@
             <div class="pinfo">
               
               <ul class="plist">
-                <% project.roles.first(4).each do |role| %> 
+                <% project.open_roles.first(4).each do |role| %> 
                   <li class="badge badge-custom-green">
                     <%= role.name %>
                   </li>
                 <% end %>
-                <% if project.roles.count > 4 %>
+                <% if project.open_roles.count > 4 %>
                   <li class="badge badge-custom-green">
-                      +<%= project.roles.count - 4 %> MORE
+                      +<%= project.open_roles.count - 4 %> MORE
                   </li>
                 <% end %>
               </ul>
