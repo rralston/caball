@@ -185,7 +185,7 @@
                 <% end %>
                 <% if project.roles.count > 4 %>
                   <li class="badge badge-custom-green">
-                      +<%= project.roles.count - 4 %>MORE
+                      +<%= project.roles.count.to_i - 4 %> MORE
                   </li>
                 <% end %>
               </ul>
