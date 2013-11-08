@@ -75,6 +75,7 @@
         <a href="" data-toggle='modal' data-target='#signup_modal'>Create  an Account</a>  
       </div>
     <% end %>
+		<% if current_user %>
     <div class="container" style='width: 800px'>
       <div class="hnav navbar light pull-left">
         <div class="navbar-inner ">
@@ -99,6 +100,7 @@
         </form>
       </div>
     </div>
+		<% end %>
   </header>
 
   <% if flash[:notice] %>
