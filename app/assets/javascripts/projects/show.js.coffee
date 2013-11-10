@@ -84,7 +84,7 @@ $(document).ready ()->
               btn.addClass('liked')
               fan = new app.models.fan(app.current_user)
               app.fans.add(fan)
-              btn.html('Un Like This')
+              btn.html('You're a Fan!')
             else
               alert 'Something went wrong, Please try laters'
 
