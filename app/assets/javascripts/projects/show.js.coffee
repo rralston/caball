@@ -32,7 +32,7 @@ $(document).ready ()->
           alert 'Applicant added to the role'
           btn.removeClass('select_applicant').addClass('remove_applicant').html('Remove')
         else
-          alert 'Error approving application. May be you approved a appilcation for this role already. Please check'
+          alert 'Error approving application. Maybe you approved a appilcation for this role already. Please check'
 
   $('body').on 'click', '.remove_applicant', (event)->
     btn = $(event.target)
@@ -68,9 +68,9 @@ $(document).ready ()->
               btn.removeClass('liked')
               fan = new app.models.fan(app.current_user)
               app.fans.remove(fan)
-              btn.html('Like This')
+              btn.html('Become a Fan!')
             else
-              alert 'Something went wrong, Please try laters'
+              alert 'Something went wrong, please try again later'
       else
         $.ajax
           url: '/likes.json'
@@ -84,7 +84,7 @@ $(document).ready ()->
               btn.addClass('liked')
               fan = new app.models.fan(app.current_user)
               app.fans.add(fan)
-              btn.html('Un Like This')
+              btn.html("You're a Fan!")
             else
-              alert 'Something went wrong, Please try laters'
+              alert 'Something went wrong, please again try later'
 

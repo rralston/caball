@@ -21,7 +21,7 @@
 
 		      <input type='hidden' name='role_application[role_id]' value= <%= @role.id %> >
 
-		      <%= role_application.submit 'Submit Application', :class => 'btn btn-success btn_apply_for_position' %>
+		      <%= role_application.submit 'Submit Application', :class => 'btn btn-success btn_apply_for_position', data: { disable_with: 'Submitting...' } %>
 
 		    <% end %>
 		  <% elsif current_user.has_applied?(@role) %>  
