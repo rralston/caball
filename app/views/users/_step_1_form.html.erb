@@ -214,7 +214,7 @@
          <div class="control-group">
            <%= talent.label "Position", :class => 'control-label' %>
            <div class="controls">
-             <%= talent.select(:name, options_for_select(User.types), {}, :class=>'super_role_select hinted', "data-hint" => 'While you might be able to do a lot of things in the film industry, focus on the 2 positions you are strongest at and want to be known for.', :style => "width:400px") %>
+             <%= talent.select(:name, options_for_select(User.types), {}, :class=>'super_role_select', :style => "width:400px") %>
            </div>
 
            <div class='sub_role_container' style='display: none;'>
