@@ -68,7 +68,7 @@ $(document).ready ()->
               btn.removeClass('liked')
               fan = new app.models.fan(app.current_user)
               app.fans.remove(fan)
-              btn.html('Like This')
+              btn.html('Become a Fan!')
             else
               alert 'Something went wrong, please try again later'
       else
