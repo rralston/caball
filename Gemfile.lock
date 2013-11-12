@@ -308,7 +308,7 @@ GEM
       rest-client (>= 1.4.0, < 1.7.0)
       sequel (~> 3.20.0)
       sinatra (~> 1.0.0)
-    therubyracer (0.11.4)
+    therubyracer (0.12.0)
       libv8 (~> 3.11.8.12)
       ref
     thor (0.18.1)
