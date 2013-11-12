@@ -147,4 +147,18 @@ class ApplicationController < ActionController::Base
   def clear_temp_photo_objects
     Photo.where(:imageable_type => nil).destroy_all
   end
+  
+  # custom 404
+  unless Rails.application.config.consider_all_requests_local
+    rescue_from ActiveRecord::RecordNotFound,
+                ActionController::RoutingError,
+                ActionController::UnknownController,
+                ActionController::UnknownAction,
+                ActionController::MethodNotAllowed do |exception|
+
+      # Put loggers here, if desired.
+
+      redirect_to error_path
+    end
+  end
 end
