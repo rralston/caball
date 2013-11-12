@@ -158,7 +158,7 @@ class ApplicationController < ActionController::Base
 
       # Put loggers here, if desired.
 
-      redirect_to error_path
+      redirect_to sorry_url
     end
   end
 end
