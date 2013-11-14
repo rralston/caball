@@ -393,7 +393,7 @@ DEPENDENCIES
   spork-rails
   sqlite3
   taps
-  therubyracer
+  therubyracer (~> 0.12.0)
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
   unicorn
