@@ -36,7 +36,7 @@
             <%= link_to "Edit", edit_user_blog_path(@user, blog) %>
           <% end  %>
           <% if can? :destroy, blog %> |
-            <%= link_to "Destroy", [@user, blog], method: :delete %>
+            <%= link_to "Destroy", [@user, blog], method: :delete, data: { confirm: "Are you sure?" } %>
           <% end %>
         </p>
         
