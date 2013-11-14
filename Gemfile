@@ -30,7 +30,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'less-rails'
 # Twitter Boostrap and Upgrade dependencies
-gem 'therubyracer'
+gem 'therubyracer', '~> 0.12.0'
 gem 'twitter-bootstrap-rails'
 
 # To use ActiveModel has_secure_password
