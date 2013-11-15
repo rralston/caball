@@ -88,7 +88,10 @@
 
             <div class='span7 project-types'>
               <ul>
-                <% @project.is_type.each do |type| %>
+                <% if @project.status.present? %>
+                  <li class='badge badge-custom-green'> <%= @project.status %> </li>
+                <% end %>
+ 								<% @project.is_type.each do |type| %>
                   <% if type.present? %>
                     <li class='badge badge-custom-green'> <%= type %> </li>
                   <% end %>

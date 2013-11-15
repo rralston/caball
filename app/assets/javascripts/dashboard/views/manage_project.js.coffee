@@ -8,6 +8,7 @@ app.views.manage_project = Backbone.View.extend
 
   events: 
     'click .mark_done': 'mark_as_done'
+    'click .mark_live': 'mark_as_live'
 
   render: ()->
     this.$el.html( this.template(this.model.toJSON()) )
@@ -51,6 +52,23 @@ app.views.manage_project = Backbone.View.extend
           if response
               _this.model.set('status', 'Completed')
               alert('Project marked as Done')
+              _this.render()
+      }
+    else
+      alert('Project Status Unchanged')
+
+  mark_as_live: (event)->
+    _this = this
+    if confirm "Are you sure you want to make this project live? It will appear in the Project directory and on your profile."
+      $(event.target).html('Please wait..')
+      this.model.save {
+        status: 'Development'
+      }, {
+        success: (model, response) ->
+          console.log response
+          if response
+              _this.model.set('status', 'Development')
+              alert('Project marked as in Development')
               _this.render()
       }
     else
