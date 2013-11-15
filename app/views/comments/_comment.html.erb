@@ -36,7 +36,7 @@
             <%= link_to "Edit", edit_project_comment_path(@project, comment) %> 
           <% end %>
           <% if can? :destroy, comment %> |
-            <%= link_to "Destroy", [@project, comment], method: :delete %>
+            <%= link_to "Destroy", [@project, comment], method: :delete, data: { confirm: "Are you sure?" } %>
           <% end %>
         </p>
 

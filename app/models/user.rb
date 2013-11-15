@@ -202,6 +202,16 @@ class User < ActiveRecord::Base
     end
   end
 
+  def get_cover_medium
+    if (cover_photo.nil? || cover_photo.image.url == "/images/fallback/User_default.png") && !talents.empty?
+      return "../assets/default_cover/#{talents.first.name}.jpg"
+    elsif cover_photo.nil?
+      return "/assets/default_cover/Fan.jpg"
+    else
+      return cover_photo.image.url(:medium) rescue "/assets/default_cover/Fan.jpg"
+    end
+  end
+  
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
@@ -527,6 +537,7 @@ class User < ActiveRecord::Base
       'profile_tiny' => profile_tiny,
       'cover_photo' => display_cover,
       'cover_regular' => get_cover_regular,
+      'cover_medium' => display_cover_medium,
       'talent_names' => talent_names,
       'url_param' => url_param
     }
@@ -659,6 +670,8 @@ class User < ActiveRecord::Base
     end
     json[:url_param]      = self.url_param
     json[:display_cover]  = self.display_cover
+    json[:display_cover_regular]  = self.display_cover_regular
+    json[:display_cover_medium]  = self.display_cover_medium
     json
   end
 
@@ -740,7 +753,15 @@ class User < ActiveRecord::Base
   def display_cover
     get_cover
   end
+  
+  def display_cover_regular
+    get_cover_regular
+  end
 
+  def display_cover_medium
+    get_cover_medium
+  end
+  
   def url_param
     url_name.present? ? url_name : id
   end
@@ -764,10 +785,10 @@ class User < ActiveRecord::Base
   def self_and_managing_projects
     # Projects the user created.
     # +
-    # Role Application Approved (Since this incorporates Managers As Well)
+    # Role Application Approved (Since this incorporates Managers As Well) - Updated to not show DRAFT Status Projects
     Project.
       joins( "LEFT OUTER JOIN roles ON roles.project_id = projects.id LEFT OUTER JOIN role_applications ON role_applications.role_id = roles.id LEFT OUTER JOIN users ON users.id = role_applications.user_id" ).
-        where( " ( projects.user_id = ? ) OR ( role_applications.approved = true AND role_applications.user_id = ? )", self.id, self.id ).
+        where( " ( projects.user_id = ? ) AND ( projects.status != 'Draft' ) OR ( role_applications.approved = true AND role_applications.user_id = ? ) AND ( projects.status != 'Draft' )", self.id, self.id ).
           uniq
     # Projects for which the user has a approved role and has the manager flag set for the role application.
     # Project.
