@@ -3,9 +3,9 @@
 # Ruby, Java, .NET, PHP, and Python applications with deep visibility and low overhead.
 # For more information, visit www.newrelic.com.
 #
-# Generated September 27, 2013
+# Generated November 17, 2013
 #
-# This configuration file is custom generated for app15411689@heroku.com
+# This configuration file is custom generated for Caball LLC
 
 
 # Here are the settings that are common to all environments
@@ -15,7 +15,7 @@ common: &default_settings
   # You must specify the license key associated with your New Relic
   # account.  This key binds your Agent's data to your account in the
   # New Relic service.
-  license_key: '441b8df9db770d199e8f35285751a487f31efa5c'
+  license_key: '5c5768a8a29cd4c61e23f8a8c86874f4b9ed4831'
 
   # Agent Enabled (Ruby/Rails Only)
   # Use this setting to force the agent to run or not run.
@@ -42,7 +42,7 @@ common: &default_settings
   #       - Ajax Service
   #       - All Services
   #
-  app_name: My Application
+  app_name: Filmzu
 
   # When "true", the agent collects performance data about your
   # application and reports this data to the New Relic service at

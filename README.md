@@ -1,4 +1,4 @@
-```html
+
 <h2>Welcome to Filmzu</h2>
 
 <pre>
@@ -23,6 +23,8 @@
         </div>
     </div>
 </pre>
+```html
+Code
 ```
 
 
