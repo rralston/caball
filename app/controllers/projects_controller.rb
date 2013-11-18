@@ -3,6 +3,11 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource :except => [:show]
 
   after_filter :clear_temp_photo_objects, :only => [:update, :create]
+  before_filter :set_page_title
+  
+  def set_page_title
+    @page_title = "Projects on Filmzu"
+  end
   
   def index
     search(Project, "projects")
@@ -53,7 +58,7 @@ class ProjectsController < ApplicationController
   
   def show
     search(Project, "projects")
-
+    @page_title = @project.title+" on Filmzu"
     if params[:id].to_i > 0 #to_i will return 0 if the id is a string
       @project = Project.find(params[:id])
     else

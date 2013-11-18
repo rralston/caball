@@ -4,10 +4,14 @@ class UsersController < ApplicationController
   
   before_filter :search, only: [:index, :show, :new, :edit, :update, :dashboard]
   before_filter :authenticate_user!, only: [:dashboard]
-
+  before_filter :set_page_title
+  
+  def set_page_title
+    @page_title = "Film Professionals on Filmzu"
+  end
+  
   def index
     @talents = User.types
-
     # if page is present, it indicates that request is for load more
     if params[:page].present?
       page = params[:page]
@@ -83,7 +87,7 @@ class UsersController < ApplicationController
     else
       @user = User.find_by_url_name(params[:id])
     end
-
+    @page_title = @user.name + ' profile on Filmzu'   
     @blog = Blog.new
     @real_videos = @user.videos.real
     @followers_following = (@user.friends + @user.followers).uniq

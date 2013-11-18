@@ -3,7 +3,12 @@ class EventsController < ApplicationController
   load_and_authorize_resource :except => [:show]
 
   after_filter :clear_temp_photo_objects, :only => [:update, :create]
-
+  before_filter :set_page_title
+  
+  def set_page_title
+    @page_title = "Events on Filmzu"
+  end
+  
   def index
     search
     @params_used = params
@@ -63,7 +68,7 @@ class EventsController < ApplicationController
 
   def show
     search
-
+    @page_title = @event.title+", "+@event.location
     if params[:id].to_i > 0 #to_i will return 0 if the id is a string
       @event = Event.find(params[:id])
     else
