@@ -107,6 +107,8 @@
 
                         <li>
                           <img src="/assets/role_icons/<%= image_name %>.png" alt="<%= talent.name %>" width="45" height="45" title='<%= talent.sub_talent ? talent.sub_talent : talent.name %>' data-scrollto='#<%= talent.name.downcase %>_profile' class='action-div scroll_to'/>
+
+                          <a href=""  style='display:block;' data-toggle='modal' data-target='#<%= talent.name %>-modal'>Edit</a>
                         </li>
                       <% end %>
                       <!--<li><a href="#"><img src="/assets/cut.png" alt="" /></a></li>
@@ -534,6 +536,8 @@
 <%= render :partial => 'users/templates/fans' %>
 <%= render :partial => 'users/templates/fan' %>
 
+<%= render :partial => 'users/edit_modals' %>
+
 <%= render :partial => 'application/read_more_modal' %>
 
 <% if current_user && current_user != @user %>
@@ -650,6 +654,9 @@ $(document).ready(function(){
 
   app.fn.init_show_post_button_handler()
 
+  app.fn.init_agent_name_autocomplete()
+
+  app.fn.init_user_docs_upload()
 
   // if this line is not there it will show similar projects as the same templte is used for projects also.
   $('#user_projects_div').find('.shrink-div').find('h3').html('Projects');

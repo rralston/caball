@@ -1,0 +1,103 @@
+<!-- Agent form Modal -->
+<div id="Agent-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Update Agent Role Details</span></h3>
+  </div>
+  
+  <div class="modal-body">
+    
+    <%= form_for current_user, :html => { :class => 'form-horizontal' , :name => 'formElem' } do |f| %>
+
+      <%= f.fields_for :talents do |talent| %>
+
+        <% if talent.object.name == 'Agent' %>
+          <%= render :partial => 'agent_form', :locals => { :f => f, :talent => talent} %>
+        <% end %>
+
+      <% end %>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit "Update" %>
+        </div>    
+      </div>
+
+    <% end %>
+
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Close</button>
+  </div>
+</div>
+<!-- Agent form Modal -->
+
+
+<!-- Cast form Modal -->
+<div id="Cast-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Update Cast Role Details</span></h3>
+  </div>
+  
+  <div class="modal-body edit-user">
+    
+    <%= form_for current_user, :html => { :class => 'form-horizontal' , :name => 'formElem' } do |f| %>
+
+      <%= f.fields_for :talents do |talent| %>
+
+        <% if talent.object.name == 'Cast' %>
+          <%= render :partial => 'characteristics_form', :locals => { :f => f, :talent => talent} %>
+        <% end %>
+
+      <% end %>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit "Update" %>
+        </div>    
+      </div>
+
+    <% end %>
+
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Close</button>
+  </div>
+</div>
+<!-- Cast form Modal -->
+
+
+<!-- Writer form Modal -->
+<div id="Writer-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Update Writer Role Details</span></h3>
+  </div>
+  
+  <div class="modal-body edit-user">
+    
+    <%= form_for current_user, :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'user_edit_form_step_2', :class => 'user_edit_form_with_docs' } do |f| %>
+
+      <%= f.fields_for :talents do |talent| %>
+
+        <% if talent.object.name == 'Writer' %>
+          <%= render :partial => 'writer_form', :locals => { :f => f, :talent => talent} %>
+        <% end %>
+
+      <% end %>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit "Update" %>
+        </div>    
+      </div>
+
+    <% end %>
+
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Close</button>
+  </div>
+</div>
+<!-- Writer form Modal -->
