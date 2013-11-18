@@ -38,7 +38,8 @@
 											<th><%= sort_link(@search, :id, "ID") %></th>
 											<th><%= sort_link(@search, :name, "Name") %></th>
 											<th><%= sort_link(@search, :email, "Email") %></th>
-											<th><%= sort_link(@search, :created_at, "Sign-Up Date") %></th>
+											<th><%= sort_link(@search, :updated_at, "Updated Date") %></th>
+											<th><%= sort_link(@search, :sign_in_count, "Most Active") %></th>
 											<th><%= sort_link(@search, :admin, "Admin") %></th>
 											<th><%= sort_link(@search, :featured, "Featured") %></th>
 											<th>Actions</th>
@@ -50,9 +51,10 @@
 											<td><%= link_to user.id, user_path(user.id), :class => "btn btn-mini" %></td>
 											<td><%= link_to user.name, user_path(user.id) %></td>
 											<td><%= form_for(user, :url => admin_admin_update_user_path, :remote => true) do |f| %>
-												<%= f.text_field :email, :class => 'text_field required email', :placeholder => 'This where we notify you of the new opportunities' %></td>
+												<%= f.text_field :email, :class => 'text_field required email', :placeholder => 'Do not delete any emails' %></td>
 											
-											<td><%= user.created_at %></td>
+											<td><%= user.updated_at %></td>
+											<td><%= user.sign_in_count %></td>
 											
 												<input type='hidden' name='user_id' value='<%= user.id %>' >
 
