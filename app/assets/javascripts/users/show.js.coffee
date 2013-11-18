@@ -174,66 +174,10 @@ $(document).ready ->
         data.progress_div.hide()
         app.fn.adjust_slider_height()
 
-  app.fn.init_user_cover_upload = ()->
-    # file upload handler for step 1 form and step 3 form containing image files.
-    $('.user_edit_form_with_cover').fileupload
-      url: '/users/files_upload'
-      type: 'POST'
-      add: (e, data)->
-        # e.target gives the form.
-        types = /(\.|\/)(jpe?g|png)$/i
-        file = data.files[0]
-        # file type verification.
-        if types.test(file.type) || types.test(file.name)
-          data.progress_div = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.upload_progress')
-          data.progress_div.show()
+  app.fn.init_user_photos_upload = (element)->
 
-          data.control_group_div =  $('#' + data.fileInput.attr('id')).closest('.control-group')
+    if typeof element == 'undefined'
+      element = $('.user_edit_form_with_photos')
 
-          data.image_container = data.control_group_div.find('.image_preview_container')
-          data.image_container.attr('src', '')
-
-          data.image_parent_container = data.control_group_div.find('.image_container')
-
-          data.crop_btn = data.control_group_div.find('.btn.crop_image')
-
-          data.submit()
-        else
-          alert('The file you selected is not a jpeg or png image file')
-      progress: (e, data)->
-        progress = parseInt(data.loaded / data.total * 100, 10)
-        data.progress_div.find('.bar').css('width', progress + '%')
-      done: (e, data)->
-        
-        if typeof data.result == 'object' && _.size(data.result) > 1
-          # > 1 when a hash is returned with id of the newly created object.
-          image_url = data.result['url']
-          id = data.result['id']
-
-          # update the id value to the value returned by the server.
-          data.id_div = data.control_group_div.find('.photo_id_div')
-          data.id_div.val(id)
-
-          # remove the numerous-remove link and show object destroy link
-          data.control_group_div.find('.numerous-remove').hide()
-          data.control_group_div.find('.saved_object_remove_actions').show()
-
-        else
-          image_url = data.result
-
-
-        data.image_container.attr('src', image_url)
-        data.image_container.show()
-        data.image_parent_container.show()
-
-        if typeof data.result == 'object'
-          data.crop_btn.attr('data-orgImgUrl', image_url)
-          data.crop_btn.attr('data-prevImgUrl', image_url)
-          data.crop_btn.attr('data-orgWidth', data.result['original_width'])
-          data.crop_btn.attr('data-orgHeight', data.result['original_height'])
-          data.crop_btn.show()
-
-          app.fn.hard_rest_crop_values(data.control_group_div, '150px', '150px')
-
-        app.fn.adjust_slider_height()
-        data.progress_div.hide()
+    # check users/edit.js.coffee for this method
+    app.fn.init_image_file_uploader( element )

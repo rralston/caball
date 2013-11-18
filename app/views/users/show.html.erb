@@ -38,6 +38,12 @@
                             <i class='icon-remove-sign action-div'></i>
                           </div>
 
+                          <div class='edit-photos-link'>
+                            <a href="" data-toggle='modal' data-target='#Photos-modal'>
+                              Edit Photos <i class='icon-pencil'></i>
+                            </a>
+                          </div>
+
                         <% end %>
                         <span class='user_headline_text'>
 
@@ -117,10 +123,13 @@
                           <% image_name = talent.name %>
                         <% end %>
 
-                        <li>
+                        <li class='text-center'>
                           <img src="/assets/role_icons/<%= image_name %>.png" alt="<%= talent.name %>" width="45" height="45" title='<%= talent.sub_talent ? talent.sub_talent : talent.name %>' data-scrollto='#<%= talent.name.downcase %>_profile' class='action-div scroll_to'/>
 
-                          <a href=""  style='display:block;' data-toggle='modal' data-target='#<%= talent.name %>-modal'>Edit</a>
+                          <% if current_user == @user %>
+
+                            <a href=""  style='display:block;' data-toggle='modal' data-target='#<%= talent.name %>-modal'>Edit</a>
+                          <% end %>
                         </li>
                       <% end %>
                       <!--<li><a href="#"><img src="/assets/cut.png" alt="" /></a></li>
@@ -712,7 +721,7 @@ $(document).ready(function(){
   app.fn.init_agent_name_autocomplete()
 
   app.fn.init_user_docs_upload()
-  app.fn.init_user_cover_upload()
+  app.fn.init_user_photos_upload()
 
   app.fn.initialize_radio_toggler()
 

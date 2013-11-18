@@ -312,7 +312,7 @@
 <!-- Videos form Modal -->
 
 
-<!-- Writer form Modal -->
+<!-- Cover form Modal -->
 <div id="Cover-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -321,7 +321,7 @@
   
   <div class="modal-body edit-user">
     
-    <%= form_for current_user, :html => { :class => 'form-horizontal' , :name => 'formElem', :class => 'user_edit_form_with_cover' } do |f| %>
+    <%= form_for current_user, :html => { :class => 'form-horizontal' , :name => 'formElem', :class => 'user_edit_form_with_photos' } do |f| %>
 
 
       <%= f.fields_for :cover_photo, (current_user.cover_photo || Photo.new) do |user_cover_photo|  %>
@@ -401,4 +401,121 @@
     <button class='btn' data-dismiss="modal">Close</button>
   </div>
 </div>
-<!-- Writer form Modal -->
+<!-- Cover form Modal -->
+
+
+<!-- Photos form Modal -->
+<div id="Photos-modal" class="modal hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Update Photos </span></h3>
+  </div>
+  
+  <div class="modal-body">
+    
+    <%= form_for current_user, :html => { :class => 'form-horizontal' , :name => 'formElem', :class => 'user_edit_form_with_photos' } do |f| %>
+
+      <div class="controls">
+        <h4>More Photos</h4>
+      </div>
+
+      <%= f.fields_for :photos do |p|  %>
+        <% if current_user.photos.exists? %>
+          <div class="control-group user-extra-photo">
+            
+            <%= p.label "Photo", :class => 'control-label' %>
+            
+            <div class="controls">
+              <%= image_tag p.object.image.url(:medium), {:class => "img-polaroid image_preview_container"} %>
+            </div>
+
+            <div class="controls">
+              <%= p.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+
+              <a href='#' class='remove_entity' data-toRemove='.user-extra-photo'>Remove this photo</a>
+            </div>
+
+            <div class='controls upload_progress'>
+              Upload Progress:
+              <div class='progress'>
+                <div class='bar' style='width: 0%'></div>
+              </div>
+            </div>
+
+
+            <div class="controls">
+              <%= p.file_field :image %>
+            </div>
+
+            <% if false %> <!-- Content Exclusion -->
+          
+            <div class='controls'>
+              <%= p.label "Description:" %>
+              <%= p.text_field :description, :class => 'text_field' %>
+            </div>
+            <% end %> <!-- End Exclusion -->
+
+          </div>
+
+        <% end %>
+      <% end %>
+
+      <div id="fields-for-photos-list" class="numerous">
+        <%= f.fields_for :photos, Photo.new, :child_index => 'replace_this' do |photo| %>
+          <div class="control-group user-extra-photo">
+
+            <label class='control-label'>Photo</label>
+
+            <!-- just keep the container there in case to preview if user uploads an image. -->
+            <div class="controls">
+              <img class='image_preview_container img-polaroid' src="" style='display: none;'>
+            </div>
+
+            <div class='controls upload_progress'>
+              Upload Progress:
+              <div class='progress'>
+                <div class='bar' style='width: 0%'></div>
+              </div>
+            </div>
+
+            <div class="controls">
+              <%= photo.file_field :image %>
+            </div>
+
+            <div class="controls">
+
+              <!-- id is updated when the image is created and uploaded  -->
+              <%= photo.hidden_field :id, :class => 'photo_id_div' %>
+              <% if false %> <!-- Content Exclusion -->
+
+              <%= photo.label :description %>
+
+              <%= photo.text_field :description, :class => 'text_field', :rows => "5" %>
+              <% end %> <!-- End Exclusion -->
+            </div>   
+          </div>
+
+          <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+        <% end %>
+      </div>
+
+      <div id="photos-list"></div>
+      
+      <div class="controls">
+        <%= link_to 'Add Another Photo', '#', :id => 'add-to-photos-list' %>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit "Update" %>
+        </div>    
+      </div>
+
+    <% end %>
+
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Close</button>
+  </div>
+</div>
+<!-- Photos form Modal -->

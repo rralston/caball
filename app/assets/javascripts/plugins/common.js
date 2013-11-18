@@ -673,6 +673,9 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height, o
     h: null
   }
 
+  console.log(original_width)
+  console.log(original_height)
+
   element.Jcrop({
     trueSize: [original_width, original_height],
     aspectRatio: ar_width / ar_height,
