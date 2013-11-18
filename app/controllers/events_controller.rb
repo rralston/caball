@@ -68,13 +68,12 @@ class EventsController < ApplicationController
 
   def show
     search
-    @page_title = @event.title+", "+@event.location
     if params[:id].to_i > 0 #to_i will return 0 if the id is a string
       @event = Event.find(params[:id])
     else
       @event = Event.find_by_url_name(params[:id])
     end
-
+    @page_title = @event.title+", "+@event.location
   end
 
   def new

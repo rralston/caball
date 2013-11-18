@@ -87,7 +87,7 @@ class UsersController < ApplicationController
     else
       @user = User.find_by_url_name(params[:id])
     end
-    @page_title = @user.name + ' profile on Filmzu'   
+    @page_title = @user.name + ' on Filmzu'   
     @blog = Blog.new
     @real_videos = @user.videos.real
     @followers_following = (@user.friends + @user.followers).uniq

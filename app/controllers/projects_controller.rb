@@ -58,13 +58,12 @@ class ProjectsController < ApplicationController
   
   def show
     search(Project, "projects")
-    @page_title = @project.title+" on Filmzu"
     if params[:id].to_i > 0 #to_i will return 0 if the id is a string
       @project = Project.find(params[:id])
     else
       @project = Project.find_by_url_name(params[:id])
     end
-
+    @page_title = @project.title+" on Filmzu"
     @comment = Comment.new
     @producer = @project.user
     @real_videos = @project.videos.real
