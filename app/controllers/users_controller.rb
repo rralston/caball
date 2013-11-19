@@ -98,6 +98,7 @@ class UsersController < ApplicationController
                                              :layout => false, :formats => [:html], :locals => {} ) 
                   } }
     end
+
   end
   
   ## ALERT : is this being used?

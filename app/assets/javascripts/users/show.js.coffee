@@ -19,6 +19,10 @@ $(document).ready ->
 
   app.fn.initialize_send_generic_message()
 
+  $('body').on 'click', '.public_view_link a', (event)->
+    window.open("/people/" + app.current_user.id + "?public_view=true",'_blank', 'toolbar=0,location=0,menubar=0')
+    false
+
   $('body').on 'click', '.btn-follow', (event) ->
     btn = $(event.target)
     friendId = parseInt(btn.attr('data-friend-id'))
