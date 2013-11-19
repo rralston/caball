@@ -34,6 +34,9 @@ class CommentsController < ApplicationController
 
   def update
     comment = Comment.find(params[:id])
+
+    DeleteActivities.new( comment ).del_1_day_ago_updates
+
     if comment.update_attributes(params[:comment])
       render :json => comment.to_json()
     else

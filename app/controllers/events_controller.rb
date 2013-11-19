@@ -97,6 +97,9 @@ class EventsController < ApplicationController
 
   def update
     @event = current_user.events.find(params[:id])
+
+    DeleteActivities.new( @event ).del_1_day_ago_updates
+
     if @event.update_attributes(params[:event])
       redirect_to @event, notice: "Event was updated."
     else

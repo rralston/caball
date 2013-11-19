@@ -155,7 +155,11 @@ class ProjectsController < ApplicationController
       # editing
       @project = Project.find(params[:project_id])
       if @project.update_attributes(params[:project])
+
+        DeleteActivities.new( @project ).del_1_day_ago_updates
+
         @project.create_activity :update, owner: current_user
+
         render 'projects/step_2_form', :layout => false
       else
         render :json => false

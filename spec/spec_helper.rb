@@ -63,4 +63,8 @@ Spork.each_run do
   Dir[Rails.root + "app/**/*.rb"].each do |file|
     load file
   end
+
+  Dir[Rails.root + "lib/*.rb"].each do |file|
+    load file
+  end
 end
