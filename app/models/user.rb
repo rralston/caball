@@ -183,6 +183,13 @@ class User < ActiveRecord::Base
     facebook { |fb| fb.get_connection("me", "friends").size }
   end
   
+  def self.share_review(user_id, movie_url)
+    user = User.find(user_id)
+    @token = user.fb_token
+    @graph = Koala::Facebook::API.new(@token)
+    @graph.put_connections("me", "cinematrontest:movie", movie: movie_url)
+  end
+  
   def get_cover
     if (cover_photo.nil? || cover_photo.image.url == "/images/fallback/User_default.png") && !talents.empty?
       return "../assets/default_cover/#{talents.first.name}.jpg"

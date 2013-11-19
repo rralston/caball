@@ -12,7 +12,10 @@ class BlogsController < ApplicationController
     end
 
     @blog = Blog.create(params[:blog])
-
+    #Share to Facebook
+    @user = current_user
+    User.share_review(@user.id, "http://www.filmzu.com/users/"+@user.id.to_s)
+    
     # if the user tried to add a video, check if its valid or not.
     if params[:blog][:video_attributes][:url].present?
       if @blog.video.provider.nil?
