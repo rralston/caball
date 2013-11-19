@@ -259,11 +259,11 @@ class UsersController < ApplicationController
       if current_user.cover_photo.nil?
         current_user.create_cover_photo(params['user']['cover_photo_attributes'])
       else
-        current_user.cover_photo.update_attributes(params['user']['cover_photo_attributes'])
+        current_user.update_attributes(params['user'])
       end
 
       file_url = {
-        :url => current_user.cover_photo.image.url(:medium),
+        :url => current_user.cover_photo.image.url,
         :id => current_user.cover_photo.reload.id,
         :original_width => current_user.cover_photo.reload.original_width,
         :original_height => current_user.cover_photo.reload.original_height

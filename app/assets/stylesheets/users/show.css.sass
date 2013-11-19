@@ -615,3 +615,107 @@
     background: url("/assets/twitter-link.png") no-repeat !important
   .social-share-button-google_plus
     background: url("/assets/g-link.png") no-repeat !important
+
+form .form_hint
+  font-size: 13px
+  font-style: italic
+
+.control-group.video-url
+  margin-bottom: 0px
+  margin-top: 20px
+
+
+.modal form .control-group .controls
+  margin-left: 0px
+
+.demo-reel .hint_msg
+  width: 270px
+
+#user-video-placeholder
+  height: 180px
+  width: 320px
+  cursor: pointer
+  background: url("/assets/videos-placeholder.png") no-repeat !important
+  background-size: 100% 100% !important
+  .add-video-overlay
+    display: none
+    background: rgba(35, 45, 83, 0.6)
+    color: white
+    text-align: center
+    height: 110px
+    padding-top: 70px
+    font-size: 20px
+#user-video-placeholder:hover
+  .add-video-overlay
+    display: block
+
+#edit_videos_link
+  display: none
+  position: absolute
+  top: 60px
+  right: 0px
+  height: 50px
+  width: 100px
+  cursor: pointer
+  z-index: 9999
+  .edit-videos-overlay
+    display: none
+    background: #444751
+    border-radius: 5px 0px 0px 5px
+    color: white
+    text-align: center
+    height: 20px
+    padding-top: 9px
+    font-size: 12px
+
+#user_side_bar_videos:hover
+  #edit_videos_link
+    display: block
+    .edit-videos-overlay
+      display: block
+
+.edit-user form .image_container.cover_photo_container .image_preview_container
+  vertical-align: baseline
+  max-width: none
+  width: 160px
+  height: 90px
+
+.edit-user form .image_container.cover_photo_container
+  width: 160px
+  height: 90px
+  overflow: hidden
+  position: relative
+  margin-top: 0px
+
+.edit-cover-link
+  display: none
+  position: absolute
+  top: 0px
+  left: 0px
+  width: 140px
+  padding: 4px
+  border-radius: 0px 5px 5px 0px
+  text-align: center
+  background: #444751
+  z-index: 9999
+  a, a:hover
+    color: white !important
+
+.edit-photos-link
+  display: none
+  position: absolute
+  top: 95px
+  left: 230px
+  width: 90px
+  padding: 4px
+  border-radius: 0px 5px 5px 0px
+  text-align: center
+  background: #444751
+  z-index: 7
+  a, a:hover
+    color: white !important
+    font-size: 14px
+
+.profhdr:hover
+  .edit-cover-link, .edit-photos-link
+    display: block

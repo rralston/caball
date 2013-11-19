@@ -1,5 +1,5 @@
 <%= javascript_include_tag "users/users_manifest" %>
-<%= stylesheet_link_tag "users/show" %>
+<%= stylesheet_link_tag 'users/show' %>
 
 <!--========= content wrapper======------>
 <div>
@@ -11,10 +11,21 @@
           <div class="row-fluid">
           <!--========= Header ends======------>
               <div class="profhdr span12">
-                  
+                  <% if current_user == @user %>
+
+                    <div class='edit-cover-link'>
+                      <a href="" data-toggle='modal' data-target='#Cover-modal'>
+                        Edit Cover Photo <i class='icon-pencil'></i>
+                      </a>
+                    </div>
+
+                  <% end %>
+
                   <div class="blurbgcover">
                     <div class="blurbg">
-                      <div class="cover" style='background-image: url(<%= @user.get_cover_regular %>)'></div>
+                      <div class="cover" style='background-image: url(<%= @user.get_cover_regular %>)'>
+                        
+                      </div>
                     </div>
                   </div>
                   <div class="proftagwrap row-fluid">
@@ -27,8 +38,15 @@
                             <i class='icon-remove-sign action-div'></i>
                           </div>
 
+                          <div class='edit-photos-link'>
+                            <a href="" data-toggle='modal' data-target='#Photos-modal'>
+                              Edit Photos <i class='icon-pencil'></i>
+                            </a>
+                          </div>
+
                         <% end %>
                         <span class='user_headline_text'>
+
                           <% if current_user == @user %>
                             <i class='icon-pencil action-div edit_headline' data-toggle="tooltip" title="Click here to update your headline"></i>
                           <% end %>
@@ -105,8 +123,13 @@
                           <% image_name = talent.name %>
                         <% end %>
 
-                        <li>
+                        <li class='text-center'>
                           <img src="/assets/role_icons/<%= image_name %>.png" alt="<%= talent.name %>" width="45" height="45" title='<%= talent.sub_talent ? talent.sub_talent : talent.name %>' data-scrollto='#<%= talent.name.downcase %>_profile' class='action-div scroll_to'/>
+
+                          <% if current_user == @user %>
+
+                            <a href=""  style='display:block;' data-toggle='modal' data-target='#<%= talent.name %>-modal'>Edit</a>
+                          <% end %>
                         </li>
                       <% end %>
                       <!--<li><a href="#"><img src="/assets/cut.png" alt="" /></a></li>
@@ -182,45 +205,76 @@
       </div>
       
       <div class='row right-extra-div' id='user_video'>
+        
+
         <% if @user.valid_videos.size > 0 %>
 
-        <div id="user_side_bar_videos" class="carousel slide" data-interval='false'>
-          <!-- Carousel items -->
-          <div class="carousel-inner">
-            <% @user.valid_videos.each_with_index do |video, index| %>
-              
-              <% if index == 0 %>
-                <!-- make the first one as active. -->
-                <div class="item active text-center">
-                  <%= raw video.embed_code %>
-                </div>
-              
-              <% else %>
-                <div class="item text-center">
-                  <%= raw video.embed_code %>
-                </div>
-              <% end %>
-            
-            <% end %>
-          </div>
-          
-          <% if @user.valid_videos.size > 1 %>
+          <div id="user_side_bar_videos" class="carousel slide" data-interval='false'>
 
-            <ol class="carousel-indicators">
+            <% if current_user == @user %>
+              <div id='edit_videos_link' data-toggle='modal' data-target='#Videos-modal'>
+                <div class='edit-videos-overlay'>
+                  <i class='icon-pencil'></i> Edit/Add Videos
+                </div>
+              </div>
+            <% end %>
+
+            <!-- Carousel items -->
+            <div class="carousel-inner">
               <% @user.valid_videos.each_with_index do |video, index| %>
                 
                 <% if index == 0 %>
                   <!-- make the first one as active. -->
-                  <li data-target="#user_side_bar_videos" data-slide-to="<%= index %>" class="active"></li>
+                  <div class="item active text-center">
+                    <%= raw video.embed_code %>
+                  </div>
+                
                 <% else %>
-                  <li data-target="#user_side_bar_videos" data-slide-to="<%= index %>"></li>
+                  <div class="item text-center">
+                    <%= raw video.embed_code %>
+                  </div>
                 <% end %>
+              
               <% end %>
-            </ol>
+            </div>
+            
+            <% if @user.valid_videos.size > 1 %>
+
+              <ol class="carousel-indicators">
+                <% @user.valid_videos.each_with_index do |video, index| %>
+                  
+                  <% if index == 0 %>
+                    <!-- make the first one as active. -->
+                    <li data-target="#user_side_bar_videos" data-slide-to="<%= index %>" class="active"></li>
+                  <% else %>
+                    <li data-target="#user_side_bar_videos" data-slide-to="<%= index %>"></li>
+                  <% end %>
+                <% end %>
+              </ol>
+
+            <% end %>
+          </div>
+
+        <% else %>
+          <% if current_user == @user %>
+            <div id='user-video-placeholder' data-toggle='modal' data-target='#Videos-modal'>
+              <div class='add-video-overlay'>
+                Add Demo Reel
+              </div>
+            </div>
+          <% else %>
+            <div id='user-video-placeholder'>
+              <div class='add-video-overlay'>
+                No Videos updated!
+              </div>
+            </div>
 
           <% end %>
-        </div>
+
+
         <% end %>
+
+
       </div>
 
       <% if current_user == @user and !@user.only_fan?  %>
@@ -457,7 +511,7 @@
       <div class='row right-extra-div' id='endorsements_div'>
       </div>
 
-      <% if @user.resume.present? and @user.resume.document.present? %>
+      <% if ( @user.resume.present? and @user.resume.document.present? ) or current_user == @user  %>
         <div class='row right-extra-div' id='resume_div'>
           <div class='span4 shrink-div head'>
             <span class="pull-left">
@@ -475,11 +529,23 @@
             </div>
           </div>
 
-          <div class='row text-center link'>
-            <a href='<%= @user.resume.document.url %>' class='badge badge-custom-green'>
-              DOWNLOAD
-            </a>
-          </div>
+          <% if current_user == @user %>
+
+            <div class='text-center'>
+              <a href="" data-toggle='modal' data-target='#Resume-modal'>Add/Update Resume</a>
+            </div>
+
+          <% end %> 
+
+          <% if @user.resume.present? and @user.resume.document.present? %>
+
+            <div class='row text-center link'>
+              <a href='<%= @user.resume.document.url %>' class='badge badge-custom-green'>
+                DOWNLOAD
+              </a>
+            </div>
+
+          <% end %>    
         </div>
       <% end %>
 
@@ -522,7 +588,6 @@
 </div><!--container fluid-->
 
 
-
 <%= render :partial => 'users/templates/blogs' %>
 <%= render :partial => 'users/templates/blog' %>
 <%= render :partial => 'projects/templates/similar_projects' %>
@@ -543,11 +608,14 @@
 <% if current_user == @user %>
   <%= render :partial => 'users/edit_headline_modal' %>
   <%= render :partial => 'users/edit_skills_modal' %>
+  <%= render :partial => 'users/edit_modals' %>
 <% end %>
 
 <%= render :partial => 'conversations/send_new_message_modal' %>
 
 <%= render :partial => 'users/media_modal' %>
+
+<%= render :partial => 'application/crop_image_modal' %>
 
 <%= render :partial => 'application/report_modal', :locals => { :entity => @user } %>
 
@@ -650,6 +718,16 @@ $(document).ready(function(){
 
   app.fn.init_show_post_button_handler()
 
+  app.fn.init_agent_name_autocomplete()
+
+  app.fn.init_user_docs_upload()
+  app.fn.init_user_photos_upload()
+
+  app.fn.initialize_radio_toggler()
+
+  Users.Edit.init_numerous()
+
+  app.fn.init_image_crop_handlers()
 
   // if this line is not there it will show similar projects as the same templte is used for projects also.
   $('#user_projects_div').find('.shrink-div').find('h3').html('Projects');
