@@ -7,7 +7,7 @@
   <title><%= @page_title? @page_title: "Filmzu" %></title>
   <meta name="viewport" content="width=1280", minimum-scale="1.0", maximum-scale="2.6", user-scalable="yes">
 	<meta name="apple-mobile-web-app-capable" content="YES">
-
+	<%= yield :head %>
   <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->

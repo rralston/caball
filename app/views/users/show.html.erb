@@ -1,5 +1,13 @@
 <%= javascript_include_tag "users/users_manifest" %>
 <%= stylesheet_link_tag "users/show" %>
+<% content_for :head do %>
+  <%= tag :meta, property: "fb:app_id", content: ENV["cinematrontest"] %>
+  <%= tag :meta, property: "og:site_name", content: "Filmzu" %>
+  <%= tag :meta, property: "og:type", content: "cinematrontest:movie" %>
+  <%= tag :meta, property: "og:title", content: @user.name %>
+  <%= tag :meta, property: "og:url", content: user_url(@user) %>
+  <%= tag :meta, property: "og:image", content: request.protocol + request.host_with_port + image_path(@user.profile) %>
+<% end %>
 
 <!--========= content wrapper======------>
 <div>
