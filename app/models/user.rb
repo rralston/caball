@@ -170,7 +170,19 @@ class User < ActiveRecord::Base
     end
     user
   end
+  
+  def facebook
+    @facebook ||= Koala::Facebook::API.new(oauth_token)
+    block_given? ? yield(@facebook) : @facebook
+  rescue Koala::Facebook::APIError => e
+    logger.info e.to_s
+    nil # or consider a custom null object
+  end
 
+  def friends_count
+    facebook { |fb| fb.get_connection("me", "friends").size }
+  end
+  
   def get_cover
     if (cover_photo.nil? || cover_photo.image.url == "/images/fallback/User_default.png") && !talents.empty?
       return "../assets/default_cover/#{talents.first.name}.jpg"
