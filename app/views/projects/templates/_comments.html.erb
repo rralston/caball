@@ -25,6 +25,13 @@
                     <img src="/assets/writep.png" alt="" title="Add a Photo">
                   </a>
                 </li>
+
+                <li>
+                  <a href="#url_form_tab" data-toggle="tab" title="Add a URL">
+                    <img src="/assets/writep.png" alt="" >
+                  </a>
+                </li>
+
               </ul>
             </div>
 
@@ -51,6 +58,13 @@
                   <%= v.text_field :url, :placeholder => 'Video URL' %>
                 <% end %>
               </div>
+
+              <div class='tab-pane' id='url_form_tab'>
+                <%= c.fields_for :url, Url.new do |u| %>
+                  <%= u.text_field :url, :placeholder => 'http://something.com' %>
+                <% end %>
+              </div>
+                
             </div>
 
             <div class='post_comment_btn'>

@@ -25,6 +25,12 @@ class CommentsController < ApplicationController
         @error = 'Video not found. Please try different url'
       end
     end
+
+    if not @comment.valid?
+      @error = @comment.errors.full_messages.join(', ')
+      @comment = nil
+    end
+    
     render 'comments/comment_create_response'
   end
 

@@ -53,5 +53,6 @@ app.views.blogs = Backbone.View.extend
       element.attr('disabled', 'disabled')
       $('#blog_video_attributes_url').attr('disabled', 'disabled')
       $('#blog_photo_attributes_image').attr('disabled', 'disabled')
+      $('#blog_url_attributes_url').attr('disabled', 'disabled')
       $('button.post_update').attr('disabled', 'disabled')
       
