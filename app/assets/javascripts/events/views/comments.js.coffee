@@ -18,8 +18,10 @@ app.views.comments = Backbone.View.extend
 
   check_keypress: (event)->
     # check if enter is pressed.
-    if event.which == app.constants.enter_key_code
-      this.add_comment(event)
+    # if enter is pressed when no test is entered, return 0
+    val = $(event.target).val()
+    if val == '' && event.which == app.constants.enter_key_code
+      return false
 
   check_postbutton: (event) ->
     # toggle post button based on the value in the input
