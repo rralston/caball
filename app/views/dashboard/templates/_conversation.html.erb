@@ -15,7 +15,7 @@
   </span>
 
   <div class='conv-sender pull-left'>
-    <div class="img-circle user-circle-image" style="background: url(<%%= originator.profile_thumb %>)">
+    <div class="img-circle user-circle-image" style="background: url(<%%= to_show_user.profile_thumb  %>)">
     </div>
     <%% if(!is_read){%>
       <div class="notno  medium img-circle text-center">
@@ -26,8 +26,8 @@
 
   <div class='conv-details pull-left'>
     <div class='user-name'>
-      <a href='/users/<%%= originator.url_param %>' target='_blank'>
-        <%%= originator.name %>
+      <a href='/users/<%%= to_show_user.url_param %>' target='_blank'>
+        <%%= to_show_user.name %>
       </a>
     </div>
     <div class='msg-preview'>

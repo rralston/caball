@@ -126,7 +126,7 @@
                         <li class='text-center'>
                           <img src="/assets/role_icons/<%= image_name %>.png" alt="<%= talent.name %>" width="45" height="45" title='<%= talent.sub_talent ? talent.sub_talent : talent.name %>' data-scrollto='#<%= talent.name.downcase %>_profile' class='action-div scroll_to'/>
 
-                          <% if current_user == @user %>
+                          <% if current_user == @user and ['Cast', 'Writer', 'Agent'].include?(talent.name) %>
 
                             <a href=""  style='display:block;' data-toggle='modal' data-target='#<%= talent.name %>-modal'>Edit</a>
                           <% end %>
