@@ -1,12 +1,6 @@
 <div id="content">
 			<div id="content-header">
 				<h1>Messages</h1>
-				<div class="btn-group">
-					<a class="btn btn-large tip-bottom" title="Manage Files"><i class="icon-file"></i></a>
-					<a class="btn btn-large tip-bottom" title="Manage Users"><i class="icon-user"></i></a>
-					<a class="btn btn-large tip-bottom" title="Manage Comments"><i class="icon-comment"></i><span class="label label-important">5</span></a>
-					<a class="btn btn-large tip-bottom" title="Manage Orders"><i class="icon-shopping-cart"></i></a>
-				</div>
 			</div>
 			<div id="breadcrumb">
 				<%= link_to admin_admin_index_url, {:title => "Go to Home", :class => "tip-bottom"} do %>
@@ -48,7 +42,7 @@
 										<% @notification.each do |notification| %>
 										<tr>
 											<td><%= link_to(notification.conversation_id, conversation_path(notification.conversation_id), :class => "btn btn-mini") %></td>
-											<td><%= link_to User.find(Receipt.find(notification.id).receiver_id).name, user_path(User.find(Receipt.find(notification.id).receiver_id).id) %></td>
+											<td><%= link_to User.find(Receipt.find(notification.conversation_id).receiver_id).name, user_path(User.find(Receipt.find(notification.id).receiver_id).id) %></td>
 											<td><%= link_to User.find(notification.sender_id).name, user_path(User.find(notification.sender_id).id) %></td>
 											<td><%= notification.subject %></td>
 											<td><%= notification.body %></td>
