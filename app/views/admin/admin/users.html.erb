@@ -50,7 +50,7 @@
 										<tr>
 											<td><%= link_to user.id, user_path(user.id), :class => "btn btn-mini" %></td>
 											<td><%= form_for(user, :url => admin_admin_update_user_path, :remote => true) do |f| %>
-												<%= f.text_field :name, :class => 'text_field required name', , :placeholder => 'Do not delete any names'%></td>
+												<%= f.text_field :name, :class => 'text_field required name', :placeholder => 'Do not delete any names'%></td>
 											<td>
 												<%= f.text_field :email, :class => 'text_field required email', :placeholder => 'Do not delete any emails' %></td>
 											
