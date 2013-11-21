@@ -19,6 +19,10 @@ $(document).ready ->
 
   app.fn.initialize_send_generic_message()
 
+  $('body').on 'click', '.public_view_link a', (event)->
+    window.open("/people/" + app.current_user.id + "?public_view=true",'_blank', 'toolbar=0,location=0,menubar=0')
+    false
+
   $('body').on 'click', '.btn-follow', (event) ->
     btn = $(event.target)
     friendId = parseInt(btn.attr('data-friend-id'))
@@ -129,3 +133,55 @@ $(document).ready ->
     if target.size() > 0
       $("html, body").animate({ scrollTop: target.offset().top }, "slow")
     return false
+
+  app.fn.init_user_docs_upload = ()->
+    # file upload handler for form.
+    $('.user_edit_form_with_docs').fileupload
+      url: '/users/files_upload'
+      type: 'POST'
+      add: (e, data)->
+        # e.target gives the form.
+        types = /(\.|\/)(doc?x|pdf)$/i
+        file = data.files[0]
+
+        # file type verification.
+        if types.test(file.type) || types.test(file.name)
+          data.progress_div = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.upload_progress')
+          data.progress_div.show()
+
+          data.preview_container = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.upload_doc_preview')
+          data.destroy_checkbox = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.destroy_checkbox')
+          data.preview_parent = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.upload-doc-parent') 
+
+          data.destroy_checkbox.attr('checked', false)
+          
+          data.preview_container.hide()
+          data.submit()
+          
+          # if the user just uploaded the script document, then show synopsis div
+          if data.fileInput.hasClass('script_document')
+            $('.script_synopsis').show()
+
+        else
+          alert('The file you selected is not a doc, docx or pdf file')
+      progress: (e, data)->
+        progress = parseInt(data.loaded / data.total * 100, 10)
+        data.progress_div.find('.bar').css('width', progress + '%')
+      done: (e, data)->
+        
+        data.preview_container.attr('href', data.result.link)
+        data.preview_container.html(data.result.name)
+        data.preview_container.show()
+        data.preview_parent.show()
+        # find the desctroy checkbox and make it un checked.
+        data.destroy_checkbox.attr('checked', false)
+        data.progress_div.hide()
+        app.fn.adjust_slider_height()
+
+  app.fn.init_user_photos_upload = (element)->
+
+    if typeof element == 'undefined'
+      element = $('.user_edit_form_with_photos')
+
+    # check users/edit.js.coffee for this method
+    app.fn.init_image_file_uploader( element )

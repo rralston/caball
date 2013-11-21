@@ -29,6 +29,14 @@
           </div>
         <%% } %>
 
+        <%% if (url != null && url.url != null) { %>
+          <div class='comment-url'>
+            <a href='<%%= url.url %>' target='_blank'>
+              <%%= url.url %>
+            </a>
+          </div>
+        <%% } %>
+
         
         <%% if (photo != null) { %>
           <div class='comment-img'>

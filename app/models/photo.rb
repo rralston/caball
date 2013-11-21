@@ -42,6 +42,6 @@ class Photo < ActiveRecord::Base
   end
 
   def reprocess_profile
-    self.image.recreate_versions!
+    self.image.recreate_versions! rescue nil
   end
 end

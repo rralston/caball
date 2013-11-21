@@ -25,6 +25,12 @@ class CommentsController < ApplicationController
         @error = 'Video not found. Please try different url'
       end
     end
+
+    if not @comment.valid?
+      @error = @comment.errors.full_messages.join(', ')
+      @comment = nil
+    end
+    
     render 'comments/comment_create_response'
   end
 
@@ -34,6 +40,9 @@ class CommentsController < ApplicationController
 
   def update
     comment = Comment.find(params[:id])
+
+    DeleteActivities.new( comment ).del_1_day_ago_updates
+
     if comment.update_attributes(params[:comment])
       render :json => comment.to_json()
     else

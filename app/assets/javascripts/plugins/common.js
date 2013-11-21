@@ -629,7 +629,16 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height, o
     app.main_prev_width = 160;
     app.main_prev_height = 90;
 
-  }else if( aspect_ratio == '4:3' ){
+  }else if( aspect_ratio == '13:6' ){
+
+    prev_div_width = 130;
+    prev_div_heigth = 60;
+
+    app.main_prev_width = 130;
+    app.main_prev_height = 60;
+
+  }
+  else if( aspect_ratio == '4:3' ){
     
     prev_div_width = 120;
     prev_div_heigth = 90;
@@ -672,6 +681,9 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height, o
     w: null,
     h: null
   }
+
+  console.log(original_width)
+  console.log(original_height)
 
   element.Jcrop({
     trueSize: [original_width, original_height],

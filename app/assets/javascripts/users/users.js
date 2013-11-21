@@ -88,7 +88,7 @@ var Users = {
             var stepHeight = $('#steps .step:eq(' + (current - 1) + ')').height();
             $('#steps').height(stepHeight);
 
-            app.fn.init_image_file_uploader(added_form_element.find('input[type=file]'))
+            app.fn.init_user_photos_upload(added_form_element.find('input[type=file]'))
           },
   
           'remove' : function(form){

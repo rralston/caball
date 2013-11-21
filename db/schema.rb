@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131029052712) do
+ActiveRecord::Schema.define(:version => 20131119095853) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -307,6 +307,14 @@ ActiveRecord::Schema.define(:version => 20131029052712) do
     t.string   "filename"
   end
 
+  create_table "urls", :force => true do |t|
+    t.string   "url"
+    t.integer  "urlable_id"
+    t.string   "urlable_type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -328,7 +336,7 @@ ActiveRecord::Schema.define(:version => 20131029052712) do
     t.text     "headline"
     t.boolean  "featured"
     t.string   "expertise"
-    t.datetime "notification_check_time", :default => '2013-07-31 14:32:25'
+    t.datetime "notification_check_time", :default => '2013-07-31 14:32:36'
     t.string   "experience"
     t.boolean  "agent_present",           :default => false
     t.string   "agent_name"
