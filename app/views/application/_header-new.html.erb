@@ -207,6 +207,14 @@ $(document).ready(function(){
   });
 
 
+
+  // handler to navigate to messages when clicking in notification.
+  $('body').on('click', '.message_notification', function(event){
+    $('a[href=#messages]').trigger('click');
+    $('.noticontentwrap').slideUp(500);
+  });
+
+
   $('.timeago').timeago()
 
   // for search
