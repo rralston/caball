@@ -91,7 +91,7 @@ Caball::Application.configure do
    }
   
   # Change when Push to the Website or will Error out
-  config.action_mailer.default_url_options = { :host => 'filmzu.com' }
+  config.action_mailer.default_url_options = { :host => 'development.filmzu.com' }
   # config.action_mailer.default_url_options = { :host => 'filmzu-dev-env-cpbt693qtg.elasticbeanstalk.com' }
   # config.action_mailer.default_url_options = { :host => 'filmzu-4mapu5m2zx.elasticbeanstalk.com' }
 end
