@@ -9,13 +9,6 @@
 </div>
 <% end %>
 
-<div class='step_progress'>
-  <div class="progress">
-    <div class="bar" style="width: 30%;"></div>
-  </div>
-  <div class='progress_summary'>Step 1 of 3</div>
-</div>
-
 <%= form_for current_user, :url => '/users/step_1', :validate => true, :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'user_edit_form'} do |f| %>
   <div class="span12">
     
@@ -321,18 +314,13 @@
     <div class='span12'>
       <div class='text-center form_footer'>
         <div class='links'>
-          <% if current_user.only_fan? %>
-            <%= f.submit "Next Step", :class=>'step_1_submit', :style => 'display:none;' %>
-          <% else %>
-            <%= f.submit "Next Step", :class=>'step_1_submit' %> <div class='or_hint'>or</div>
-          <% end %>
           <%= f.submit "Finish! Go to my Dashboard", :class=>'skip step_1_submit' %>
         </div>
         
         <% if current_user.only_fan? %>
-          <span id='step_1_submit_hint'>Fans need only one step! You are ready to explore Filmzu!</span>
+          <span id='step_1_submit_hint'></span>
         <% else %>
-          <span class='step_1_submit_hint'>You are almost done! Go to the next page to enter the fun stuff! Or you can check out your Dashboard and enter the rest of the stuff later</span>
+          <span class='step_1_submit_hint'></span>
         <% end %>
       </div>
     </div>
