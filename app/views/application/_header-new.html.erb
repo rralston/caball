@@ -75,7 +75,6 @@
         <a href="" data-toggle='modal' data-target='#signup_modal'>Create  an Account</a>  
       </div>
     <% end %>
-		<% if current_user %>
     <div class="container" style='width: 800px'>
       <div class="hnav navbar light pull-left">
         <div class="navbar-inner ">
@@ -94,13 +93,14 @@
           
         </div>
       </div>
-      <div class="hdrfrm pull-left">
+      <% if current_user %>
+			<div class="hdrfrm pull-left">
         <form action="">
           <input type="text" class='search_header' id='main_header_search' placeholder='Search for people, projects and events'/>
         </form>
       </div>
+			<% end %>
     </div>
-		<% end %>
   </header>
 
   <% if flash[:notice] %>
