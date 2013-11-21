@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :fb_token
   
+
   include Mailboxer::Models::Messageable
   acts_as_messageable
   #Returning the email address of the model if an email should be sent for this object (Message or Notification).

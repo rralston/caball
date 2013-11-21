@@ -33,7 +33,7 @@
 
     <!-- if the sender was later deleted, no need to show his notifications. -->
     <% if notification.message.sender.present? %>
-      <div class="notification">  
+      <div class="notification message_notification action-div">  
         <div class="usrimg img-circle" style='background: url(<%= notification.message.sender.profile_pic %>)'>
         <!--user prof images as cover bg-->
         </div>
