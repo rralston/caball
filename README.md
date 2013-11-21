@@ -1,9 +1,13 @@
-# Filmzu.com Matchmaking for Filmmakers
+# Filmzu.com 
 
-[![Filmzu Logo](logo.png)](http://filmzu.com/assets/logo.png)
+[![Filmzu Logo](http://filmzu.com/assets/logo.png)](http://filmzu.com)
 
+Matchmaking for Filmmakers. 
 
-Released into the wild on Thursday 7th, November 2013
+Filmzu gives you access to the best filmmakers,
+cast, crew, agents, and fans in an incredibly simple and stunning experience.
+
+Released on Thursday 7th, November 2013
 -------
 
 Registered Users Tally (Internal Numbers)
