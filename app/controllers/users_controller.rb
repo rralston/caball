@@ -160,7 +160,7 @@ class UsersController < ApplicationController
     current_user.reset_sub_talents
 
     if current_user.update_attributes(params[:user])
-      render 'users/step_2_form', :layout => false
+      render :text => 'true', :layout => false
     else
       render :json => {:success => false, :message => current_user.errors.full_messages.first}
     end

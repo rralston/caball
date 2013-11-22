@@ -805,6 +805,15 @@ class User < ActiveRecord::Base
         uniq
   end
 
+  def cast_profile_present?
+    (guild_present and guild.present?) or gender.present? or characteristics.present? or agent.present? 
+  end
+
+  def writer_profile_present?
+    talent = self.talents.where(:name => 'Writer').first
+    talent.script_document.present? or talent.synopsis.present?
+  end
+
 end
 
 class Array

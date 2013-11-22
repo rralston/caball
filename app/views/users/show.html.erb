@@ -371,8 +371,14 @@
             <span class="pull-left">
               <h3>Cast Profile</h3>
             </span>
+
+            <% if current_user == @user %>
+              <span class="btn-show-all btn-edit-details pull-right action-div" data-toggle='modal' data-target='#Cast-modal' title='Add/Edit details'></span> 
+            <% else %>
+              <span class="btn-show-all pull-right"></span>   
+            <% end %>
             
-            <span class="btn-show-all pull-right"></span> 
+            
             
             <div class='clearfix'></div>
           </div>
@@ -383,57 +389,65 @@
             </div>
           </div>
 
-          <div class='content light'>
+          <% if @user.cast_profile_present? %>
 
-            <% if @user.guild_present and @user.guild.present? %>
-              Guild: <%=  @user.guild %><br/>
-            <% end %>
+            <div class='content light'>
 
-            <% if @user.gender.present? %>
-              Sex: <%=  @user.gender.camelize %><br/>
-            <% end %>
-
-            <% if @user.characteristics.present? %>
-              
-              <% if @user.characteristics.height.present? %>
-                Height: <%=  @user.characteristics.height.camelize %><br/>
+              <% if @user.guild_present and @user.guild.present? %>
+                Guild: <%=  @user.guild %><br/>
               <% end %>
 
-              <% if @user.characteristics.ethnicity.present? %>
-                Ethnicity: <%=  @user.characteristics.ethnicity.camelize %><br/>
+              <% if @user.gender.present? %>
+                Sex: <%=  @user.gender.camelize %><br/>
               <% end %>
 
-              <% if @user.characteristics.bodytype.present? %>
-                Build: <%=  @user.characteristics.bodytype %><br/>
+              <% if @user.characteristics.present? %>
+                
+                <% if @user.characteristics.height.present? %>
+                  Height: <%=  @user.characteristics.height.camelize %><br/>
+                <% end %>
+
+                <% if @user.characteristics.ethnicity.present? %>
+                  Ethnicity: <%=  @user.characteristics.ethnicity.camelize %><br/>
+                <% end %>
+
+                <% if @user.characteristics.bodytype.present? %>
+                  Build: <%=  @user.characteristics.bodytype %><br/>
+                <% end %>
+
+                <% if @user.characteristics.hair_color.present? %>
+                  Hair Color: <%=  @user.characteristics.hair_color.camelize %><br/>
+                <% end %>
+
+                <% if @user.characteristics.age.present? %>
+                  Age: <%=  @user.characteristics.age.camelize %><br/>
+                <% end %>
+
               <% end %>
 
-              <% if @user.characteristics.hair_color.present? %>
-                Hair Color: <%=  @user.characteristics.hair_color.camelize %><br/>
-              <% end %>
-
-              <% if @user.characteristics.age.present? %>
-                Age: <%=  @user.characteristics.age.camelize %><br/>
-              <% end %>
-
-            <% end %>
-
-            <% if @user.agent.present? %>
-              Representation:
-              <div class='representation'>
-                <span class="pull-left agent-img">
-                  <div class='agent_photo img-circle' style='background: url("<%= @user.agent.profile_thumb %>") no-repeat;'>
-                  </div>
-                </span>
-                <span class="agent pull-left">
-                  <a href='<%= user_path(@user.agent) %>'><%= @user.agent.name %></a>
-                  <br>
-                  <span class="agent-company medium">
-                    <%= @user.agent.managing_company %>
+              <% if @user.agent.present? %>
+                Representation:
+                <div class='representation'>
+                  <span class="pull-left agent-img">
+                    <div class='agent_photo img-circle' style='background: url("<%= @user.agent.profile_thumb %>") no-repeat;'>
+                    </div>
                   </span>
-                </span>
-              </div>
-            <% end %>
-          </div>
+                  <span class="agent pull-left">
+                    <a href='<%= user_path(@user.agent) %>'><%= @user.agent.name %></a>
+                    <br>
+                    <span class="agent-company medium">
+                      <%= @user.agent.managing_company %>
+                    </span>
+                  </span>
+                </div>
+              <% end %>
+            </div>
+
+          <% else %>
+            <div class='content light text-center'>
+              No data provided
+            </div>
+          <% end %>
 
         </div>
       <% end %>
@@ -445,7 +459,11 @@
               <h3>Agent Profile</h3>
             </span>
             
-            <span class="btn-show-all pull-right"></span> 
+            <% if current_user == @user %>
+              <span class="btn-show-all btn-edit-details pull-right action-div" data-toggle='modal' data-target='#Agent-modal' title='Add/Edit details'></span> 
+            <% else %>
+              <span class="btn-show-all pull-right"></span>   
+            <% end %>
             
             <div class='clearfix'></div>
           </div>
@@ -456,14 +474,22 @@
             </div>
           </div>
 
-          <div class='content light'>
-            <% if @user.agent.present? %>
+          <% if @user.agent.present? %>
+          
+            <div class='content light'>
               Managing Comany:
               <div class='company'>
                   <%= @user.managing_company %>
               </div>
-            <% end %>
-          </div>
+            </div>
+          
+          <% else %>
+
+            <div class='content light text-center'>
+              No data provided
+            </div>
+
+          <% end %>
 
         </div>
       <% end %>
@@ -471,25 +497,31 @@
       <% if @user.talent_names.include?('Writer') %>
         <% talent = @user.talents.where(:name => 'Writer').first %>
 
-        <% if talent.script_document.present? || talent.synopsis.present? %>
-          <div class='row right-extra-div' id='writer_profile'>
-            <div class='span4 shrink-div head'>
-              <span class="pull-left">
-                <h3>Writer Profile</h3>
-              </span>
-              
-              <span class="btn-show-all pull-right"></span> 
-              
-              <div class='clearfix'></div>
-            </div>
+        <div class='row right-extra-div' id='writer_profile'>
+          <div class='span4 shrink-div head'>
+            <span class="pull-left">
+              <h3>Writer Profile</h3>
+            </span>
+            
+            <% if current_user == @user %>
+              <span class="btn-show-all btn-edit-details pull-right action-div" data-toggle='modal' data-target='#Writer-modal' title='Add/Edit details'></span> 
+            <% else %>
+              <span class="btn-show-all pull-right"></span>   
+            <% end %>
+            
+            
+            <div class='clearfix'></div>
+          </div>
 
-            <div class="span4">
-              <div class="row clearfix">
-                <div class="grey-line-divider"></div>
-              </div>
+          <div class="span4">
+            <div class="row clearfix">
+              <div class="grey-line-divider"></div>
             </div>
+          </div>
 
-            <div class="span4 shrink-div desc">
+          <div class="span4 shrink-div desc">
+
+            <% if @user.writer_profile_present? %>
 
               <div class='content light'>
                 
@@ -507,10 +539,16 @@
                   </div>
                 <% end %>
               </div>
-            </div>
+
+            <% else %>
+              <div class='content light text-center'>
+                No data provided
+              </div>
+            <% end %>
 
           </div>
-        <% end %>    
+
+        </div>
       <% end %>
 
       <div class='row right-extra-div' id='user_projects_div'>
@@ -529,7 +567,11 @@
               <h3>Resume</h3>
             </span>
             
-            <span class="btn-show-all pull-right"></span> 
+            <% if current_user == @user %>
+              <span class="btn-show-all btn-edit-details pull-right action-div" data-toggle='modal' data-target='#Resume-modal' title='Add/Edit resume'></span> 
+            <% else %>
+              <span class="btn-show-all pull-right"></span>   
+            <% end %>
             
             <div class='clearfix'></div>
           </div>
@@ -540,13 +582,6 @@
             </div>
           </div>
 
-          <% if current_user == @user %>
-
-            <div class='text-center'>
-              <a href="" data-toggle='modal' data-target='#Resume-modal'>Add/Update Resume</a>
-            </div>
-
-          <% end %> 
 
           <% if @user.resume.present? and @user.resume.document.present? %>
 
@@ -556,7 +591,13 @@
               </a>
             </div>
 
-          <% end %>    
+          <% else %>
+            <div class='content light text-center'>
+              Resume not uploaded
+            </div>
+          <% end %>
+
+
         </div>
       <% end %>
 
