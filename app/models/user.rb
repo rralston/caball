@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :fb_token
   
+
   include Mailboxer::Models::Messageable
   acts_as_messageable
   #Returning the email address of the model if an email should be sent for this object (Message or Notification).
@@ -802,6 +803,15 @@ class User < ActiveRecord::Base
     Project.joins( :roles => { :applications => :user } ).
       where( "role_applications.approved = true AND role_applications.manager = true AND role_applications.user_id = ? ", self.id ).
         uniq
+  end
+
+  def cast_profile_present?
+    (guild_present and guild.present?) or gender.present? or characteristics.present? or agent.present? 
+  end
+
+  def writer_profile_present?
+    talent = self.talents.where(:name => 'Writer').first
+    talent.script_document.present? or talent.synopsis.present?
   end
 
 end

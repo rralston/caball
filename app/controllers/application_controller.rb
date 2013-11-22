@@ -147,4 +147,15 @@ class ApplicationController < ActionController::Base
   def clear_temp_photo_objects
     Photo.where(:imageable_type => nil).destroy_all
   end
+
+
+  def current_user
+    user = super
+    if params[:public_view].present? and params[:public_view] == "true"
+      nil
+    else
+      user
+    end
+  end
+
 end

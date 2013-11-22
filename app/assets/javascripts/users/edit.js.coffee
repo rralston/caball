@@ -88,50 +88,6 @@ $(document).ready ()->
         app.fn.adjust_slider_height()
         data.progress_div.hide()
 
-  app.fn.init_step_2_fileupload = () ->
-    # file upload handler for step 2 form.
-    $('#user_edit_form_step_2').fileupload
-      url: '/users/files_upload'
-      type: 'POST'
-      add: (e, data)->
-        # e.target gives the form.
-        types = /(\.|\/)(doc?x|pdf)$/i
-        file = data.files[0]
-
-        # file type verification.
-        if types.test(file.type) || types.test(file.name)
-          data.progress_div = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.upload_progress')
-          data.progress_div.show()
-
-          data.preview_container = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.upload_doc_preview')
-          data.destroy_checkbox = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.destroy_checkbox')
-          data.preview_parent = $('#' + data.fileInput.attr('id')).closest('.control-group').find('.upload-doc-parent') 
-
-          data.destroy_checkbox.attr('checked', false)
-          
-          data.preview_container.hide()
-          data.submit()
-          
-          # if the user just uploaded the script document, then show synopsis div
-          if data.fileInput.hasClass('script_document')
-            $('.script_synopsis').show()
-
-        else
-          alert('The file you selected is not a doc, docx or pdf file')
-      progress: (e, data)->
-        progress = parseInt(data.loaded / data.total * 100, 10)
-        data.progress_div.find('.bar').css('width', progress + '%')
-      done: (e, data)->
-        
-        data.preview_container.attr('href', data.result.link)
-        data.preview_container.html(data.result.name)
-        data.preview_container.show()
-        data.preview_parent.show()
-        # find the desctroy checkbox and make it un checked.
-        data.destroy_checkbox.attr('checked', false)
-        data.progress_div.hide()
-        app.fn.adjust_slider_height()
-
   # this will toggle textboxes based on radio choice,
   # example: do you have an agent.? if yes, show text box.
   app.fn.initialize_radio_toggler()
@@ -200,17 +156,7 @@ $(document).ready ()->
         success: (data)->
           # if object, that has some error messages
           if typeof data != 'object'
-            $("html, body").animate({ scrollTop: 0 }, "slow");
-            if btn.hasClass('skip')
-              window.location = "/users/profile"
-            else
-              $('#step_2').html(data)
-              app.allow_forward_sliding_till = 2
-              $('a.step_2_nav').trigger('click')
-              app.fn.description_tag_list_init()
-              app.fn.init_step_2_fileupload()
-              app.fn.init_agent_name_autocomplete()
-              app.fn.description_tag_list_init()
+            window.location = "/users/profile"
           else
             alert(data.message)
             if data.message.match(/Profile image/)
@@ -240,46 +186,6 @@ $(document).ready ()->
 
     return false
 
-  $('body').on 'click', '.step_2_submit', (event)->
-    btn = $(event.target)
-    $.ajax
-      type: 'POST'
-      url: '/users/step_2'
-      data: $('#user_edit_form_step_2').serialize()
-      success: (data)->
-        # if object, that has some error messages
-        if typeof data != 'object'
-          $("html, body").animate({ scrollTop: 0 }, "slow");
-          if btn.hasClass('skip')
-            window.location = "/users/profile"
-          else
-            $('#step_3').html(data)
-            app.allow_forward_sliding_till = 3
-            $('a.step_3_nav').trigger('click')
-            # initialize numerous js
-            Users.Edit.init_numerous()
-            # initialize step_3 images file uploader.
-            app.fn.init_image_file_uploader($('#user_edit_form_step_3'))
-            app.fn.adjust_slider_height()
-        else
-          alert(data.message)
-        
-
-    return false
-
-  # # step 3 submit handler
-  # $('body').on 'submit', '#user_edit_form_step_3', (event)->
-  #   $.ajax
-  #     type: 'POST'
-  #     url: '/users/step_3'
-  #     data: $('#user_edit_form_step_3').serialize()
-  #     success: (data)->
-  #       console.log data
-  #       # $('#step_3').html(data)
-  #       # $('a.step_3_nav').trigger('click')
-  #       # initialize step_3 images file uploader.
-  #       # app.fn.init_image_file_uploader('#user_edit_form_step_3')
-  #   return false
 
   app.fn.slide_form = (current)->
     $('#steps').stop().animate { marginLeft: '-' + widths[current-1] + 'px'}, 500, () ->

@@ -242,6 +242,9 @@ header
   color: white
   text-shadow: 1px 1px 10px black
   background: url(/assets/grey-tile-bg.png) repeat-x
+  position: absolute
+  bottom: 0px
+  right: 0px
 
 .action-div
   cursor: pointer
@@ -873,6 +876,7 @@ ul.tagit span.ui-helper-hidden-accessible
         .comment-content
           margin-top: 15px
           font-size: 18px
+          word-wrap: break-word
         .comment-edit-textarea
           margin-top: 10px
           display: none
@@ -895,6 +899,10 @@ ul.tagit span.ui-helper-hidden-accessible
           iframe
             height: 100%
             width: 100%
+        .comment-url
+          margin-top: 10px
+          font-size: 15px
+          word-wrap: break-word
       .comment-actions
         padding: 20px
         border-top: 2px solid $divider-border
@@ -920,20 +928,22 @@ ul.tagit span.ui-helper-hidden-accessible
       .comment_edit
         display: block
 
+  #url_form_tab
+    margin-top: 20px
 
   textarea#comment_content, textarea#blog_content
     margin-left: 30px
     margin-top: 0px
     height: 95px !important
-    width: 445px
-    padding-right: 75px !important
+    width: 400px
+    padding-right: 120px !important
     -moz-box-shadow: 0px 0px 5px 1px #c8d2de inset
     -webkit-box-shadow: 0px 0px 5px 1px #c8d2de inset
     box-shadow: 0px 0px 5px 1px #c8d2de inset
     border: 1px solid #D0D7Df
     padding: 10px
     resize: none
-  #image_form_tab, #video_form_tab
+  #image_form_tab, #video_form_tab, #url_form_tab
     margin-left: 30px
 
 
@@ -999,6 +1009,10 @@ ul.tagit span.ui-helper-hidden-accessible
 
 .fans-tiles
   width: 321px
+  position: relative
+  background: url('/assets/fans-placeholder.png') no-repeat
+  background-size: 100% 100%
+  height: 285px
   .fan
     width: 107px
     div

@@ -28,12 +28,12 @@ class Ability
         user.persisted?
       end
     
-      can [:update, :destroy, :files_upload, :edit], Project do |project|
+      can [ :destroy ], Project do |project|
         project.user == user
       end
 
       can [:update, :files_upload, :edit], Project do |project|
-        project.managers.include?( user )
+        project.user == user or project.managers.include?( user )
       end
 
       can [:step_1, :step_2, :step_3, :add_filled_role], Project do |project|

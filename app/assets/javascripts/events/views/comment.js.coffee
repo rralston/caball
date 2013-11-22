@@ -12,8 +12,10 @@ app.views.comment = Backbone.View.extend
 
   check_keypress: (event)->
     # check if enter is pressed.
-    if event.which == app.constants.enter_key_code
-      this.update_content()
+    # if enter is pressed when no test is entered, return 0
+    val = $(event.target).val()
+    if val == '' && event.which == app.constants.enter_key_code
+      return false
 
   render: ()->
     this.$el.html( this.template(this.model.toJSON()) )

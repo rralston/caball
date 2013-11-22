@@ -40,8 +40,10 @@ app.views.blogs = Backbone.View.extend
 
   check_keypress: (event)->
     # check if enter is pressed.
-    if event.which == app.constants.enter_key_code
-      this.add_blog(event)
+    # if enter is pressed when no test is entered, return 0
+    val = $(event.target).val()
+    if val == '' && event.which == app.constants.enter_key_code
+      return false
 
   add_blog: (event)->
     _this = this
@@ -53,5 +55,6 @@ app.views.blogs = Backbone.View.extend
       element.attr('disabled', 'disabled')
       $('#blog_video_attributes_url').attr('disabled', 'disabled')
       $('#blog_photo_attributes_image').attr('disabled', 'disabled')
+      $('#blog_url_attributes_url').attr('disabled', 'disabled')
       $('button.post_update').attr('disabled', 'disabled')
       

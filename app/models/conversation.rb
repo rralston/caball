@@ -166,7 +166,14 @@ class Conversation < ActiveRecord::Base
     if options[:check_user].present?
       json['is_read'] = self.is_read?(options[:check_user])
       json['unread_count'] = self.unread_count(options[:check_user])
-      json['other_user_names'] = self.other_participants(options[:check_user]).map(&:name)
+      
+      other_users = self.other_participants(options[:check_user]) 
+      
+      json['other_user_names'] = other_users.map(&:name)
+
+      # to show user is the method used for showing the name and image of the user in dashboard.
+      # if the other user is later deleted, the currect user will be shown
+      json['to_show_user'] = other_users.first || options[:check_user]
     end
     json
   end

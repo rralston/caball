@@ -24,6 +24,11 @@ class BlogsController < ApplicationController
       end
     end
 
+    if not @blog.valid?
+      @error = @blog.errors.full_messages.join(', ')
+      @blog = nil
+    end
+
     render 'blogs/blog_create_response'
   end
 

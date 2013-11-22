@@ -207,6 +207,21 @@ $(document).ready(function(){
   });
 
 
+
+  // handler to navigate to messages when clicking in notification.
+  $('body').on('click', '.message_notification', function(event){
+
+    // if on dashboard, don't reload
+    if( $('a[href=#messages]').size() > 0 ) {
+      $('a[href=#messages]').trigger('click');
+    }else{
+      window.location.href = '/dashboard#messages';
+    }
+    
+    $('.noticontentwrap').slideUp(500);
+  });
+
+
   $('.timeago').timeago()
 
   // for search
