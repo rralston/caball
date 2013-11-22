@@ -1,39 +1,29 @@
+# Filmzu.com 
 
-<h2>Welcome to Filmzu</h2>
+[![Filmzu Logo](http://filmzu.com/assets/logo.png)](http://filmzu.com)
 
-<pre>
-    <div class="container">
-        <div class="block two first">
-            <h2>Released into the wild on Thursday 7th, November 2013</h2>
-            <div class="wrap">
-            	Registered Users Tally (Internal Numbers)
-						<ul>
-							<li>November: </li>
-							<li>December: </li>
-							<li>January: </li>
-							<li>February: </li>
-							<li>March: </li>
-							<li>April: </li>
-						</ul>
-						<br>
-						<p>Website is live at <a href="http://www.filmzu.com">Filmzu.com</a>
-							<br>
-						User development suggestions are available at: <a href="https://filmzu.uservoice.com">Filmzu Suggestion Box</a>
-            </div>
-        </div>
-    </div>
-</pre>
-```html
-Code
-```
+Matchmaking for Filmmakers. 
 
+Filmzu gives you access to the best filmmakers,
+cast, crew, agents, and fans in an incredibly simple and stunning experience.
 
+Released on Thursday 7th, November 2013
+-------
 
+Registered Users Tally (Internal Numbers)
+* November: 
+* December:
+* January:
+* February:
+* March:
+* April:
 
+[Website is live at Filmzu.com](http://www.filmzu.com")
 
-December:
-January: 
-February:
-March:
-April:
+User development suggestions are available at: <a href="https://filmzu.uservoice.com">Filmzu Suggestion Box</a>
 
+## Filmzu is tested on the following platforms
+
+| Chrome | Firefox | Internet Explorer | Opera | Safari |
+|:---:|:---:|:---:|:---:|:---:|
+| <a href="http://he4rtofcourage.deviantart.com/art/Chrome-poni-305866510"><img width=115 src="http://fc05.deviantart.net/fs70/i/2012/154/9/b/chrome_poni_by_he4rtofcourage-d523s3y.png" alt="Chrome browser pony logo"></a> | <a href="http://noreasontohope.deviantart.com/art/My-Little-Browser-Firefox-260640031"><img width=115 src="http://th08.deviantart.net/fs70/PRE/i/2013/142/8/9/my_little_browser__firefox_by_noreasontohope-d4b6f4v.png" alt="Firefox browser pony logo"></a> | <a href="http://mcsadat.deviantart.com/art/ie-just-don-t-know-what-went-wrong-306422360"><img width=115 src="http://fc03.deviantart.net/fs71/i/2012/156/0/b/ie_just_don__t_know_what_went_wrong_by_mcsadat-d52fp08.png" alt="Internet Explorer browser pony logo"></a> | <a href="http://parallaxmlp.deviantart.com/art/My-Little-Opera-306933368"><img width=115 src="http://th05.deviantart.net/fs71/PRE/i/2012/159/c/9/my_little_opera_by_parallaxmlp-d52qnaw.png" alt="Opera browser pony logo"></a> | <a href="http://parallaxmlp.deviantart.com/art/My-Little-Safari-307396501"><img width=115 src="http://th08.deviantart.net/fs70/PRE/i/2012/246/b/e/my_little_safari_by_parallaxmlp-d530knp.png" alt="Safari browser pony logo"></a> |
