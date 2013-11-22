@@ -55,12 +55,16 @@
                   <% end %>
                 </div>
 
+              </div>
+
+              <div class='tab-content'>
+
                 <div class='tab-pane' id='url_form_tab'>
                   <%= c.fields_for :url, Url.new do |u| %>
+                    <label for='#blog_url_attributes_url'>Add a URL to the POST:</label>
                     <%= u.text_field :url, :placeholder => 'http://something.com' %>
                   <% end %>
                 </div>
-
               </div>
 
               <div class='post_comment_btn'>
