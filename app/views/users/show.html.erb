@@ -294,8 +294,7 @@
             <span class="pull-left">
               <h3>Profile Completeness</h3>
             </span>
-            <span class="btn-show-all pull-right"></span>
-
+           <a href='/users/<%= @user.id %>/edit'><span class="btn-show-all btn-edit-details pull-right" data-toggle="tooltip" title="Update your profile"></span></a>
           </div>
 
           <div class="span4">
@@ -312,9 +311,9 @@
                   <%= @user.completeness %>%
                 </div>
               </div>
-							<div class='edit text-center'>
+							<!-- <div class='edit text-center'>
                 <a href='/users/<%= @user.id %>/edit'><i class='icon-pencil'></i> Edit Profile</a>
-              </div>
+              </div> -->
             </div>
           </div>
           
@@ -330,8 +329,11 @@
             <h3>About</h3>
             
           </span>
+					<% if current_user == @user %>
+					<span class="btn-show-all btn-edit-details pull-right action-div edit_about" data-toggle="tooltip" title="Edit"></span>
+					<% else %>
           <span class="btn-show-all pull-right"></span>
-
+					<% end %>
         </div>
 
         <div class="span4">
@@ -350,9 +352,9 @@
 
           <% end %>
           <div class="user_about_text">
-            <% if current_user == @user %>
+            <!-- <% if current_user == @user %>
               <i class='icon-pencil action-div edit_about' data-toggle="tooltip" title="Click here to update your about"></i>
-            <% end %>
+            <% end %> --> 
             <div class="about_content">
               <% if @user.about.present? and @user.about.length > 200 %>
                 <%= truncate(@user.about, :length => 200, :separator => ' ') %> <a class='read_more_btn' data-content='<%= @user.about %>' data-header='About - <%= @user.name %>' >Read more</a>
