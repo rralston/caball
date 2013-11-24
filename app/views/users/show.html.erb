@@ -788,8 +788,10 @@ $(document).ready(function(){
 
   app.fn.init_image_crop_handlers()
 
-  // if this line is not there it will show similar projects as the same templte is used for projects also.
+  // if this line is not there it will show similar projects as the same template is used for projects also.
   $('#user_projects_div').find('.shrink-div').find('h3').html('Projects');
+  $('#user_projects_div').find('.shrink-div').find('.btn-show-all').wrap("<a href='../dashboard#projects'></a>");
+  $('#user_events_div').find('.shrink-div').find('.btn-show-all').wrap("<a href='../dashboard#events'></a>");
 
 });
 </script>
