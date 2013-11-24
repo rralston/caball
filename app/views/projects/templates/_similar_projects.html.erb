@@ -4,7 +4,7 @@
     <span class="pull-left">
       <h3>Similar Projects</h3>
     </span>
-    <% if current_user && current_user == @user %>
+    <% if current_user == @user %>
 		<%= link_to "../dashboard#projects" do %><span class="btn-show-all pull-right"></span><% end %>
 		<% else %>
 		<span class="btn-show-all pull-right"></span>
