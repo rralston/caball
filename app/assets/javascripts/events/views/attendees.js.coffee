@@ -1,6 +1,7 @@
 app.views.attendees = Backbone.View.extend
-  initialize: ()->
+  initialize: (options)->
     this.template = _.template($('#attendees_template').html())
+    this.total_attendees = options.total_attendees
     this.collection.on('add', this.render, this)
     this.collection.on('remove', this.render, this)
 

@@ -37,7 +37,7 @@ class Event < ActiveRecord::Base
           :dependent => :destroy, :conditions => { :is_end_date => true }
 
   has_many :attends, :as => :attendable, :dependent => :destroy
-  # has_many :attendees, :through => :attends, :source => :user
+  has_many :attendees, :through => :attends, :source => :user
 
   attr_accessible :title, :description, :main_photo_attributes, :other_photos_attributes, :videos_attributes, :website,
                   :location, :other_important_dates_attributes, :user_id, :main_photo,
@@ -108,16 +108,16 @@ class Event < ActiveRecord::Base
     group('events.id, important_dates.date_time').
     order("important_dates.date_time ASC")
 
-  def attendees
-    attends.order('created_at').map(&:user)
-  end
+  # def attendees
+  #   attends.order('created_at').map(&:user)
+  # end
 
   def self.upcoming_events
     Event.joins(:start).where("important_dates.date_time > ?", Time.now)
   end
 
   def attendees_emails
-    attendees.map(&:email)
+    attendees.pluck("users.email")
   end
 
   def attending?(user)
@@ -284,6 +284,19 @@ class Event < ActiveRecord::Base
       json[:category]= 'Events'
       json[:url] = "/events/#{id}"
     end
+
+    if options[:comments_count].present? and options[:comments_count] == true
+      json[:comments_count] = comments.count
+    end
+
+    if options[:likes_count].present? and options[:likes_count] == true
+      json[:likes_count] = comments.count
+    end
+
+    if options[:include_attendees].present? and options[:include_attendees] == true
+      json[:attendees] = attendees.last(5)
+    end
+
     json[:url_param] = url_param
     json
   end
@@ -295,13 +308,11 @@ class Event < ActiveRecord::Base
           first.total.to_i
   end
 
-  def self.custom_json(events, user = nil)
+  def self.custom_json(events, user = nil, comments_count = true, likes_count = true, include_attendees = true )
     # user is passed to include if he is attending the event.
     events.to_json(:include => [
                       :user,
-                      :comments,
                       :main_photo,
-                      :likes,
                       { 
                         :start => {
                           :methods => [
@@ -323,12 +334,14 @@ class Event < ActiveRecord::Base
                       }
                     ],
                     :methods => [
-                      :attendees,
                       :distance,
                       :votes_count
                     ],
                     :check_user => user,
-                    :votes_data_for_user => user
+                    :votes_data_for_user => user,
+                    :comments_count => comments_count,
+                    :likes_count => likes_count,
+                    :include_attendees => include_attendees
                   )
   end
 
