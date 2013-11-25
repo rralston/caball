@@ -7,43 +7,50 @@
   </div>
 	<br><br>
 	<%= form_for @user, html: {class: "form-horizontal"} do |f| %>
-  <div class="control-group">
-    <label class="control-label">IMDB URL</label>
-    <div class="controls">
-      <%= f.text_field :imdb_url, :style => "width:400px", :class => 'text_field', :placeholder => "It's OK if you don't have one, we all started somewhere!" %>
+  
+    <div class="control-group">
+      <label class="control-label">IMDB URL</label>
+      <div class="controls">
+        <%= f.text_field :imdb_url, :style => "width:400px", :class => 'text_field', :placeholder => "It's OK if you don't have one, we all started somewhere!" %>
+      </div>
     </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label">Experience</label>
-    <div class="controls">
-      <%= f.select(:experience, options_for_select(User.experience, current_user.experience), {}, :style => "width:400px", :class=>'hinted', "data-hint" => 'Tell us how long you have been working in the film industry. Be honest, otherwise you might lose a position you really wanted!') %>
+    
+    <div class="control-group">
+      <label class="control-label">Experience</label>
+      <div class="controls">
+        <%= f.select(:experience, options_for_select(User.experience, current_user.experience), {}, :style => "width:400px", :class=>'hinted', "data-hint" => 'Tell us how long you have been working in the film industry. Be honest, otherwise you might lose a position you really wanted!') %>
+      </div>
     </div>
-  </div>
-	<div class="control-group">
-    <label class="control-label">Expertise Tags</label>
-    <div class="controls">
-      <%= f.hidden_field :expertise, :class => 'text_field' %>
-        <ul id="expertise_tags" class='tagit ui-sortable' style="margin-left:0px; height:80px; width:400px">
-          <% if current_user.expertise.present? %>
-            <%= current_user.expertise.split(',').each do |exp_tag| %>
-              <li data-value="<%= exp_tag %>"><%= exp_tag %> </li>
+
+  	<div class="control-group">
+      <label class="control-label">Expertise Tags</label>
+      <div class="controls">
+        <%= f.hidden_field :expertise, :class => 'text_field' %>
+          <ul id="expertise_tags" class='tagit ui-sortable' style="margin-left:0px; height:80px; width:400px">
+            <% if current_user.expertise.present? %>
+              <%= current_user.expertise.split(',').each do |exp_tag| %>
+                <li data-value="<%= exp_tag %>"><%= exp_tag %> </li>
+              <% end %>
             <% end %>
-          <% end %>
-        </ul>
-				<div class='ul_hint' style="width:400px">
-		      To tag more then one word use Shift+Spacebar between words. This is a great way to show case your strengths, some good suggestions: <i>Action, Comedy, Sports, Horror. </i> <b>Maximum of 4</b>
-		    </div>
+          </ul>
+  				<div class='ul_hint' style="width:400px">
+  		      To tag more then one word use Shift+Spacebar between words. This is a great way to show case your strengths, some good suggestions: <i>Action, Comedy, Sports, Horror. </i> <b>Maximum of 4</b>
+  		    </div>
+      </div>
     </div>
-  </div>
-	<div class="control-group">
-	<div class="controls">
-		<%= f.submit 'Update' %>
-	  <% end %>
-	</div>
-	</div>
-	<div class='modal-footer'>
+    
+  	<div class="control-group">
+    	<div class="controls">
+    		<%= f.submit 'Update' %>
+    	</div>
+  	</div>
+
+  <% end %>
+	
+  <div class='modal-footer'>
 	<!-- <button class='btn' data-dismiss="modal">Close</button> -->
 	</div>
+
 </div>
 
 <!-- Media Modal -->

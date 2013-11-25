@@ -322,13 +322,13 @@ class UsersController < ApplicationController
       format.json {
         render :json => resp.to_json(:include => 
                                       [
-                                        :open_roles,
-                                        :filled_roles,
                                         :roles,
                                         :user
                                       ],
                                       :methods => [
-                                        :pending_applications
+                                        :pending_applications,
+                                        :open_roles,
+                                        :filled_roles,
                                       ])
       }
     end
