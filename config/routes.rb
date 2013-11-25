@@ -31,6 +31,7 @@ Caball::Application.routes.draw do
   match '/users/profile' => 'users#profile'
   match '/users/change_password' => 'users#change_password'
   match '/users/change_email' => 'users#change_email'
+  match '/users/change_email_settings' => 'users#change_email_settings'
   get '/users/search_by_name'  
 
   match '/events/files_upload' => 'events#files_upload'

@@ -474,15 +474,15 @@ $(document).ready(function(){
 
   // similar projects
   app.similar_projects = new app.collections.similar_projects()
-  app.similar_projects.reset(<%= raw Project.custom_json(@project.similar_projects.first(4), current_user) rescue nil %>)
+  app.similar_projects.reset(<%= raw Project.custom_json(@project.similar_projects.first(4), current_user, true, false, true) rescue nil %>)
   app.similar_projects_view = new app.views.similar_projects({ collection: app.similar_projects })
   $('#similar_projects_div').html(app.similar_projects_view.render().el)
 
 
   // fans
   app.fans = new app.collections.fans()
-  app.fans.reset(<%= raw @project.fans.to_json() %>)
-  app.fans_view = new app.views.fans({ collection: app.fans })
+  app.fans.reset(<%= raw @project.fans.last(8).to_json() %>)
+  app.fans_view = new app.views.fans({ collection: app.fans, total_fans: <%= @project.fans.count %> })
   $('#fans_div').html(app.fans_view.render().el)
 
   $(document).on('newComment', function(event){

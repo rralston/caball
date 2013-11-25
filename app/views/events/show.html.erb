@@ -392,8 +392,8 @@ $(document).ready(function(){
 
 // who is coming
   app.attendees = new app.collections.attendees()
-  app.attendees.reset(<%= raw @event.attendees.to_json() %>)
-  app.attendees_view = new app.views.attendees({ collection: app.attendees })
+  app.attendees.reset(<%= raw @event.attendees.last(8).to_json() %>)
+  app.attendees_view = new app.views.attendees({ collection: app.attendees, total_attendees: <%= @event.attendees.count %> })
 
   $('#who_coming').html( app.attendees_view.render().el )
 

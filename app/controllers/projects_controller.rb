@@ -52,7 +52,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => Project.custom_json(@projects, current_user) }
+      format.json { render :json => Project.custom_json(@projects, current_user, false, false, true) }
     end
   end
   

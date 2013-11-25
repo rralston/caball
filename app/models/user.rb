@@ -19,10 +19,11 @@ class User < ActiveRecord::Base
   #If no mail has to be sent, return nil.
   def mailboxer_email(object)
     #Check if an email should be sent for that object
-    #if true
-    return email
-    #if false
-    #return nil
+    if send_notification_mails == true
+      return email
+    else
+      return nil
+    end
   end
 
   after_create do |user|
@@ -676,9 +677,9 @@ class User < ActiveRecord::Base
       json[:url] = "/users/#{id}"
     end
     
-    json[:url_param]      = self.url_param
-    json[:display_cover]  = self.display_cover
-    json[:display_cover_regular]  = self.display_cover_regular
+    json[:url_param]             = self.url_param
+    json[:display_cover]         = self.display_cover
+    json[:display_cover_regular] = self.display_cover_regular
     json[:display_cover_medium]  = self.display_cover_medium
     json
   end

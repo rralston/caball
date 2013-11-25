@@ -114,8 +114,9 @@ class Project < ActiveRecord::Base
 
 
   def roles_percent
-    if roles.size > 0
-      ((filled_roles.size.to_f / roles.size.to_f) * 10).to_i
+    total = roles.size
+    if total > 0
+      ((filled_roles.size.to_f / total.to_f) * 10).to_i
     else
       10
     end
@@ -123,11 +124,11 @@ class Project < ActiveRecord::Base
   
   def open_roles
     # returns all open roles
-    roles.select{ |role| !role.filled }
+    roles.where(:filled => false)
   end
 
   def filled_roles
-    roles.select{ |role| role.filled }
+    roles.where(:filled => true)
   end
 
   def self.genres
@@ -286,7 +287,7 @@ class Project < ActiveRecord::Base
   end
 
   def super_roles_needed
-    roles.map(&:name).uniq
+    roles.pluck("DISTINCT name")
   end
 
 
@@ -432,6 +433,19 @@ class Project < ActiveRecord::Base
       json[:category]= 'Projects'
       json[:url] = "/projects/#{id}"
     end
+
+    if options[:include_fans].present? and options[:include_fans] == true
+      json[:fans] = fans
+    end
+
+    if options[:comments_count].present? and options[:comments_count] == true
+      json[:comments_count] = comments.count
+    end
+
+    if options[:fans_count].present? and options[:fans_count] == true
+      json[:fans_count] = fans.count
+    end
+
     json[:url_param] = url_param
     json[:display_photo] = display_photo
     json[:display_medium] = display_medium
@@ -439,12 +453,10 @@ class Project < ActiveRecord::Base
     json
   end
 
-  def self.custom_json(projects, user = nil)
+  def self.custom_json(projects, user = nil, comments_count = true, include_fans = true, fans_count = false)
     projects.to_json(:include => [
-                        :fans,
                         :photos,
-                        :user,
-                        :comments
+                        :user
                       ],
                       :methods => [
                         :super_roles_needed,
@@ -453,7 +465,10 @@ class Project < ActiveRecord::Base
                         :liker_ids,
                         :display_photo
                       ],
-                      :check_user => user
+                      :check_user => user,
+                      :include_fans => include_fans,
+                      :fans_count => fans_count,
+                      :comments_count => comments_count
                     )
   end
 
