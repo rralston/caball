@@ -186,7 +186,7 @@ class Project < ActiveRecord::Base
   end
 
   def liker_ids
-    fans.pluck("users.id")
+    fans.map(&:id)
   end
 
   def roles_for_dashboard
@@ -438,8 +438,8 @@ class Project < ActiveRecord::Base
       json[:fans] = fans
     end
 
-    if options[:include_comments].present? and options[:include_comments] == true
-      json[:comments] = comments
+    if options[:comments_count].present? and options[:comments_count] == true
+      json[:comments_count] = comments.count
     end
 
     if options[:fans_count].present? and options[:fans_count] == true
@@ -453,7 +453,7 @@ class Project < ActiveRecord::Base
     json
   end
 
-  def self.custom_json(projects, user = nil, include_comments = true, include_fans = true, fans_count = false)
+  def self.custom_json(projects, user = nil, comments_count = true, include_fans = true, fans_count = false)
     projects.to_json(:include => [
                         :photos,
                         :user
@@ -468,7 +468,7 @@ class Project < ActiveRecord::Base
                       :check_user => user,
                       :include_fans => include_fans,
                       :fans_count => fans_count,
-                      :include_comments => include_comments
+                      :comments_count => comments_count
                     )
   end
 

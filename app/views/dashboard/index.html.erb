@@ -209,7 +209,7 @@
   $('.recommended_people_container').html(app.recommended_people_view.render().el)
 
 
-  app.recommended_projects = new app.collections.recommended_projects(<%= raw Project.custom_json(current_user.recommended_projects.limit(RECOMMENDED_PROJECTS_PER_PAGE), current_user) %>)
+  app.recommended_projects = new app.collections.recommended_projects(<%= raw Project.custom_json(current_user.recommended_projects.limit(RECOMMENDED_PROJECTS_PER_PAGE), current_user, true, false, true) %>)
   app.recommended_projects_view = new app.views.recommended_projects({ collection: app.recommended_projects })
   $('#recommended_projects_div').html(app.recommended_projects_view.render().el)
 
