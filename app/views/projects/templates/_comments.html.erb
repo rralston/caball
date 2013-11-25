@@ -58,6 +58,10 @@
                   <%= v.text_field :url, :placeholder => 'Video URL' %>
                 <% end %>
               </div>
+                
+            </div>
+
+            <div class='tab-content'>
 
               <div class='tab-pane' id='url_form_tab'>
                 <%= c.fields_for :url, Url.new do |u| %>
