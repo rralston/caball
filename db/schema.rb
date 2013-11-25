@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131119095853) do
+ActiveRecord::Schema.define(:version => 20131125075715) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -336,7 +336,7 @@ ActiveRecord::Schema.define(:version => 20131119095853) do
     t.text     "headline"
     t.boolean  "featured"
     t.string   "expertise"
-    t.datetime "notification_check_time", :default => '2013-07-31 14:32:36'
+    t.datetime "notification_check_time", :default => '2013-07-31 14:32:25'
     t.string   "experience"
     t.boolean  "agent_present",           :default => false
     t.string   "agent_name"
@@ -354,6 +354,7 @@ ActiveRecord::Schema.define(:version => 20131119095853) do
     t.string   "last_sign_in_ip"
     t.string   "fb_token"
     t.string   "managing_company"
+    t.boolean  "send_notification_mails", :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

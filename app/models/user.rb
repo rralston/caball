@@ -19,10 +19,11 @@ class User < ActiveRecord::Base
   #If no mail has to be sent, return nil.
   def mailboxer_email(object)
     #Check if an email should be sent for that object
-    #if true
-    return email
-    #if false
-    #return nil
+    if send_notification_mails == true
+      return email
+    else
+      return nil
+    end
   end
 
   after_create do |user|

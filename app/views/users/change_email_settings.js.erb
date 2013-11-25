@@ -1,0 +1,6 @@
+<% if current_user.errors.any? %>
+	<% error = "Send Notification Mails "+current_user.errors.messages[:send_notification_mails][0] %>
+	$('.change_email_settings_form .errors').html("<div class='alert alert-error'><button type='button' class='close' data-dismiss='alert'>&times;</button><br/><%= error %><br/></div>")
+<% else %>
+	$('.change_email_settings_form .errors').html("<div class='alert alert-success'><button type='button' class='close' data-dismiss='alert'>&times;</button>Email Settings Updated.<br/></div>")
+<% end %>

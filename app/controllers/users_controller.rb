@@ -460,6 +460,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def change_email_settings
+    current_user.update_attributes send_notification_mails: params[:user][:send_notification_mails]
+    respond_to do |format|
+      format.js #change_email_settings.js.erb
+    end
+  end
 
   # this action is used in the projects creation form for searching and adding users to roles.
   def search_by_name
