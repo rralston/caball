@@ -1,6 +1,9 @@
 app.views.user_fans = Backbone.View.extend
   initialize: (options)->
     this.template = _.template($('#user_fans_template').html())
+
+    this.count = options.total_fans
+
     this.collection.on('add', this.render, this)
     this.collection.on('remove', this.render, this)
 

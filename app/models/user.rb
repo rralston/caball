@@ -677,9 +677,9 @@ class User < ActiveRecord::Base
       json[:url] = "/users/#{id}"
     end
     
-    json[:url_param]      = self.url_param
-    json[:display_cover]  = self.display_cover
-    json[:display_cover_regular]  = self.display_cover_regular
+    json[:url_param]             = self.url_param
+    json[:display_cover]         = self.display_cover
+    json[:display_cover_regular] = self.display_cover_regular
     json[:display_cover_medium]  = self.display_cover_medium
     json
   end

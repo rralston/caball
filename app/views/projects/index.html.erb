@@ -428,7 +428,7 @@ $(document).ready(function(){
   popular_projects = new app.collections.projects()
   popular_projects_view = new app.views.projects({ collection: popular_projects })
 
-  popular_projects.reset(<%= raw Project.custom_json(Project.sample_popular_projects, current_user) %>)
+  popular_projects.reset(<%= raw Project.custom_json(Project.sample_popular_projects, current_user, false, false, true) %>)
 
   $('#popular_projects_container').html(popular_projects_view.render().el)
 
@@ -436,7 +436,7 @@ $(document).ready(function(){
   app.recent_projects = new app.collections.projects()
   recent_projects_view = new app.views.projects({ collection: app.recent_projects })
 
-  app.recent_projects.reset(<%= raw Project.custom_json(Project.recent_projects(1, PROJECTS_PER_PAGE_IN_INDEX), current_user) %>)
+  app.recent_projects.reset(<%= raw Project.custom_json(Project.recent_projects(1, PROJECTS_PER_PAGE_IN_INDEX), current_user, false, false, true) %>)
 
   $('#recent_projects_container').html(recent_projects_view.render().el)
 

@@ -728,9 +728,9 @@ $(document).ready(function(){
   $('#endorsements_div').html(app.endorsements_view.render().el)
 
   // fans
-  app.user_fans = new app.collections.user_fans()
-  app.user_fans.reset(<%= raw @user.followers.to_json() %>)
-  app.user_fans_view = new app.views.user_fans({ collection: app.user_fans })
+  app.user_fans = new app.collections.user_fans({})
+  app.user_fans.reset(<%= raw @user.followers.last(8).to_json() %>)
+  app.user_fans_view = new app.views.user_fans({ collection: app.user_fans, total_fans: <%= @user.followers.count %> })
   $('#user_fans_div').html(app.user_fans_view.render().el)
 
   // listen to the new blog creation event
