@@ -297,7 +297,8 @@
         'showStepNumbers': false,
         'doneLabel': 'Continue',
         'exitOnEsc': false,
-        'exitOnOverlayClick': false
+        'exitOnOverlayClick': false,
+        'showBullets': false
       }).start().oncomplete(function(targetElement) {  
 
         $('a[href=#projects]').trigger( 'click' );
@@ -338,6 +339,7 @@
           'exitOnEsc': false,
           'exitOnOverlayClick': false,
           'doneLabel': 'Start',
+          'showBullets': false
         }).start().oncomplete(function(targetElement) {  
           // save the state that user has seen this intro.
           app.fn.mark_finished_intro( 2, app.current_user.id );
