@@ -274,6 +274,9 @@
 
     app.fn.start_main_intro = function(){
 		
+			// show the user menu 
+			$('.userprflistwrap').show();
+			
       introJs().setOptions({ 
         steps: [
                 {
@@ -308,7 +311,7 @@
 
       }).onexit(function(targetElement) {  
         console.log('ecit')
-
+				
         // save the state that user has seen this intro.
         app.fn.mark_finished_intro( 1, app.current_user.id );
       });
@@ -341,7 +344,11 @@
           'doneLabel': 'Start',
           'showBullets': false
         }).start().oncomplete(function(targetElement) {  
-          // save the state that user has seen this intro.
+          
+					// send user back to the Dashboard home
+					$('a[href=#home]').trigger( 'click' );
+				
+					// save the state that user has seen this intro.
           app.fn.mark_finished_intro( 2, app.current_user.id );
 
         }).onexit(function(targetElement) {
@@ -355,7 +362,6 @@
       <% end %>
     }
 		
-    $('.userprflistwrap').show();
   });
   
 
