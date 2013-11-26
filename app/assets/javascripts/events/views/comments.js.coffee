@@ -40,5 +40,6 @@ app.views.comments = Backbone.View.extend
       element.attr('disabled', 'disabled')
       $('#comment_video_attributes_url').attr('disabled', 'disabled')
       $('#comment_photo_attributes_image').attr('disabled', 'disabled')
+      $('#comment_url_attributes_url').attr('disabled', 'disabled')
       $('button.post_update').attr('disabled', 'disabled')
       
