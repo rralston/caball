@@ -271,6 +271,8 @@
     if (url.match('#')) {
         $('a[href=#'+url.split('#')[1]+']').trigger('click') ;
     }
+		introJs().setOptions({ 'skipLabel': 'Exit', 'tooltipPosition': 'left' }).start();
+		$('.userprflistwrap').show();
   });
   
 

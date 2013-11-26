@@ -33,7 +33,7 @@
           
         </div>
         
-        <div class="userprofwrap">
+        <div class="userprofwrap" data-step="2" data-intro='Click here to access your menu'>
           <div class="usrprev">
 
             <a href='/users/<%= current_user.url_param %>' class="usrimg img-circle" style='background: url(<%= current_user.profile_thumb %>)'>
@@ -45,7 +45,7 @@
             </div>
           
           </div>
-          <div class="userprflistwrap">
+          <div class="userprflistwrap" data-step="3" data-intro='From here you can access your profile, dashboard, or logout'>
             <ul class="proflist medium">
               <a href="/users/<%= current_user.url_param %>">
                 <li class="profile">profile</li>
