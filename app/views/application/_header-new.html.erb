@@ -1,8 +1,11 @@
 <!--========= Header starts======------>
+<div class='empty-div' data-step="1">
+</div>
+
 <div class="headerwrap">
 
   <header>
-    <div class='logo pull-left'>
+    <div class='logo pull-left' data-step="3">
       <a href="/" class="brand pull-right"><img src="/assets/emboss-logo-beta.png" alt="" /></a>
     </div>
 
@@ -33,37 +36,39 @@
           
         </div>
         
-        <div class="userprofwrap">
-          <div class="usrprev">
+        <div class="userprofwrap" data-step="2" >
+          <div class='dummy-highlight'>
+            <div class="usrprev">
 
-            <a href='/users/<%= current_user.url_param %>' class="usrimg img-circle" style='background: url(<%= current_user.profile_thumb %>)'>
-              <!--user prof images as cover bg-->
-            </a>
-            
-            <div class="username">
-              <%= current_user.name %>
-            </div>
-          
-          </div>
-          <div class="userprflistwrap">
-            <ul class="proflist medium">
-              <a href="/users/<%= current_user.url_param %>">
-                <li class="profile">profile</li>
+              <a href='/users/<%= current_user.url_param %>' class="usrimg img-circle" style='background: url(<%= current_user.profile_thumb %>)'>
+                <!--user prof images as cover bg-->
               </a>
-              <a href="/dashboard" >
-                <li class="dboard">Dashboard</li>
-              </a>
-              <a href="/users/<%= current_user.id %>/edit">
-                <li class="settings">Edit Profile</li>
-              </a>
-							<% if current_user.admin == true %>
-							<a href="/admin/admin/index">
-                <li class="admin">Admin Area</li>
-              </a>
-							<% end %>
-              <%= link_to '<li class="lout" id="sign_out">Logout</li>'.html_safe, {:controller=> "users/sessions", :action=> "destroy"}, :method => :delete %>
               
-            </ul>
+              <div class="username">
+                <%= current_user.name %>
+              </div>
+            
+            </div>
+            <div class="userprflistwrap" data-step="3" data-intro='From here you can access your profile, dashboard, or logout'>
+              <ul class="proflist medium">
+                <a href="/users/<%= current_user.url_param %>" data-step="22">
+                  <li class="profile">profile</li>
+                </a>
+                <a href="/dashboard" >
+                  <li class="dboard">Dashboard</li>
+                </a>
+                <a href="/users/<%= current_user.id %>/edit">
+                  <li class="settings">Edit Profile</li>
+                </a>
+  							<% if current_user.admin == true %>
+  							<a href="/admin/admin/index">
+                  <li class="admin">Admin Area</li>
+                </a>
+  							<% end %>
+                <%= link_to '<li class="lout" id="sign_out">Logout</li>'.html_safe, {:controller=> "users/sessions", :action=> "destroy"}, :method => :delete %>
+                
+              </ul>
+            </div>
           </div>
         </div>
       </div>

@@ -999,3 +999,18 @@ app.fn.check_and_trigger_fan_selection = function(){
     });
   }
 }
+
+app.fn.mark_finished_intro = function( step_finished, user_id ){
+  $.ajax({
+    url: '/people/'+user_id+'.json',
+    type: 'post',
+    data:{
+      user: {
+        finished_intro_state: step_finished
+      }
+    },
+    success: function(data){
+      return true;
+    } 
+  })
+}
