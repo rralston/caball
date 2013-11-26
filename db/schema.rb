@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131125075715) do
+ActiveRecord::Schema.define(:version => 20131126115056) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -171,19 +171,20 @@ ActiveRecord::Schema.define(:version => 20131125075715) do
     t.text     "description"
     t.string   "content_type"
     t.integer  "file_size"
-    t.datetime "updated_at",                         :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "imageable_id"
     t.string   "imageable_type"
-    t.datetime "created_at",                         :null => false
+    t.datetime "created_at",                          :null => false
     t.boolean  "primary"
-    t.boolean  "is_main",         :default => false
-    t.boolean  "is_cover",        :default => false
+    t.boolean  "is_main",          :default => false
+    t.boolean  "is_cover",         :default => false
     t.integer  "crop_x"
     t.integer  "crop_y"
     t.integer  "crop_w"
     t.integer  "crop_h"
     t.integer  "original_width"
     t.integer  "original_height"
+    t.boolean  "image_processing"
   end
 
   create_table "profiles", :force => true do |t|
@@ -191,15 +192,16 @@ ActiveRecord::Schema.define(:version => 20131125075715) do
     t.string   "description"
     t.string   "content_type"
     t.integer  "file_size"
-    t.datetime "updated_at",      :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "user_id"
-    t.datetime "created_at",      :null => false
+    t.datetime "created_at",       :null => false
     t.integer  "crop_x"
     t.integer  "crop_y"
     t.integer  "crop_w"
     t.integer  "crop_h"
     t.integer  "original_width"
     t.integer  "original_height"
+    t.boolean  "image_processing"
   end
 
   create_table "projects", :force => true do |t|
@@ -334,7 +336,7 @@ ActiveRecord::Schema.define(:version => 20131125075715) do
     t.text     "headline"
     t.boolean  "featured"
     t.string   "expertise"
-    t.datetime "notification_check_time", :default => '2013-10-22 11:58:07'
+    t.datetime "notification_check_time", :default => '2013-07-31 14:32:25'
     t.string   "experience"
     t.boolean  "agent_present",           :default => false
     t.string   "agent_name"
@@ -353,6 +355,7 @@ ActiveRecord::Schema.define(:version => 20131125075715) do
     t.string   "fb_token"
     t.string   "managing_company"
     t.boolean  "send_notification_mails", :default => true
+    t.integer  "finished_intro_state",    :default => 0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

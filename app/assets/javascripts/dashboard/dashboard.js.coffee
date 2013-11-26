@@ -59,6 +59,11 @@ $(document).ready ->
 
             # set projects loaded as true
             app.projects_loaded = true
+
+            console.log resp.show_project_intro
+            
+            app.fn.try_project_intro()
+
           else
             alert('Something went wrong, Please try again')
     else

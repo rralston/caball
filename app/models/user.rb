@@ -822,6 +822,14 @@ class User < ActiveRecord::Base
     talent.script_document.present? or talent.synopsis.present?
   end
 
+  def show_main_intro?
+    finished_intro_state < 1
+  end
+
+  def show_project_intro?
+    finished_intro_state < 2
+  end
+
 end
 
 class Array
