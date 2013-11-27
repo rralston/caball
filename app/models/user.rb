@@ -534,18 +534,25 @@ class User < ActiveRecord::Base
 
   def serializable_hash(options)
     hash = super(options)
-    extra_hash = {
-      'profile_pic' => profile_pic,
-      'profile_thumb' => profile_thumb,
-      'profile_medium' => profile_medium,
-      'profile_tiny' => profile_tiny,
-      'cover_photo' => display_cover,
-      'cover_regular' => get_cover_regular,
-      'cover_medium' => display_cover_medium,
-      'talent_names' => talent_names,
-      'url_param' => url_param
-    }
-    hash.merge!(extra_hash)
+
+    # don't load the unnecassary attributes. (this is to improve speed)
+    if not options[:for_search].present?
+      extra_hash = {
+        'profile_pic' => profile_pic,
+        'profile_thumb' => profile_thumb,
+        'profile_medium' => profile_medium,
+        'profile_tiny' => profile_tiny,
+        'cover_photo' => display_cover,
+        'cover_regular' => get_cover_regular,
+        'cover_medium' => display_cover_medium,
+        'talent_names' => talent_names,
+        'url_param' => url_param
+      }
+      hash.merge!(extra_hash)
+    end
+
+    hash
+
   end
 
   def attending_events
@@ -677,10 +684,14 @@ class User < ActiveRecord::Base
       json[:url] = "/users/#{id}"
     end
     
-    json[:url_param]             = self.url_param
-    json[:display_cover]         = self.display_cover
-    json[:display_cover_regular] = self.display_cover_regular
-    json[:display_cover_medium]  = self.display_cover_medium
+    # don't load the unnecassary attributes. (this is to improve speed)
+    if not options[:for_search].present?
+      json[:url_param]             = self.url_param
+      json[:display_cover]         = self.display_cover
+      json[:display_cover_regular] = self.display_cover_regular
+      json[:display_cover_medium]  = self.display_cover_medium
+    end
+
     json
   end
 

@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     if params[:page].present?
       page = params[:page]
       type = params[:load_type]
+
       
       if type == 'recent'
         @users = User.recently_updated(page, USERS_PER_PAGE_IN_INDEX)
@@ -25,6 +26,8 @@ class UsersController < ApplicationController
         if params[:roles]
           params[:roles].delete('') # delete empty string that is appended in few cases
         end
+
+        @search = params[:search].present? ? true : false
 
         sub_roles = params[:sub_talents]
         

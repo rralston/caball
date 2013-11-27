@@ -253,11 +253,19 @@ app.recent_users = new app.collections.users()
 recent_users_view = new app.views.users({ collection: app.recent_users })
 
 
-<% if current_user.present? %>
-// remove current user from the display
-  app.recent_users.reset(<%= raw User.recently_updated(1, USERS_PER_PAGE_IN_INDEX, current_user).to_json(:followers_count => true, :check_user => current_user) %>)
-<% else %>
-  app.recent_users.reset(<%= raw User.recently_updated(1, USERS_PER_PAGE_IN_INDEX).to_json(:followers_count => true, :check_user => current_user) %>)
+// load recent users, if it wasn't a search or if the search results are 0
+<% if @search == true and @users.count < 1 %>
+
+  <% if current_user.present? %>
+    // if current user is present, don't show him.
+    app.recent_users.reset(<%= raw User.recently_updated(1, USERS_PER_PAGE_IN_INDEX, current_user).to_json(:followers_count => true, :check_user => current_user) %>)
+
+  <% else %>
+
+    app.recent_users.reset(<%= raw User.recently_updated(1, USERS_PER_PAGE_IN_INDEX).to_json(:followers_count => true, :check_user => current_user) %>)
+
+  <% end %>
+
 <% end %>
 
 $('#recent_users_container').html(recent_users_view.render().el)
@@ -305,6 +313,33 @@ $('body').on('click', '.distance_radio', function(event){
 
   }
 });
+
+app.fn.reset_results = function (resp){
+  app.result_users.reset(resp);
+  $('#all_users').html(app.result_users_view.render().el);
+  $('.btn-load_more').attr('data-next-page', 2);
+}
+    
+
+// if there is a search query in the url
+<% if @search == true %>
+
+  <% if @users.count < 1 %>
+  
+    alert('No users found!')
+  
+  <% else %>
+
+    app.status             = 'search';
+    app.params_used        = {}
+    app.params_used.search = "<%= params[:search] %>";
+    app.params_used.type   = 'keyword';
+
+    app.fn.reset_results( <%= raw @users.to_a.to_json(:followers_count => true, :check_user => current_user) %> );
+
+  <% end %>
+
+<% end %>
 
 
 
