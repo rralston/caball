@@ -37,7 +37,7 @@ development:
 # development:
 #   adapter: mysql2
 #   pool: 5
-#   database: caball_development
+#   database: caball_production
 #   username: root
 #   password: root
 #   host: localhost

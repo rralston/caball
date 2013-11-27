@@ -163,10 +163,14 @@ class Conversation < ActiveRecord::Base
       })
 
     json = super(options)
+
     if options[:check_user].present?
       json['is_read'] = self.is_read?(options[:check_user])
       json['unread_count'] = self.unread_count(options[:check_user])
       
+      # last message will show the last message from the messages which he is intended to receive, not from all messages in the conversation.
+      json['last_message'] = self.receipts.where( :receiver_id => options[:check_user].id ).order('created_at DESC').first.message
+
       other_users = self.other_participants(options[:check_user]) 
       
       json['other_user_names'] = other_users.map(&:name)

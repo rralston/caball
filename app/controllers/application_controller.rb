@@ -33,9 +33,9 @@ class ApplicationController < ActionController::Base
   def main_search
     query = params[:q]
 
-    events   = Event.search_events(query)
-    projects = Project.search_projects(query)
-    users    = User.search_users(query)
+    events   = Event.search_events(query).limit(10)
+    projects = Project.includes(:photos).search_projects(query).limit(10)
+    users    = User.includes(:profile).search_users(query).limit(10)
 
     render :json => JSON.parse(users.to_json(:for_search => true)) + JSON.parse(projects.to_json(:for_search => true)) + JSON.parse(events.to_json(:for_search => true))
   end
