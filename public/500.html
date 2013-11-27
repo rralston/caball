@@ -1,26 +1,47 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>We're sorry, but something went wrong (500)</title>
-  <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
-    }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
-  </style>
-</head>
-
-<body>
-  <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <h1>We're sorry</h1>
-		<p>The page you were looking for cannot be found. Please visit our: <a href="http://www.filmzu.com">Home Page</a>, <a href="http://www.filmzu.com/users/sign_up">Sign Up</a>, <a href="http://www.filmzu.com/people">View People</a>, <a href="http://www.filmzu.com/projects">View Projects</a> or <a href="http://www.filmzu.com/contact_us">Contact Us</a> if you believe there has been an error.</p>
-  </div>
-</body>
+<!--Error Page for Filmzu. Textures and color scheme are up to date. The fonts on this Error Page do not reflect the actual fonts on Filmzu. This is a general 404, 500, 304 error page. Primary goal is to redirect the user to main content. -->
+	<head>
+		<!--Giving the general Error Page a title-->
+		<title>Uh-oh!</title>
+		<!--Changing the default look of hyperlinks-->
+		<style type="text/css">
+			a:link {
+			COLOR: white;
+			}
+			a:visited {
+			COLOR: #e37168;
+			}
+			a:hover {
+			COLOR: #e37168;
+			}
+			a:active {
+			COLOR: white;
+			}
+			p{
+				text-align: right;
+				padding: 0px 15px 0px 0px;
+			}
+		</style>
+		<script type="text/javascript" src="//use.typekit.net/bej5twh.js"></script>
+	  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+	</head>
+	<!--Establishing the page's font, text color, and background color -->
+	<body style="font-family: "brandon-grotesque", sans-serif; background-image:url('http://filmzu-dev-env-cpbt693qtg.elasticbeanstalk.com/assets/errorbackgroundTexture.png'); margin:0px; color:white; padding-top:150px;">
+		<!--Creating an inner "box" to display primary content -->
+		<!--Establishing the containiner's dimensions and layout -->
+		<div style="width:60%; margin:0px auto 0px auto; text-align: left;">
+			<!--Creating two different headers with site-native textures -->
+			<h1 style="background-image:url('http://filmzu-dev-env-cpbt693qtg.elasticbeanstalk.com/assets/errorgreenTexture.png');margin:0px;padding:5px;text-align:center;border-top-left-radius:15px;border-top-right-radius: 15px;">Cut!</h1>
+			<h2 style="background-image:url('http://filmzu-dev-env-cpbt693qtg.elasticbeanstalk.com/assets/errorblueTexture.png');margin:0px;padding:5px;text-align:center;">We've seem to run out of film.</h2>
+				<!--Creating a text box where the error image and text will go.-->
+				<div style="background-image:url('http://filmzu-dev-env-cpbt693qtg.elasticbeanstalk.com/assets/errorforegroundTexture.png'); padding:5px; border-bottom-left-radius: 15px;border-bottom-right-radius:15px; 					overflow:auto">
+					<img src="http://filmzu-dev-env-cpbt693qtg.elasticbeanstalk.com/assets/errorImage.png" align="left" style="padding: 15px;"/>
+					<p style="padding: 25px 15px 0px 0px;">The page you are looking for might have been removed, had its name changed, or is temporarily 						unavailable.</p>
+					<p>If you sincerely believe that this is the work of dark magic, feel free to <a href="http://www.filmzu.com/contact_us">contact us.</a><p>
+					<p>Otherwise, click one of these links to get back on track:</p>
+					<p><a href="http://www.filmzu.com">Home</a> // <a href="http://www.filmzu.com/dashboard">Dashboard</a> // <a href="http://www.filmzu.com/					projects">Projects</a> // <a href="http://www.filmzu.com/users">People</a></p>
+				</div>
+		</div>
+	</body>
 </html>
