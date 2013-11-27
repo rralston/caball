@@ -273,7 +273,7 @@
     }
 
     app.fn.start_main_intro = function(){
-		
+
 			// show the user menu 
 			$('.userprflistwrap').show();
 			
@@ -309,8 +309,7 @@
         // save the state that user has seen this intro.
         app.fn.mark_finished_intro( 1, app.current_user.id );
 
-      }).onexit(function(targetElement) {  
-        console.log('ecit')
+      }).onexit(function(targetElement) { 
 				
         // save the state that user has seen this intro.
         app.fn.mark_finished_intro( 1, app.current_user.id );
@@ -324,6 +323,7 @@
 
     app.fn.try_project_intro = function(){
       <% if current_user.show_project_intro? %>
+        $('.userprflistwrap').show();
         introJs().setOptions({
           steps: [
             {
@@ -352,12 +352,11 @@
           app.fn.mark_finished_intro( 2, app.current_user.id );
 
         }).onexit(function(targetElement) {
-          console.log('ecit')
           // save the state that user has seen this intro.
           app.fn.mark_finished_intro( 2, app.current_user.id );
         });
       <% else %>
-        console.log('already shown');
+        // have shown the tour already! Don't have to show it again.
         return true
       <% end %>
     }

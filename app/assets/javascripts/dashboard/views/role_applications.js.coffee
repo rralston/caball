@@ -1,6 +1,6 @@
 app.views.role_applications = Backbone.View.extend
   render: ()->
-    this.collection.forEach(this.renderEach, this)
+    this.collection.sorted().forEach(this.renderEach, this)
     return this
 
   renderEach: (role_application)->
