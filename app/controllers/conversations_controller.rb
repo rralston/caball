@@ -60,7 +60,7 @@ class ConversationsController < ApplicationController
   def reply
     # receipt = current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
 
-    # if conversation.subject == "Regarding Role Application - Sorry"
+    if conversation.subject == "Regarding Role Application - Sorry"
       # this a role application rejection conversation.
       # in this case, get the last receipt of the current user in the converation
       # using it, reply to the sender of that receipt. Which is basically, the project owner who rejected this user's application.
@@ -68,11 +68,11 @@ class ConversationsController < ApplicationController
       receipt = conversation.receipts.where(:receiver_id => current_user.id ).first
 
       receipt = current_user.reply_to_sender(receipt, *message_params(:body, :subject))
-    # else
+    else
 
-    #   receipt = current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
+      receipt = current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
 
-    # end
+    end
 
 
     respond_to do |format|
