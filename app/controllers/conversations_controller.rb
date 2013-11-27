@@ -58,7 +58,23 @@ class ConversationsController < ApplicationController
   end
   
   def reply
-    receipt = current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
+    # receipt = current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
+
+    # if conversation.subject == "Regarding Role Application - Sorry"
+      # this a role application rejection conversation.
+      # in this case, get the last receipt of the current user in the converation
+      # using it, reply to the sender of that receipt. Which is basically, the project owner who rejected this user's application.
+
+      receipt = conversation.receipts.where(:receiver_id => current_user.id ).first
+
+      receipt = current_user.reply_to_sender(receipt, *message_params(:body, :subject))
+    # else
+
+    #   receipt = current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
+
+    # end
+
+
     respond_to do |format|
       format.html { redirect_to :conversation }
       format.json { render :json => receipt.message.to_json(:include => [:sender]) }
@@ -102,7 +118,9 @@ class ConversationsController < ApplicationController
 
   def get_messages
     this_conversation = Conversation.find(params[:id])
-    messages = this_conversation.messages
+
+    ids = Conversation.last.receipts_for( current_user ).pluck('notification_id')
+    messages = Notification.where( :type => 'Message', :id => ids )
 
     # mark conversation read for this user, since he has requested to see messages
     conversation.mark_as_read(current_user)
