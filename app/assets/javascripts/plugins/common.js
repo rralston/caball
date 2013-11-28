@@ -695,7 +695,7 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height, o
     trueSize: [original_width, original_height],
     aspectRatio: ar_width / ar_height,
     boxWidth: 500,
-    boxHeight: 350,
+    boxHeight: 250,
     onSelect: function(c){
       updateCropValues(c)
     },
