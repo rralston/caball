@@ -349,6 +349,7 @@
 					$('a[href=#home]').trigger( 'click' );
 
           $('.userprflistwrap a:nth(0)').addClass('hover')
+          $('.userprflistwrap a:nth(0)').find('li').html('Complete my Profile');
 				
 					// save the state that user has seen this intro.
           app.fn.mark_finished_intro( 2, app.current_user.id );
