@@ -48,7 +48,6 @@ app.views.manage_project = Backbone.View.extend
         status: 'Completed'
       }, {
         success: (model, response) ->
-          console.log response
           if response
               _this.model.set('status', 'Completed')
               alert('Project marked as Done')
@@ -65,7 +64,6 @@ app.views.manage_project = Backbone.View.extend
         status: 'Development'
       }, {
         success: (model, response) ->
-          console.log response
           if response
               _this.model.set('status', 'Development')
               alert('Project marked as in Development')

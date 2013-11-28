@@ -1,6 +1,5 @@
 app.views.recommended_events = Backbone.View.extend
   initialize: ()->
-    console.log 'initializing what yu want'
     app.events.on('next_recommended_events', this.next_events)
     this.template = _.template($('#recommended_events_template').html())
     this.collection.on('add', this.render, this)
