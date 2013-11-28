@@ -30,7 +30,6 @@ $(document).ready ()->
     maxTags: 4
     triggerKeys: ['comma', 'tab', 'space', 'enter']
     tagsChanged: (tagValue, action, element) ->
-      console.log element
       tag_value_array = _.map($('#event_tags').tagit('tags'), (tag) ->
         tag.value
       )
@@ -63,7 +62,6 @@ $(document).ready ()->
         progress = parseInt(data.loaded / data.total * 100, 10)
         data.progress_div.find('.bar').css('width', progress + '%')
       done: (e, data)->
-        console.log data
         app.data= data
         if typeof data.result == 'object' && _.size(data.result) > 1
           # > 1 when a hash is returned with id of the newly created object.

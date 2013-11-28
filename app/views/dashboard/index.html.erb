@@ -347,11 +347,14 @@
           
 					// send user back to the Dashboard home
 					$('a[href=#home]').trigger( 'click' );
+
+          $('.userprflistwrap a:nth(0)').addClass('hover')
 				
 					// save the state that user has seen this intro.
           app.fn.mark_finished_intro( 2, app.current_user.id );
 
         }).onexit(function(targetElement) {
+          $('.userprflistwrap a:nth(0)').addClass('hover')
           // save the state that user has seen this intro.
           app.fn.mark_finished_intro( 2, app.current_user.id );
         });

@@ -159,6 +159,12 @@ app.fn.bind_click_event_on_modal_btn = function(selector){
           if(resp != 'false'){
             alert('Message sent successfully');
             modal.modal('hide');
+
+            // if the conversations page, open the sent items.
+            if( $("a[href=#conversation-tab-sent]").is(":visible") ){
+              $("a[href=#conversation-tab-sent]").trigger('click');
+            }
+              
           }else{
             alert('Something went Wrong, Please try again');
           }
@@ -689,7 +695,7 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height, o
     trueSize: [original_width, original_height],
     aspectRatio: ar_width / ar_height,
     boxWidth: 500,
-    boxHeight: 350,
+    boxHeight: 250,
     onSelect: function(c){
       updateCropValues(c)
     },

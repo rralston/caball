@@ -58,9 +58,8 @@ class ConversationsController < ApplicationController
   end
   
   def reply
-    # receipt = current_user.reply_to_conversation(conversation, *message_params(:body, :subject))
 
-    if conversation.subject == "Regarding Role Application - Sorry"
+    if conversation.is_application_denial? and ( !conversation.is_originator?( current_user ) )
       # this a role application rejection conversation.
       # in this case, get the last receipt of the current user in the converation
       # using it, reply to the sender of that receipt. Which is basically, the project owner who rejected this user's application.
@@ -119,7 +118,7 @@ class ConversationsController < ApplicationController
   def get_messages
     this_conversation = Conversation.find(params[:id])
 
-    ids = Conversation.last.receipts_for( current_user ).pluck('notification_id')
+    ids = this_conversation.receipts_for( current_user ).pluck('notification_id')
     messages = Notification.where( :type => 'Message', :id => ids )
 
     # mark conversation read for this user, since he has requested to see messages

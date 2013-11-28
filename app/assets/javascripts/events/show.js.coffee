@@ -66,7 +66,6 @@ $(document).ready ()->
             message: message
             event_id: btn.attr('data-event-id')
           success: (resp)->
-            console.log resp
             if resp != 'false'
               alert 'Message Sent'
               $('#message_event_organizer_modal').modal('hide')
@@ -108,7 +107,6 @@ $(document).ready ()->
           id: btn.attr('data-eventid')
         success: (resp)->
           if resp != 'false'
-            # console.log(resp)
             btn.parent().find('.votes-count').html(resp.votes_count)
           else
             alert 'Something went wrong. Please try later'
