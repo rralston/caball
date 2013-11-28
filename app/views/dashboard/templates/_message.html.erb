@@ -12,14 +12,21 @@
 
     <div class='message-details pull-left'>
       <div class='user-name'>
-        <a href='/users/<%%= sender.url_param %>'><%%= sender.name %></a>
+        <a class='pull-left' href='/users/<%%= sender.url_param %>'><%%= sender.name %></a>
+
+        <%% if ( this.is_application_denial == true && this.is_originator == true && sender.id != app.current_user.id ){ %>
+          <div class="send-generic-message pull-left action-div send-pm-div" data-message-header="Message user - <%%= sender.name %>" data-message-recipients="<%%= sender.email %>" title='Send Personal Message'>
+            <i class='icon-envelope'></i>
+          </div>
+        <%% } %>
+
       </div>
-      <div class='msg-body'>
+      <div class='msg-body clearfix'>
         <%%= body %>
       </div>
     </div>
 
-  <%% }else{ %>
+  <%% }else{ %>`
     <div class='message-sender pull-left'>
       <div class="img-circle user-circle-image" style="background: url('')">
       </div>
