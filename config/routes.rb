@@ -9,7 +9,7 @@ Caball::Application.routes.draw do
   # get 'people', to: 'users#index', via: :all
   resources :users, :path => "people"
   match '/people/:id' => 'users#update', :via => 'post'
-  match "/skills(/*path)" => redirect{ |env, req| "http://skills.filmzu.com" + (req.path ? "#{req.path}" : '/')}
+  match "/blog(/*path)" => redirect{ |env, req| "http://blog.filmzu.com" + (req.path ? "#{req.path}" : '/')}
 
   match 'check_url_param' => 'application#check_url_param'
 
@@ -102,7 +102,7 @@ Caball::Application.routes.draw do
   # Static Pages 
   
   resources :home, except: :show  
-  %w[privacy terms about opportunities FAQ glossary contact labs partners beta blog].each do |page|
+  %w[privacy terms about opportunities FAQ glossary contact labs partners beta skills].each do |page|
     get page, controller: "static_pages", action: page
   end
 

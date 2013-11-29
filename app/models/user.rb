@@ -691,7 +691,6 @@ class User < ActiveRecord::Base
       json[:display_cover_regular] = self.display_cover_regular
       json[:display_cover_medium]  = self.display_cover_medium
     end
-
     json
   end
 
