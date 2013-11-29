@@ -248,7 +248,7 @@ class User < ActiveRecord::Base
 
   def self.types
     {
-      'Fan - Only select if your a just a film fan'      => 'Fan',
+      'Fan - Only select if you are just a film fan'      => 'Fan',
       'Agent'                                             => 'Agent',
       'Business - Manager, Studio Exec'                   => 'Business', 
       'Cast - Actor'                                      => 'Cast', 
@@ -270,6 +270,7 @@ class User < ActiveRecord::Base
       'Cast'           => {
                             'Actor'   => 'Actor',
                             'Actress' => 'Actress',
+                            'Extra'   => 'Extra',
                             'Stunt'   => 'Stunt',
                             'Dancer'  => 'Dancer',
                             'Driver'  => 'Driver',
