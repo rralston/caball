@@ -80,6 +80,10 @@ $(document).ready ()->
   app.fn.init_image_file_uploader('#steps form')
 
 
+  # Remove hints if user leaves div
+  $(".hinted").focusout ->
+    $(".hint_msg").hide()
+
   $('body').on 'click', '.step_1_submit', (event)->
     btn = $(event.target)
 
