@@ -63,6 +63,7 @@ class Conversation < ActiveRecord::Base
   end
 
   #Returns an array of participants
+  # this will return the last message's recipients
   def recipients
     if self.last_message
       recps = self.last_message.recipients
@@ -83,6 +84,16 @@ class Conversation < ActiveRecord::Base
     all.delete(user)
     all.delete(nil) # nil will appear when any of the user in the coversation is deleted later.
     all
+  end
+
+  def all_users( user )
+    if self.last_message
+      recps = self.original_message.recipients
+      recps = recps.is_a?(Array) ? recps : [recps]
+      recps.delete(user)
+      return recps
+    end
+    return []
   end
 
   #Originator of the conversation.
@@ -163,12 +174,48 @@ class Conversation < ActiveRecord::Base
       })
 
     json = super(options)
+
     if options[:check_user].present?
-      json['is_read'] = self.is_read?(options[:check_user])
-      json['unread_count'] = self.unread_count(options[:check_user])
-      json['other_user_names'] = self.other_participants(options[:check_user]).map(&:name)
+      json['is_read']               = self.is_read?(options[:check_user])
+      json['unread_count']          = self.unread_count(options[:check_user])
+      
+      # last message will show the last message from the messages which he is intended to receive, not from all messages in the conversation.
+      json['last_message']          = self.receipts.where( :receiver_id => options[:check_user].id ).order('created_at DESC').first.message
+      
+      other_users                   = self.other_participants(options[:check_user]) 
+      
+      is_application_denial         = is_application_denial?
+      json['is_application_denial'] = is_application_denial
+      
+      
+      is_originator                 = is_originator?( options[:check_user] )
+      json['is_originator']         = is_originator
+
+      if is_application_denial 
+        # if the current user 
+        if is_originator
+          json['other_user_names'] = all_users( options[:check_user] ).map(&:name)
+        else
+          json['other_user_names'] = [ originator.name ]
+        end
+      else
+        json['other_user_names'] = other_users.map(&:name)
+      end
+
+      # to show user is the method used for showing the name and image of the user in dashboard.
+      # if the other user is later deleted, the currect user will be shown
+      json['to_show_user'] = other_users.first || options[:check_user]
     end
     json
+  end
+
+  def is_originator?( user )
+    user == originator
+  end
+
+  def is_application_denial?
+    # tells if this conversation is a sorry message sent when the role application is denied.
+    self.subject == "Regarding Role Application - Sorry"
   end
 
   protected

@@ -59,6 +59,9 @@ $(document).ready ->
 
             # set projects loaded as true
             app.projects_loaded = true
+            
+            app.fn.try_project_intro()
+
           else
             alert('Something went wrong, Please try again')
     else

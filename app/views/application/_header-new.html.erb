@@ -1,8 +1,11 @@
 <!--========= Header starts======------>
+<div class='empty-div' data-step="1">
+</div>
+
 <div class="headerwrap">
 
   <header>
-    <div class='logo pull-left'>
+    <div class='logo pull-left' data-step="3">
       <a href="/" class="brand pull-right"><img src="/assets/emboss-logo-beta.png" alt="" /></a>
     </div>
 
@@ -33,37 +36,39 @@
           
         </div>
         
-        <div class="userprofwrap">
-          <div class="usrprev">
+        <div class="userprofwrap" data-step="2" >
+          <div class='dummy-highlight'>
+            <div class="usrprev">
 
-            <a href='/users/<%= current_user.url_param %>' class="usrimg img-circle" style='background: url(<%= current_user.profile_thumb %>)'>
-              <!--user prof images as cover bg-->
-            </a>
-            
-            <div class="username">
-              <%= current_user.name %>
-            </div>
-          
-          </div>
-          <div class="userprflistwrap">
-            <ul class="proflist medium">
-              <a href="/users/<%= current_user.url_param %>">
-                <li class="profile">profile</li>
+              <a href='/users/<%= current_user.url_param %>' class="usrimg img-circle" style='background: url(<%= current_user.profile_thumb %>)'>
+                <!--user prof images as cover bg-->
               </a>
-              <a href="/dashboard" >
-                <li class="dboard">Dashboard</li>
-              </a>
-              <a href="/users/<%= current_user.id %>/edit">
-                <li class="settings">Edit Profile</li>
-              </a>
-							<% if current_user.admin == true %>
-							<a href="/admin/admin/index">
-                <li class="admin">Admin Area</li>
-              </a>
-							<% end %>
-              <%= link_to '<li class="lout" id="sign_out">Logout</li>'.html_safe, {:controller=> "users/sessions", :action=> "destroy"}, :method => :delete %>
               
-            </ul>
+              <div class="username">
+                <%= current_user.name %>
+              </div>
+            
+            </div>
+            <div class="userprflistwrap" data-step="3" data-intro='From here you can access your profile, dashboard, or logout'>
+              <ul class="proflist medium">
+                <a href="/users/<%= current_user.url_param %>" data-step="22">
+                  <li class="profile">profile</li>
+                </a>
+                <a href="/dashboard" >
+                  <li class="dboard">Dashboard</li>
+                </a>
+                <a href="/users/<%= current_user.id %>/edit">
+                  <li class="settings">Edit Profile</li>
+                </a>
+  							<% if current_user.admin == true %>
+  							<a href="/admin/admin/index">
+                  <li class="admin">Admin Area</li>
+                </a>
+  							<% end %>
+                <%= link_to '<li class="lout" id="sign_out">Logout</li>'.html_safe, {:controller=> "users/sessions", :action=> "destroy"}, :method => :delete %>
+                
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -93,13 +98,13 @@
           
         </div>
       </div>
-      <% if current_user %>
 			<div class="hdrfrm pull-left">
-        <form action="">
-          <input type="text" class='search_header' id='main_header_search' placeholder='Search for people, projects and events'/>
+        <form action="/people">
+          <input type="text" class='search_header' id='main_header_search' placeholder='Search for people, projects and events' name='search'/>
+          <input type='hidden' name='load_type' value='search'>
+          <input type='hidden' name='page' value='1'>
         </form>
       </div>
-			<% end %>
     </div>
   </header>
 
@@ -161,7 +166,7 @@
   <div id='signup_modal' class="modal hide fade span9">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h3 class='cover-header'> Create Account</h3>
+      <h3 class='cover-header'> Join the Film Community</h3>
     </div>
     
     <div class="modal-body">
@@ -204,6 +209,21 @@ $(document).ready(function(){
 
   $('.usrprev .username').on('click',function(){
     $('.userprflistwrap').slideToggle(500);
+  });
+
+
+
+  // handler to navigate to messages when clicking in notification.
+  $('body').on('click', '.message_notification', function(event){
+
+    // if on dashboard, don't reload
+    if( $('a[href=#messages]').size() > 0 ) {
+      $('a[href=#messages]').trigger('click');
+    }else{
+      window.location.href = '/dashboard#messages';
+    }
+    
+    $('.noticontentwrap').slideUp(500);
   });
 
 

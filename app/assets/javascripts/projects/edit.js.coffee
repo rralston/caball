@@ -80,6 +80,10 @@ $(document).ready ()->
   app.fn.init_image_file_uploader('#steps form')
 
 
+  # Remove hints if user leaves div
+  $(".hinted").focusout ->
+    $(".hint_msg").hide()
+
   $('body').on 'click', '.step_1_submit', (event)->
     btn = $(event.target)
 
@@ -99,6 +103,8 @@ $(document).ready ()->
             $('#step_2').html(data)
             app.allow_forward_sliding_till = 2
             $('a.step_2_nav').trigger('click')
+
+            get_ready_for_last_step()
           else
             alert('Please correct form errors')
           btn.val('Next Step')
@@ -113,26 +119,6 @@ $(document).ready ()->
 
     return false
 
-  $('body').on 'click', '.step_2_submit', (event)->
-    btn = $(event.target)
-    $.ajax
-      type: 'POST'
-      url: '/projects/step_2'
-      data: $('.step_2_form').serialize()
-      success: (data)->
-        if data != false
-          $("html, body").animate({ scrollTop: 0 }, "slow");
-
-          $('#step_3').html(data)
-          app.allow_forward_sliding_till = 3
-          $('a.step_3_nav').trigger('click')
-          get_ready_for_step_3()
-
-        else
-          alert('Please correct form errors')
-        
-    return false
-
 
   app.fn.init_image_crop_handlers()
 
@@ -143,7 +129,7 @@ $(document).ready ()->
 
 
   # this function is called once after the step 3 html is loaded from the server and attached to the DOM
-  get_ready_for_step_3 = ()->
+  get_ready_for_last_step = ()->
     # prevents creation of multiples object when user is sliding back and front in the form.
     if typeof app.project_roles == 'undefined'
       app.project_roles = new app.collections.project_roles(app.project_added_roles)

@@ -52,7 +52,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => Project.custom_json(@projects, current_user) }
+      format.json { render :json => Project.custom_json(@projects, current_user, false, false, true) }
     end
   end
   
@@ -159,7 +159,11 @@ class ProjectsController < ApplicationController
       # editing
       @project = Project.find(params[:project_id])
       if @project.update_attributes(params[:project])
+
+        DeleteActivities.new( @project ).del_1_day_ago_updates
+
         @project.create_activity :update, owner: current_user
+
         render 'projects/step_2_form', :layout => false
       else
         render :json => false

@@ -33,9 +33,9 @@ class ApplicationController < ActionController::Base
   def main_search
     query = params[:q]
 
-    events   = Event.search_events(query)
-    projects = Project.search_projects(query)
-    users    = User.search_users(query)
+    events   = Event.search_events(query).limit(10)
+    projects = Project.includes(:photos).search_projects(query).limit(10)
+    users    = User.includes(:profile).search_users(query).limit(10)
 
     render :json => JSON.parse(users.to_json(:for_search => true)) + JSON.parse(projects.to_json(:for_search => true)) + JSON.parse(events.to_json(:for_search => true))
   end
@@ -147,4 +147,15 @@ class ApplicationController < ActionController::Base
   def clear_temp_photo_objects
     Photo.where(:imageable_type => nil).destroy_all
   end
+
+
+  def current_user
+    user = super
+    if params[:public_view].present? and params[:public_view] == "true"
+      nil
+    else
+      user
+    end
+  end
+
 end

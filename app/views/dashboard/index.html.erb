@@ -209,7 +209,7 @@
   $('.recommended_people_container').html(app.recommended_people_view.render().el)
 
 
-  app.recommended_projects = new app.collections.recommended_projects(<%= raw Project.custom_json(current_user.recommended_projects.limit(RECOMMENDED_PROJECTS_PER_PAGE), current_user) %>)
+  app.recommended_projects = new app.collections.recommended_projects(<%= raw Project.custom_json(current_user.recommended_projects.limit(RECOMMENDED_PROJECTS_PER_PAGE), current_user, true, false, true) %>)
   app.recommended_projects_view = new app.views.recommended_projects({ collection: app.recommended_projects })
   $('#recommended_projects_div').html(app.recommended_projects_view.render().el)
 
@@ -271,6 +271,100 @@
     if (url.match('#')) {
         $('a[href=#'+url.split('#')[1]+']').trigger('click') ;
     }
+
+    app.fn.start_main_intro = function(){
+
+			// show the user menu 
+			$('.userprflistwrap').show();
+			
+      introJs().setOptions({ 
+        steps: [
+                {
+                  element: $('[data-step=1]')[0],
+                  intro: "Welcome to Filmzu. <br/> This is your dashboard <p class='text'>Your Dashboard provides you with all the tools you need to create and collaborate on Filmzu</p>  ",
+                  tooltipClass:'main-intro'
+                },
+                {
+                  element: $('[data-step=2]')[0],
+                  intro: "<p class='text'>Your dashboard is just one click away</p> <p class='text'>Access it by clicking on your name and Dashboard.</p>",
+                  tooltipClass:'right-links-intro'
+                },
+                {
+                  element: $('[data-step=3]')[0],
+                  intro: "<p class='text'>Alternatively, you can click on this Filmzu logo to get to the Dashboard.</p>",
+                  tooltipClass:'logo-intro'
+                }
+              ],
+        'skipLabel': 'Skip',
+        'tooltipPosition': 'left',
+        'showStepNumbers': false,
+        'doneLabel': 'Continue',
+        'exitOnEsc': false,
+        'exitOnOverlayClick': false,
+        'showBullets': false
+      }).start().oncomplete(function(targetElement) {  
+
+        $('a[href=#projects]').trigger( 'click' );
+
+        // save the state that user has seen this intro.
+        app.fn.mark_finished_intro( 1, app.current_user.id );
+
+      }).onexit(function(targetElement) { 
+				
+        // save the state that user has seen this intro.
+        app.fn.mark_finished_intro( 1, app.current_user.id );
+      });
+
+    }
+
+    <% if current_user.show_main_intro? %>
+      app.fn.start_main_intro()
+    <% end %>
+
+    app.fn.try_project_intro = function(){
+      <% if current_user.show_project_intro? %>
+        $('.userprflistwrap').show();
+        introJs().setOptions({
+          steps: [
+            {
+              element: $('[data-step=21]')[0],
+              intro: "<div class='bordered-div'></div> Projects.<p class='text no-margin'>From your Dashboard, you can easily create and manage projects. </p> <p class='text'>If you're not sure where to start, we've got some useful tips at: <a href='http://www.filzmu.com/labs' target='_blank'>http://www.filzmu.com/labs</a></p>  ",
+              tooltipClass:'projects-main-intro'
+            },
+            {
+              element: $('[data-step=22]')[0],
+              intro: "You're Ready.<p class='text'>Take a look at the profile and start filling it in.<br/>The more information you provide, the more likely you are to be connected with filmmakers just like you.</p> <p class='text'>Start Collaborating. Start Creating.</p>  ",
+              tooltipClass:'profile-link-intro'
+            }
+          ],
+          'skipLabel': 'Skip',
+          'showStepNumbers': false,
+          'exitOnEsc': false,
+          'exitOnOverlayClick': false,
+          'doneLabel': 'Start',
+          'showBullets': false
+        }).start().oncomplete(function(targetElement) {  
+          
+					// send user back to the Dashboard home
+					$('a[href=#home]').trigger( 'click' );
+
+          $('.userprflistwrap a:nth(0)').addClass('hover')
+          $('.userprflistwrap a:nth(0)').find('li').html('Complete my Profile');
+				
+					// save the state that user has seen this intro.
+          app.fn.mark_finished_intro( 2, app.current_user.id );
+
+        }).onexit(function(targetElement) {
+          $('.userprflistwrap a:nth(0)').addClass('hover')
+          // save the state that user has seen this intro.
+          app.fn.mark_finished_intro( 2, app.current_user.id );
+        });
+      <% else %>
+        // have shown the tour already! Don't have to show it again.
+        return true
+      <% end %>
+    }
+		
   });
   
 

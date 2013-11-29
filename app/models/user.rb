@@ -12,16 +12,18 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :fb_token
   
+
   include Mailboxer::Models::Messageable
   acts_as_messageable
   #Returning the email address of the model if an email should be sent for this object (Message or Notification).
   #If no mail has to be sent, return nil.
   def mailboxer_email(object)
     #Check if an email should be sent for that object
-    #if true
-    return email
-    #if false
-    #return nil
+    if send_notification_mails == true
+      return email
+    else
+      return nil
+    end
   end
 
   after_create do |user|
@@ -82,11 +84,13 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :location, :about, :profile_attributes,
                   :imdb_url, :characteristics_attributes, :photos_attributes,
                   :talents_attributes, :photo, :other_videos_attributes, :projects_attributes,
-                  :admin, :gender, :headline, :featured, :expertise, :cover_photo_attributes,
+                  :gender, :headline, :featured, :expertise, :cover_photo_attributes,
                   :resume_attributes, :resume, :notification_check_time, :experience, :agent_name, :url_name,
                   :agent_present, :guild_present, :guild, :agentship_attributes, :demo_reel_attributes,
                   :terms_of_service, :provider, :uid, :managing_company
 
+  attr_protected :admin, :superadmin
+  
  # Name, Email is Required for User Sign-Up
   validates_presence_of :name, :email, :message => "is required"
   
@@ -530,18 +534,25 @@ class User < ActiveRecord::Base
 
   def serializable_hash(options)
     hash = super(options)
-    extra_hash = {
-      'profile_pic' => profile_pic,
-      'profile_thumb' => profile_thumb,
-      'profile_medium' => profile_medium,
-      'profile_tiny' => profile_tiny,
-      'cover_photo' => display_cover,
-      'cover_regular' => get_cover_regular,
-      'cover_medium' => display_cover_medium,
-      'talent_names' => talent_names,
-      'url_param' => url_param
-    }
-    hash.merge!(extra_hash)
+
+    # don't load the unnecassary attributes. (this is to improve speed)
+    if not options[:for_search].present?
+      extra_hash = {
+        'profile_pic' => profile_pic,
+        'profile_thumb' => profile_thumb,
+        'profile_medium' => profile_medium,
+        'profile_tiny' => profile_tiny,
+        'cover_photo' => display_cover,
+        'cover_regular' => get_cover_regular,
+        'cover_medium' => display_cover_medium,
+        'talent_names' => talent_names,
+        'url_param' => url_param
+      }
+      hash.merge!(extra_hash)
+    end
+
+    hash
+
   end
 
   def attending_events
@@ -673,10 +684,13 @@ class User < ActiveRecord::Base
       json[:url] = "/users/#{id}"
     end
     
-    json[:url_param]      = self.url_param
-    json[:display_cover]  = self.display_cover
-    json[:display_cover_regular]  = self.display_cover_regular
-    json[:display_cover_medium]  = self.display_cover_medium
+    # don't load the unnecassary attributes. (this is to improve speed)
+    if not options[:for_search].present?
+      json[:url_param]             = self.url_param
+      json[:display_cover]         = self.display_cover
+      json[:display_cover_regular] = self.display_cover_regular
+      json[:display_cover_medium]  = self.display_cover_medium
+    end
     json
   end
 
@@ -807,6 +821,23 @@ class User < ActiveRecord::Base
     Project.joins( :roles => { :applications => :user } ).
       where( "role_applications.approved = true AND role_applications.manager = true AND role_applications.user_id = ? ", self.id ).
         uniq
+  end
+
+  def cast_profile_present?
+    (guild_present and guild.present?) or gender.present? or characteristics.present? or agent.present? 
+  end
+
+  def writer_profile_present?
+    talent = self.talents.where(:name => 'Writer').first
+    talent.script_document.present? or talent.synopsis.present?
+  end
+
+  def show_main_intro?
+    finished_intro_state < 1
+  end
+
+  def show_project_intro?
+    finished_intro_state < 2
   end
 
 end

@@ -18,6 +18,14 @@
     <%%= trackable.content %>
   </div>
 
+  <%% if (trackable.url != null && trackable.url.url != null) { %>
+    <div class='comment-url'>
+      <a href='<%%= trackable.url.url %>' target='_blank'>
+        <%%= trackable.url.url %>
+      </a>
+    </div>
+  <%% } %>
+
   <%% if (trackable.photo != null) { %>
     <div class='comment-img'>
       <img src="<%%= trackable.photo.image.large.url %>">
@@ -65,6 +73,14 @@
     <%%= trackable.content %>
   </div>
 
+  <%% if (trackable.url != null && trackable.url.url != null) { %>
+    <div class='comment-url'>
+      <a href='<%%= trackable.url.url %>' target='_blank'>
+        <%%= trackable.url.url %>
+      </a>
+    </div>
+  <%% } %>
+
   <%% if (trackable.photo != null) { %>
     <div class='comment-img'>
       <img src="<%%= trackable.photo.image.large.url %>">
@@ -76,7 +92,6 @@
       <%%= trackable.video.embed_code %>
     </div>
   <%% } %>
-  
 
   <div class="row comment-actions">
     <div class='pull-left time-ago'>

@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag "dashboard/introjs" %>
+<%= javascript_include_tag "dashboard/intro" %>
 <div class='row  dashboard-tab-main-head user-profile-head'>
   
   <div class="profpicwrap img-circle pull-left" style="background: url('<%= @user.profile_pic %>') no-repeat"></div>
@@ -9,21 +11,25 @@
       Welcome, <%= @user.name %>.
     </div>
     
-    <div class='notifications-summary'>
-      <div class='btn-custom btn-notification'>
-        <div class='blue-star-icon pull-left light'></div> 
-        You have <span class='count'><%= current_user.unread_notifications.count %></span> new <%= "notification".pluralize(current_user.unread_notifications.count) %>!
+		<% if current_user.unread_notifications.present? %>
+	    <div class='notifications-summary'>
+	      <div class='btn-custom btn-notification'>
+	        <div class='blue-star-icon pull-left light'></div> 
+	        You have <span class='count'><%= current_user.unread_notifications.count %></span> new <%= "notification".pluralize(current_user.unread_notifications.count) %>!
         
-        <% class_to_set = current_user.unread_notifications.empty? ? '' : 'set_time' %>
+	        <% class_to_set = current_user.unread_notifications.empty? ? '' : 'set_time' %>
 
-        <div class='ignore-btn <%= class_to_set %>'>
-           <i class='icon-remove-sign'> </i>
-        </div>
+	        <div class='ignore-btn <%= class_to_set %>'>
+	           <i class='icon-remove-sign'> </i>
+	        </div>
 
 
-      </div>
-    </div>
-    
+	      </div>
+	    </div>
+		<% else %>
+			<div class='notifications-summary' style='margin-bottom: 35px'></div>
+    <% end %>
+
     <div class='links'>
       <%= link_to user_path(@user.id), :class => 'btn-custom btn-dark-grey pull-left link' do %>
         <div class='eye-open-icon'></div> View Profile

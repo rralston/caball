@@ -27,7 +27,7 @@ header
   .brand
     position: relative
     top: 10px
-    left: 30px
+    right: 0px
 
 ul
   list-style-type: none
@@ -242,6 +242,9 @@ header
   color: white
   text-shadow: 1px 1px 10px black
   background: url(/assets/grey-tile-bg.png) repeat-x
+  position: absolute
+  bottom: 0px
+  right: 0px
 
 .action-div
   cursor: pointer
@@ -873,6 +876,7 @@ ul.tagit span.ui-helper-hidden-accessible
         .comment-content
           margin-top: 15px
           font-size: 18px
+          word-wrap: break-word
         .comment-edit-textarea
           margin-top: 10px
           display: none
@@ -895,6 +899,10 @@ ul.tagit span.ui-helper-hidden-accessible
           iframe
             height: 100%
             width: 100%
+        .comment-url
+          margin-top: 10px
+          font-size: 15px
+          word-wrap: break-word
       .comment-actions
         padding: 20px
         border-top: 2px solid $divider-border
@@ -920,20 +928,22 @@ ul.tagit span.ui-helper-hidden-accessible
       .comment_edit
         display: block
 
+  #url_form_tab
+    margin-top: 20px
 
   textarea#comment_content, textarea#blog_content
     margin-left: 30px
     margin-top: 0px
     height: 95px !important
-    width: 445px
-    padding-right: 75px !important
+    width: 400px
+    padding-right: 120px !important
     -moz-box-shadow: 0px 0px 5px 1px #c8d2de inset
     -webkit-box-shadow: 0px 0px 5px 1px #c8d2de inset
     box-shadow: 0px 0px 5px 1px #c8d2de inset
     border: 1px solid #D0D7Df
     padding: 10px
     resize: none
-  #image_form_tab, #video_form_tab
+  #image_form_tab, #video_form_tab, #url_form_tab
     margin-left: 30px
 
 
@@ -999,6 +1009,10 @@ ul.tagit span.ui-helper-hidden-accessible
 
 .fans-tiles
   width: 321px
+  position: relative
+  background: url('/assets/fans-placeholder.png') no-repeat
+  background-size: 100% 100%
+  height: 285px
   .fan
     width: 107px
     div
@@ -1034,7 +1048,8 @@ ul.tagit span.ui-helper-hidden-accessible
 
 header
   .logo
-    width: 200px
+    width: 230px
+    height: 65px
 
 .hnav.navbar
   
@@ -1216,7 +1231,6 @@ header
 .loggedwrap 
   display: inline-block
   color: white
-  margin-top: 20px
   position: relative
   min-width: 250px
 
@@ -1245,11 +1259,12 @@ a:hover
   position: absolute
   width: 20px
   height: 20px
-  top: 0
-  left: 15px
+  top: 15px
+  left: 10px
 
 .notstarwrap 
   cursor: pointer
+  margin-top: 20px
 
 .noticontentwrap 
   position: absolute
@@ -1322,6 +1337,7 @@ a:hover
 .userprofwrap 
   display: block
   float: left
+  padding-top: 20px
 
 .usrprev 
   max-width: 200px
@@ -1386,8 +1402,21 @@ a:hover
   overflow: hidden
   background: rgba(255,255,255,.9)
 
-.proflist a:hover 
+.proflist a:hover, .proflist a.hover
   background: url('/assets/profhbg.png')
+  li
+    color: white
+  .profile
+    background: url('/assets/profileh.png') no-repeat 8% center rgba(255,255,255,.01)
+
+  .dboard
+    background: url('/assets/dashboardh.png') no-repeat 8% center
+
+  .settings
+    background: url('/assets/pencil-white.png') no-repeat 8% center
+
+  .lout
+    background: url('/assets/loggedh.png') no-repeat 8% center
 
 .proflist a:hover li 
   color: white
@@ -1398,29 +1427,17 @@ a:hover
 .profile 
   background: url('/assets/profile.png') no-repeat 8% center rgba(255,255,255,.01)
 
-.profile:hover 
-  background: url('/assets/profileh.png') no-repeat 8% center rgba(255,255,255,.01)
-
 .dboard 
   background: url('/assets/dashboard.png') no-repeat 8% center
 
-.dboard:hover 
-  background: url('/assets/dashboardh.png') no-repeat 8% center
-
 .settings 
   background: url('/assets/pencil-grey.png') no-repeat 8% center
-
-.settings:hover 
-  background: url('/assets/pencil-white.png') no-repeat 8% center
 
 .admin 
   background: url('/assets/open-eye.png') no-repeat 8% center
 	
 .lout 
   background: url('/assets/logged.png') no-repeat 8% center
-
-.lout:hover 
-  background: url('/assets/loggedh.png') no-repeat 8% center
 
 /*logged in info details*/
 
@@ -1448,6 +1465,7 @@ li.custom-ui-item
   
 .report_entity
   color: $brick-red
+  font-size: 15px
 
 .message_for_empty
   color: #d4d6dc

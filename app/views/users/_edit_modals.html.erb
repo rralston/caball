@@ -1,0 +1,521 @@
+<!-- Agent form Modal -->
+<div id="Agent-modal" class="modal user-edit-forms hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Update Agent Role Details</span></h3>
+  </div>
+  
+  <div class="modal-body">
+    
+    <%= form_for current_user, :html => { :class => 'form-horizontal' , :name => 'formElem' } do |f| %>
+
+      <%= f.fields_for :talents do |talent| %>
+
+        <% if talent.object.name == 'Agent' %>
+          <%= render :partial => 'agent_form', :locals => { :f => f, :talent => talent} %>
+        <% end %>
+
+      <% end %>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit "Update" %>
+        </div>    
+      </div>
+
+    <% end %>
+
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Close</button>
+  </div>
+</div>
+<!-- Agent form Modal -->
+
+
+<!-- Cast form Modal -->
+<div id="Cast-modal" class="modal user-edit-forms hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Update Cast Role Details</span></h3>
+  </div>
+  
+  <div class="modal-body edit-user">
+    
+    <%= form_for current_user, :html => { :class => 'form-horizontal' , :name => 'formElem' } do |f| %>
+
+      <%= f.fields_for :talents do |talent| %>
+
+        <% if talent.object.name == 'Cast' %>
+          <%= render :partial => 'characteristics_form', :locals => { :f => f, :talent => talent} %>
+        <% end %>
+
+      <% end %>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit "Update" %>
+        </div>    
+      </div>
+
+    <% end %>
+
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Close</button>
+  </div>
+</div>
+<!-- Cast form Modal -->
+
+
+<!-- Writer form Modal -->
+<div id="Writer-modal" class="modal user-edit-forms hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Update Writer Role Details</span></h3>
+  </div>
+  
+  <div class="modal-body edit-user">
+    
+    <%= form_for current_user, :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'user_edit_form_step_2', :class => 'user_edit_form_with_docs' } do |f| %>
+
+      <%= f.fields_for :talents do |talent| %>
+
+        <% if talent.object.name == 'Writer' %>
+          <%= render :partial => 'writer_form', :locals => { :f => f, :talent => talent} %>
+        <% end %>
+
+      <% end %>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit "Update" %>
+        </div>    
+      </div>
+
+    <% end %>
+
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Close</button>
+  </div>
+</div>
+<!-- Writer form Modal -->
+
+
+<!-- Resume form Modal -->
+<div id="Resume-modal" class="modal user-edit-forms hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Update Resume</span></h3>
+  </div>
+  
+  <div class="modal-body edit-user">
+    
+    <%= form_for current_user, :html => { :class => 'form-horizontal' , :name => 'formElem', :id => 'user_edit_form_step_2', :class => 'user_edit_form_with_docs' } do |f| %>
+
+      <%= f.fields_for :resume, current_user.resume || current_user.build_resume do |r|  %>
+
+        <div class="control-group resume-div">
+
+          <div class='controls clearfix'>
+            <%= r.label "Resume:", :class => 'control-label', :style=>'text-align: left;' %>
+          </div>
+
+          <% if current_user.resume.present? and current_user.resume.document.present? %>
+            <div class='controls upload-doc-preview upload-doc-parent'>
+              <a class='upload_doc_preview' href="<%= current_user.resume.document.url %>" target='_black'><%= current_user.resume.filename %></a>
+              <%= r.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+              <br/>
+              <a href='#' class='remove_entity' data-toRemove='.upload-doc-preview' style='top:0px;'>Remove resume</a>
+            </div>
+          <% else %>
+            <!-- hide initially, but when a file uploaded show the preview -->
+            <div class='controls'>
+              <a class='upload_doc_preview' href="#" target='_black' style='display: none;'>Check your uploaded doc.</a>
+            </div>
+          <% end %>
+
+          <div class="controls">
+            <%= r.file_field :document %>
+            <div class='form_hint'>
+              Upload a PDF or Microsoft Word Document, keep file size to 1MB
+              </div></div>
+
+          <div class='controls upload_progress'>
+            Upload Progress:
+            <div class='progress'>
+              <div class='bar' style='width: 0%'></div>
+            </div>
+          </div>
+
+          <% if current_user.resume.present? and current_user.resume.document.present? %>
+            <div class="controls">
+              
+            </div>
+          <% end %>
+        </div>
+
+      <% end %>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit "Update" %>
+        </div>    
+      </div>
+
+    <% end %>
+
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Close</button>
+  </div>
+</div>
+<!-- Resume form Modal -->
+
+<!-- Videos form Modal -->
+<div id="Videos-modal" class="modal user-edit-forms hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Update Videos</span></h3>
+  </div>
+  
+  <div class="modal-body">
+    
+    <%= form_for current_user, :html => { :class => 'form-horizontal' , :name => 'formElem' } do |f| %>
+
+      <%= f.fields_for :demo_reel, (current_user.demo_reel || Video.new) do |video|  %>
+      
+        <div class="control-group demo-reel">
+
+          <div class="controls">
+            <h4>Videos for your profile</h4>
+            <%= video.label :url, "First Video:" %>
+            <%= video.text_field(:url, :placeholder => 'YouTube, Vimeo URL', :class => 'hinted', "data-hint" => "Why can't I upload my clip directly? We know you probably already have your reel online somewhere, but we are in the process of making it so you can simply upload your video directly. Thanks for understanding!") %>
+            <div class='form_hint'>
+              We accept YouTube and Vimeo videos, simply paste the video URL and we will take care of the rest.
+            </div>
+          </div>
+
+          <% if video.object.embed_code.present? %>
+            <div class="controls">
+              <%= raw video.object.embed_code %>
+              <%= video.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+
+              <a href='#' class='remove_entity' data-toRemove='.demo-reel'>Remove this Video</a>
+            </div>
+          <% end %>
+
+          <% if false %> <!-- Content Exclusion -->
+            <div class="controls">
+              <label>Your Participation</label>
+              <%= video.text_area :user_description, :class => 'text_field', :rows => 5 %>
+            </div>
+          <% end %> <!-- End Exclusion -->
+          <input type='hidden' value='1' name='user[demo_reel_attributes][is_demo_reel]'>
+
+        </div>
+
+      <% end %>
+
+      <div class="control-group">
+        <div class="controls">
+          <h4>More Videos</h4>
+        </div>
+      </div>
+
+      <%= f.fields_for :other_videos do |video|  %>
+        <% if current_user.other_videos.exists? %>
+                
+          <% if video.object.embed_code.present? %>
+            <div class="control-group user-video">
+
+              <div class="controls">
+                <%= video.label :url %>
+                <%= video.text_field(:url, :placeholder => 'YouTube, Vimeo URL') %>
+              </div>
+
+
+              <div class="controls">
+                <%= raw video.object.embed_code %>
+                <%= video.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+
+                <a href='#' class='remove_entity' data-toRemove='.user-video'>Remove this Video</a>
+
+              </div>
+
+            </div>
+          <% end %>
+
+        <% else %>
+          <div class="control-group">
+            
+            <div class="controls">
+              <%= video.text_field(:url, :placeholder => 'YouTube, Vimeo URL') %>
+            </div>
+          </div>
+        <% end %>
+        
+        <% if false %> <!-- Content Exclusion -->
+          <div class="control-group">
+            
+            <div class="controls">
+              <label>Your Participation</label>
+              <%= video.text_area :user_description, :class => 'text_field', :rows => 5 %>
+            </div>
+          </div>
+        <% end %> <!-- End Exclusion -->
+      <% end %>
+
+      <div id="fields-for-videos-list" class="numerous">
+        <%= f.fields_for :other_videos, Video.new, :child_index => 'replace_this' do |video| %>
+          
+          <div class="control-group video-url">
+            <div class="controls">
+              <label>Url</label>
+              <%= video.text_field(:url, :placeholder => 'YouTube, Vimeo URL') %>
+            </div>
+            <% if false %> <!-- Content Exclusion -->
+            
+            <div class="controls">
+              <label>Your Participation</label>
+              <%= video.text_area :user_description, :class => 'text_field', :rows => 5 %>
+            </div>
+            <% end %> <!-- End Exclusion -->
+          </div>
+          <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+
+        <% end %>
+      </div>
+      
+      <div id="videos-list"></div>
+      
+      <div class="control-group" style="margin-top: 10px;">      
+        <div class='controls'>
+          <%= link_to 'Add Another Video', '#', :id => 'add-to-videos-list' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit "Update" %>
+        </div>    
+      </div>
+
+    <% end %>
+
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Close</button>
+  </div>
+</div>
+<!-- Videos form Modal -->
+
+
+<!-- Cover form Modal -->
+<div id="Cover-modal" class="modal user-edit-forms hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Update Cover Photo</span></h3>
+  </div>
+  
+  <div class="modal-body edit-user">
+    
+    <%= form_for current_user, :html => { :class => 'form-horizontal' , :name => 'formElem', :class => 'user_edit_form_with_photos' } do |f| %>
+
+
+      <%= f.fields_for :cover_photo, (current_user.cover_photo || Photo.new) do |user_cover_photo|  %>
+
+        <div class='row cover-photo-container'>
+          <div class='span3'>
+            <div class="control-group">
+              <%= user_cover_photo.hidden_field :crop_x, :class => 'crop_x' %>
+              <%= user_cover_photo.hidden_field :crop_y, :class => 'crop_y' %>
+              <%= user_cover_photo.hidden_field :crop_w, :class => 'crop_w' %>
+              <%= user_cover_photo.hidden_field :crop_h, :class => 'crop_h' %>
+
+                <!-- if image exits, allow to change it -->
+                <% if user_cover_photo.object.image.present? %>
+                  <div class="controls image_container cover_photo_container">
+                    <img src=<%= user_cover_photo.object.image.url(:medium) %> class="image_preview_container" >
+                  </div>
+
+                  <div class='controls' style='margin-top: 5px; white-space: nowrap;'>
+                    <label class="checkbox">
+                        <%= user_cover_photo.check_box :_destroy, :class=>'destroy_checkbox checkbox' %> Delete cover photo
+                    </label>
+                  </div>
+                    
+                  <div class='controls image_btns'>
+                    <a href="" class='btn crop_image pull-left' data-orgImgUrl='<%= user_cover_photo.object.image.url %>' data-orgWidth='<%= user_cover_photo.object.original_width %>' data-orgHeight='<%= user_cover_photo.object.original_height %>' data-prevImgUrl='<%= user_cover_photo.object.image.url(:original) %>' data-ar='13:6' style='display: inline'>Crop</a>
+                  </div>
+
+
+                <% else %>
+                  <!-- just keep the container there in case to preview if user uploads an image. -->
+                  <div class="controls image_container cover_photo_container" style='display:none;'>
+                    <img src='' class="image_preview_container" style='display:none;'>
+                  </div>
+                  <div class='controls image_btns'>
+                    <a href="" class='btn crop_image pull-left' data-imgUrl='' data-ar='13:6' >Crop</a>
+                  </div>
+                <% end %>
+
+              <div class='controls upload_progress'>
+                Upload Progress:
+                <div class='progress'>
+                  <div class='bar' style='width: 0%'></div>
+                </div>
+              </div>
+
+              <div class="controls">
+                <%= user_cover_photo.file_field :image, :validate => true %>
+                <!-- id is updated when the image is created and uploaded  -->
+                <%= user_cover_photo.hidden_field :id, :class => 'photo_id_div' %>
+              </div>
+              <% if false %> <!-- Content Exclusion -->
+                <div class="controls">
+                  <label>Description:</label>
+                  <%= user_cover_photo.text_field :description %>
+                </div>
+              <% end %> <!-- End Exclusion -->
+              <input type='hidden' value='1' name='user[cover_photo_attributes][is_cover]'>
+
+            </div>
+          </div>
+
+        </div>
+
+      <% end %>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit "Update" %>
+        </div>    
+      </div>
+
+    <% end %>
+
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Close</button>
+  </div>
+</div>
+<!-- Cover form Modal -->
+
+
+<!-- Photos form Modal -->
+<div id="Photos-modal" class="modal user-edit-forms hide fade left-aligned" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3><span>Update Photos </span></h3>
+  </div>
+  
+  <div class="modal-body">
+    
+    <%= form_for current_user, :html => { :class => 'form-horizontal' , :name => 'formElem', :class => 'user_edit_form_with_photos' } do |f| %>
+
+      <div class="controls">
+        <h4>More Photos</h4>
+      </div>
+
+      <%= f.fields_for :photos do |p|  %>
+        <% if current_user.photos.exists? %>
+          <div class="control-group user-extra-photo">
+            
+            <%= p.label "Photo", :class => 'control-label' %>
+            
+            <div class="controls">
+              <%= image_tag p.object.image.url(:medium), {:class => "img-polaroid image_preview_container"} %>
+            </div>
+
+            <div class="controls">
+              <%= p.check_box :_destroy, :class=>'destroy_checkbox', :style=>'display:none;' %>
+
+              <a href='#' class='remove_entity' data-toRemove='.user-extra-photo'>Remove this photo</a>
+            </div>
+
+            <div class='controls upload_progress'>
+              Upload Progress:
+              <div class='progress'>
+                <div class='bar' style='width: 0%'></div>
+              </div>
+            </div>
+
+
+            <div class="controls">
+              <%= p.file_field :image %>
+            </div>
+
+            <% if false %> <!-- Content Exclusion -->
+          
+            <div class='controls'>
+              <%= p.label "Description:" %>
+              <%= p.text_field :description, :class => 'text_field' %>
+            </div>
+            <% end %> <!-- End Exclusion -->
+
+          </div>
+
+        <% end %>
+      <% end %>
+
+      <div id="fields-for-photos-list" class="numerous">
+        <%= f.fields_for :photos, Photo.new, :child_index => 'replace_this' do |photo| %>
+          <div class="control-group user-extra-photo">
+
+            <label class='control-label'>Photo</label>
+
+            <!-- just keep the container there in case to preview if user uploads an image. -->
+            <div class="controls">
+              <img class='image_preview_container img-polaroid' src="" style='display: none;'>
+            </div>
+
+            <div class='controls upload_progress'>
+              Upload Progress:
+              <div class='progress'>
+                <div class='bar' style='width: 0%'></div>
+              </div>
+            </div>
+
+            <div class="controls">
+              <%= photo.file_field :image %>
+            </div>
+
+            <div class="controls">
+
+              <!-- id is updated when the image is created and uploaded  -->
+              <%= photo.hidden_field :id, :class => 'photo_id_div' %>
+              <% if false %> <!-- Content Exclusion -->
+
+              <%= photo.label :description %>
+
+              <%= photo.text_field :description, :class => 'text_field', :rows => "5" %>
+              <% end %> <!-- End Exclusion -->
+            </div>   
+          </div>
+
+          <%= link_to 'Remove', '#', :class => 'numerous-remove' %>
+        <% end %>
+      </div>
+
+      <div id="photos-list"></div>
+      
+      <div class="controls">
+        <%= link_to 'Add Another Photo', '#', :id => 'add-to-photos-list' %>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <%= f.submit "Update" %>
+        </div>    
+      </div>
+
+    <% end %>
+
+  </div>
+  <div class='modal-footer'>
+    <button class='btn' data-dismiss="modal">Close</button>
+  </div>
+</div>
+<!-- Photos form Modal -->

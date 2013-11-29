@@ -41,7 +41,7 @@ class Admin::AdminController < Admin::BaseController
 
   def update_user
     user = User.find(params[:user_id])
-    
+    user.admin = params[:user][:admin] if current_user.admin?
     if user.update_attributes( params[:user] )
       render js: 'alert("User details updated.")' 
     else

@@ -58,12 +58,6 @@ $(document).ready ()->
         else
           alert('Something went wrong, Please try again later')
         btn.html('Load More') 
-
-
-  reset_results = (resp)->
-    app.result_users.reset(resp)
-    $('#all_users').html(app.result_users_view.render().el)
-    $('.btn-load_more').attr('data-next-page', 2)
   
 
   # when advanced search is clicked.
@@ -91,7 +85,7 @@ $(document).ready ()->
       success: (resp) ->
         if resp != 'false'
           if resp.length > 0
-            reset_results(resp)
+            app.fn.reset_results(resp)
             app.fn.add_filters(data)
           else
             alert('No users found matching the selection')
@@ -140,7 +134,7 @@ $(document).ready ()->
               app.params_used        = {}
               app.params_used.search = search_object.value
               app.params_used.type   = search_object.type
-              reset_results(resp)
+              app.fn.reset_results(resp)
               $('#users_search_form')[0].reset()
               if type == 'location'
                 $('.search_filters').html('<div class="badge badge-custom-green">location: '+search_object.value+'</div>');

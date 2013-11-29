@@ -152,8 +152,10 @@
             
             <div class='event-links row'>
               <div class='span4 text-center'>
-                <a href="http://<%= @event.website.gsub('http://', '') %>" target='_blank'>Visit website</a>
-                <span class='dot-seperator-red'></span>
+                <% if @event.website.present? %>
+									<a href="http://<%= @event.website.gsub('http://', '') %>" target='_blank'>Visit website</a>
+                	<span class='dot-seperator-red'></span>
+								<% end %>
                 <a href="#" data-toggle='modal' data-target='#event_map_modal'>Visit Map</a>
               </div>
             </div>
@@ -392,8 +394,8 @@ $(document).ready(function(){
 
 // who is coming
   app.attendees = new app.collections.attendees()
-  app.attendees.reset(<%= raw @event.attendees.to_json() %>)
-  app.attendees_view = new app.views.attendees({ collection: app.attendees })
+  app.attendees.reset(<%= raw @event.attendees.last(8).to_json() %>)
+  app.attendees_view = new app.views.attendees({ collection: app.attendees, total_attendees: <%= @event.attendees.count %> })
 
   $('#who_coming').html( app.attendees_view.render().el )
 
@@ -439,6 +441,7 @@ $(document).ready(function(){
     $('#comment_please_wait').hide()
     $('textarea#comment_content').attr('disabled', false).val('')
     $('#comment_video_attributes_url').attr('disabled', false).val('')
+    $('#comment_url_attributes_url').attr('disabled', false).val('')
     $('#comment_photo_attributes_image').attr('disabled', false)
     $('button.post_update').attr('disabled', false)
     $('.post_comment_btn').hide()
@@ -454,6 +457,7 @@ $(document).ready(function(){
     $('#comment_please_wait').hide()
     $('textarea#comment_content').attr('disabled', false)
     $('#comment_video_attributes_url').attr('disabled', false)
+    $('#comment_url_attributes_url').attr('disabled', false)
     $('#comment_photo_attributes_image').attr('disabled', false)
     $('button.post_update').attr('disabled', false)
     $('.post_comment_btn').hide()

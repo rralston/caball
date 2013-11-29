@@ -8,6 +8,7 @@ Caball::Application.routes.draw do
   match '/contact_us' => 'contact_us/contacts#new'
   # get 'people', to: 'users#index', via: :all
   resources :users, :path => "people"
+  match '/people/:id' => 'users#update', :via => 'post'
   match "/blog(/*path)" => redirect{ |env, req| "http://blog.filmzu.com" + (req.path ? "#{req.path}" : '/')}
 
   match 'check_url_param' => 'application#check_url_param'
@@ -31,6 +32,7 @@ Caball::Application.routes.draw do
   match '/users/profile' => 'users#profile'
   match '/users/change_password' => 'users#change_password'
   match '/users/change_email' => 'users#change_email'
+  match '/users/change_email_settings' => 'users#change_email_settings'
   get '/users/search_by_name'  
 
   match '/events/files_upload' => 'events#files_upload'

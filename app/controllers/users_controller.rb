@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     if params[:page].present?
       page = params[:page]
       type = params[:load_type]
+
       
       if type == 'recent'
         @users = User.recently_updated(page, USERS_PER_PAGE_IN_INDEX)
@@ -25,6 +26,8 @@ class UsersController < ApplicationController
         if params[:roles]
           params[:roles].delete('') # delete empty string that is appended in few cases
         end
+
+        @search = params[:search].present? ? true : false
 
         sub_roles = params[:sub_talents]
         
@@ -102,6 +105,7 @@ class UsersController < ApplicationController
                                              :layout => false, :formats => [:html], :locals => {} ) 
                   } }
     end
+
   end
   
   ## ALERT : is this being used?
@@ -159,32 +163,12 @@ class UsersController < ApplicationController
     current_user.reset_sub_talents
 
     if current_user.update_attributes(params[:user])
-      render 'users/step_2_form', :layout => false
+      render :text => 'true', :layout => false
     else
       render :json => {:success => false, :message => current_user.errors.full_messages.first}
     end
   end
 
-
-  def step_1_reload
-    render 'users/_step_1_form', :layout => false
-  end
-
-  def step_2
-    if current_user.update_attributes(params[:user])
-      render 'users/step_3_form', :layout => false
-    else
-      render :json => {:success => false, :message => current_user.errors.full_messages.first}
-    end
-  end
-
-  def step_3
-    if current_user.update_attributes(params[:user])
-      redirect_to dashboard_url, :success => true, :notice => 'User info saved'
-    else
-      redirect_to dashboard_url, :success => false, :notice => 'User info not saved'
-    end
-  end
 
   def files_upload    
     # TODO: try to send only required parameters from client side if possible.
@@ -259,11 +243,11 @@ class UsersController < ApplicationController
       if current_user.cover_photo.nil?
         current_user.create_cover_photo(params['user']['cover_photo_attributes'])
       else
-        current_user.cover_photo.update_attributes(params['user']['cover_photo_attributes'])
+        current_user.update_attributes(params['user'])
       end
 
       file_url = {
-        :url => current_user.cover_photo.image.url(:medium),
+        :url => current_user.cover_photo.image.url,
         :id => current_user.cover_photo.reload.id,
         :original_width => current_user.cover_photo.reload.original_width,
         :original_height => current_user.cover_photo.reload.original_height
@@ -341,13 +325,13 @@ class UsersController < ApplicationController
       format.json {
         render :json => resp.to_json(:include => 
                                       [
-                                        :open_roles,
-                                        :filled_roles,
                                         :roles,
                                         :user
                                       ],
                                       :methods => [
-                                        :pending_applications
+                                        :pending_applications,
+                                        :open_roles,
+                                        :filled_roles,
                                       ])
       }
     end
@@ -479,6 +463,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def change_email_settings
+    current_user.update_attributes send_notification_mails: params[:user][:send_notification_mails]
+    respond_to do |format|
+      format.js #change_email_settings.js.erb
+    end
+  end
 
   # this action is used in the projects creation form for searching and adding users to roles.
   def search_by_name

@@ -29,7 +29,7 @@
 					  </div>
 					  <div class="control-group">
 					    <div class="controls">
-					      <button type="submit" class="btn chng_password">Change Password</button>
+					      <input type="submit" class="chng_password" value="Change Password">
 					    </div>
 					  </div>
 					</form>
@@ -50,10 +50,37 @@
 				  </div>
 				  <div class="control-group">
 				    <div class="controls">
-				      <button type="submit" class="btn chng_email">Change Email</button>
+				      <input type="submit" class="chng_email" value="Change Email">
 				    </div>
 				  </div>
 				</form>
   		</div>
+
+      <!-- Change Email Section -->
+      <div class="row">
+        <h3>Change Email Settings</h3>
+        <hr/>
+        <%= form_for current_user, :url => users_change_email_settings_path, :html => { :class => 'change_email_settings_form form-horizontal' }, :remote => true do |f| %>
+
+          <div class="errors" style="margin-left: 400px;">
+
+          </div>
+
+          <div class='control-group'>
+            <div class='controls'>
+              Receive notification emails: <%= f.check_box :send_notification_mails %>
+            </div>
+          </div>
+
+          <div class='control-group'>
+            <div class='controls'>
+              <%= f.submit 'Change Settings' %>
+            </div>
+          </div>
+          
+        <% end %>
+      </div>
+
+
   </div>
 </div>

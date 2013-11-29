@@ -370,7 +370,7 @@
           <div class='right-extra-div coming-div row'>
             <div class="span4 shrink-div head">
               <span class="pull-left">
-                <h3>Connect</h3>
+                <h3>Promote</h3>
               </span>
               <span class="btn-show-all pull-right"></span>
               <div class="clearfix"></div>
@@ -394,7 +394,7 @@
               <span class="pull-left">
                 <h3 class='action-div report_entity' data-toggle='modal' data-target='#report-modal' title='Report Project'>
                   <i class='icon-exclamation-sign'></i>
-                  <%= link_to "#" do %> Report<% end %> 
+                  <%= link_to "#" do %> Report this project<% end %> 
                 </h3>
               </span>
               
@@ -474,15 +474,15 @@ $(document).ready(function(){
 
   // similar projects
   app.similar_projects = new app.collections.similar_projects()
-  app.similar_projects.reset(<%= raw Project.custom_json(@project.similar_projects.first(4), current_user) rescue nil %>)
+  app.similar_projects.reset(<%= raw Project.custom_json(@project.similar_projects.first(4), current_user, true, false, true) rescue nil %>)
   app.similar_projects_view = new app.views.similar_projects({ collection: app.similar_projects })
   $('#similar_projects_div').html(app.similar_projects_view.render().el)
 
 
   // fans
   app.fans = new app.collections.fans()
-  app.fans.reset(<%= raw @project.fans.to_json() %>)
-  app.fans_view = new app.views.fans({ collection: app.fans })
+  app.fans.reset(<%= raw @project.fans.last(8).to_json() %>)
+  app.fans_view = new app.views.fans({ collection: app.fans, total_fans: <%= @project.fans.count %> })
   $('#fans_div').html(app.fans_view.render().el)
 
   $(document).on('newComment', function(event){
@@ -494,6 +494,7 @@ $(document).ready(function(){
     $('#comment_please_wait').hide()
     $('textarea#comment_content').attr('disabled', false).val('')
     $('#comment_video_attributes_url').attr('disabled', false).val('')
+    $('#comment_url_attributes_url').attr('disabled', false).val('')
     $('#comment_photo_attributes_image').attr('disabled', false)
     $('button.post_update').attr('disabled', false)
     $('.post_comment_btn').hide()
@@ -509,6 +510,7 @@ $(document).ready(function(){
     $('#comment_please_wait').hide()
     $('textarea#comment_content').attr('disabled', false)
     $('#comment_video_attributes_url').attr('disabled', false)
+    $('#comment_url_attributes_url').attr('disabled', false)
     $('#comment_photo_attributes_image').attr('disabled', false)
     $('button.post_update').attr('disabled', false)
     $('.post_comment_btn').hide()

@@ -1,5 +1,5 @@
 <%= javascript_include_tag "users/users_manifest" %>
-<%= stylesheet_link_tag "users/show" %>
+<%= stylesheet_link_tag 'users/show' %>
 
 <!--========= content wrapper======------>
 <div>
@@ -11,10 +11,21 @@
           <div class="row-fluid">
           <!--========= Header ends======------>
               <div class="profhdr span12">
-                  
+                  <% if current_user == @user %>
+
+                    <div class='edit-cover-link'>
+                      <a href="" data-toggle='modal' data-target='#Cover-modal'>
+                        Edit Cover Photo <i class='icon-pencil'></i>
+                      </a>
+                    </div>
+
+                  <% end %>
+
                   <div class="blurbgcover">
                     <div class="blurbg">
-                      <div class="cover" style='background-image: url(<%= @user.get_cover_regular %>)'></div>
+                      <div class="cover" style='background-image: url(<%= @user.get_cover_regular %>)'>
+                        
+                      </div>
                     </div>
                   </div>
                   <div class="proftagwrap row-fluid">
@@ -27,8 +38,15 @@
                             <i class='icon-remove-sign action-div'></i>
                           </div>
 
+                          <div class='edit-photos-link'>
+                            <a href="" data-toggle='modal' data-target='#Photos-modal'>
+                              Edit Photos <i class='icon-pencil'></i>
+                            </a>
+                          </div>
+
                         <% end %>
                         <span class='user_headline_text'>
+
                           <% if current_user == @user %>
                             <i class='icon-pencil action-div edit_headline' data-toggle="tooltip" title="Click here to update your headline"></i>
                           <% end %>
@@ -105,7 +123,7 @@
                           <% image_name = talent.name %>
                         <% end %>
 
-                        <li>
+                        <li class='text-center'>
                           <img src="/assets/role_icons/<%= image_name %>.png" alt="<%= talent.name %>" width="45" height="45" title='<%= talent.sub_talent ? talent.sub_talent : talent.name %>' data-scrollto='#<%= talent.name.downcase %>_profile' class='action-div scroll_to'/>
                         </li>
                       <% end %>
@@ -116,7 +134,18 @@
                 </div>
                 <div class="row-fluid">
                   <div class="profnm">
-                    <div class="profnmh1"><%= @user.name %></div>
+                    <div class="profnmh1">
+                      <%= @user.name %> 
+                      <% if current_user == @user %>
+                        <span class='public_view_link'>
+
+                          <a href="#">
+                            View public profile
+                          </a>
+
+                        </span>
+                      <% end %>
+                    </div>
                     <div class="profnmh2"><%= @user.location %></div>
                   </div>
                 </div>
@@ -182,45 +211,76 @@
       </div>
       
       <div class='row right-extra-div' id='user_video'>
+        
+
         <% if @user.valid_videos.size > 0 %>
 
-        <div id="user_side_bar_videos" class="carousel slide" data-interval='false'>
-          <!-- Carousel items -->
-          <div class="carousel-inner">
-            <% @user.valid_videos.each_with_index do |video, index| %>
-              
-              <% if index == 0 %>
-                <!-- make the first one as active. -->
-                <div class="item active text-center">
-                  <%= raw video.embed_code %>
-                </div>
-              
-              <% else %>
-                <div class="item text-center">
-                  <%= raw video.embed_code %>
-                </div>
-              <% end %>
-            
-            <% end %>
-          </div>
-          
-          <% if @user.valid_videos.size > 1 %>
+          <div id="user_side_bar_videos" class="carousel slide" data-interval='false'>
 
-            <ol class="carousel-indicators">
+            <% if current_user == @user %>
+              <div id='edit_videos_link' data-toggle='modal' data-target='#Videos-modal'>
+                <div class='edit-videos-overlay'>
+                  <i class='icon-pencil'></i> Edit/Add Videos
+                </div>
+              </div>
+            <% end %>
+
+            <!-- Carousel items -->
+            <div class="carousel-inner">
               <% @user.valid_videos.each_with_index do |video, index| %>
                 
                 <% if index == 0 %>
                   <!-- make the first one as active. -->
-                  <li data-target="#user_side_bar_videos" data-slide-to="<%= index %>" class="active"></li>
+                  <div class="item active text-center">
+                    <%= raw video.embed_code %>
+                  </div>
+                
                 <% else %>
-                  <li data-target="#user_side_bar_videos" data-slide-to="<%= index %>"></li>
+                  <div class="item text-center">
+                    <%= raw video.embed_code %>
+                  </div>
                 <% end %>
+              
               <% end %>
-            </ol>
+            </div>
+            
+            <% if @user.valid_videos.size > 1 %>
+
+              <ol class="carousel-indicators">
+                <% @user.valid_videos.each_with_index do |video, index| %>
+                  
+                  <% if index == 0 %>
+                    <!-- make the first one as active. -->
+                    <li data-target="#user_side_bar_videos" data-slide-to="<%= index %>" class="active"></li>
+                  <% else %>
+                    <li data-target="#user_side_bar_videos" data-slide-to="<%= index %>"></li>
+                  <% end %>
+                <% end %>
+              </ol>
+
+            <% end %>
+          </div>
+
+        <% else %>
+          <% if current_user == @user %>
+            <div id='user-video-placeholder' data-toggle='modal' data-target='#Videos-modal'>
+              <div class='add-video-overlay'>
+                Upload your Reel Video
+              </div>
+            </div>
+          <% else %>
+            <div id='user-video-placeholder'>
+              <div class='add-video-overlay'>
+                No Videos updated!
+              </div>
+            </div>
 
           <% end %>
-        </div>
+
+
         <% end %>
+
+
       </div>
 
       <% if current_user == @user and !@user.only_fan?  %>
@@ -229,8 +289,7 @@
             <span class="pull-left">
               <h3>Profile Completeness</h3>
             </span>
-            <span class="btn-show-all pull-right"></span>
-
+           <a href='/users/<%= @user.id %>/edit'><span class="btn-show-all btn-edit-details pull-right" data-toggle="tooltip" title="Update your profile"></span></a>
           </div>
 
           <div class="span4">
@@ -247,9 +306,9 @@
                   <%= @user.completeness %>%
                 </div>
               </div>
-							<div class='edit text-center'>
+							<!-- <div class='edit text-center'>
                 <a href='/users/<%= @user.id %>/edit'><i class='icon-pencil'></i> Edit Profile</a>
-              </div>
+              </div> -->
             </div>
           </div>
           
@@ -265,8 +324,11 @@
             <h3>About</h3>
             
           </span>
+					<% if current_user == @user %>
+					<span class="btn-show-all btn-edit-details pull-right action-div edit_about" data-toggle="tooltip" title="Edit"></span>
+					<% else %>
           <span class="btn-show-all pull-right"></span>
-
+					<% end %>
         </div>
 
         <div class="span4">
@@ -285,9 +347,9 @@
 
           <% end %>
           <div class="user_about_text">
-            <% if current_user == @user %>
+            <!-- <% if current_user == @user %>
               <i class='icon-pencil action-div edit_about' data-toggle="tooltip" title="Click here to update your about"></i>
-            <% end %>
+            <% end %> --> 
             <div class="about_content">
               <% if @user.about.present? and @user.about.length > 200 %>
                 <%= truncate(@user.about, :length => 200, :separator => ' ') %> <a class='read_more_btn' data-content='<%= @user.about %>' data-header='About - <%= @user.name %>' >Read more</a>
@@ -306,8 +368,14 @@
             <span class="pull-left">
               <h3>Cast Profile</h3>
             </span>
+
+            <% if current_user == @user %>
+              <span class="btn-show-all btn-edit-details pull-right action-div" data-toggle='modal' data-target='#Cast-modal' title='Add/Edit details'></span> 
+            <% else %>
+              <span class="btn-show-all pull-right"></span>   
+            <% end %>
             
-            <span class="btn-show-all pull-right"></span> 
+            
             
             <div class='clearfix'></div>
           </div>
@@ -318,57 +386,65 @@
             </div>
           </div>
 
-          <div class='content light'>
+          <% if @user.cast_profile_present? %>
 
-            <% if @user.guild_present and @user.guild.present? %>
-              Guild: <%=  @user.guild %><br/>
-            <% end %>
+            <div class='content light'>
 
-            <% if @user.gender.present? %>
-              Sex: <%=  @user.gender.camelize %><br/>
-            <% end %>
-
-            <% if @user.characteristics.present? %>
-              
-              <% if @user.characteristics.height.present? %>
-                Height: <%=  @user.characteristics.height.camelize %><br/>
+              <% if @user.guild_present and @user.guild.present? %>
+                Guild: <%=  @user.guild %><br/>
               <% end %>
 
-              <% if @user.characteristics.ethnicity.present? %>
-                Ethnicity: <%=  @user.characteristics.ethnicity.camelize %><br/>
+              <% if @user.gender.present? %>
+                Sex: <%=  @user.gender.camelize %><br/>
               <% end %>
 
-              <% if @user.characteristics.bodytype.present? %>
-                Build: <%=  @user.characteristics.bodytype %><br/>
+              <% if @user.characteristics.present? %>
+                
+                <% if @user.characteristics.height.present? %>
+                  Height: <%=  @user.characteristics.height.camelize %><br/>
+                <% end %>
+
+                <% if @user.characteristics.ethnicity.present? %>
+                  Ethnicity: <%=  @user.characteristics.ethnicity.camelize %><br/>
+                <% end %>
+
+                <% if @user.characteristics.bodytype.present? %>
+                  Build: <%=  @user.characteristics.bodytype %><br/>
+                <% end %>
+
+                <% if @user.characteristics.hair_color.present? %>
+                  Hair Color: <%=  @user.characteristics.hair_color.camelize %><br/>
+                <% end %>
+
+                <% if @user.characteristics.age.present? %>
+                  Age: <%=  @user.characteristics.age.camelize %><br/>
+                <% end %>
+
               <% end %>
 
-              <% if @user.characteristics.hair_color.present? %>
-                Hair Color: <%=  @user.characteristics.hair_color.camelize %><br/>
-              <% end %>
-
-              <% if @user.characteristics.age.present? %>
-                Age: <%=  @user.characteristics.age.camelize %><br/>
-              <% end %>
-
-            <% end %>
-
-            <% if @user.agent.present? %>
-              Representation:
-              <div class='representation'>
-                <span class="pull-left agent-img">
-                  <div class='agent_photo img-circle' style='background: url("<%= @user.agent.profile_thumb %>") no-repeat;'>
-                  </div>
-                </span>
-                <span class="agent pull-left">
-                  <a href='<%= user_path(@user.agent) %>'><%= @user.agent.name %></a>
-                  <br>
-                  <span class="agent-company medium">
-                    <%= @user.agent.managing_company %>
+              <% if @user.agent.present? %>
+                Representation:
+                <div class='representation'>
+                  <span class="pull-left agent-img">
+                    <div class='agent_photo img-circle' style='background: url("<%= @user.agent.profile_thumb %>") no-repeat;'>
+                    </div>
                   </span>
-                </span>
-              </div>
-            <% end %>
-          </div>
+                  <span class="agent pull-left">
+                    <a href='<%= user_path(@user.agent) %>'><%= @user.agent.name %></a>
+                    <br>
+                    <span class="agent-company medium">
+                      <%= @user.agent.managing_company %>
+                    </span>
+                  </span>
+                </div>
+              <% end %>
+            </div>
+
+          <% else %>
+            <div class='content light text-center'>
+              No data provided
+            </div>
+          <% end %>
 
         </div>
       <% end %>
@@ -380,7 +456,11 @@
               <h3>Agent Profile</h3>
             </span>
             
-            <span class="btn-show-all pull-right"></span> 
+            <% if current_user == @user %>
+              <span class="btn-show-all btn-edit-details pull-right action-div" data-toggle='modal' data-target='#Agent-modal' title='Add/Edit details'></span> 
+            <% else %>
+              <span class="btn-show-all pull-right"></span>   
+            <% end %>
             
             <div class='clearfix'></div>
           </div>
@@ -391,14 +471,22 @@
             </div>
           </div>
 
-          <div class='content light'>
-            <% if @user.agent.present? %>
+          <% if @user.agent.present? %>
+          
+            <div class='content light'>
               Managing Comany:
               <div class='company'>
                   <%= @user.managing_company %>
               </div>
-            <% end %>
-          </div>
+            </div>
+          
+          <% else %>
+
+            <div class='content light text-center'>
+              No data provided
+            </div>
+
+          <% end %>
 
         </div>
       <% end %>
@@ -406,25 +494,31 @@
       <% if @user.talent_names.include?('Writer') %>
         <% talent = @user.talents.where(:name => 'Writer').first %>
 
-        <% if talent.script_document.present? || talent.synopsis.present? %>
-          <div class='row right-extra-div' id='writer_profile'>
-            <div class='span4 shrink-div head'>
-              <span class="pull-left">
-                <h3>Writer Profile</h3>
-              </span>
-              
-              <span class="btn-show-all pull-right"></span> 
-              
-              <div class='clearfix'></div>
-            </div>
+        <div class='row right-extra-div' id='writer_profile'>
+          <div class='span4 shrink-div head'>
+            <span class="pull-left">
+              <h3>Writer Profile</h3>
+            </span>
+            
+            <% if current_user == @user %>
+              <span class="btn-show-all btn-edit-details pull-right action-div" data-toggle='modal' data-target='#Writer-modal' title='Add/Edit details'></span> 
+            <% else %>
+              <span class="btn-show-all pull-right"></span>   
+            <% end %>
+            
+            
+            <div class='clearfix'></div>
+          </div>
 
-            <div class="span4">
-              <div class="row clearfix">
-                <div class="grey-line-divider"></div>
-              </div>
+          <div class="span4">
+            <div class="row clearfix">
+              <div class="grey-line-divider"></div>
             </div>
+          </div>
 
-            <div class="span4 shrink-div desc">
+          <div class="span4 shrink-div desc">
+
+            <% if @user.writer_profile_present? %>
 
               <div class='content light'>
                 
@@ -442,10 +536,16 @@
                   </div>
                 <% end %>
               </div>
-            </div>
+
+            <% else %>
+              <div class='content light text-center'>
+                No data provided
+              </div>
+            <% end %>
 
           </div>
-        <% end %>    
+
+        </div>
       <% end %>
 
       <div class='row right-extra-div' id='user_projects_div'>
@@ -457,14 +557,18 @@
       <div class='row right-extra-div' id='endorsements_div'>
       </div>
 
-      <% if @user.resume.present? and @user.resume.document.present? %>
+      <% if ( @user.resume.present? and @user.resume.document.present? ) or current_user == @user  %>
         <div class='row right-extra-div' id='resume_div'>
           <div class='span4 shrink-div head'>
             <span class="pull-left">
               <h3>Resume</h3>
             </span>
             
-            <span class="btn-show-all pull-right"></span> 
+            <% if current_user == @user %>
+              <span class="btn-show-all btn-edit-details pull-right action-div" data-toggle='modal' data-target='#Resume-modal' title='Add/Edit resume'></span> 
+            <% else %>
+              <span class="btn-show-all pull-right"></span>   
+            <% end %>
             
             <div class='clearfix'></div>
           </div>
@@ -475,11 +579,22 @@
             </div>
           </div>
 
-          <div class='row text-center link'>
-            <a href='<%= @user.resume.document.url %>' class='badge badge-custom-green'>
-              DOWNLOAD
-            </a>
-          </div>
+
+          <% if @user.resume.present? and @user.resume.document.present? %>
+
+            <div class='row text-center link'>
+              <a href='<%= @user.resume.document.url %>' class='badge badge-custom-green'>
+                DOWNLOAD
+              </a>
+            </div>
+
+          <% else %>
+            <div class='content light text-center'>
+              Resume not uploaded
+            </div>
+          <% end %>
+
+
         </div>
       <% end %>
 
@@ -510,7 +625,7 @@
           <span class="pull-left">
             <h3 class='action-div report_entity' data-toggle='modal' data-target='#report-modal' title='Report User'>
               <i class='icon-exclamation-sign'></i>
-              <%= link_to "#" do %> Report<% end %> 
+              <%= link_to "#" do %> Report this profile<% end %> 
             </h3>
           </span>
           
@@ -520,7 +635,6 @@
   <!--=========Sidebar ends======------>
   </div><!--rowfluid-->
 </div><!--container fluid-->
-
 
 
 <%= render :partial => 'users/templates/blogs' %>
@@ -543,11 +657,14 @@
 <% if current_user == @user %>
   <%= render :partial => 'users/edit_headline_modal' %>
   <%= render :partial => 'users/edit_skills_modal' %>
+  <%= render :partial => 'users/edit_modals' %>
 <% end %>
 
 <%= render :partial => 'conversations/send_new_message_modal' %>
 
 <%= render :partial => 'users/media_modal' %>
+
+<%= render :partial => 'application/crop_image_modal' %>
 
 <%= render :partial => 'application/report_modal', :locals => { :entity => @user } %>
 
@@ -582,7 +699,7 @@ $(document).ready(function(){
 
   // user projects
   app.user_projects = new app.collections.user_projects()
-  app.user_projects.reset(<%= raw Project.custom_json(@user.self_and_managing_projects.first(4), current_user) %>)
+  app.user_projects.reset(<%= raw Project.custom_json(@user.self_and_managing_projects.first(4), current_user, true, false, true) %>)
   app.user_projects_view = new app.views.user_projects({ collection: app.user_projects })
   $('#user_projects_div').html(app.user_projects_view.render().el)
 
@@ -606,9 +723,9 @@ $(document).ready(function(){
   $('#endorsements_div').html(app.endorsements_view.render().el)
 
   // fans
-  app.user_fans = new app.collections.user_fans()
-  app.user_fans.reset(<%= raw @user.followers.to_json() %>)
-  app.user_fans_view = new app.views.user_fans({ collection: app.user_fans })
+  app.user_fans = new app.collections.user_fans({})
+  app.user_fans.reset(<%= raw @user.followers.last(8).to_json() %>)
+  app.user_fans_view = new app.views.user_fans({ collection: app.user_fans, total_fans: <%= @user.followers.count %> })
   $('#user_fans_div').html(app.user_fans_view.render().el)
 
   // listen to the new blog creation event
@@ -621,6 +738,7 @@ $(document).ready(function(){
     $('#comment_please_wait').hide()
     $('textarea#blog_content').attr('disabled', false).val('')
     $('#blog_video_attributes_url').attr('disabled', false).val('')
+    $('#blog_url_attributes_url').attr('disabled', false).val('')
     $('#blog_photo_attributes_image').attr('disabled', false)
     $('button.post_update').attr('disabled', false)
     $('.post_comment_btn').hide()
@@ -638,6 +756,7 @@ $(document).ready(function(){
     $('#comment_please_wait').hide()
     $('textarea#blog_content').attr('disabled', false)
     $('#blog_video_attributes_url').attr('disabled', false)
+    $('#blog_url_attributes_url').attr('disabled', false)
     $('#blog_photo_attributes_image').attr('disabled', false)
     $('button.post_update').attr('disabled', false)
     $('.post_comment_btn').hide()
@@ -651,8 +770,25 @@ $(document).ready(function(){
   app.fn.init_show_post_button_handler()
 
 
-  // if this line is not there it will show similar projects as the same templte is used for projects also.
+  // HeadsUp! Most of the controls to handle dynamic forms for user to 
+  // update his details are controlled by javascript that comes from the users/edit.js.coffee file.
+  // Those are not included here to prevent code from being repeated.
+  
+  app.fn.init_agent_name_autocomplete()
+
+  app.fn.init_user_docs_upload()
+  app.fn.init_user_photos_upload()
+
+  app.fn.initialize_radio_toggler()
+
+  Users.Edit.init_numerous()
+
+  app.fn.init_image_crop_handlers()
+
+  // if this line is not there it will show similar projects as the same template is used for projects also.
   $('#user_projects_div').find('.shrink-div').find('h3').html('Projects');
+  $('#user_projects_div').find('.shrink-div').find('.btn-show-all').wrap("<a href='../dashboard#projects'></a>");
+  $('#user_events_div').find('.shrink-div').find('.btn-show-all').wrap("<a href='../dashboard#events'></a>");
 
 });
 </script>

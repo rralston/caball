@@ -159,6 +159,12 @@ app.fn.bind_click_event_on_modal_btn = function(selector){
           if(resp != 'false'){
             alert('Message sent successfully');
             modal.modal('hide');
+
+            // if the conversations page, open the sent items.
+            if( $("a[href=#conversation-tab-sent]").is(":visible") ){
+              $("a[href=#conversation-tab-sent]").trigger('click');
+            }
+              
           }else{
             alert('Something went Wrong, Please try again');
           }
@@ -629,7 +635,16 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height, o
     app.main_prev_width = 160;
     app.main_prev_height = 90;
 
-  }else if( aspect_ratio == '4:3' ){
+  }else if( aspect_ratio == '13:6' ){
+
+    prev_div_width = 130;
+    prev_div_heigth = 60;
+
+    app.main_prev_width = 130;
+    app.main_prev_height = 60;
+
+  }
+  else if( aspect_ratio == '4:3' ){
     
     prev_div_width = 120;
     prev_div_heigth = 90;
@@ -673,11 +688,14 @@ app.fn.init_jcrop = function(element, parent, original_width, original_height, o
     h: null
   }
 
+  console.log(original_width)
+  console.log(original_height)
+
   element.Jcrop({
     trueSize: [original_width, original_height],
     aspectRatio: ar_width / ar_height,
     boxWidth: 500,
-    boxHeight: 350,
+    boxHeight: 250,
     onSelect: function(c){
       updateCropValues(c)
     },
@@ -986,4 +1004,19 @@ app.fn.check_and_trigger_fan_selection = function(){
       type: 'NonFanSelection'
     });
   }
+}
+
+app.fn.mark_finished_intro = function( step_finished, user_id ){
+  $.ajax({
+    url: '/people/'+user_id+'.json',
+    type: 'post',
+    data:{
+      user: {
+        finished_intro_state: step_finished
+      }
+    },
+    success: function(data){
+      return true;
+    } 
+  })
 }
