@@ -20,7 +20,7 @@
           <div class='control-group'>
             <%= event.label :title, :class => 'control-label' %>
             <div class='controls'>
-              <%= event.text_field :title, "data-entity" => 'Event', "data-entityid" => event.object.try(:id) %>
+              <%= event.text_field :title, :style => "width:400px", "data-entity" => 'Event', "data-entityid" => event.object.try(:id) %>
 
               <div class='url_name_summary'>
                 <b>Event url will be</b>: filmzu.com/events/<span class='url_param'></span>
@@ -31,21 +31,21 @@
           <div class='control-group'>
             <%= event.label :description, :class => 'control-label' %>
             <div class='controls'>
-              <%= event.text_area :description, :rows => 5 %>
+              <%= event.text_area :description, :style => "width:400px", :rows => 5 %>
             </div>
           </div>
 
           <div class='control-group'>
             <%= event.label :website, :class => 'control-label' %>
             <div class='controls'>
-              <%= event.text_field :website %>
+              <%= event.text_field :website, :style => "width:400px" %>
             </div>
           </div>
 
           <div class='control-group'>
             <%= event.label :location, :class => 'control-label' %>
             <div class='controls'>
-              <%= event.text_field :location %> 
+              <%= event.text_field :location, :style => "width:400px" %> 
               <!-- <span class='location_finder' id='locate'> Find my Location <i class='icon-map-marker'></i></span>     -->
             </div>
           </div>
@@ -54,13 +54,16 @@
             <%= event.label :tag_list, "Tags",  :class => 'control-label' %>
 
             <div class='controls'>
-              <%= event.hidden_field :tag_list, :class => 'text_field' %>
+              <%= event.hidden_field :tag_list, :class => 'text_field'%>
               <!-- data name attr will create a select box with name as provided..! -->
-              <ul id="event_tags" class='tagit ui-sortable'>
+              <ul id="event_tags" class='tagit ui-sortable' style="width:400px">
                 <% event.object.tag_list.each do |event_tag| %>
                   <li data-value="<%= event_tag %>"><%= event_tag %> </li>
                 <% end %>
               </ul>
+							<div class='ul_hint' style="width:400px">
+		  		      To tag more then one word use Shift+Spacebar between words. Have fun tagging what your event will be about</i> <b>Maximum of 4</b>
+		  		    </div>
             </div>    
           </div>
 
