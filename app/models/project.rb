@@ -524,6 +524,7 @@ class Project < ActiveRecord::Base
                             "Background"       => "Background",
                             "Co star"          => "Co star",
                             "Dancer"           => "Dancer",
+                            "Extra"            => "Extra",
                             "Feature"          => "Feature",
                             "Guest-star"       => "Guest-star",
                             "Lead"             => "Lead",
