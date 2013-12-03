@@ -15,7 +15,7 @@
       <div>
         <%= f.email_field :email, :validate => { :presence => true }, :placeholder => 'Email address ' %>
         <div class='div_hint'>
-          We NEVER, EVER Spam our Users email addresses
+          We NEVER, EVER spam our users email addresses
         </div>
       </div>
       
@@ -25,7 +25,10 @@
       
       <div>
         <%= f.password_field :password_confirmation, :validate => { :presence => true }, :placeholder => 'Confirm Password' %>
-      </div>
+        <div class='div_hint'>
+          Password minimum 6 characters long
+        </div>
+			</div>
       
       <div class='terms_services'>
         <%= f.check_box :terms_of_service %>
