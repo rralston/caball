@@ -320,7 +320,7 @@ class User < ActiveRecord::Base
                             "Script Supervisor"     => "Script Supervisor",
                           }, 
       'Production'     => {
-                            "production assistant"              => "production assistant",
+                            "Production Assistant"              => "Production Assistant",
                             "Production Accountant/Asst"        => "Production Accountant/Asst",
                             "Producer"                          => "Producer",
                             "Production Supervisor/Coordinator" => "Production Supervisor/Coordinator",
@@ -338,7 +338,9 @@ class User < ActiveRecord::Base
                             "Manager"          => "Manager",
                             "Lawyer"           => "Lawyer",
                             "Studio Executive" => "Studio Executive",
-                            "Investment"        => "Investment"
+                            "Investment"       => "Investment",
+                            "Marketing / PR"   => "Marketing/PR",
+                            "Distribution"     => "Distribution"
                           }, 
       'Writer'         => {
                             "Screenwriter"        => "Screenwriter",
@@ -360,7 +362,7 @@ class User < ActiveRecord::Base
                           },
       'Agent'          => {},
       'Other'          => {
-                            "Food/Catering"      => "Food/Catering",
+                            "Food / Catering"      => "Food/Catering",
                             "Acting Coach"       => "Acting Coach",
                             "Security"           => "Security",
                             "Medic"              => "Medic",
@@ -369,7 +371,6 @@ class User < ActiveRecord::Base
                             "Aerial photography" => "Aerial photography",
                             "Intern"             => "Intern",
                             "Personal Assistant" => "Personal Assistant",
-                            "PR Executive"       => "PR Executive",
                             "Other"              => "Other"
                           }
     }
