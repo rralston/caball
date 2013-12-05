@@ -22,7 +22,7 @@ def as_json(options)
       json['trackable'][:user_liked] = trackable.likes.pluck("user_id").include?(options[:check_user].id)
       json['trackable'][:likes_count] = trackable.likes.count
       json['trackable'][:comments_count] = trackable.comments.count
-    elsif trackable_type == 'Comment'
+    elsif trackable_type == 'Comment' or trackable_type == 'Blog'
       json['trackable'][:user_liked] = trackable.likes.pluck("user_id").include?(options[:check_user].id)
       json['trackable'][:likes_count] = trackable.likes.count
     end
