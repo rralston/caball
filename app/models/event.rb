@@ -290,7 +290,7 @@ class Event < ActiveRecord::Base
     end
 
     if options[:likes_count].present? and options[:likes_count] == true
-      json[:likes_count] = comments.count
+      json[:likes_count] = likes.count
     end
 
     if options[:include_attendees].present? and options[:include_attendees] == true
