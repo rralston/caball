@@ -5,6 +5,7 @@ Caball::Application.routes.draw do
   get "activities/index"
 
   match '/our_story' => 'static_pages#our_story'
+  match '/contact' => 'contact_us/contacts#new'
   match '/contact_us' => 'contact_us/contacts#new'
   # get 'people', to: 'users#index', via: :all
   resources :users, :path => "people"
@@ -102,7 +103,7 @@ Caball::Application.routes.draw do
   # Static Pages 
   
   resources :home, except: :show  
-  %w[privacy terms about opportunities FAQ glossary contact labs partners beta skills].each do |page|
+  %w[privacy terms about opportunities FAQ glossary labs partners beta skills].each do |page|
     get page, controller: "static_pages", action: page
   end
 
