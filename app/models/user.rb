@@ -675,7 +675,7 @@ class User < ActiveRecord::Base
     end
 
     if options[:followers_count].present? and options[:followers_count] == true
-      json[:followers_count] = self.followers.count
+      json[:followers_count] = self.followers.uniq.count
     end
 
     if options[:for_search].present? and options[:for_search] == true
