@@ -503,16 +503,19 @@ class Project < ActiveRecord::Base
   def self.role_types
     {
       'Agent'                                             => 'Agent',
+      'Art Department'                                    => 'Art Dept',
       'Business - Manager, Studio Exec'                   => 'Business', 
       'Cast - Actor'                                      => 'Cast', 
       'Camera Dept.'                                      => 'Camera',
-      'Light Dept.'                                       => 'Light',
-      'Sound/Audio Dept.'                                 => 'Sound',
       'Directing'                                         => 'Directing',
+      'Hair - Make Up'                                    => 'Hair - Make Up',
+      'Light Dept.'                                       => 'Light',
       'Pre Production - Casting Director, Location'       => 'Pre-Production', 
-      'Production - Producer, Assistant'                  => 'Production', 
+      'Production - Producer, Assistant'                  => 'Production',     
       'Post-Pro - Editor, Effects'                        => 'Post-Pro', 
       'Set - Hair, Makeup, Construction'                  => 'Set', 
+      'Sound/Audio Dept.'                                 => 'Sound',
+      'Wardrobe'                                          => 'Wardrobe',
       'Writing Department - Screenwriter, Assistant etc.' => 'Writer',
       'Other'                                             => 'Other'
     }
@@ -538,108 +541,133 @@ class Project < ActiveRecord::Base
                             "Double"           => "double",
                             "Voice"            => "Voice"
                           },
-      'Camera'          => {
-                            'Director of Photography (DP)' => 'Director of Photography (DP)',
-                            'Camera Operator'              => 'Camera Operator',
-                            'Camera Assistant'             => 'Camera Assistant',
-                            'B Camera Operator'            => 'B Camera Operator',
-                            '2nd Unit Cinematographer.'    => '2nd Unit Cinematographer.',
-                            'Additional Cinematography'    => 'Additional Cinematography',
-                            'Still Photographer'           => 'Still Photographer',
-                            'DIT (Digital Imaging Tech)'   => 'DIT (Digital Imaging Tech)',
-                            'Steadicam operator'           => 'Steadicam operator',
-                            'Underwater DP'                => 'Underwater DP'
-                          },
-      'Light'           => {
-                            'Best Boy'    => 'Best Boy',
-                            'Electrician' => 'Electrician',
-                            'Gaffer'      => 'Gaffer',
-                            'Grip'        => 'Grip',
-                            'Key Grip'    => 'Key Grip'
-                          },
-      'Sound'            => {
-                            'Composer'         => 'Composer',
-                            'Sound Designer'   => 'Sound Designer',
-                            'Sound Technician' => 'Sound Technician',
-                            'Boom operators'   => 'Boom operators',
-                            'Sound assistants' => 'Sound assistants',
-                            'Dialogue editor'  => 'Dialogue editor',
-                            'Dubbing mixer'    => 'Dubbing mixer',
-                            'Foley artist'     => 'Foley artist',
-                            'Foley editor'     => 'Foley editor',
-                            'Production mixer' => 'Production mixer',
-                            'Sound editor'     => 'Sound editor',
-                            'Sound recordist'  => 'Sound recordist'
-                          },
-      'Crew'           => {
-                            'Camera' => 'Camera',
-                            'Light'  => 'Light',
-                            'Sound'  => 'Sound'
-                          }, 
-      'Set'            => {
-                            "Make up artist"        => "Make up artist",
-                            "Hairdresser"           => "Hairdresser",
-                            "Costume"               => "Costume",
-                            "Costume Assistant"     => "Costume Assistant",
-                            "Prop builder"          => "Prop builder",
-                            "Prop assistant"        => "Prop assistant",
-                            "Set decorator/dresser" => "Set decorator/dresser",
-                            "Script Supervisor"     => "Script Supervisor",
-                          }, 
-      'Production'     => {
-                            "production assistant"              => "production assistant",
-                            "Production Accountant/Asst"        => "Production Accountant/Asst",
-                            "Producer"                          => "Producer",
-                            "Production Supervisor/Coordinator" => "Production Supervisor/Coordinator",
-                            "Exec. Producer"                    => "Exec. Producer",
-                            "Line Producer"                     => "Line Producer"
-                          }, 
-      'Post-Pro'       => {
-                            "Editor"                      => "Editor",
-                            "Editor asst"                 => "Editor asst",
-                            "Visual effects"              => "Visual effects",
-                            "Graphic/Titles design"       => "Graphic/Titles design",
-                            "Post- production Supervisor" => "Post- production Supervisor"
-                          }, 
-      'Business'       => {
-                            "Manager"          => "Manager",
-                            "Lawyer"           => "Lawyer",
-                            "Studio Executive" => "Studio Executive",
-                            "Investment"        => "Investment"
-                          }, 
-      'Writer'         => {
-                            "Screenwriter"        => "Screenwriter",
-                            "Script Consultant"   => "Script Consultant",
-                            "Script Coordinators" => "Script Coordinators",
-                            "Writers' Assistants" => "Writers' Assistants",
-                            "Formatter/Proofer"   => "Formatter/Proofer"
-                          }, 
-      'Pre-Production' => {
-                            "Location Scout"     => "Location Scout",
-                            "Location Manager"   => "Location Manager",
-                            "Location Assistant" => "Location Assistant",
-                            "Casting Director"   => "Casting Director",
-                            "Casting Assistant"  => "Casting Assistant"
-                          }, 
-      'Directing'       => {
-                            "Director"       => "Director",
-                            "Asst. Director" => "Asst. Director"
-                          },
-      'Agent'          => {},
-      'Other'          => {
-                            "Food/Catering"      => "Food/Catering",
-                            "Acting Coach"       => "Acting Coach",
-                            "Security"           => "Security",
-                            "Medic"              => "Medic",
-                            "Stunt coordinator"  => "Stunt coordinator",
-                            "Pyrotechnics"       => "Pyrotechnics",
-                            "Aerial photography" => "Aerial photography",
-                            "Intern"             => "Intern",
-                            "Personal Assistant" => "Personal Assistant",
-                            "PR Executive"       => "PR Executive",
-                            "Other"              => "Other"
-                          }
-    }
+        'Camera'          => {
+                              'Director of Photography (DP)' => 'Director of Photography (DP)',
+                              'Camera Operator'              => 'Camera Operator',
+                              'Camera Assistant'             => 'Camera Assistant',
+                              'B Camera Operator'            => 'B Camera Operator',
+                              '2nd Unit Cinematographer.'    => '2nd Unit Cinematographer.',
+                              'Additional Cinematography'    => 'Additional Cinematography',
+                              'Still Photographer'           => 'Still Photographer',
+                              'DIT (Digital Imaging Tech)'   => 'DIT (Digital Imaging Tech)',
+                              'Steadicam operator'           => 'Steadicam operator',
+                              'Underwater DP'                => 'Underwater DP'
+                            },
+        'Light'           => {
+                              'Best Boy'    => 'Best Boy',
+                              'Electrician' => 'Electrician',
+                              'Gaffer'      => 'Gaffer',
+                              'Grip'        => 'Grip',
+                              'Key Grip'    => 'Key Grip'
+                            },
+        'Sound'            => {
+                              'Composer'         => 'Composer',
+                              'Sound Designer'   => 'Sound Designer',
+                              'Sound Technician' => 'Sound Technician',
+                              'Boom operators'   => 'Boom operators',
+                              'Sound assistants' => 'Sound assistants',
+                              'Dialogue editor'  => 'Dialogue editor',
+                              'Dubbing mixer'    => 'Dubbing mixer',
+                              'Foley artist'     => 'Foley artist',
+                              'Foley editor'     => 'Foley editor',
+                              'Production mixer' => 'Production mixer',
+                              'Sound editor'     => 'Sound editor',
+                              'Sound recordist'  => 'Sound recordist'
+                            },
+        'Set'            => {
+                              "Make up artist"        => "Make up artist",
+                              "Hairdresser"           => "Hairdresser",
+                              "Costume"               => "Costume",
+                              "Costume Assistant"     => "Costume Assistant",
+                              "Prop builder"          => "Prop builder",
+                              "Prop assistant"        => "Prop assistant",
+                              "Set decorator/dresser" => "Set decorator/dresser",
+                              "Script Supervisor"     => "Script Supervisor",
+                            }, 
+        'Production'     => {
+                              "Production Assistant"              => "Production Assistant",
+                              "Production Accountant/Asst"        => "Production Accountant/Asst",
+                              "Producer"                          => "Producer",
+                              "Production Supervisor/Coordinator" => "Production Supervisor/Coordinator",
+                              "Exec. Producer"                    => "Exec. Producer",
+                              "Line Producer"                     => "Line Producer"
+                            }, 
+        'Post-Pro'       => {
+                              "Editor"                      => "Editor",
+                              "Editor asst"                 => "Editor asst",
+                              "Visual effects"              => "Visual effects",
+                              "Graphic/Titles design"       => "Graphic/Titles design",
+                              "Post- production Supervisor" => "Post- production Supervisor"
+                            }, 
+        'Business'       => {
+                              "Manager"          => "Manager",
+                              "Lawyer"           => "Lawyer",
+                              "Studio Executive" => "Studio Executive",
+                              "Investment"       => "Investment",
+                              "Marketing / PR"   => "Marketing/PR",
+                              "Distribution"     => "Distribution"
+                            }, 
+        'Writer'         => {
+                              "Screenwriter"        => "Screenwriter",
+                              "Script Consultant"   => "Script Consultant",
+                              "Script Coordinators" => "Script Coordinators",
+                              "Writers' Assistants" => "Writers' Assistants",
+                              "Formatter/Proofer"   => "Formatter/Proofer"
+                            }, 
+        'Pre-Production' => {
+                              "Location Scout"     => "Location Scout",
+                              "Location Manager"   => "Location Manager",
+                              "Location Assistant" => "Location Assistant",
+                              "Casting Director"   => "Casting Director",
+                              "Casting Assistant"  => "Casting Assistant"
+                            }, 
+        'Directing'       => {
+                              "Director"       => "Director",
+                              "Asst. Director" => "Asst. Director"
+                            },
+        'Agent'          => {},
+        'Other'          => {
+                              "Food / Catering"    => "Food/Catering",
+                              "Acting Coach"       => "Acting Coach",
+                              "Security"           => "Security",
+                              "Medic"              => "Medic",
+                              "Stunt coordinator"  => "Stunt coordinator",
+                              "Pyrotechnics"       => "Pyrotechnics",
+                              "Aerial photography" => "Aerial photography",
+                              "Intern"             => "Intern",
+                              "Personal Assistant" => "Personal Assistant",
+                              "PR Executive"       => "PR Executive",
+                              "Other"              => "Other"
+                            },
+          'Hair - Make Up' => {
+                              "Make up Artist"                          => "Make up Artist",
+                              "Make up Assistant"                       => "Make up Assistant",
+                              "Prosthetics/Special Effects Artist"      => "Prosthetics/Special Effects Artist",
+                              "Hair Stylist"                            => "Hair Stylist",
+                          		"Hair Assistant"                          => "Hair Assistant"
+                            },             
+          'Wardrobe' => {
+                              "Costume Designer"    => "Costume Designer",
+                              "Costume Assistant"   => "Costume Assistant",
+                              "Costume Supervisor"  =>  "Costume Supervisor", 
+                              "Seamstress"          =>  "Seamstress",
+                              "Costume buyer"       =>  "Costume buyer"
+                            },
+          'Art Dept'  =>  {
+                              "Production Designer"     =>  "Production Designer",
+                              "Art Director"            =>  "Art Director",
+                              "Assistant Art Director"  =>  "Assistant Art Director",
+                              "Storyboard Artist"       =>  "Storyboard Artist",
+                              "Draftsman"               =>  "Draftsman",
+                              "Set Decorator"           =>  "Set Decorator",
+                              "Set Dresser"             =>  "Set Dresser",
+                              "Property Master"         =>  "Property Master",
+                              "Leadman"                 =>  "Leadman",
+                              "Swing Gang"              =>  "Swing Gang",
+                              "Production Buyer"        =>  "Production Buyer",
+                              "Property Assistant"      =>  "Property Assistant"
+                            },                           
+      }
   end
 
   def self.role_super_sub_types
