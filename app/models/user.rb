@@ -250,16 +250,19 @@ class User < ActiveRecord::Base
     {
       'Fan - Only select if you are just a film fan'      => 'Fan',
       'Agent'                                             => 'Agent',
+      'Art Department'                                    => 'Art Dept',
       'Business - Manager, Studio Exec'                   => 'Business', 
       'Cast - Actor'                                      => 'Cast', 
       'Camera Dept.'                                      => 'Camera',
-      'Light Dept.'                                       => 'Light',
-      'Sound/Audio Dept.'                                 => 'Sound',
       'Directing'                                         => 'Directing',
+      'Hair - Make Up'                                    => 'Hair - Make Up',
+      'Light Dept.'                                       => 'Light',
       'Pre Production - Casting Director, Location'       => 'Pre-Production', 
-      'Production - Producer, Assistant'                  => 'Production', 
+      'Production - Producer, Assistant'                  => 'Production',     
       'Post-Pro - Editor, Effects'                        => 'Post-Pro', 
       'Set - Hair, Makeup, Construction'                  => 'Set', 
+      'Sound/Audio Dept.'                                 => 'Sound',
+      'Wardrobe'                                          => 'Wardrobe',
       'Writing Department - Screenwriter, Assistant etc.' => 'Writer',
       'Other'                                             => 'Other'
     }
@@ -274,7 +277,7 @@ class User < ActiveRecord::Base
                             'Stunt'   => 'Stunt',
                             'Dancer'  => 'Dancer',
                             'Driver'  => 'Driver',
-                            'Voice'  => 'Voice'
+                            'Voice'   => 'Voice'
                           },
       'Camera'          => {
                             'Director of Photography (DP)' => 'Director of Photography (DP)',
@@ -320,7 +323,7 @@ class User < ActiveRecord::Base
                             "Script Supervisor"     => "Script Supervisor",
                           }, 
       'Production'     => {
-                            "production assistant"              => "production assistant",
+                            "Production Assistant"              => "Production Assistant",
                             "Production Accountant/Asst"        => "Production Accountant/Asst",
                             "Producer"                          => "Producer",
                             "Production Supervisor/Coordinator" => "Production Supervisor/Coordinator",
@@ -338,7 +341,9 @@ class User < ActiveRecord::Base
                             "Manager"          => "Manager",
                             "Lawyer"           => "Lawyer",
                             "Studio Executive" => "Studio Executive",
-                            "Investment"        => "Investment"
+                            "Investment"       => "Investment",
+                            "Marketing / PR"   => "Marketing/PR",
+                            "Distribution"     => "Distribution"
                           }, 
       'Writer'         => {
                             "Screenwriter"        => "Screenwriter",
@@ -360,7 +365,7 @@ class User < ActiveRecord::Base
                           },
       'Agent'          => {},
       'Other'          => {
-                            "Food/Catering"      => "Food/Catering",
+                            "Food / Catering"    => "Food/Catering",
                             "Acting Coach"       => "Acting Coach",
                             "Security"           => "Security",
                             "Medic"              => "Medic",
@@ -371,7 +376,35 @@ class User < ActiveRecord::Base
                             "Personal Assistant" => "Personal Assistant",
                             "PR Executive"       => "PR Executive",
                             "Other"              => "Other"
-                          }
+                          },
+        'Hair - Make Up' => {
+                            "Make up Artist"                          => "Make up Artist",
+                            "Make up Assistant"                       => "Make up Assistant",
+                            "Prosthetics/Special Effects Artist"      => "Prosthetics/Special Effects Artist",
+                            "Hair Stylist"                            => "Hair Stylist",
+                        		"Hair Assistant"                          => "Hair Assistant"
+                          },             
+        'Wardrobe' => {
+                            "Costume Designer"    => "Costume Designer",
+                            "Costume Assistant"   => "Costume Assistant",
+                            "Costume Supervisor"  =>  "Costume Supervisor", 
+                            "Seamstress"          =>  "Seamstress",
+                            "Costume buyer"       =>  "Costume buyer"
+                          },
+        'Art Dept'  =>  {
+                            "Production Designer"     =>  "Production Designer",
+                            "Art Director"            =>  "Art Director",
+                            "Assistant Art Director"  =>  "Assistant Art Director",
+                            "Storyboard Artist"       =>  "Storyboard Artist",
+                            "Draftsman"               =>  "Draftsman",
+                            "Set Decorator"           =>  "Set Decorator",
+                            "Set Dresser"             =>  "Set Dresser",
+                            "Property Master"         =>  "Property Master",
+                            "Leadman"                 =>  "Leadman",
+                            "Swing Gang"              =>  "Swing Gang",
+                            "Production Buyer"        =>  "Production Buyer",
+                            "Property Assistant"      =>  "Property Assistant"
+                          },                           
     }
   end
 
@@ -674,7 +707,7 @@ class User < ActiveRecord::Base
     end
 
     if options[:followers_count].present? and options[:followers_count] == true
-      json[:followers_count] = self.followers.count
+      json[:followers_count] = self.followers.uniq.count
     end
 
     if options[:for_search].present? and options[:for_search] == true

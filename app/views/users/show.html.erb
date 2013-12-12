@@ -198,6 +198,10 @@
                 </ul>
               </div>
 
+              <div class='span12 updates-head'>
+                Updates
+              </div>
+
               <div class='pull-right' id='comments_div'>
 
               </div>
@@ -603,7 +607,7 @@
       <div class='right-extra-div coming-div row'>
         <div class="span4 shrink-div head">
           <span class="pull-left">
-            <h3>Promote</h3>
+            <h3>Share</h3>
           </span>
           <span class="btn-show-all pull-right"></span>
           <div class="clearfix"></div>
@@ -726,8 +730,8 @@ $(document).ready(function(){
 
   // fans
   app.user_fans = new app.collections.user_fans({})
-  app.user_fans.reset(<%= raw @user.followers.last(8).to_json() %>)
-  app.user_fans_view = new app.views.user_fans({ collection: app.user_fans, total_fans: <%= @user.followers.count %> })
+  app.user_fans.reset(<%= raw @user.followers.uniq.last(8).to_json() %>)
+  app.user_fans_view = new app.views.user_fans({ collection: app.user_fans, total_fans: <%= @user.followers.uniq.count %> })
   $('#user_fans_div').html(app.user_fans_view.render().el)
 
   // listen to the new blog creation event
@@ -761,7 +765,6 @@ $(document).ready(function(){
     $('#blog_url_attributes_url').attr('disabled', false)
     $('#blog_photo_attributes_image').attr('disabled', false)
     $('button.post_update').attr('disabled', false)
-    $('.post_comment_btn').hide()
     app.post_button_shown = false
     // remove the image preview if a photo was uploaded and clear the hidden url value
     $('.image_preview_container').hide()

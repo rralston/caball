@@ -10,8 +10,8 @@ cast, crew, agents, and fans in an incredibly simple and stunning experience.
 Released on Thursday 7th, November 2013
 -------
 
-Registered Users Tally (Internal Numbers)
-* November: 
+Registered Users Tally (Confidential Internal Numbers)
+* November: 222  
 * December:
 * January:
 * February:

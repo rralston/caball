@@ -31,6 +31,7 @@ app.views.messages = Backbone.View.extend
     text_box = $('textarea#new_message')
     if text_box.val() != ''
       $('.message_please_wait').show()
+      $('.reply-btn').hide()
       text_box.attr('disabled', 'disabled')
       $.ajax
         url: '/conversations/'+ _this.conversation.get('id') + '/reply.json'
@@ -47,3 +48,4 @@ app.views.messages = Backbone.View.extend
             alert('Somethng went wrong, Please try again later')
           text_box.attr('disabled', false).val('')
           $('.message_please_wait').hide()
+          $('.reply-btn').show()

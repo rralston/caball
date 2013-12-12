@@ -11,6 +11,13 @@
       <div class="bnrtext light span12">
           <h1>PEOPLE</h1>
           <p class='light'> Discover and contact filmmakers or fans who share your enthusiasm for creating great content.</p>
+					<% if !current_user %>
+						<div class="startbutton text-center">
+			        <a data-toggle='modal' data-target='#signup_modal' class="strtbtn btn regular text-left">
+			          <div class="strtbtntext">Join Filmzu - It's Free</div>
+			        </a>
+			      </div>	
+					<% end %>
           </div>
     </div>
   </div>
