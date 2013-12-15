@@ -49,6 +49,7 @@ class Characteristics < ActiveRecord::Base
       "Kid"            => "Kid",
       "Teen"           => "Teen",
       "Young Adult"    => "Young Adult",
+      "Adult"          => "Adult",
       "Parent"         => "Parent",
       "Golden Years"   => "Golden Years"
     }
