@@ -961,8 +961,13 @@ app.fn.bind_show_url_name = function(selector, target){
         entity_id: field.attr('data-entityid')
       },
       success: function (resp) {
-        $(target).show();
-        $(target).find('.url_param').html(resp);
+        if(resp != false){
+          $(target).show();
+          $(target).find('.url_param').html(resp);
+        }else{
+          $(target).hide();
+        }
+          
       }
     });
   }

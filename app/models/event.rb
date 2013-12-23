@@ -47,6 +47,7 @@ class Event < ActiveRecord::Base
                                 :start, :end, :other_important_dates, :allow_destroy => true  
   
   validates_presence_of :title, :description, :location, :message => "is required"
+  validates_format_of :title, :with =>  /^[a-zA-Z0-9_]*[a-zA-Z][a-zA-Z0-9_]*$/, :message => 'should contain at least one alphabet and no special characters except \'_\''
   
   geocoded_by :location   # can also be an IP address
   after_validation :geocode, :if => :location_changed?  # auto-fetch coordinates

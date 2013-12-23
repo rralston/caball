@@ -93,6 +93,8 @@ class User < ActiveRecord::Base
   
  # Name, Email is Required for User Sign-Up
   validates_presence_of :name, :email, :message => "is required"
+
+  validates_format_of :title, :with =>  /^[a-zA-Z0-9_]*[a-zA-Z][a-zA-Z0-9_]*$/, :message => 'should contain at least one alphabet and no special characters except \'_\''
   
   validates :terms_of_service, acceptance: true
 

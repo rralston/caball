@@ -48,30 +48,38 @@ class ApplicationController < ActionController::Base
 
     name = params[:value].gsub(/\s/,'-').gsub(/[^a-zA-Z0-9-]/, '').downcase
 
-    id_check = false
-    
+    if name =~ /^[a-zA-Z0-9_]*[a-zA-Z][a-zA-Z0-9_]*$/
+      id_check = false
+      
 
-    id_check = true if params[:entity_id].present?
+      id_check = true if params[:entity_id].present?
 
-    if id_check
-      same_named_count = entity.camelize.constantize.where("lower(url_name) like lower(?) AND id <> ? ", "#{name}%", params[:entity_id]).count
-    else
-      same_named_count = entity.camelize.constantize.where("lower(url_name) like lower(?)", "#{name}%").count
-    end
-
-    if same_named_count > 0
       if id_check
-        to_return = name + "-#{params[:entity_id]}"
+        same_named_count = entity.camelize.constantize.where("lower(url_name) like lower(?) AND id <> ? ", "#{name}%", params[:entity_id]).count
       else
-        # if the entity doesn't have an id, it will probably have id of last + 1
-        total_entities =  entity.camelize.constantize.count > 0 ? entity.camelize.constantize.last.id : 0
-        to_return = name + "-#{total_entities.to_i + 1 }"
+        same_named_count = entity.camelize.constantize.where("lower(url_name) like lower(?)", "#{name}%").count
       end
+
+      if same_named_count > 0
+        if id_check
+          to_return = name + "-#{params[:entity_id]}"
+        else
+          # if the entity doesn't have an id, it will probably have id of last + 1
+          total_entities =  entity.camelize.constantize.count > 0 ? entity.camelize.constantize.last.id : 0
+          to_return = name + "-#{total_entities.to_i + 1 }"
+        end
+      else
+        to_return = name
+      end
+
+      render :json => to_return.to_json()
     else
-      to_return = name
+
+      render :json => false
+
     end
 
-    render :json => to_return.to_json()
+      
   end
 
 
