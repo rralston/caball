@@ -64,6 +64,13 @@
 											      <p class='inline-error'><%= f.object.errors[:message].join(' and ') %></p>
 											    <% end %>
 											</div></div>
+											
+											<div class="control-group">
+													<%= f.label :message, (t('Recaptcha') + content_tag(:abbr, '*', :class => 'required')).html_safe %>
+										      <div class="controls">
+														<%= recaptcha_tags :ajax => true %>
+													</div>
+											</div>
 											  <div class="control-group">
 											      <div class="controls">
 											    <%= f.submit :submit, :alt => t('.submit'), :class => 'btn-custom load_more btn-red red_submit', :label => t('.submit'), :title => t('.submit'), :value => "Send Message", data: { disable_with: 'Sending...' } %>
@@ -116,7 +123,7 @@
 											<p>Please see our <%= link_to "current opportunities", opportunities_url %> page.</p>
 											<br>
 											<div class="info verylight">Speaker</div><br>
-											<p>Please fill out the form on the left if you would like a Filmzu representative to speak at your film school or event</p>
+											<p>Please fill out the form on the left if you would like a Filmzu representative to speak at your film school or event.</p>
 											
 										
 											</form>
