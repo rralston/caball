@@ -135,6 +135,7 @@ gem 'devise-async'
 
 #Contact Us Form
 gem 'contact_us', '~> 0.4.0'
+gem "recaptcha", :require => "recaptcha/rails"
 
 # for db commands
 gem 'taps'
