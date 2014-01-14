@@ -3,7 +3,7 @@ class ContactUs::ContactsController < ApplicationController
   def create
     @contact = ContactUs::Contact.new(params[:contact_us_contact])
 
-    if verify_recaptcha(:model => @contact, :message => "Oh! It's error with reCAPTCHA!") && @contact.save
+    if verify_recaptcha(:model => @contact) && @contact.save
       redirect_to('/', :notice => t('contact_us.notices.success'))
     else
       flash[:error] = t('contact_us.notices.error')
