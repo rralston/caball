@@ -64,6 +64,11 @@
 											      <p class='inline-error'><%= f.object.errors[:message].join(' and ') %></p>
 											    <% end %>
 											</div></div>
+											<div class="control-group">
+										      <div class="controls">
+														<%= recaptcha_tags %>
+													</div>
+											</div>
 											  <div class="control-group">
 											      <div class="controls">
 											    <%= f.submit :submit, :alt => t('.submit'), :class => 'btn-custom load_more btn-red red_submit', :label => t('.submit'), :title => t('.submit'), :value => "Send Message", data: { disable_with: 'Sending...' } %>
