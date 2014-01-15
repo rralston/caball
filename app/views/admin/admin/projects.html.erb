@@ -36,6 +36,7 @@
 											<th><%= sort_link(@search, :title, "Title") %></th>
 											<th>Owner</th>
 											<th><%= sort_link(@search, :created_at, "Created On") %></th>
+											<th><%= sort_link(@search, :compensation, "Compensation") %></th>
 											<th><%= sort_link(@search, :status, "Status") %></th>
 											<th><%= sort_link(@search, :featured, "Featured") %></th>
 											<th>Actions</th>
@@ -48,6 +49,7 @@
 											<td><%= link_to project.title, project_path(project.id) %></td>
 											<td><%= link_to User.find(project.user_id).name, user_path(project.user_id) %></td>
 											<td><%= project.created_at %></td>
+											<td><%= project.compensation %></td>
 											<td>
 										<%= form_for(project, :url => admin_admin_update_project_path , :remote => true) do |f| %>
 										<%= f.select(:status, options_for_select(Project.status_stages, f.object.status)) %>
