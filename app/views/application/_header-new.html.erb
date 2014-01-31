@@ -81,7 +81,14 @@
       </div>
     <% end %>
     <div class="container" style='width: 800px'>
-      <div class="hnav navbar light pull-left">
+      <div class="hdrfrm pull-right">
+        <form action="/people">
+          <input type="text" class='search_header' id='main_header_search' placeholder='Search for people, projects and events' name='search'/>
+          <input type='hidden' name='load_type' value='search'>
+          <input type='hidden' name='page' value='1'>
+        </form>
+      </div>
+			<div class="hnav navbar light pull-right">
         <div class="navbar-inner ">
           
           <ul class="nav nav-tabs">
@@ -91,19 +98,12 @@
             <% class_names['users'] = 'active' if controller_name == 'users' and action_name != 'dashboard' %>
             <% class_names['events'] = 'active' if controller_name == 'events' %>
 
+						<li class="<%= class_names['users'] %>" ><a href="/users">People</a></li>
             <li class="<%= class_names['projects'] %>"><a href="/projects" >Projects</a></li>
-            <li class="<%= class_names['users'] %>" ><a href="/users">People</a></li>
-            <li class="<%= class_names['events'] %>"><a href="/events">Events</a></li>
+            <% if false %><li class="<%= class_names['events'] %>"><a href="/events">Events</a></li><% end %>
           </ul>
-          
+  
         </div>
-      </div>
-			<div class="hdrfrm pull-left">
-        <form action="/people">
-          <input type="text" class='search_header' id='main_header_search' placeholder='Search for people, projects and events' name='search'/>
-          <input type='hidden' name='load_type' value='search'>
-          <input type='hidden' name='page' value='1'>
-        </form>
       </div>
     </div>
   </header>
