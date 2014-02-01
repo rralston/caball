@@ -23,7 +23,7 @@ class RoleApplicationsController < ApplicationController
     # create a public activity addressed to the project owner
     role_application.create_activity action: 'create', recipient: project_owner, owner: current_user
 
-    redirect_to project_path(role_application.project), :notice => 'Your application is submittied, Project owner will get back to you soon.'
+    redirect_to project_path(role_application.project), :notice => 'Your application has been submitted, expect a reply soon.'
   end
 
   def approve
