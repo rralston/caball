@@ -46,6 +46,7 @@ fb_param.currency = 'USD';
             </div>
           </a>
         </li>
+				<% if false %>
         <li>
           <a href='#events' data-toggle='tab'>
             <div class='nav-icon events'>
@@ -55,6 +56,7 @@ fb_param.currency = 'USD';
             </div>
           </a>
         </li>
+				<% end %>
         <li>
           <a href='#settings' data-toggle='tab'>
             <div class='nav-icon settings'>
@@ -89,7 +91,7 @@ fb_param.currency = 'USD';
               </div>
 
               <%= render :partial => 'dashboard/recommended_people' %>
-
+							<% if false %>
               <div class='row right-extra-div'>
                 <div id='recommended_events_div'>
                 </div>
@@ -101,7 +103,7 @@ fb_param.currency = 'USD';
                 </div>
 
               </div>
-                
+              <% end %>
             </div>
 
           </div>
@@ -111,9 +113,11 @@ fb_param.currency = 'USD';
           <div class='tab-pane main' id='projects'>
             <%= render :partial => 'dashboard/projects' %>
           </div>
+					<% if false %>
           <div class='tab-pane main' id='events'>
             <%= render :partial => 'dashboard/events' %>
           </div>
+					<% end %>
           <div class='tab-pane main' id='settings'>
             <%= render :partial => 'dashboard/settings' %>
           </div>
