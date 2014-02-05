@@ -171,20 +171,19 @@ ActiveRecord::Schema.define(:version => 20131126115056) do
     t.text     "description"
     t.string   "content_type"
     t.integer  "file_size"
-    t.datetime "updated_at",                          :null => false
+    t.datetime "updated_at",                         :null => false
     t.integer  "imageable_id"
     t.string   "imageable_type"
-    t.datetime "created_at",                          :null => false
+    t.datetime "created_at",                         :null => false
     t.boolean  "primary"
-    t.boolean  "is_main",          :default => false
-    t.boolean  "is_cover",         :default => false
+    t.boolean  "is_main",         :default => false
+    t.boolean  "is_cover",        :default => false
     t.integer  "crop_x"
     t.integer  "crop_y"
     t.integer  "crop_w"
     t.integer  "crop_h"
     t.integer  "original_width"
     t.integer  "original_height"
-    t.boolean  "image_processing"
   end
 
   create_table "profiles", :force => true do |t|
@@ -192,16 +191,15 @@ ActiveRecord::Schema.define(:version => 20131126115056) do
     t.string   "description"
     t.string   "content_type"
     t.integer  "file_size"
-    t.datetime "updated_at",       :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "user_id"
-    t.datetime "created_at",       :null => false
+    t.datetime "created_at",      :null => false
     t.integer  "crop_x"
     t.integer  "crop_y"
     t.integer  "crop_w"
     t.integer  "crop_h"
     t.integer  "original_width"
     t.integer  "original_height"
-    t.boolean  "image_processing"
   end
 
   create_table "projects", :force => true do |t|
@@ -336,7 +334,7 @@ ActiveRecord::Schema.define(:version => 20131126115056) do
     t.text     "headline"
     t.boolean  "featured"
     t.string   "expertise"
-    t.datetime "notification_check_time", :default => '2013-07-31 14:32:25'
+    t.datetime "notification_check_time", :default => '2014-02-05 11:10:40'
     t.string   "experience"
     t.boolean  "agent_present",           :default => false
     t.string   "agent_name"
