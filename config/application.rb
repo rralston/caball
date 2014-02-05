@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'minitest/autorun'
 
 include ActionView::Helpers::DateHelper
 
@@ -55,7 +56,7 @@ module Caball
     # This will create an empty whitelist of attributes available for mass-assignment for all models
     # in your app. As such, your models will need to explicitly whitelist or blacklist accessible
     # parameters by using an attr_accessible or attr_protected declaration.
-    config.active_record.whitelist_attributes = true
+    config.active_record.whitelist_attributes = false
     
     # Enable the asset pipeline
     config.assets.enabled = true
@@ -65,6 +66,17 @@ module Caball
 
     # Precompile additional asset types
     config.assets.precompile += %w( .svg .eot .woff .ttf )
+
+    config.generators do |g|
+      g.test_framework :rspec,
+        fixtures: true,
+        view_specs: false,
+        helper_specs: false,
+        routing_specs: false,
+        controller_specs: true,
+        request_specs: true
+        g.fixture_replacement :factory_girl, dir: "spec/factories"
+    end
 
   end
 end

@@ -13,7 +13,7 @@ class Comment < ActiveRecord::Base
   has_one :video, :as => :videoable, :dependent => :destroy
   has_one :url, :as => :urlable, :dependent => :destroy
 
-  accepts_nested_attributes_for :photo, :video, :url
+  #accepts_nested_attributes_for :photo, :video, :url
 
   def serializable_hash(options)
     hash = super(options)

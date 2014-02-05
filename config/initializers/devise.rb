@@ -5,6 +5,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
   config.mailer_sender = "notifications@filmzu.com"
+  config.secret_key = 'c6d931c05671015d2c95a579928b9a69e02856df06be27dc4fd4e8bd22a0d436ac972d6f73dd850f7490cb541136cab9e757af7084f0316db7aed35392219aa7'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"
@@ -15,7 +16,7 @@ Devise.setup do |config|
   # available as additional gems.
   require 'devise/orm/active_record'
   require "omniauth-facebook"
-  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+  #OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
   config.omniauth :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET'], :scope => 'email, read_friendlists',
                   :strategy_class => OmniAuth::Strategies::Facebook, :display => "page", :image_size => "large"
   # ==> Configuration for any authentication mechanism

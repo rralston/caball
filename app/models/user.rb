@@ -32,12 +32,12 @@ class User < ActiveRecord::Base
   
   has_one :characteristics, :dependent => :destroy
   has_one :profile, :dependent => :destroy
-  has_many :photos, :as => :imageable, :dependent => :destroy, :conditions => { :is_cover => false }
+  has_many :photos, :as => :imageable, :dependent => :destroy#, :conditions => { :is_cover => false }
   has_one :resume, :class_name => 'UploadedDocument', :as => :documentable, :dependent => :destroy
-  has_one :cover_photo, :class_name =>'Photo' , :as => :imageable, :dependent => :destroy, :conditions => { :is_cover => true }
+  has_one :cover_photo, :class_name =>'Photo' , :as => :imageable, :dependent => :destroy#, :conditions => { :is_cover => true }
   
-  has_one :demo_reel, :class_name => 'Video', :as => :videoable, :dependent => :destroy, :conditions => { :is_demo_reel => true }
-  has_many :other_videos, :class_name => 'Video', :as => :videoable, :dependent => :destroy, :conditions => { :is_demo_reel => false }
+  has_one :demo_reel, :class_name => 'Video', :as => :videoable, :dependent => :destroy#, :conditions => { :is_demo_reel => true }
+  has_many :other_videos, :class_name => 'Video', :as => :videoable, :dependent => :destroy#, :conditions => { :is_demo_reel => false }
   # this gives all videos incluing demo reel and other videos
   has_many :videos, :as => :videoable, :dependent => :destroy
 
@@ -73,9 +73,9 @@ class User < ActiveRecord::Base
   has_many :received_endorsements, :class_name => 'Endorsement', :foreign_key => 'receiver_id', :dependent => :destroy
 
 
-  accepts_nested_attributes_for :characteristics, :profile, :photos, :other_videos, :demo_reel,
-                                :projects, :talents, :cover_photo, :resume,
-                                :agentship, :allow_destroy => true
+  #accepts_nested_attributes_for :characteristics, :profile, :photos, :other_videos, :demo_reel,
+  #                              :projects, :talents, :cover_photo, :resume,
+  #                              :agentship, :allow_destroy => true
 
   has_many :role_applications, :dependent => :destroy
   has_many :applied_roles, :class_name => 'Role', :through => :role_applications, :source => :role

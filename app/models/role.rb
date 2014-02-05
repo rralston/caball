@@ -2,15 +2,15 @@ class Role < ActiveRecord::Base
   belongs_to :project
 
   has_many :applications, :class_name => 'RoleApplication', :dependent => :destroy  
-  has_many :rejected_applications, :class_name => 'RoleApplication', :dependent => :destroy, :conditions => { :approved => false }
-  has_many :approved_applications, :class_name => 'RoleApplication', :dependent => :destroy, :conditions => { :approved => true }
+  has_many :rejected_applications, :class_name => 'RoleApplication', :dependent => :destroy#, :conditions => { :approved => false }
+  has_many :approved_applications, :class_name => 'RoleApplication', :dependent => :destroy#, :conditions => { :approved => true }
 
   has_many :all_approved_users, :class_name => 'User', :through => :approved_applications, :source => :user
   has_many :all_rejected_users, :class_name => 'User', :through => :rejected_applications, :source => :user
 
-  has_many :approved_managers, :class_name => 'User', :through => :approved_applications, :source => :user, :conditions => { :manager => true } 
+  has_many :approved_managers, :class_name => 'User', :through => :approved_applications, :source => :user#, :conditions => { :manager => true }
 
-  accepts_nested_attributes_for :applications
+  #accepts_nested_attributes_for :applications
 
   attr_accessible :name, :description, :filled, :subrole, :gender, :super_subrole, :applications_attributes,
                   :age, :ethnicity, :height, :build, :haircolor, :cast_title

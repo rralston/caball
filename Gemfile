@@ -16,23 +16,22 @@ gem 'unicorn'
 gem 'awesome_print'
 
 group :test, :development do
-  gem 'rspec-rails', '>= 2.14.1'
+  gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'capybara'
   gem 'launchy'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 2.35.1'
   gem 'shoulda-matchers'
   gem 'ci_reporter'
   gem "factory_girl_rails", "~> 4.0"
   gem "spork-rails"
   gem 'debugger'
-  gem 'minitest'
 end
 
 group :test do
   gem "guard-rspec"
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'database_cleaner'
-  gem 'fuubar'
+  gem "minitest", "~> 5.1.0"
 end
 
 gem 'carrierwave'
@@ -64,3 +63,4 @@ gem "recaptcha", :require => "recaptcha/rails"
 gem 'taps'
 gem 'rake', '~> 10.1.0'
 gem 'protected_attributes'
+gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
