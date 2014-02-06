@@ -25,6 +25,7 @@ group :test, :development do
   gem "factory_girl_rails", "~> 4.0"
   gem "spork-rails"
   gem 'debugger'
+  gem 'pg'
 end
 
 group :test do
