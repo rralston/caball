@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   before_filter :set_page_title
   
   def set_page_title
-    @page_title = "Film Professionals on Filmmo"
+    @page_title = "Film Professionals on filmmo"
   end
   
   def index
@@ -90,7 +90,7 @@ class UsersController < ApplicationController
     else
       @user = User.find_by_url_name(params[:id])
     end
-    @page_title = @user.name + ' on Filmmo'   
+    @page_title = @user.name + ' on filmmo'   
     @blog = Blog.new
     @real_videos = @user.videos.real
     @followers_following = (@user.friends + @user.followers).uniq
@@ -301,7 +301,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to admin_admin_users_url, :notice => @user.name +  ' was deleted from Filmmo.' }
+      format.html { redirect_to admin_admin_users_url, :notice => @user.name +  ' was deleted from filmmo.' }
     end
   end
 

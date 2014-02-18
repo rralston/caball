@@ -226,7 +226,7 @@ $(document).ready ()->
     $('.fan_unhint').removeClass('hinted')
 
     $('#skills_label').html('Types of films you like')
-    $('#step_1_submit_hint').html('Fans need only one step! You are ready to explore Filmmo!')
+    $('#step_1_submit_hint').html('Fans need only one step! You are ready to explore filmmo!')
 
     app.fn.adjust_slider_height()
 

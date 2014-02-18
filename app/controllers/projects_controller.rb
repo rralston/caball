@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
   before_filter :set_page_title
   
   def set_page_title
-    @page_title = "Projects on Filmmo"
+    @page_title = "Projects on filmmo"
   end
   
   def index
@@ -63,7 +63,7 @@ class ProjectsController < ApplicationController
     else
       @project = Project.find_by_url_name(params[:id])
     end
-    @page_title = @project.title+" on Filmmo"
+    @page_title = @project.title+" on filmmo"
     @comment = Comment.new
     @producer = @project.user
     @real_videos = @project.videos.real
