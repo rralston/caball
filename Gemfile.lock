@@ -93,6 +93,9 @@ GEM
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
     ffi (1.9.0)
+    flip (0.2.1)
+      activesupport (>= 3.0, < 5)
+      i18n
     fog (1.12.1)
       builder
       excon (~> 0.23.0)
@@ -358,6 +361,7 @@ DEPENDENCIES
   devise (~> 2.2.3)
   devise-async
   factory_girl_rails (~> 4.0)
+  flip
   fog (~> 1.12.1)
   fuubar
   geocoder

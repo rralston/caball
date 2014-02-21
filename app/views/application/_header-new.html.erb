@@ -100,7 +100,7 @@
 
 						<li class="<%= class_names['users'] %>" ><a href="/users">People</a></li>
             <li class="<%= class_names['projects'] %>"><a href="/projects" >Projects</a></li>
-            <% if false %><li class="<%= class_names['events'] %>"><a href="/events">Events</a></li><% end %>
+            <% if feature? :events_feature %><li class="<%= class_names['events'] %>"><a href="/events">Events</a></li><% end %>
           </ul>
   
         </div>

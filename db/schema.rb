@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131126115056) do
+ActiveRecord::Schema.define(:version => 20140220230555) do
 
   create_table "activities", :force => true do |t|
     t.integer  "trackable_id"
@@ -89,6 +89,16 @@ ActiveRecord::Schema.define(:version => 20131126115056) do
     t.datetime "updated_at",                 :null => false
   end
 
+  create_table "credit_cards", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "card_type"
+    t.string   "card_token"
+    t.string   "last_four_digits"
+    t.string   "uri"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
+
   create_table "endorsements", :force => true do |t|
     t.integer  "receiver_id"
     t.integer  "sender_id"
@@ -114,6 +124,23 @@ ActiveRecord::Schema.define(:version => 20131126115056) do
   end
 
   add_index "events", ["user_id"], :name => "index_events_on_user_id"
+
+  create_table "features", :force => true do |t|
+    t.string   "key",                           :null => false
+    t.boolean  "enabled",    :default => false, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "follows", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "follow_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "follows", ["follow_id"], :name => "index_follows_on_follow_id"
+  add_index "follows", ["user_id"], :name => "index_follows_on_user_id"
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -171,20 +198,19 @@ ActiveRecord::Schema.define(:version => 20131126115056) do
     t.text     "description"
     t.string   "content_type"
     t.integer  "file_size"
-    t.datetime "updated_at",                          :null => false
+    t.datetime "updated_at",                         :null => false
     t.integer  "imageable_id"
     t.string   "imageable_type"
-    t.datetime "created_at",                          :null => false
+    t.datetime "created_at",                         :null => false
     t.boolean  "primary"
-    t.boolean  "is_main",          :default => false
-    t.boolean  "is_cover",         :default => false
+    t.boolean  "is_main",         :default => false
+    t.boolean  "is_cover",        :default => false
     t.integer  "crop_x"
     t.integer  "crop_y"
     t.integer  "crop_w"
     t.integer  "crop_h"
     t.integer  "original_width"
     t.integer  "original_height"
-    t.boolean  "image_processing"
   end
 
   create_table "profiles", :force => true do |t|
@@ -192,16 +218,15 @@ ActiveRecord::Schema.define(:version => 20131126115056) do
     t.string   "description"
     t.string   "content_type"
     t.integer  "file_size"
-    t.datetime "updated_at",       :null => false
+    t.datetime "updated_at",      :null => false
     t.integer  "user_id"
-    t.datetime "created_at",       :null => false
+    t.datetime "created_at",      :null => false
     t.integer  "crop_x"
     t.integer  "crop_y"
     t.integer  "crop_w"
     t.integer  "crop_h"
     t.integer  "original_width"
     t.integer  "original_height"
-    t.boolean  "image_processing"
   end
 
   create_table "projects", :force => true do |t|
@@ -267,6 +292,13 @@ ActiveRecord::Schema.define(:version => 20131126115056) do
     t.string   "cast_title"
   end
 
+  create_table "search_suggestions", :force => true do |t|
+    t.string   "term"
+    t.integer  "popularity"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -294,6 +326,17 @@ ActiveRecord::Schema.define(:version => 20131126115056) do
     t.string   "sub_talent"
     t.string   "super_sub_talent"
   end
+
+  create_table "updates", :force => true do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "updates", ["project_id"], :name => "index_updates_on_project_id"
+  add_index "updates", ["user_id"], :name => "index_updates_on_user_id"
 
   create_table "uploaded_documents", :force => true do |t|
     t.string   "document"
@@ -336,7 +379,7 @@ ActiveRecord::Schema.define(:version => 20131126115056) do
     t.text     "headline"
     t.boolean  "featured"
     t.string   "expertise"
-    t.datetime "notification_check_time", :default => '2013-07-31 14:32:25'
+    t.datetime "notification_check_time", :default => '2013-08-06 22:13:33'
     t.string   "experience"
     t.boolean  "agent_present",           :default => false
     t.string   "agent_name"
@@ -356,8 +399,12 @@ ActiveRecord::Schema.define(:version => 20131126115056) do
     t.string   "managing_company"
     t.boolean  "send_notification_mails", :default => true
     t.integer  "finished_intro_state",    :default => 0
+    t.string   "ssn_last4"
+    t.string   "bp_id"
+    t.string   "authentication_token"
   end
 
+  add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 

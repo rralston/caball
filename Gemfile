@@ -142,3 +142,6 @@ gem 'taps'
 
 #Required for AWS Setuup
 gem 'rake', '~> 10.1.0'
+
+#Feature Flipper
+gem "flip"

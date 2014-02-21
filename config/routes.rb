@@ -1,4 +1,6 @@
 Caball::Application.routes.draw do
+  mount Flip::Engine => "/flip"
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
                                        :registrations => "users/registrations", :sessions => "users/sessions"}
 
