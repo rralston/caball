@@ -1,4 +1,6 @@
 Caball::Application.routes.draw do
+  get "pages/index"
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
                                        :registrations => "users/registrations", :sessions => "users/sessions"}
 
@@ -118,7 +120,7 @@ Caball::Application.routes.draw do
   # match 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
-  root :to => 'home#index'
+  root :to => 'pages#index'
   
   # Admin Area
   namespace :admin do

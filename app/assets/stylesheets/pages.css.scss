@@ -1,0 +1,110 @@
+// Place all the styles related to the pages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.container {
+  max-width: none!important;
+  width: 960px;
+}
+.banner {
+  background: url('Home.jpg') top center;
+  background-size: cover;
+  color: #ffffff;
+  height: 450px;
+  min-width: 960px;
+  padding-top: 100px;
+  h1 {
+    font-size: 70px;
+    margin-bottom: 0px;
+  }
+  h3 {
+    font-size: 30px;
+    margin-top: 0px;
+    margin-bottom: 30px;
+  }
+}
+
+//buttons
+
+.btn-red {
+  color: #fff;
+  background-color: #f15854;
+  border-color: #f15854;
+}
+.btn-red:hover,
+.btn-red:focus,
+.btn-red:active,
+.btn-red.active,
+.open .dropdown-toggle.btn-red {
+  color: #fff;
+  background-color: #DE514E;
+  border-color: #DE514E;
+}
+.btn-red:active,
+.btn-red.active,
+.open .dropdown-toggle.btn-red {
+  background-image: none;
+}
+.btn-red.disabled,
+.btn-red[disabled],
+fieldset[disabled] .btn-red,
+.btn-red.disabled:hover,
+.btn-red[disabled]:hover,
+fieldset[disabled] .btn-red:hover,
+.btn-red.disabled:focus,
+.btn-red[disabled]:focus,
+fieldset[disabled] .btn-red:focus,
+.btn-red.disabled:active,
+.btn-red[disabled]:active,
+fieldset[disabled] .btn-red:active,
+.btn-red.disabled.active,
+.btn-red[disabled].active,
+fieldset[disabled] .btn-red.active {
+  background-color: #f15854;
+  border-color: #f15854;
+}
+.btn-orange {
+  color: #fff;
+  background-color: #faaf1c;
+  border-color: #faaf1c;
+}
+.btn-orange:hover,
+.btn-orange:focus,
+.btn-orange:active,
+.btn-orange.active,
+.open .dropdown-toggle.btn-orange {
+  color: #fff;
+  background-color: #F5A50A;
+  border-color: #F5A50A;
+}
+.btn-orange:active,
+.btn-orange.active,
+.open .dropdown-toggle.btn-orange {
+  background-image: none;
+}
+.btn-orange.disabled,
+.btn-orange[disabled],
+fieldset[disabled] .btn-orange,
+.btn-orange.disabled:hover,
+.btn-orange[disabled]:hover,
+fieldset[disabled] .btn-orange:hover,
+.btn-orange.disabled:focus,
+.btn-orange[disabled]:focus,
+fieldset[disabled] .btn-orange:focus,
+.btn-orange.disabled:active,
+.btn-orange[disabled]:active,
+fieldset[disabled] .btn-orange:active,
+.btn-orange.disabled.active,
+.btn-orange[disabled].active,
+fieldset[disabled] .btn-orange.active {
+  background-color: #faaf1c;
+  border-color: #faaf1c;
+}
+.btn-slg,
+.btn-group-slg > .btn {
+  padding: 20px 30px;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.33;
+  border-radius: 8px;
+}
