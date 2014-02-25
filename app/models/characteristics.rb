@@ -3,8 +3,8 @@ class Characteristics < ActiveRecord::Base
 
   acts_as_taggable_on :description_tag
   
-  attr_accessible :age, :height, :ethnicity, :bodytype,
-                  :hair_color, :description_tag_list, :language
+  #attr_accessible :age, :height, :ethnicity, :bodytype,
+  #                :hair_color, :description_tag_list, :language
 
 
   

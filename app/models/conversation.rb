@@ -2,7 +2,7 @@
 # we have copied it, in order add our own functions.
 
 class Conversation < ActiveRecord::Base
-  attr_accessible :subject, :body
+  #attr_accessible :subject, :body
 
   has_many :messages, :dependent => :destroy
   has_many :receipts, :through => :messages

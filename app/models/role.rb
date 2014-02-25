@@ -2,18 +2,18 @@ class Role < ActiveRecord::Base
   belongs_to :project
 
   has_many :applications, :class_name => 'RoleApplication', :dependent => :destroy  
-  has_many :rejected_applications, :class_name => 'RoleApplication', :dependent => :destroy#, :conditions => { :approved => false }
-  has_many :approved_applications, :class_name => 'RoleApplication', :dependent => :destroy#, :conditions => { :approved => true }
+  has_many :rejected_applications, -> {where approved: false}, :class_name => 'RoleApplication', :dependent => :destroy
+  has_many :approved_applications, -> {where approved: true}, :class_name => 'RoleApplication', :dependent => :destroy
 
   has_many :all_approved_users, :class_name => 'User', :through => :approved_applications, :source => :user
   has_many :all_rejected_users, :class_name => 'User', :through => :rejected_applications, :source => :user
 
-  has_many :approved_managers, :class_name => 'User', :through => :approved_applications, :source => :user#, :conditions => { :manager => true }
+  has_many :approved_managers,-> { where manager: true }, :class_name => 'User', :through => :approved_applications, :source => :user
 
   #accepts_nested_attributes_for :applications
 
-  attr_accessible :name, :description, :filled, :subrole, :gender, :super_subrole, :applications_attributes,
-                  :age, :ethnicity, :height, :build, :haircolor, :cast_title
+  #attr_accessible :name, :description, :filled, :subrole, :gender, :super_subrole, :applications_attributes,
+  #                :age, :ethnicity, :height, :build, :haircolor, :cast_title
   before_save :reset_cast_role_options
 
   def reset_cast_role_options

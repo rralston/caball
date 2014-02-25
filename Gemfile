@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.1.0'
-gem 'rails', '4.1.0.beta1'
+ruby '2.1.1'
+gem 'rails', '4.1.0.rc1'
 gem 'mysql2'
 gem 'coffee-rails', '~> 4.0.1'
 gem 'sass-rails', '~> 4.0.1'
@@ -24,7 +24,6 @@ group :test, :development do
   gem 'ci_reporter'
   gem "factory_girl_rails", "~> 4.0"
   gem "spork-rails"
-  gem 'debugger'
   gem 'pg'
 end
 
@@ -63,5 +62,5 @@ gem 'contact_us', '~> 0.5.1'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'taps'
 gem 'rake', '~> 10.1.0'
-gem 'protected_attributes'
+#gem 'protected_attributes'
 gem 'polyamorous', github: 'activerecord-hackery/polyamorous'

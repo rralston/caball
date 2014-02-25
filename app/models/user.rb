@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
          :omniauth_providers => [:facebook]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :fb_token
+  #attr_accessible :email, :password, :password_confirmation, :remember_me, :fb_token
   
 
   include Mailboxer::Models::Messageable
@@ -32,12 +32,12 @@ class User < ActiveRecord::Base
   
   has_one :characteristics, :dependent => :destroy
   has_one :profile, :dependent => :destroy
-  has_many :photos, :as => :imageable, :dependent => :destroy#, :conditions => { :is_cover => false }
+  has_many :photos, -> { where is_cover: false }, :as => :imageable, :dependent => :destroy
   has_one :resume, :class_name => 'UploadedDocument', :as => :documentable, :dependent => :destroy
-  has_one :cover_photo, :class_name =>'Photo' , :as => :imageable, :dependent => :destroy#, :conditions => { :is_cover => true }
+  has_one :cover_photo, -> { where is_cover: true }, :class_name =>'Photo' , :as => :imageable, :dependent => :destroy
   
-  has_one :demo_reel, :class_name => 'Video', :as => :videoable, :dependent => :destroy#, :conditions => { :is_demo_reel => true }
-  has_many :other_videos, :class_name => 'Video', :as => :videoable, :dependent => :destroy#, :conditions => { :is_demo_reel => false }
+  has_one :demo_reel, -> { where is_demo_reel: true }, :class_name => 'Video', :as => :videoable, :dependent => :destroy
+  has_many :other_videos, -> { where is_demo_reel: false }, :class_name => 'Video', :as => :videoable, :dependent => :destroy
   # this gives all videos incluing demo reel and other videos
   has_many :videos, :as => :videoable, :dependent => :destroy
 
@@ -81,15 +81,15 @@ class User < ActiveRecord::Base
   has_many :applied_roles, :class_name => 'Role', :through => :role_applications, :source => :role
   has_many :all_applied_projects, :class_name => 'Project', :through => :applied_roles, :source => :project
   
-  attr_accessible :name, :email, :location, :about, :profile_attributes,
-                  :imdb_url, :characteristics_attributes, :photos_attributes,
-                  :talents_attributes, :photo, :other_videos_attributes, :projects_attributes,
-                  :gender, :headline, :featured, :expertise, :cover_photo_attributes,
-                  :resume_attributes, :resume, :notification_check_time, :experience, :agent_name, :url_name,
-                  :agent_present, :guild_present, :guild, :agentship_attributes, :demo_reel_attributes,
-                  :terms_of_service, :provider, :uid, :managing_company
+  #attr_accessible :name, :email, :location, :about, :profile_attributes,
+  #                :imdb_url, :characteristics_attributes, :photos_attributes,
+  #                :talents_attributes, :photo, :other_videos_attributes, :projects_attributes,
+  #                :gender, :headline, :featured, :expertise, :cover_photo_attributes,
+  #                :resume_attributes, :resume, :notification_check_time, :experience, :agent_name, :url_name,
+  #                :agent_present, :guild_present, :guild, :agentship_attributes, :demo_reel_attributes,
+  #                :terms_of_service, :provider, :uid, :managing_company
 
-  attr_protected :admin, :superadmin
+  #attr_protected :admin, :superadmin
   
  # Name, Email is Required for User Sign-Up
   validates_presence_of :name, :email, :message => "is required"

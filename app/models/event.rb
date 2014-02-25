@@ -9,43 +9,37 @@ class Event < ActiveRecord::Base
 
   has_many :likes, :as => :loveable, :dependent => :destroy
   has_many :fans, :through => :likes, :source => :user
-  has_one :main_photo, :class_name => 'Photo', :as => :imageable, :dependent => :destroy#, :conditions => { :is_main => true }
-  
-  has_many :other_photos, :class_name => 'Photo', :as => :imageable,
-           :dependent => :destroy#, :conditions => { :is_main => false }
-  
+  has_one :main_photo, -> { where is_main: true }, :class_name => 'Photo', :as => :imageable, :dependent => :destroy
+
+  has_many :other_photos, -> { where is_main: true }, :class_name => 'Photo', :as => :imageable, :dependent => :destroy
+
   has_many :votes, :as => :votable, :dependent => :destroy
 
-  has_many :up_votes, :class_name => 'Vote', :as => :votable, :dependent => :destroy#,
-            #:conditions => { :is_up_vote => true }
+  has_many :up_votes, -> {where is_up_vote: true}, :class_name => 'Vote', :as => :votable, :dependent => :destroy
 
-  has_many :down_votes, :class_name => 'Vote', :as => :votable, :dependent => :destroy#,
-            #:conditions => { :is_down_vote => true }
+  has_many :down_votes,-> {where is_down_vote: true}, :class_name => 'Vote', :as => :votable, :dependent => :destroy
 
   has_many :videos, :as => :videoable, :dependent => :destroy
   has_many :comments, :as => :commentable, :dependent => :destroy
   
-  has_many :other_important_dates, :class_name => 'ImportantDate',
-           :as => :important_dateable, :dependent => :destroy#, :conditions => { :is_start_date => false, :is_end_date => false }
+  has_many :other_important_dates, -> {where is_start_date: false, is_end_date: false}, :class_name => 'ImportantDate', :as => :important_dateable, :dependent => :destroy
 
   has_many :likers, :through => :likes, :source => :user
 
-  has_one :start, :class_name => 'ImportantDate', :as => :important_dateable,
-          :dependent => :destroy#, :conditions => { :is_start_date => true }
+  has_one :start, ->{where is_start_date: true } , :class_name => 'ImportantDate', :as => :important_dateable, :dependent => :destroy
   
-  has_one :end, :class_name => 'ImportantDate', :as => :important_dateable,
-          :dependent => :destroy#, :conditions => { :is_end_date => true }
+  has_one :end,-> { where is_end_date: true }, :class_name => 'ImportantDate', :as => :important_dateable,:dependent => :destroy
 
   has_many :attends, :as => :attendable, :dependent => :destroy
   has_many :attendees, :through => :attends, :source => :user
 
-  attr_accessible :title, :description, :main_photo_attributes, :other_photos_attributes, :videos_attributes, :website,
-                  :location, :other_important_dates_attributes, :user_id, :main_photo,
-                  :start_attributes, :end_attributes, :tag_list
+  #attr_accessible :title, :description, :main_photo_attributes, :other_photos_attributes, :videos_attributes, :website,
+  #                :location, :other_important_dates_attributes, :user_id, :main_photo,
+  #                :start_attributes, :end_attributes, :tag_list
   
   #accepts_nested_attributes_for :other_photos, :videos, :main_photo,
   #                              :start, :end, :other_important_dates, :allow_destroy => true
-  
+
   validates_presence_of :title, :description, :location, :message => "is required"
   
   geocoded_by :location   # can also be an IP address
