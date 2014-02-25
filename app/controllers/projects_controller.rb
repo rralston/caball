@@ -51,7 +51,7 @@ class ProjectsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render :json => Project.custom_json(@projects, current_user, false, false, true) }
     end
   end

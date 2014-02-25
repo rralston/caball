@@ -76,7 +76,7 @@ class UsersController < ApplicationController
     end
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { 
         render :json => @users.to_a.to_json(:followers_count => true, :check_user => current_user) 
       }
