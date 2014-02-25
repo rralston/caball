@@ -20,10 +20,32 @@
     }
   }
   .navbar-nav > li > a {
-    padding-bottom: 24px;
-    padding-top: 24px;
+    padding: 24px;
+    font-size: 16px;
+    font-family: 'Conv_HelveticaNeue-Medium';
   }
   .btn {
-    margin: 17px 0px 17px 15px;
+    margin: 19px 0px 19px 30px;
   }
+}
+
+//navbar icons
+
+.project {
+  width: 30px;
+  height: 35px;
+  background-image: url("icons.png");
+  background-position: 0px 124px;
+  float: left;
+  margin-right: 5px;
+  margin-top: -2px;
+}
+.user {
+  width: 30px;
+  height: 35px;
+  background-image: url("icons.png");
+  background-position: 0px 220px;
+  float: left;
+  margin-right: 5px;
+  margin-top: -2px;
 }

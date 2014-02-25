@@ -4,6 +4,7 @@ html {
 }
 body {
   margin-bottom: 250px;
+  font-family: 'helveticaneuewebfont', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 }
 #footer {
   position: absolute;
@@ -14,6 +15,7 @@ body {
 }
 h1, h2, h3, h4, h5, h6, p {
   color: #424242;
+  font-family: 'helveticaneuewebfont', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 }
 //.container {
 //  width: auto;
@@ -32,15 +34,17 @@ h1, h2, h3, h4, h5, h6, p {
   min-width: 960px;
   padding-top: 80px;
   h1 {
-    font-size: 70px;
+    font-size: 72px;
     margin-bottom: 0px;
     color: #ffffff;
+    font-family: 'Conv_HelveticaNeue-Light';
   }
   h3 {
     font-size: 30px;
     margin-top: 0px;
     margin-bottom: 30px;
     color: #ffffff;
+    font-family: 'Conv_HelveticaNeue-Medium';
   }
 }
 .steps {
@@ -48,13 +52,14 @@ h1, h2, h3, h4, h5, h6, p {
     color: #b2aeae;
     font-size: 44px;
     margin-top: 50px;
+    font-family: 'Conv_HelveticaNeue-Light';
   }
   .steps-container {
     width: 80%;
     margin: 40px auto 60px;
     h3 {
       font-size: 20px;
-      font-weight: bold;
+      font-family: 'Conv_HelveticaNeue-Medium';
     }
     p {
       color: #b2aeae;
@@ -73,6 +78,7 @@ h1, h2, h3, h4, h5, h6, p {
       color: #a9a8a8;
       font-size: 44px;
       margin-bottom: 30px;
+      font-family: 'Conv_HelveticaNeue-Light';
     }
   }
 }
@@ -103,13 +109,16 @@ h1, h2, h3, h4, h5, h6, p {
   padding-top: 40px;
   h4 {
     color: #ffffff;
-    font-weight: bold;
+    font-family: 'Conv_HelveticaNeue-Medium';
+    font-size: 18px;
     margin-top: 0px;
   }
   ul {
     li {
       a {
         color: #b9bdbd;
+        font-family: 'Conv_HelveticaNeue-Light';
+        font-size: 13px;
       }
       a:hover,
       a:focus {
@@ -248,5 +257,8 @@ fieldset[disabled] .btn-white.active {
   font-weight: bold;
   line-height: 1.33;
   border-radius: 8px;
+}
+.btn-nb {
+  padding: 3px 20px 5px;
 }
 

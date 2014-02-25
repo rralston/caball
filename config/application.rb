@@ -65,6 +65,7 @@ module Caball
     config.assets.version = '1.0'
 
     # Precompile additional asset types
+    config.assets.paths << "#{Rails.root}/app/assets/fonts"
     config.assets.precompile += %w( .svg .eot .woff .ttf )
 
     config.generators do |g|
