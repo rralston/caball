@@ -120,7 +120,11 @@ Caball::Application.routes.draw do
   # match 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'signout', to: 'sessions#destroy', as: 'signout'
+
+
   root :to => 'pages#index'
+  get 'register' => 'pages#register', as: 'register'
+
   
   # Admin Area
   namespace :admin do
