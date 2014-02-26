@@ -7,8 +7,8 @@ body {
 }
 #wrap {
   top: 0;
-  min-height: 100%;
-  height: auto !important;
+  //min-height: 100%;
+  //height: auto !important;
   height: 100%;
   margin: 0 auto -250px;
   padding: 0 0 250px;
@@ -41,6 +41,43 @@ h1, h2, h3, h4, h5, h6, p {
 .container {
   max-width: none!important;
   width: 980px;
+  h2.title {
+    margin: 0px;
+    font-size: 34px;
+    font-family: 'Conv_HelveticaNeue-Light';
+    line-height: 1;
+  }
+  p.subtitle {
+    color: #9ea2a2;
+    font-size: 16px;
+  }
+}
+.container.container-basic {
+  margin: -70px auto 0px;
+  padding: 70px 0 0px;
+  height: 100%;
+  background: #ffffff;
+  .row {
+    height: 100%;
+    > .col-xs-2 {
+      padding: 30px 25px 30px 15px;
+      min-height: 100%;
+      background: #eaeeee;
+      border-right: 1px solid #ccd5d6;
+    }
+    > .col-xs-10 {
+      padding: 30px 15px 30px 25px;
+      //h2 {
+      //  margin: 0px;
+      //  font-size: 34px;
+      //  font-family: 'Conv_HelveticaNeue-Light';
+      //}
+      //p.subtitle {
+      //  color: #9ea2a2;
+      //  font-size: 16px;
+      //}
+    }
+  }
 }
 .banner {
   background: url('Home.jpg') top center;
@@ -271,6 +308,9 @@ h1, h2, h3, h4, h5, h6, p {
 
 //buttons
 
+.btn {
+  font-family: 'Conv_HelveticaNeue-Medium';
+}
 .btn-red {
   color: #fff;
   background-color: #f15854;
@@ -419,16 +459,56 @@ fieldset[disabled] .btn-blue.active {
   background-color: #1facc9;
   border-color: #1facc9;
 }
+.btn-grey {
+  color: #fff;
+  background-color: #b9bdbd;
+  border-color: #b9bdbd;
+}
+.btn-grey:hover,
+.btn-grey:focus,
+.btn-grey:active,
+.btn-grey.active,
+.open .dropdown-toggle.btn-grey {
+  color: #fff;
+  background-color: #9B9E9E;
+  border-color: #9B9E9E;
+}
+.btn-grey:active,
+.btn-grey.active,
+.open .dropdown-toggle.btn-grey {
+  background-image: none;
+}
+.btn-grey.disabled,
+.btn-grey[disabled],
+fieldset[disabled] .btn-grey,
+.btn-grey.disabled:hover,
+.btn-grey[disabled]:hover,
+fieldset[disabled] .btn-grey:hover,
+.btn-grey.disabled:focus,
+.btn-grey[disabled]:focus,
+fieldset[disabled] .btn-grey:focus,
+.btn-grey.disabled:active,
+.btn-grey[disabled]:active,
+fieldset[disabled] .btn-grey:active,
+.btn-grey.disabled.active,
+.btn-grey[disabled].active,
+fieldset[disabled] .btn-grey.active {
+  background-color: #b9bdbd;
+  border-color: #b9bdbd;
+}
 .btn-slg,
 .btn-group-slg > .btn {
   padding: 20px 30px;
   font-size: 18px;
-  font-weight: bold;
   line-height: 1.33;
   border-radius: 8px;
 }
+.btn-md {
+  padding: 8px 14px;
+  border-radius: 4px;
+}
 .btn-nb {
-  padding: 3px 20px 5px;
+  padding: 4px 20px 4px;
 }
 .btn.btn-full-width {
   width: 100%;
@@ -439,9 +519,6 @@ fieldset[disabled] .btn-blue.active {
   font-family: 'Conv_HelveticaNeue-Medium';
   border-radius: 4px;
   margin-bottom: 5px;
-  //.fa {
-  //  margin-right: 10px;
-  //}
 }
 .btn-modal-facebook {
   margin-top: 55px;
