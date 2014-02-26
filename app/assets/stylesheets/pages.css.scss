@@ -245,6 +245,13 @@ h1, h2, h3, h4, h5, h6, p {
             color: #424242;
             font-size: 13px;
             text-decoration: underline;
+            cursor: pointer;
+          }
+          p.help-modal {
+            display: inline-block;
+            width: 140px;
+            font-size: 13px;
+            color: #9ea2a2;
           }
         }
         .col-xs-6.left {

@@ -11,9 +11,8 @@
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %form.navbar-form.navbar-left{role: "search"}
         .form-group
-          %input.form-control{placeholder: "Search", type: "text"}/
-      %a.btn.btn-red.btn-nb.pull-right{"data-target" => "#singup_modal", "data-toggle" => "modal"} Create an Account
-      %ul.nav.navbar-nav.navbar-right
+          %input.form-control{placeholder: "Search", type: "text"}
+      %ul.nav.navbar-nav
         %li
           %a{href: "#"}
             %span.project
@@ -22,6 +21,8 @@
           %a{href: "#"}
             %span.user
             People
+      %a.btn.btn-red.btn-nb.pull-right{"data-target" => "#singup_modal", "data-toggle" => "modal"} Create an Account
+      %ul.nav.navbar-nav.navbar-right
         %li
-          %a{href: "#"}
+          %a{"data-target" => "#login_modal", "data-toggle" => "modal"}
             Sign in
