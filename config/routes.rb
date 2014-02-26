@@ -8,10 +8,8 @@ Caball::Application.routes.draw do
 
   get '/our_story' => 'static_pages#our_story'
   get '/contact' => 'contact_us/contacts#new'
-  #get '/contact_us' => 'contact_us/contacts#new'
-  # get 'people', to: 'users#index', via: :all
   resources :users, :path => "people"
-  get '/people/:id' => 'users#update', :via => 'post'
+  post '/people/:id' => 'users#update'
   get "/blog(/*path)" => redirect{ |env, req| "http://blog.filmzu.com" + (req.path ? "#{req.path}" : '/')}
 
   get 'check_url_param' => 'application#check_url_param'
@@ -145,4 +143,11 @@ Caball::Application.routes.draw do
       post :read
     end
   end
+
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v2 do
+      post 'accounts' => 'accounts#auth'
+    end
+  end
+
 end
