@@ -2,7 +2,6 @@ source 'https://rubygems.org'
 
 ruby '2.1.1'
 gem 'rails', '4.1.0.rc1'
-gem 'mysql2'
 gem 'coffee-rails', '~> 4.0.1'
 gem 'sass-rails', '~> 4.0.1'
 gem 'uglifier', '>= 2.4.0'
@@ -15,6 +14,15 @@ gem 'twitter-bootstrap-rails'
 gem 'unicorn'
 gem 'awesome_print'
 
+
+group :production do
+  gem 'mysql2'
+end
+
+group :development do
+  gem 'pg'
+end
+
 group :test, :development do
   gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'capybara'
@@ -24,7 +32,6 @@ group :test, :development do
   gem 'ci_reporter'
   gem "factory_girl_rails", "~> 4.0"
   gem "spork-rails"
-  gem 'pg'
 end
 
 group :test do
@@ -32,6 +39,7 @@ group :test do
   gem 'rb-fsevent', '~> 0.9.1'
   gem 'database_cleaner'
   gem "minitest", "~> 5.1.0"
+  gem 'mysql2'
 end
 
 gem 'carrierwave'
