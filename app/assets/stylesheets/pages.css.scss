@@ -17,6 +17,19 @@ h1, h2, h3, h4, h5, h6, p {
   color: #424242;
   font-family: 'helveticaneuewebfont', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
 }
+.content {
+  background: #eaeeee;
+  background: -moz-linear-gradient(top,  #eaeeee 0%, #eaeeee 50%, #ffffff 51%, #ffffff 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eaeeee), color-stop(50%,#eaeeee), color-stop(51%,#ffffff), color-stop(100%,#ffffff));
+  background: -webkit-linear-gradient(top,  #eaeeee 0%,#eaeeee 50%,#ffffff 51%,#ffffff 100%);
+  background: -o-linear-gradient(top,  #eaeeee 0%,#eaeeee 50%,#ffffff 51%,#ffffff 100%);
+  background: -ms-linear-gradient(top,  #eaeeee 0%,#eaeeee 50%,#ffffff 51%,#ffffff 100%);
+  background: linear-gradient(to bottom,  #eaeeee 0%,#eaeeee 50%,#ffffff 51%,#ffffff 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eaeeee', endColorstr='#ffffff',GradientType=0 );
+  height: 100%;
+  min-height: 100%;
+  //height: auto !important;
+}
 .container {
   max-width: none!important;
   width: 960px;
@@ -343,8 +356,8 @@ fieldset[disabled] .btn-white.active {
 .btn-blue.active,
 .open .dropdown-toggle.btn-blue {
   color: #fff;
-  background-color: #0CA9C9;
-  border-color: #0CA9C9;
+  background-color: #029BBA;
+  border-color: #029BBA;
 }
 .btn-blue:active,
 .btn-blue.active,
@@ -394,8 +407,9 @@ fieldset[disabled] .btn-blue.active {
   //}
 }
 .btn-modal-facebook {
+  margin-top: 55px;
   display: table;
-  padding: 10px 90px 8px;
+  padding: 9px 90px 7px;
   font-size: 15px;
   font-family: 'Conv_HelveticaNeue-Medium';
   border-radius: 4px;
