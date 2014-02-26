@@ -12,7 +12,7 @@
       %form.navbar-form.navbar-left{role: "search"}
         .form-group
           %input.form-control{placeholder: "Search", type: "text"}/
-      %a.btn.btn-red.btn-nb.pull-right{href: "#"} Sign In
+      %a.btn.btn-red.btn-nb.pull-right{"data-target" => "#singup_modal", "data-toggle" => "modal"} Create an Account
       %ul.nav.navbar-nav.navbar-right
         %li
           %a{href: "#"}
@@ -22,3 +22,6 @@
           %a{href: "#"}
             %span.user
             People
+        %li
+          %a{href: "#"}
+            Sign in
