@@ -152,6 +152,7 @@ h1, h2, h3, h4, h5, h6, p {
     color: #ffffff;
     text-decoration: underline;
     outline: 0;
+    cursor: pointer;
   }
   a.white-link:hover,
   a.white-link:focus {
@@ -257,6 +258,22 @@ h1, h2, h3, h4, h5, h6, p {
               margin-top: 0px;
               font-size: 12px;
             }
+            .bootstrap-select:not([class*="span"]):not([class*="col-"]):not([class*="form-control"]) {
+              width: 100%;
+            }
+            .btn.dropdown-toggle.selectpicker {
+              height: 50px;
+              color: #555555;
+              border-radius: 0px;
+            }
+            .btn.dropdown-toggle.selectpicker:hover,
+            .btn.dropdown-toggle.selectpicker:focus,
+            .btn.dropdown-toggle.selectpicker:active,
+            .btn.dropdown-toggle.selectpicker.active,
+            .open .dropdown-toggle.btn.dropdown-toggle.selectpicker {
+              background-color: #fafafa;
+              border-color: #cccccc;
+            }
           }
           .form-group.form-group-help {
             margin-bottom: 0px;
@@ -271,6 +288,9 @@ h1, h2, h3, h4, h5, h6, p {
               text-decoration: underline;
               color: #1dacc7;
             }
+          }
+          .checkbox-inline {
+            width: 30%;
           }
           p.checkbox-help {
             padding-left: 20px;
@@ -520,8 +540,7 @@ fieldset[disabled] .btn-grey.active {
   border-radius: 4px;
   margin-bottom: 5px;
 }
-.btn-modal-facebook {
-  margin-top: 55px;
+.btn-modal-sn {
   display: table;
   padding: 9px 90px 7px;
   font-size: 15px;
@@ -553,5 +572,14 @@ fieldset[disabled] .btn-grey.active {
 }
 .amt-5 {
   margin-top: 50px;
+}
+.snb-1 {
+  margin-top: 55px;
+}
+.snb-2 {
+  margin-top: 44px;
+}
+.snb-3 {
+  margin-top: 21px;
 }
 

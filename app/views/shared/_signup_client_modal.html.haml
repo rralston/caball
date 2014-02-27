@@ -1,4 +1,4 @@
-#singup_modal.modal.modal-1.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+#singup_client_modal.modal.modal-1.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
   .modal-dialog
     .modal-content
       .modal-body
@@ -11,10 +11,10 @@
             %form{role: "form"}
               .form-group
                 %label Full Name
-                %input.form-control{placeholder: "Enter email", type: "text"}
+                %input.form-control{placeholder: "Full Name", type: "text"}
               .form-group.form-group-help
                 %label Email Address
-                %input.form-control{placeholder: "Enter email", type: "email"}
+                %input.form-control{placeholder: "Email", type: "email"}
                 %p.help-block.text-right We NEVER NEVER Spam our users emails.
               .form-group.form-group-help.form-group-up
                 %label Password
@@ -34,11 +34,11 @@
                 FilmZu may promote my profile per my settings. I'm 18+ years
                 old or have permission from a parent/rep.
               %button.btn.btn-blue.btn-full-width.btn-modal.amt-3{type: "submit"} I'm ready, let me in
-              %a.modal-link{href: "#"} Sign Up as Filmaker
+              %a.modal-link{"data-target" => "#singup_filmaker_modal", "data-toggle" => "modal", "data-dismiss" => "modal"} Sign Up as Filmaker
           .col-xs-6.right
             %h3 Log In with Facebook
             %p.subtitle Fast and easy, and we don't post without permission
-            %a.btn.btn-blue.btn-full-width.btn-modal-facebook{href: "#"}
+            %a.btn.btn-blue.btn-full-width.btn-modal-sn.snb-1{href: "#"}
               %i.fa.fa-facebook
               %span.btn-text
                 Log In With Facebook
