@@ -9,22 +9,64 @@
 -#        %a{href: '#'}
 -#          Register as a Client
 -#        \.
-.container.container-basic
+.container.container-gw-2-10
   .row
     .col-xs-2
+      %ul.list-unstyled.steps-breadcrumb
+        %li.active
+          %span.step-icon
+          %span.step-name
+            Basics
+        %li.unfinished
+          %span.step-icon
+          %span.step-name
+            Account
+        %li.unfinished
+          %span.step-icon
+          %span.step-name
+            Portfolio
     .col-xs-10
       .row
-        .col-xs-8
+        .col-xs-7
           %h2.title
             Complete Registration
           %p.subtitle
             Step 1: The Basics
-        .col-xs-4
+        .col-xs-5
           .text-right
             %a.btn.btn-blue.btn-md{href: "#"}
               Next Step
             %a.btn.btn-grey.btn-md{href: "#"}
               Cancel
+      .row
+        .col-xs-3
+          .file-input-wrapper-profile-image.amt-2
+            %button{:class => "btn-new-image btn"}
+              .new-image-box
+            %input{type: "file"}
+        .col-xs-9.new-image-legend
+          %h3 Choose an Image
+          %p
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore.
       .clearfix
+      .row
+        .col-xs-6.location-and-position
+          %form{role: "form"}
+            .form-group
+              %label Location
+              %input.form-control{placeholder: "Location", type: "text"}
+              %p.help-block Click icon to use current location
+            .form-group
+              %label Your Position*
+              %select.selectpicker
+                %option First Option
+                %option Second Option
+                %option Third Option
+              %p.help-block
+                *1 role max. Focus on what you are best at. Want to add more?
+                %br
+                %a{href: "#"} Upgrade to PRO now!
+            %button.btn.btn-blue.btn-full-width.btn-lmd.amt-3{type: "submit"} Next Step
+        .col-xs-6
   .clearfix
 
