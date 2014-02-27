@@ -14,11 +14,6 @@ gem 'twitter-bootstrap-rails'
 gem 'unicorn'
 gem 'awesome_print'
 
-
-group :production do
-  gem 'mysql2'
-end
-
 group :development do
   gem 'pg'
 end
@@ -70,5 +65,7 @@ gem 'contact_us', '~> 0.5.1'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'taps'
 gem 'rake', '~> 10.1.0'
-#gem 'protected_attributes'
 gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
+gem 'active_model_serializers'
+gem 'ember-rails'
+gem 'ember-source', '1.4.0' # or the version you need
