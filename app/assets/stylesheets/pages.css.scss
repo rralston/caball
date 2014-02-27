@@ -67,6 +67,16 @@ h1, h2, h3, h4, h5, h6, p {
       //min-height: 100%;
       background-color: #ffffff;
       border-left: 1px solid #ccd5d6;
+      p.help-block {
+        color: #9ea2a2;
+        margin-bottom: 0;
+        margin-top: 0px;
+        font-size: 13px;
+        a {
+          text-decoration: underline;
+          color: #1dacc7;
+        }
+      }
       .new-image-legend {
         padding-top: 70px;
         padding-left: 0px;
@@ -111,14 +121,53 @@ h1, h2, h3, h4, h5, h6, p {
           background-color: #eaeeee;
           border-color: #cccccc;
         }
-        p.help-block {
-          color: #9ea2a2;
-          margin-bottom: 0;
-          margin-top: 0px;
-          font-size: 13px;
-          a {
-            text-decoration: underline;
-            color: #1dacc7;
+      }
+    }
+    .pro-or-standard {
+      a.register-link {
+        margin-right: 10px;
+        text-decoration: underline;
+        color: #9ea2a2;
+        font-size: 13px;
+      }
+      .col-xs-6.account-type {
+        .black-header {
+          background-color: #424242;
+          padding: 30px 20px;
+          h3 {
+            color: #ffffff;
+            font-size: 40px;
+            margin: 0px;
+            font-family: 'Conv_HelveticaNeue-Light';
+          }
+          p {
+            color: #ffffff;
+            font-size: 18px;
+            margin: 0px;
+          }
+        }
+        .benefits-title {
+          padding: 20px;
+          color: #b8bcbc;
+          font-size: 18px;
+          font-family: 'Conv_HelveticaNeue-Medium';
+        }
+        ul.benefits {
+          > li {
+            font-family: 'Conv_HelveticaNeue-Medium';
+            font-size: 16px;
+            padding: 20px;
+            margin-bottom: 10px;
+            border: 1px solid #ccd5d6;
+            h5 {
+              color: #b8bcbc;
+              font-size: 16px;
+              margin: 0px 0px 10px;
+            }
+            ul {
+              padding-left: 10px;
+              list-style-type:disc;
+            }
           }
         }
       }
@@ -328,22 +377,6 @@ h1, h2, h3, h4, h5, h6, p {
     font-size: 12px;
   }
 }
-
-//tabels
-
-//.steps-breadcrumb {
-//  td.step-icon {
-//    padding: 10px 10px 10px 0px;
-//  }
-//  td.step-name {
-//    font-size: 20px;
-//    color: #9ea2a2;
-//  }
-//  td.step-name.active {
-//    font-size: 20px;
-//    color: #424242;
-//  }
-//}
 
 //modals
 
@@ -730,33 +763,20 @@ fieldset[disabled] .btn-grey.active {
       color: #9ea2a2;
     }
   }
+  .finished {
+    .step-icon {
+      background-image: url('register_breadcrumb.png');
+      background-position: 0px 0px;
+    }
+    .step-name {
+      color: #9ea2a2;
+    }
+  }
 }
 
 //icons
 
-//.steps-breadcrumb {
-//  .unfinished {
-//    background-image: url('register_breadcrumb.png');
-//    background-position: 0px -140px;
-//    background-repeat: no-repeat;
-//    width: 50px;
-//    height: 50px;
-//  }
-//  .finished {
-//    background-image: url('register_breadcrumb.png');
-//    background-position: 0px -140px;
-//    background-repeat: no-repeat;
-//    width: 50px;
-//    height: 50px;
-//  }
-//  .active {
-//    background-image: url('register_breadcrumb.png');
-//    background-position: 0px -70px;
-//    background-repeat: no-repeat;
-//    width: 50px;
-//    height: 50px;
-//  }
-//}
+
 
 //typography
 

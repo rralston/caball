@@ -5,7 +5,11 @@ class PagesController < ApplicationController
 
   end
 
-  def register
+  def register_basics
+
+  end
+
+  def register_account
 
   end
 end
