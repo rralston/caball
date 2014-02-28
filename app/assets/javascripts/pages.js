@@ -6,4 +6,5 @@ $(document).on("page:load",function(){
 });
 function pagesInitialize() {
     $('.selectpicker').selectpicker();
+    $('.slider').slider();
 }
