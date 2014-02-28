@@ -540,19 +540,31 @@ class User < ActiveRecord::Base
   def talent_names
     self.talents.map(&:name).uniq
   end
-
+  #Updated Activities feed to Include all Activities (Only People you Follow below)
+  # def activities_feed
+  #   Activity.order("created_at DESC").
+  #     where('(owner_id in (?) AND owner_type = ? AND recipient_id IS NULL) OR (recipient_id = ?)', self.friend_ids, 'User', self.id).
+  #       where('activities.key NOT IN (?)', ['blog.update', 'comment.update'])
+  # end
+  # 
+  # def friends_activities
+  #   Activity.order("created_at desc").
+  #             where(:owner_id => self.friend_ids, :owner_type => 'User').
+  #             where(:recipient_id => nil)
+  # end
+  
   def activities_feed
     Activity.order("created_at DESC").
-      where('(owner_id in (?) AND owner_type = ? AND recipient_id IS NULL) OR (recipient_id = ?)', self.friend_ids, 'User', self.id).
+      where('(owner_type = ? AND recipient_id IS NULL) OR (recipient_id = ?)', 'User', self.id).
         where('activities.key NOT IN (?)', ['blog.update', 'comment.update'])
   end
 
   def friends_activities
     Activity.order("created_at desc").
-              where(:owner_id => self.friend_ids, :owner_type => 'User').
+              where(:owner_type => 'User').
               where(:recipient_id => nil)
   end
-
+  
   def addressed_activities
     Activity.order("created_at desc").
               where(:recipient_id => self.id)
