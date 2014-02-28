@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/activerecord-hackery/polyamorous.git
+  revision: 3d45f4c9219b5e6626096d38aa04f401b7ce7808
+  specs:
+    polyamorous (0.6.4)
+      activerecord (>= 3.0)
+
+GIT
   remote: git://github.com/activerecord-hackery/ransack.git
   revision: 856428ee95de7e40d0cc68e74f2181f52231880c
   branch: rails-4.1
@@ -407,6 +414,7 @@ DEPENDENCIES
   omniauth
   omniauth-facebook (= 1.6.0)
   pg
+  polyamorous!
   possessive
   public_activity
   rails (= 4.1.0.rc1)
