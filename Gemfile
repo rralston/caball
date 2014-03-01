@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '1.9.3'
-gem 'rails', '4.1.0.rc1'
+gem 'rails', '4.0.3'
 gem 'coffee-rails', '~> 4.0.1'
 gem 'sass-rails', '~> 4.0.1'
 gem 'uglifier', '>= 2.4.0'
@@ -19,7 +19,7 @@ group :development do
 end
 
 group :test, :development do
-  gem 'rspec-rails', '~> 3.0.0.beta'
+  gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy'
   gem 'selenium-webdriver', '~> 2.35.1'
@@ -31,9 +31,9 @@ end
 
 group :test do
   gem "guard-rspec"
-  gem 'rb-fsevent', '~> 0.9.1'
+  gem 'rb-fsevent'
   gem 'database_cleaner'
-  gem "minitest", "~> 5.1.0"
+  gem "minitest"
   gem 'mysql2'
 end
 
@@ -46,7 +46,7 @@ gem 'mailboxer'
 gem 'haml-rails'
 gem 'simple_form'
 gem 'geocoder'
-gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
+gem 'ransack'
 gem 'possessive'
 gem 'kaminari'
 gem 'newrelic_rpm'
@@ -65,7 +65,7 @@ gem 'contact_us', '~> 0.5.1'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'taps'
 gem 'rake', '~> 10.1.0'
-gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
+gem 'polyamorous'
 gem 'active_model_serializers'
 gem 'ember-rails'
 gem 'ember-source', '1.4.0' # or the version you need
