@@ -6,7 +6,7 @@ class EventsController < ApplicationController
   before_filter :set_page_title
   
   def set_page_title
-    @page_title = "Events on Filmzu"
+    @page_title = "Events on filmmo"
   end
   
   def index
