@@ -40,7 +40,7 @@ end
 
 gem 'carrierwave'
 gem "rmagick"
-gem 'video_info'
+# gem 'video_info'
 gem 'hpricot'
 gem 'omniauth-facebook', '1.6.0'
 gem 'mailboxer'
