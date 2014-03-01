@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 ruby '1.9.3'
 gem 'rails', '4.0.3'
+gem 'mysql2'
 gem 'coffee-rails', '~> 4.0.1'
 gem 'sass-rails', '~> 4.0.1'
 gem 'uglifier', '>= 2.4.0'
@@ -34,10 +35,6 @@ group :test do
   gem 'rb-fsevent'
   gem 'database_cleaner'
   gem "minitest"
-  gem 'mysql2'
-end
-
-group :production do 
   gem 'mysql2'
 end
 
