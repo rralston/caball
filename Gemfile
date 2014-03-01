@@ -37,6 +37,10 @@ group :test do
   gem 'mysql2'
 end
 
+group :production do 
+  gem 'mysql2'
+end
+
 gem 'carrierwave'
 gem "rmagick"
 gem 'video_info'
