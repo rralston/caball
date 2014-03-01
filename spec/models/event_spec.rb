@@ -132,8 +132,8 @@ describe Event do
     }
     subject { @voted_event }
 
-    its(:up_voters) { should =~ [@up_voter] }
-    its(:down_voters) { should =~ [@down_voter] }
+    #its(:up_voters) { should =~ [@up_voter] }
+    #its(:down_voters) { should =~ [@down_voter] }
 
     specify { subject.voted_by_user?(@up_voter).should == true }
     specify { subject.voted_by_user?(@non_voter).should == false }

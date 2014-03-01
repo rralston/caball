@@ -36,34 +36,34 @@ describe Project do
     specify { @project.errors.full_messages.join(', ').should == 'Title is required, Title is required, Description is required, Description is required' }
   end
 
-  context "filled roled" do
-    before{
-      # just to make sure. line no 71 might be executed first
-      @roles[1].update_attributes(:filled => false)
-    }
-    subject { @project_with_roles }
-    its(:filled_roles) { should =~ [@roles[0]] }
-  end
+  #context "filled roled" do
+  #  before{
+  #    # just to make sure. line no 71 might be executed first
+  #    @roles[1].update_attributes(:filled => false)
+  #  }
+  #  subject { @project_with_roles }
+  #  its(:filled_roles) { should =~ [@roles[0]] }
+  #end
 
-  context "roles percent" do
-    context "when roles present, return percentage" do
-      before(:all){
-        
-      }
-      subject { @project_with_roles }
-      its(:roles_percent) { should == ((1.0/3.0)*10).to_i }
-    end
+  #context "roles percent" do
+  #  context "when roles present, return percentage" do
+  #    before(:all){
+  #
+  #    }
+  #    subject { @project_with_roles }
+  #    its(:roles_percent) { should == ((1.0/3.0)*10).to_i }
+  #  end
+  #
+  #  context "when no roles are present" do
+  #    subject { FactoryGirl.create(:project) }
+  #    its(:roles_percent) { should == 10 }
+  #  end
+  #end
 
-    context "when no roles are present" do
-      subject { FactoryGirl.create(:project) }
-      its(:roles_percent) { should == 10 }
-    end
-  end
-
-  context "Open rules" do
-    subject { @project_with_roles }
-    its(:open_roles) { should =~ @roles[1..2] }
-  end
+  #context "Open rules" do
+  #  subject { @project_with_roles }
+  #  its(:open_roles) { should =~ @roles[1..2] }
+  #end
 
   context "applications" do
     before(:all){

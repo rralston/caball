@@ -1,7 +1,7 @@
 class ProjectDate < ActiveRecord::Base
   belongs_to :project
 
-  attr_accessible :description, :date_time
+  #attr_accessible :description, :date_time
 
   def full_date
     date_time.split(' ').first

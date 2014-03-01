@@ -1,6 +1,6 @@
 class Url < ActiveRecord::Base
   belongs_to :urlable, :polymorphic => true
-  attr_accessible :url
+  #attr_accessible :url
 
   validates :url, :url => true, :if => :validate_url?
 

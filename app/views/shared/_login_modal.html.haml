@@ -1,0 +1,31 @@
+#login_modal.modal.modal-1.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .row
+          .modal-close
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+          .col-xs-6.left
+            %h3 Log In with Password
+            %p.subtitle Login to your account using password!
+            %form{role: "form"}
+              .form-group
+                %label Email Address
+                %input.form-control{placeholder: "Enter email", type: "email"}
+              .form-group
+                %label Password
+                %input.form-control{placeholder: "Password", type: "password"}
+                %p.help-block.text-right Forgot your Password?
+              %button.btn.btn-blue.btn-full-width.btn-lmd.amt-3{type: "submit"} Log in
+              %p.help-modal
+                Don't have an Account?
+              %a.modal-link{"data-target" => "#singup_client_modal", "data-toggle" => "modal", "data-dismiss" => "modal"}
+                Sign Up
+          .col-xs-6.right
+            %h3 Log In with Facebook
+            %p.subtitle Fast and easy, and we don't post without permission
+            %a.btn.btn-blue.btn-full-width.btn-modal-sn.snb-1{href: "#"}
+              %i.fa.fa-facebook
+              %span.btn-text
+                Log In With Facebook
+              .clearfix

@@ -17,11 +17,11 @@ class Project < ActiveRecord::Base
   has_many :project_dates, :class_name => 'ImportantDate', :as => :important_dateable, :dependent => :destroy
 
 
-  attr_accessible :title, :description, :start, :end, :featured, :roles_attributes,
-                  :photos_attributes, :videos_attributes, :status, :genre, :is_type, :genre_list, :is_type_list,
-                  :thoughts, :compensation, :location, :headline, :project_dates_attributes, :union, :url_name, :union_present
+  #attr_accessible :title, :description, :start, :end, :featured, :roles_attributes,
+  #                :photos_attributes, :videos_attributes, :status, :genre, :is_type, :genre_list, :is_type_list,
+  #                :thoughts, :compensation, :location, :headline, :project_dates_attributes, :union, :url_name, :union_present
   
-  accepts_nested_attributes_for :roles, :photos, :videos, :project_dates, :genre, :allow_destroy => true  
+  #accepts_nested_attributes_for :roles, :photos, :videos, :project_dates, :genre, :allow_destroy => true
   validates_presence_of :title, :description, :message => "is required"
   validates :headline, :length => { :maximum => 224 }
   

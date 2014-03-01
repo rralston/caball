@@ -1,102 +1,102 @@
 Caball::Application.routes.draw do
+  get "pages/index"
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
                                        :registrations => "users/registrations", :sessions => "users/sessions"}
 
   get "activities/index"
 
-  match '/our_story' => 'static_pages#our_story'
-  match '/contact' => 'contact_us/contacts#new'
-  match '/contact_us' => 'contact_us/contacts#new'
-  # get 'people', to: 'users#index', via: :all
+  get '/our_story' => 'static_pages#our_story'
+  get '/contact' => 'contact_us/contacts#new'
   resources :users, :path => "people"
-  match '/people/:id' => 'users#update', :via => 'post'
-  match "/blog(/*path)" => redirect{ |env, req| "http://blog.filmzu.com" + (req.path ? "#{req.path}" : '/')}
+  post '/people/:id' => 'users#update'
+  get "/blog(/*path)" => redirect{ |env, req| "http://blog.filmzu.com" + (req.path ? "#{req.path}" : '/')}
 
-  match 'check_url_param' => 'application#check_url_param'
+  get 'check_url_param' => 'application#check_url_param'
 
-  match "/main_search" => 'application#main_search'
+  get "/main_search" => 'application#main_search'
 
-  match 'users/recommended_projects' => 'users#next_recommended_projects'
-  match 'users/recommended_people' => 'users#next_recommended_people'
-  match 'users/recommended_events' => 'users#next_recommended_events'
+  get 'users/recommended_projects' => 'users#next_recommended_projects'
+  get 'users/recommended_people' => 'users#next_recommended_people'
+  get 'users/recommended_events' => 'users#next_recommended_events'
 
-  match '/users/set_notification_check_time' => 'users#set_notification_check_time'
+  get '/users/set_notification_check_time' => 'users#set_notification_check_time'
 
-  match '/users/update' => 'users#custom_update', :via => 'POST'
-  match '/users/step_1' => 'users#step_1'
+  post '/users/update' => 'users#custom_update'
+  get '/users/step_1' => 'users#step_1'
 
-  match '/users/step_1_reload' => 'users#step_1_reload'
-  match '/users/step_2' => 'users#step_2'
-  match '/users/step_3' => 'users#step_3'
-  match '/users/files_upload' => 'users#files_upload'
-  match '/users/agent_names' => 'users#agent_names'
-  match '/users/profile' => 'users#profile'
-  match '/users/change_password' => 'users#change_password'
-  match '/users/change_email' => 'users#change_email'
-  match '/users/change_email_settings' => 'users#change_email_settings'
+  get '/users/step_1_reload' => 'users#step_1_reload'
+  get '/users/step_2' => 'users#step_2'
+  get '/users/step_3' => 'users#step_3'
+  get '/users/files_upload' => 'users#files_upload'
+  get '/users/agent_names' => 'users#agent_names'
+  get '/users/profile' => 'users#profile'
+  get '/users/change_password' => 'users#change_password'
+  get '/users/change_email' => 'users#change_email'
+  get '/users/change_email_settings' => 'users#change_email_settings'
   get '/users/search_by_name'  
 
-  match '/events/files_upload' => 'events#files_upload'
-  match '/projects/files_upload' => 'projects#files_upload'
-  match '/comments/files_upload' => 'comments#files_upload'
-  match '/blogs/files_upload' => 'blogs#files_upload'
+  get '/events/files_upload' => 'events#files_upload'
+  get '/projects/files_upload' => 'projects#files_upload'
+  get '/comments/files_upload' => 'comments#files_upload'
+  get '/blogs/files_upload' => 'blogs#files_upload'
 
   resources :users do 
     resources :characteristics, :photos, :talents, :profile, :blogs
   end
 
 
-  match '/roles/destroy' => 'roles#destroy', :via => 'POST'
+  post '/roles/destroy' => 'roles#destroy'
 
 
-  match '/projects/step_1'          => 'projects#step_1'
-  match '/projects/step_2'          => 'projects#step_2'
-  match '/projects/step_3'          => 'projects#step_3'
-  match '/projects/add_filled_role' => 'projects#add_filled_role'
+  get '/projects/step_1'          => 'projects#step_1'
+  get '/projects/step_2'          => 'projects#step_2'
+  get '/projects/step_3'          => 'projects#step_3'
+  get '/projects/add_filled_role' => 'projects#add_filled_role'
 
 
   resources :projects do 
     resources :comments
   end
 
-  match '/blogs/:id' => 'blogs#update', :via => 'POST'
+  post '/blogs/:id' => 'blogs#update'
   resources :blogs
   # post request to handle comment handle
-  match '/comments/:id' => 'comments#update', :via => 'POST'
+  post '/comments/:id' => 'comments#update'
   resources :comments
-  match 'conversations/get_messages' => 'conversations#get_messages', :via => 'GET'
-  match '/conversations/empty_trash' => 'conversations#empty_trash', :via => 'POST'
+  get 'conversations/get_messages' => 'conversations#get_messages'
+  post '/conversations/empty_trash' => 'conversations#empty_trash'
   resources :conversations
-  match 'conversations/send-generic-message' => 'conversations#send_message_generic', :via => 'POST'
+  post 'conversations/send-generic-message' => 'conversations#send_message_generic'
 
   resources :notifications
   resources :friendships
-  match 'friendships/destroy' => 'friendships#destroy', :via => 'POST'
+  post 'friendships/destroy' => 'friendships#destroy'
   resources :likes
-  match 'likes/unlike' => 'likes#unlike', :via => 'POST'
+  post 'likes/unlike' => 'likes#unlike'
 
   resources :endorsements
  
   resources :events
-  match 'events/up_vote' => 'events#up_vote', :via => 'POST'
-  match 'events/down_vote' => 'events#down_vote', :via => 'POST'
-  match 'events/load_more' => 'events#load_more', :via => 'POST'
-  match 'events/message_organizer' => 'events#send_message_to_organizer', :via => 'POST'
-  match 'events/attend' => 'events#attend', :via => 'POST'
-  match 'events/unattend' => 'events#unattend', :via => 'POST'
-  match 'events/invite_followers' => 'events#invite_followers', :via => 'POST'
+  post 'events/up_vote' => 'events#up_vote'
+  post 'events/down_vote' => 'events#down_vote'
+  post 'events/load_more' => 'events#load_more'
+  post 'events/message_organizer' => 'events#send_message_to_organizer'
+  post 'events/attend' => 'events#attend'
+  post 'events/unattend' => 'events#unattend'
+  post 'events/invite_followers' => 'events#invite_followers'
 
   resources :role_applications do
     get :already_approved
   end
-  match 'roles_applicants' => 'roles#applicants_list', :via => 'POST'
-  match 'role_applications/approve' => 'role_applications#approve', :via => 'POST'
-  match 'role_applications/un_approve' => 'role_applications#un_approve', :via => 'POST'
+  post 'roles_applicants' => 'roles#applicants_list'
+  post 'role_applications/approve' => 'role_applications#approve'
+  post 'role_applications/un_approve' => 'role_applications#un_approve'
 
-  match 'report' => 'application#report'
+  post 'report' => 'application#report'
   
   # News feed
-  match 'activities/load_more' => 'activities#next_activities'
+  get 'activities/load_more' => 'activities#next_activities'
   resources :activities
   
   
@@ -107,18 +107,23 @@ Caball::Application.routes.draw do
     get page, controller: "static_pages", action: page
   end
 
-  match 'dashboard'                 => 'users#dashboard'
-  match 'dashboard/projects'        => 'users#dashboard_projects', :via => 'GET'
-  match 'dashboard/events'          => 'users#dashboard_events', :via => 'GET'
-  match 'dashboard/conversations'   => 'users#dashboard_conversations', :via => 'GET'
-  match '/dashboard/manage_project' => 'users#manage_project', :via => 'GET'
+  get 'dashboard'                 => 'users#dashboard'
+  get 'dashboard/projects'        => 'users#dashboard_projects'
+  get 'dashboard/events'          => 'users#dashboard_events'
+  get 'dashboard/conversations'   => 'users#dashboard_conversations'
+  get '/dashboard/manage_project' => 'users#manage_project'
   
 
-  match 'projects/show' => 'projects#show'
+  get 'projects/show' => 'projects#show'
   # match 'auth/:provider/callback', to: 'sessions#create'
-  match 'auth/failure', to: redirect('/')
-  match 'signout', to: 'sessions#destroy', as: 'signout'
-  root :to => 'home#index'
+  get 'auth/failure', to: redirect('/')
+  get 'signout', to: 'sessions#destroy', as: 'signout'
+
+
+  root :to => 'pages#index'
+  get 'register/basics' => 'pages#register_basics', as: 'register_basics'
+  get 'register/account' => 'pages#register_account', as: 'register_account'
+
   
   # Admin Area
   namespace :admin do
@@ -139,4 +144,11 @@ Caball::Application.routes.draw do
       post :read
     end
   end
+
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v2 do
+      post 'accounts' => 'accounts#auth'
+    end
+  end
+
 end

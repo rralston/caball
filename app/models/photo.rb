@@ -1,8 +1,8 @@
 class Photo < ActiveRecord::Base
   belongs_to :imageable, :polymorphic => true
-  attr_accessible :image, :description, :content_type, :file_size,
-                  :updated_at, :is_main, :is_cover, :remote_image_url,
-                  :crop_x, :crop_y, :crop_w, :crop_h, :original_width, :original_height
+  #attr_accessible :image, :description, :content_type, :file_size,
+  #                :updated_at, :is_main, :is_cover, :remote_image_url,
+  #                :crop_x, :crop_y, :crop_w, :crop_h, :original_width, :original_height
   mount_uploader :image, ImageUploader
 
   after_update :reprocess_profile, :if => :cropping?

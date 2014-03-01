@@ -1,0 +1,78 @@
+.container.container-gw-2-10
+  .row
+    .col-xs-2
+      %ul.list-unstyled.steps-breadcrumb
+        %li.finished
+          %span.step-icon
+          %span.step-name
+            Basics
+        %li.active
+          %span.step-icon
+          %span.step-name
+            Account
+        %li.unfinished
+          %span.step-icon
+          %span.step-name
+            Portfolio
+    .col-xs-10.pro-or-standard
+      .row
+        .col-xs-7
+          %h2.title
+            Pick an Account Type
+          %p.subtitle
+            Step 2: Pro or Standard
+        .col-xs-5
+          .text-right
+            %a.register-link{href: "#"}
+              Sign Up as Filmaker
+            %a.btn.btn-blue.btn-md{href: "#"}
+              Next Step
+            %a.btn.btn-grey.btn-md{href: "#"}
+              Cancel
+      .row
+        .col-xs-6.account-type.pro
+          .black-header.text-center.amt-2
+            %h3
+              Pro
+            %p
+              US $9/MO
+          .benefits-title.text-center
+            Pro Benefits
+          %ul.list-unstyled.benefits
+            %li.text-center
+              Message All Users
+            %li.text-center
+              Apply to up to 50 projects per month
+            %li.text-center
+              %h5 Unique Features
+              %ul
+                %li View job posts before standard users
+                %li Featured Profiles
+                %li Better Profile ensures professionalism
+                %li Appear Higher in search results
+          %p.help-block
+            FilmZu Pro Members are admitted through a simple application process only. Learn about the qualifications
+            %a{href: '#'}
+              Here
+        .col-xs-6.account-type.standard
+          .black-header.text-center.amt-2
+            %h3
+              Standard
+            %p
+              Free
+          .benefits-title.text-center
+            Standard Benefits
+          %ul.list-unstyled.benefits
+            %li.text-center
+              Message Standard Users Only
+            %li.text-center
+              Apply to up to 20 projects per month
+      .row
+        .col-xs-6
+          %a.btn.btn-red.btn-full-width.btn-lmd.amt-5{href: '#'}
+            Go Pro
+        .col-xs-6
+          %a.btn.btn-grey.btn-full-width.btn-lmd.amt-5{href: '#'}
+            Select Now
+  .clearfix
+
