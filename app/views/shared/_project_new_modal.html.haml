@@ -1,0 +1,243 @@
+#project_new_modal.modal.modal-2.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .modal-close
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+        %form{role: "form"}
+          #project_new_step_one
+            %ul.list-unstyled.steps-bar.step-one
+              %li.text-center.active
+                .step-bar-content
+                  %span.ion-ios7-checkmark-empty.step-bar-icon
+                  %span.step-bar-name
+                    Lorem ipsum
+              %li.text-center
+                .step-bar-content
+                  %span.ion-ios7-plus-empty.step-bar-icon
+                  %span.step-bar-name
+                    Lorem ipsum
+              %li.text-center
+                .step-bar-content
+                  %span.ion-ios7-plus-empty.step-bar-icon
+                  %span.step-bar-name
+                    Lorem ipsum
+            %h2.title
+              Create Project
+            %p.subtitle
+              List your project, and get the video you want made!
+            .form-group.amt-2
+              %label Title of your project
+              %input.form-control{placeholder: "Title", type: "text"}
+            .form-group
+              %label What type of video do you want?
+              .clearfix
+              %a.btn.btn-grey{href: '#'} TV Commercial
+              %a.btn.btn-blue{href: '#'} Crowdfunding
+              %a.btn.btn-grey{href: '#'} Web Video
+              %a.btn.btn-grey{href: '#'} Music Video
+              %a.btn.btn-grey{href: '#'} Event
+              %a.btn.btn-grey{href: '#'} Other
+            .form-group
+              %label What style of video do you want?
+              .clearfix
+              %a.btn.btn-blue{href: '#'} Live Action
+              %a.btn.btn-grey{href: '#'} Animated
+              %a.btn.btn-grey{href: '#'} Stop Motion
+              %a.btn.btn-grey{href: '#'} Motion Graphics
+            .form-group
+              %label Do you have an idea for a script?
+              .clearfix
+              %a.btn.btn-grey{href: '#'} Yes
+              %a.btn.btn-grey{href: '#'} No
+              %a.btn.btn-grey{href: '#'} I don't know
+            .form-group
+              %label Do you need any actors?
+              .clearfix
+              %a.btn.btn-grey{href: '#'} Yes
+              %a.btn.btn-grey{href: '#'} No
+              %a.btn.btn-grey{href: '#'} I don't know
+            .form-group
+              %label Do you need music?
+              .clearfix
+              %a.btn.btn-grey{href: '#'} No
+              %a.btn.btn-grey{href: '#'} Original
+              %a.btn.btn-grey{href: '#'} Licensed
+              %a.btn.btn-grey{href: '#'} Stock
+            .form-group
+              %label About how long do you want it to be?
+              .clearfix
+              %a.btn.btn-grey{href: '#'} 30 sec
+              %a.btn.btn-grey{href: '#'} 1 min
+              %a.btn.btn-grey{href: '#'} 1-2 min
+              %a.btn.btn-grey{href: '#'} 2-5 min
+              %a.btn.btn-grey{href: '#'} 5+ min
+            .form-group
+              %label Proposals due by:
+              .clearfix
+              %a.btn.btn-grey{href: '#'} 1 day
+              %a.btn.btn-grey{href: '#'} 3 days
+              %a.btn.btn-grey{href: '#'} 5 days
+              %a.btn.btn-grey{href: '#'} 7 days
+              %a.btn.btn-grey{href: '#'} 10 days
+            .form-group
+              %label What-s your approx budget?
+              .clearfix
+              .budget-slider
+                %span
+                  $100
+                %input.slider.slider-horizontal{"data-slider-max" => "5000", "data-slider-min" => "100", "data-slider-orientation" => "horizontal", "data-slider-selection" => "before", "data-slider-step" => "1", "data-slider-tooltip" => "show", "data-slider-value" => "700", type: "text", value: ""}
+                %span
+                  $5000
+            .form-group
+              %label Who do you want applicants by?
+              .clearfix
+              %a.btn.btn-grey{href: '#'} Everyone
+              %a.btn.btn-grey{href: '#'} FilmZu Pro Only
+            .form-group
+              %label Tell us in your own words what you want
+              %textarea.form-control{rows: "3"}
+            .form-group
+              %label Location
+              %input.form-control{placeholder: "Location", type: "text"}
+            .form-group
+              %label Title of Your Project
+              %select.selectpicker
+                %option Editing
+                %option Wedding
+                %option Writing
+            .row
+              .col-xs-12.text-right.amt-2
+                .file-input-wrapper-modal-attachments.pull-left
+                  %button{:class => "btn-new-attacment btn btn-grey btn-md"}
+                    Attach File
+                  %input{type: "file"}
+                %button.btn.btn-red.btn-md{type: "button"} Next
+                %button.btn.btn-grey.btn-md{"data-dismiss" => "modal", type: "button"} Close
+          #project_new_step_two.hide
+            %ul.list-unstyled.steps-bar.step-two
+              %li.text-center
+                .step-bar-content
+                  %span.ion-ios7-checkmark-empty.step-bar-icon
+                  %span.step-bar-name
+                    Lorem ipsum
+              %li.text-center.active
+                .step-bar-content
+                  %span.ion-ios7-checkmark-empty.step-bar-icon
+                  %span.step-bar-name
+                    Lorem ipsum
+              %li.text-center
+                .step-bar-content
+                  %span.ion-ios7-plus-empty.step-bar-icon
+                  %span.step-bar-name
+                    Lorem ipsum
+            %h2.title
+              Feature Your Project
+            %p.subtitle
+              Feature your project to receive top proposals and applicants
+            %ul.amt-3.feature-project-list
+              %li
+                Receive proposals faster and make sure your post stands out
+              %li
+                Access to FilmZu Pro users who provide verified work
+              %li
+                Attract top talent that know you are serious about making something great
+            .row
+              .col-xs-12.amt-2
+                %button.btn.btn-grey.btn-md{type: "button"} No thanks
+                %button.btn.btn-red.btn-md{type: "button"} Yes, Feature Me!
+                .clearfix
+                %p.help-feature-project
+                  One time $15 free
+          #project_new_step_three.hide
+            %ul.list-unstyled.steps-bar.step-three
+              %li.text-center
+                .step-bar-content
+                  %span.ion-ios7-checkmark-empty.step-bar-icon
+                  %span.step-bar-name
+                    Lorem ipsum
+              %li.text-center
+                .step-bar-content
+                  %span.ion-ios7-checkmark-empty.step-bar-icon
+                  %span.step-bar-name
+                    Lorem ipsum
+              %li.text-center.active
+                .step-bar-content
+                  %span.ion-ios7-checkmark-empty.step-bar-icon
+                  %span.step-bar-name
+                    Lorem ipsum
+            %h2.title
+              Preview Your Post
+            .row.project-modal-preview
+              .col-xs-3
+                %img.amt-3{src: "http://placehold.it/125x125/eaeeee/424242&text=No+Image"}
+              .col-xs-9
+                %h3
+                  Some Project
+                %p.project-modal-owner
+                  by
+                  %a{href: "#"}
+                    Some User
+                %ul.project-modal-basics.list-unstyled
+                  %li Los Angeles
+                  %li Documentary Film
+                  %li 3 Jobs
+                %p.project-modal-description
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+                  dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                %ul.project-modal-details.list-unstyled
+                  %li
+                    %strong
+                      Film Length:
+                    3min
+                  %li
+                    %strong
+                      Proposals due in:
+                    1day
+                  %li
+                    %strong
+                      Total Budget:
+                    $500
+                  %li
+                    %strong
+                      Visibility:
+                    FilmZu Pro Only
+                  %li
+                    %strong
+                      Skills
+                    DSLR
+                %ul.project-modal-attachments.list-unstyled
+                  %li
+                    %span.ion-paperclip
+                    Attachment 1
+                  %li
+                    %span.ion-paperclip
+                    Attachment 2
+            .row
+              .col-xs-12.text-right
+                %a.project-modal-save-draft{href: "#"} Save draft for later
+                %button.btn.btn-grey.btn-md{type: "button"} Edit Post
+                %button.btn.btn-red.btn-md{type: "button"} Post My Job
+          #project_new_step_four.hide
+            %h2.title.amt-3
+              Almost Done!
+            %p.subtitle
+              Before we can list your project you must register
+            %ul.amt-3.feature-project-list
+              %li
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              %li
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              %li
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            .row
+              .col-xs-12.amt-2
+                %button.btn.btn-grey.btn-md{type: "button"} No thanks
+                %button.btn.btn-red.btn-md{type: "button"} Yes, Register Now!
+
+
+
+
+

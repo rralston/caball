@@ -1,0 +1,65 @@
+#singup_filmaker_modal.modal.modal-1.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-body
+        .row
+          .modal-close
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+          .col-xs-6.left
+            %h3 New to FilmZu?
+            %p.subtitle Create an account today!
+            %form{role: "form"}
+              .form-group
+                %label Full Name
+                %input.form-control{placeholder: "Full Name", type: "text"}
+              .form-group.form-group-help
+                %label Email Address
+                %input.form-control{placeholder: "Email", type: "email"}
+                %p.help-block.text-right We NEVER NEVER Spam our users emails.
+              .form-group.form-group-help.form-group-up
+                %label Password
+                %input.form-control{placeholder: "Password", type: "password"}
+                %p.help-block.text-right Minimum 6 characters.
+              .form-group.form-group-up
+                %label Confirm Password
+                %input.form-control{placeholder: "Confirm Password", type: "password"}
+              .form-group.form-group-help.form-group-up
+                %label How you want to represent yourself?
+              %label.checkbox-inline
+                %input{type: "checkbox", value: "option1"}
+                Individual
+              %label.checkbox-inline
+                %input{type: "checkbox", value: "option2"}
+                Company
+              .form-group.amt-1
+                %label Company Name
+                %input.form-control{placeholder: "Company Name", type: "text"}
+              .form-group
+                %label Role that Describes You
+                %select.selectpicker
+                  %option First Option
+                  %option Second Option
+                  %option Third Option
+              .checkbox
+                %label
+                  %input{type: "checkbox"}
+                  I agree to FilmZu's
+                  %a{href: "#"} Terms and Conditions
+              %button.btn.btn-blue.btn-full-width.btn-lmd.amt-3{type: "submit"} I'm ready, let me in
+              %a.modal-link{"data-target" => "#singup_client_modal", "data-toggle" => "modal", "data-dismiss" => "modal"} Sign Up as Client
+          .col-xs-6.right
+            %h3
+              Log In with
+              %br
+              Facebook or LinkedIn
+            %p.subtitle Fast and easy, and we don't post without permission
+            %a.btn.btn-blue.btn-full-width.btn-modal-sn.snb-3{href: "#"}
+              %i.fa.fa-facebook
+              %span.btn-text
+                Log In With Facebook
+              .clearfix
+            %a.btn.btn-blue.btn-full-width.btn-modal-sn.snb-2{href: "#"}
+              %i.fa.fa-linkedin
+              %span.btn-text
+                Log In With LinkedIn
+              .clearfix
