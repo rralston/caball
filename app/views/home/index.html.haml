@@ -3,7 +3,9 @@
     .row
       %h1 Your Vision. Your Video.
       %h3 made exclusively for you
-      %button.btn.btn-orange.btn-slg{"data-target" => "#project_new_modal", "data-toggle" => "modal"} Start a New Project
+      %form.form-inline#mc-embedded-subscribe-form{:action => "http://filmzu.us6.list-manage2.com/subscribe/post?u=f7f6702bd4e503b98fda073a0&amp;id=122bcc356e", :method => "post", :name => "mc-embedded-subscribe-form", :novalidate => "", :target => "_blank"}
+        %input#mce-EMAIL.input-small.required.email{:name => "EMAIL", :type => "email", :value => "", placeholder: "email"}/
+        %input#mc-embedded-subscribe.btn.btn-orange.btn-slg{:name => "subscribe", :type => "submit", :value => "Submit"}/
 .steps
   .container
     .row
@@ -14,31 +16,13 @@
             .col-xs-4.text-center
               = image_tag "step1.png"
               %h3 List Your Project
-              %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              %p It only takes 3 minutes to post your project and details
             .col-xs-4.text-center
               = image_tag "step2.png"
               %h3 Receive Proposals
-              %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              %p Within 24 hours have proposals from the best talent in the industry
             .col-xs-4.text-center
               = image_tag "step3.png"
               %h3 Get Your Video
-              %p Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+              %p Choose your favourite, and get your vision made into video. 
         .clearfix
-.customer-successes
-  .container
-    .row
-      %h2.text-center Customer Successes
-      = image_tag "home_video.png"
-.testimonials
-  .container.text-center
-    .row
-      %h3 "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor..."
-      = image_tag "fast_company_logo.png"
-.red-bar
-  .container.text-center
-    .row
-      %a.btn.btn-white.btn-slg{href: "#"} Post Your Job For Free!
-      .clearfix
-      %a.white-link{"data-target" => "#singup_filmaker_modal", "data-toggle" => "modal"} Register as a Filmaker
-
-
