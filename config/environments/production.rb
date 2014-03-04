@@ -55,7 +55,7 @@ Caball::Application.configure do
   
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
 
-  config.assets.precompile += %w( application_2.css application.css bootstrap-select.css.scss bootstrap.css.scss font-awesome.css.scss font.css.scss home_page.css.sass ionicons.css.scss admin/admin.css admin/*.js conversations/new.css users/users_manifest.js dashboard/dashboard.css dashboard/dashboard_manifest.js users/users.js signup.css signin.css
+  config.assets.precompile += %w(application_2.css application.css bootstrap-select.css.scss bootstrap.css.scss font-awesome.css.scss font.css.scss home_page.css.sass ionicons.css.scss admin/admin.css admin/*.js conversations/new.css users/users_manifest.js dashboard/dashboard.css dashboard/dashboard_manifest.js users/users.js signup.css signin.css
                                 events_manifest.js events/manifest.css events/event_index.css events/events_manifest.js home_page.css 
                                 users/user_index.css application.js plugins/common.css.sass users/user_index.css.sass application_2.js bootstrap-select.js bootstrap.js caball.js.coffee contact.js bootstrap-slider.js
                                 projects/projects_manifest.js projects/manifest.css users/user_search.js projects/project_index.css 
