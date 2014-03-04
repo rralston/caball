@@ -141,4 +141,4 @@ gem "recaptcha", :require => "recaptcha/rails"
 gem 'taps'
 
 #Required for AWS Setuup
-gem 'rake', '~> 10.1.0'
+gem 'rake', '~> 10.1.1'
