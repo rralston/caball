@@ -15,11 +15,11 @@
         .col-xs-12
           .row
             .col-xs-3.text-center
-              = image_tag "http://itventures.co.nz/filmzu/step1.png"
+              = image_tag "step1.png"
               %h3 List Your Project
               %p It takes less than 3 minutes to post your project and details on Filmzu.
             .col-xs-3.text-center
-              = image_tag "http://itventures.co.nz/filmzu/step2.png"
+              = image_tag "step2.png"
               %h3 Review Proposals
               %p Within 24 hours have proposals from the best talent in the industry.
             .col-xs-3.text-center
@@ -27,7 +27,7 @@
               %h3 Pay Securely
               %p Securely deposit funds into an Escrow account. 100% safe. Guaranteed.  
             .col-xs-3.text-center
-              = image_tag "http://itventures.co.nz/filmzu/step3.png"
+              = image_tag "step3.png"
               %h3 Get Your Video
               %p Choose your favourite, and get your vision made into video. Exclusively for you. 
         .clearfix
@@ -35,6 +35,6 @@
     $(function() {
     var BV = new $.BigVideo();
     BV.init();
-    BV.show('assets/river.mp4',{ambient:true});
-    $("#big-video-wrap").css("position", "absolute");
+    BV.getPlayer().width(1).height(1);
+    if (Modernizr.touch) {BV.show('assets/Home.jpg');} else {BV.show('assets/river.mp4',{ambient:true});}
     } );
