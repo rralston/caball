@@ -4,5 +4,6 @@
 //= require bootstrap-slider
 //= require pages
 
+//= require bigvideo
 //= require_self
 //= require caball

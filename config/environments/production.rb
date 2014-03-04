@@ -60,7 +60,8 @@ Caball::Application.configure do
                                 users/user_index.css application.js plugins/common.css.sass users/user_index.css.sass application_2.js bootstrap-select.js bootstrap.js caball.js.coffee contact.js bootstrap-slider.js
                                 projects/projects_manifest.js projects/manifest.css users/user_search.js projects/project_index.css 
                                 static_pages/our_story.css navigation.css.scss pages.css.scss slider.css.scss 
-                                users/users_manifest.js users/manifest.css users/show.css contact.js glossary.js static_pages/labs.css dashboard/introjs.css dashboard/intro.js)
+                                users/users_manifest.js users/manifest.css users/show.css contact.js glossary.js static_pages/labs.css dashboard/introjs.css dashboard/intro.js
+                                bigvideo.css bigvideo.js)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

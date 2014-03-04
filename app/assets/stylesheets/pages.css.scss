@@ -175,10 +175,9 @@ h1, h2, h3, h4, h5, h6, p {
   }
 }
 .banner {
-  background: url('Home.jpg') top center;
+  background: top center;  
   background-size: cover;
-
-  height: 430px;
+  min-height: 430px;
   min-width: 960px;
   padding-top: 80px;
   h1 {
