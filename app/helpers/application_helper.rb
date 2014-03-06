@@ -43,7 +43,7 @@ module ApplicationHelper
  
     content_tag(:script, :type => 'text/javascript') do
       raw "var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-38653918-1']);
+        _gaq.push(['_setAccount', 'UA-38653918-2']);
         _gaq.push(['_trackPageview']);
 
         (function() {
