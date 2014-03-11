@@ -10,4 +10,4 @@
 //= require_self
 //= require caball
 
-window.Filmzu = Ember.Application.create()
+window.Filmzu = Ember.Application.create({rootElement: '#film_zu_container'})

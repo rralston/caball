@@ -4,6 +4,8 @@ Caball::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
                                        :registrations => "users/registrations", :sessions => "users/sessions"}
 
+  get "ember" => "pages#ember", :as => :pages_ember
+
   get "activities/index"
 
   get '/our_story' => 'static_pages#our_story'

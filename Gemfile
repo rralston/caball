@@ -70,5 +70,6 @@ gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
 gem 'active_model_serializers'
 gem 'ember-rails'
 gem 'ember-source', '1.4.0' # or the version you need
+gem "ember-data-source", "~> 1.0.0.beta.7"
 gem 'balanced', '~> 1.0'
 gem 'spring'
