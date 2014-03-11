@@ -254,5 +254,5 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = "/my_engine/users/auth"
 
-  config.omniauth :linkedin, APP['linkedin_app_id'], APP['linkedin_secret_key'], :scope => 'r_fullprofile r_emailaddress r_contactinfo'
+  #config.omniauth :linkedin, APP['linkedin_app_id'], APP['linkedin_secret_key'], :scope => 'r_fullprofile r_emailaddress r_contactinfo'
 end

@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/activerecord-hackery/ransack.git
-  revision: 856428ee95de7e40d0cc68e74f2181f52231880c
+  revision: a97df885c115ca9f846c1aa071086579c0c62db6
   branch: rails-4.1
   specs:
     ransack (1.1.0)
@@ -56,6 +56,10 @@ GEM
       fog (>= 1.8.0)
     atomic (1.1.15)
     awesome_print (1.2.0)
+    balanced (1.0)
+      addressable (~> 2.3.5)
+      faraday (~> 0.8.6)
+      faraday_middleware (~> 0.9.0)
     barber (0.4.2)
       ember-source
       execjs
@@ -128,8 +132,10 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
-    faraday (0.9.0)
-      multipart-post (>= 1.2, < 3)
+    faraday (0.8.9)
+      multipart-post (~> 1.2.0)
+    faraday_middleware (0.9.0)
+      faraday (>= 0.7.4, < 0.9)
     ffi (1.9.3)
     fog (1.19.0)
       builder
@@ -190,7 +196,7 @@ GEM
       actionpack (>= 3.1)
       less (~> 2.4.0)
     libv8 (3.16.14.3)
-    listen (2.6.1)
+    listen (2.7.0)
       celluloid (>= 0.15.2)
       celluloid-io (>= 0.15.0)
       rb-fsevent (>= 0.9.3)
@@ -207,17 +213,18 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (5.1.0)
-    multi_json (1.8.4)
+    multi_json (1.9.0)
     multi_xml (0.5.5)
-    multipart-post (2.0.0)
+    multipart-post (1.2.0)
     mysql2 (0.3.15)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.8.0)
-    newrelic_rpm (3.7.2.195)
+    newrelic_rpm (3.7.3.199)
     nio4r (1.0.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    oauth (0.4.7)
     oauth2 (0.9.3)
       faraday (>= 0.8, < 0.10)
       jwt (~> 0.1.8)
@@ -229,6 +236,11 @@ GEM
       rack (~> 1.0)
     omniauth-facebook (1.6.0)
       omniauth-oauth2 (~> 1.1)
+    omniauth-linkedin (0.1.0)
+      omniauth-oauth (~> 1.0)
+    omniauth-oauth (1.0.1)
+      oauth
+      omniauth (~> 1.0)
     omniauth-oauth2 (1.1.2)
       faraday (>= 0.8, < 0.10)
       multi_json (~> 1.3)
@@ -302,7 +314,7 @@ GEM
     rspec-support (3.0.0.beta2)
     ruby-hmac (0.4.0)
     rubyzip (0.9.9)
-    sass (3.2.14)
+    sass (3.3.1)
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
@@ -326,6 +338,7 @@ GEM
     spork-rails (4.0.0)
       rails (>= 3.0.0, < 5)
       spork (>= 1.0rc0)
+    spring (1.1.2)
     sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -365,7 +378,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    video_info (2.2.2)
+    video_info (2.3.0)
       addressable
       htmlentities
       multi_json
@@ -383,6 +396,7 @@ DEPENDENCIES
   acts-as-taggable-on
   asset_sync
   awesome_print
+  balanced (~> 1.0)
   cancan
   capybara
   carrierwave
@@ -413,6 +427,7 @@ DEPENDENCIES
   newrelic_rpm
   omniauth
   omniauth-facebook (= 1.6.0)
+  omniauth-linkedin
   pg
   polyamorous!
   possessive
@@ -431,6 +446,7 @@ DEPENDENCIES
   simple_form
   social-share-button
   spork-rails
+  spring
   taps
   therubyracer (~> 0.12.1)
   twitter-bootstrap-rails

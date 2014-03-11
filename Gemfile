@@ -41,7 +41,9 @@ gem 'carrierwave'
 gem "rmagick"
 gem 'video_info'
 gem 'hpricot'
+gem 'omniauth'
 gem 'omniauth-facebook', '1.6.0'
+gem 'omniauth-linkedin'
 gem 'mailboxer'
 gem 'haml-rails'
 gem 'simple_form'
@@ -59,7 +61,6 @@ gem 'acts-as-taggable-on'
 gem "remotipart", "~> 1.2.1"
 gem 'social-share-button'
 gem 'devise', "~> 3.2.2"
-gem 'omniauth'
 gem 'devise-async'
 gem 'contact_us', '~> 0.5.1'
 gem "recaptcha", :require => "recaptcha/rails"
@@ -69,3 +70,5 @@ gem 'polyamorous', github: 'activerecord-hackery/polyamorous'
 gem 'active_model_serializers'
 gem 'ember-rails'
 gem 'ember-source', '1.4.0' # or the version you need
+gem 'balanced', '~> 1.0'
+gem 'spring'
