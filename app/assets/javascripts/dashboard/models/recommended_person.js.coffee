@@ -1,1 +1,0 @@
-app.models.recommended_person = Backbone.Model.extend()

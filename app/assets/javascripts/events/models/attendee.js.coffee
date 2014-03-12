@@ -1,1 +1,0 @@
-app.models.attendee = Backbone.Model.extend()
