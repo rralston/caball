@@ -1051,7 +1051,7 @@ fieldset[disabled] .btn-grey.active {
     }
   }
   .col-xs-7 {
-    width: 68%;
+    width: 63%;
     border-right: 1px solid #cfd4d2;
     height: 210px;
     ul.member-details {
@@ -1073,6 +1073,14 @@ fieldset[disabled] .btn-grey.active {
         font-family: 'Conv_HelveticaNeue-Medium';
       }
       line-height: 1.4;
+    }
+  }
+  .col-xs-3 {
+    .rating-star {
+      i {
+        font-size: 18px;
+        color: #1facc9;
+      }
     }
   }
 }

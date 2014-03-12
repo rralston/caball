@@ -16,11 +16,12 @@ module Api
         end
 
         def avatar
-          if object.photos.first.nil?
-            ActionController::Base.helpers.image_url "actor.png"
-          else
-            object.photos.first
-          end
+          ActionController::Base.helpers.image_url "actor.png"
+          #if object.photos.first.nil?
+          #  ActionController::Base.helpers.image_url "actor.png"
+          #else
+          #  object.photos.first
+          #end
         end
 
         #has_one :metadata, :serializer => Api::V1::Serializers::PaginationSerializer, :key => :metadata, :root => :metadata

@@ -2,6 +2,13 @@ Filmzu.FilmMakerTemplateView = Ember.View.extend({
     templateName: 'filmmaker',
     didInsertElement: function(){
         $('.selectpicker').selectpicker();
+        $('.member-description').each(function(i){
+            len=$(this).text().length;
+            if(len > 290)
+            {
+                $(this).text($(this).text().substr(0,290)+'...');
+            }
+        });
     }
 });
 //

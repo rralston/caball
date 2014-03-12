@@ -4,7 +4,7 @@ Caball::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
                                        :registrations => "users/registrations", :sessions => "users/sessions"}
 
-  get "ember" => "pages#ember", :as => :pages_ember
+  get "/" => "pages#ember", :as => :root
 
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
@@ -134,7 +134,7 @@ Caball::Application.routes.draw do
   get 'signout', to: 'sessions#destroy', as: 'signout'
 
 
-  root :to => 'pages#index'
+  #root :to => 'pages#index'
   get 'register/basics' => 'pages#register_basics', as: 'register_basics'
   get 'register/account' => 'pages#register_account', as: 'register_account'
   get 'listing' => 'pages#listing', as: 'listing'

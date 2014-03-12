@@ -32,10 +32,17 @@
               </a>
             </div>
             <div class='col-xs-3'>
+                <div class='rating-star'>
+                    <i class='fa fa fa-star'></i>
+                    <i class='fa fa fa-star'></i>
+                    <i class='fa fa fa-star'></i>
+                    <i class='fa fa fa-star'></i>
+                    <i class='fa fa fa-star'></i>
+                </div>
             </div>
         </div>
       </td>
-      <td class="col-3"></td>
+      <td class="col-4"></td>
     </tr>
     <tr>
       <td class="col-1"></td>
