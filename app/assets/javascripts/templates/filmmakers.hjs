@@ -33,9 +33,7 @@
       <td class="col-3">
         <div class="row">
           <div class="col-xs-12">
-            {{#each film_maker in model}}
-                {{view Filmzu.FilmMakerTemplateView contentBinding="film_maker"}}
-            {{/each}}
+            {{outlet}}
           </div>
         </div>
       </td>

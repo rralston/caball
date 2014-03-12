@@ -1,0 +1,3 @@
+{{#each film_maker in model}}
+    {{view Filmzu.FilmMakerTemplateView contentBinding="film_maker"}}
+{{/each}}
