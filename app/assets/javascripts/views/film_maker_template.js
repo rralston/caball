@@ -1,5 +1,8 @@
 Filmzu.FilmMakerTemplateView = Ember.View.extend({
-    templateName: 'filmmaker'
+    templateName: 'filmmaker',
+    didInsertElement: function(){
+        $('.selectpicker').selectpicker();
+    }
 });
 //
 //

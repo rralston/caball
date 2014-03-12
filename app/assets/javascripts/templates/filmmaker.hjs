@@ -10,7 +10,7 @@
             <ul class="list-unstyled member-details">
               <li>
                 <i class="fa fa-map-marker"></i>
-                {{view.content.city}}, {{view.content.state}}
+                {{view.content.location}}
               </li>
               <li>
                 <i class="fa fa-user"></i>
@@ -27,6 +27,25 @@
               </span>
               {{view.content.description}}
             </p>
+        </div>
+        <div class="col-xs-3">
+            <ul class="list-unstyled member-price">
+              <li>
+                <span>
+                  $300
+                </span>
+                Price
+              </li>
+              <li>
+                <span>
+                  $150
+                </span>
+                Daily Rate
+              </li>
+            </ul>
+            <a class="btn btn-md btn-blue btn-full-width" href="#">
+              Hire
+            </a>
         </div>
     </div>
 </div>

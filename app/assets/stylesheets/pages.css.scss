@@ -981,7 +981,9 @@ fieldset[disabled] .btn-grey.active {
   .col-xs-7 {
     width: 68%;
     h4.member-name {
+      margin: 0px;
       a{
+        color: #424242;
         margin: 0px;
         font-family: 'Conv_HelveticaNeue-Medium';
         font-size: 18px;

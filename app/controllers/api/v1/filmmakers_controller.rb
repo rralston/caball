@@ -3,7 +3,6 @@ module Api
     class FilmmakersController < BaseController
 
       def list_film_makers
-        puts "///////////////////"
         @users=User.all
         render :json=>@users , :each_serializer=>Api::V1::Serializers::FilmMakerSerializer
       end
