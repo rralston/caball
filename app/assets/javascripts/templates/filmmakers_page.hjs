@@ -1,0 +1,12 @@
+{{#each film_maker in model}}
+    {{view Filmzu.FilmMakerTemplateView contentBinding="film_maker"}}
+{{/each}}
+{{#unless firstPage}}
+    <a {{action firstPage }}> First </a>
+    <a {{action previousPage }}> Prev </a>
+{{/unless}}
+<span> {{content.pagination.current_page}} </span>
+{{#unless lastPage}}
+    <a {{action nextPage }}> Next </a>
+    <a {{action lastPage }}> Last </a>
+{{/unless}}

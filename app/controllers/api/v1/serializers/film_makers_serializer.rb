@@ -1,10 +1,11 @@
 module Api
   module V1
     module Serializers
-      class FilmMakerSerializer < ActiveModel::Serializer
+      class FilmMakersSerializer < ActiveModel::Serializer
         attributes :id, :name, :location, :avatar, :role, :description
         self.root=:film_makers
-        embed :ids, include: true
+
+        #embed include: true
 
         def role
           object.expertise
@@ -21,6 +22,8 @@ module Api
             object.photos.first
           end
         end
+
+        #has_one :metadata, :serializer => Api::V1::Serializers::PaginationSerializer, :key => :metadata, :root => :metadata
 
         #has_one :customer,:serializer=>Api::V1::Serializers::CustomerSerializer, :key => :customer, :root => :customer
         #has_many :credit_cards, :serializer=>Api::V1::Serializers::CreditCardSerializer, :key => :creditCards, :root => :creditCards
