@@ -16,4 +16,8 @@ class PagesController < ApplicationController
   def listing
 
   end
+
+  def ember
+
+  end
 end

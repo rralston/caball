@@ -1,0 +1,10 @@
+<div class="row">
+    <div class="col-xs-3">
+        <image {{bindAttr src=view.content.avatar}}>
+    </div>
+    <div class="col-xs-9">
+        <p> {{view.content.name}} </p>
+        <p> {{view.content.city}}, {{view.content.state}} </p>
+        <p> About: {{view.content.description}} </p>
+    </div>
+</div>
