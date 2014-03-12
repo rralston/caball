@@ -18,6 +18,10 @@ group :development do
   gem 'pg'
 end
 
+group :production do
+  gem 'pg'
+end
+
 group :test, :development do
   gem 'rspec-rails', '~> 3.0.0.beta'
   gem 'capybara'
