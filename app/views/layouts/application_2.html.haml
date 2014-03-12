@@ -16,10 +16,10 @@
     = javascript_include_tag "application_2"
     = csrf_meta_tags
   %body{"data-action" => action_name, "data-controller" => controller_name}
-    #wrap{:class => [('single-wrapper' if params[:controller] == 'pages' && params[:action] == 'index'), ('two-color-wrapper' if params[:controller] == 'pages' && (params[:action] == 'register_basics' || params[:action] == 'register_account'))]}
-      = render "shared/navigation"
-      -#.contentwrap{id: "#{controller_name}-#{action_name}", role: "main"}
-      = yield
+    -##wrap{:class => [('single-wrapper' if params[:controller] == 'pages' && params[:action] == 'index'), ('two-color-wrapper' if params[:controller] == 'pages' && (params[:action] == 'register_basics' || params[:action] == 'register_account'))]}
+    = render "shared/navigation"
+    -#.contentwrap{id: "#{controller_name}-#{action_name}", role: "main"}
+    = yield
     #footer
       = render "shared/footer"
     = render "shared/signup_client_modal"

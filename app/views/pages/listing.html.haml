@@ -1,10 +1,28 @@
--#%table.table-grid-1
--#  %tbody
--#    %tr
--#      %td{rowspan: "2"}
--#      %td.left-white{rowspan: "2"}
--#      %td.right-top
--#      %td.right-end-top
--#    %tr
--#      %td.right
--#      %td
+%table.content.content-grid-1
+  %tbody
+    %tr
+      %td.col-1{rowspan: "2"}
+      %td.col-2{rowspan: "2"}
+      %td.col-3-a.col-header-1
+        .row
+          .col-xs-12
+            .row
+              .col-xs-4
+                %h2.title People
+              .col-xs-4.col-pr-1
+                %form
+                  .form-group
+                    %input{type: "text", class: "form-control", placeholder: "Search People"}
+              .col-xs-4
+                %select.selectpicker
+                  %option First Option
+                  %option Second Option
+                  %option Third Option
+      %td.col-4-a
+    %tr
+      %td.col-3
+        .row
+          .col-xs-12
+            .member
+              .row
+      %td.col-4

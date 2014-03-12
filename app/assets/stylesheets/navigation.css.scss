@@ -13,6 +13,11 @@
     .navbar-header {
       width: 100%;
     }
+    .navbar-collapse {
+      border-top: none;
+      padding-left: 0px;
+      padding-right: 0px;
+    }
   }
   .navbar-brand {
     padding: 17px 15px 17px 0px;
