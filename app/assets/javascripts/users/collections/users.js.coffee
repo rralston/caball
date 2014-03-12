@@ -1,1 +1,0 @@
-app.collections.users = Backbone.Collection.extend()

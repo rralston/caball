@@ -1,1 +1,0 @@
-app.models.recent_event = Backbone.Model.extend()

@@ -1,1 +1,0 @@
-app.models.endorsement = Backbone.Model.extend()

@@ -1,1 +1,0 @@
-app.models.recommended_event = Backbone.Model.extend()

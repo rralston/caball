@@ -1,1 +1,0 @@
-app.models.searched_user = Backbone.Model.extend()
