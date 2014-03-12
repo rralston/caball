@@ -6,6 +6,17 @@ Caball::Application.routes.draw do
 
   get "ember" => "pages#ember", :as => :pages_ember
 
+  namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      namespace :filmmakers do
+        get "/", :action => "list_film_makers"
+      end
+    end
+  end
+
+
+
+
   get "activities/index"
 
   get '/our_story' => 'static_pages#our_story'
