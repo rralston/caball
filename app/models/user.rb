@@ -29,7 +29,8 @@ class User < ActiveRecord::Base
   after_create do |user|
     UserMailer.signup_confirmation(user).deliver
   end
-  
+
+  has_one :film_maker
   has_one :characteristics, :dependent => :destroy
   has_one :profile, :dependent => :destroy
   has_many :photos, -> { where is_cover: false }, :as => :imageable, :dependent => :destroy

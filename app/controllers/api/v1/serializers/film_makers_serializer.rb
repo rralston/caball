@@ -1,7 +1,7 @@
 module Api
   module V1
     module Serializers
-      class FilmMakerSerializer < ActiveModel::Serializer
+      class FilmMakersSerializer < ActiveModel::Serializer
         attributes :id, :name, :location, :avatar, :role, :description
         self.root=:film_makers
 
