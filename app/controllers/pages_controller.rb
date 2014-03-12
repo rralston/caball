@@ -12,4 +12,8 @@ class PagesController < ApplicationController
   def register_account
 
   end
+
+  def listing
+
+  end
 end

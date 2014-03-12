@@ -8,17 +8,21 @@
   margin-bottom: 0px;
   min-height: 70px;
   .container {
-    padding-right: 0px;
-    padding-left: 0px;
+    padding-right: 10px;
+    padding-left: 10px;
     .navbar-header {
       width: 100%;
     }
   }
   .navbar-brand {
-    padding: 17px 15px;
+    padding: 17px 15px 17px 0px;
+    width: 150px;
+    margin-left: 0px;
+    outline: 0;
   }
   .navbar-form {
-    margin-left: 20px;
+    margin-left: 0px;
+    padding-left: 0px;
     padding-top: 11px;
     .form-control {
       background-color: #eaeded;
@@ -30,10 +34,14 @@
       width: 240px;
     }
   }
+  .nav.navbar-nav.navbar-left {
+    width: 280px;
+  }
   .navbar-nav > li > a {
     padding: 24px;
     font-size: 16px;
     font-family: 'Conv_HelveticaNeue-Medium';
+    outline: 0;
   }
   .btn {
     margin: 19px 0px 19px 30px;
