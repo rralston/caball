@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Api::V1::FilmMakersController do
+describe Api::V1::FilmmakersController do
 
   before :each do
     @user = create(:user)

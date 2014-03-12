@@ -10,6 +10,7 @@ Caball::Application.routes.draw do
     namespace :v1 do
       namespace :filmmakers do
         get "/", :action => "list_film_makers"
+        get "/:id", :action => "film_maker"
       end
     end
   end
