@@ -1,11 +1,36 @@
-
+<div class="member">
     <div class="row">
+        <div class="col-xs-2">
+            <image {{bindAttr src=view.content.avatar}}>
+        </div>
+        <div class="col-xs-7">
+            <h4 class="member-name">
+              {{#link-to 'person' view.content}} {{view.content.name}} {{/link-to}}
+            </h4>
+            <ul class="list-unstyled member-details">
+              <li>
+                <i class="fa fa-map-marker"></i>
+                {{view.content.city}}, {{view.content.state}}
+              </li>
+              <li>
+                <i class="fa fa-user"></i>
+                Writer
+              </li>
+              <li>
+                <i class="fa fa-star-o"></i>
+                5.0 Stars
+              </li>
+            </ul>
+            <p class="member-description">
+              <span>
+                About
+              </span>
+              {{view.content.description}}
+            </p>
+        </div>
         <div class="col-xs-3">
             <image {{bindAttr src=view.content.avatar}}>
         </div>
-        <div class="col-xs-9">
-            <p> {{#link-to 'person' view.content}} {{view.content.name}} {{/link-to}} </p>
-            <p> {{view.content.city}}, {{view.content.state}} </p>
-            <p> About: {{view.content.description}} </p>
-        </div>
     </div>
+</div>
+
