@@ -1,6 +1,45 @@
-<div>
-    <p> People </p>
-    {{#each film_maker in model}}
-        {{view Filmzu.FilmMakerTemplateView contentBinding="film_maker"}}
-    {{/each}}
-</div>
+<table class="content content-grid-1">
+  <tbody>
+    <tr>
+      <td class="col-1">{rowspan: "2"}</td>
+      <td class="col-2">{rowspan: "2"}</td>
+      <td class="col-3-a col-header-1">
+        <div class="row">
+          <div class="col-xs-12">
+            <div class="row">
+              <div class="col-xs-4">
+                <h2 class="title">People</h2>
+              </div>
+              <div class="col-xs-4 col-pr-1">
+                <form>
+                  <div class="form-group">
+                    <input />{type: "text", class: "form-control", placeholder: "Search People"}</div>
+                </form>
+              </div>
+              <div class="col-xs-4">
+                <select class="selectpicker">
+                  <option>First Option</option>
+                  <option>Second Option</option>
+                  <option>Third Option</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </td>
+      <td class="col-4-a"></td>
+    </tr>
+    <tr>
+      <td class="col-3">
+        <div class="row">
+          <div class="col-xs-12">
+            {{#each film_maker in model}}
+
+            {{/each}}
+          </div>
+        </div>
+      </td>
+      <td class="col-4"></td>
+    </tr>
+  </tbody>
+</table>

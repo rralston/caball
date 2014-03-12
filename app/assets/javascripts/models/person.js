@@ -1,4 +1,4 @@
-Filmzu.Filmmaker = DS.Model.extend({
+Filmzu.Person = DS.Model.extend({
     avatar: DS.attr('string'),
     name: DS.attr('string'),
     location: DS.attr('string'),

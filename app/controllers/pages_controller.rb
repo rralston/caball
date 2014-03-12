@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-  layout "application_2"
 
   def index
 
@@ -10,6 +9,10 @@ class PagesController < ApplicationController
   end
 
   def register_account
+
+  end
+
+  def listing
 
   end
 

@@ -136,6 +136,7 @@ Caball::Application.routes.draw do
   root :to => 'pages#index'
   get 'register/basics' => 'pages#register_basics', as: 'register_basics'
   get 'register/account' => 'pages#register_account', as: 'register_account'
+  get 'listing' => 'pages#listing', as: 'listing'
 
   
   # Admin Area

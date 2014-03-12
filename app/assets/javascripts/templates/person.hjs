@@ -1,0 +1,14 @@
+<div class='row'>
+    <div class="col-xs-3">
+        <image {{bindAttr src=model.avatar}}>
+    </div>
+    <div class="col-xs-9">
+        <h1> {{model.name}} </h1>
+        <div>
+            <span> {{model.location}} </span>
+            <span> {{model.role}} </span>
+        </div>
+        <label> About </label>
+        <p> {{model.description}} </p>
+    </div>
+</div>

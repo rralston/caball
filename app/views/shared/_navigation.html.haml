@@ -3,20 +3,21 @@
     .navbar-header
       %a.navbar-brand{href: root_path}
         = image_tag "new_logo.png"
-      %form.navbar-form.navbar-left{role: "search"}
-        .form-group
-          %input.form-control{placeholder: "Search", type: "text"}
-      %ul.nav.navbar-nav
-        %li
-          %a{href: "#"}
-            %span.project
-            Projects
-        %li
-          %a{href: "#"}
-            %span.user
-            People
-      %a.btn.btn-red.btn-nb.pull-right{"data-target" => "#singup_client_modal", "data-toggle" => "modal"} Create an Account
-      %ul.nav.navbar-nav.navbar-right
-        %li
-          %a{'href'=> '#' ,"data-target" => "#login_modal", "data-toggle" => "modal"}
-            Log in
+      .collapse.navbar-collapse
+        %form.navbar-form.navbar-left{role: "search"}
+          .form-group
+            %input.form-control{placeholder: "Search", type: "text"}
+        %ul.nav.navbar-nav.navbar-left
+          %li
+            %a{href: "#"}
+              %span.project
+              Projects
+          %li
+            %a{href: "#"}
+              %span.user
+              People
+        %a.btn.btn-red.btn-nb.pull-right{"data-target" => "#singup_client_modal", "data-toggle" => "modal"} Create an Account
+        %ul.nav.navbar-nav.navbar-right
+          %li
+            %a{'href'=> '#' ,"data-target" => "#login_modal", "data-toggle" => "modal"}
+              Log in
