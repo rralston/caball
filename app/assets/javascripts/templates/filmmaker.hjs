@@ -1,7 +1,7 @@
 <div class="member">
     <div class="row">
         <div class="col-xs-2">
-            <image {{bindAttr src=view.content.avatar}}>
+            <image {{bind-attr src=view.content.avatar}}>
         </div>
         <div class="col-xs-7">
             <h4 class="member-name">
@@ -14,7 +14,7 @@
               </li>
               <li>
                 <i class="fa fa-user"></i>
-                Writer
+                {{view.content.role}}
               </li>
               <li>
                 <i class="fa fa-star-o"></i>
@@ -27,9 +27,6 @@
               </span>
               {{view.content.description}}
             </p>
-        </div>
-        <div class="col-xs-3">
-            <image {{bindAttr src=view.content.avatar}}>
         </div>
     </div>
 </div>

@@ -1,6 +1,6 @@
 <div class='row'>
     <div class="col-xs-3">
-        <image {{bindAttr src=model.avatar}}>
+        <image {{bind-attr src=model.avatar}}>
     </div>
     <div class="col-xs-9">
         <h1> {{model.name}} </h1>
