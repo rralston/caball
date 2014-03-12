@@ -15,19 +15,25 @@ Filmzu._PaginatedRouteMixin = Ember.Mixin.create({
     actions: {
         gotoPage: function(pageNum){
             var last = this.get('controller.content.pagination.total_pages') || 1;
-            var num = Util.clamp(pageNum, 1, last);
+            var num;
+            if(pageNum > last){
+                num = last;
+            }else{
+                num = pageNum
+            }
+//            = Util.clamp(pageNum, 1, last);
             this.transitionTo(this.paginationRoute, num);
         },
         nextPage: function(){
-            var cur = this.get('controller.content.pagination.current_page') || 0;
+            var cur = parseInt(this.get('controller.content.pagination.current_page') || 0);
             this.transitionTo(this.paginationRoute, cur + 1);
         },
         previousPage: function(){
-            var cur = this.get('controller.content.pagination.current_page') || 2;
+            var cur = parseInt(this.get('controller.content.pagination.current_page') || 2);
             this.transitionTo(this.paginationRoute, cur - 1);
         },
         lastPage: function(){
-            var last = this.get('controller.content.pagination.total_pages') || 1;
+            var last = parseInt(this.get('controller.content.pagination.total_pages') || 1);
             this.transitionTo(this.paginationRoute, last);
         },
         firstPage: function(){

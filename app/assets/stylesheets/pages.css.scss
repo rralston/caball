@@ -1074,3 +1074,18 @@ p.subtitle {
   margin-top: 21px!important;
 }
 
+.loading-spinner-box-ember{
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  top: 35%;
+  left: 48%;
+  border-radius: 10px;
+  margin: 0px auto;
+  padding: 20px 20px 20px 16px;
+  background-color: #000000;
+  opacity: 0.5;
+  text-align: center;
+  color: white;
+  z-index: 2000;
+}
