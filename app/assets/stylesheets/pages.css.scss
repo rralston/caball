@@ -5,6 +5,18 @@ h1, h2, h3, h4, h5, h6, p {
 .container {
   max-width: none!important;
   width: 980px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.row.header {
+  background-color: #eaeded;
+  border-bottom: 1px solid #cfd4d2;
+  .col-xs-2 {
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  }
 }
 .container.container-gw-2-10 {
   //margin: -70px auto 0px;
@@ -1026,6 +1038,41 @@ fieldset[disabled] .btn-grey.active {
           font-size: 16px;
         }
       }
+    }
+  }
+}
+.member-header-full {
+  .col-xs-2 {
+    width: 12%;
+    padding-right: 0px;
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  .col-xs-7 {
+    width: 68%;
+    border-right: 1px solid #cfd4d2;
+    height: 210px;
+    ul.member-details {
+      margin-bottom: 15px;
+      li {
+        i {
+          font-size: 15px;
+        }
+        color: #f15854;
+        font-size: 13px;
+        display: inline-block;
+        padding-right: 10px;
+      }
+    }
+    p.member-description {
+      margin-bottom: 0px;
+      width: 90%;
+      span {
+        font-family: 'Conv_HelveticaNeue-Medium';
+      }
+      line-height: 1.4;
     }
   }
 }
