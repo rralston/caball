@@ -82,12 +82,8 @@ Rails.application.configure do
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
 
-  config.assets.precompile += %w( admin/admin.css admin/*.js conversations/new.css users/users_manifest.js dashboard/dashboard.css dashboard/dashboard_manifest.js users/users.js signup.css signin.css
-                                events_manifest.js events/manifest.css events/event_index.css events/events_manifest.js home_page.css
-                                users/user_index.css application.js
-                                projects/projects_manifest.js projects/manifest.css users/user_search.js projects/project_index.css
-                                static_pages/our_story.css
-                                users/users_manifest.js users/manifest.css users/show.css contact.js glossary.js static_pages/labs.css dashboard/introjs.css dashboard/intro.js)
+  config.assets.precompile += %w( application.js bootstrap-select.js bootstrap-slider.js bootstrap.js caball.js.coffee controllers/filmmakers_page.js mixins/pagination_mixin.js models/filmmaker.js models/person.js pages.js router.js routes/application.js routes/filmmakers.js routes/filmmakers_page.js routes/person.js store.js templates/filmmaker.hjs templates/filmmakers.hjs templates/filmmakers_page.hjs templates/global-loading.hjs templates/person.hjs
+  application.css.scss bootstrap-select.css.scss bootstrap.css.scss font-awesome.css.scss font.css.scss grid.css.scss home_page.css.scss ionicons.css.scss navigation.css.scss pages.css.scss)
 
 
   config.action_mailer.delivery_method = :smtp
