@@ -7,8 +7,8 @@ class ContactUs::Contact
   validates :email,   :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i },
                       :presence => true
   validates :message, :presence => true
-  validates :name,    :format => { :with => /^([a-z]+ ){1,2}[a-z]+$/i },
-                      :presence => {:if => Proc.new{ContactUs.require_name}}
+  # validates :name,    :format => { :with => /^([a-z]+ ){1,2}[a-z]+$/i },
+  #                     :presence => {:if => Proc.new{ContactUs.require_name}}
   validates :subject, :presence => {:if => Proc.new{ContactUs.require_subject}}
 
   def initialize(attributes = {})
