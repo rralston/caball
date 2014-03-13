@@ -8,11 +8,11 @@ development:
   linkedin_secret_key:
 
 production:
-  secret_key_base:
-  devise_secret_key:
-  balanced_marketplace_uri:
-  balanced_secret_key:
-  mailer_sender:
+  secret_key_base: 40dbe9daa16934cf1cd3b67c9f477d89b6ca90f8188cb945bbcd382dee05b59762d1e4ba5b64980d3f381de7dc19630f21ce5287f5275251af3b944b094856da
+  devise_secret_key: c6d931c05671015d2c95a579928b9a69e02856df06be27dc4fd4e8bd22a0d436ac972d6f73dd850f7490cb541136cab9e757af7084f0316db7aed35392219aa7
+  balanced_marketplace_uri: /v1/marketplaces/TEST-MP3iYX4vCq7heTbV4ZonRZMZ
+  balanced_secret_key: ak-test-etuwBGjFuhxjPfytTnH95E0RLr5pZqvl
+  mailer_sender: notifications@filmzu.com
   linkedin_app_id:
   linkedin_secret_key:
 
