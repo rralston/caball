@@ -19,7 +19,7 @@ group :development do
 end
 
 group :production do
-  gem 'mysql2'
+  gem 'pg'
   # Unable to load the 'unf' gem. Your AWS strings may not be properly encoded. Should Fix
   gem 'unf'
 end
