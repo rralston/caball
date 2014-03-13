@@ -30,7 +30,6 @@ class ConversationsController < ApplicationController
   
   def create
     # Standard Part
-    recipient_emails = params[:recipients].gsub(/\s+/, "").split(',') # remove any spaces that are present in the params
     # recipient_emails = conversation_params(:recipients).split(',')
     recipients = User.where(email: recipient_emails).all
     

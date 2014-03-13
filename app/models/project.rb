@@ -35,7 +35,6 @@ class Project < ActiveRecord::Base
 
       new_title = truncate(self.title, :length => 20, :separator => ' ', :omission => '')
       # if the name is changed, convert to the url name
-      # self.url_name = new_title.gsub(/\s/,'-').gsub(/[^a-zA-Z0-9-]/, '').downcase
 
       if self.id.present?
         same_named_count = Project.where("lower(url_name) like lower(?) and id <> ? ",  "#{self.url_name}%", self.id).size
@@ -693,6 +692,5 @@ end
 
 class Array
   def sql_array_for_in
-    self.to_s.gsub(/]/, ')').gsub(/\[/, '(').gsub(/"/,'\'')
   end
 end
