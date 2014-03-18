@@ -63,7 +63,7 @@ gem 'public_activity'
 gem "asset_sync"
 gem 'fog', '~> 1.19.0'
 gem 'cancan'
-gem 'client_side_validations'
+#gem 'client_side_validations'
 gem 'acts-as-taggable-on'
 gem "remotipart", "~> 1.2.1"
 gem 'social-share-button'

@@ -17,6 +17,6 @@ class PagesController < ApplicationController
   end
 
   def ember
-
+    @resource = User.new
   end
 end

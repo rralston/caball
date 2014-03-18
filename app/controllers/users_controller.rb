@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   load_and_authorize_resource :except => [:show, :next_recommended_projects, :next_recommended_people, :next_recommended_events, :set_notification_check_time, :manage_project]
   
-  before_filter :search, only: [:index, :show, :new, :edit, :update, :dashboard]
+  before_filter :search, only: [:index, :show, :new, :edit, :update]
   before_filter :authenticate_user!, only: [:dashboard]
   before_filter :set_page_title
   

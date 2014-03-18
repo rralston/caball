@@ -3,7 +3,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # load_and_authorize_resource :except => [:new]
 
   def create
-    build_resource(params[:user])
+    build_resource(resource_params)
 
     if resource.save
       if resource.active_for_authentication?
@@ -28,5 +28,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   current_user.update_attributes(:last_signout_time => Time.now)
   #   super
   # end
+  def resource_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :current_password, :name)
+  end
+  private :resource_params
 
 end

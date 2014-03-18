@@ -8,15 +8,17 @@
           .col-xs-6.left
             %h3 Log In with Password
             %p.subtitle Login to your account using password!
-            %form{role: "form"}
-              .form-group
+            = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :method => :post) do |f|
+
+              .form-group.form-group-help
                 %label Email Address
-                %input.form-control{placeholder: "Enter email", type: "email"}
+                = f.text_field :email, :validate => { :presence => true }, :placeholder => 'Email address', :class => 'form-control'
+              
               .form-group
                 %label Password
-                %input.form-control{placeholder: "Password", type: "password"}
-                %p.help-block.text-right Forgot your Password?
-              %button.btn.btn-blue.btn-full-width.btn-lmd.amt-3{type: "submit"} Log in
+                = f.password_field :password, :validate => { :presence => true }, :placeholder => 'Password', :class => 'form-control'
+                = f.submit "Log in", :class => 'button btn btn-blue btn-full-width btn-lmd amt-3'
+            
               %p.help-modal
                 Don't have an Account?
               %a.modal-link{"data-target" => "#singup_client_modal", "data-toggle" => "modal", "data-dismiss" => "modal"}

@@ -200,14 +200,14 @@ fb_param.currency = 'USD';
 
   app.activities = new app.collections.activities()
 
-  app.activities.reset(<%= raw current_user.activities_feed.first(ACTIVITIES_PER_PAGE).
-                                          to_json(:include => [
-                                                      {:owner => {:methods => :url_param}},
-                                                      :trackable
-                                                    ],
-                                                  :check_user => current_user
-                                                  ) 
-                      %>)
+  //app.activities.reset(<%#= raw current_user.activities_feed.first(ACTIVITIES_PER_PAGE).
+                            #              to_json(:include => [
+                             #                         {:owner => {:methods => :url_param}},
+                              #                        :trackable
+                               #                     ],
+                                #                  :check_user => current_user
+                                 #                 ) 
+                      #%>)
   app.activities_view = new app.views.activities({ collection: app.activities })
 
   $('#activities_container').html(app.activities_view.render().el)

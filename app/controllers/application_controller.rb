@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include RedirectHelper
 
   protect_from_forgery
-  
+    
   before_filter :subdomain_view_path
   # helper_method :current_user
   # hide_action :current_user
@@ -86,6 +86,7 @@ class ApplicationController < ActionController::Base
   
   # Search for Home Directory
   def search(model=User, instance="users")
+    Rails.logger.info "test params #{params[:q]}"
    @search = model.search(params[:q])
    instance_variable_set("@#{instance}", @search.result)
      if params[:q]
@@ -156,5 +157,5 @@ class ApplicationController < ActionController::Base
       user
     end
   end
-
+  
 end

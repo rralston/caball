@@ -103,8 +103,8 @@ class User < ActiveRecord::Base
   validates_with UserRolesValidator
   validates_with UserLocationValidator
 
-  before_save :update_url_name
-
+  #before_save :update_url_name
+  #TODO: Make url_name is unique
   def update_url_name
     if self.name_changed?
 
@@ -216,13 +216,13 @@ class User < ActiveRecord::Base
     end
   end
   
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      end
-    end
-  end
+  # def self.new_with_session(params, session)
+    # super.tap do |user|
+      # if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        # user.email = data["email"] if user.email.blank?
+      # end
+    # end
+  # end
 
   def self.experience
     #Experience of the user in hash
