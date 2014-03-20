@@ -8,29 +8,32 @@
           .col-xs-6.left
             %h3 New to FilmZu?
             %p.subtitle Create an account today!
-            %form{role: "form"}
+            = simple_form_for(User.new, :as => resource_name, :url => registration_path(resource_name), :method => :post) do |f|
               .form-group
                 %label Full Name
-                %input.form-control{placeholder: "Full Name", type: "text"}
+                = f.text_field :name, :validate => { :presence => true }, :placeholder => 'Full Name', :class => 'form-control'
+              
               .form-group.form-group-help
                 %label Email Address
-                %input.form-control{placeholder: "Email", type: "email"}
+                = f.text_field :email, :validate => { :presence => true }, :placeholder => 'Email address', :class => 'form-control'
                 %p.help-block.text-right We NEVER NEVER Spam our users emails.
-              .form-group.form-group-help.form-group-up
+              .form-group
                 %label Password
-                %input.form-control{placeholder: "Password", type: "password"}
+                = f.password_field :password, :validate => { :presence => true }, :placeholder => 'Password', :class => 'form-control'
                 %p.help-block.text-right Minimum 6 characters.
-              .form-group.form-group-up
-                %label Confirm Password
-                %input.form-control{placeholder: "Confirm Password", type: "password"}
+              .form-group
+                %label Password Confirm
+                = f.password_field :password_confirmation, :validate => { :presence => true }, :placeholder => 'Password', :class => 'form-control'
+                %p.help-block.text-right Minimum 6 characters.
+                
               .form-group.form-group-help.form-group-up
                 %label How you want to represent yourself?
-              %label.checkbox-inline
-                %input{type: "checkbox", value: "option1"}
-                Individual
-              %label.checkbox-inline
-                %input{type: "checkbox", value: "option2"}
-                Company
+                %label.checkbox-inline
+                  %input{type: "checkbox", value: "option1"}
+                    Individual
+                %label.checkbox-inline
+                  %input{type: "checkbox", value: "option2"}
+                    Company
               .form-group.amt-1
                 %label Company Name
                 %input.form-control{placeholder: "Company Name", type: "text"}
@@ -45,7 +48,7 @@
                   %input{type: "checkbox"}
                   I agree to FilmZu's
                   %a{href: "#"} Terms and Conditions
-              %button.btn.btn-blue.btn-full-width.btn-lmd.amt-3{type: "submit"} I'm ready, let me in
+              = f.submit "I'm ready, let me in", :class => 'button btn btn-blue btn-full-width btn-lmd amt-3'
               %a.modal-link{"data-target" => "#singup_client_modal", "data-toggle" => "modal", "data-dismiss" => "modal"} Sign Up as Client
           .col-xs-6.right
             %h3

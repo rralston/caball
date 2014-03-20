@@ -3,9 +3,14 @@ Caball::Application.routes.draw do
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
                                        :registrations => "users/registrations", :sessions => "users/sessions"}
-
-  get "/" => "pages#ember", :as => :root
-
+  devise_scope :user do
+    get "/login", :to => "users/sessions#new", :as => "login"
+    get "/signup", :to => "users/registrations#new"
+    get '/signout', :to => 'users/sessions#destroy'
+  end
+  
+  #get "/" => "pages#ember", :as => :root
+  get "/" => "pages#index", :as => :root
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       namespace :filmmakers do
@@ -131,7 +136,7 @@ Caball::Application.routes.draw do
   get 'projects/show' => 'projects#show'
   # match 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
-  get 'signout', to: 'sessions#destroy', as: 'signout'
+  #get 'signout', to: 'sessions#destroy', as: 'signout'
 
 
   #root :to => 'pages#index'

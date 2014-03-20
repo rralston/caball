@@ -9,7 +9,7 @@
             </div>
             <div class='col-xs-7'>
               <h2 class='title'>
-                {{model.name}}
+                {{model.}}
               </h2>
               <ul class='list-unstyled member-details'>
                 <li>

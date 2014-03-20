@@ -1,3 +1,4 @@
+= stylesheet_link_tag "nagative/nagative", :media => "all"
 %nav.navbar.navbar-default{role: "navigation"}
   .container
     .navbar-header
@@ -16,8 +17,55 @@
             %a{href: "/#/filmmakers"}
               %span.user
               People
-        %a.btn.btn-red.btn-nb.pull-right{"data-target" => "#singup_client_modal", "data-toggle" => "modal"} Create an Account
-        %a.nav.navbar-nav.navbar-right
-          %li
-            %a{'href'=> '#' ,"data-target" => "#login_modal", "data-toggle" => "modal"}
-              Log in
+        - unless current_user.present?
+          %a.btn.btn-red.btn-nb.pull-right{"data-target" => "#singup_client_modal", "data-toggle" => "modal"} Create an Account
+          %a.btn.btn-red.btn-nb.pull-right{'href'=> '#' ,"data-target" => "#login_modal", "data-toggle" => "modal", "class" => "btn btn-primary"}
+            Log In
+        - else
+          .notiwrap
+            = class_to_set = current_user.unread_notifications.empty? ? '' : 'set_time'
+            .notstarwrap
+              = class_to_set
+            .notico
+              - if current_user.unread_notifications.present?
+                .notno.medium.img-circle.text-center
+                  = current_user.unread_notifications.count
+            .noticontentwrap
+              .noticontent
+                .notih1.medium.text-center
+                  NOTIFICATIONS
+                  = render :partial => '/application/user_notifications'
+                .noteclose.img-circle.medium.text-center
+                  x
+          .userprofwrap{ 'data-step' => "2"}
+            .dummy-highlight
+              .usrprev
+                %a{'href' => '/users/#{current_user.url_param}', :class => 'usrimg img-circle', 'style' => 'background: url(#{current_user.profile_thumb} '}
+                .username
+                  = current_user.name
+              .userprflistwrap{'data-step' => '3', 'data-intro' => 'From here you can access your profile, dashboard, or logout'}
+                %ul.proflist.medium
+                  %a{'href' => '/users/#{current_user.url_param}'}
+                    %li.profile 
+                      profile
+                  
+                  %a{'href' => '/dashboard'}
+                    %li.dboard 
+                      Dashboard
+                    
+                  %a{ 'href' => '/users/#{current_user.id}/edit'}
+                    %li.settings 
+                      Edit Profile
+                  - if current_user.admin == true
+                    %a{ 'href' => '/admin/admin/index'}  
+                      %li.admin  
+                        Admin Area   
+                  = link_to 'Sign Out', destroy_user_session_path, :method => :delete
+                  
+                    
+                      
+                  
+                  
+                  
+                  
+                

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   load_and_authorize_resource :except => [:show, :next_recommended_projects, :next_recommended_people, :next_recommended_events, :set_notification_check_time, :manage_project]
   
-  before_filter :search, only: [:index, :show, :new, :edit, :update]
+  #before_filter :search, only: [:index, :show, :new, :edit, :update, :dashboard]
   before_filter :authenticate_user!, only: [:dashboard]
   before_filter :set_page_title
   
@@ -115,10 +115,10 @@ class UsersController < ApplicationController
   end
 
   def edit
-    render layout: "edit"
+    #render layout: "edit"
     @talents = User.types
     @experience = User.experience
-    @user.talents.present? || @user.talents.build
+    @talents = @user.talents.present? || @user.talents.build
   end
    
   def create

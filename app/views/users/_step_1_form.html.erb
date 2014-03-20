@@ -150,7 +150,7 @@
        </div>
      </div>
  
-     <%= f.fields_for :talents do |talent|   %>
+     <%= f.fields_for Talent.new do |talent|   %>
        <div class='user-talent'>
          <div class="control-group">
            <%= talent.label :name, "Position", :class => 'control-label' %>
