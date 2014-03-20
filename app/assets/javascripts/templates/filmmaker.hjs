@@ -43,7 +43,7 @@
                 Daily Rate
               </li>
             </ul>
-            <a class="btn btn-md btn-blue btn-full-width" href="#">
+            <a class="btn btn-md btn-new btn-full-width" href="#">
               Hire
             </a>
         </div>

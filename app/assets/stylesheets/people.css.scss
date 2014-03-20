@@ -1,0 +1,31 @@
+#people {
+  background:#eaedec;
+  border-bottom: 1px solid #dedede;
+}
+#people form input {
+border: none;
+min-height: 30px;
+width: 200px;
+}
+.people_title{
+  font-size: 30px;
+  font-family: 'helveticaneuewebfont', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, Tahoma, Verdana, sans-serif;
+  
+}
+.search_icon{
+  margin-top: 15px;
+}
+.people_selected{
+  padding: 8px;
+  margin: 13px 0px 0 5px;
+  background: #FFFFFF;
+  border: none;
+  width: 140%;
+  color: #9FA2B8;
+}
+.btn-new {
+  background-color: #f15854;
+  margin-top: 20px;
+  padding: 5px 50px;
+  color: white;
+}

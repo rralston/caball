@@ -1,44 +1,53 @@
-<table class="content content-grid-1">
-  <tbody>
-    <tr>
-      <td class="col-1" rowspan="2"></td>
-      <td class="col-2" rowspan="2"></td>
-      <td class="col-3-a col-header-1">
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="row">
-              <div class="col-xs-4">
-                <h2 class="title">People</h2>
-              </div>
-              <div class="col-xs-4 col-pr-1">
-                <form>
-                  <div class="form-group">
-                    <input class="form-control search_icon" id="exampleInputEmail2" placeholder="Search people">
-                  </div>
-                </form>
-              </div>
-              <div class="col-xs-4">
-                <select class="selectpicker">
-                  <option>First Option</option>
-                  <option>Second Option</option>
-                  <option>Third Option</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-      </td>
-      <td class="col-4-a"></td>
-    </tr>
-    <tr>
-      <td class="col-3">
-        <div class="row">
-          <div class="col-xs-12">
-            {{outlet}}
-          </div>
-        </div>
-      </td>
-      <td class="col-4"></td>
-    </tr>
-  </tbody>
-</table>
+<div class= "mainwap">
+	<div class= "maincontain container-fluid">
+		<div class="row">
+			<aside class="col-md-3">
+				<div class="form-inline">
+					<h2 align= "center">Positions</h2>
+					<div class= "list-position">
+					</div>
+				</div>
+			</aside>
+			<div class= "main-wrap col-md-9" id="main-content" >
+				<div class= "row-fluid">
+					<div class="col-md-10 all_people" id="people">
+						<div class= col-md-12 >
+							<div class="page-header-secondary">
+								<h2 class= "col-md-4">People</h2>
+								<div class= "col-md-8 pull-right">
+									<form class="form-inline" role="form">
+										<div class="form-group">
+											<input  class="form-control search_icon" id="exampleInputEmail2" placeholder="Search people">
+										</div>
+										<div class="form-group">
+			                <select class="people_selected">
+			                  <option>First Option</option>
+			                  <option>Second Option</option>
+			                  <option>Third Option</option>
+			                </select>
+			              </div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class= "col-md-10">
+						<div class="page-header">
+						  <button type="button" class="btn btn-default pull-right">View all</button>
+							<h2>Popular</h2>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<div class= "main-wrap col-md-9 pull-right" id="main-content">
+				<div class= "row">
+					<div class="col-md-10" >
+						{{outlet}}
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
