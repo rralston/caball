@@ -13,7 +13,7 @@
               <div class="col-xs-4 col-pr-1">
                 <form>
                   <div class="form-group">
-                    <input type="text", class="form-control", placeholder="Search People" />
+                    <input class="form-control search_icon" id="exampleInputEmail2" placeholder="Search people">
                   </div>
                 </form>
               </div>

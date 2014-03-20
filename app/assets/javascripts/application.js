@@ -10,5 +10,4 @@
 //= require ember-data
 //= require_self
 //= require caball
-//= require_tree .
 window.Filmzu = Ember.Application.create({rootElement: '#film_zu_container'})

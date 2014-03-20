@@ -9,8 +9,8 @@ Caball::Application.routes.draw do
     get '/signout', :to => 'users/sessions#destroy'
   end
   
-  #get "/" => "pages#ember", :as => :root
-  get "/" => "pages#index", :as => :root
+  get "/" => "pages#ember", :as => :root
+  #get "/" => "pages#index", :as => :root
   namespace :api, defaults: {format: 'json'} do
     namespace :v1 do
       namespace :filmmakers do
