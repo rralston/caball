@@ -1,7 +1,7 @@
 Caball::Application.routes.draw do
   get "pages/index"
 
-  get "/projects" => redirect("http://filmmo.com/projects")
+  get "/projects", to: redirect("http://filmmo.com/projects")
   get "/projects/index" => redirect("http://filmmo.com/projects/index")
   get "/projects/show" => redirect("http://filmmo.com/projects/show")
   get "/users/index" => redirect("http://filmmo.com/users/index")
