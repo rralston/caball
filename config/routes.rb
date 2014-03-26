@@ -1,6 +1,12 @@
 Caball::Application.routes.draw do
   get "pages/index"
 
+  get "/projects/index" => redirect("http://filmo.com/project/index")
+  get "/projects/show" => redirect("http://filmo.com/project/show")
+  get "/users/index" => redirect("http://filmo.com/users/index")
+  get "/users/show" => redirect("http://filmo.com/project/show")
+  
+  
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
                                        :registrations => "users/registrations", :sessions => "users/sessions"}
 
