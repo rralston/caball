@@ -2,6 +2,23 @@ Caball::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
                                        :registrations => "users/registrations", :sessions => "users/sessions"}
 
+  get "/projects", to: redirect("http://filmmo.com/projects")
+  get "/projects/index" => redirect("http://filmmo.com/projects/index")
+  get "/projects/show" => redirect("http://filmmo.com/projects/show")
+  get '/projects/:id', to: redirect('http://filmmo.com/projects/%{id}')
+  get '/projects/:name', to: redirect('http://filmmo.com/projects/%{name}')
+  get "/users", to: redirect("http://filmmo.com/users")
+  get "/users/index" => redirect("http://filmmo.com/users/index")
+  get "/users/show" => redirect("http://filmmo.com/users/show")
+  get '/users/:id', to: redirect('http://filmmo.com/users/%{id}')
+  get '/users/:name', to: redirect('http://filmmo.com/users/%{name}')
+  get "/people", to: redirect("http://filmmo.com/people")
+  get "/people/index" => redirect("http://filmmo.com/people/index")
+  get "/people/show" => redirect("http://filmmo.com/people/show")
+  get '/people/:id', to: redirect('http://filmmo.com/people/%{id}')
+  get '/people/:name', to: redirect('http://filmmo.com/people/%{name}')
+  root :to => 'home#index'
+                                       
   get "activities/index"
 
   match '/our_story' => 'static_pages#our_story'
