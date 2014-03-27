@@ -2,24 +2,24 @@ Caball::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks",
                                        :registrations => "users/registrations", :sessions => "users/sessions"}
 
-  get "/projects", to: redirect("http://filmmo.com/projects")
-  get "/projects/index" => redirect("http://filmmo.com/projects/index")
-  get "/projects/show" => redirect("http://filmmo.com/projects/show")
-  get '/projects/:id', to: redirect('http://filmmo.com/projects/%{id}')
-  get '/projects/:name', to: redirect('http://filmmo.com/projects/%{name}')
-  get "/users", to: redirect("http://filmmo.com/users")
-  get "/users/index" => redirect("http://filmmo.com/users/index")
-  get "/users/show" => redirect("http://filmmo.com/users/show")
-  get '/users/:id', to: redirect('http://filmmo.com/users/%{id}')
-  get '/users/:name', to: redirect('http://filmmo.com/users/%{name}')
-  get "/people", to: redirect("http://filmmo.com/people")
-  get "/people/index" => redirect("http://filmmo.com/people/index")
-  get "/people/show" => redirect("http://filmmo.com/people/show")
-  get '/people/:id', to: redirect('http://filmmo.com/people/%{id}')
-  get '/people/:name', to: redirect('http://filmmo.com/people/%{name}')
-  root :to => 'home#index'
-                                       
-  get "activities/index"
+   get "/projects", to: redirect("http://filmmo.com/projects")
+   get "/projects/index" => redirect("http://filmmo.com/projects/index")
+   get "/projects/show" => redirect("http://filmmo.com/projects/show")
+   get '/projects/:id', to: redirect('http://filmmo.com/projects/%{id}')
+   get '/projects/:name', to: redirect('http://filmmo.com/projects/%{name}')
+   get "/users", to: redirect("http://filmmo.com/users")
+   get "/users/index" => redirect("http://filmmo.com/users/index")
+   get "/users/show" => redirect("http://filmmo.com/users/show")
+   get '/users/:id', to: redirect('http://filmmo.com/users/%{id}')
+   get '/users/:name', to: redirect('http://filmmo.com/users/%{name}')
+   get "/people", to: redirect("http://filmmo.com/people")
+   get "/people/index" => redirect("http://filmmo.com/people/index")
+   get "/people/show" => redirect("http://filmmo.com/people/show")
+   get '/people/:id', to: redirect('http://filmmo.com/people/%{id}')
+   get '/people/:name', to: redirect('http://filmmo.com/people/%{name}')
+   root :to => 'home#index'
+ 
+   get "activities/index"
 
   match '/our_story' => 'static_pages#our_story'
   match '/contact' => 'contact_us/contacts#new'
@@ -93,7 +93,7 @@ Caball::Application.routes.draw do
   match 'likes/unlike' => 'likes#unlike', :via => 'POST'
 
   resources :endorsements
- 
+
   resources :events
   match 'events/up_vote' => 'events#up_vote', :via => 'POST'
   match 'events/down_vote' => 'events#down_vote', :via => 'POST'
@@ -111,14 +111,14 @@ Caball::Application.routes.draw do
   match 'role_applications/un_approve' => 'role_applications#un_approve', :via => 'POST'
 
   match 'report' => 'application#report'
-  
+
   # News feed
   match 'activities/load_more' => 'activities#next_activities'
   resources :activities
-  
-  
+
+
   # Static Pages 
-  
+
   resources :home, except: :show  
   %w[privacy terms about opportunities FAQ glossary labs partners beta skills].each do |page|
     get page, controller: "static_pages", action: page
@@ -129,14 +129,13 @@ Caball::Application.routes.draw do
   match 'dashboard/events'          => 'users#dashboard_events', :via => 'GET'
   match 'dashboard/conversations'   => 'users#dashboard_conversations', :via => 'GET'
   match '/dashboard/manage_project' => 'users#manage_project', :via => 'GET'
-  
+
 
   match 'projects/show' => 'projects#show'
   # match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   match 'signout', to: 'sessions#destroy', as: 'signout'
-  root :to => 'home#index'
-  
+
   # Admin Area
   namespace :admin do
     %w[index users user_images interrogate projects project_images events event_images messages interface buttons calendar charts chat gallery grid invoice login tables widgets form_wizard form_common form_validation ].each do |page|
@@ -146,7 +145,7 @@ Caball::Application.routes.draw do
     put 'admin/update_user'
     put 'admin/update_project'
   end
-  
+
   resources :conversations, only: [:index, :show, :new, :create] do
     member do
       post :reply

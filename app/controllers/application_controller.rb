@@ -157,5 +157,4 @@ class ApplicationController < ActionController::Base
       user
     end
   end
-
 end
