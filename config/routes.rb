@@ -23,7 +23,7 @@ Caball::Application.routes.draw do
 
   match '/our_story', to: redirect("http://filmmo.com/static_pages#our_story")
   match '/contact', to: redirect("http://filmmo.com/contact_us/contacts#new")
-  match '/contact_us, to: redirect("http://filmmo.com/contact_us/contacts#new")
+  match '/contact_us', to: redirect("http://filmmo.com/contact_us/contacts#new")
   # get 'people', to: 'users#index', via: :all
   resources :users, :path => "people"
   match '/people/:id' => 'users#update', :via => 'post'
