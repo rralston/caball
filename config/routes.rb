@@ -18,7 +18,10 @@ Caball::Application.routes.draw do
   get '/people/:id', to: redirect('http://filmmo.com/people/%{id}')
   get '/people/:name', to: redirect('http://filmmo.com/people/%{name}')
   root :to => 'home#index'
-
+  
+  match "/(/*path)" => redirect{ |env, req| "http://filmmo.com" + (req.path ? "#{req.path}" : '/')}
+  
+  
   get "activities/index"
 
   match '/our_story', to: redirect("http://filmmo.com/static_pages#our_story")
