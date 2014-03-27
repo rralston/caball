@@ -24,9 +24,9 @@ Caball::Application.routes.draw do
   
   get "activities/index"
 
-  match '/our_story', to: redirect("http://filmmo.com/static_pages#our_story")
-  match '/contact', to: redirect("http://filmmo.com/contact_us/contacts#new")
-  match '/contact_us', to: redirect("http://filmmo.com/contact_us/contacts#new")
+  match '/our_story', to: redirect("http://filmmo.com/our_story")
+  match '/contact', to: redirect("http://filmmo.com/contact")
+  match '/contact_us', to: redirect("http://filmmo.com/contact")
   # get 'people', to: 'users#index', via: :all
   resources :users, :path => "people"
   match '/people/:id' => 'users#update', :via => 'post'
