@@ -1,4 +1,5 @@
 <%= stylesheet_link_tag "home_page.css" %>
+<%= stylesheet_link_tag "static_pages/home_additional.css" %>
 <%= stylesheet_link_tag "projects/project_index.css" %>
 <%= stylesheet_link_tag "users/user_index.css" %>
 
@@ -11,18 +12,30 @@
       
       <div class='midtext text-center'>
         <div class='center-it light'>
-          Showcase your talent, build your portfolio, and connect with the best filmmakers in <%= request.location.country %>.<br/><br/>
-					We've already had <%= Role.all.count %> Jobs Filled and <%= RoleApplication.all.count %> Applications!
+          Showcase your talent, build your portfolio, and connect with the best filmmakers in <%= request.location.country %>.
         </div>
       </div>
-      
-      <div class="startbutton text-center">
-        <a data-toggle='modal' data-target='#signup_modal' class="strtbtn btn regular text-left">
-          <div class="strtbtntext">Join filmmo - It's Free </div>
-        </a>
-				<a href="#" data-toggle="modal" data-target="#signin_modal" class="already_signin">Already a member? Sign In</a>
-      </div>
-    
+<!-- New Area -->
+      <div class='bx-overlay midtext text-center'>
+			<div id="applynow">
+			   <div class="clear"></div>
+		
+						<div id="jobs"><span class="numbers"><%= Role.all.count %></span><span class="text">JOBS FILLED</span></div>
+			       <div id="sep1"></div>
+						<div id="join">
+							<a href="#" data-toggle='modal' data-target='#signup_modal'><span class="join">Join</span></a>
+							<a href="#" data-toggle="modal" data-target="#signin_modal"><span class="text">Sign-in</span></a>
+						</div>
+						<div id="sep2"></div>
+						<div id="jobs"><span class="numbers"><%= RoleApplication.all.count %></span><span class="text">APPLICATIONS</span></div>
+        							<div id="sep3"></div>
+
+					<div class="clear"></div>
+			</div>
+			</div>
+      		<!-- New Area -->
+			
+     		
 		</div>
   </div>
   </div>
