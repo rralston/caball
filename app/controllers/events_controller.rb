@@ -100,8 +100,12 @@ class EventsController < ApplicationController
   end
 
   def update
-    @event = current_user.events.find(params[:id])
-
+    if current_user.admin
+      @event = Event.find(params[:id])
+    else
+      @event = current_user.events.find(params[:id])
+    end
+    
     DeleteActivities.new( @event ).del_1_day_ago_updates
 
     if @event.update_attributes(params[:event])
