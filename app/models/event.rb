@@ -58,8 +58,13 @@ class Event < ActiveRecord::Base
     if self.title_changed?
 
       new_title = truncate(self.title, :length => 20, :separator => ' ', :omission => '')
+      
       # if the name is changed, convert to the url name
-      self.url_name = new_title.gsub(/\s/,'-').gsub(/[^a-zA-Z0-9-]/, '').downcase
+      if new_title.start_with?(*('0'..'9'))
+        self.url_name = "the-"+new_title.gsub(/\s/,'-').gsub(/[^a-zA-Z0-9-]/, '').downcase
+      else
+        self.url_name = new_title.gsub(/\s/,'-').gsub(/[^a-zA-Z0-9-]/, '').downcase
+      end
 
       if self.id.present?
         same_named_count = Event.where("lower(url_name) like lower(?) and id <> ? ",  "#{self.url_name}%", self.id).size
