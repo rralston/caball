@@ -57,7 +57,7 @@ class Event < ActiveRecord::Base
   def update_url_name
     if self.title_changed?
 
-      new_title = truncate(self.title, :length => 20, :separator => ' ', :omission => '')
+      new_title = truncate(self.title, :length => 120, :separator => ' ', :omission => '')
       
       # if the name is changed, convert to the url name
       if new_title.start_with?(*('0'..'9'))

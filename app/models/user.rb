@@ -107,7 +107,7 @@ class User < ActiveRecord::Base
   def update_url_name
     if self.name_changed?
 
-      new_name = truncate(self.name, :length => 20, :separator => ' ', :omission => '')
+      new_name = truncate(self.name, :length => 120, :separator => ' ', :omission => '')
 
       # if the name is changed, convert to the url name
       self.url_name = new_name.gsub(/\s/,'-').gsub(/[^a-zA-Z0-9-]/, '').downcase
