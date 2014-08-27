@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
     
 
     entity = params[:entity]
-    params[:value] = view_context.truncate(params[:value], :length => 20, :separator => ' ', :omission => '')
+    params[:value] = view_context.truncate(params[:value], :length => 120, :separator => ' ', :omission => '')
 
     name = params[:value].gsub(/\s/,'-').gsub(/[^a-zA-Z0-9-]/, '').downcase
 
