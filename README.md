@@ -1,6 +1,6 @@
 # Filmmo.com 
 
-[![Filmmo Logo](http://filmmo.com/assets/logo.png)](http://filmmo.com)
+[![Filmmo Logo](http://filmmo.com/assets/top-image.jpg)](http://filmmo.com)
 
 Matchmaking for Filmmakers. 
 
