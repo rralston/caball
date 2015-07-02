@@ -1,28 +1,15 @@
-# Filmzu.com 
+# Filmmo.com 
 
-[![Filmzu Logo](http://filmzu.com/assets/logo.png)](http://filmzu.com)
+[![Filmmo Logo](http://filmmo.com/assets/top-image.jpg)](http://filmmo.com)
 
 Matchmaking for Filmmakers. 
 
-Filmzu gives you access to the best filmmakers,
+Filmmo gives you access to the best filmmakers,
 cast, crew, agents, and fans in an incredibly simple and stunning experience.
 
-Released on Thursday 7th, November 2013
--------
+[Website is live at Filmmo.com](http://www.filmmo.com")
 
-Registered Users Tally (Confidential Internal Numbers)
-* November: 222  
-* December:
-* January:
-* February:
-* March:
-* April:
-
-[Website is live at Filmzu.com](http://www.filmzu.com")
-
-User development suggestions are available at: <a href="https://filmzu.uservoice.com">Filmzu Suggestion Box</a>
-
-## Filmzu is tested on the following platforms
+## Filmmo is tested on the following platforms
 
 | Chrome | Firefox | Internet Explorer | Opera | Safari |
 |:---:|:---:|:---:|:---:|:---:|
