@@ -24,3 +24,8 @@ Snippets.txt
 # Ignore Public Assets
 /public/assets
 .elasticbeanstalk/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
