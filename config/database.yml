@@ -22,8 +22,9 @@ production:
   password: <%= ENV['RDS_PASSWORD'] %>
   host: <%= ENV['RDS_HOSTNAME'] %>
   port: <%= ENV['RDS_PORT'] %>
- 
-# Max Heroku 
+  socket: /var/lib/mysql/mysql.sock
+
+# Max Heroku
 development:
   adapter: postgresql
   encoding: unicode
@@ -50,15 +51,15 @@ development:
 #   database: caball_test
 #   host: localhost
 #   username: postgres
-#   password: 
+#   password:
 #   pool: 5
 #   timeout: 5000
-# 
+#
 # production:
 #   adapter: postgresql
 #   database: caball_production
 #   host: localhost
 #   username: postgres
-#   password: 
+#   password:
 #   pool: 5
 #   timeout: 5000
