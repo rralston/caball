@@ -14,23 +14,23 @@
 #   pool: 5
 #   timeout: 5000
 
-#production:
-#  adapter: mysql2
-#  encoding: utf8
-#  database: d5gplihnrmuhgp
-#  username: cgqmoimdevhcvm
-#  password: BSib5K0ZAgokA3z8nMNTJXZC2y
-#  host: d5gplihnrmuhgp.c8aipepaiyph.us-west-1.rds.amazonaws.com
-#  port: 3306
-
 production:
   adapter: mysql2
   encoding: utf8
-  database: <%= ENV['RDS_DB_NAME'] %>
-  username: <%= ENV['RDS_USERNAME'] %>
-  password: <%= ENV['RDS_PASSWORD'] %>
-  host: <%= ENV['RDS_HOSTNAME'] %>
-  port: <%= ENV['RDS_PORT'] %>
+  database: d5gplihnrmuhgp
+  username: cgqmoimdevhcvm
+  password: BSib5K0ZAgokA3z8nMNTJXZC2y
+  host: d5gplihnrmuhgp.c8aipepaiyph.us-west-1.rds.amazonaws.com
+  port: 3306
+
+#production:
+#  adapter: mysql2
+#  encoding: utf8
+#  database: <%= ENV['RDS_DB_NAME'] %>
+#  username: <%= ENV['RDS_USERNAME'] %>
+#  password: <%= ENV['RDS_PASSWORD'] %>
+#  host: <%= ENV['RDS_HOSTNAME'] %>
+#  port: <%= ENV['RDS_PORT'] %>
 
 
 # Max Heroku
