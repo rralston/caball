@@ -32,8 +32,9 @@ production:
   host: <%= ENV['RDS_HOSTNAME'] %>
   port: <%= ENV['RDS_PORT'] %>
 
+
 # Max Heroku
-staging:
+development:
   adapter: postgresql
   encoding: unicode
   pool: 5
